@@ -1,0 +1,33 @@
+#  spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation
+spring:
+  application:
+    name: liquibase-test-application
+  liquibase:
+    enabled: true
+    change-log: classpath:db/change-log-master.xml
+  h2:
+    console:
+      enabled: false
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+    database-platform: org.hibernate.dialect.PostgreSQL82Dialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/Liquibase
+    driver-class-name: org.postgresql.Driver
+    username: BolandPayeh
+    password: 120412
+
+server:
+  port: 8080
+
+
+
+

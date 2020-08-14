@@ -1,0 +1,22 @@
+
+<databaseChangeLog
+xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+    <include file="src/main/resources/db/changelog/2020-08-14T07:58:46Z.change-log.xml" relativeToChangelogFile="false" />
+    <include file="src/main/resources/db/changelog/2020-08-14T08:02:40Z.change-log.xml" relativeToChangelogFile="false" />
+    <include file="src/main/resources/db/changelog/2020-08-14T11:42:50Z.change-log.xml" relativeToChangelogFile="false" />
+    <include file="src/main/resources/db/changelog/2020-08-14T11:45:00Z.change-log.xml" relativeToChangelogFile="false" />
+    <include file="src/main/resources/db/changelog/2020-08-14T11:46:31Z.change-log.xml" relativeToChangelogFile="false" />
+
+
+
+
+
+
+
+
+</databaseChangeLog>
