@@ -1,2 +1,2 @@
 
-content of file 4
+content of file 4 - second changes applied in master
