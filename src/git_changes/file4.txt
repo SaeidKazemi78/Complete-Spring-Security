@@ -1,2 +1,2 @@
 
-content of file 4
+content of file 4 - here is the changes in same line
