@@ -1,2 +1,4 @@
 
 content of file 4 - second changes applied in master >>>This changes comes from dev-2
+
+here is another changes coming to master
