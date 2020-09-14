@@ -1,0 +1,328 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <p-dataTable [sortField]="predicate" [sortOrder]="reverse ? -1 : 1" #dt [value]="people" [lazy]="true"
+                 [rows]="itemsPerPage"
+                 [rowsPerPageOptions]="[5,10,20,totalItems]"
+                 [paginator]="true" [responsive]="true" [stacked]="false"
+                 [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)"
+                 [emptyMessage]="'global.messages.info.emptyRecords' | translate">
+        <p-header>
+            <div class="ui-helper-clearfix">
+
+                <ng-container *ngIf="!companyId">
+                    <button class="btn btn-primary float-right create-entity"
+                            *jhiHasAnyAuthority="['ROLE_ADMIN', 'CREATE_PERSON']"
+                            [disabled]="isTransport"
+                            [routerLink]="['/','person',  { outlets: { popup: 'new'} }]">
+                        <span class="fa fa-plus"></span>
+                        <span jhiTranslate="entity.action.create">Create</span>
+                    </button>
+                </ng-container>
+
+                <ng-container *ngIf="companyId">
+                    <button class="btn btn-primary float-right create-entity"
+                            *jhiHasAnyAuthority="['ROLE_ADMIN', 'CREATE_STAKEHOLDER']"
+                            [disabled]="isTransport"
+                            [routerLink]="[{ outlets: { popup:[companyId,'new'] } }]">
+                        <span class="fa fa-plus"></span>
+                        <span jhiTranslate="entity.action.create">Create</span>
+                    </button>
+                </ng-container>
+
+            </div>
+        </p-header>
+
+        <p-headerColumnGroup>
+            <p-row>
+                <p-column field="fullName" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.person.fullName">Full Name</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="code" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.person.code">Code</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="personality" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.person.personality">Personality</span>
+                    </ng-template>
+                </p-column>
+                <p-column *ngIf="companyId" field="sharePercent" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.stakeholder.sharePercent">Share Percent</span>
+                    </ng-template>
+                </p-column>
+                <p-column *ngIf="companyId" field="stakeholderType" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.stakeholder.stakeholderType">Share Percent</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="verifyStatus" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.person.verifyStatus">Active</span>
+                    </ng-template>
+                </p-column>
+                <p-column *ngIf="isTransport" field="transportCode" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.person.transportCode">transport Code</span>
+                    </ng-template>
+                </p-column>
+                <p-column styleClass="col-button"></p-column>
+            </p-row>
+            <p-row>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="name" id="field_name"
+                               [(ngModel)]="person.fullName"
+                               maxlength="42" search-after-typed (onSearch)="search()"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="code" id="field_code"
+                               [(ngModel)]="person.code"
+                               maxlength="11" search-after-typed (onSearch)="search()"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <select class="form-control" name="personality" [(ngModel)]="person.personality"
+                                id="field_personality" (change)="search()">
+                            <option></option>
+                            <option value="LEGAL">{{'niopdcgatewayApp.Personality.LEGAL' | translate}}</option>
+                            <option value="NATURAL">{{'niopdcgatewayApp.Personality.NATURAL' | translate}}</option>
+                        </select>
+                    </ng-template>
+                </p-column>
+                <p-column *ngIf="companyId">
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="number"
+                               name="sharePercent" id="field_sharePercent"
+                               [(ngModel)]="person.sharePercent"
+                               max="100" search-after-typed (onSearch)="search()"
+                        />
+                    </ng-template>
+                </p-column>
+
+                <p-column *ngIf="companyId">
+                    <ng-template pTemplate="header">
+                        <select class="form-control" name="stakeholderType" [(ngModel)]="person.stakeholderType"
+                                id="field_stakeholderType" disabled (change)="search()">
+                            <option></option>
+                            <option value="CEO">{{'niopdcgatewayApp.StakeholderType.CEO' | translate}}</option>
+                            <option value="AGENT">{{'niopdcgatewayApp.StakeholderType.AGENT' | translate}}</option>
+                            <option value="OTHER">{{'niopdcgatewayApp.StakeholderType.OTHER' | translate}}</option>
+                        </select>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <select class="form-control" name="verifyStatus" [(ngModel)]="person.status" id="field_status"
+                                (change)="search()">
+                            <option value="PENDING">{{'niopdcgatewayApp.VerifyStatus.PENDING' | translate}}</option>
+                            <option value="ACTIVE">{{'niopdcgatewayApp.VerifyStatus.ACTIVE' | translate}}</option>
+                            <option value="REJECT">{{'niopdcgatewayApp.VerifyStatus.REJECT' | translate}}</option>
+                            <option value="DEACTIVE">{{'niopdcgatewayApp.VerifyStatus.DEACTIVE' | translate}}</option>
+                        </select>
+                    </ng-template>
+                </p-column>
+                <p-column *ngIf="isTransport">
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="transportCode" id="field_transportCode"
+                               [(ngModel)]="person.transportCode"
+                               maxlength="10" search-after-typed (onSearch)="search()"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <button class="btn btn-info" (click)="search()">
+                            <span class="fa fa-search"></span>
+                        </button>
+                        <button class=" btn btn-danger" (click)="clear()">
+                            <span class="fa fa-remove"></span>
+                        </button>
+                    </ng-template>
+                </p-column>
+            </p-row>
+        </p-headerColumnGroup>
+
+        <p-column field="fullName" [header]="'niopdcgatewayApp.person.fullName' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span data-toggle="tooltip" title="{{item.fullName}}">{{item.fullName | truncate}}</span>
+            </ng-template>
+        </p-column>
+        <p-column field="code" [header]="'niopdcgatewayApp.person.code' | translate"></p-column>
+        <p-column field="personality" [header]="'niopdcgatewayApp.person.personality' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span jhiTranslate="{{'niopdcgatewayApp.Personality.' + item.personality}}">{{item.personality}}</span>
+            </ng-template>
+        </p-column>
+        <p-column *ngIf="companyId" field="sharePercent"
+                  [header]="'niopdcgatewayApp.stakeholder.sharePercent' | translate"></p-column>
+        <p-column *ngIf="companyId" field="stakeholderType"
+                  [header]="'niopdcgatewayApp.stakeholder.stakeholderType' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span jhiTranslate="{{'niopdcgatewayApp.StakeholderType.' + item.stakeholderType}}">{{item.stakeholderType}}</span>
+            </ng-template>
+        </p-column>
+        <p-column field="status" [header]="'niopdcgatewayApp.person.verifyStatus' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span jhiTranslate="{{'niopdcgatewayApp.VerifyStatus.'+item.status}}"></span>
+                <span *ngIf="item.invalidData" style="color: red"
+                      jhiTranslate="{{'niopdcgatewayApp.VerifyStatus.INVALID'}}"></span>
+            </ng-template>
+        </p-column>
+        <p-column *ngIf="isTransport" field="transportCode" [header]="'niopdcgatewayApp.person.transportCode' | translate"></p-column>
+        <p-column class="component">
+            <ng-template let-item="rowData" pTemplate="body">
+                <div class="btn-group" ngbDropdown placement="right">
+                    <button type="button" class="btn btn-primary"
+                            replaceUrl="true"
+                            *jhiHasAnyAuthorityDisabled="['ROLE_ADMIN', 'EDIT_PERSON']"
+                            [routerLink]="[ { outlets: { popup: (companyId ? [item.companyId,item.id , 'edit']  : item.id + '/edit') } }]">
+                        <span class="fa fa-edit"></span>
+                        <span jhiTranslate="entity.action.edit">ویرایش</span>
+                    </button>
+
+                    <button class="btn btn-primary"
+                            *jhiHasAnyAuthorityDisabled="['ROLE_ADMIN',
+                             'VIEW_PERSON',
+                             'ACTIVE_PERSON',
+                             'DEACTIVE_PERSON',
+                             'REJECT_PERSON',
+                              'DELETE_PERSON',
+                              'LIST_STAKEHOLDER',
+                              'LIST_SELL_CONTRACT',
+                              'LIST_PERSON_CREDIT',
+                              'CREATE_USER',
+                              'EDIT_USER',
+                              'LIST_BANK_ACCOUNT',
+                              'CREDIT_ACCOUNT_PERSON',
+                              'LIST_DEPOSIT_IDENTIFIER_PERSON']"
+                            ngbDropdownToggle></button>
+                    <div class="dropdown-menu" ngbDropdownMenu>
+                        <button class="dropdown-item"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN', 'VIEW_PERSON']"
+                                replaceUrl="true"
+                                [routerLink]="[ { outlets: { popup: (companyId ? [item.companyId,item.id , 'view']  : item.id + '/view') } }]">
+                            <span class="fa fa-eye"></span>
+                            <span jhiTranslate="entity.action.view">نمایش</span>
+                        </button>
+                        <button class="dropdown-item"
+                                replaceUrl="true"
+                                [routerLink]="[]">
+                            <span class="fa fa-check"></span>
+                            <span jhiTranslate="entity.action.active">فعال</span>
+                        </button>
+                        <ng-container *ngIf="item.status !== VerifyStatus[VerifyStatus.ACTIVE]">
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'ACTIVE_PERSON']"
+                                    replaceUrl="true"
+                                    [routerLink]="[{ outlets: { popup: item.id + '/active'} }]">
+                                <span class="fa fa-check"></span>
+                                <span jhiTranslate="entity.action.active">فعال</span>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="item.status === VerifyStatus[VerifyStatus.ACTIVE]">
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'DEACTIVE_PERSON']"
+                                    replaceUrl="true"
+                                    [routerLink]="[ { outlets: { popup:  item.id + '/de-active'} }]">
+                                <span class="fa fa-close"></span>
+                                <span jhiTranslate="entity.action.deActive">غیر فعال</span>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="item.status === VerifyStatus[VerifyStatus.PENDING]">
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'REJECT_PERSON']"
+                                    replaceUrl="true"
+                                    [routerLink]="[ { outlets: { popup:  item.id + '/reject'} }]">
+                                <span class="fa fa-close"></span>
+                                <span jhiTranslate="entity.action.reject">رد کردن</span>
+                            </button>
+                        </ng-container>
+                        <button class="dropdown-item"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN', 'DELETE_PERSON']"
+                                replaceUrl="true"
+                                [routerLink]="['/','person', { outlets: { popup: (companyId ? 'stakeholder/' + item.stakeholderId : item.id) + '/delete'} }]">
+                            <span class="fa fa-remove"></span>
+                            <span jhiTranslate="entity.action.delete">delete</span>
+                        </button>
+
+                        <ng-container *ngIf="item.personality == 'LEGAL' && !companyId">
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'LIST_STAKEHOLDER']"
+                                    [routerLink]="[ item.id, 'stakeholder']">
+                                <span class="fa fa-external-link"></span>
+                                <span jhiTranslate="niopdcgatewayApp.stakeholder.home.title">Stakeholder</span>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="!item.username">
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'CREATE_USER_PERSON']"
+                                    [routerLink]="[{ outlets: { popup: item.id + '/create/user'} }]">
+                                <span class="fa fa-external-link"></span>
+                                <span jhiTranslate="niopdcgatewayApp.person.createUser">Create User</span>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="item.username">
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'EDIT_USER']"
+                                    [routerLink]="[{ outlets: { popup: item.id + '/edit/user'} }]">
+                                <span class="fa fa-external-link"></span>
+                                <span jhiTranslate="niopdcgatewayApp.person.editUser">Edit User</span>
+                            </button>
+                        </ng-container>
+                         <ng-container *ngIf="!companyId">
+                        <button class="dropdown-item"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN', 'LIST_SELL_CONTRACT']"
+                                [routerLink]="['/sell-contract']" [queryParams]="{person : item.id}">
+                            <span class="fa fa-external-link"></span>
+                            <span jhiTranslate="niopdcgatewayApp.sellContract.home.title">SellContract</span>
+                        </button>
+                        <button class="dropdown-item"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN', 'LIST_PERSON_CREDIT']"
+                                [routerLink]="[ item.id, 'person-credit']">
+                            <span class="fa fa-external-link"></span>
+                            <span jhiTranslate="niopdcgatewayApp.personCredit.home.title">person Credit</span>
+                        </button>
+                        <button class="dropdown-item"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN', 'LIST_BANK_ACCOUNT']"
+                                [routerLink]="[item.id, 'bank-account']">
+                            <span class="fa fa-external-link"></span>
+                            <span jhiTranslate="niopdcgatewayApp.bankAccount.home.title">Bank Account</span>
+                        </button>
+                    </ng-container>
+                        <ng-container *ngIf="!companyId">
+                        <button class="dropdown-item"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN', 'CREDIT_ACCOUNT_PERSON']"
+                                [routerLink]="['/','person', { outlets: { popup:  item.id + '/credit-account'} }]">
+                            <span class="fa fa-external-link"></span>
+                            <span jhiTranslate="niopdcgatewayApp.person.creditAccount">Customer Credit</span>
+                        </button>
+                        </ng-container>
+                        <ng-container *ngIf="!companyId">
+                         <button class="dropdown-item"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN','LIST_DEPOSIT_IDENTIFIER_PERSON']"
+                                [routerLink]="['/','person', { outlets: { popup: 'deposit-identifier'} }]" [queryParams]="{personId: item.id}">
+                            <span class="fa fa-external-link"></span>
+                            <span jhiTranslate="niopdcgatewayApp.depositIdentifier.title">depositIdentifier</span>
+                        </button>
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+
+</div>

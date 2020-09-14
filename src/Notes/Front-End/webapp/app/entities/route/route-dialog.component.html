@@ -1,0 +1,260 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="route.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="route.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.sourceCode"
+                           for="field_sourceCode">Source Code</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="sourceCode" id="field_sourceCode"
+                           [(ngModel)]="route.sourceCode"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.sourceTadaCode"
+                           for="field_sourceTadaCode">Source Tada Code</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="sourceTadaCode"
+                           id="field_sourceTadaCode"
+                           [(ngModel)]="route.sourceTadaCode"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.sourceName"
+                           for="field_sourceName">Source Name</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="sourceName" id="field_sourceName"
+                           [(ngModel)]="route.sourceName"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.customerCode"
+                           for="field_customerCode">Customer Code</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="customerCode"
+                           id="field_customerCode"
+                           [(ngModel)]="route.customerCode"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.destCode"
+                           for="field_destCode">Dest
+                        Code</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="destCode" id="field_destCode"
+                           [(ngModel)]="route.destCode"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.destOpCode"
+                           for="field_destOpCode">Dest Op Code</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="destOpCode" id="field_destOpCode"
+                           [(ngModel)]="route.destOpCode"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.destName"
+                           for="field_destName">Dest
+                        Name</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="destName" id="field_destName"
+                           [(ngModel)]="route.destName"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.oldCode" for="field_oldCode">Old
+                        Code</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="oldCode" id="field_oldCode"
+                           [(ngModel)]="route.oldCode"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.isActive"
+                           for="field_isActive">Is
+                        Active</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="isActive" id="field_isActive"
+                           [(ngModel)]="route.isActive"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.customerStatus"
+                           for="field_customerStatus">Customer Status</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="customerStatus"
+                           id="field_customerStatus"
+                           [(ngModel)]="route.customerStatus"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.hamlType"
+                           for="field_hamlType">Haml
+                        Type</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="hamlType" id="field_hamlType"
+                           [(ngModel)]="route.hamlType"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.customerType"
+                           for="field_customerType">Customer Type</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="customerType"
+                           id="field_customerType"
+                           [(ngModel)]="route.customerType"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.rate"
+                           for="field_rate">Rate</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="rate" id="field_rate"
+                           [(ngModel)]="route.rate"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.distanceKm"
+                           for="field_distanceKm">Distance Km</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="distanceKm"
+                           id="field_distanceKm"
+                           [(ngModel)]="route.distanceKm"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.description"
+                           for="field_description">Description</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="description"
+                           id="field_description"
+                           [(ngModel)]="route.description"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.executeDate"
+                           for="field_executeDate">Execute Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                            id="field_executeDate" class="form-control"
+                                            name="executeDate" [(ngModel)]="route.executeDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.taCode" for="field_taCode">Ta
+                        Code</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="taCode" id="field_taCode"
+                           [(ngModel)]="route.taCode"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.code"
+                           for="field_code">Code</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="code" id="field_code"
+                           [(ngModel)]="route.code"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.customerName"
+                           for="field_customerName">Customer Name</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="customerName"
+                           id="field_customerName"
+                           [(ngModel)]="route.customerName"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.address" for="field_address">Address</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="address" id="field_address"
+                           [(ngModel)]="route.address"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.via"
+                           for="field_via">Via</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="via" id="field_via"
+                           [(ngModel)]="route.via"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.caption" for="field_caption">Caption</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="caption" id="field_caption"
+                           [(ngModel)]="route.caption"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.route.routeType"
+                           for="field_routeType">Route
+                        Type</label>
+                    <select [disabled]="isView" class="form-control" name="routeType" [(ngModel)]="route.routeType"
+                            id="field_routeType">
+                        <option value="EMERGENCY_ROUTE">{{'niopdcgatewayApp.RouteType.EMERGENCY_ROUTE' | translate}}
+                        </option>
+                        <option value="URBAN_HARD">{{'niopdcgatewayApp.RouteType.URBAN_HARD' | translate}}</option>
+                        <option value="PROCUREMENT_LOCAL">{{'niopdcgatewayApp.RouteType.PROCUREMENT_LOCAL' | translate}}
+                        </option>
+                        <option value="NORMAL_CITY">{{'niopdcgatewayApp.RouteType.NORMAL_CITY' | translate}}</option>
+                        <option value="NORMAL_LOCAL_PROCUREMENT">{{'niopdcgatewayApp.RouteType.NORMAL_LOCAL_PROCUREMENT'
+                            |
+                            translate}}
+                        </option>
+                        <option value="BULK_URBAN_GAS">{{'niopdcgatewayApp.RouteType.BULK_URBAN_GAS' | translate}}
+                        </option>
+                        <option value="VOLUMETRIC_GAS_SUPPLY">{{'niopdcgatewayApp.RouteType.VOLUMETRIC_GAS_SUPPLY' |
+                            translate}}
+                        </option>
+                        <option value="FREE">{{'niopdcgatewayApp.RouteType.FREE' | translate}}</option>
+                        <option value="INSTANT">{{'niopdcgatewayApp.RouteType.INSTANT' | translate}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,43 @@
+{
+    "niopdcgatewayApp": {
+        "driver": {
+            "home": {
+                "title": "راننده ها",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ویرایش",
+                "carTitle": "نفت کش"
+            },
+            "delete": {
+                "question": "آیا برای حذف راننده مطمئن هستید ؟ "
+            },
+            "detail": {
+                "title": "راننده"
+            },
+            "firstName": "نام",
+            "lastName": "نام خانوادگی",
+            "birthCertificateNumber": "شماره شناسنامه",
+            "drivingLicenseTypeCode": "پایه گواهینامه",
+            "drivingLicenseNumber": "شماره گواهینامه",
+            "drivingLicenseIssueDate": "تاریخ صدور گواهینامه",
+            "drivingLicenseExpireDate": "تاریخ اعتبار گواهینامه",
+            "expireViolationDate": "مهلت رفع تخلفات ایمینی",
+            "smartCardNumber": "شماره کارت هوشمند",
+            "active": "فعال",
+            "mainDriver": "راننده اصلی ؟ ",
+            "description": "توضیحات",
+            "picture": "تصویر",
+            "satisfactionWeight": "رضایت راننده",
+            "desiredLengthWeight": "مسافت مطلوب راننده",
+            "behaviourWeight": "وضعیت اخلاقی راننده",
+            "birthCity": "شهر محل تولد",
+            "car": "نفت کش"
+        }
+    },
+    "niopdcbaseApp": {
+        "driver": {
+            "created": "راننده با موفقیت ایجاد شد.",
+            "updated": "راننده با موفقیت ویرایش شد.",
+            "deleted": "راننده با موفیت حذف شد."
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "AccessType" : {
+            "null": "",
+            "ACCESS": "ACCESS",
+            "READ": "READ"
+        }
+    }
+}

@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "requestElement" : {
+            "home": {
+                "title": "Request Elements",
+                "createLabel": "Create a new Request Element",
+                "createOrEditLabel": "Create or edit a Request Element"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Request Element {{ id }}?"
+            },
+            "detail": {
+                "title": "Request Element"
+            },
+            "count": "تعداد",
+            "requestFilterElement": "Request Filter Element",
+            "element": "المنت"
+        }
+    },
+    "niopdcaoApp": {
+        "requestElement" : {
+            "created": "A new Request Element is created with identifier {{ param }}",
+            "updated": "A Request Element is updated with identifier {{ param }}",
+            "deleted": "A Request Element is deleted with identifier {{ param }}"
+        }
+    }
+}

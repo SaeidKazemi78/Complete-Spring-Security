@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+   <changeSet author="mohammad (generated)" id="1576674790468-5">
+      <addColumn tableName="vehicle_model">
+         <column name="confirm" type="bit"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="mohammad (generated)" id="1576674790468-6">
+      <addColumn tableName="vehicle_model_aud">
+         <column name="confirm" type="bit"/>
+      </addColumn>
+   </changeSet>
+    <changeSet author="mohammad (generated)" id="1576674790468-7">
+        <update tableName="vehicle_model">
+            <column name="confirm" type="bit" value="1"/>
+        </update>
+    </changeSet>
+    <changeSet author="mohammad (generated)" id="1576674790468-8">
+        <update tableName="vehicle_model_aud">
+            <column name="confirm" type="bit" value="1"/>
+        </update>
+    </changeSet>
+</databaseChangeLog>

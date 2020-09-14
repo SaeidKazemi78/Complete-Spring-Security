@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "SpentType" : {
+            "null": "",
+            "PRODUCT": "PRODUCT",
+            "COST": "COST",
+            "WALLET": "WALLET"
+        }
+    }
+}

@@ -1,0 +1,27 @@
+
+{
+    "niopdcgatewayApp": {
+        "stakeholder" : {
+            "home": {
+                "title": "سهام داران"
+            },
+            "delete": {
+                "question": "آیا برای حذف این سهام دار مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "سهام داران"
+            },
+            "sharePercent": "درصد سهام",
+            "stakeholderType": "مدیرعامل/سهام دار",
+            "company": "Company",
+            "person": "Person"
+        }
+    },
+    "niopdcbaseApp": {
+        "stakeholder" : {
+            "created": "سهام دار با موفقیت ایجاد شد.",
+            "updated": "سهام دار با موفقیت ویرایش شد.",
+            "deleted": "سهام دار با موفقیت حذف شد."
+        }
+    }
+}

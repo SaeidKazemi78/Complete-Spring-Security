@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "lastChangeDateElement" : {
+            "home": {
+                "title": "Last Change Date Elements",
+                "createLabel": "Create a new Last Change Date Element",
+                "createOrEditLabel": "Create or edit a Last Change Date Element"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Last Change Date Element {{ id }}?"
+            },
+            "detail": {
+                "title": "Last Change Date Element"
+            },
+            "currentModel": "Current Model",
+            "lastChangeDate": "Last Change Date",
+            "requestFilterElement": "Request Filter Element",
+            "element": "Element"
+        }
+    },
+    "niopdcaoApp": {
+        "lastChangeDateElement" : {
+            "created": "A new Last Change Date Element is created with identifier {{ param }}",
+            "updated": "A Last Change Date Element is updated with identifier {{ param }}",
+            "deleted": "A Last Change Date Element is deleted with identifier {{ param }}"
+        }
+    }
+}

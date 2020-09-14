@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "ProductRateDifferenceType" : {
+            "null": "",
+            "EXIT_FROM_DEPOT": "خروج از انبار",
+            "SELL": "فروش",
+            "SELL_AND_PRD": "تفاوت خروج از انبار با فروش"
+        }
+    }
+}

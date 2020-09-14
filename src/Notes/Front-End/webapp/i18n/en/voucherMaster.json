@@ -1,0 +1,33 @@
+
+{
+    "niopdcgatewayApp": {
+        "voucherMaster" : {
+            "home": {
+                "title": "Voucher Masters",
+                "createLabel": "Create a new Voucher Master",
+                "createOrEditLabel": "Create or edit a Voucher Master"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Voucher Master {{ id }}?"
+            },
+            "detail": {
+                "title": "Voucher Master"
+            },
+            "locationId": "Location Id",
+            "confirmDate": "Confirm Date",
+            "userConfirm": "User Confirm",
+            "docNumber": "Doc Number",
+            "description": "Description",
+            "status": "Status",
+            "voucherItem": "Voucher Item",
+            "voucherType": "Voucher Type"
+        }
+    },
+    "niopdcaccountingApp": {
+        "voucherMaster" : {
+            "created": "A new Voucher Master is created with identifier {{ param }}",
+            "updated": "A Voucher Master is updated with identifier {{ param }}",
+            "deleted": "A Voucher Master is deleted with identifier {{ param }}"
+        }
+    }
+}

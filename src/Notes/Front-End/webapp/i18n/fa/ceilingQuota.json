@@ -1,0 +1,30 @@
+{
+    "niopdcgatewayApp": {
+        "ceilingQuota": {
+            "home": {
+                "title": "سقف سهمیه",
+                "createLabel": "ایجاد سقف سهمیه",
+                "createOrEditLabel": "ویرایش سقف سهمیه",
+                "customerTitle": "مشتری",
+                "customerCreditTitle": "سهمیه مشتری"
+            },
+            "delete": {
+                "question": "آیا برای حذف سقف سهمیه مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "Ceiling Quota"
+            },
+            "startDate": "تاریخ شروع",
+            "finishDate": "تاریخ پایان",
+            "amount": "مقدار",
+            "customerCredit": "اعتبار مشتری"
+        }
+    },
+    "niopdcbaseApp": {
+        "ceilingQuota": {
+            "created": "سقف سهمیه با موفقیت ایجاد شد.",
+            "updated": "سقف سهمیه با موفقیت ویرایش شد.",
+            "deleted": "سقف سهمیه با موفقیت حذف شد."
+        }
+    }
+}

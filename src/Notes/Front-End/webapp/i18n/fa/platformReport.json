@@ -1,0 +1,21 @@
+{
+    "niopdcgatewayApp": {
+        "platformReport": {
+            "home": {
+                "title": "دریافت سوخت واحد"
+            },
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "unitName": "واحد",
+            "platformName": "سکو",
+            "metreName": "میتر",
+            "day": "روز",
+            "productCode": "نام فرآورده",
+            "productName": "کد فرآورده",
+            "amount": "مقدار",
+            "startMetre": "میتر شروع",
+            "endMetre": "میتر پایان",
+            "count": "تعداد"
+        }
+    }
+}

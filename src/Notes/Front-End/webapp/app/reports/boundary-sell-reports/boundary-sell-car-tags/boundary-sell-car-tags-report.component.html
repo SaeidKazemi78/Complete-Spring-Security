@@ -1,0 +1,135 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <form name="editForm" role="form" novalidate (ngSubmit)="loadAll()" #editForm="ngForm">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.order.startDate"
+                           for="field_startDate">startDate</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [rtlActive]="true" time="00:00:00"
+                                            id="field_startDate"
+                                            class="form-control"
+                                            name="startDate" [(ngModel)]="req.startDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.order.finishDate"
+                           for="field_finishDate">finish Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [rtlActive]="true" time="00:00:00"
+                                            id="field_finishDate"
+                                            class="form-control"
+                                            name="finishDate" [(ngModel)]="req.finishDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label jhiTranslate="niopdcgatewayApp.order.locationId"
+                       for="field_locationId">Location</label>
+                <p-multiSelect
+                    [(ngModel)]="req.locationIds"
+                    [options]="customLocation | sortBy: 'label'"
+                    class="form-control"
+                    id="field_locationId"
+                    widthGrid="300px" required
+                    [ngModelOptions]="{standalone: true}"
+                    [defaultLabel]="'global.messages.info.choose' | translate"
+                    [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                    ngDefaultControl
+                    name="location"
+                >
+                </p-multiSelect>
+            </div>
+        </div>
+
+        <div class="card-footer text-center">
+            <button type="submit" class="btn btn-primary "
+                    [disabled]="editForm.form.invalid || searching ">
+                <span class="fa fa-search"></span>&nbsp;<span
+                jhiTranslate="report.search">Save</span>
+            </button>
+        </div>
+    </form>
+
+    <br/>
+    <kendo-grid
+        [data]="gridData"
+        [skip]="state.skip"
+        [sort]="state.sort"
+        [group]="state.group"
+        [resizable]="true"
+        [sortable]="{ mode: 'multiple' }">
+        <ng-template kendoGridToolbarTemplate>
+            <button type="button" kendoGridExcelCommand>
+                <span class="fa fa-file-excel-o"></span>&nbsp;
+                <span jhiTranslate="report.exportToExcel"></span>
+            </button>
+        </ng-template>
+        <kendo-grid-column field="locationName"
+                           [title]="'niopdcgatewayApp.boundaryReport.locationName' | translate" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="registerTag"
+                           [title]="'niopdcgatewayApp.boundaryReport.registerTag' | translate" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="assignTag"
+                           [title]="'niopdcgatewayApp.boundaryReport.assignTag' | translate" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="activeTag"
+                           [title]="'niopdcgatewayApp.boundaryReport.activeTag' | translate" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="newTag"
+                           [title]="'niopdcgatewayApp.boundaryReport.newTag' | translate" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="missingTag"
+                           [title]="'niopdcgatewayApp.boundaryReport.missingTag' | translate" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="defectiveTag"
+                           [title]="'niopdcgatewayApp.boundaryReport.defectiveTag' | translate" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-excel fileName="tagsReport.xlsx"></kendo-grid-excel>
+    </kendo-grid>
+
+    <br/>
+</div>

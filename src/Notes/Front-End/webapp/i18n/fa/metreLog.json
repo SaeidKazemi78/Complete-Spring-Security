@@ -1,0 +1,39 @@
+
+{
+    "niopdcgatewayApp": {
+        "metreLog" : {
+            "home": {
+                "title": "Metre Logs",
+                "createLabel": "Create a new Metre Log",
+                "createOrEditLabel": "Create or edit a Metre Log"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Metre Log {{ id }}?"
+            },
+            "detail": {
+                "title": "Metre Log"
+            },
+            "startMeter": "میتر قبل",
+            "endMeter": "میتر بعد",
+            "machineEndMetre": "میتر بعد فیزیکی",
+            "amount": "مقدار",
+            "registerDate": "تاریخ ثبت",
+            "fuelType": "نوع سوخت",
+            "transfer": "انتقال",
+            "transferPlatformToUnit": "انتقال سکو به واحد",
+            "logBook": "Log Book",
+            "metre": "میتر",
+            "useType": "نوع استفاده",
+            "difference":"تفاوت",
+            "productTitle":"فرآورده",
+            "productGroupTitle":"گروه فرآورده"
+        }
+    },
+    "niopdcaoApp": {
+        "metreLog" : {
+            "created": "A new Metre Log is created with identifier {{ param }}",
+            "updated": "A Metre Log is updated with identifier {{ param }}",
+            "deleted": "A Metre Log is deleted with identifier {{ param }}"
+        }
+    }
+}

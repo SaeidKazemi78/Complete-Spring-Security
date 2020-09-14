@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "StakeholderType" : {
+            "null": "",
+            "CEO": "CEO",
+            "OTHER": "OTHER"
+        }
+    }
+}

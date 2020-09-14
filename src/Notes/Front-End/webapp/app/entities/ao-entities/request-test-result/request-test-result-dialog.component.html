@@ -1,0 +1,230 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+    <div class="modal-header">
+        <h4 *ngIf="requestTestResult.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="requestTestResult.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.requestTestResult.refuelCenter"
+                           for="field_refuelCenter">Refuel Center</label>
+                    <select class="form-control" id="field_refuelCenter" name="refuelCenter"
+                            [(ngModel)]="requestTestResult.refuelCenterId"
+                            (ngModelChange)="onChangeRefuelCenter($event)"
+                            [disabled]="isView"
+                            required>
+                        <option *ngIf="!editForm.value.refuelCenter" [ngValue]="null" selected></option>
+                        <option [ngValue]="refuelCenterOption.id"
+                                *ngFor="let refuelCenterOption of refuelcenters; trackBy: trackRefuelCenterById">
+                            {{refuelCenterOption.persianTitle}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.refuelCenter?.dirty && editForm.controls.refuelCenter?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.refuelCenter?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.requestTestResult.oilTank"
+                           for="field_oilTank">Oil Tank</label>
+                    <select class="form-control" id="field_oilTank" name="oilTank"
+                            [(ngModel)]="requestTestResult.oilTankId"
+                            (ngModelChange)="onChangeOilTank($event)"
+                            [disabled]="isView"
+                            required
+                    >
+                        <option *ngIf="!editForm.value.oilTank" [ngValue]="null" selected></option>
+                        <option [ngValue]="oilTankOption.id"
+                                *ngFor="let oilTankOption of oiltanks; trackBy: trackOilTankById">
+                            {{oilTankOption.title}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.oilTank?.dirty && editForm.controls.oilTank?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.oilTank?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.requestTestResult.productId"
+                           for="field_productId">Product Id</label>
+                    <input [disabled]="true" class="form-control" name="productId" id="field_productId"
+                           [(ngModel)]="oiltank.productTitle" required/>
+                    <div [hidden]="!(editForm.controls.productId?.dirty && editForm.controls.productId?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.productId?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.productId?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.requestTestResult.testResultType"
+                           for="field_testResultType">Test Result Type</label>
+                    <select [disabled]="isView" class="form-control" name="testResultType"
+                            [(ngModel)]="requestTestResult.testResultType" id="field_testResultType" required>
+                        <option value="PLUNGING">{{'niopdcgatewayApp.TestResultType.PLUNGING' | translate}}</option>
+                        <option value="BASE">{{'niopdcgatewayApp.TestResultType.BASE' | translate}}</option>
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.testResultType?.dirty && editForm.controls.testResultType?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.testResultType?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.requestTestResult.oilTankInventory"
+                           for="field_oilTankInventory">Oil Tank Inventory</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="oilTankInventory"
+                           id="field_oilTankInventory"
+                           [(ngModel)]="requestTestResult.oilTankInventory" required/>
+                    <div
+                        [hidden]="!(editForm.controls.oilTankInventory?.dirty && editForm.controls.oilTankInventory?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.oilTankInventory?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.oilTankInventory?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.requestTestResult.date"
+                           for="field_date">Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                            id="field_date" class="form-control"
+                                            name="date" [(ngModel)]="requestTestResult.date"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div [hidden]="!(editForm.controls.date?.dirty && editForm.controls.date?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.date?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.date?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.requestTestResult.sampleValue"
+                           for="field_sampleValue">Sample Value</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="sampleValue"
+                           id="field_sampleValue"
+                           [(ngModel)]="requestTestResult.sampleValue" required/>
+                    <div [hidden]="!(editForm.controls.sampleValue?.dirty && editForm.controls.sampleValue?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.sampleValue?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.sampleValue?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.requestTestResult.sourceOilTankNumber"
+                           for="field_sourceOilTankNumber">Source Oil Tank Number</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="sourceOilTankNumber"
+                           id="field_sourceOilTankNumber"
+                           [(ngModel)]="requestTestResult.sourceOilTankNumber" required/>
+                    <div
+                        [hidden]="!(editForm.controls.sourceOilTankNumber?.dirty && editForm.controls.sourceOilTankNumber?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.sourceOilTankNumber?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.requestTestResult.electricalConductivity"
+                           for="field_electricalConductivity">Electrical Conductivity</label>
+                    <input type="text" class="form-control" name="electricalConductivity"
+                           id="field_electricalConductivity"
+                           [(ngModel)]="requestTestResult.electricalConductivity"
+                           required
+                           [disabled]="isView"
+                    />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.requestTestResult.samplerName"
+                           for="field_samplerName">Sampler Name</label>
+                    <input type="text" class="form-control" name="samplerName" id="field_samplerName"
+                           [(ngModel)]="requestTestResult.samplerName"
+                           required
+                           [disabled]="isView"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

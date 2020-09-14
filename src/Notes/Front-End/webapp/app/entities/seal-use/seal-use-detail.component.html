@@ -1,0 +1,46 @@
+
+<div *ngIf="sealUse">
+    <h2><span jhiTranslate="niopdcgatewayApp.sealUse.detail.title">Seal Use</span> {{sealUse.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="niopdcgatewayApp.sealUse.sealNumber">Seal Number</span></dt>
+        <dd>
+            <span>{{sealUse.sealNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.sealUse.sealPrefix">Seal Prefix</span></dt>
+        <dd>
+            <span>{{sealUse.sealPrefix}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.sealUse.sealUseReason">Seal Use Reason</span></dt>
+        <dd>
+            <span jhiTranslate="{{'niopdcgatewayApp.SealUseReason.' + sealUse.sealUseReason}}">{{sealUse.sealUseReason}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.sealUse.seal">Seal</span></dt>
+        <dd>
+            <div *ngIf="sealUse.sealId">
+                <a [routerLink]="['/seal', sealUse.sealId]">{{sealUse.sealId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.sealUse.wayBill">Way Bill</span></dt>
+        <dd>
+            <div *ngIf="sealUse.wayBillId">
+                <a [routerLink]="['/way-bill', sealUse.wayBillId]">{{sealUse.wayBillId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'seal-use/'+ sealUse.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

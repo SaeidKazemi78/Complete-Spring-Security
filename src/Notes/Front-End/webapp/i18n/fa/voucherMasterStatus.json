@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "VoucherMasterStatus" : {
+            "null": "",
+            "CONFIRM": "تایید",
+            "REJECT": "برگشت از تایید",
+            "PENDING": "در انتظار"
+        }
+    }
+}

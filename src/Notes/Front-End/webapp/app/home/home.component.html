@@ -1,0 +1,242 @@
+<jhi-alert-error></jhi-alert-error>
+<div>
+    <div class="card">
+        <div class="card-header" role="tab" id="headingOne">
+
+            <h5 class="mb-0">
+                <div class="row">
+
+                </div>
+            </h5>
+            <div class="row">
+                <div class="col-md-6">
+                    <p-tabView (onChange)="handleChangeTab($event)">
+                        <p-tabPanel header="همه">
+                            <div class="card text-center" *ngIf="tabIndex===0">
+                                <div class="card-block">
+                                    <p-dataList [value]="newses"  [rows]="5" [emptyMessage] ="('global.messages.info.emptyRecords' | translate)"
+                                                [lazy]="true" [responsive]="true" [stacked]="false"
+                                                [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)">
+
+                                        <ng-template let-news pTemplate="item">
+                                            <a>
+                                                <div class="news ui-g ui-fluid car-item"
+                                                     (click)="selectNews($event, news)">
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-md-4" style="text-align:right">
+                                                                <img *ngIf="news.thumbnail"
+                                                                    [src]="'data:' + news.thumbnailContentType + ';base64,' + news.thumbnail"/>
+                                                                   <img *ngIf="!news.thumbnail"
+                                                                        src="../../content/images/logo.jpg"
+                                                                                height="300" width="400"/>
+                                                            </div>
+                                                            <div class="col-md-8" >
+                                                                <div class="row ttl">
+                                                                    {{news.title}}
+                                                                </div>
+                                                                <div class="row" style="font-size: small;text-align:right">
+                                                                    <div>{{news.summary}}</div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </ng-template>
+                                    </p-dataList>
+                                </div>
+                            </div>
+                        </p-tabPanel>
+                        <p-tabPanel header="اطلاعیه">
+                            <div class="card text-center" *ngIf="tabIndex===1">
+                                <div class="card-block">
+                                    <p-dataList [value]="newses" [emptyMessage] ="('global.messages.info.emptyRecords' | translate)" [rows]="5"
+                                                [lazy]="true" [responsive]="true" [stacked]="false"
+                                                [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)">
+
+                                        <ng-template let-news pTemplate="item">
+                                            <a>
+                                                <div class="news ui-g ui-fluid car-item"
+                                                     (click)="selectNews($event, news)">
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-md-4" style="text-align:right">
+                                                                <img *ngIf="news.thumbnail"
+                                                                     [src]="'data:' + news.thumbnailContentType + ';base64,' + news.thumbnail"/>
+                                                                <img *ngIf="!news.thumbnail"
+                                                                     src="../../content/images/logo.jpg"
+                                                                     height="300" width="400"/>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="row ttl">
+                                                                    {{news.title}}
+                                                                </div>
+                                                                <div class="row"  style="font-size: small;text-align:right">
+                                                                    <div>{{news.summary}}</div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </ng-template>
+                                    </p-dataList>
+                                </div>
+                            </div>
+                        </p-tabPanel>
+                        <p-tabPanel header="رویداد">
+                            <div class="card text-center" *ngIf="tabIndex===2">
+                                <div class="card-block">
+                                    <p-dataList [value]="newses"  [rows]="5" [emptyMessage] ="('global.messages.info.emptyRecords' | translate)"
+                                                [lazy]="true" [responsive]="true" [stacked]="false"
+                                                [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)">
+
+                                        <ng-template let-news pTemplate="item">
+                                            <a>
+                                                <div class="news ui-g ui-fluid car-item"
+                                                     (click)="selectNews($event, news)">
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-md-4" style="text-align:right">
+                                                                <img *ngIf="news.thumbnail"
+                                                                     [src]="'data:' + news.thumbnailContentType + ';base64,' + news.thumbnail"/>
+                                                                <img *ngIf="!news.thumbnail"
+                                                                     src="../../content/images/logo.jpg"
+                                                                     height="300" width="400"/>
+                                                                  </div>
+                                                            <div class="col-md-8">
+                                                                <div class="row ttl">
+                                                                    {{news.title}}
+                                                                </div>
+                                                                <div class="row"  style="font-size: small;text-align:right">
+                                                                    <div>{{news.summary}}</div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </ng-template>
+                                    </p-dataList>
+                                </div>
+                            </div>
+                        </p-tabPanel>
+                        <p-tabPanel header="اخبار">
+                            <div class="card text-center" *ngIf="tabIndex===3">
+                                <div class="card-block">
+                                    <p-dataList [value]="newses"  [rows]="5" [emptyMessage] ="('global.messages.info.emptyRecords' | translate)"
+                                                [lazy]="true" [responsive]="true" [stacked]="false"
+                                                [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)">
+
+                                        <ng-template let-news pTemplate="item">
+                                            <a>
+                                                <div class="news ui-g ui-fluid car-item"
+                                                     (click)="selectNews($event, news)">
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-md-4" style="text-align:right">
+                                                                <img *ngIf="news.thumbnail"
+                                                                     [src]="'data:' + news.thumbnailContentType + ';base64,' + news.thumbnail"/>
+                                                                <img *ngIf="!news.thumbnail"
+                                                                     src="../../content/images/logo.jpg"
+                                                                     height="300" width="400"/>
+                                                                 </div>
+                                                            <div class="col-md-8">
+                                                                <div class="row ttl">
+                                                                    {{news.title}}
+                                                                </div>
+                                                                <div class="row"  style="font-size: small;text-align:right">
+                                                                    <div>{{news.summary}}</div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </ng-template>
+                                    </p-dataList>
+                                </div>
+                            </div>
+                        </p-tabPanel>
+                        <p-tabPanel header="اخطار">
+                            <div class="card text-center" *ngIf="tabIndex===4">
+                                <div class="card-block">
+                                    <p-dataList [value]="newses" [rows]="5" [emptyMessage] ="('global.messages.info.emptyRecords' | translate)"
+                                                [lazy]="true" [responsive]="true" [stacked]="false"
+                                                [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)">
+
+                                        <ng-template let-news pTemplate="item">
+                                            <a>
+                                                <div class="news ui-g ui-fluid car-item"
+                                                     (click)="selectNews($event, news)">
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-md-4" style="text-align:right">
+                                                                <img *ngIf="news.thumbnail"
+                                                                     [src]="'data:' + news.thumbnailContentType + ';base64,' + news.thumbnail"/>
+                                                                <img *ngIf="!news.thumbnail"
+                                                                     src="../../content/images/logo.jpg"
+                                                                     height="300" width="400"/>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="row ttl">
+                                                                    {{news.title}}
+                                                                </div>
+                                                                <div class="row"  style="font-size: small;text-align:right">
+                                                                    <div>{{news.summary}}</div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </ng-template>
+                                    </p-dataList>
+                                </div>
+                            </div>
+                        </p-tabPanel>
+                    </p-tabView>
+                </div>
+                <div class="col-md-6" *ngIf="news">
+                    <div class="container">
+                        <div class="row" *ngIf="news.picture">
+                            <div class="col-md-12">
+                                <img style="width: 100%;height: 300px;"
+                                     [src]="'data:' + news.pictureContentType + ';base64,' + news.picture"/>
+                            </div>
+                        </div>
+                        <div class="row" style="margin: 20px 0px;">
+                            <div class="col-md-11">
+                                <span jhiTranslate="niopdcgatewayApp.news.date">date</span>
+                                <p style="color: #ff8000">{{news.createdDate | dateTimeJalali}}</p>
+                                <p style="float: right;font-size: large;color: #0e80e6;">{{news.title}}</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-11">
+                                <div class="col-md-11" style="text-align: justify">
+                                    <div [innerHTML]="news.content"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="news.fileId">
+                            <a (click)="downloadFile(news.fileId)"><u></u><p>دانلود فایل پیوست شده</p></u></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="viewer" dir="ltr">
+
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,29 @@
+{
+    "niopdcgatewayApp": {
+        "tagRate": {
+            "home": {
+                "title": "نرخ های تگ",
+                "createLabel": "Create a new Tag Rate",
+                "createOrEditLabel": "Create or edit a Tag Rate",
+                "locationTitle": "ناحیه مرزی"
+            },
+            "delete": {
+                "question": "آیا برای حذف این نرخ تگ مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "Tag Rate"
+            },
+            "sellPrice": "قیمت فروش",
+            "startDate": "تاریخ شروع",
+            "finishDate": "تاریخ پایان",
+            "location": "ناحیه مرزی"
+        }
+    },
+    "niopdcbaseApp": {
+        "tagRate": {
+            "created": "نرخ تگ با موفقیت ایجاد شد.",
+            "updated": "نرخ تگ با موفقیت ویرایش شد.",
+            "deleted": "نرخ تگ با موفقیت حذف شد."
+        }
+    }
+}

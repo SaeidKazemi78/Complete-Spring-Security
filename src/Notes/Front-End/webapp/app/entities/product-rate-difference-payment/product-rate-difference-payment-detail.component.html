@@ -1,0 +1,40 @@
+
+<div *ngIf="productRateDifferencePayment">
+    <h2><span jhiTranslate="niopdcgatewayApp.productRateDifferencePayment.detail.title">Product Rate Difference Payment</span> {{productRateDifferencePayment.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="niopdcgatewayApp.productRateDifferencePayment.paymentId">Payment Id</span></dt>
+        <dd>
+            <span>{{productRateDifferencePayment.paymentId}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.productRateDifferencePayment.price">Price</span></dt>
+        <dd>
+            <span>{{productRateDifferencePayment.price}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.productRateDifferencePayment.data">Data</span></dt>
+        <dd>
+            <span>{{productRateDifferencePayment.data | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.productRateDifferencePayment.productRateDifference">Product Rate Difference</span></dt>
+        <dd>
+            <div *ngIf="productRateDifferencePayment.productRateDifferenceId">
+                <a [routerLink]="['/product-rate-difference', productRateDifferencePayment.productRateDifferenceId]">{{productRateDifferencePayment.productRateDifferenceId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'product-rate-difference-payment/'+ productRateDifferencePayment.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

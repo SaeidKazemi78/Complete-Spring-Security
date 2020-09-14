@@ -1,0 +1,221 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+
+    <div *ngIf="!isPayment">
+        <div class="row">
+            <div class="col-md-3">
+                <button class="btn btn-info" (click)="search()">
+                    <span class="fa fa-search"></span>
+                </button>
+                <button class=" btn btn-danger" (click)="clear()">
+                    <span class="fa fa-remove"></span>
+                </button>
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3">
+                        <span><label jhiTranslate="niopdcgatewayApp.order.price">Price</label></span>
+                    </div>
+                    <div class="col-md-6">
+                        <input [disabled]="true" type="number" class="form-control" name="price" id="field_price"
+                               [(ngModel)]="price"/>
+
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-success"
+                                (click)="payment()">
+                            <span class="fa fa-credit-card"></span>
+                            <span jhiTranslate="niopdcgatewayApp.order.paymentCredit">paymentFinal</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <br/>
+        <p-dataTable [sortField]="predicate" [sortOrder]="reverse ? -1 : 1" #dt [value]="orders" [lazy]="true"
+                     [rows]="itemsPerPage" [rowsPerPageOptions]="[5,10,20,totalItems]"
+                     [paginator]="true" [responsive]="true" [stacked]="false"
+                     selectionMode="multiple" [(selection)]="orderPayments"
+                     (onRowUnselect)="onSelect($event, false)"
+                     (onRowSelect)="onSelect($event, false)"
+                     [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)">
+
+            <p-headerColumnGroup>
+                <p-row>
+                    <p-column [style]="{'width':'38px'}">
+                    </p-column>
+                    <p-column field="customerId" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.order.customerId">Customer Id</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="personId" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.order.personId">Customer Id</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="locationId" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.order.locationId">Location Id</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="orderNo" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.order.orderNo">Order No</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="registerDate" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.order.registerDate">Register Date</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="priceAmount" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.order.priceAmount">priceAmount</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="depotId" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.order.depotId">Depot Id</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="buyGroup" >
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.order.buyGroup">buy Group</span>
+                        </ng-template>
+                    </p-column>
+                </p-row>
+                <p-row>
+                    <p-column [style]="{'width':'38px'}">
+
+                    </p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="customer" id="field_customerId"
+                                   [(ngModel)]="order.customerName"
+                            />
+                        </ng-template>
+                    </p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="person" id="field_personId"
+                                   [(ngModel)]="order.personName"
+                            />
+                        </ng-template>
+                    </p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="location" id="field_locationId"
+                                   [(ngModel)]="order.locationName"
+                            />
+                        </ng-template>
+                    </p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="orderNo" id="field_orderNo"
+                                   [(ngModel)]="order.orderNo"
+                            />
+                        </ng-template>
+                    </p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <ng2-datetimepicker [disableTime]="true" class="form-control" name="registerDate"
+                                                [rtlActive]="true" time="00:00:00"
+                                                [(ngModel)]="order.registerDate">
+                            </ng2-datetimepicker>
+                        </ng-template>
+                    </p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <input class="form-control"
+                                   name="priceAmount" id="field_priceAmount"
+                                   [(ngModel)]="order.price"
+                                   [numeric]
+                            />
+                        </ng-template>
+                    </p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="depot" id="field_depotId"
+                                   [(ngModel)]="order.depotTitle"
+                            />
+                        </ng-template>
+                    </p-column>
+                    <p-column field="buyGroup" >
+                    </p-column>
+                </p-row>
+            </p-headerColumnGroup>
+            <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+            <p-column field="customerName" [header]="'niopdcgatewayApp.order.customerId' | translate"></p-column>
+            <p-column field="personName" [header]="'niopdcgatewayApp.order.personTitle' | translate"></p-column>
+            <p-column field="locationName" [header]="'niopdcgatewayApp.order.locationId' | translate"></p-column>
+            <p-column field="orderNo" [header]="'niopdcgatewayApp.order.orderNo' | translate"></p-column>
+            <p-column field="registerDate" [header]="'niopdcgatewayApp.order.registerDate' | translate">
+                <ng-template let-item="rowData" pTemplate="body">
+                    <span>{{item.registerDate | dateJalali}}</span>
+                </ng-template>
+            </p-column>
+            <p-column field="price" [header]="'niopdcgatewayApp.order.priceAmount' | translate"></p-column>
+            <p-column field="depotTitle" [header]="'niopdcgatewayApp.order.depotId' | translate"></p-column>
+            <p-column field="buyGroup" [header]="'niopdcgatewayApp.order.buyGroup' | translate">
+                <ng-template let-item="rowData" pTemplate="body">
+                <span *ngIf="item.buyGroup"
+                      jhiTranslate="{{'niopdcgatewayApp.BuyGroup.' + item.buyGroup}}">{{item.buyGroup}}</span>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+    </div>
+    <div *ngIf="isPayment">
+        <jhi-e-payment #ePayment [requestIdentifier]="payId"
+                       [showButton]="false"
+                       (canPay)="payEnable = $event"
+                       (status)="onPayStatus($event)"></jhi-e-payment>
+
+        <div class="modal-footer">
+
+            <!-- بازگشت -->
+            <ng-container>
+                <button type="button" class="btn btn-info" routerLink="/order/credit-not-deposited">
+                    <span class="fa fa-arrow-right"></span>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+                </button>
+            </ng-container>
+
+            <!-- pay (3 and draft) -->
+            <button type="button"
+                    class="btn btn-success"
+                    [disabled]="!payEnable"
+                    (click)="ePaymentComponent.pay()"
+                    *ngIf="payStatus === 'BEGIN'">
+                <span class="fa fa-paypal"></span>&nbsp;<span jhiTranslate="entity.action.pay">payment</span>
+            </button>
+
+           <ng-container *jhiHasAnyAuthority="['ROLE_ADMIN','WALLET_PAY']">
+                <button type="button"
+                        class="btn btn-success"
+                        [disabled]="!payEnable"
+                        (click)="ePaymentComponent.walletPay2()"
+                        *ngIf="payStatus === 'BEGIN'">
+                    <span class="fa fa-paypal"></span>&nbsp;<span jhiTranslate="entity.action.pay.wallet">payment</span>
+                </button>
+            </ng-container>
+
+            <!-- restart bank transaction (3 and draft) -->
+            <button type="button"
+                    class="btn btn-success"
+                    (click)="restartBankTransaction()"
+                    *ngIf="payStatus === 'PENDING'">
+                <span class="fa fa-refresh"></span>&nbsp;<span
+                jhiTranslate="entity.action.tryAgain">payment Again</span>
+            </button>
+        </div>
+    </div>
+</div>

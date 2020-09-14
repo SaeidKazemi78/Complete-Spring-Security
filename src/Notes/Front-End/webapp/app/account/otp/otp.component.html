@@ -1,0 +1,141 @@
+<div class="row justify-content-center">
+
+    <!--<h1 jhiTranslate="reset.finish.title">Reset password</h1>-->
+    <jhi-alert-success></jhi-alert-success>
+    <div class="col-md-12">
+        <div class="alert alert-info">
+            <p jhiTranslate="reset.request.messages.info">Enter the email address you used to register.</p>
+        </div>
+    </div>
+
+    <div class="Absolute-Center is-Responsive">
+
+        <form class="form justify-content-center"  [ngSwitch]="step"  #otpForm="ngForm" (submit)="resetPassword()" role="form">
+
+            <div class="col-md-12"  *ngSwitchCase="'START'">
+                <span jhiTranslate="otp.form.send.otp.media.type" style="padding-bottom:10px; "></span>
+                <div class="form-group">
+                    <label class="form-check-inline">
+                        <input class="form-check-input" type="radio" name="mode" [value]="true"
+                               [(ngModel)]="retrieveMode">
+                        <span jhiTranslate="login.form.retrieve.sms"> </span>
+                    </label>
+                    <label class="form-check-inline">
+                        <input class="form-check-input" type="radio" name="mode" [value]="false"
+                               [(ngModel)]="retrieveMode">
+                        <span jhiTranslate="login.form.retrieve.email"> </span>
+                    </label>
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" [(ngModel)]="username" name="username"  placeholder="{{'global.form.username.placeholder' | translate}}"   [required]="true">
+                    <input type="text" class="form-control" *ngIf="retrieveMode"   [(ngModel)]="cellPhone"
+                           name="cellPhone"
+                           placeholder="{{'global.form.cellPhone.placeholder' | translate}}"
+                           minlength="11" maxlength="11" required  pattern="^[0-9-]*$">
+                    <div class="input-group-prepend">
+                        <span  id="basic-addon1">
+                            <button type="button"  class="btn  btn-outline-primary" [disabled]="(otpForm.controls.username?.dirty && otpForm.controls.username.invalid) || (otpForm.controls.cellPhone?.dirty && otpForm.controls.cellPhone.invalid) || sending"
+                                    (click)="sendRecoveryCode($event)"
+                                    jhiTranslate="login.form.button.otpCode">Sign in
+                           </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12"  *ngSwitchCase="'WAITING'">
+
+                <div class="input-group" style="padding: 10px">
+                 <!--   <label for="otp-code" jhiTranslate="login.form.otp.code">Login</label>-->
+                    <input type="text" class="form-control"  name="otpCode" minlength="4" maxlength="4"    id="otp-code"
+                           (input)="onOtpChange($event.target.value)"
+                           placeholder="{{'login.form.otp.code' | translate}}"
+                           [(ngModel)]="otpCode" [required]="true">
+                    <div class="input-group-append">
+                        <span class="input-group-text" *ngIf="!waiting">
+                             <button type="button"  class="btn btn-primary" [disabled]="sending "
+                                     (click)="sendRecoveryCode($event)"
+                                     jhiTranslate="login.form.button.otpCode.try">Sign in
+                    </button>
+                        </span>
+                        <span class="input-group-text" *ngIf="waiting">
+                            {{'( '+timerLabel+' )'}}
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div *ngSwitchCase="'PASS'">
+                <div class="col-xs-12 col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label" for="new-password"
+                               jhiTranslate="global.form.password">New password</label>
+                        <input type="password" class="form-control" id="new-password"
+                               name="password" [pattern]="patternPassword"
+                               placeholder="{{'global.form.newpassword.placeholder' | translate}}"
+                               [(ngModel)]="password" minlength=4 maxlength=50 [required]="true">
+                        <div *ngIf="otpForm.controls.password?.dirty && otpForm.controls.password?.invalid">
+                            <small class="form-text text-danger" *ngIf="otpForm.controls.password?.errors?.required"
+                                   jhiTranslate="global.messages.validate.newpassword.required">
+                                Your password is required.
+                            </small>
+                            <small class="form-text text-danger" *ngIf="otpForm.controls.password?.errors?.maxlength"
+                                   jhiTranslate="global.messages.validate.newpassword.maxlength">
+                                Your password cannot be longer than 50 characters.
+                            </small>
+                            <small class="form-text text-danger"
+                                   [hidden]="!otpForm.controls.password.errors?.pattern"
+                                   jhiTranslate="entity.validation.patternPassword">
+                            </small>
+                        </div>
+                        <jhi-password-strength-bar
+                            [passwordToCheck]="password"></jhi-password-strength-bar>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label" for="confirm_password"
+                               jhiTranslate="global.form.confirmpassword">confirm password</label>
+                        <input type="password" class="form-control"
+                               id="confirm_password"
+                               name="confirmPass"
+                               placeholder="{{'global.form.newconfirmpassword.placeholder' | translate}}"
+                               equals-input-validation [equals]="password"
+                               [(ngModel)]="confirmPass" minlength=4 maxlength=50 [required]="true">
+                        <div *ngIf="otpForm.controls.confirmPass?.dirty && otpForm.controls.confirmPass?.invalid">
+                            <small class="form-text text-danger" *ngIf="otpForm.controls.confirmPass?.errors?.required"
+                                   jhiTranslate="global.messages.validate.confirmpassword.required">
+                                Your password is required.
+                            </small>
+                            <small class="form-text text-danger" *ngIf="otpForm.controls.confirmPass?.errors?.equals"
+                                   jhiTranslate="global.messages.validate.confirmpassword.confirm">
+                                Your password is required.
+                            </small>
+                            <small class="form-text text-danger" *ngIf="otpForm.controls.confirmPass?.errors?.minlength"
+                                   jhiTranslate="global.messages.validate.confirmpassword.minlength">
+                                Your password is required to be at least 4 characters.
+                            </small>
+                            <small class="form-text text-danger" *ngIf="otpForm.controls.confirmPass?.errors?.maxlength"
+                                   jhiTranslate="global.messages.validate.confirmpassword.maxlength">
+                                Your password cannot be longer than 50 characters.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" style="display:  inline-block;direction: ltr;text-align:  left;">
+                        <button type="submit" class="btn btn-primary"  style="float: left;"
+                                [disabled]=" sendingPass || (otpForm.form?.dirty && otpForm.form?.invalid) "
+                                jhiTranslate="login.form.button.reset">Sign in
+                        </button>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+
+</div>

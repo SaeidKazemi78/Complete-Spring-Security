@@ -1,0 +1,15 @@
+{
+    "niopdcgatewayApp": {
+        "RateGroupType": {
+            "ALL": "همه",
+            "null": "",
+            "SUBSIDY": "یارانه ای",
+            "NON_SUBSIDY": "غیر یارانه ای",
+            "DIFFERENCE_TRANSIT": "ویژه از باک ترانزیت",
+            "BOUNDARY_TRANSIT": "ویژه از تلمبه ترانزیت",
+            "DIFFERENCE_TRANSHIP": "ویژه از باک ترانشیپ",
+            "BOUNDARY_TRANSHIP": "ویژه از تلمبه ترانشیپ",
+            "FOB": "FOB"
+        }
+    }
+}

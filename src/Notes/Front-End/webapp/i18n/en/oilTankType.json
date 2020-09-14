@@ -1,0 +1,16 @@
+{
+    "niopdcgatewayApp": {
+        "OilTankType" : {
+            "null": "",
+            "MAIN": "MAIN",
+            "CONTAMINATED": "CONTAMINATED",
+            "SERVICE_TANK": "SERVICE_TANK",
+            "UNIT": "UNIT",
+            "PLATFORM": "PLATFORM",
+            "WATER_METHANOL": "WATER_METHANOL",
+            "BASE_PRODUCT": "BASE_PRODUCT",
+            "EARTH": "EARTH",
+            "RECYCLE": "RECYCLE"
+        }
+    }
+}

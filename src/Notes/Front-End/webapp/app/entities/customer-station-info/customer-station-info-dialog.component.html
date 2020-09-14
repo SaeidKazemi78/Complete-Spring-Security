@@ -1,0 +1,260 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="customerStationInfo.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="customerStationInfo.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customerStationInfo.stationType"
+                           for="field_stationType">Station Type</label>
+                    <select [disabled]="isView" class="form-control" name="stationType"
+                            [(ngModel)]="customerStationInfo.stationType" id="field_stationType" required>
+                        <option value="LIQUID_PRODUCT">{{'niopdcgatewayApp.StationType.LIQUID_PRODUCT' | translate}}
+                        </option>
+                        <option value="CNG_PRODUCT">{{'niopdcgatewayApp.StationType.CNG_PRODUCT' | translate}}</option>
+                        <option value="BOTH">{{'niopdcgatewayApp.StationType.BOTH' | translate}}</option>
+                    </select>
+                </div>
+                <div class="card">
+                    <form name="editFormNozzleCount" role="form"
+                          novalidate
+                          #editFormNozzleCount="ngForm">
+                        <div class="card-header">
+                            <div class="row">
+                                <h5 class="col-md-8"
+                                    jhiTranslate="niopdcgatewayApp.customerStationInfo.nozzleProductCounts">
+                                    Create or edit
+                                </h5>
+                                <div class="col-md-2"></div>
+                                <button type="button" class="btn btn-primary col-md-2"
+                                        (click)="newNozzleProductCount()">
+                                    <span class="fa fa-plus"></span>
+                                    <span jhiTranslate="entity.action.create">Create</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-block container">
+                            <div *ngIf="nozzleProductCountCreate || nozzleProductCountEdit" class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.nozzleProductCount.nozzleProductType"
+                                               for="field_nozzleProductType">Nozzle Product Type</label>
+                                        <select class="form-control" name="nozzleProductType"
+                                                [(ngModel)]="nozzleProductCount.nozzleProductType"
+                                                id="field_nozzleProductType" required>
+                                            <option value="PETROL">{{'niopdcgatewayApp.NozzleProductType.PETROL' |
+                                                translate}}
+                                            </option>
+                                            <option value="SUPER_PETROL">
+                                                {{'niopdcgatewayApp.NozzleProductType.SUPER_PETROL' | translate}}
+                                            </option>
+                                            <option value="CNG">{{'niopdcgatewayApp.NozzleProductType.CNG' |
+                                                translate}}
+                                            </option>
+                                            <option value="GAS_OIL">{{'niopdcgatewayApp.NozzleProductType.GAS_OIL' |
+                                                translate}}
+                                            </option>
+                                        </select>
+                                        <div
+                                            [hidden]="!(editFormNozzleCount.controls.nozzleProductType?.dirty && editFormNozzleCount.controls.nozzleProductType?.invalid)">
+                                            <small class="form-text text-danger"
+                                                   [hidden]="!editFormNozzleCount.controls.nozzleProductType?.errors?.required"
+                                                   jhiTranslate="entity.validation.required">
+                                                This field is required.
+                                            </small>
+                                        </div>
+                                        <div *ngIf="isExistProductType(nozzleProductCount.nozzleProductType)">
+                                            <small class="form-text text-danger"
+                                                   jhiTranslate="niopdcgatewayApp.nozzleProductCount.nozzleProductCountValidation">
+                                                This field is required.
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.nozzleProductCount.nozzleCount"
+                                               for="field_nozzleCount">Nozzle Count</label>
+                                        <input type="number" class="form-control" name="nozzleCount"
+                                               id="field_nozzleCount" required
+                                               [(ngModel)]="nozzleProductCount.nozzleCount"/>
+                                        <div
+                                            [hidden]="!(editFormNozzleCount.controls.nozzleCount?.dirty && editFormNozzleCount.controls.nozzleCount?.invalid)">
+                                            <small class="form-text text-danger"
+                                                   [hidden]="!editFormNozzleCount.controls.nozzleCount?.errors?.required"
+                                                   jhiTranslate="entity.validation.required">
+                                                This field is required.
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <p-dataTable [hidden]="nozzleProductCountCreate || nozzleProductCountEdit" #dt
+                                         [value]="nozzleProductCounts"
+                                         [immutable]="false"
+                                         [paginator]="false" [responsive]="true" [stacked]="false">
+                                <p-headerColumnGroup>
+                                    <p-row>
+                                        <p-column field="nozzleProductType" [sortable]="false">
+                                            <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.nozzleProductCount.nozzleProductType">NozzleProductType</span>
+                                            </ng-template>
+                                        </p-column>
+                                        <p-column field="nozzleCount" [sortable]="false">
+                                            <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.nozzleProductCount.nozzleCount">NozzleCount</span>
+                                            </ng-template>
+                                        </p-column>
+                                        <p-column field="editeNozzle" [sortable]="false">
+                                            <ng-template pTemplate="header">
+                                            </ng-template>
+                                        </p-column>
+                                    </p-row>
+                                </p-headerColumnGroup>
+
+                                <p-column field="nozzleProductType"
+                                          [header]="'niopdcgatewayApp.NozzleProductType' | translate">
+                                    <ng-template let-item="rowData" pTemplate="body">
+                                        <span
+                                            jhiTranslate="{{'niopdcgatewayApp.NozzleProductType.' + item.nozzleProductType}}">{{item.nozzleProductType}}</span>
+                                    </ng-template>
+                                </p-column>
+                                <p-column field="nozzleCount"
+                                ></p-column>
+                                <p-column class="component">
+                                    <ng-template let-item="rowData" pTemplate="body">
+                                        <div class="btn-group" ngbDropdown placement="right">
+                                            <button type="button" class="btn btn-danger"
+                                                    (click)="deleteNozzleProductCount(item)">
+                                                <span class="fa fa-remove"></span>
+                                                <span jhiTranslate="entity.action.delete">delete</span>
+                                            </button>
+                                            <button type="button" class="btn btn-info"
+                                                    (click)="editNozzleProductCount(item)">
+                                                <span class="fa fa-edit"></span>
+                                                <span jhiTranslate="entity.action.edit">edit</span>
+                                            </button>
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+                            </p-dataTable>
+                        </div>
+                        <div class="card-footer" [hidden]="!nozzleProductCountCreate && !nozzleProductCountEdit">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                    (click)="cancelNozzleProductCount()">
+                                <span class="fa fa-ban"></span>&nbsp;<span
+                                jhiTranslate="entity.action.cancel">Cancel</span>
+                            </button>
+                            <button type="button" class="btn btn-primary"
+                                    [disabled]="editFormNozzleCount.form.invalid || isExistProductType(nozzleProductCount.nozzleProductType )"
+                                    (click)="saveNozzleProductCount()">
+                                <span class="fa fa-save"></span>&nbsp;<span
+                                jhiTranslate="entity.action.save">Save</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.customerStationInfo.hasDispatching"
+                                   for="field_hasDispatching">Has Dispatching</label>
+                            <input [disabled]="isView" type="checkbox" class="form-control" name="hasDispatching"
+                                   id="field_hasDispatching"
+                                   [(ngModel)]="customerStationInfo.hasDispatching"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.customerStationInfo.hasKahab" for="field_hasKahab">Has
+                                Kahab</label>
+                            <input [disabled]="isView" type="checkbox" class="form-control" name="hasKahab"
+                                   id="field_hasKahab"
+                                   [(ngModel)]="customerStationInfo.hasKahab"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.customerStationInfo.hasCanopy" for="field_hasCanopy">Has
+                                Canopy</label>
+                            <input [disabled]="isView" type="checkbox" class="form-control" name="hasCanopy"
+                                   id="field_hasCanopy"
+                                   [(ngModel)]="customerStationInfo.hasCanopy"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.customerStationInfo.hasBodyPump"
+                                   for="field_hasBodyPump">Has Body Pump</label>
+                            <input [disabled]="isView" type="checkbox" class="form-control" name="hasBodyPump"
+                                   id="field_hasBodyPump"
+                                   [(ngModel)]="customerStationInfo.hasBodyPump"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.customerStationInfo.hasWorkClothes"
+                                   for="field_hasWorkClothes">Has Work Clothes</label>
+                            <input [disabled]="isView" type="checkbox" class="form-control" name="hasWorkClothes"
+                                   id="field_hasWorkClothes"
+                                   [(ngModel)]="customerStationInfo.hasWorkClothes"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.customerStationInfo.hasColumns"
+                                   for="field_hasColumns">Has Columns</label>
+                            <input [disabled]="isView" type="checkbox" class="form-control" name="hasColumns"
+                                   id="field_hasColumns"
+                                   [(ngModel)]="customerStationInfo.hasColumns"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+        <button type="button" class="btn btn-secondary" *ngIf="customerStationInfo.id"
+                (click)="print()">
+            <span class="fa fa-ban"></span></span>&nbsp;
+            <span jhiTranslate="niopdcgatewayApp.customerStationInfo.home.report"> report </span>
+        </button>
+    </div>
+</form>

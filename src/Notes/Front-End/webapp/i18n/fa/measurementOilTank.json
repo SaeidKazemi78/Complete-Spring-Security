@@ -1,0 +1,32 @@
+{
+    "niopdcgatewayApp": {
+        "measurementOilTank" : {
+            "home": {
+                "title": "اندازه گیری مخزن",
+                "homeTitle": "خانه",
+                "createLabel":"ایجاد اندازه گیری مخزن",
+                "createOrEditLabel":"ویرایش اندازه گیری مخزن",
+                "view":"نمایش اندازه گیری مخزن",
+                "search": "جستجو"
+            },
+            "delete": {
+                "question": "آیا برای حذف  این اندازه گیری مخزن مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "اندازه گیری مخزن"
+            },
+            "amount": "مقدار",
+            "amountDeep": "مقدار دیپ",
+            "registerDate": "تاریخ ثبت",
+            "sixtyAmount": "مقدار 60 درجه",
+            "specialWeight": "وزن مخصوص",
+            "environmentTemperature": "دمای محیط",
+            "productTemperature": "دمای فرآورده",
+            "oilTank": "مخزن",
+
+            "created": "اندازه گیری مخزن با موفقیت  ایجاد شد.",
+            "updated": "اندازه گیری مخزن با موفقیت  ویرایش شد.",
+            "deleted": "اندازه گیری مخزن با موفقیت  حذف شد."
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "ReceiptMethod" : {
+            "null": "",
+            "BRANCH": "BRANCH",
+            "EPAYMENT": "EPAYMENT"
+        }
+    }
+}

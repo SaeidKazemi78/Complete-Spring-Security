@@ -1,0 +1,132 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="costRate.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.costRate.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="costRate.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.costRate.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.costRate.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.costRate.startDate"
+                           for="field_startDate">Start Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disableTime]="true" [disabled]="isView" [rtlActive]="true" time="00:00:00"
+                                            id="field_startDate"
+                                            class="form-control" [disableTime]="true"
+                                            name="startDate" [(ngModel)]="costRate.startDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.costRate.finishDate"
+                           for="field_finishDate">Finish Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disableTime]="true" [disabled]="isView" [rtlActive]="true" time="23:59:59"
+                                            id="field_finishDate"
+                                            class="form-control" [disableTime]="true"
+                                            name="finishDate" [(ngModel)]="costRate.finishDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" *ngIf="isPercent" jhiTranslate="niopdcgatewayApp.costGroup.home.percent"
+                           for="field_rate1">Rate</label>
+                    <label class="form-control-label" *ngIf="!isPercent" jhiTranslate="niopdcgatewayApp.costRate.rate"
+                           for="field_rate1">Rate</label>
+                    <input [disabled]="isView" type="number" *ngIf="!isPercent" class="form-control" name="rate"
+                           id="field_rate1"
+                           pattern="^\s*(?=.*[1-9])\d*(?:\.\d{1,})?\s*$"
+                           [(ngModel)]="costRate.rate"
+                           required/>
+                    <input [disabled]="isView" type="number" *ngIf="isPercent" class="form-control" name="rate"
+                           id="field_rate2"
+                           [(ngModel)]="costRate.rate"
+                           pattern="^100$|^\d{0,2}(\.\d{1,5})? *%?$"
+                           required/>
+                    <div [hidden]="!(editForm.controls.rate?.dirty && editForm.controls.rate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.rate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.rate?.errors?.min" jhiTranslate="entity.validation.min"
+                               [translateValues]="{ min: 0 }">
+                            This field should be at least 0.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.rate?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3" *ngIf="cost && cost.rateType!==RateType[RateType.PERCENT]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.costRate.currency" for="field_currency">Currency</label>
+                    <select class="form-control" id="field_currency" name="currency" [(ngModel)]="costRate.currencyId" [required]="cost && cost.rateType!==RateType[RateType.PERCENT]">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="currencyOption.id" *ngFor="let currencyOption of currencies; trackBy: trackCurrencyById">{{currencyOption.title}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3" *ngIf="costGroup?.step">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.costRate.stepNo" for="field_stepNo">stepNo</label>
+                    <select class="form-control" id="field_stepNo" name="stepNo" [(ngModel)]="costRate.stepNo">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="stepNoOption" *ngFor="let stepNoOption of stepNos; trackBy: trackCurrencyById">{{stepNoOption}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.customerCredit.description"
+                           for="description">Start Time</label>
+                    <textarea type="text"  [disabled]="isView" maxlength="500" class="form-control" name="description" id="description"
+                              [(ngModel)]="costRate.description"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+        <button *ngIf="!isView && !costRate.id" type="button" (click)="save(null,true)" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.saveAndNext">Save</span>
+        </button>
+    </div>
+</form>

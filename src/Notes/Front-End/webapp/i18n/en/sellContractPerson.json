@@ -1,0 +1,32 @@
+
+{
+    "niopdcgatewayApp": {
+        "sellContractPerson" : {
+            "home": {
+                "title": "Sell Contract People",
+                "createLabel": "Create a new Sell Contract Person",
+                "createOrEditLabel": "Create or edit a Sell Contract Person"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Sell Contract Person {{ id }}?"
+            },
+            "detail": {
+                "title": "Sell Contract Person"
+            },
+            "sharePercent": "Share Percent",
+            "startDate": "Start Date",
+            "creditAccount": "Credit Account",
+            "costAccount": "Cost Account",
+            "active": "Active",
+            "sellContract": "Sell Contract",
+            "person": "Person"
+        }
+    },
+    "niopdcbaseApp": {
+        "sellContractPerson" : {
+            "created": "A new Sell Contract Person is created with identifier {{ param }}",
+            "updated": "A Sell Contract Person is updated with identifier {{ param }}",
+            "deleted": "A Sell Contract Person is deleted with identifier {{ param }}"
+        }
+    }
+}

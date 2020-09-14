@@ -1,0 +1,384 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="rateGroup.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.rateGroup.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="rateGroup.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.rateGroup.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.rateGroup.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.customerType.customerGroup"
+                           for="field_customerGroup">Customer Group</label>
+                    <select [disabled]="isView" class="form-control" name="customerGroup"
+                            [(ngModel)]="rateGroup.customerGroup"
+                            (ngModelChange)="onChangeCustomerGroup($event)"
+                            id="field_customerGroup">
+                        <option [ngValue]="null" jhiTranslate="niopdcgatewayApp.CustomerGroup.ALL">
+                            SUPPLIER
+                        </option>
+                        <option value="STATION" jhiTranslate="niopdcgatewayApp.CustomerGroup.STATION">
+                            SUPPLIER
+                        </option>
+                        <option value="SELLER" jhiTranslate="niopdcgatewayApp.CustomerGroup.SELLER">
+                            CONSUMER
+                        </option>
+                        <option value="MAJOR_CONSUMER"
+                                jhiTranslate="niopdcgatewayApp.CustomerGroup.MAJOR_CONSUMER">
+                            SUPPLIER
+                        </option>
+                        <option value="AIRPLANE" jhiTranslate="niopdcgatewayApp.CustomerGroup.AIRPLANE">
+                            AIRLINE
+                        </option>
+                        <option value="LIQUID_GAS">{{'niopdcgatewayApp.CustomerGroup.LIQUID_GAS' | translate}}
+                        </option>
+                        <option value="BOUNDARY">{{'niopdcgatewayApp.CustomerGroup.BOUNDARY' | translate}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.rateGroup.rateGroupType"
+                           for="field_type">Type</label>
+                    <select
+
+                        [disabled]="isView || disableFields || rateGroup.customerGroup===CustomerGroup[CustomerGroup.BOUNDARY]"
+                        class="form-control" name="type"
+                        [(ngModel)]="rateGroup.type" required
+                        (ngModelChange)="onChangeType($event)"
+                        id="field_type">
+                        <option [value]="null"></option>
+                        <option value="SUBSIDY">{{'niopdcgatewayApp.RateGroupType.SUBSIDY' | translate}}
+                        </option>
+                        <option value="NON_SUBSIDY">{{'niopdcgatewayApp.RateGroupType.NON_SUBSIDY' | translate}}
+                        </option>
+                        <option
+                            *ngIf="rateGroup.archive && rateGroup.customerGroup && rateGroup.customerGroup===CustomerGroup[CustomerGroup.BOUNDARY]"
+                            value="DIFFERENCE_TRANSIT">{{'niopdcgatewayApp.RateGroupType.DIFFERENCE_TRANSIT' |
+                            translate}}
+                        </option>
+                        <option
+                            *ngIf="rateGroup.archive && rateGroup.customerGroup && rateGroup.customerGroup===CustomerGroup[CustomerGroup.BOUNDARY]"
+                            value="BOUNDARY_TRANSIT">{{'niopdcgatewayApp.RateGroupType.BOUNDARY_TRANSIT' |
+                            translate}}
+                        </option>
+                        <option
+                            *ngIf="rateGroup.archive && rateGroup.customerGroup && rateGroup.customerGroup===CustomerGroup[CustomerGroup.BOUNDARY]"
+                            value="DIFFERENCE_TRANSHIP">{{'niopdcgatewayApp.RateGroupType.DIFFERENCE_TRANSHIP' |
+                            translate}}
+                        </option>
+                        <option
+                            *ngIf="rateGroup.archive && rateGroup.customerGroup && rateGroup.customerGroup===CustomerGroup[CustomerGroup.BOUNDARY]"
+                            value="BOUNDARY_TRANSHIP">{{'niopdcgatewayApp.RateGroupType.BOUNDARY_TRANSHIP' |
+                            translate}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="rateGroup.customerGroup ==CustomerGroup[CustomerGroup.BOUNDARY]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.rateGroup.vehicleModelType"
+                           for="field_vehicleModelType">vehicleModelType</label>
+                    <select class="form-control" name="vehicleModelType" [disabled]="isView"
+                            [(ngModel)]="rateGroup.vehicleModelType" (ngModelChange)="onChangeVehicleModelType($event)"
+                            id="field_vehicleModelType">
+                        <option [ngValue]="null">{{'niopdcgatewayApp.VehicleModelType.ALL' | translate}}</option>
+                        <option value="TRUCK">{{'niopdcgatewayApp.VehicleModelType.TRUCK' | translate}}
+                        </option>
+                        <option value="CAR">{{'niopdcgatewayApp.VehicleModelType.CAR' | translate}}
+                        <option value="BUS">{{'niopdcgatewayApp.VehicleModelType.BUS' | translate}}
+                        <!--<option value="AIRPLANE">{{'niopdcgatewayApp.VehicleModelType.AIRPLANE' | translate}}-->
+                        </option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <input [disabled]="isView || disableFields|| rateGroup.customerGroup===null"
+                           [checked]="rateGroup.customerGroup!==null&&rateGroup.selectiveCustomerTypes" type="checkbox"
+                           class="form-control"
+                           name="selectiveCustomerTypes" id="field_customerType"
+                           [(ngModel)]="rateGroup.selectiveCustomerTypes"/>
+                    <label jhiTranslate="niopdcgatewayApp.rateGroup.customerTypeId" for="field_customerType">customerType</label>
+                    <p-multiSelect
+                        *ngIf="rateGroup.selectiveCustomerTypes||rateGroup.customerGroup!==null&&rateGroup.selectiveCustomerTypes"
+                        [disabled]="isView || disableFields" class="form-control"
+                        [options]="customerTypes"
+                        name="customerTypes"
+                        [defaultLabel]="'global.messages.info.choose' | translate"
+                        [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                        [(ngModel)]="rateGroup.customerTypeIds"
+                        [ngModelOptions]="{standalone: true}"
+                        required
+                    ></p-multiSelect>
+                    <input [disabled]="isView || disableFields"
+                           *ngIf="!rateGroup.selectiveCustomerTypes||!(rateGroup.customerGroup!==null&&rateGroup.selectiveCustomerTypes)"
+                           disabled
+                           type="text" class="form-control"
+                           name="customerTypes" [ngModel]="'همه'"/>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.niopdcBankAccountType.home.title"
+                           for="field_bankAccount">Bank Account</label>
+                    <select class="form-control" id="field_bankAccount" name="bankAccount" [disabled]="isView"
+                            [(ngModel)]="rateGroup.bankAccountTypeId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="niopdcBankAccountOption.id"
+                                *ngFor="let niopdcBankAccountOption of niopdcbankaccountTypes; trackBy: trackNiopdcBankAccountTypeById">
+                            {{niopdcBankAccountOption.title}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-4 vertical-center-group"
+                 *ngIf="rateGroup.type === this.RateGroupType[RateGroupType.NON_SUBSIDY] && !rateGroup.customerGroup">
+                <div class="form-group ">
+                    <input [disabled]="isView" type="checkbox"
+                           class="form-control" name="fob"
+                           id="field_fob"
+                           [(ngModel)]="fob"
+                           (ngModelChange)="onFobCheked($event)"
+                    />
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.RateGroupType.FOB"
+                           for="field_fob">fob</label>
+                </div>
+            </div>
+            <div class="col-md-4 vertical-center-group">
+                <div class="form-group ">
+                    <input [disabled]="isView" type="checkbox"
+                           class="form-control" name="rate_difference"
+                           id="field_rate_difference"
+                           [(ngModel)]="rateGroup.rateDifference"
+                    />
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.rateGroup.rateDifference"
+                           for="field_fob">fob</label>
+                </div>
+            </div>
+            <div class="col-md-4 vertical-center-group">
+                <div class="form-group ">
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="radio" [disabled]="isView" class="form-check-input" name="foreignExchange"
+                                   [value]="false" [(ngModel)]="rateGroup.foreignExchange"
+                                   (change)="onForeignExchangeChecked($event)"
+                                   [checked]="rateGroup.foreignExchange != true ? 'checked' : ''" />ریالی
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="radio" [disabled]="isView" class="form-check-input" name="foreignExchange"
+                                   [value]="true" (change)="onForeignExchangeChecked($event)"
+                                   [(ngModel)]="rateGroup.foreignExchange"
+                                   [checked]="rateGroup.foreignExchange == true ? 'checked' : ''">ارزی
+                        </label>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-3" >
+                <div class="form-group" *ngIf="rateGroup.customerGroup === 'STATION' || rateGroup.customerGroup === 'SELLER'">
+                    <input [disabled]="isView" type="checkbox" class="form-control"
+                           name="step" id="field_step" (change)="setTitle()"
+                           [(ngModel)]="rateGroup.step"/>
+                    <label jhiTranslate="niopdcgatewayApp.rateGroup.step"
+                           for="field_step">step</label>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3" *ngIf="rateGroup.step && (rateGroup.customerGroup === 'STATION' || rateGroup.customerGroup === 'SELLER')">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productStep.paymentPeriod"
+                           for="field_paymentPeriod">Payment Period</label>
+                    <select
+                        [disabled]="true"
+                        class="form-control"
+                        name="paymentPeriod"
+                        [(ngModel)]="rateGroup.paymentPeriod"
+                        id="field_paymentPeriod"
+                        (change)="setTitle()"
+                        required>
+                        <option value="DAY">{{'niopdcgatewayApp.PaymentPeriod.DAY' | translate}}</option>
+                        <option  [selected]="true" value="MONTH">{{'niopdcgatewayApp.PaymentPeriod.MONTH' | translate}}</option>
+                        <option value="SEASON">{{'niopdcgatewayApp.PaymentPeriod.SEASON' | translate}}</option>
+                        <option value="YEAR">{{'niopdcgatewayApp.PaymentPeriod.YEAR' | translate}}</option>
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.paymentPeriod?.dirty && editForm.controls.paymentPeriod?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.paymentPeriod?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-6"
+                 *ngIf="rateGroup.customerGroup!==CustomerGroup[CustomerGroup.BOUNDARY]">
+                <div class="form-group">
+                    <input [disabled]="isView || disableFields" type="checkbox" class="form-control"
+                           name="selectiveContractTypes" id="field_contractType"
+                           [(ngModel)]="rateGroup.selectiveContractTypes"/>
+                    <label jhiTranslate="niopdcgatewayApp.rateGroup.contractTypeId" for="field_contractType">contract
+                        Type</label>
+                    <p-multiSelect *ngIf="rateGroup.selectiveContractTypes"
+                                   [disabled]="isView || disableFields" class="form-control"
+                                   [options]="contractTypes"
+                                   name="contractTypes"
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                   [(ngModel)]="rateGroup.contractTypes"
+                                   [ngModelOptions]="{standalone: true}"
+                                   (ngModelChange)="onContractTypeChange($event)"
+                                   required
+                    ></p-multiSelect>
+                    <input [disabled]="isView || disableFields" *ngIf="!rateGroup.selectiveContractTypes"
+                           disabled type="text" class="form-control"
+                           name="contractTypes" [ngModel]="'همه'"/>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.rateGroup.locationId"
+                           for="field_location">Location</label>
+                    <!--[firstSelect]="true"-->
+
+                    <input-location-selector [disabled]="isView || disableFields"
+                                             *ngIf="rateGroup.customerGroup!==CustomerGroup[CustomerGroup.BOUNDARY] && (!rateGroup.id || rateGroup.locationIds)"
+                                             class="form-control" required
+                                             [(ngModel)]="rateGroup.locationIds"
+                                             id="field_location"
+                                             [firstSelect]="true"
+                                             (selected)="onLocationSelected($event)"
+                                             (ngModelChange)="locationChanged()"
+                                             name="location"
+                                             [idSelector]="true"
+                                             [selectOfLevel]="[0,1,2]"
+                                             [selectByPriority]="true"
+
+                    >
+                    </input-location-selector>
+                    <p-multiSelect
+                        *ngIf="rateGroup.customerGroup===CustomerGroup[CustomerGroup.BOUNDARY]"
+                        [disabled]="isView" class="form-control"
+                        [options]="customLocation"
+                        multiple="true"
+                        id="field_locations"
+                        name="locations"
+                        (onChange)="onChangeLocation($event.value)"
+                        [defaultLabel]="'global.messages.info.choose' | translate"
+                        [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                        [(ngModel)]="selectedLocation"
+                        [ngModelOptions]="{standalone: true}"
+                        required
+                    ></p-multiSelect>
+                    <div
+                        [hidden]="!(editForm.controls.location?.dirty && editForm.controls.location?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.location?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                    <input [disabled]="isView" *ngIf="rateGroup.id && ! rateGroup.locationIds"
+                           disabled type="text" class="form-control"
+                           name="locations" [ngModel]="'همه'"/>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <input [disabled]="isView" type="checkbox" class="form-control"
+                           name="canSetProductIds" id="field_product_ch"
+                           [(ngModel)]="rateGroup.canSetProductIds"/>
+                    <label jhiTranslate="niopdcgatewayApp.rateGroup.product"
+                           for="field_product_ch">product</label>
+                    <p-multiSelect *ngIf="rateGroup.canSetProductIds" [disabled]="isView" class="form-control"
+                                   id="field_product"
+                                   [options]="products"
+                                   name="products"
+                                   (onChange)="setTitle()"
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                   [(ngModel)]="rateGroup.productIds"
+                                   [ngModelOptions]="{standalone: true}"
+                                   required
+                    ></p-multiSelect>
+                    <input [disabled]="isView" *ngIf="!rateGroup.canSetProductIds"
+                           disabled type="text" class="form-control"
+                           name="products" [ngModel]="'همه'"/>
+                </div>
+            </div>
+
+            <!--<div class="col-xs-12 col-md-6"-->
+                 <!--*ngIf="rateGroup.customerGroup!==CustomerGroup[CustomerGroup.BOUNDARY]">-->
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" jhiTranslate="niopdcgatewayApp.rateGroup.regionId"-->
+                           <!--for="field_region">Region</label>-->
+                    <!--<input-region-selector [disabled]="isView || disableFields" [idSelector]="true"-->
+                                           <!--[oneSelection]="false"-->
+                                           <!--[selectOfLevel]="[1,2]"-->
+                                           <!--[options]="regions"-->
+                                           <!--class="form-control" id="field_region" name="region"-->
+                                           <!--[(ngModel)]="rateGroup.regionIds">-->
+                    <!--</input-region-selector>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.rateGroup.title" for="field_title">Title</label>
+
+                    <input [disabled]="isView || disableFields" type="text" class="form-control" name="rateTitle"
+                           id="field_title" (input)="setTitle()"
+                           [(ngModel)]="rateGroup.rateTitle"/>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.customerCredit.description"
+                           for="description">Start Time</label>
+                    <textarea type="text" [disabled]="isView"   maxlength="500" class="form-control" name="description" id="description"
+                              [(ngModel)]="rateGroup.description"></textarea>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-12">
+                <label class="form-control-label col-md-12">{{rateGroup.title ? rateGroup.title : ''}}</label>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

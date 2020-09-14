@@ -1,0 +1,123 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="vehicleModel.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="vehicleModel.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.vehicleModel.title"
+                           for="field_title">Title</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="title" id="field_title"
+                           [(ngModel)]="vehicleModel.title" required/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.vehicleModel.customerGroup"
+                           for="field_customerGroup">Customer Group</label>
+                    <select [disabled]="isView" class="form-control" name="customerGroup"
+                            (change)="customerGroupChange()"
+                            [(ngModel)]="vehicleModel.customerGroup" id="field_customerGroup">
+                        <option *jhiHasAnyAuthority="['CREATE_AIRPLANE_VEHICLE_MODEL','ROLE_ADMIN']" value="AIRPLANE">{{'niopdcgatewayApp.CustomerGroup.AIRPLANE_VEHICLE' | translate}}
+                        </option>
+                        <option *jhiHasAnyAuthority="['CREATE_BOUNDARY_VEHICLE_MODEL','ROLE_ADMIN']" value="BOUNDARY">{{'niopdcgatewayApp.CustomerGroup.BOUNDARY_VEHICLE' | translate}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4" >
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.vehicleModel.vehicleModelType"
+                           for="field_vehicleModelType">Oil Tank Type</label>
+                    <select [disabled]="isView" class="form-control" name="vehicleModelType"
+                            [(ngModel)]="vehicleModel.vehicleModelType" id="field_vehicleModelType" required>
+                        <option [value]="null" ></option>
+                        <option *ngIf="vehicleModel.customerGroup===CustomerGroup[CustomerGroup.BOUNDARY]"
+                                value="TRUCK">{{'niopdcgatewayApp.VehicleModelType.TRUCK' | translate}}</option>
+                        <option *ngIf="vehicleModel.customerGroup===CustomerGroup[CustomerGroup.BOUNDARY]"
+                                value="BUS">{{'niopdcgatewayApp.VehicleModelType.BUS' | translate}}</option>
+                        <option *ngIf="vehicleModel.customerGroup===CustomerGroup[CustomerGroup.BOUNDARY]"
+                                value="CAR">{{'niopdcgatewayApp.VehicleModelType.CAR' | translate}}</option>
+                        <option *ngIf="vehicleModel.customerGroup===CustomerGroup[CustomerGroup.AIRPLANE]"
+                                value="AIRPLANE">{{'niopdcgatewayApp.VehicleModelType.AIRPLANE' | translate}}</option>
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.vehicleModelType?.dirty && editForm.controls.vehicleModelType?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.vehicleModelType?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="vehicleModel.customerGroup!==CustomerGroup[CustomerGroup.AIRPLANE]">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.vehicleModel.productTitle"
+                           for="field_product">productTitle</label>
+                    <p-dropdown [options]="customProducts" [(ngModel)]="vehicleModel.productId"
+                                [filter]="true"
+                                class="form-control"
+                                filterBy="label"
+                                id="field_product"
+                                name="productId1"
+                                ngDefaultControl
+                                required
+                                [disabled]="isView">
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="vehicleModel.vehicleModelType==='CAR'">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.vehicleModel.capacity"
+                           for="field_capacity">Capacity</label>
+                    <input [disabled]="isView" min="1" type="number" class="form-control" name="capacity"
+                           id="field_capacity"
+                           [(ngModel)]="vehicleModel.capacity" required/>
+                    <div [hidden]="!(editForm.controls.capacity?.dirty && editForm.controls.capacity?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.capacity?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.capacity?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

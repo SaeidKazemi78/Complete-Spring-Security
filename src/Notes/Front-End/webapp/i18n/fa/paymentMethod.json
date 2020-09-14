@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "PaymentMethod" : {
+            "null": "",
+            "CASH": "نقدی",
+            "CREDIT": "اعتباری",
+            "WALLET": "کیف پول"
+
+        }
+    }
+}

@@ -1,0 +1,50 @@
+
+{
+    "niopdcgatewayApp": {
+        "driveSecurity" : {
+            "home": {
+                "title": "اطاعات کارت تردد",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ویرایش"
+            },
+            "delete": {
+                "question": "آیا برای حذف مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "Drive Security"
+            },
+            "birthDate": "تاریخ تولد",
+            "height": "قد",
+            "weight": "وزن",
+            "eyeColor": "رنگ چشم",
+            "hairColor": "رنگ مو",
+            "nationalId": "کد ملی",
+            "fatherName": "نام پدر",
+            "religion": "مذهب",
+            "education": "تحصیلات",
+            "maritalStatus": "وضعیت تاهل",
+            "militaryStatus": "وضعیت خدمت مقدس سربازی",
+            "exemptMilitaryReason": "دلیل معافیت",
+            "haveCriminal": "دارای سو سابقه",
+            "criminalReason": "توضیحات سو سابقه",
+            "address": "آدرس",
+            "postalCode": "کد پستی",
+            "mobileNumber": "شماره همراه",
+            "phoneNumber": "شماره تلفن",
+            "fileName": "شماره پرونده",
+            "description": "توضیحات",
+            "inCompleteDocument": "شرح نقص مدارک",
+            "serial": "شماره کارت الکترونیک تردد",
+            "isGuest": "مهمان ؟ ",
+            "driver": "راننده",
+            "nationality": "ملیت"
+        }
+    },
+    "niopdcbaseApp": {
+        "driveSecurity" : {
+            "created": "اطلاعات کارت تردد با موفقیت ایجاد شد.",
+            "updated": "اطلاعات کارت تردد با موفقیت ویرایش شد.",
+            "deleted": "اطلاعات کارت تردد با موفقیت حذف شد."
+        }
+    }
+}

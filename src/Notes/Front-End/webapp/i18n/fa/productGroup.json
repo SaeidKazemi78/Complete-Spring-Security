@@ -1,0 +1,31 @@
+{
+    "niopdcgatewayApp": {
+        "productGroup" : {
+            "home": {
+                "title": "گروه فرآورده",
+                "createLabel":"ایجاد گروه فرآورده",
+                "createOrEditLabel":"ویرایش گروه فرآورده",
+                "view":"نمایش گروه فرآورده"
+            },
+            "delete": {
+                "question": "آیا برای حذف  گروه فرآورده  {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "گروه فرآورده"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "color": "رنگ",
+            "special": "ویژه",
+            "specialTrue": "ویژه",
+            "specialFalse": "معمولی"
+        }
+    },
+    "niopdcbaseApp": {
+        "productGroup" : {
+            "created": "گروه فرآورده با شناسه {{ param }} ایجاد شد.",
+            "updated": "گروه فرآورده با شناسه {{ param }} ویرایش شد.",
+            "deleted": "گروه فرآورده با شناسه {{ param }} حذف شد."
+        }
+    }
+}

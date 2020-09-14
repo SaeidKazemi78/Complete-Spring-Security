@@ -1,0 +1,38 @@
+
+{
+    "niopdcgatewayApp": {
+        "sendContainerProduct" : {
+            "home": {
+                "title": "Send Container Products",
+                "createLabel": "Create a new Send Container Product",
+                "createOrEditLabel": "Create or edit a Send Container Product"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Send Container Product {{ id }}?"
+            },
+            "detail": {
+                "title": "Send Container Product"
+            },
+            "sendDate": "Send Date",
+            "receivedDate": "Received Date",
+            "sendAmount": "Send Amount",
+            "receivedAmount": "Received Amount",
+            "sendCount": "Send Count",
+            "receivedCount": "Received Count",
+            "waybillNumber": "Waybill Number",
+            "inventoryId": "Inventory Id",
+            "driverName": "Driver Name",
+            "truckNumber": "Truck Number",
+            "truckSerial": "Truck Serial",
+            "oilTankContainer": "Oil Tank Container",
+            "dayDepotContainer": "Day Depot Container"
+        }
+    },
+    "niopdcaoApp": {
+        "sendContainerProduct" : {
+            "created": "A new Send Container Product is created with identifier {{ param }}",
+            "updated": "A Send Container Product is updated with identifier {{ param }}",
+            "deleted": "A Send Container Product is deleted with identifier {{ param }}"
+        }
+    }
+}

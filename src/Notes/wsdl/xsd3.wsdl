@@ -1,0 +1,19 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.datacontract.org/2004/07/System.Collections.Generic" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+<xs:import schemaLocation="xsd1.wsdl" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+<xs:complexType name="KeyValuePairOfbooleanstring">
+<xs:annotation>
+<xs:appinfo>
+<GenericType xmlns="http://schemas.microsoft.com/2003/10/Serialization/" Name="KeyValuePairOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+<GenericParameter Name="boolean" Namespace="http://www.w3.org/2001/XMLSchema"/>
+<GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema"/>
+</GenericType>
+<IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+</xs:appinfo>
+</xs:annotation>
+<xs:sequence>
+<xs:element name="key" type="xs:boolean"/>
+<xs:element name="value" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="KeyValuePairOfbooleanstring" nillable="true" type="tns:KeyValuePairOfbooleanstring"/>
+</xs:schema>

@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "NewsType" : {
+            "null": "",
+            "ALERT": "اخطار",
+            "NEWS": "اخبار",
+            "EVENT": "رویداد",
+            "INFO": "اطلاعیه"
+        }
+    }
+}

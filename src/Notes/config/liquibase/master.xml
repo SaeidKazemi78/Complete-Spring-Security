@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="config/liquibase/changelog/init_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191117131120_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191118075641_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191120122416_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191126133132_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191126135031_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191120122417_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191125105217_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191127083940_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191127132520_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191130120034_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191207112853_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191218131101_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191222073119_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20191224134324_changelog.xml" relativeToChangelogFile="false"/>
+
+
+    <include file="config/liquibase/changelog/regionByLevel_function.xml" relativeToChangelogFile="false"/>
+
+
+
+
+    <!--views-->
+    <include file="config/liquibase/changelog/view/all_contract_type_view_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/view/contract_type_view_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/view/customer_type_view_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/view/customer_view_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/view/location_view_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/view/person_view_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/view/region_view_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/view/sell_contract_view_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/view/depot_view_changelog.xml" relativeToChangelogFile="false"/>
+
+
+    <!-- access -->
+    <include file="config/liquibase/changelog/location_access_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/region_access_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/customer_type_access_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/contract_type_access_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/person_access_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/customer_access_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/depot_access_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/sell_contract_access_changelog.xml" relativeToChangelogFile="false"/>
+
+
+</databaseChangeLog>

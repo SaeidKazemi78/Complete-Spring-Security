@@ -1,0 +1,42 @@
+
+<div *ngIf="reservoirCapacity">
+    <h2><span jhiTranslate="niopdcgatewayApp.reservoirCapacity.detail.title">Reservoir Capacity</span> {{reservoirCapacity.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="niopdcgatewayApp.reservoirCapacity.capacity">Capacity</span></dt>
+        <dd>
+            <span>{{reservoirCapacity.capacity}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.reservoirCapacity.active">Active</span></dt>
+        <dd>
+            <span>{{reservoirCapacity.active}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.reservoirCapacity.product">Product</span></dt>
+        <dd>
+            <div *ngIf="reservoirCapacity.productId">
+                <a [routerLink]="['/product', reservoirCapacity.productId]">{{reservoirCapacity.productTitle}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.reservoirCapacity.person">Person</span></dt>
+        <dd>
+            <div *ngIf="reservoirCapacity.personId">
+                <a [routerLink]="['/person', reservoirCapacity.personId]">{{reservoirCapacity.personName}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'reservoir-capacity/'+ reservoirCapacity.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

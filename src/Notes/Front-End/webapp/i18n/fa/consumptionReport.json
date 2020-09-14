@@ -1,0 +1,26 @@
+{
+    "niopdcgatewayApp": {
+        "consumptionReport": {
+            "home": {
+                "title": "گزارش مصرف"
+            },
+            "totalCount":"تعداد کل",
+            "productCode":"کد فرآورده",
+            "timeBy":"تاریخ با",
+            "timeByOrderCreate":"صدور حواله",
+            "timeByExportFromDepot":"خروج از انبار",
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "location": "ناحیه",
+            "product":"فرآورده",
+            "productSrc": "کد فرآورده",
+            "productTitle": "نام فرآورده",
+            "amount": "مقدار",
+            "count": "تعداد",
+            "consumptions": "انواع مصرف",
+            "customerTypes": "نوع مشتری"
+
+
+        }
+    }
+}

@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "plaqueRule" : {
+            "home": {
+                "title": "Plaque Rules",
+                "createLabel": "Create a new Plaque Rule",
+                "createOrEditLabel": "Create or edit a Plaque Rule"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Plaque Rule {{ id }}?"
+            },
+            "detail": {
+                "title": "Plaque Rule"
+            },
+            "digit": "Digit",
+            "priority": "Priority",
+            "digitType": "Digit Type",
+            "plaque": "Plaque"
+        }
+    },
+    "niopdcbaseApp": {
+        "plaqueRule" : {
+            "created": "A new Plaque Rule is created with identifier {{ param }}",
+            "updated": "A Plaque Rule is updated with identifier {{ param }}",
+            "deleted": "A Plaque Rule is deleted with identifier {{ param }}"
+        }
+    }
+}

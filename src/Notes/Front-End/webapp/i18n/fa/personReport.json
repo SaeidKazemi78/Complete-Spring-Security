@@ -1,0 +1,83 @@
+{
+    "niopdcgatewayApp": {
+        "personReport": {
+            "createUserTitle":"ایجاد حساب کاربری",
+            "home": {
+                "title": "اشخاص",
+                "createLabel": "ایجاد اشخاص",
+                "createOrEditLabel": "ویرایش اشخاص",
+                "view": "نمایش اشخاص",
+                "register": "اطلاعات حساب کاربری",
+                "generalInformation": "اطلاعات عمومی",
+                "oldSellInformation": "اطلاعات فروش قدیم"
+            },
+            "delete": {
+                "question": "آیا برای حذف شخص {{ id }} مطمئن هستید؟"
+            },
+            "confirm": {
+                "question": "آیا برای تایید نهایی شخص {{param}} مطمئن هستید ؟"
+            },
+            "message": {
+                "wrongConfirmPassword": "رمز عبور و تکرار باید یکسان باشند.",
+                "existUser": "نام کاربری از قبل ثبت شده است.",
+                "existEmail": "این ایمیل قبلا ثبت شده است.",
+                "existPerson": "این صاحب امتیاز قبلا ثبت شده است."
+            },
+            "detail": {
+                "title": "اشخاص"
+            },
+            "name": "نام",
+            "fullName": "نام",
+            "firstName": "نام",
+            "lastName": "نام خانوادگی",
+            "code": "کد",
+            "nationalCode": "کد ملی",
+            "codeLegal": "شناسه ملی",
+            "codeOther": "کد فراگیر",
+            "createdDate": "تاریخ ایجاد",
+            "fatherName": "نام پدر",
+            "idCode": "شماره شناسنامه",
+            "telephone": "تلفن",
+            "cellphone": "تلفن همراه",
+            "cellPhone": "تلفن همراه",
+            "email": "ایمیل",
+            "postalCode": "کد پستی",
+            "creditAccount": "حساب اعتباری",
+            "registerNo": "شماره ثبت",
+            "address": "آدرس",
+            "birthday": "تاریخ تولد",
+            "birthDate": "تاریخ تولد",
+            "economicCode": "کد اقتصادی",
+            "personality": "نوع مالکیت",
+            "birthRegion": "محل تولد",
+            "region": "موقعیت مکانی",
+            "regionLegal": "محل ثبت",
+            "country": "کشور",
+            "nationality": "ملیت",
+            "location": "حوزه فعالیت",
+            "sellContractPerson": "Sell Contract Person",
+            "username": "نام کاربری",
+            "password": "رمز عبور",
+            "confirmPassword": "تکرار رمز عبور",
+            "salesCode": "کد 9 رقمی فروش",
+            "verifyStatus": "وضعیت",
+            "old":"قبلا در سیستم فروش  اینترنتی ثبت نام شده ام",
+            "costAccount": "حساب هزینه",
+            "createUser":"ایجاد حساب کاربری",
+            "status":"وضعیت",
+            "birthRegionTitle":"محل تولد",
+            "startDate":"تاریخ شروع",
+            "finishDate":"تاریخ پایان"
+
+        }
+    },
+    "niopdcbaseApp": {
+        "person": {
+            "created": "شخص با موفقیت ایجاد شد.",
+            "updated": "شخص با موفقیت ویرایش شد.",
+            "deleted": "شخص با موفقیت حذف شد.",
+            "confirmed": "شخص با موفقیت تایید شد.",
+            "failedActive": "اطلاعات در حال بررسی می باشد."
+        }
+    }
+}

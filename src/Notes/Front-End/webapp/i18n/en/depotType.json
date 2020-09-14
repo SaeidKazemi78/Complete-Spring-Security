@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "DepotType" : {
+            "null": "",
+            "DEPOT": "DEPOT",
+            "REFUELING_UNIT": "REFUELING_UNIT"
+        }
+    }
+}

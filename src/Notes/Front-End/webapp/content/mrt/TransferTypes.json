@@ -1,0 +1,124 @@
+{
+    "TransferType": [
+        {
+            "createdBy": "system",
+            "createdDate": "2018-05-27T11:57:35.490Z",
+            "lastModifiedBy": "system",
+            "lastModifiedDate": "2018-05-28T09:44:37.147Z",
+            "id": 14101,
+            "title": "واحد به سرويس 3",
+            "transferFrom": "UNIT",
+            "transferTo": "SERVICE_TANK",
+            "activeMetre": null,
+            "transferToHimself": false
+        },
+        {
+            "createdBy": null,
+            "createdDate": null,
+            "lastModifiedBy": "system",
+            "lastModifiedDate": "2018-05-27T11:28:29.373Z",
+            "id": 13201,
+            "title": "واحد به واحد (فلاش)",
+            "transferFrom": "UNIT",
+            "transferTo": null,
+            "activeMetre": null,
+            "transferToHimself": true
+        },
+        {
+            "createdBy": null,
+            "createdDate": null,
+            "lastModifiedBy": null,
+            "lastModifiedDate": null,
+            "id": 12051,
+            "title": "واحد به واحد",
+            "transferFrom": "UNIT",
+            "transferTo": "UNIT",
+            "activeMetre": "SOURCE",
+            "transferToHimself": false
+        },
+        {
+            "createdBy": null,
+            "createdDate": null,
+            "lastModifiedBy": null,
+            "lastModifiedDate": null,
+            "id": 10851,
+            "title": "اصلي به اب الکل",
+            "transferFrom": "MAIN",
+            "transferTo": "BASE_PRODUCT",
+            "activeMetre": null,
+            "transferToHimself": false
+        },
+        {
+            "createdBy": null,
+            "createdDate": null,
+            "lastModifiedBy": null,
+            "lastModifiedDate": null,
+            "id": 4751,
+            "title": "واحد به سکو",
+            "transferFrom": "UNIT",
+            "transferTo": "PLATFORM",
+            "activeMetre": "TARGET",
+            "transferToHimself": false
+        },
+        {
+            "createdBy": null,
+            "createdDate": null,
+            "lastModifiedBy": null,
+            "lastModifiedDate": null,
+            "id": 4501,
+            "title": "واحد به اصلي",
+            "transferFrom": "UNIT",
+            "transferTo": "MAIN",
+            "activeMetre": "SOURCE",
+            "transferToHimself": false
+        },
+        {
+            "createdBy": null,
+            "createdDate": null,
+            "lastModifiedBy": null,
+            "lastModifiedDate": null,
+            "id": 1651,
+            "title": "اصلي به سرويس تانک",
+            "transferFrom": "MAIN",
+            "transferTo": "SERVICE_TANK",
+            "activeMetre": null,
+            "transferToHimself": false
+        },
+        {
+            "createdBy": null,
+            "createdDate": null,
+            "lastModifiedBy": null,
+            "lastModifiedDate": null,
+            "id": 1606,
+            "title": "سکو به واحد",
+            "transferFrom": "PLATFORM",
+            "transferTo": "UNIT",
+            "activeMetre": "SOURCE",
+            "transferToHimself": false
+        },
+        {
+            "createdBy": null,
+            "createdDate": null,
+            "lastModifiedBy": null,
+            "lastModifiedDate": null,
+            "id": 1605,
+            "title": "واترمتانول به آب/الکل",
+            "transferFrom": "WATER_METHANOL",
+            "transferTo": "BASE_PRODUCT",
+            "activeMetre": null,
+            "transferToHimself": false
+        },
+        {
+            "createdBy": null,
+            "createdDate": null,
+            "lastModifiedBy": null,
+            "lastModifiedDate": null,
+            "id": 1604,
+            "title": "اصلي به بازيافت",
+            "transferFrom": "MAIN",
+            "transferTo": "RECYCLE",
+            "activeMetre": null,
+            "transferToHimself": false
+        }
+    ]
+}

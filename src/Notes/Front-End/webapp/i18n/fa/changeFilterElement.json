@@ -1,0 +1,45 @@
+
+{
+    "niopdcgatewayApp": {
+        "changeFilterElement" : {
+            "home": {
+                "title": "Change Filter Elements",
+                "createLabel": "Create a new Change Filter Element",
+                "createOrEditLabel": "Create or edit a Change Filter Element"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Change Filter Element {{ id }}?"
+            },
+            "confirm": {
+                "question": "آیا برای تایید و ارسال پاسخ مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "Change Filter Element"
+            },
+            "conditionOfCartridges": "وضعیت المنت ها",
+            "conditionOfSeals": "وضعیت واشر 0- رینگها و ...",
+            "conditionOfCoating": "وضعیت پوشش داخلی",
+            "pdGauge": "اختلاف فشار سنج",
+            "airEliminator": "جدا کننده هوا",
+            "reliefValue": "شیر تخلیه هوا",
+            "sampleDrainValue": "شیر نمونه گیری",
+            "namePlate": "تابلو مشخصات",
+            "requestStatus": "Request Status",
+            "draftUser": "Draft User",
+            "confirmUser": "Confirm User",
+            "sendUser": "Send User",
+            "description": "توضیحات",
+            "pdReading": "اختلاف فشار خوانده شده",
+            "flowTest": "دبی تست",
+            "responseStatus": "وضعیت",
+            "requestFilterElement": "Request Filter Element"
+        }
+    },
+    "niopdcaoApp": {
+        "changeFilterElement" : {
+            "created": "A new Change Filter Element is created with identifier {{ param }}",
+            "updated": "A Change Filter Element is updated with identifier {{ param }}",
+            "deleted": "A Change Filter Element is deleted with identifier {{ param }}"
+        }
+    }
+}

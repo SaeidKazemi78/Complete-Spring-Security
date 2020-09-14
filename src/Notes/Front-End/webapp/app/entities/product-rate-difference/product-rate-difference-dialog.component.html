@@ -1,0 +1,287 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-error></jhi-alert-error>
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+        <div class="modal-body">
+            <div class="card">
+                <form name="searchForm" role="form" novalidate (ngSubmit)="save()" #searchForm="ngForm">
+
+                    <div class="card-header">
+                        <div class="row">
+                            <h5 class="col-md-3"
+                                jhiTranslate="report.search">Search
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="card-block container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           jhiTranslate="niopdcgatewayApp.productRateDifference.startDate"
+                                           for="field_startDate">startDate</label>
+                                    <div class="d-flex">
+                                        <ng2-datetimepicker [disableTime]="true" [rtlActive]="true"
+                                                            time="00:00:00"
+                                                            id="field_startDate"
+                                                            class="form-control"
+                                                            [disabled]="search"
+                                                            name="startDate" [(ngModel)]="req.startDate"
+                                                            required></ng2-datetimepicker>
+                                    </div>
+                                    <div
+                                        [hidden]="!(searchForm.controls.startDate?.dirty && searchForm.controls.startDate?.invalid)">
+                                        <small class="form-text text-danger"
+                                               [hidden]="!searchForm.controls.startDate?.errors?.required"
+                                               jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                        <small class="form-text text-danger"
+                                               [hidden]="!searchForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                            This field should be a date and time.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           jhiTranslate="niopdcgatewayApp.productRateDifference.finishDate"
+                                           for="field_finishDate">finishDate</label>
+                                    <div class="d-flex">
+                                        <ng2-datetimepicker [disableTime]="true" [rtlActive]="true"
+                                                            time="23:59:59"
+                                                            id="field_finishDate"
+                                                            class="form-control"
+                                                            name="finishDate"
+                                                            [disabled]="search"
+                                                            [(ngModel)]="req.finishDate"
+                                                            required></ng2-datetimepicker>
+                                    </div>
+                                    <div
+                                        [hidden]="!(searchForm.controls.finishDate?.dirty && searchForm.controls.finishDate?.invalid)">
+                                        <small class="form-text text-danger"
+                                               [hidden]="!searchForm.controls.finishDate?.errors?.required"
+                                               jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                        <small class="form-text text-danger"
+                                               [hidden]="!searchForm.controls.finishDate?.errors?.ZonedDateTimelocal"
+                                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                            This field should be a date and time.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           jhiTranslate="niopdcgatewayApp.productRateDifference.type"
+                                           for="field_type">Stakeholder Type</label>
+                                    <select [disabled]="search" class="form-control" name="type"
+                                            [(ngModel)]="req.type" required
+                                            id="field_type">
+                                        <option value="EXIT_FROM_DEPOT">
+                                            {{'niopdcgatewayApp.ProductRateDifferenceType.EXIT_FROM_DEPOT' |
+                                            translate}}
+                                        </option>
+                                        <option value="SELL">{{'niopdcgatewayApp.ProductRateDifferenceType.SELL'
+                                            |
+                                            translate}}
+                                        </option>
+                                    </select>
+
+                                    <div
+                                        [hidden]="!(searchForm.controls.type?.dirty && searchForm.controls.type?.invalid)">
+                                        <small class="form-text text-danger"
+                                               [hidden]="!searchForm.controls.type?.errors?.required"
+                                               jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           jhiTranslate="niopdcgatewayApp.productRateDifference.fromRateGroupId"
+                                           for="field_fromRateGroupId">startDate</label>
+                                    <select class="form-control" id="field_fromRateGroupId" name="fromRateGroupId" required
+                                            [disabled]="search"
+                                            [(ngModel)]="req.fromRateGroupId">
+                                        <option *ngFor="let rateGroupOption of fromRateGroups"
+                                                [ngValue]="rateGroupOption.id">{{rateGroupOption.title}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="req.type && req.type !== 'EXIT_FROM_DEPOT'">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           jhiTranslate="niopdcgatewayApp.productRateDifference.date"
+                                           for="field_date">startDate</label>
+                                    <ng2-datetimepicker class="form-control" name="date" id="field_date"
+                                                        [disabled]="search" required
+                                                        [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                                        [(ngModel)]="req.date">
+                                    </ng2-datetimepicker>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           jhiTranslate="niopdcgatewayApp.productRateDifference.product"
+                                           for="field_product">product</label>
+                                    <jhi-product-selector class="form-control" name="productId"
+                                                          id="field_product" required
+                                                          widthGrid="500px"
+                                                          [disabled]="search"
+                                                          [selectObject]="false"
+                                                          [multiSelect]="false"
+                                                          [(ngModel)]="req.productId">
+                                    </jhi-product-selector>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           jhiTranslate="niopdcgatewayApp.productRateDifference.toRateGroupId"
+                                           for="field_toRateGroupId">startDate</label>
+                                    <select class="form-control" id="field_toRateGroupId" name="toRateGroupId" [required]="search"
+                                            [(ngModel)]="req.toRateGroupId">
+                                        <option *ngFor="let rateGroupOption of rateGroups"
+                                                [ngValue]="rateGroupOption.id">{{rateGroupOption.title}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <button type="button" class="btn btn-danger"
+                                (click)="newSearch()">
+                            <span class="fa fa-close"></span>&nbsp;<span
+                            jhiTranslate="entity.action.newSearch">Save</span>
+                        </button>
+                        <button type="button" class="btn btn-primary"
+                                [disabled]="search || searchForm.form.invalid || isSaving"
+                                (click)="findAllRateGroup()">
+                            <span class="fa fa-search"></span>&nbsp;<span
+                            jhiTranslate="entity.action.search">Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <p-dataTable *ngIf="productRateDifferences && productRateDifferences.length"
+                          #dt [value]="productRateDifferences"
+                         [paginator]="false" [responsive]="true" [stacked]="false" [immutable]="true"
+                         [emptyMessage]="'global.messages.info.emptyRecords' | translate">
+                <p-headerColumnGroup>
+                    <p-row>
+                        <p-column field="orderNo" [sortable]="true">
+                            <ng-template pTemplate="header">
+                                <span jhiTranslate="niopdcgatewayApp.productRateDifference.orderNo">Order No</span>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="productTitle" [sortable]="true">
+                            <ng-template pTemplate="header">
+                                <span
+                                    jhiTranslate="niopdcgatewayApp.productRateDifference.productTitle">product Title</span>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="orderRegisterDate" [sortable]="true">
+                            <ng-template pTemplate="header">
+                    <span
+                        jhiTranslate="niopdcgatewayApp.productRateDifference.orderRegisterDate">Order Register Date</span>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="exitFromDepotDate" [sortable]="true">
+                            <ng-template pTemplate="header">
+                    <span
+                        jhiTranslate="niopdcgatewayApp.productRateDifference.exitFromDepotDate">Exit From Depot Date</span>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="fromProductRatePrice" [sortable]="true">
+                            <ng-template pTemplate="header">
+                    <span
+                        jhiTranslate="niopdcgatewayApp.productRateDifference.fromProductRatePrice">From Product Rate Price</span>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="amount" [sortable]="false">
+                            <ng-template pTemplate="header">
+                                <span jhiTranslate="niopdcgatewayApp.productRateDifference.amount">Amount</span>
+                            </ng-template>
+                        </p-column>
+
+                        <p-column field="toProductRatePrice" [sortable]="true" *ngIf="req.type && req.type === 'EXIT_FROM_DEPOT'">
+                            <ng-template pTemplate="header">
+                    <span
+                        jhiTranslate="niopdcgatewayApp.productRateDifference.toProductRatePrice">To Product Rate Price</span>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="price" [sortable]="false" *ngIf="req.type && req.type === 'EXIT_FROM_DEPOT'">
+                            <ng-template pTemplate="header">
+                                <span jhiTranslate="niopdcgatewayApp.productRateDifference.price">Price</span>
+                            </ng-template>
+                        </p-column>
+                    </p-row>
+                </p-headerColumnGroup>
+
+                <p-column field="orderNo"
+                          [header]="'niopdcgatewayApp.productRateDifference.orderNo' | translate"></p-column>
+                <p-column field="productTitle"
+                          [header]="'niopdcgatewayApp.productRateDifference.productTitle' | translate"></p-column>
+                <p-column field="orderRegisterDate"
+                          [header]="'niopdcgatewayApp.productRateDifference.orderRegisterDate' | translate">
+                    <ng-template let-item="rowData" pTemplate="body">
+                        <span>{{item.orderRegisterDate | dateJalali}}</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="exitFromDepotDate"
+                          [header]="'niopdcgatewayApp.productRateDifference.exitFromDepotDate' | translate">
+                    <ng-template let-item="rowData" pTemplate="body">
+                        <span>{{item.exitFromDepotDate | dateJalali}}</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="fromProductRatePrice"
+                          [header]="'niopdcgatewayApp.productRateDifference.fromProductRatePrice' | translate"></p-column>
+                <p-column field="amount"
+                          [header]="'niopdcgatewayApp.productRateDifference.amount' | translate">
+                    <ng-template let-item="rowData" pTemplate="body">
+
+                        <span *ngIf="req.type === 'EXIT_FROM_DEPOT'">{{item.amount}}</span>
+                        <span *ngIf="req.type !== 'EXIT_FROM_DEPOT' && !item.canInsert"
+                              style="color: darkred">****</span>
+                        <input class="form-control" type="text" *ngIf="req.type !== 'EXIT_FROM_DEPOT' && item.canInsert"
+                               name="amount" id="field_amount"
+                               [numeric]="{min:0, max: item.maxAmount}"
+                               [(ngModel)]="item.amount"
+                        />
+                    </ng-template>
+                </p-column>
+
+                <p-column field="toProductRatePrice" *ngIf="req.type && req.type === 'EXIT_FROM_DEPOT'"
+                          [header]="'niopdcgatewayApp.productRateDifference.toProductRatePrice' | translate"></p-column>
+                <p-column field="price" *ngIf="req.type && req.type === 'EXIT_FROM_DEPOT'"
+                          [header]="'niopdcgatewayApp.productRateDifference.price' | translate"></p-column>
+            </p-dataTable>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+                <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+            </button>
+            <button *ngIf="!isView" type="submit"
+                    [disabled]="!productRateDifferences || !productRateDifferences.length || editForm.form.invalid || isSaving"
+                    class="btn btn-primary">
+                <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+            </button>
+        </div>
+    </form>
+</div>

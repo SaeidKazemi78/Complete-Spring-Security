@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "AllocateTagReason" : {
+            "null": "",
+            "NEW": "جدید",
+            "MISSING": "مفقودی",
+            "DEFECTIVE": "معیوب",
+            "ACTIVE": "فعال کردن"
+        }
+    }
+}

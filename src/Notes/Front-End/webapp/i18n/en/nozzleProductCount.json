@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "nozzleProductCount" : {
+            "home": {
+                "title": "Nozzle Product Counts",
+                "createLabel": "Create a new Nozzle Product Count",
+                "createOrEditLabel": "Create or edit a Nozzle Product Count"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Nozzle Product Count {{ id }}?"
+            },
+            "detail": {
+                "title": "Nozzle Product Count"
+            },
+            "nozzleProductType": "Nozzle Product Type",
+            "nozzleCount": "Nozzle Count",
+            "customerStationInfo": "Customer Station Info"
+        }
+    },
+    "niopdcbaseApp": {
+        "nozzleProductCount" : {
+            "created": "A new Nozzle Product Count is created with identifier {{ param }}",
+            "updated": "A Nozzle Product Count is updated with identifier {{ param }}",
+            "deleted": "A Nozzle Product Count is deleted with identifier {{ param }}"
+        }
+    }
+}

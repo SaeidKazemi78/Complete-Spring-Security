@@ -1,0 +1,52 @@
+
+.jhi-tr-plaque  {
+    background-size: contain;
+    height: 43px;
+    background: url(/content/images/transit-plaque.jpg);
+    background-repeat: no-repeat;
+    padding-bottom: 7px;
+    width: 320px;
+    text-shadow: 1px 1px white;
+    font-family: "DejaVu Sans", "Arial", sans-serif !important;
+    font-size: 25px;
+    direction: rtl;
+    text-align: right !important;
+}
+
+.plague-tr{
+
+}
+.tr-combo  {
+    background-color: initial;
+    width: 18%;
+    display: block;
+    line-height: 1.5;
+    color: #495057;
+    border: 0px;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    font-size: 18px !important;
+    padding-left: 12px;
+}
+.tr-plaque-r{
+    background-color: initial;
+    padding-right: 29px !important;
+    width: 28%;
+
+}
+
+.tr-plaque-l{
+    background-color: initial;
+    padding-left: 28px !important;
+    width: 30%;
+}
+
+.tr-control{
+    display: block;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-clip: padding-box;
+    border: 0px ;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    font-size: 20px !important;
+}

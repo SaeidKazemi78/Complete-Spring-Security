@@ -1,0 +1,66 @@
+{
+    "niopdcgatewayApp": {
+        "momentSheet" : {
+            "home": {
+                "aoTitle": "گزارش مومنت شیت عملیات",
+                "depotTitle": "گزارش مومنت شیت انبار",
+                "createLabel":"ایجاد میلی پور",
+                "createOrEditLabel":"ویرایش میلی پور",
+                "view":"نمایش میلی پور"
+            },
+            "delete": {
+                "question": "آیا برای حذف این میلی پور مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "میلی پور"
+            },
+            "oilTankCode":"مخزن",
+            "unitCode":"واحد",
+            "startMeasurementOilTankAmount":"موجودی اول وقت",
+            "receivedFromOilTanks":"رسیده از انبار",
+            "receivedFromLogBooks":"رسیده از هواپیما",
+            "receivedFromUnitOilTanks":"رسیده از واحد",
+            "sumOfReceive":"جمع موجودی و رسیده ها",
+            "sendToUnitOilTanks":"انتقال به واحد",
+            "sendToServiceOilTanks":"انتقال به مخزن سرویس",
+            "sendToContaminatedOilTanks":"انتقال به مخزن آلوده",
+            "sendToOilTanks":"انتقال به انبار",
+            "sendToLogBooks":"جمع تحویلی به هواپیماها",
+            "sumOfSends":"مجموع انتقالی ها",
+            "endMeasurementOilTankAmount":"موجودی آخر وقت",
+            "addition":"سرک در موجودی",
+            "deductible":"کمبود در موجودی",
+            "startTime":"زمان شروع",
+            "endTime":"زمان پایان",
+            "refuelCenter":"مرکز سوخت گیری" ,
+            "code":"شماره مخزن",
+            "receiveSixtyAmount":"دریافتی 60 درجه",
+            "receiveNatureAmount":"دریافتی طبیعی",
+            "sendSixtyAmount":"ارسالی 60 درجه",
+            "sendNatureAmount":"ارسالی طبیعی",
+             "day":"تاریخ",
+             "receiveDepots":"رسیده ار انبار",
+             "receiveTransferContaminants":"رسیده از آلوده",
+             "receiveTransferRecycles":"رسیده از بازیافت",
+             "receiveTransferMains":"رسیده از اصلی",
+             "receiveTransferUnits":"رسیده از واحد",
+             "receiveTransferServiceTanks":"رسیده از سرویس تانک",
+             "receiveTransferTotals":"مجموع رسیده",
+             "sendDepots":"ارسال به انبار",
+             "sendToUnits":"ارسال به واحد",
+             "sendToContaminants":"ارسال به آلوده",
+             "sendToRecycles":"ارسال به بازیافت",
+             "sendToServiceTanks":"ارسال به سرویس تانک",
+             "sendSells":"فروش",
+             "sendToPlatforms":"ارسال به سکو",
+             "sendTotals":"جمع ارسالی ها"
+        }
+    },
+    "niopdcaoApp": {
+        "milliPoor" : {
+            "created": "میلی پور با موفقیت ایجاد شد.",
+            "updated": "میلی پور با موفقیت ویرایش شد.",
+            "deleted": "میلی پور با موفقیت حذف شد."
+        }
+    }
+}

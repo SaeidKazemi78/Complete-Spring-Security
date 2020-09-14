@@ -1,0 +1,130 @@
+<form name="plaqueChangeForm" (ngSubmit)="save()" #plaqueChangeForm="ngForm">
+    <div class="modal-header">
+        <h4 class="modal-title" jhiTranslate="entity.plaqueChange.title">plaqueChange</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="form-control-label"
+                       jhiTranslate="niopdcgatewayApp.customer.oldPlaqueOne"
+                       for="field_oldPlaqueOne">Name</label>
+                <jhi-ir-plaque required
+                               id="field_oldPlaqueOne"
+                               name="oldPlaqueOne"
+                               class="form-control"
+                               [disabled]="true"
+                               defaultTemplateCode="TR"
+                               [(ngModel)]="boundaryCustomer.oldCustomPlaque"></jhi-ir-plaque>
+            </div>
+            <div class="col-md-6">
+                <label class="form-control-label"
+                       jhiTranslate="niopdcgatewayApp.customer.oldPlaqueTwo"
+                       for="field_oldPlaqueTwo">Name</label>
+                <jhi-ir-plaque class="form-control"
+                               id="field_oldPlaqueTwo"
+                               name="oldPlaqueTwo"
+                               [disabled]="true"
+                               defaultTemplateCode="IR"
+                               [(ngModel)]="boundaryCustomer.oldCustomPlaqueTwo"></jhi-ir-plaque>
+            </div>
+            <div class="col-md-12">
+                <br>
+            </div>
+            <div class="col-md-6">
+                <label class="form-control-label"
+                       jhiTranslate="niopdcgatewayApp.customer.newPlaqueOne"
+                       for="field_newPlaqueOne">Name</label>
+                <jhi-ir-plaque required
+                               id="field_newPlaqueOne"
+                               name="newPlaqueOne"
+                               class="form-control"
+                               defaultTemplateCode="TR"
+                               [(ngModel)]="boundaryCustomer.newCustomPlaque"></jhi-ir-plaque>
+            </div>
+            <div class="col-md-6">
+                <label class="form-control-label"
+                       jhiTranslate="niopdcgatewayApp.customer.newPlaqueTwo"
+                       for="field_newPlaqueTwo">Name</label>
+                <jhi-ir-plaque class="form-control"
+                               id="field_newPlaqueTwo"
+                               name="newPlaqueTwo"
+                               defaultTemplateCode="IR"
+                               [(ngModel)]="boundaryCustomer.newCustomPlaqueTwo"></jhi-ir-plaque>
+            </div>
+            <div class="col-md-12">
+                <br>
+            </div>
+            <div class="col-md-3">
+                <label class="form-control-label"
+                       jhiTranslate="niopdcgatewayApp.customer.ownerFirstName"
+                       for="field_ownerFirstName">ownerFirstName</label>
+                <div class="form-group">
+                    <input type="text" class="form-control"
+                           [(ngModel)]="boundaryCustomer.ownerFirstName" name="ownerFirstName"
+                           id="field_ownerFirstName" [required]="true">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-control-label"
+                       jhiTranslate="niopdcgatewayApp.customer.ownerLastName"
+                       for="field_ownerLastName">ownerLastName</label>
+                <div class="form-group">
+
+                    <input type="text" class="form-control"
+                           [(ngModel)]="boundaryCustomer.ownerLastName" name="ownerLastName"
+                           id="field_ownerLastName" [required]="true">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-control-label"
+                       jhiTranslate="niopdcgatewayApp.customer.driverFirstName"
+                       for="field_driverFirstName">driverFirstName</label>
+                <div class="form-group">
+                    <input type="text" class="form-control"
+                           [(ngModel)]="boundaryCustomer.driverFirstName" name="driverFirstName"
+                           id="field_driverFirstName" [required]="true">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="form-control-label"
+                       jhiTranslate="niopdcgatewayApp.customer.driverLastName"
+                       for="field_driverLastName">driverLastName</label>
+                <div class="form-group">
+                    <input type="text" class="form-control"
+                           [(ngModel)]="boundaryCustomer.driverLastName" name="driverLastName"
+                           id="field_driverLastName" [required]="true">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.customer.vinNo"
+                           for="field_vinNo">vinNo</label>
+                    <input type="text" required class="form-control"
+                           name="vinNo"
+                           style="direction: ltr"
+                           id="field_vinNo"
+                           [(ngModel)]="boundaryCustomer.carVIN"/>
+                </div>
+            </div>
+            <div class="col-md-6" >
+                <div class="form-group" style="padding-top:30px ">
+                    <input [disabled]="plaqueChangeForm.form.invalid"  name="valid"  id="field_valid"  class="form-control" type="checkbox" [(ngModel)]="isPlaqueChangeValid">
+                    <label  jhiTranslate="niopdcgatewayApp.customer.home.ok.information.plaqueChange" ></label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="!isPlaqueChangeValid">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

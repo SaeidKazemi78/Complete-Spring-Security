@@ -1,0 +1,46 @@
+
+{
+    "niopdcgatewayApp": {
+        "voucherMapping" : {
+            "home": {
+                "title": "نگاشت های سند",
+                "createLabel": "ایجاد نگاشت سند",
+                "createOrEditLabel": "ویرایش نگاشت سند",
+                "view":"نمایش نگاشت سند"
+            },
+            "delete": {
+                "question": "آیا برای حذف نگاشت سند مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "نگاشت سند"
+            },
+            "rowNo": "اولویت اجرا",
+            "extraMap": "متفرقه",
+            "specialMap": "ویژه",
+            "creditMap": "بستانکار",
+            "debitMap": "بدهکار",
+            "descriptionMap": "توضیحات",
+            "accountNoMap": "شماره حساب",
+            "suffixMap": "پسوند",
+            "keyMap": "کلید",
+            "referenceMap": "ارجاعات",
+            "referenceType": "نوع ارجاع",
+            "baseQuery": "کوئری پایه",
+            "voucherTemplate": "الگوی سند",
+            "name": "نام",
+            "value": "مقدار",
+            "condition":"شرط",
+            "isElse":"else",
+            "order": "کد حواله",
+            "rateDifference": "کد تفاوت نرخ",
+            "receipt": "شماره رسید"
+        }
+    },
+    "niopdcaccountingApp": {
+        "voucherMapping" : {
+            "created": "نگاشت سند با موفقیت ایجاد شد.",
+            "updated": "الگوی سند با موفقیت ویرایش شد.",
+            "deleted": "الگوی سند با موفقیت حذف شد."
+        }
+    }
+}

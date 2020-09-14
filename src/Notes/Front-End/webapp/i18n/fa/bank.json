@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "Bank": {
+            "MARKAZI": "مرکزی",
+            "MELLI": "ملی",
+            "MELLAT": "ملت"
+        }
+    }
+}

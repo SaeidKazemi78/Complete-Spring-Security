@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "FactorType" : {
+            "null": "",
+            "PRICE": "به ازای فرآورده",
+            "COST": "به ازای هزینه"
+        }
+    }
+}

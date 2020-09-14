@@ -1,0 +1,30 @@
+{
+    "niopdcgatewayApp": {
+        "container" : {
+            "home": {
+                "title": "ظرف فرآورده",
+                "createLabel": "ایجاد ظرف فرآورده",
+                "createOrEditLabel": "ویرایش ظرف فرآورده",
+                "view": "نمایش ظرف فرآورده"
+            },
+            "delete": {
+                "question": "آیا برای حذف ظرف فرآورده  {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "ظرف فرآورده"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "capacity":"ظرفیت",
+            "productUnit": "واحد فرآورده",
+            "containerRate":"نرخ ظرف فرآورده"
+        }
+    },
+    "niopdcbaseApp": {
+        "container" : {
+            "created": "ظرف فرآورده با موفقیت  ایجاد شد.",
+            "updated": "ظرف فرآورده با موفقیت  ویرایش شد.",
+            "deleted": "ظرف فرآورده با موفقیت  حذف شد."
+        }
+    }
+}

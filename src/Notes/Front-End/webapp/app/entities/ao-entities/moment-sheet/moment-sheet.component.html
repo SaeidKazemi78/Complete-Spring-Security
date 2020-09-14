@@ -1,0 +1,167 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.momentSheet.refuelCenter"
+                       for="field_refuelCenter">RefuelCenter</label>
+                <select class="form-control" id="field_refuelCenter"
+                        name="refuelCenter"
+                        [(ngModel)]="refuelCenterId"
+                        (ngModelChange)="changeRefuelCenter($event)"
+                        required
+                >
+                    <option [ngValue]="null" selected></option>
+                    <option [ngValue]="refuelCenterOption.id"
+                            *ngFor="let refuelCenterOption of refuelCenters; trackBy: trackRefuelCenterById">
+                        {{refuelCenterOption.persianTitle}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.momentSheet.startTime"
+                       for="field_startTime">Register Date</label>
+                <div class="d-flex">
+                    <ng2-datetimepicker [disableTime]="true" [rtlActive]="true" time="00:00:00"
+                                        id="field_startTime"
+                                        class="form-control"
+                                        (ngModelChange)="changeStartTime($event)"
+                                        name="startTime" [(ngModel)]="startTime"
+                                        required></ng2-datetimepicker>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.momentSheet.endTime"
+                       for="field_endTime">Register Date</label>
+                <div class="d-flex">
+                    <ng2-datetimepicker [disableTime]="true" [rtlActive]="true" time="23:59:59"
+                                        id="field_endTime"
+                                        class="form-control"
+                                        (ngModelChange)="changeEndTime($event)"
+                                        name="endTime" [(ngModel)]="endTime"
+                                        required></ng2-datetimepicker>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p-dataTable #dt [value]="momentSheets" [lazy]="true" [rows]="itemsPerPage"
+                 [rowsPerPageOptions]="[5,10,20,totalItems]"
+                 [paginator]="true" [responsive]="true" [stacked]="false"
+                 [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)">
+        <p-headerColumnGroup>
+            <p-row>
+                <p-column field="title" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.momentSheet.oilTankRegister">Title</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="title" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.momentSheet.startMeasurementOilTankAmount">Title</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="title" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.momentSheet.receivedFromOilTanks">Title</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="title" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.momentSheet.receivedFromLogBooks">Title</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="title" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.momentSheet.receivedFromUnitOilTanks">Title</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="title" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.momentSheet.sumOfReceive">Title</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="title" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.momentSheet.sendToUnitOilTanks">Title</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="title" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.momentSheet.sendToServiceOilTanks">Title</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="title" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.momentSheet.sendToContaminatedOilTanks">Title</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="title" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.momentSheet.sendToOilTanks">Title</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="title" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.momentSheet.sendToLogBooks">Title</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="title" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.momentSheet.sumOfSends">Title</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="title" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.momentSheet.addition">Title</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="title" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.momentSheet.deductible">Title</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="title" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.momentSheet.endMeasurementOilTankAmount">Title</span>
+                    </ng-template>
+                </p-column>
+
+
+            </p-row>
+
+        </p-headerColumnGroup>
+
+        <p-column field="oilTankCode" [header]="'niopdcgatewayApp.momentSheet.oilTankRegister' | translate"></p-column>
+        <p-column field="startMeasurementOilTankAmount"
+                  [header]="'niopdcgatewayApp.momentSheet.startMeasurementOilTankAmount' | translate"></p-column>
+        <p-column field="receivedFromOilTanks"
+                  [header]="'niopdcgatewayApp.momentSheet.receivedFromOilTanks' | translate"></p-column>
+        <p-column field="receivedFromLogBooks"
+                  [header]="'niopdcgatewayApp.momentSheet.receivedFromLogBooks' | translate"></p-column>
+        <p-column field="receivedFromUnitOilTanks"
+                  [header]="'niopdcgatewayApp.momentSheet.receivedFromUnitOilTanks' | translate"></p-column>
+        <p-column field="sumOfReceive" [header]="'niopdcgatewayApp.momentSheet.sumOfReceive' | translate"></p-column>
+        <p-column field="sendToUnitOilTanks"
+                  [header]="'niopdcgatewayApp.momentSheet.sendToUnitOilTanks' | translate"></p-column>
+        <p-column field="sendToServiceOilTanks"
+                  [header]="'niopdcgatewayApp.momentSheet.sendToServiceOilTanks' | translate"></p-column>
+        <p-column field="sendToContaminatedOilTanks"
+                  [header]="'niopdcgatewayApp.momentSheet.sendToContaminatedOilTanks' | translate"></p-column>
+        <p-column field="sendToOilTanks"
+                  [header]="'niopdcgatewayApp.momentSheet.sendToOilTanks' | translate"></p-column>
+        <p-column field="sendToLogBooks"
+                  [header]="'niopdcgatewayApp.momentSheet.sendToLogBooks' | translate"></p-column>
+        <p-column field="sumOfSends" [header]="'niopdcgatewayApp.momentSheet.sumOfSends' | translate"></p-column>
+        <p-column field="addition" [header]="'niopdcgatewayApp.momentSheet.addition' | translate"></p-column>
+        <p-column field="deductible" [header]="'niopdcgatewayApp.momentSheet.deductible' | translate"></p-column>
+        <p-column field="endMeasurementOilTankAmount"
+                  [header]="'niopdcgatewayApp.momentSheet.endMeasurementOilTankAmount' | translate"></p-column>
+    </p-dataTable>
+
+</div>

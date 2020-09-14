@@ -1,0 +1,27 @@
+
+{
+    "niopdcgatewayApp": {
+        "pos" : {
+            "home": {
+                "title": "Pos",
+                "createLabel": "Create a new Pos",
+                "createOrEditLabel": "Create or edit a Pos"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Pos {{ id }}?"
+            },
+            "detail": {
+                "title": "Pos"
+            },
+            "serial": "Serial",
+            "airport": "Airport"
+        }
+    },
+    "niopdcaoApp": {
+        "pos" : {
+            "created": "A new Pos is created with identifier {{ param }}",
+            "updated": "A Pos is updated with identifier {{ param }}",
+            "deleted": "A Pos is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "bankTransactionRef" : {
+            "home": {
+                "title": "Bank Transaction Refs",
+                "createLabel": "Create a new Bank Transaction Ref",
+                "createOrEditLabel": "Create or edit a Bank Transaction Ref"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Bank Transaction Ref {{ id }}?"
+            },
+            "detail": {
+                "title": "Bank Transaction Ref"
+            },
+            "orderId": "Order Id",
+            "personId": "Person Id",
+            "customerId": "Customer Id",
+            "amount": "Amount",
+            "bankTransaction": "Bank Transaction"
+        }
+    },
+    "niopdcpaymentApp": {
+        "bankTransactionRef" : {
+            "created": "A new Bank Transaction Ref is created with identifier {{ param }}",
+            "updated": "A Bank Transaction Ref is updated with identifier {{ param }}",
+            "deleted": "A Bank Transaction Ref is deleted with identifier {{ param }}"
+        }
+    }
+}

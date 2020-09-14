@@ -1,0 +1,32 @@
+
+{
+    "niopdcgatewayApp": {
+        "logBook" : {
+            "home": {
+                "title": "Log Books",
+                "createLabel": "Create a new Log Book",
+                "createOrEditLabel": "Create or edit a Log Book"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Log Book {{ id }}?"
+            },
+            "detail": {
+                "title": "Log Book"
+            },
+            "orderId": "Order Id",
+            "orderProductId": "Order Product Id",
+            "amount": "Amount",
+            "fuelType": "Fuel Type",
+            "status": "Status",
+            "metreLog": "Metre Log",
+            "dayDepot": "Day Depot"
+        }
+    },
+    "niopdcaoApp": {
+        "logBook" : {
+            "created": "A new Log Book is created with identifier {{ param }}",
+            "updated": "A Log Book is updated with identifier {{ param }}",
+            "deleted": "A Log Book is deleted with identifier {{ param }}"
+        }
+    }
+}

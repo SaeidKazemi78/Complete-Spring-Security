@@ -1,0 +1,26 @@
+
+{
+    "niopdcgatewayApp": {
+        "niopdcBankAccountType" : {
+            "home": {
+                "title": "Niopdc Bank Account Types",
+                "createLabel": "Create a new Niopdc Bank Account Type",
+                "createOrEditLabel": "Create or edit a Niopdc Bank Account Type"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Niopdc Bank Account Type {{ id }}?"
+            },
+            "detail": {
+                "title": "Niopdc Bank Account Type"
+            },
+            "title": "Title"
+        }
+    },
+    "niopdcpaymentApp": {
+        "niopdcBankAccountType" : {
+            "created": "A new Niopdc Bank Account Type is created with identifier {{ param }}",
+            "updated": "A Niopdc Bank Account Type is updated with identifier {{ param }}",
+            "deleted": "A Niopdc Bank Account Type is deleted with identifier {{ param }}"
+        }
+    }
+}

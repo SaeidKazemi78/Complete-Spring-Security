@@ -1,0 +1,12 @@
+ngb-datepicker-navigation{
+    direction: ltr;
+}
+
+ngb-datepicker-navigation-select{
+    direction: rtl;
+}
+
+
+ngb-datepicker.d-inline-block{
+    left: inherit !important;
+}

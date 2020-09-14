@@ -1,0 +1,113 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="productSrc.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="productSrc.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productSrc.productTitle"
+                           for="field_productId">Product Id</label>
+
+                    <p-dropdown [options]="productItems"
+                                [(ngModel)]="productSrc.productId"
+                                [filter]="true"
+                                [disabled]="isView"
+                                class="form-control"
+                                filterBy="label"
+                                id="field_productId"
+                                name="productId"
+                                required>
+                    </p-dropdown>
+
+
+                    <div [hidden]="!(editForm.controls.productId?.dirty && editForm.controls.productId?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.productId?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.productId?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productSrc.type" for="field_type">Type</label>
+                    <select [disabled]="isView" class="form-control"
+                            name="type" [(ngModel)]="productSrc.type"
+                            id="field_type" required>
+                        <option value="NORMAL">{{'niopdcgatewayApp.SrcType.NORMAL' | translate}}</option>
+                        <option value="PUMP_NOZZLE">{{'niopdcgatewayApp.SrcType.PUMP_NOZZLE' | translate}}</option>
+                        <option value="TRANSHIP">{{'niopdcgatewayApp.SrcType.TRANSHIP' | translate}}</option>
+                        <option value="IRANIAN_BACK">{{'niopdcgatewayApp.SrcType.IRANIAN_BACK' | translate}}</option>
+                        <option value="FOREIGN_BACK">{{'niopdcgatewayApp.SrcType.FOREIGN_BACK' | translate}}</option>
+                        <option value="EXPORT">{{'niopdcgatewayApp.SrcType.EXPORT' | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productSrc.src"
+                           for="field_src">Src</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="src" id="field_src"  [numeric] maxlength="3" minlength="3"
+                           [(ngModel)]="productSrc.src" required/>
+                    <div [hidden]="!(editForm.controls.src?.dirty && editForm.controls.src?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.src?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productSrc.active"
+                           for="field_active">Is
+                        Active</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="active" id="field_active"
+                           [(ngModel)]="productSrc.active"/>
+                </div>
+            </div>
+
+            <!--<div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productSrc.ratePrice"
+                           for="field_ratePrice">Rate Price</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="ratePrice" id="field_ratePrice"
+                           [(ngModel)]="productSrc.ratePrice"/>
+                </div>
+            </div>-->
+
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

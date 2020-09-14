@@ -1,0 +1,21 @@
+{
+    "niopdcgatewayApp": {
+        "detailsBuy": {
+            "home": {
+                "title": "گزارش ریز فروش"
+            },
+            "timeBy":"تاریخ با",
+            "timeByOrderCreate":"صدور حواله",
+            "timeByExportFromDepot":"خروج از انبار",
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "location": "ناحیه",
+            "customerTypes":"نوع مشتری",
+            "regions":"تقسیم کشوری",
+            "locationName":"ناحیه",
+            "customerName":"مشتری",
+            "customerTypeTitle":"نوع مشتری",
+            "consumptionTitle":"نوع مصرف"
+        }
+    }
+}

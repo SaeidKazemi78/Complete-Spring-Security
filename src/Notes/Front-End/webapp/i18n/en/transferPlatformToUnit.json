@@ -1,0 +1,36 @@
+
+{
+    "niopdcgatewayApp": {
+        "transferPlatformToUnit" : {
+            "home": {
+                "title": "Transfer Platform To Units",
+                "createLabel": "Create a new Transfer Platform To Unit",
+                "createOrEditLabel": "Create or edit a Transfer Platform To Unit"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Transfer Platform To Unit {{ id }}?"
+            },
+            "detail": {
+                "title": "Transfer Platform To Unit"
+            },
+            "registerDate": "Register Date",
+            "natureAmount": "Nature Amount",
+            "sixtyAmount": "Sixty Amount",
+            "specialWeight": "Special Weight",
+            "environmentTemperature": "Environment Temperature",
+            "productTemperature": "Product Temperature",
+            "unitMetreNumber": "Unit Metre Number",
+            "metreLog": "Metre Log",
+            "metre": "Metre",
+            "platform": "Platform",
+            "unit": "Unit"
+        }
+    },
+    "niopdcaoApp": {
+        "transferPlatformToUnit" : {
+            "created": "A new Transfer Platform To Unit is created with identifier {{ param }}",
+            "updated": "A Transfer Platform To Unit is updated with identifier {{ param }}",
+            "deleted": "A Transfer Platform To Unit is deleted with identifier {{ param }}"
+        }
+    }
+}

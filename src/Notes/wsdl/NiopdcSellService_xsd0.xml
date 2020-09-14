@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tempuri.org/">
+    <xs:import schemaLocation="NiopdcSellService_xsd2.xml"
+               namespace="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+    <xs:element name="RegisterCustomerMajari">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="connectionString" nillable="true" type="q1:NiopdcConnectionString"
+                            xmlns:q1="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+                <xs:element minOccurs="0" name="customerMajari" nillable="true" type="q2:NiopdcCustomerMajari"
+                            xmlns:q2="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RegisterCustomerMajariResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="RegisterCustomerMajariResult" nillable="true" type="q3:Output"
+                            xmlns:q3="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RegisterProduct">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="connectionString" nillable="true" type="q4:NiopdcConnectionString"
+                            xmlns:q4="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+                <xs:element minOccurs="0" name="Customer" nillable="true" type="q5:NiopdcProductCustomer"
+                            xmlns:q5="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RegisterProductResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="RegisterProductResult" nillable="true" type="q6:Output"
+                            xmlns:q6="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SetExpireDate">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="connectionString" nillable="true" type="q7:NiopdcConnectionString"
+                            xmlns:q7="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+                <xs:element minOccurs="0" name="Customer" nillable="true" type="q8:NiopdcExpireCustomer"
+                            xmlns:q8="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SetExpireDateResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="SetExpireDateResult" nillable="true" type="q9:Output"
+                            xmlns:q9="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

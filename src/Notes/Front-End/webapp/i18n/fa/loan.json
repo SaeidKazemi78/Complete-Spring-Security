@@ -1,0 +1,41 @@
+
+{
+    "niopdcgatewayApp": {
+        "loan" : {
+            "home": {
+                "title": "لیست تسهیلات",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ویرایش"
+            },
+            "delete": {
+                "question": "آیا شما می خواهید این وام حذف شود؟"
+            },
+            "detail": {
+                "title": "تسهیلات"
+            },
+            "customerId": "مشتری",
+            "amount": "مبلغ",
+            "reason": "دلیل",
+            "description": "توضیحات",
+            "installmentCount": "تعداد اقساط",
+            "firstPaymentDate": "تاریخ اولین پرداخت (اقساط)",
+            "completed": "تکمیل شده",
+            "completedTrue": "تکمیل شده",
+            "completedFalse": "تکمیل نشده",
+            "payByBill": "پرداخت با صورت حساب",
+            "penaltyDay": "تعداد روز های مجاز برای تاخیر",
+            "loanType": "نوع تسهیلات",
+            "amountMonth":"مبلغ هر قسط",
+            "payment":"پرداخت",
+            "payment.again":"سعی مجدد",
+            "year":"سال"
+        }
+    },
+    "niopdcaccountingApp": {
+        "loan" : {
+            "created": "وام با موفقیت ایجاد شد.",
+            "updated": "وام با موفقیت ویرایش شد.",
+            "deleted": "وام با موفقیت حذف شد."
+        }
+    }
+}

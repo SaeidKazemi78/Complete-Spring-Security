@@ -1,0 +1,18 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+    <xs:import schemaLocation="InquiryService.xsd1.xml" namespace="http://schemas.datacontract.org/2004/07/CMR.Web.Services.DTO"/>
+    <xs:element name="GetCMRCategoryByReferenceNo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="ReferenceNo" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="IncludeAllCMRs" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetCMRCategoryByReferenceNoResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/CMR.Web.Services.DTO" minOccurs="0" name="GetCMRCategoryByReferenceNoResult" nillable="true" type="q1:Message"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

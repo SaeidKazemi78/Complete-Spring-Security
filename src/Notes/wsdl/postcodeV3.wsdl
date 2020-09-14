@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WL5G3N0:definitions name="PostCode" targetNamespace="http://tempuri.org/" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://tempuri.org/" xmlns:WL5G3N2="http://www.w3.org/2006/05/addressing/wsdl" xmlns:WL5G3N3="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://tempuri.org/" schemaLocation="postcodeV3_FXMLSchema.wsdl"/>
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="IPostCode_GenerateCertificate_InputMessage">
+    <WL5G3N0:part element="WL5G3N1:GenerateCertificate" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GenerateCertificate_OutputMessage">
+    <WL5G3N0:part element="WL5G3N1:GenerateCertificateResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetActivityCodeByPostcode_InputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetActivityCodeByPostcode" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetActivityCodeByPostcode_OutputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetActivityCodeByPostcodeResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetActivityCodeByTelephone_InputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetActivityCodeByTelephone" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetActivityCodeByTelephone_OutputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetActivityCodeByTelephoneResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetAddressAndTelephonesByPostcode_InputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetAddressAndTelephonesByPostcode" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetAddressAndTelephonesByPostcode_OutputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetAddressAndTelephonesByPostcodeResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetAddressByPostcode_InputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetAddressByPostcode" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetAddressByPostcode_OutputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetAddressByPostcodeResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetAddressByTelephone_InputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetAddressByTelephone" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetAddressByTelephone_OutputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetAddressByTelephoneResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetAddressStringByTelephone_InputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetAddressStringByTelephone" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetAddressStringByTelephone_OutputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetAddressStringByTelephoneResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetAddressStringByPostcode_InputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetAddressStringByPostcode" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetAddressStringByPostcode_OutputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetAddressStringByPostcodeResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetAddressByCertificateNo_InputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetAddressByCertificateNo" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetAddressByCertificateNo_OutputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetAddressByCertificateNoResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetParcelPositionByPostcode_InputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetParcelPositionByPostcode" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetParcelPositionByPostcode_OutputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetParcelPositionByPostcodeResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetParcelPositionByTelephone_InputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetParcelPositionByTelephone" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetParcelPositionByTelephone_OutputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetParcelPositionByTelephoneResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetAddressAndPostcodeByTelephone_InputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetAddressAndPostcodeByTelephone" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetAddressAndPostcodeByTelephone_OutputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetAddressAndPostcodeByTelephoneResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetPostcodeByTelephone_InputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetPostcodeByTelephone" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetPostcodeByTelephone_OutputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetPostcodeByTelephoneResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetTelephonesByPostcode_InputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetTelephonesByPostcode" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetTelephonesByPostcode_OutputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetTelephonesByPostcodeResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetWorkshopByPostcode_InputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetWorkshopByPostcode" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetWorkshopByPostcode_OutputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetWorkshopByPostcodeResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetWorkshopByTelephone_InputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetWorkshopByTelephone" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_GetWorkshopByTelephone_OutputMessage">
+    <WL5G3N0:part element="WL5G3N1:GetWorkshopByTelephoneResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_ValidatePostCode_InputMessage">
+    <WL5G3N0:part element="WL5G3N1:ValidatePostCode" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_ValidatePostCode_OutputMessage">
+    <WL5G3N0:part element="WL5G3N1:ValidatePostCodeResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_ValidateTelephone_InputMessage">
+    <WL5G3N0:part element="WL5G3N1:ValidateTelephone" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="IPostCode_ValidateTelephone_OutputMessage">
+    <WL5G3N0:part element="WL5G3N1:ValidateTelephoneResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="IPostCode">
+    <WL5G3N0:operation name="GenerateCertificate">
+      <WL5G3N0:input WL5G3N2:Action="http://tempuri.org/IPostCode/GenerateCertificate" message="WL5G3N1:IPostCode_GenerateCertificate_InputMessage"/>
+      <WL5G3N0:output WL5G3N2:Action="http://tempuri.org/IPostCode/GenerateCertificateResponse" message="WL5G3N1:IPostCode_GenerateCertificate_OutputMessage"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetActivityCodeByPostcode">
+      <WL5G3N0:input WL5G3N2:Action="http://tempuri.org/IPostCode/GetActivityCodeByPostcode" message="WL5G3N1:IPostCode_GetActivityCodeByPostcode_InputMessage"/>
+      <WL5G3N0:output WL5G3N2:Action="http://tempuri.org/IPostCode/GetActivityCodeByPostcodeResponse" message="WL5G3N1:IPostCode_GetActivityCodeByPostcode_OutputMessage"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetActivityCodeByTelephone">
+      <WL5G3N0:input WL5G3N2:Action="http://tempuri.org/IPostCode/GetActivityCodeByTelephone" message="WL5G3N1:IPostCode_GetActivityCodeByTelephone_InputMessage"/>
+      <WL5G3N0:output WL5G3N2:Action="http://tempuri.org/IPostCode/GetActivityCodeByTelephoneResponse" message="WL5G3N1:IPostCode_GetActivityCodeByTelephone_OutputMessage"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetAddressAndTelephonesByPostcode">
+      <WL5G3N0:input WL5G3N2:Action="http://tempuri.org/IPostCode/GetAddressAndTelephonesByPostcode" message="WL5G3N1:IPostCode_GetAddressAndTelephonesByPostcode_InputMessage"/>
+      <WL5G3N0:output WL5G3N2:Action="http://tempuri.org/IPostCode/GetAddressAndTelephonesByPostcodeResponse" message="WL5G3N1:IPostCode_GetAddressAndTelephonesByPostcode_OutputMessage"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetAddressByPostcode">
+      <WL5G3N0:input WL5G3N2:Action="http://tempuri.org/IPostCode/GetAddressByPostcode" message="WL5G3N1:IPostCode_GetAddressByPostcode_InputMessage"/>
+      <WL5G3N0:output WL5G3N2:Action="http://tempuri.org/IPostCode/GetAddressByPostcodeResponse" message="WL5G3N1:IPostCode_GetAddressByPostcode_OutputMessage"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetAddressByTelephone">
+      <WL5G3N0:input WL5G3N2:Action="http://tempuri.org/IPostCode/GetAddressByTelephone" message="WL5G3N1:IPostCode_GetAddressByTelephone_InputMessage"/>
+      <WL5G3N0:output WL5G3N2:Action="http://tempuri.org/IPostCode/GetAddressByTelephoneResponse" message="WL5G3N1:IPostCode_GetAddressByTelephone_OutputMessage"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetAddressStringByTelephone">
+      <WL5G3N0:input WL5G3N2:Action="http://tempuri.org/IPostCode/GetAddressStringByTelephone" message="WL5G3N1:IPostCode_GetAddressStringByTelephone_InputMessage"/>
+      <WL5G3N0:output WL5G3N2:Action="http://tempuri.org/IPostCode/GetAddressStringByTelephoneResponse" message="WL5G3N1:IPostCode_GetAddressStringByTelephone_OutputMessage"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetAddressStringByPostcode">
+      <WL5G3N0:input WL5G3N2:Action="http://tempuri.org/IPostCode/GetAddressStringByPostcode" message="WL5G3N1:IPostCode_GetAddressStringByPostcode_InputMessage"/>
+      <WL5G3N0:output WL5G3N2:Action="http://tempuri.org/IPostCode/GetAddressStringByPostcodeResponse" message="WL5G3N1:IPostCode_GetAddressStringByPostcode_OutputMessage"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetAddressByCertificateNo">
+      <WL5G3N0:input WL5G3N2:Action="http://tempuri.org/IPostCode/GetAddressByCertificateNo" message="WL5G3N1:IPostCode_GetAddressByCertificateNo_InputMessage"/>
+      <WL5G3N0:output WL5G3N2:Action="http://tempuri.org/IPostCode/GetAddressByCertificateNoResponse" message="WL5G3N1:IPostCode_GetAddressByCertificateNo_OutputMessage"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetParcelPositionByPostcode">
+      <WL5G3N0:input WL5G3N2:Action="http://tempuri.org/IPostCode/GetParcelPositionByPostcode" message="WL5G3N1:IPostCode_GetParcelPositionByPostcode_InputMessage"/>
+      <WL5G3N0:output WL5G3N2:Action="http://tempuri.org/IPostCode/GetParcelPositionByPostcodeResponse" message="WL5G3N1:IPostCode_GetParcelPositionByPostcode_OutputMessage"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetParcelPositionByTelephone">
+      <WL5G3N0:input WL5G3N2:Action="http://tempuri.org/IPostCode/GetParcelPositionByTelephone" message="WL5G3N1:IPostCode_GetParcelPositionByTelephone_InputMessage"/>
+      <WL5G3N0:output WL5G3N2:Action="http://tempuri.org/IPostCode/GetParcelPositionByTelephoneResponse" message="WL5G3N1:IPostCode_GetParcelPositionByTelephone_OutputMessage"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetAddressAndPostcodeByTelephone">
+      <WL5G3N0:input WL5G3N2:Action="http://tempuri.org/IPostCode/GetAddressAndPostcodeByTelephone" message="WL5G3N1:IPostCode_GetAddressAndPostcodeByTelephone_InputMessage"/>
+      <WL5G3N0:output WL5G3N2:Action="http://tempuri.org/IPostCode/GetAddressAndPostcodeByTelephoneResponse" message="WL5G3N1:IPostCode_GetAddressAndPostcodeByTelephone_OutputMessage"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetPostcodeByTelephone">
+      <WL5G3N0:input WL5G3N2:Action="http://tempuri.org/IPostCode/GetPostcodeByTelephone" message="WL5G3N1:IPostCode_GetPostcodeByTelephone_InputMessage"/>
+      <WL5G3N0:output WL5G3N2:Action="http://tempuri.org/IPostCode/GetPostcodeByTelephoneResponse" message="WL5G3N1:IPostCode_GetPostcodeByTelephone_OutputMessage"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetTelephonesByPostcode">
+      <WL5G3N0:input WL5G3N2:Action="http://tempuri.org/IPostCode/GetTelephonesByPostcode" message="WL5G3N1:IPostCode_GetTelephonesByPostcode_InputMessage"/>
+      <WL5G3N0:output WL5G3N2:Action="http://tempuri.org/IPostCode/GetTelephonesByPostcodeResponse" message="WL5G3N1:IPostCode_GetTelephonesByPostcode_OutputMessage"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetWorkshopByPostcode">
+      <WL5G3N0:input WL5G3N2:Action="http://tempuri.org/IPostCode/GetWorkshopByPostcode" message="WL5G3N1:IPostCode_GetWorkshopByPostcode_InputMessage"/>
+      <WL5G3N0:output WL5G3N2:Action="http://tempuri.org/IPostCode/GetWorkshopByPostcodeResponse" message="WL5G3N1:IPostCode_GetWorkshopByPostcode_OutputMessage"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetWorkshopByTelephone">
+      <WL5G3N0:input WL5G3N2:Action="http://tempuri.org/IPostCode/GetWorkshopByTelephone" message="WL5G3N1:IPostCode_GetWorkshopByTelephone_InputMessage"/>
+      <WL5G3N0:output WL5G3N2:Action="http://tempuri.org/IPostCode/GetWorkshopByTelephoneResponse" message="WL5G3N1:IPostCode_GetWorkshopByTelephone_OutputMessage"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ValidatePostCode">
+      <WL5G3N0:input WL5G3N2:Action="http://tempuri.org/IPostCode/ValidatePostCode" message="WL5G3N1:IPostCode_ValidatePostCode_InputMessage"/>
+      <WL5G3N0:output WL5G3N2:Action="http://tempuri.org/IPostCode/ValidatePostCodeResponse" message="WL5G3N1:IPostCode_ValidatePostCode_OutputMessage"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ValidateTelephone">
+      <WL5G3N0:input WL5G3N2:Action="http://tempuri.org/IPostCode/ValidateTelephone" message="WL5G3N1:IPostCode_ValidateTelephone_InputMessage"/>
+      <WL5G3N0:output WL5G3N2:Action="http://tempuri.org/IPostCode/ValidateTelephoneResponse" message="WL5G3N1:IPostCode_ValidateTelephone_OutputMessage"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="BasicHttpBinding_IPostCode" type="WL5G3N1:IPostCode">
+    <WL5G3N3:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="GenerateCertificate">
+      <WL5G3N3:operation soapAction="http://tempuri.org/IPostCode/GenerateCertificate" style="document"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetActivityCodeByPostcode">
+      <WL5G3N3:operation soapAction="http://tempuri.org/IPostCode/GetActivityCodeByPostcode" style="document"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetActivityCodeByTelephone">
+      <WL5G3N3:operation soapAction="http://tempuri.org/IPostCode/GetActivityCodeByTelephone" style="document"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetAddressAndTelephonesByPostcode">
+      <WL5G3N3:operation soapAction="http://tempuri.org/IPostCode/GetAddressAndTelephonesByPostcode" style="document"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetAddressByPostcode">
+      <WL5G3N3:operation soapAction="http://tempuri.org/IPostCode/GetAddressByPostcode" style="document"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetAddressByTelephone">
+      <WL5G3N3:operation soapAction="http://tempuri.org/IPostCode/GetAddressByTelephone" style="document"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetAddressStringByTelephone">
+      <WL5G3N3:operation soapAction="http://tempuri.org/IPostCode/GetAddressStringByTelephone" style="document"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetAddressStringByPostcode">
+      <WL5G3N3:operation soapAction="http://tempuri.org/IPostCode/GetAddressStringByPostcode" style="document"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetAddressByCertificateNo">
+      <WL5G3N3:operation soapAction="http://tempuri.org/IPostCode/GetAddressByCertificateNo" style="document"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetParcelPositionByPostcode">
+      <WL5G3N3:operation soapAction="http://tempuri.org/IPostCode/GetParcelPositionByPostcode" style="document"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetParcelPositionByTelephone">
+      <WL5G3N3:operation soapAction="http://tempuri.org/IPostCode/GetParcelPositionByTelephone" style="document"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetAddressAndPostcodeByTelephone">
+      <WL5G3N3:operation soapAction="http://tempuri.org/IPostCode/GetAddressAndPostcodeByTelephone" style="document"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetPostcodeByTelephone">
+      <WL5G3N3:operation soapAction="http://tempuri.org/IPostCode/GetPostcodeByTelephone" style="document"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetTelephonesByPostcode">
+      <WL5G3N3:operation soapAction="http://tempuri.org/IPostCode/GetTelephonesByPostcode" style="document"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetWorkshopByPostcode">
+      <WL5G3N3:operation soapAction="http://tempuri.org/IPostCode/GetWorkshopByPostcode" style="document"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="GetWorkshopByTelephone">
+      <WL5G3N3:operation soapAction="http://tempuri.org/IPostCode/GetWorkshopByTelephone" style="document"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ValidatePostCode">
+      <WL5G3N3:operation soapAction="http://tempuri.org/IPostCode/ValidatePostCode" style="document"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="ValidateTelephone">
+      <WL5G3N3:operation soapAction="http://tempuri.org/IPostCode/ValidateTelephone" style="document"/>
+      <WL5G3N0:input>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N3:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="PostCode">
+    <WL5G3N0:port binding="WL5G3N1:BasicHttpBinding_IPostCode" name="BasicHttpBinding_IPostCode">
+      <WL5G3N3:address location="http://10.0.233.254:80/post/proxy/PostcodeV3"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

@@ -1,0 +1,39 @@
+
+{
+    "niopdcgatewayApp": {
+        "payment" : {
+            "home": {
+                "title": "Payments",
+                "createLabel": "Create a new Payment",
+                "createOrEditLabel": "Create or edit a Payment"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Payment {{ id }}?"
+            },
+            "detail": {
+                "title": "Payment"
+            },
+            "currencyId": "Currency Id",
+            "bankAccountNumber": "Bank Account Number",
+            "customerId": "Customer Id",
+            "personId": "Person Id",
+            "receiptNo": "Receipt No",
+            "depositIdentifier": "Deposit Identifier",
+            "requestIdentifier": "Request Identifier",
+            "receiptDateTime": "Receipt Date Time",
+            "receiptBody": "Receipt Body",
+            "amount": "Amount",
+            "currentAmount": "Current Amount",
+            "registerMethod": "Register Method",
+            "verified": "Verified",
+            "bank": "Bank"
+        }
+    },
+    "niopdcpaymentApp": {
+        "payment" : {
+            "created": "A new Payment is created with identifier {{ param }}",
+            "updated": "A Payment is updated with identifier {{ param }}",
+            "deleted": "A Payment is deleted with identifier {{ param }}"
+        }
+    }
+}

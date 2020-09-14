@@ -1,0 +1,28 @@
+{
+    "niopdcgatewayApp": {
+        "mainDayOilTank" : {
+            "home": {
+                "title": "حساب روز مخزن تانک",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ایجاد یا ویرایش"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Main Day Repository {{ id }}?"
+            },
+            "detail": {
+                "title": "حساب روز مخزن تانک"
+            },
+            "deductible": "کسری",
+            "addition": "سرک",
+            "day": "روز",
+            "refuelCenter": "مرکز سوخت گیری"
+        }
+    },
+    "niopdcaoApp": {
+        "mainDayOilTank" : {
+            "created": "A new Main Day Repository is created with identifier {{ param }}",
+            "updated": "A Main Day Repository is updated with identifier {{ param }}",
+            "deleted": "A Main Day Repository is deleted with identifier {{ param }}"
+        }
+    }
+}

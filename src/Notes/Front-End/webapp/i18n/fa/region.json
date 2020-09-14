@@ -1,0 +1,39 @@
+
+{
+    "niopdcgatewayApp": {
+        "region" : {
+            "home": {
+                "regionTitle": "استان",
+                "countryTitle":"کشور",
+                "title2": "تقسیمات استانی",
+                "title": "تقسیمات کشوری",
+                "createLabel":"ایجاد تقسیمات کشوری",
+                "uploadLabel":"بروزرسانی با فایل اکسل",
+                "createOrEditLabel":"ویرایش تقسیمات کشوری",
+                "view":"نمایش تقسیمات کشوری"
+            },
+            "delete": {
+                "question": "آیا برای حذف {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "تقسیمات کشوری"
+            },
+            "create-excel": "بارگذاری اکسل",
+            "name": "نام",
+            "code": "کد",
+            "level": "Level",
+            "globalCode": "کد اختصاصی",
+            "subRegion": "شهر ها",
+            "location": "ناحیه",
+            "parent": "استان",
+            "country": "کشور"
+        }
+    },
+    "niopdcbaseApp": {
+        "region" : {
+            "created": "تقسیمات کشوری با موفقیت ایجاد شد.",
+            "updated": "تقسیمات کشوری با موفقیت ویرایش شد.",
+            "deleted": "تقسیمات کشوری با موفقیت حذف شد."
+        }
+    }
+}

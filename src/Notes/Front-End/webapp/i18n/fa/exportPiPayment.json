@@ -1,0 +1,40 @@
+
+{
+    "niopdcgatewayApp": {
+        "exportPiPayment" : {
+            "home": {
+                "title": "فیش های پروفرم",
+                "exportPiTitle": "پروفرم"
+            },
+            "delete": {
+                "question": "آیا برای حذف این فیش  مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "فیش های پروفرم"
+            },
+            "paymentId": "Payment Id",
+            "price": "مبلغ(ریال)",
+            "sanaRate": "نرخ سنا",
+            "sanaRateBuy": "نرخ سنا خرید",
+            "sanaRateSell": "نرخ سنا فروش",
+            "registerDate": "تاریخ واریز",
+            "receiptNo": "شماره رسید",
+            "hashCode": "Hash Code",
+            "exportPi": "Export Pi",
+            "percent": "درصد",
+            "avgSanaRate": "نرخ کلی سنا",
+            "sumPrice": "جمع مبلغ(ریال)",
+            "sumPriceCurrency": "معادل نرخ ارزی",
+            "quota": "سهم",
+            "baseRate": "نرخ ارزی",
+            "value": "معادل"
+        }
+    },
+    "niopdcbaseApp": {
+        "exportPiPayment" : {
+            "created": " فیش پروفرم با موفقیت ایجاد شد.",
+            "updated": "فیش پروفرم با موفقیت ویرایش شد.",
+            "deleted": "فیش پروفرم با موفقیت حذف شد."
+        }
+    }
+}

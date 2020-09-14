@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "AirplaneType" : {
+            "null":"",
+            "PASSENGER": "مسافربری",
+            "FREIGHT": "باربری"
+        }
+    }
+}

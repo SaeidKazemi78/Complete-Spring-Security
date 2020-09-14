@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "NozzleProductType" : {
+            "null": "",
+            "PETROL": "بنزین",
+            "SUPER_PETROL": "بنزین سوپر",
+            "CNG": "CNG",
+            "GAS_OIL": "نفت گاز"
+        }
+    }
+}

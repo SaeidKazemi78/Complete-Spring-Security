@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "ReceiptMethod" : {
+            "null": "",
+            "BRANCH": "شعبه",
+            "EPAYMENT": "پرداخت اینترنتی",
+            "POS": "POS / PC-POS"
+        }
+    }
+}

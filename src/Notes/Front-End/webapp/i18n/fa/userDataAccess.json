@@ -1,0 +1,34 @@
+
+{
+    "niopdcgatewayApp": {
+        "userDataAccess": {
+            "home": {
+                "title": "دسترسی ها",
+                "createLabel": "ایجاد دسترسی",
+                "createOrEditLabel": "ویرایش دسترسی",
+                "view": "نمایش دسترسی"
+            },
+            "delete": {
+                "question": "آیا شما می خواهید این دسترسی حذف شود؟"
+            },
+            "detail": {
+                "title": "دسترسی"
+            },
+            "username": "نام کاربری",
+            "location": "منطقه/ناحیه",
+            "region": "تقسیمات کشوری",
+            "person": "شخص",
+            "sellContract": "قرارداد",
+            "customer": "مشتری",
+            "customerType": "نوع مشتری",
+            "contractType": "نوع قرارداد"
+        }
+    },
+    "niopdcbaseApp": {
+        "userDataAccess": {
+            "created": "دسترسی با موفقیت ایجاد شد.",
+            "updated": "دسترسی با موفقیت ویرایش شد.",
+            "deleted": "دسترسی با موفقیت حذف شد."
+        }
+    }
+}

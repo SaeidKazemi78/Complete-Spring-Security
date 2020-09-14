@@ -1,0 +1,35 @@
+
+{
+    "niopdcgatewayApp": {
+        "supply" : {
+            "home": {
+                "title": "عرضه",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ایجاد/ویرایش عرضه"
+            },
+            "delete": {
+                "question": "آیا مایلید این عرضه را حذف کنید؟"
+            },
+            "detail": {
+                "title": "عرضه"
+            },
+            "amount": "مقدار",
+            "minimumAmount": "حداقل مقدار خرید",
+            "basePrice": "قیمت پایه به دلار",
+            "broker": "نام کارگزار",
+            "telephone": "شماره تماس کارگزار",
+            "supplyDate": "تاریخ عرضه",
+            "description": "توضیحات",
+            "product": "فرآورده",
+            "depot": "محل تحویل",
+            "country": "مقصد"
+        }
+    },
+    "niopdcbaseApp": {
+        "supply" : {
+            "created": "عرضه با موفقیت ایجاد شد",
+            "updated": "عرضه با موفقیت ویرایش شد",
+            "deleted": "عرضه با موفقیت حذف شد"
+        }
+    }
+}

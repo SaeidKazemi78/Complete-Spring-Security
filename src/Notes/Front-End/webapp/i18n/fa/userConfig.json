@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "userConfig": {
+            "home": {
+                "title": "تنظیمات کاربری"
+            },
+            "delete": {
+                "question": "آیا برای حذف مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "تنظیم کاربر"
+            },
+            "username": "نام کاربری",
+            "typeOfFuelReceipt": "نحوه فروش",
+            "customer": "مشتری",
+            "depot": "مرکز سوختگیری",
+            "product": "فرآورده"
+        }
+    },
+    "niopdcbaseApp": {
+        "userConfig": {
+            "created": "تنظیمات کاربری جدید با موفقیت ایجاد شد.",
+            "updated": "تنظیمات کاربری با موفقیت ویرایش شد.",
+            "deleted": "تنظیمات کاربری با موفقیت حذف شد."
+        }
+    }
+}

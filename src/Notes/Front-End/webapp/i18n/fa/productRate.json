@@ -1,0 +1,61 @@
+{
+    "niopdcgatewayApp": {
+        "productRate": {
+            "home": {
+                "homeTitle": "خانه",
+                "productTitle": "فرآورده",
+                "containerTitle": "ظرف فرآورده",
+                "title": "نرخ فرآورده",
+                "adjustmentLabel": "تعدیل نرخ فرآورده",
+                "createLabel": "ایجاد نرخ فرآورده",
+                "createOrEditLabel": "ویرایش نرخ فرآورده",
+                "view": "نمایش نرخ فرآورده",
+                "search": "جستجو"
+            },
+            "delete": {
+                "question": "آیا برای حذف این نرخ مطمئن هستید؟"
+            },
+            "confirm": {
+                "question": "آیا برای تایید این نرخ مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "نرخ فرآورده"
+            },
+            "productId": "Product Id",
+            "containerId": "Container Id",
+            "src": "رمز فرآورده",
+            "title": "نام نرخ",
+            "special": "ويژه",
+            "price": "بهاي فرآورده",
+            "price2": "نرخ علی الحساب",
+            "galon": "گالن",
+            "hasTax": "مشمول محاسبه",
+            "isPublic": "فرآورده آزاد",
+            "startDate": "تاريخ شروع",
+            "finishDate": "تاریخ پايان",
+            "currency": "واحد پولی",
+            "currency2": "واحد پولی (نرخ علی الحساب)",
+            "product": "فرآورده",
+            "rateGroup": "گروه نرخی",
+            "regionId": "تقسیمات کشوری",
+            "locationId": "منطقه/ناحیه",
+            "customerTypeId": "نوع مشتری",
+            "rateGroupTitle": "عنوان گروه نرخی",
+            "moneyType": "واحد",
+            "rial": "ریالی",
+            "foreignExchange": "ارزی",
+            "productStep": "نرخ پلکانی فرآورده",
+            "productSrc": "رمز فرآورده",
+            "adjustmentAlert": "در صورت عدم انتخاب حواله ، تمامی حواله هایی که از این نرخ استفاده کرده اند متاثر خواهند شد.",
+            "withOutSrc": "بدون SRC"
+        }
+    },
+    "niopdcrateApp": {
+        "productRate": {
+            "created": "نرخ فرآورده با موفقیت ایجاد شد.",
+            "updated": "نرخ فرآورده با موفقیت ویرایش شد.",
+            "deleted": "نرخ با موفقیت حذف شد.",
+            "confirmed": "نرخ با موفقیت تایید شد."
+        }
+    }
+}

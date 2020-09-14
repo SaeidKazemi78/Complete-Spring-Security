@@ -1,0 +1,112 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="pspConfig.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="pspConfig.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.pspConfig.psp"
+                           for="field_psp">Psp</label>
+                    <select [disabled]="isView" class="form-control" name="psp" [(ngModel)]="pspConfig.psp"
+                            id="field_psp" required>
+                        <option value="BEHPARDAKHT">{{'niopdcgatewayApp.Psp.BEHPARDAKHT' | translate}}</option>
+                        <option value="SADAD">{{'niopdcgatewayApp.Psp.SADAD' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.psp?.dirty && editForm.controls.psp?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.psp?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group vertical-center-group">
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="active" id="field_active"
+                           [(ngModel)]="pspConfig.active"/>
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.pspConfig.active"
+                           for="field_active">Active</label>
+                    <div [hidden]="!(editForm.controls.active?.dirty && editForm.controls.active?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.active?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group vertical-center-group">
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="activeIpg"
+                           id="field_activeIpg"
+                           [(ngModel)]="pspConfig.activeIpg"/>
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.pspConfig.activeIpg"
+                           for="field_activeIpg">Active Ipg</label>
+                    <div [hidden]="!(editForm.controls.activeIpg?.dirty && editForm.controls.activeIpg?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.activeIpg?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group vertical-center-group">
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="activePos"
+                           id="field_activePos"
+                           [(ngModel)]="pspConfig.activePos"/>
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.pspConfig.activePos"
+                           for="field_activePos">Active Pos</label>
+                    <div [hidden]="!(editForm.controls.activePos?.dirty && editForm.controls.activePos?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.activePos?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.pspConfig.actionUrl"
+                           for="field_psp">Psp</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="actionUrl"
+                           id="field_actionUrl" required dir="ltr"
+                           [(ngModel)]="pspConfig.actionUrl"/>
+                    <div [hidden]="!(editForm.controls.actionUrl?.dirty && editForm.controls.actionUrl?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.actionUrl?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

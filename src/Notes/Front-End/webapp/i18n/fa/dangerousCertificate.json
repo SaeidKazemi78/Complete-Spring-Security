@@ -1,0 +1,31 @@
+
+{
+    "niopdcgatewayApp": {
+        "dangerousCertificate" : {
+            "home": {
+                "title": "کارت های حمل مواد خطرناک",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ویرایش",
+                "driverTitle":"راننده"
+            },
+            "delete": {
+                "question": "آیا برای حذف کارت حمل مواد خطرناک مطمئن هستید ؟ "
+            },
+            "detail": {
+                "title": "Dangerous Certificate"
+            },
+            "cardNumber": "شماره کارت",
+            "cardExpireDate": "تاریخ اعتبار",
+            "type": "نوع کارت",
+            "driver": "Driver",
+            "depot": "انبار صادر کننده کارت"
+        }
+    },
+    "niopdcbaseApp": {
+        "dangerousCertificate" : {
+            "created": "کارت حمل مواد خطرناک با موفقیت ایجاد شد.",
+            "updated": "کارت حمل مواد خطرناک با موفقیت ویرایش شد.",
+            "deleted": "کارت حمل مواد خطرناک با موفقیت حذف شد."
+        }
+    }
+}

@@ -1,0 +1,176 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="buyType.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.buyType.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="buyType.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.buyType.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.buyType.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.buyType.title" for="field_title">Title</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="title" id="field_title"
+                           [(ngModel)]="buyType.title" required minlength="3" maxlength="42"/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 42 }">
+                            This field cannot be longer than 42 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3" >
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.customerType.customerGroup"
+                           for="field_customerGroups">Customer Group</label>
+
+                    <p-multiSelect [options]="customerGroupOptions" [disabled]="isView" class="form-control"
+                                   id="field_customerGroups"
+                                   name="customerGroups"
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                   [(ngModel)]="buyType.customerGroups" required></p-multiSelect>
+                    <div
+                        [hidden]="!(editForm.controls.customerGroups?.dirty && editForm.controls.customerGroups?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.customerGroups?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.buyType.buyGroup"
+                           for="field_buyGroup">buy Group</label>
+                    <select [disabled]="isView"
+                            class="form-control"
+                            name="buyGroup"
+                            (ngModelChange)="buyGroupChanged($event)"
+                            [(ngModel)]="buyType.buyGroup"
+                            id="field_buyGroup" required>
+
+                        <option value="CREDIT">{{'niopdcgatewayApp.BuyGroup.CREDIT' | translate}}</option>
+                        <option value="FINANCIAL_LICENSE">{{'niopdcgatewayApp.BuyGroup.FINANCIAL_LICENSE' | translate}}
+                        </option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.buyGroup?.dirty && editForm.controls.buyGroup?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.buyGroup?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.buyType.buyTypeUsage"
+                           for="field_buyTypeUsage">Buy Type Usage</label>
+                    <select
+                        [disabled]="isView || buyType.buyGroup === buyGroup[buyGroup.CASH] || buyType.buyGroup === buyGroup[buyGroup.PREBUY] || buyType.buyGroup === buyGroup[buyGroup.QUOTA]"
+                        class="form-control" name="buyTypeUsage" [(ngModel)]="buyType.buyTypeUsage"
+                        id="field_buyTypeUsage" required>
+                        <option value="COST">{{'niopdcgatewayApp.BuyTypeUsage.COST' | translate}}</option>
+                        <option value="PRODUCT">{{'niopdcgatewayApp.BuyTypeUsage.PRODUCT' | translate}}</option>
+                        <option value="BOTH">{{'niopdcgatewayApp.BuyTypeUsage.BOTH' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.buyTypeUsage?.dirty && editForm.controls.buyTypeUsage?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.buyTypeUsage?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row"
+             *ngIf="buyType.buyGroup !== buyGroup[buyGroup.CASH] && buyType.buyGroup !== buyGroup[buyGroup.PREBUY] && buyType.buyGroup !== buyGroup[buyGroup.QUOTA]">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.buyType.typeEffect"
+                           for="field_typeEffect">Type Effect</label>
+                    <select [disabled]="isView" class="form-control" name="typeEffect" [(ngModel)]="buyType.typeEffect"
+                            id="field_typeEffect">
+                        <option value="CREDIT">{{'niopdcgatewayApp.TypeEffect.CREDIT' | translate}}</option>
+                        <option value="BOTH">{{'niopdcgatewayApp.TypeEffect.BOTH' | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.buyType.effectDate"
+                           for="field_effectDate">Effect Date</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="effectDate"
+                           id="field_effectDate"
+                           [numeric]="{min:1,max:9999}"
+                           [(ngModel)]="buyType.effectDate"/>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group vertical-center-group">
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="sellLimit"
+                           id="field_sellLimit"
+                           [(ngModel)]="buyType.sellLimit"/>
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.buyType.sellLimit"
+                           for="field_sellLimit">Sell Limit</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div *ngIf="buyType.typeEffect=='CREDIT'|| buyType.typeEffect=='BOTH'" class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.buyType.minCredit"
+                           for="field_minCredit">minCredit</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="minCredit" id="field_minCredit"
+                           [(ngModel)]="buyType.minCredit"/>
+                </div>
+            </div>
+            <div *ngIf="buyType.typeEffect=='AMOUNT'|| buyType.typeEffect=='BOTH'" class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.buyType.minAmount"
+                           for="field_minAmount">minAmount</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="minAmount" id="field_minAmount"
+                           [(ngModel)]="buyType.minAmount"/>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

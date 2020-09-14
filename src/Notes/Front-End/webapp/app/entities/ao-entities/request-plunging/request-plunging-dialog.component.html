@@ -1,0 +1,74 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="requestPlunging.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.requestPlunging.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="requestPlunging.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.requestPlunging.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.requestPlunging.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.requestPlunging.requestDate"
+                           for="field_requestDate">Request Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disableTime]="true" [disabled]="isView" [rtlActive]="true" time="00:00:00"
+                                            id="field_requestDate"
+                                            class="form-control"
+                                            name="requestDate" [(ngModel)]="requestPlunging.requestDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div [hidden]="!(editForm.controls.requestDate?.dirty && editForm.controls.requestDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.requestDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.requestDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6" style="text-align: center;margin-top: auto">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.requestPlunging.isSend"
+                           for="field_isSend">Is Send</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="isSend" id="field_isSend"
+                           [(ngModel)]="requestPlunging.isSend"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.requestPlunging.description"
+                           for="field_description">Description</label>
+                    <textarea [disabled]="isView" type="text" class="form-control" name="description"
+                              id="field_description"
+                              [(ngModel)]="requestPlunging.description"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

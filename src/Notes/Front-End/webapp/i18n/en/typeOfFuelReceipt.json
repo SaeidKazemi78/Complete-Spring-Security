@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "TypeOfFuelReceipt" : {
+            "null": "",
+            "TANKER_SALES": "TANKER_SALES",
+            "PIPE_LINE_SALES": "PIPE_LINE_SALES",
+            "UNIT_TO_AIRPLANE": "UNIT_TO_AIRPLANE",
+            "UNIT_TO_CUSTOMERS": "UNIT_TO_CUSTOMERS"
+        }
+    }
+}

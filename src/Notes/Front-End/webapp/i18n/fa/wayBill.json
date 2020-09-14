@@ -1,0 +1,52 @@
+{
+    "niopdcgatewayApp": {
+        "wayBill": {
+            "home": {
+                "title": "بارنامه های ارسالی",
+                "titleReceived": "بارنامه های دریافتی",
+                "createLabel": "ایجاد بارنامه",
+                "createOrEditLabel": "ویرایش بارنامه",
+                "dayDepotTitle": "مخزن"
+            },
+            "delete": {
+                "question": "آیا برای حذف بارنامه مطمئن هستید ؟ "
+            },
+            "detail": {
+                "title": "بارنامه"
+            },
+            "registerDate": "تاریخ ایجاد",
+            "wayBillNumber": "شماره بارنامه",
+            "natureAmount": "مقدار طبیعی",
+            "sixtyAmount": "مقدار 60 درجه",
+            "specialWeight": "وزن مخصوص",
+            "environmentTemperature": "دمای محیط",
+            "productTemperature": "دمای فرآورده",
+            "sourceDepotId": "انبار مبدا",
+            "targetDepotId": "انبار مقصد",
+            "driverId": "راننده",
+            "carId": "نفت کش",
+            "personId": "پیمانکار",
+            "routeId": "مسیر",
+            "transferFuelType": "نوع انتقال",
+            "wayBillType": "نوع بارنامه",
+            "description": "توضیحات",
+            "dayDepot": "مخزن",
+            "weight":"وزن",
+            "receivedWeight":"وزن دریافتی",
+            "receivedNatureAmount":"مقدار طبیعی دریافتی",
+            "receivedSixtyAmount":"مقدار 60 درجه دریافتی",
+            "receivedSpecialWeight":"وزن مخصوص دریافتی",
+            "receivedEnvironmentTemperature":"دمای محیط دریافتی",
+            "receivedProductTemperature":"دمای فرآورده دریافتی",
+            "differenceAmount": "مابه تفاوت مقدار طبیعی",
+            "differenceSixtyAmount": "مابه تفاوت مقدار شصت درجه"
+        }
+    },
+    "niopdcaoApp": {
+        "wayBill": {
+            "created": "بارنامه با موفقیت ایجاد شد.",
+            "updated": "بارنامه با موفقیت ویرایش شد.",
+            "deleted": "بارنامه با موفقیت حذف شد."
+        }
+    }
+}

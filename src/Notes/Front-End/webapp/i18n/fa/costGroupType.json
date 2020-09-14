@@ -1,0 +1,13 @@
+{
+    "niopdcgatewayApp": {
+        "CostGroupType" : {
+            "null": "",
+            "CASH": "نقدی",
+            "LADDER": "کارمزد پلکانی",
+            "ENCOURAGEMENT": "کارمزد تشویقی",
+            "SUPPLEMENT": "کارمزد متمم",
+            "ALPHA":"آلفا",
+            "WAGE":"کارمزد"
+        }
+    }
+}

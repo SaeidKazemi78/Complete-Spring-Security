@@ -1,0 +1,35 @@
+
+{
+    "niopdcgatewayApp": {
+        "voucherItem" : {
+            "home": {
+                "title": "Voucher Items",
+                "createLabel": "Create a new Voucher Item",
+                "createOrEditLabel": "Create or edit a Voucher Item"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Voucher Item {{ id }}?"
+            },
+            "detail": {
+                "title": "Voucher Item"
+            },
+            "rowNo": "Row No",
+            "extra": "Extra",
+            "special": "Special",
+            "credit": "Credit",
+            "debit": "Debit",
+            "description": "Description",
+            "accountNo": "Account No",
+            "suffix": "Suffix",
+            "key": "Key",
+            "voucherMaster": "Voucher Master"
+        }
+    },
+    "niopdcaccountingApp": {
+        "voucherItem" : {
+            "created": "A new Voucher Item is created with identifier {{ param }}",
+            "updated": "A Voucher Item is updated with identifier {{ param }}",
+            "deleted": "A Voucher Item is deleted with identifier {{ param }}"
+        }
+    }
+}

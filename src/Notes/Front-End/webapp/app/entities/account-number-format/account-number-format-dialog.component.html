@@ -1,0 +1,141 @@
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="accountNumberFormat.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="accountNumberFormat.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit"itemPart>
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+        <div class="form-group" class="col-md-4">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.accountNumberFormat.title" for="field_title">Title</label>
+            <input [disabled]="isView" type="text" class="form-control" name="title" id="field_title"
+                   [(ngModel)]="accountNumberFormat.title"  />
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.accountNumberFormat.part1" for="field_part1">Part 1</label>
+                    <select [disabled]="isView"  class="form-control" id="field_part1_data" name="Part1_data" (change)="partChanges()" [(ngModel)]="accountNumberFormat.part1" >
+                        <option [ngValue]="itemPart.content" *ngFor="let itemPart of itemPart1; trackBy: trackAccountNumber">{{itemPart.title}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.accountNumberFormat.part2" for="field_part2">Part 2</label>
+                    <select [disabled]="isView"  class="form-control" id="field_part2_data" name="Part2_data" [(ngModel)]="accountNumberFormat.part2" (change)="partChanges()" >
+                        <option [ngValue]="itemPart.content" *ngFor="let itemPart of itemPart2; trackBy: trackAccountNumber">{{itemPart.title}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.accountNumberFormat.part3" for="field_part3">Part 3</label>
+                    <select [disabled]="isView"  class="form-control" id="field_part3_data" name="Part3_data" [(ngModel)]="accountNumberFormat.part3" (change)="partChanges()">
+                        <option [ngValue]="itemPart.content" *ngFor="let itemPart of itemPart3; trackBy: trackAccountNumber">{{itemPart.title}}</option>
+                        <option value="[COST]">{{'niopdcgatewayApp.accountNumberFormat.COST' | translate}}</option>
+                        <option value="[CUSTOMER]">{{'niopdcgatewayApp.accountNumberFormat.CUSTOMER' | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.accountNumberFormat.part4" for="field_part4">Part 4</label>
+                    <select [disabled]="isView"  class="form-control" id="field_part4_data" name="Part4_data" [(ngModel)]="accountNumberFormat.part4" (change)="partChanges()">
+                        <option [ngValue]="itemPart.content" *ngFor="let itemPart of itemPart4; trackBy: trackAccountNumber">{{itemPart.title}}</option>
+                        <option value="[AREA]">{{'niopdcgatewayApp.accountNumberFormat.AREA' | translate}}</option>
+                        <option value="[ZONE]">{{'niopdcgatewayApp.accountNumberFormat.ZONE' | translate}}</option>
+                    </select>
+                </div>
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="col-md-3">
+
+                <div class="form-group">
+                    <input [disabled]="isView" type="text" class="form-control" name="part1" id="field_part1"
+                        [(ngModel)]="accountNumberFormat.part1" [maxLength]="3" (change)="partChanges()" [numeric]="{min:0}" required />
+                    <div [hidden]="!(editForm.controls.part1?.dirty && editForm.controls.part1?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.part1?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input [disabled]="isView" type="text" class="form-control" name="part2" id="field_part2"
+                        [(ngModel)]="accountNumberFormat.part2" [maxLength]="3" (change)="partChanges()" [numeric]="{min:0}"  required />
+                    <div [hidden]="!(editForm.controls.part2?.dirty && editForm.controls.part2?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.part2?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input [disabled]="isView" type="text" class="form-control" name="part3" id="field_part3"
+                        [(ngModel)]="accountNumberFormat.part3" [maxLength]="5" (change)="partChanges()" [numeric]="{min:0}"  required />
+                    <div [hidden]="!(editForm.controls.part3?.dirty && editForm.controls.part3?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.part3?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input [disabled]="isView" type="text" class="form-control" name="part4" id="field_part4"
+                        [(ngModel)]="accountNumberFormat.part4" [maxLength]="3" (change)="partChanges()" [numeric]="{min:0}"  required />
+                    <div [hidden]="!(editForm.controls.part4?.dirty && editForm.controls.part4?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.part4?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+                <div class="form-group" class="col-md-6">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.accountNumberFormat.format" for="field_format">Format</label>
+                    <input [disabled]="true" type="text" dir="ltr" class="form-control" name="format" id="field_format"
+                        [(ngModel)]="accountNumberFormat.format"  required />
+                    <div [hidden]="!(editForm.controls.format?.dirty && editForm.controls.format?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.format?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
+                </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

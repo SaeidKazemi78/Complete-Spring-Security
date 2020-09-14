@@ -1,0 +1,108 @@
+<div>
+    <div class="input-group">
+        <input #inp class="textInput form-control" style="border:0; height: unset;"
+               [readonly]="!disabled" [disabled]="disabled"
+               [ngModel]="(multiSelect) ? ((selects && selects.length && selects.length > 0) ? selects.length + ' مورد انتخاب شد' : 'موردی انتخاب نشده است') : (selects ? selects.title: '')"
+            (focus)="showTable()">
+        <a *ngIf="!disabled" class="input-group-append btn btn-outline-secondary rtl-btn" (click)="showTable()">
+            <span class="fa fa-search"></span>
+        </a>
+    </div>
+    <div [style.visibility]="!overlayVisible ? 'collapse' : 'visible'"
+         [style.height]="!overlayVisible ? '0' : 'none'"
+         [style.overflow]="!overlayVisible ? 'hidden' : 'visible'"
+         [style.width]="widthGrid" style="padding: 0;"
+         class="d-inline-block rounded dataGrid">
+
+        <p-dataTable [sortField]="oilTank.title" [sortOrder]="reverse ? -1 : 1"  [value]="oilTanks"
+                     [selectionMode]="multiSelect ? 'multiple' : 'single'"
+                     [(selection)]="selects"
+                     (onRowUnselect)="onSelect($event, false)"
+                     (onRowSelect)="onSelect($event, true)"
+                     [lazy]="true" [rows]="itemsPerPage" [rowsPerPageOptions]="[5,10,20,totalItems]"
+                     [paginator]="true" [responsive]="true" [stacked]="false"
+                     [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)">
+            <p-header>
+                <p-header>
+                    <button type="button" class="btn btn-info" (click)="search()">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button type="button" class=" btn btn-danger" (click)="clear()">
+                        <span class="fa fa-remove"></span>
+                    </button>
+                    <button type="button" class=" btn btn-danger" (click)="empty()">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </p-header>
+            </p-header>
+
+            <p-headerColumnGroup>
+                <p-row>
+                    <p-column [style]="{'width':'38px'}"></p-column>
+                    <p-column field="title" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.oilTank.title">Title</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="productTitle" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.oilTank.productId">Product Title</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="oilTankType" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.oilTank.oilTankType">Oil Tank Type</span>
+                        </ng-template>
+                    </p-column>
+                </p-row>
+                <p-row>
+                    <p-column></p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="title" id="field_title"
+                                   [(ngModel)]="oilTank.title"
+                                   maxlength="40"
+                            />
+                        </ng-template>
+                    </p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="productTitle‍" id="field_productTitle"
+                                   [(ngModel)]="oilTank.productTitle"
+                                   maxlength="40"
+                            />
+                        </ng-template>
+                    </p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <select class="form-control" name="oilTankType" [(ngModel)]="oilTank.oilTankType" id="field_oilTankType">
+                                <option></option>
+                                <option value="MAIN">{{'niopdcgatewayApp.oilTankType.MAIN' | translate}}</option>
+                                <option value="CONTAMINATED">{{'niopdcgatewayApp.oilTankType.CONTAMINATED' | translate}}</option>
+                                <option value="SERVICE_TANK">{{'niopdcgatewayApp.oilTankType.SERVICE_TANK' | translate}}</option>
+                                <option value="UNIT">{{'niopdcgatewayApp.oilTankType.UNIT' | translate}}</option>
+                                <option value="PLATFORM">{{'niopdcgatewayApp.oilTankType.PLATFORM' | translate}}</option>
+                                <option value="WATER_METHANOL">{{'niopdcgatewayApp.oilTankType.WATER_METHANOL' | translate}}</option>
+                                <option value="BASE_PRODUCT">{{'niopdcgatewayApp.oilTankType.BASE_PRODUCT' | translate}}</option>
+                                <option value="EARTH">{{'niopdcgatewayApp.oilTankType.EARTH' | translate}}</option>
+                                <option value="RECYCLE">{{'niopdcgatewayApp.oilTankType.RECYCLE' | translate}}</option>
+                            </select>
+                        </ng-template>
+                    </p-column>
+                </p-row>
+            </p-headerColumnGroup>
+
+            <p-column [selectionMode]="multiSelect ? 'multiple' : 'single'"></p-column>
+            <p-column field="title" [header]="'niopdcgatewayApp.oilTank.title' | translate"></p-column>
+            <p-column field="productTitle‍" [header]="'niopdcgatewayApp.oilTank.productId' | translate"></p-column>
+            <p-column field="oilTankType" [header]="'niopdcgatewayApp.oilTank.oilTankType' | translate">
+                <ng-template let-item="rowData" pTemplate="body">
+                    <span jhiTranslate="{{'niopdcgatewayApp.oilTankType.' + item.oilTankType}}">{{item.oilTankType}}</span>
+                </ng-template></p-column>
+        </p-dataTable>
+    </div>
+</div>
+
+

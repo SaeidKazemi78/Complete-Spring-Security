@@ -1,0 +1,50 @@
+
+{
+    "niopdcgatewayApp": {
+        "reportRateGroup":{
+            "home":{
+                "title": "گزارش گروه های نرخی"
+            }
+        },
+        "rateGroup" : {
+            "home": {
+                "title": "گروه نرخی فرآورده",
+                "createLabel":"ایجاد گروه نرخی فرآورده",
+                "createOrEditLabel":"ویرایش گروه نرخی فرآورده",
+                "view":"نمایش گروه نرخی فرآورده"
+            },
+            "question": {
+                "delete": "آیا برای حذف گروه نرخی فرآورده \"{{ title }}\" مطمئن هستید؟",
+                "archive": "آیا برای آرشیو گروه نرخی فرآورده \"{{ title }}\" مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "گروه نرخی فرآورده"
+            },
+            "title": "عنوان نرخ",
+            "contractType": "نوع قرارداد",
+            "rateGroupType": "نوع نرخ",
+            "regionId":"تقسیمات کشوری",
+            "locationId":"منطقه/ناحیه",
+            "customerTypeId":"نوع مشتری",
+            "contractTypeId":"نوع قرارداد",
+            "foreignExchange":"ریالی",
+            "product": "نوع فرآورده مجاز",
+            "archive":"آرشیو",
+            "rateTitle":"توضیح عنوان",
+            "vehicleModelType":"نوع وسیله نقلیه",
+            "step":"پلکان فرآورده",
+            "rateDifference":"فرآورده آزاد",
+            "niopdcBankAccountType": "نوع حساب"
+
+        }
+    },
+    "niopdcrateApp": {
+        "rateGroup" : {
+            "created": "گروه نرخی فرآورده با موفقیت ایجاد شد.",
+            "updated": "گروه نرخی فرآورده با موفقیت ویرایش شد.",
+            "deleted": "گروه نرخی فرآورده با موفقیت حذف شد.",
+            "archive": "گروه نرخی فرآورده با موفقیت آرشیو شد.",
+            "empty": "هیچ گروه نرخی یافت نشد."
+        }
+    }
+}

@@ -1,0 +1,10 @@
+
+{
+    "niopdcgatewayApp": {
+        "ProductRateDifferenceStatus" : {
+            "null":"",
+            "DRAFT": "پیش نویس",
+            "PAID": "پرداخت شده"
+        }
+    }
+}

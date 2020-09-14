@@ -1,0 +1,74 @@
+<form  name="executeQueryForm" (ngSubmit)="confirmDelete(voucherTemplate.id)" #editForm="ngForm">
+    <div class="modal-header">
+        <h4 class="modal-title" jhiTranslate="entity.executeQuery.title">Confirm executeQuery operation</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row" >
+            <div class="col-md-6" *ngIf="parameterDate">
+                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.baseQuery.date"
+                       for="field_date">Date</label>
+                <div class="d-flex">
+                    <ng2-datetimepicker [disableTime]="true" [rtlActive]="true"
+                                        id="field_date"
+                                        class="form-control"
+                                        name="date"
+                                        [(ngModel)]="date"
+                    >
+                    </ng2-datetimepicker>
+                </div>
+            </div>
+            <div class="col-md-6" *ngIf="parameterLocation">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.baseQuery.location"
+                           for="field_location">Location</label>
+                    <input-location-selector
+                        [idSelector]="true"
+                        [oneSelection]="true"
+                        [selectByPriority]="true"
+                        class="form-control" id="field_location" name="location"
+                        [(ngModel)]="locationId"
+                    >
+                    </input-location-selector>
+                </div>
+            </div>
+            <div class="col-md-6" *ngIf="parameterStartDate">
+                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.baseQuery.startDate"
+                       for="field_startDate">Date</label>
+                <div class="d-flex">
+                    <ng2-datetimepicker [disableTime]="true" [rtlActive]="true"
+                                        id="field_startDate"
+                                        class="form-control"
+                                        name="startDate"
+                                        [(ngModel)]="startDate"
+                    >
+                    </ng2-datetimepicker>
+                </div>
+            </div>
+            <div class="col-md-6" *ngIf="parameterFinishDate">
+                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.baseQuery.finishDate"
+                       for="field_finishDate">Date</label>
+                <div class="d-flex">
+                    <ng2-datetimepicker [disableTime]="true" [rtlActive]="true"
+                                        id="field_finishDate"
+                                        class="form-control"
+                                        name="finishDate"
+                                        [(ngModel)]="finishDate"
+                    >
+                    </ng2-datetimepicker>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-check"></span>&nbsp;<span jhiTranslate="entity.action.executeQuery">executeQuery</span>
+        </button>
+    </div>
+</form>

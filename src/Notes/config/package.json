@@ -1,0 +1,21 @@
+{
+  "name": "niopdcbase",
+  "version": "0.0.0",
+  "description": "Description for niopdcbase",
+  "private": true,
+  "license": "UNLICENSED",
+  "cacheDirectories": [
+    "node_modules"
+  ],
+  "devDependencies": {
+    "generator-jhipster-debian-packager": "1.0.1",
+    "generator-jhipster-docker": "2.4.0",
+    "generator-jhipster-mssql": "2.1.2"
+  },
+  "engines": {
+    "node": ">=6.9.0"
+  },
+  "dependencies": {
+    "generator-jhipster-entity-audit": "3.1.0"
+  }
+}

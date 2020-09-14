@@ -1,0 +1,37 @@
+
+{
+    "niopdcgatewayApp": {
+        "orderProduct" : {
+            "home": {
+                "title": "Order Products",
+                "createLabel": "Create a new Order Product",
+                "createOrEditLabel": "Create or edit a Order Product"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Order Product {{ id }}?"
+            },
+            "detail": {
+                "title": "Order Product"
+            },
+            "sellContractProductId": "Sell Contract Product Id",
+            "productId": "Product Id",
+            "rateGroupId": "Rate Group Id",
+            "totalPrice": "Total Price",
+            "basePrice": "Base Price",
+            "productRatePrice": "Product Rate Price",
+            "productRateId": "Product Rate Id",
+            "containerRateId": "Container Rate Id",
+            "containerRatePrice": "Container Rate Price",
+            "costPrice": "Cost Price",
+            "amount": "Amount",
+            "order": "Order"
+        }
+    },
+    "niopdcorderApp": {
+        "orderProduct" : {
+            "created": "A new Order Product is created with identifier {{ param }}",
+            "updated": "A Order Product is updated with identifier {{ param }}",
+            "deleted": "A Order Product is deleted with identifier {{ param }}"
+        }
+    }
+}

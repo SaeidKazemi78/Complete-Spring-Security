@@ -1,0 +1,41 @@
+{
+    "niopdcgatewayApp": {
+        "customerType": {
+            "home": {
+                "title": "نوع مشتری",
+                "createLabel": "ایجاد نوع مشتری",
+                "createOrEditLabel": "ویرایش نوع مشتری",
+                "view": "نمایش نوع مشتری",
+                "CreateType": "ايجاد نوع مشتري"
+            },
+            "delete": {
+                "question": "آیا برای حذف نوع مشتری \"{{ id }}\" مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "نوع مشتری"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "locationType": "نوع موقعیت",
+            "customerGroup": "گروه مشتری",
+            "taxExempt": "معاف از مالیات",
+            "taxExemptTrue": "هست",
+            "taxExemptFalse": "نیست",
+            "customerCodeTitle": "عنوان کد مشتری",
+            "customerTypeIgnore": "نادیده گرفتن کد پستی",
+            "active": "فعال",
+            "activeTrue": "فعال",
+            "activeFalse": "غیر فعال",
+            "hasGsId": "ارتباط با سامانه هوشمند",
+            "manualQuota": "ثبت سهمیه به صورت دستی",
+            "iranian": "ایرانی"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerType": {
+            "created": "نوع مشتری با موفقیت ایجاد شد.",
+            "updated": "نوع مشتری با موفقیت ویرایش شد.",
+            "deleted": "نوع مشتری با موفقیت حذف شد."
+        }
+    }
+}

@@ -1,0 +1,31 @@
+
+{
+    "niopdcgatewayApp": {
+        "credit" : {
+            "home": {
+                "title": "Credits",
+                "createLabel": "Create a new Credit",
+                "createOrEditLabel": "Create or edit a Credit"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Credit {{ id }}?"
+            },
+            "detail": {
+                "title": "Credit"
+            },
+            "title": "Title",
+            "creditType": "Credit Type",
+            "effectDate": "Effect Date",
+            "creditUse": "Credit Use",
+            "typeEffect": "Type Effect",
+            "sellLimit": "Sell Limit"
+        }
+    },
+    "niopdcbaseApp": {
+        "credit" : {
+            "created": "A new Credit is created with identifier {{ param }}",
+            "updated": "A Credit is updated with identifier {{ param }}",
+            "deleted": "A Credit is deleted with identifier {{ param }}"
+        }
+    }
+}

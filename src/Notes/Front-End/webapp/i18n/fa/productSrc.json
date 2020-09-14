@@ -1,0 +1,44 @@
+{
+    "niopdcgatewayApp": {
+        "productSrc": {
+            "home": {
+                "title": "کد  src فرآورده",
+                "productTitle": "فرآورده",
+                "createLabel": "ایجاد کد src فرآورده",
+                "createOrEditLabel": "ویرایش کد src فرآورده",
+                "view": "نمایش کد src فرآورده"
+            },
+            "delete": {
+                "question": "آیا برای حذف کد src   {{ src }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "کد src فرآورده"
+            },
+            "src": "کد src ",
+            "active": "فعال؟",
+            "activeTrue": "فعال",
+            "activeFalse": "فعال",
+            "productTitle": "فرآورده",
+            "startDate": "تاریخ شروع",
+            "finishDate": "تاریخ پایان",
+            "ratePrice": "مبلغ",
+            "type": "نوع"
+        },
+        "SrcType": {
+            "NORMAL": "عادی",
+            "PUMP_NOZZLE": "تلمبه/عرضه",
+            "TRANSHIP": "بازارچه",
+            "IRANIAN_BACK": "باک ایرانی",
+            "FOREIGN_BACK": "باک خارجی",
+            "EXPORT": "صادراتی"
+        }
+    },
+    "niopdcrateApp": {
+        "productSrc": {
+            "created": "کد src فرآورده با موفقیت  ایجاد شد.",
+            "updated": "کد src فرآورده با موفقیت  ویرایش شد.",
+            "deleted": "کد src فرآورده با موفقیت  حذف شد.",
+            "exist": "رمز فرآورده باز در سیستم وجود دارد"
+        }
+    }
+}

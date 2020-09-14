@@ -1,0 +1,29 @@
+{
+    "niopdcgatewayApp": {
+        "pspConfig": {
+            "home": {
+                "title": "تنظیمات psp"
+            },
+            "delete": {
+                "question": "آیا برای تنظیمات psp {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "تنظیمات psp"
+            },
+            "psp": "psp",
+            "active": "فعال",
+            "activeTrue": "فعال",
+            "activeFalse": "غیر فعال",
+            "activeIpg": "وضعیت ipg",
+            "activePos": "Pos وضعیت",
+            "actionUrl": "آدرس درگاه پرداخت اینترنتی"
+        }
+    },
+    "niopdcpaymentApp": {
+        "pspConfig": {
+            "created": "تنظیمات psp با موفقیت ایجاد شد.",
+            "updated": "تنظیمات psp با موفقیت ویرایش شد.",
+            "deleted": "تنظیمات psp با موفقیت حذف شد."
+        }
+    }
+}

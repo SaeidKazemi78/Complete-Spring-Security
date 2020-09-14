@@ -1,0 +1,12 @@
+{
+    "niopdcgatewayApp": {
+        "ContractType" : {
+            "null": "",
+            "SUPPLY_CHANNEL": "SUPPLY_CHANNEL",
+            "EXPORT": "EXPORT",
+            "MILITARY": "MILITARY",
+            "EXCHANGE": "EXCHANGE",
+            "CONSUMER": "CONSUMER"
+        }
+    }
+}

@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "niopdcBankAccount" : {
+            "home": {
+                "title": "Niopdc Bank Accounts",
+                "createLabel": "Create a new Niopdc Bank Account",
+                "createOrEditLabel": "Create or edit a Niopdc Bank Account"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Niopdc Bank Account {{ id }}?"
+            },
+            "detail": {
+                "title": "Niopdc Bank Account"
+            },
+            "title": "Title",
+            "accountNumber": "Account Number",
+            "bankAccountType": "Bank Account Type"
+        }
+    },
+    "niopdcpaymentApp": {
+        "niopdcBankAccount" : {
+            "created": "A new Niopdc Bank Account is created with identifier {{ param }}",
+            "updated": "A Niopdc Bank Account is updated with identifier {{ param }}",
+            "deleted": "A Niopdc Bank Account is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "NozzleProductType" : {
+            "null": "",
+            "PETROL": "PETROL",
+            "SUPER_PETROL": "SUPER_PETROL",
+            "CNG": "CNG",
+            "GAS_OIL": "GAS_OIL"
+        }
+    }
+}

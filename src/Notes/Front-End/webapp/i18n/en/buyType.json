@@ -1,0 +1,32 @@
+
+{
+    "niopdcgatewayApp": {
+        "buyType" : {
+            "home": {
+                "title": "Buy Types",
+                "createLabel": "Create a new Buy Type",
+                "createOrEditLabel": "Create or edit a Buy Type"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Buy Type {{ id }}?"
+            },
+            "detail": {
+                "title": "Buy Type"
+            },
+            "title": "Title",
+            "buyGroup": "Buy Group",
+            "effectDate": "Effect Date",
+            "buyTypeUsage": "Buy Type Usage",
+            "typeEffect": "Type Effect",
+            "sellLimit": "Sell Limit",
+            "sellContractProduct": "Sell Contract Product"
+        }
+    },
+    "niopdcbaseApp": {
+        "buyType" : {
+            "created": "A new Buy Type is created with identifier {{ param }}",
+            "updated": "A Buy Type is updated with identifier {{ param }}",
+            "deleted": "A Buy Type is deleted with identifier {{ param }}"
+        }
+    }
+}

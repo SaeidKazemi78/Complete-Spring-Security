@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="LegalPersonService" targetNamespace="http://tempuri.org/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex"
+                  xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+                  xmlns:wsa10="http://www.w3.org/2005/08/addressing"
+                  xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+                  xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy"
+                  xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+                  xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tempuri.org/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://tempuri.org/Imports">
+            <xsd:import
+                schemaLocation="http://registerorgwcf.ilenc.ir/LegalPersonService/LegalPersonService.svc?xsd=xsd0"
+                namespace="http://tempuri.org/"/>
+            <xsd:import
+                schemaLocation="http://registerorgwcf.ilenc.ir/LegalPersonService/LegalPersonService.svc?xsd=xsd1"
+                namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+            <xsd:import
+                schemaLocation="http://registerorgwcf.ilenc.ir/LegalPersonService/LegalPersonService.svc?xsd=xsd2"
+                namespace="http://schemas.datacontract.org/2004/07/ilenc.NationalCodeWCF.LegalPersonService"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="ILegalPersonService_InquiryByNationalCode_InputMessage">
+        <wsdl:part name="parameters" element="tns:InquiryByNationalCode"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquiryByNationalCode_OutputMessage">
+        <wsdl:part name="parameters" element="tns:InquiryByNationalCodeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquiryByName_InputMessage">
+        <wsdl:part name="parameters" element="tns:InquiryByName"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquiryByName_OutputMessage">
+        <wsdl:part name="parameters" element="tns:InquiryByNameResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquiryByArchiveName_InputMessage">
+        <wsdl:part name="parameters" element="tns:InquiryByArchiveName"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquiryByArchiveName_OutputMessage">
+        <wsdl:part name="parameters" element="tns:InquiryByArchiveNameResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquiryBySpecialDateOnlyFromUserCreatedDate_InputMessage">
+        <wsdl:part name="parameters" element="tns:InquiryBySpecialDateOnlyFromUserCreatedDate"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquiryBySpecialDateOnlyFromUserCreatedDate_OutputMessage">
+        <wsdl:part name="parameters" element="tns:InquiryBySpecialDateOnlyFromUserCreatedDateResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_ValidateOnlyByNationalCode_InputMessage">
+        <wsdl:part name="parameters" element="tns:ValidateOnlyByNationalCode"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_ValidateOnlyByNationalCode_OutputMessage">
+        <wsdl:part name="parameters" element="tns:ValidateOnlyByNationalCodeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_ValidateOnlyByName_InputMessage">
+        <wsdl:part name="parameters" element="tns:ValidateOnlyByName"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_ValidateOnlyByName_OutputMessage">
+        <wsdl:part name="parameters" element="tns:ValidateOnlyByNameResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_ValidateOnlyByArchiveName_InputMessage">
+        <wsdl:part name="parameters" element="tns:ValidateOnlyByArchiveName"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_ValidateOnlyByArchiveName_OutputMessage">
+        <wsdl:part name="parameters" element="tns:ValidateOnlyByArchiveNameResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_ValidateCompareNationalCodeAndName_InputMessage">
+        <wsdl:part name="parameters" element="tns:ValidateCompareNationalCodeAndName"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_ValidateCompareNationalCodeAndName_OutputMessage">
+        <wsdl:part name="parameters" element="tns:ValidateCompareNationalCodeAndNameResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquirySpecialByNationalCode_InputMessage">
+        <wsdl:part name="parameters" element="tns:InquirySpecialByNationalCode"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquirySpecialByNationalCode_OutputMessage">
+        <wsdl:part name="parameters" element="tns:InquirySpecialByNationalCodeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquirySpecialByName_InputMessage">
+        <wsdl:part name="parameters" element="tns:InquirySpecialByName"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquirySpecialByName_OutputMessage">
+        <wsdl:part name="parameters" element="tns:InquirySpecialByNameResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquirySpecialByArchiveName_InputMessage">
+        <wsdl:part name="parameters" element="tns:InquirySpecialByArchiveName"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquirySpecialByArchiveName_OutputMessage">
+        <wsdl:part name="parameters" element="tns:InquirySpecialByArchiveNameResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquiryByNationalCodeForSpecificUnit_InputMessage">
+        <wsdl:part name="parameters" element="tns:InquiryByNationalCodeForSpecificUnit"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquiryByNationalCodeForSpecificUnit_OutputMessage">
+        <wsdl:part name="parameters" element="tns:InquiryByNationalCodeForSpecificUnitResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquiryByNameForSpecificUnit_InputMessage">
+        <wsdl:part name="parameters" element="tns:InquiryByNameForSpecificUnit"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquiryByNameForSpecificUnit_OutputMessage">
+        <wsdl:part name="parameters" element="tns:InquiryByNameForSpecificUnitResponse"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquiryByArchiveNameForSpecificUnit_InputMessage">
+        <wsdl:part name="parameters" element="tns:InquiryByArchiveNameForSpecificUnit"/>
+    </wsdl:message>
+    <wsdl:message name="ILegalPersonService_InquiryByArchiveNameForSpecificUnit_OutputMessage">
+        <wsdl:part name="parameters" element="tns:InquiryByArchiveNameForSpecificUnitResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="ILegalPersonService">
+        <wsdl:operation name="InquiryByNationalCode">
+            <wsdl:input wsaw:Action="http://tempuri.org/ILegalPersonService/InquiryByNationalCode"
+                        message="tns:ILegalPersonService_InquiryByNationalCode_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ILegalPersonService/InquiryByNationalCodeResponse"
+                         message="tns:ILegalPersonService_InquiryByNationalCode_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="InquiryByName">
+            <wsdl:input wsaw:Action="http://tempuri.org/ILegalPersonService/InquiryByName"
+                        message="tns:ILegalPersonService_InquiryByName_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ILegalPersonService/InquiryByNameResponse"
+                         message="tns:ILegalPersonService_InquiryByName_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="InquiryByArchiveName">
+            <wsdl:input wsaw:Action="http://tempuri.org/ILegalPersonService/InquiryByArchiveName"
+                        message="tns:ILegalPersonService_InquiryByArchiveName_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ILegalPersonService/InquiryByArchiveNameResponse"
+                         message="tns:ILegalPersonService_InquiryByArchiveName_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="InquiryBySpecialDateOnlyFromUserCreatedDate">
+            <wsdl:input wsaw:Action="http://tempuri.org/ILegalPersonService/InquiryBySpecialDateOnlyFromUserCreatedDate"
+                        message="tns:ILegalPersonService_InquiryBySpecialDateOnlyFromUserCreatedDate_InputMessage"/>
+            <wsdl:output
+                wsaw:Action="http://tempuri.org/ILegalPersonService/InquiryBySpecialDateOnlyFromUserCreatedDateResponse"
+                message="tns:ILegalPersonService_InquiryBySpecialDateOnlyFromUserCreatedDate_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="ValidateOnlyByNationalCode">
+            <wsdl:input wsaw:Action="http://tempuri.org/ILegalPersonService/ValidateOnlyByNationalCode"
+                        message="tns:ILegalPersonService_ValidateOnlyByNationalCode_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ILegalPersonService/ValidateOnlyByNationalCodeResponse"
+                         message="tns:ILegalPersonService_ValidateOnlyByNationalCode_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="ValidateOnlyByName">
+            <wsdl:input wsaw:Action="http://tempuri.org/ILegalPersonService/ValidateOnlyByName"
+                        message="tns:ILegalPersonService_ValidateOnlyByName_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ILegalPersonService/ValidateOnlyByNameResponse"
+                         message="tns:ILegalPersonService_ValidateOnlyByName_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="ValidateOnlyByArchiveName">
+            <wsdl:input wsaw:Action="http://tempuri.org/ILegalPersonService/ValidateOnlyByArchiveName"
+                        message="tns:ILegalPersonService_ValidateOnlyByArchiveName_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ILegalPersonService/ValidateOnlyByArchiveNameResponse"
+                         message="tns:ILegalPersonService_ValidateOnlyByArchiveName_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="ValidateCompareNationalCodeAndName">
+            <wsdl:input wsaw:Action="http://tempuri.org/ILegalPersonService/ValidateCompareNationalCodeAndName"
+                        message="tns:ILegalPersonService_ValidateCompareNationalCodeAndName_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ILegalPersonService/ValidateCompareNationalCodeAndNameResponse"
+                         message="tns:ILegalPersonService_ValidateCompareNationalCodeAndName_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="InquirySpecialByNationalCode">
+            <wsdl:input wsaw:Action="http://tempuri.org/ILegalPersonService/InquirySpecialByNationalCode"
+                        message="tns:ILegalPersonService_InquirySpecialByNationalCode_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ILegalPersonService/InquirySpecialByNationalCodeResponse"
+                         message="tns:ILegalPersonService_InquirySpecialByNationalCode_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="InquirySpecialByName">
+            <wsdl:input wsaw:Action="http://tempuri.org/ILegalPersonService/InquirySpecialByName"
+                        message="tns:ILegalPersonService_InquirySpecialByName_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ILegalPersonService/InquirySpecialByNameResponse"
+                         message="tns:ILegalPersonService_InquirySpecialByName_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="InquirySpecialByArchiveName">
+            <wsdl:input wsaw:Action="http://tempuri.org/ILegalPersonService/InquirySpecialByArchiveName"
+                        message="tns:ILegalPersonService_InquirySpecialByArchiveName_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ILegalPersonService/InquirySpecialByArchiveNameResponse"
+                         message="tns:ILegalPersonService_InquirySpecialByArchiveName_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="InquiryByNationalCodeForSpecificUnit">
+            <wsdl:input wsaw:Action="http://tempuri.org/ILegalPersonService/InquiryByNationalCodeForSpecificUnit"
+                        message="tns:ILegalPersonService_InquiryByNationalCodeForSpecificUnit_InputMessage"/>
+            <wsdl:output
+                wsaw:Action="http://tempuri.org/ILegalPersonService/InquiryByNationalCodeForSpecificUnitResponse"
+                message="tns:ILegalPersonService_InquiryByNationalCodeForSpecificUnit_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="InquiryByNameForSpecificUnit">
+            <wsdl:input wsaw:Action="http://tempuri.org/ILegalPersonService/InquiryByNameForSpecificUnit"
+                        message="tns:ILegalPersonService_InquiryByNameForSpecificUnit_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/ILegalPersonService/InquiryByNameForSpecificUnitResponse"
+                         message="tns:ILegalPersonService_InquiryByNameForSpecificUnit_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="InquiryByArchiveNameForSpecificUnit">
+            <wsdl:input wsaw:Action="http://tempuri.org/ILegalPersonService/InquiryByArchiveNameForSpecificUnit"
+                        message="tns:ILegalPersonService_InquiryByArchiveNameForSpecificUnit_InputMessage"/>
+            <wsdl:output
+                wsaw:Action="http://tempuri.org/ILegalPersonService/InquiryByArchiveNameForSpecificUnitResponse"
+                message="tns:ILegalPersonService_InquiryByArchiveNameForSpecificUnit_OutputMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="BasicHttpBinding_ILegalPersonService" type="tns:ILegalPersonService">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="InquiryByNationalCode">
+            <soap:operation soapAction="http://tempuri.org/ILegalPersonService/InquiryByNationalCode" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="InquiryByName">
+            <soap:operation soapAction="http://tempuri.org/ILegalPersonService/InquiryByName" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="InquiryByArchiveName">
+            <soap:operation soapAction="http://tempuri.org/ILegalPersonService/InquiryByArchiveName" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="InquiryBySpecialDateOnlyFromUserCreatedDate">
+            <soap:operation
+                soapAction="http://tempuri.org/ILegalPersonService/InquiryBySpecialDateOnlyFromUserCreatedDate"
+                style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ValidateOnlyByNationalCode">
+            <soap:operation soapAction="http://tempuri.org/ILegalPersonService/ValidateOnlyByNationalCode"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ValidateOnlyByName">
+            <soap:operation soapAction="http://tempuri.org/ILegalPersonService/ValidateOnlyByName" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ValidateOnlyByArchiveName">
+            <soap:operation soapAction="http://tempuri.org/ILegalPersonService/ValidateOnlyByArchiveName"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="ValidateCompareNationalCodeAndName">
+            <soap:operation soapAction="http://tempuri.org/ILegalPersonService/ValidateCompareNationalCodeAndName"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="InquirySpecialByNationalCode">
+            <soap:operation soapAction="http://tempuri.org/ILegalPersonService/InquirySpecialByNationalCode"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="InquirySpecialByName">
+            <soap:operation soapAction="http://tempuri.org/ILegalPersonService/InquirySpecialByName" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="InquirySpecialByArchiveName">
+            <soap:operation soapAction="http://tempuri.org/ILegalPersonService/InquirySpecialByArchiveName"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="InquiryByNationalCodeForSpecificUnit">
+            <soap:operation soapAction="http://tempuri.org/ILegalPersonService/InquiryByNationalCodeForSpecificUnit"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="InquiryByNameForSpecificUnit">
+            <soap:operation soapAction="http://tempuri.org/ILegalPersonService/InquiryByNameForSpecificUnit"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="InquiryByArchiveNameForSpecificUnit">
+            <soap:operation soapAction="http://tempuri.org/ILegalPersonService/InquiryByArchiveNameForSpecificUnit"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="LegalPersonService">
+        <wsdl:port name="BasicHttpBinding_ILegalPersonService" binding="tns:BasicHttpBinding_ILegalPersonService">
+            <soap:address location="http://registerorgwcf.ilenc.ir/LegalPersonService/LegalPersonService.svc"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

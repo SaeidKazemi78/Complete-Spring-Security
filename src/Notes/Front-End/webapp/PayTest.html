@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello PCPOS</title>
+    <script src="jquery-1.10.2.min.js"></script>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div>
+        <section id="Info">
+            <div>URLs:</div>
+            <input type="text" placeholder="URL" value="http://localhost:8000/api/Sale" id="pcpos_url" />
+            <div>Conncection Type (Lan/Serial):</div>
+            <select placeholder="Conncection Type" id="ConnectionType" onchange="change()">
+                <option value="Lan">Lan</option>
+                <option value="Serial">Serial</option>
+            </select>
+            <div id="LanSelected">
+                <div>Device (POS) Ip:</div>
+                <input type="text" placeholder="Device Ip" id="DeviceIp" />
+                <div>Device Port:</div>
+                <input type="text" placeholder="Device Port" value="8888" id="DevicePort" />
+            </div>
+            <div id="SerialSelected" style="display:none">
+                <div>Serial Port:</div>
+                <input type="text" placeholder="Serial Port" value="COMx" id="SerialPort" />
+            </div>
+            <br />
+            <!--<input type="text" placeholder="Conncection Type" value="Lan" id="ConnectionType" />-->
+            <input type="checkbox" name="Is Multi-Merchant" id="chbMultiMerchant" onchange="chbChange()" checked="checked"/>Is Multi-Merchant<br />
+            <div id="MultiMerchantDiv">
+                <div>Multi-Merchant:</div>
+                <input type="text" placeholder="Multi-Merchant" value="1:10,2:30,4:40,3:20" id="MultiMerchant" />
+                <div>Divide Type:</div>
+                <input type="text" placeholder="Divide Type" value="3" id="DivideType" />
+                <br />
+            </div>
+            <br />
+            <div>Amount:</div>
+            <input type="text" placeholder="Amount" value="10000" id="Amount" />
+            <br />
+            <button id="saleAjax">Ajax Call</button>
+            <button id="saleXHR">XHR Call</button>
+        </section>
+        <div>Result:</div>
+        <section id="result"></section>
+    </div>
+</body>
+
+<script>
+
+    function chbChange() {
+        var multiMerchantSelected = $('#chbMultiMerchant')[0].checked;
+
+        if (multiMerchantSelected) {
+            $('#MultiMerchantDiv').show();
+        }
+        else {
+            $('#MultiMerchantDiv').hide();
+        }
+    }
+
+    function change() {
+        var selected = $('#ConnectionType').val();
+
+        if (selected === "Lan") {
+            $('#LanSelected').show();
+            $('#SerialSelected').hide();
+        }
+        else {
+            $('#LanSelected').hide();
+            $('#SerialSelected').show();
+        }
+    }
+
+    var doPCPOS = function () {
+
+        var reqParams = new Object();
+        //alert($('#DeviceIp').val());
+        reqParams.ConnectionType = $('#ConnectionType').val();
+        if (reqParams.ConnectionType === "Lan") {
+        reqParams.DeviceIp = $('#DeviceIp').val();
+        reqParams.DevicePort = $('#DevicePort').val();
+        } else {
+            reqParams.SerialPort = $('#SerialPort').val();
+        }
+        var multiMerchantSelected = $('#chbMultiMerchant')[0].checked;
+        if (multiMerchantSelected) {
+            reqParams.MultiMerchant = $('#MultiMerchant').val();
+            reqParams.DivideType = $('#DivideType').val();
+        }
+        reqParams.Amount = $('#Amount').val();
+        
+        $('#result').empty();
+        $.ajax({
+            type: "post",
+            url: $('#pcpos_url').val(),
+            //url: "http://localhost:8000/api/Sale",
+            data: JSON.stringify(reqParams),
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            crossDomain: true,
+            timeout: 120 * 1000,
+            success: ajaxSuccess,
+            failure: function (errMsg) {
+                alert(errMsg);
+            }
+        });
+    }
+
+    var ajaxSuccess = function (data) {
+        $('#result').empty();
+        $('#result').append(JSON.stringify(data, null, "\t"));
+    }
+
+    function callOtherDomain() {
+
+        var reqParams = new Object();
+        //alert($('#DeviceIp').val());
+        reqParams.ConnectionType = $('#ConnectionType').val();
+        if (reqParams.ConnectionType === "Lan") {
+        reqParams.DeviceIp = $('#DeviceIp').val();
+        reqParams.DevicePort = $('#DevicePort').val();
+        } else {
+            reqParams.SerialPort = $('#DeviceIp').val();
+        }
+        var multiMerchantSelected = $('#chbMultiMerchant')[0].checked;
+        if (multiMerchantSelected) {
+            reqParams.MultiMerchant = $('#MultiMerchant').val();
+            reqParams.DivideType = $('#DivideType').val();
+        }
+        reqParams.Amount = $('#Amount').val();
+
+        var xhr = new XMLHttpRequest();
+        var url = $('#pcpos_url').val();
+        //var url = 'http://localhost:8000/api/Sale';
+        var bodyJ = JSON.stringify(reqParams);
+
+        if (xhr) {
+            xhr.open('POST', url, true);
+            //xhr.setRequestHeader('X-PINGOTHER', 'pingpong');
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.log(xhr.response); //Outputs a DOMString by default
+                    $('#result').empty();
+                    $('#result').append(xhr.response);
+                };
+            };
+            xhr.send(bodyJ);
+        }
+    }
+
+    $('#saleAjax').click(doPCPOS);
+    $('#saleXHR').click(callOtherDomain);
+
+</script>
+</html>

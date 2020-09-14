@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "ProductRateDifferenceStatus" : {
+            "null": "",
+            "DRAFT": "DRAFT",
+            "PAID": "PAID"
+        }
+    }
+}

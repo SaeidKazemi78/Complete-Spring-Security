@@ -1,0 +1,35 @@
+
+{
+    "niopdcgatewayApp": {
+        "accountNumberFormat" : {
+            "home": {
+                "title": "فرمت شماره حساب",
+                "createLabel": "ایجادفرمت شماره حساب  ",
+                "createOrEditLabel": "ویرایش فرمت شماره حساب "
+            },
+            "delete": {
+                "question": "آیا برای حذف فرمت شماره حساب  {{param}} اطمینان دارید؟"
+            },
+            "detail": {
+                "title": "فرمت شماره حساب"
+            },
+            "part1": "جزء 1",
+            "part2": "جزء 2",
+            "part3": "جزء 3",
+            "part4": "جزء 4",
+            "COST":"*حساب هزینه",
+            "CUSTOMER":"*حساب مشتری",
+            "AREA":"*منطقه",
+            "ZONE":"*ناحیه",
+            "title": "عنوان",
+            "format": "فرمت نهایی"
+        }
+    },
+    "niopdcbaseApp": {
+        "accountNumberFormat" : {
+            "created": "فرمت شماره حساب با موفقیت ایجاد شد",
+            "updated": "فرمت شماره حساب با موفقیت ویرایش شد",
+            "deleted": "فرمت شماره حساب با موفقیت حذف گردید"
+        }
+    }
+}

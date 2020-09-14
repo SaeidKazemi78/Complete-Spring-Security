@@ -1,0 +1,83 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="responsePlunging.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.responsePlunging.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="responsePlunging.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.responsePlunging.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel"
+            jhiTranslate="niopdcgatewayApp.responsePlunging.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.responsePlunging.responseDate"
+                           for="field_responseDate">Response Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disableTime]="true" [disabled]="isView" [rtlActive]="true" time="00:00:00"
+                                            id="field_responseDate"
+                                            class="form-control"
+                                            name="responseDate" [(ngModel)]="responsePlunging.responseDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div [hidden]="!(editForm.controls.responseDate?.dirty && editForm.controls.responseDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.responseDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.responseDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4" style="text-align: center;margin-top: auto">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.responsePlunging.confirm"
+                           for="field_confirm">Confirm</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="confirm" id="field_confirm"
+                           [(ngModel)]="responsePlunging.confirm"/>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4" style="text-align: center;margin-top: auto">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.responsePlunging.isSend"
+                           for="field_isSend">Is Send</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="isSend" id="field_isSend"
+                           [(ngModel)]="responsePlunging.isSend"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.responsePlunging.description"
+                           for="field_description">Description</label>
+                    <textarea [disabled]="isView" type="text" class="form-control" name="description"
+                              id="field_description"
+                              [(ngModel)]="responsePlunging.description"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

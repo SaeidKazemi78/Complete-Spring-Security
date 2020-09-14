@@ -1,0 +1,31 @@
+
+{
+    "niopdcgatewayApp": {
+        "ipFilter": {
+            "home": {
+                "title": "ای ‌پی ",
+                "createLabel": "ایجاد ای ‌پی",
+                "createOrEditLabel": "ویرایش ای ‌پی",
+                "view": "نمایش ای ‌پی"
+            },
+            "delete": {
+                "question": "آیا شما می خواهید این ای ‌پی حذف شود؟"
+            },
+            "detail": {
+                "title": "ای ‌پی"
+            },
+            "username": "نام کاربری",
+            "netMask": "نت ماسک",
+            "accessStatus": "نوع دسترسی",
+            "ip": "ای ‌پی "
+
+        }
+    },
+    "niopdcbaseApp": {
+        "IpFilter": {
+            "created": "ای ‌پی با موفقیت ایجاد شد.",
+            "updated": "ای ‌پی با موفقیت ویرایش شد.",
+            "deleted": "ای ‌پی با موفقیت حذف شد."
+        }
+    }
+}

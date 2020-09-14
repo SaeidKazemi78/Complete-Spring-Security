@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "ExportLetterStatus" : {
+            "null": "",
+            "PENDING": "در انتظار پرداخت",
+            "ACTIVE": "فعال",
+            "REVOCATION": "فسخ شده"
+        }
+    }
+}

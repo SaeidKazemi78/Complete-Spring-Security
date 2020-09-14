@@ -1,0 +1,33 @@
+
+{
+    "niopdcgatewayApp": {
+        "dayDepotContainer" : {
+            "home": {
+                "title": "Day Depot Containers",
+                "createLabel": "Create a new Day Depot Container",
+                "createOrEditLabel": "Create or edit a Day Depot Container"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Day Depot Container {{ id }}?"
+            },
+            "detail": {
+                "title": "Day Depot Container"
+            },
+            "deductible": "Deductible",
+            "addition": "Addition",
+            "systemAmount": "System Amount",
+            "startCount": "Start Count",
+            "endCount": "End Count",
+            "description": "Description",
+            "oilTankContainer": "Oil Tank Container",
+            "mainDayDepot": "Main Day Depot"
+        }
+    },
+    "niopdcaoApp": {
+        "dayDepotContainer" : {
+            "created": "A new Day Depot Container is created with identifier {{ param }}",
+            "updated": "A Day Depot Container is updated with identifier {{ param }}",
+            "deleted": "A Day Depot Container is deleted with identifier {{ param }}"
+        }
+    }
+}

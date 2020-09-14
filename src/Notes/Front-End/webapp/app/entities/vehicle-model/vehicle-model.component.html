@@ -1,0 +1,229 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <p-dataTable [sortField]="predicate" [sortOrder]="reverse ? -1 : 1"
+                 #dt [value]="vehicleModels" [lazy]="true" [rows]="itemsPerPage"
+                 [rowsPerPageOptions]="[5,10,20,totalItems]"
+                 [paginator]="true" [responsive]="true" [stacked]="false"
+                 [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)"
+                 [emptyMessage]="'global.messages.info.emptyRecords' | translate">
+        <p-header>
+            <div class="ui-helper-clearfix">
+                <button class="btn btn-primary float-right create-entity"
+                        *jhiHasAnyAuthority="['ROLE_ADMIN', 'CREATE_AIRPLANE_VEHICLE_MODEL','CREATE_BOUNDARY_VEHICLE_MODEL']"
+                        [routerLink]="['/vehicle-model', { outlets: { popup: ['new' ] } }]">
+                    <span class="fa fa-plus"></span>
+                    <span jhiTranslate="entity.action.create">Create</span>
+                </button>
+            </div>
+        </p-header>
+
+        <p-headerColumnGroup>
+            <p-row>
+                <p-column field="title" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.vehicleModel.title">Title</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="customerGroup" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.vehicleModel.customerGroup">Customer Group</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="vehicleModelType" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span
+                            jhiTranslate="niopdcgatewayApp.vehicleModel.vehicleModelType">Have Primitive Measure</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="productTitle" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span
+                            jhiTranslate="niopdcgatewayApp.vehicleModel.productTitle">Have Primitive Measure</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="capacity" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span
+                            jhiTranslate="niopdcgatewayApp.vehicleModel.capacity">Have Primitive Measure</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="confirm" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span
+                            jhiTranslate="niopdcgatewayApp.vehicleModel.confirmTrue">Have Primitive Measure</span>
+                    </ng-template>
+                </p-column>
+
+                <p-column styleClass="col-button"></p-column>
+            </p-row>
+            <p-row>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="title" id="field_title"
+                               search-after-typed (onSearch)="search()"
+                               [(ngModel)]="vehicleModel.title"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <select class="form-control" (change)="search()" name="customerGroup"
+                                [(ngModel)]="vehicleModel.customerGroup"
+                                id="field_customerGroup">
+                            <option></option>
+                            <option *jhiHasAnyAuthority="['CREATE_AIRPLANE_VEHICLE_MODEL','ROLE_ADMIN']" value="AIRPLANE">{{'niopdcgatewayApp.CustomerGroup.AIRPLANE_VEHICLE' | translate}}
+                            </option>
+                            <option *jhiHasAnyAuthority="['CREATE_BOUNDARY_VEHICLE_MODEL','ROLE_ADMIN']" value="BOUNDARY">{{'niopdcgatewayApp.CustomerGroup.BOUNDARY_VEHICLE' | translate}}
+                            </option>
+                        </select>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <select class="form-control" (change)="search()" name="vehicleModelType"
+                                [(ngModel)]="vehicleModel.vehicleModelType" id="field_vehicleModelType">
+                            <option value="">{{'niopdcgatewayApp.VehicleModelType.ALL' | translate}}</option>
+                            <option value="TRUCK" *jhiHasAnyAuthority="['CREATE_BOUNDARY_VEHICLE_MODEL','ROLE_ADMIN']" >{{'niopdcgatewayApp.VehicleModelType.TRUCK' | translate}}</option>
+                            <option value="BUS" *jhiHasAnyAuthority="['CREATE_BOUNDARY_VEHICLE_MODEL','ROLE_ADMIN']" >{{'niopdcgatewayApp.VehicleModelType.BUS' | translate}}</option>
+                            <option value="CAR" *jhiHasAnyAuthority="['CREATE_BOUNDARY_VEHICLE_MODEL','ROLE_ADMIN']" >{{'niopdcgatewayApp.VehicleModelType.CAR' | translate}}</option>
+                            <option value="AIRPLANE" *jhiHasAnyAuthority="['CREATE_AIRPLANE_VEHICLE_MODEL','ROLE_ADMIN']">{{'niopdcgatewayApp.VehicleModelType.AIRPLANE' | translate}}
+                            </option>
+                        </select>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="title" id="field_productTitle"
+                               search-after-typed (onSearch)="search()"
+                               [(ngModel)]="vehicleModel.productTitle"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="capacity" id="field_capacity"
+                               search-after-typed (onSearch)="search()"
+                               [(ngModel)]="vehicleModel.capacity"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <select class="form-control" (change)="search()" name="confirm"
+                                [(ngModel)]="vehicleModel.confirm" id="field_confirm">
+                            <option
+                                [ngValue]="null">{{'niopdcgatewayApp.vehicleModel.confirmAll' | translate}}</option>
+                            <option
+                                [ngValue]="true">{{'niopdcgatewayApp.vehicleModel.confirmTrue' | translate}}</option>
+                            <option
+                                [ngValue]="false">{{'niopdcgatewayApp.vehicleModel.confirmFalse' | translate}}</option>
+                        </select>
+                    </ng-template>
+                </p-column>
+
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <button class="btn btn-info" (click)="search()">
+                            <span class="fa fa-search"></span>
+                        </button>
+                        <button class=" btn btn-danger" (click)="clear()">
+                            <span class="fa fa-remove"></span>
+                        </button>
+                    </ng-template>
+                </p-column>
+            </p-row>
+        </p-headerColumnGroup>
+
+        <p-column field="title" [header]="'niopdcgatewayApp.vehicleModel.title' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span data-toggle="tooltip" title="{{item.title}}">{{item.title | truncate}}</span>
+            </ng-template>
+        </p-column>
+        <p-column field="customerGroup" [header]="'niopdcgatewayApp.vehicleModel.customerGroup' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span
+                    jhiTranslate="{{'niopdcgatewayApp.CustomerGroup.' + item.customerGroup+'_VEHICLE'}}">{{item.customerGroup}}</span>
+            </ng-template>
+        </p-column>
+        <p-column field="vehicleModelType"
+                  [header]="'niopdcgatewayApp.vehicleModel.vehicleModelType' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span
+                    jhiTranslate="{{'niopdcgatewayApp.VehicleModelType.'
+                +item.vehicleModelType}}">{{item.vehicleModelType}}</span>
+            </ng-template>
+        </p-column>
+        <p-column field="productName" [header]="'niopdcgatewayApp.vehicleModel.productTitle' | translate"></p-column>
+        <p-column field="capacity" [header]="'niopdcgatewayApp.vehicleModel.capacity' | translate"></p-column>
+        <p-column field="confirm" [header]="'niopdcgatewayApp.containerRate.confirm' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span class="fa" [ngClass]="{'fa-check':item.confirm,'fa-close':!item.confirm}"></span>
+            </ng-template>
+        </p-column>
+        <p-column class="component">
+            <ng-template let-item="rowData" pTemplate="body">
+                <div class="btn-group" ngbDropdown placement="right">
+                    <button type="button" class="btn btn-primary"
+                            replaceUrl="true"
+                            *jhiHasAnyAuthority="['ROLE_ADMIN', 'EDIT_VEHICLE_MODEL']"
+                            [routerLink]="['/vehicle-model', { outlets: { popup: item.id + '/edit'} }]">
+                        <span class="fa fa-edit"></span>
+                        <span jhiTranslate="entity.action.edit">ویرایش</span>
+                    </button>
+
+                    <button class="btn btn-primary" ngbDropdownToggle
+                            *jhiHasAnyAuthorityDisabled="['ROLE_ADMIN','VIEW_VEHICLE_MODEL','DELETE_VEHICLE_MODEL','LIST_VEHICLE_CAPACITY']"></button>
+                    <div class="dropdown-menu" ngbDropdownMenu>
+                        <button class="dropdown-item"
+                                replaceUrl="true"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN', 'VIEW_VEHICLE_MODEL']"
+                                [routerLink]="['/vehicle-model', { outlets: { popup: item.id + '/view'} }]">
+                            <span class="fa fa-eye"></span>
+                            <span jhiTranslate="entity.action.view">نمایش</span>
+                        </button>
+                        <button class="dropdown-item"
+                                replaceUrl="true"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN', 'DELETE_VEHICLE_MODEL']"
+                                [routerLink]="['/vehicle-model', { outlets: { popup: item.id + '/delete'} }]">
+                            <span class="fa fa-remove"></span>
+                            <span jhiTranslate="entity.action.delete">delete</span>
+                        </button>
+                        <ng-container *ngIf="!item.confirm">
+                            <button class="dropdown-item"
+                                    replaceUrl="true"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'CONFIRM_VEHICLE_MODEL']"
+                                    [routerLink]="['/vehicle-model', { outlets: { popup: item.id + '/confirm'} }]" [queryParams]="{mode:'confirm'}">
+                                <span class="fa fa-check"></span>
+                                <span jhiTranslate="entity.action.confirm">delete</span>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="item.confirm">
+                            <button class="dropdown-item"
+                                    replaceUrl="true"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'REVERT_CONFIRM_VEHICLE_MODEL']"
+                                    [routerLink]="['/vehicle-model', { outlets: { popup: item.id + '/revert-confirm'}  }]" [queryParams]="{mode:'revert-confirm'}">
+                                <span class="fa fa-undo"></span>
+                                <span jhiTranslate="entity.action.revertConfirm">delete</span>
+                            </button>
+                        </ng-container>
+                        <ng-container
+                            *ngIf="item.vehicleModelType===VehicleModelType[VehicleModelType.AIRPLANE]">
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'LIST_VEHICLE_CAPACITY']"
+                                    [routerLink]="['/vehicle-model', item.id, 'vehicle-capacity']">
+                                <span class="fa fa-external-link"></span>
+                                <span jhiTranslate="niopdcgatewayApp.vehicleCapacity.home.title">vehicleCapacity</span>
+                            </button>
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+
+</div>

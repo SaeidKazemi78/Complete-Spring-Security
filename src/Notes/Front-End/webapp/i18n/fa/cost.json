@@ -1,0 +1,40 @@
+
+{
+    "niopdcgatewayApp": {
+        "cost" : {
+
+            "home": {
+                "title": "هزینه ها",
+                "createLabel": "ایجاد هزینه",
+                "createOrEditLabel": "ویرایش هزینه",
+                "view": "نمایش هزینه",
+                "costGroupTitle":"گروه هزینه"
+            },
+            "delete": {
+                "question": "آیا برای حذف این هزینه مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "هزینه"
+            },
+            "rateType": "نوع نرخ",
+            "effect": "محاسبه از روی ",
+            "costAction": "عملکرد",
+            "costType": "نحوه پرداخت",
+            "startLitre": "لیتر شروع",
+            "endLitre": "لیتر پایان",
+            "product": "فرآورده",
+            "costRelated": "نوع",
+            "customerType": "نوع مشتری",
+            "costGroup": "گروه هزینه",
+            "parent": "پدر",
+            "code":"کد"
+        }
+    },
+    "niopdcrateApp": {
+        "cost" : {
+            "created": "هزینه با موفقیت ایجاد شد.",
+            "updated": "هزینه با موفقیت ویرایش شد.",
+            "deleted": "هزینه با موفقیت حذف شد."
+        }
+    }
+}

@@ -1,0 +1,33 @@
+
+{
+    "niopdcgatewayApp": {
+        "customerRating" : {
+            "home": {
+                "title": "درجه بندی مشتری",
+                "createLabel": "ایجاد درجه بندی مشتری",
+                "createOrEditLabel": "ویرایش درجه بندی مشتری",
+                "view":"نمایش درجه بندی مشتری"
+            },
+            "delete": {
+                "question": "ایا برای حذف درجه بندی مشتری {{param}} مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "درجه بندی مشتری"
+            },
+            "title": "عنوان",
+            "level": "سطح",
+            "fromDate": "از تاریخ",
+            "toDate": "تا تاریخ",
+            "fromScore": "از امتیاز",
+            "toScore": "تا امتیاز",
+            "locations": "ناحیه"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerRating" : {
+            "created": "درجه بندی مشتری با موفقیت ایجاد شد.",
+            "updated": "درجه بندی مشتری با موفقیت ویرایش شد.",
+            "deleted": "درجه بندی مشتری با موفقیت حذف شد."
+        }
+    }
+}

@@ -1,0 +1,56 @@
+{
+    "userRequest": {
+        "home": {
+            "title": "درخواست کاربری",
+            "view": "نمایش درخواست کاربری",
+            "report": "چاپ"
+        },
+        "register": {
+            "user": "کاربری",
+            "identity": "هویتی",
+            "organizational": "سازمانی"
+        },
+        "created": "درخواست کاربر با موفقیت ایجاد شد",
+        "updated": "درخواست کاربر با موفقیت بروز رسانی شد",
+        "deleted": "درخواست کاربر با موفقیت حذف شد",
+        "delete": {
+            "question": "آیا مایل به حذف درخواست کاربری هستید؟"
+        },
+        "detail": {
+            "title": "کاربر"
+        },
+        "login": "نام کاربری",
+        "trackingCode": "کد رهگیری",
+        "firstName": "نام",
+        "lastName": "نام خانوادگی",
+        "fullName": "نام و نام خانوادگی",
+        "nationalCode": "کد ملی",
+        "personnelCode": "شماره پرسنلی",
+        "cellPhone": "تلفن همراه",
+        "email": "ایمیل",
+        "status": "وضعیت",
+        "birthday": "تاریخ تولد",
+        "activatedTrue": "فعال",
+        "activatedFalse": "غیر فعال",
+        "deactivated": "غیر فعال شده",
+        "role": "نقش ها",
+        "group": "گروه دسترسی",
+        "profiles": "پروفایل ها",
+        "langKey": "زبان",
+        "createdBy": "ایجاد شده با",
+        "createdDate": "زمان ایجاد",
+        "location": "محل خدمت(ستاد/منطقه/ناحیه/مرز)",
+        "lastModifiedBy": "تغییر کرده با",
+        "lastModifiedDate": "آخرین زمان تغییر",
+        "userType": "سطح کاربر",
+        "organization": "سازمان",
+        "officeLocation": "محل خدمت",
+        "degreeOfEducation": "مدرک تحصیلی",
+        "employmentStatus": "وضعیت استخدامی",
+        "jobTitle": "سمت",
+        "section": "مدیریت/اداره",
+        "adminRole": "دسترسی کامل",
+        "userInfo": "اطلاعات کاربری",
+        "userAccess": "دسترسی کاربر"
+    }
+}

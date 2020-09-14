@@ -1,0 +1,30 @@
+{
+    "niopdcgatewayApp": {
+        "safetyCard": {
+            "home": {
+                "title": "کارت های ایمنی",
+                "createLabel": "ایجاد کارت ایمنی",
+                "createOrEditLabel": "ویرایش کارت ایمنی",
+                "driverTitle": "راننده"
+            },
+            "delete": {
+                "question": "آیا برای حذف کارت ایمنی مطمئن هستید ؟ "
+            },
+            "detail": {
+                "title": "کارت ایمنی"
+            },
+            "fromDate": "از تاریخ",
+            "toDate": "تا تاریخ",
+            "serial": "شماره کارت ایمنی",
+            "driver": "راننده",
+            "depot": "انبار صادر کننده"
+        }
+    },
+    "niopdcbaseApp": {
+        "safetyCard": {
+            "created": "کارت ایمنی با موفقیت ایجاد شد.",
+            "updated": "کارت ایمنی با موفقیت ویرایش شد.",
+            "deleted": "کارت ایمنی با موفقیت حذف شد."
+        }
+    }
+}

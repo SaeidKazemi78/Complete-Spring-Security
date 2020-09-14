@@ -1,0 +1,458 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="exportLetter.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="exportLetter.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-3">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.type"
+                           for="field_type">Type</label>
+                    <select [disabled]="isView" class="form-control" name="type" [(ngModel)]="exportLetter.type"
+                            id="field_type" required>
+                        <option value="EXCHANGE">{{'niopdcgatewayApp.ExportLetterType.EXCHANGE' | translate}}</option>
+                        <option value="NORMAL">{{'niopdcgatewayApp.ExportLetterType.NORMAL' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.type?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.deliveryTerm"
+                           for="field_deliveryTerm">Delivery Term</label>
+                    <select [disabled]="isView" class="form-control" name="deliveryTerm"
+                            [(ngModel)]="exportLetter.deliveryTerm" id="field_deliveryTerm" required>
+                        <option value="EX_WORKS">{{'niopdcgatewayApp.DeliveryTerm.EX_WORKS' | translate}}</option>
+                        <option value="FOB">{{'niopdcgatewayApp.DeliveryTerm.FOB' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.deliveryTerm?.dirty && editForm.controls.deliveryTerm?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.deliveryTerm?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.declarationNumber"
+                           for="field_declarationNumber">Declaration Number</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="declarationNumber"
+                           id="field_declarationNumber"
+                           [(ngModel)]="exportLetter.declarationNumber" required minlength="3" maxlength="6"/>
+                    <div
+                        [hidden]="!(editForm.controls.declarationNumber?.dirty && editForm.controls.declarationNumber?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.declarationNumber?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.declarationNumber?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.declarationNumber?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 6 }">
+                            This field cannot be longer than 6 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.destination"
+                           for="field_destination">Destination</label>
+                    <select class="form-control" id="field_destination" name="destination"
+                            [(ngModel)]="exportLetter.destinationId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="countryOption.id"
+                                *ngFor="let countryOption of countries | sortBy: 'name'; trackBy: trackCountryById">{{countryOption.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.registerDate"
+                           for="field_registerDate">Register Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                            id="field_registerDate" class="form-control"
+                                            name="registerDate" [(ngModel)]="exportLetter.registerDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div [hidden]="!(editForm.controls.registerDate?.dirty && editForm.controls.registerDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.registerDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.registerDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.dueDate"
+                           for="field_dueDate">Due Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                            id="field_dueDate" class="form-control"
+                                            name="dueDate" [(ngModel)]="exportLetter.dueDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.expiryDate"
+                           for="field_expiryDate">Expiry Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                            id="field_expiryDate" class="form-control"
+                                            name="expiryDate" [(ngModel)]="exportLetter.expiryDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" *ngIf="exportLetter.type === ExportLetterType[ExportLetterType.NORMAL]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.payDate"
+                           for="field_expiryDate">Expiry Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                            id="field_payDate" class="form-control"
+                                            name="payDate" [(ngModel)]="exportLetter.payDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6" *ngIf="exportLetter.type === ExportLetterType[ExportLetterType.NORMAL]">
+                <div class="form-group">
+                    <label  class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.deliveryLocation"
+                           for="field_deliveryLocation">delivery Location</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="deliveryLocation" id="field_deliveryLocation"
+                           [(ngModel)]="exportLetter.deliveryLocation"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.buyer"
+                           for="field_buyer">Buyer</label>
+
+                    <p-dropdown [options]="people"
+                                [(ngModel)]="exportLetter.buyerId"
+                                [filter]="true"
+                                [disabled]="isView || people.length === 1"
+                                class="form-control"
+                                filterBy="label"
+                                id="field_buyer"
+                                name="buyer"
+                                (onChange)="changeBuyer()"
+                                ngDefaultControl
+                    >
+                    </p-dropdown>
+                </div>
+            </div>
+
+
+            <div class="col-md-6" *ngIf="exportLetter.type === ExportLetterType[ExportLetterType.NORMAL]">
+                <div class="form-group">
+                    <label  class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.buyerCEO"
+                            for="field_buyerCEO">buyerCEO</label>
+                    <input [disabled]="true" type="text" class="form-control" name="buyerCEO" id="field_buyerCEO"
+                           [ngModel]="buyerCEO"/>
+                </div>
+            </div>
+            <div class="col-md-6" *ngIf="exportLetter.type === ExportLetterType[ExportLetterType.NORMAL]">
+                <div class="form-group">
+                    <label  class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.buyerAgent"
+                            for="field_buyerAgent">buyerAgent</label>
+                    <input [disabled]="true" type="text" class="form-control" name="buyerAgent" id="field_buyerAgent"
+                           [ngModel]="buyerAgent"/>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.product"
+                           for="field_product">Product</label>
+                    <jhi-product-selector
+                        class="form-control" id="field_product"
+                        widthGrid="500px" required
+                        [disabled]="isView"
+                        [haveCustomerGroup]="true"
+                        [customerGroup]="CustomerGroup[CustomerGroup.EXPORT]"
+                        [(ngModel)]="exportLetter.productId"
+                        name="product">
+                    </jhi-product-selector>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label *ngIf="exportLetter.type !== ExportLetterType[ExportLetterType.NORMAL]" class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.amount"
+                           for="field_amount">Amount</label>
+                    <label *ngIf="exportLetter.type === ExportLetterType[ExportLetterType.NORMAL]" class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.amountNormal"
+                           for="field_amount">Amount</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="amount" id="field_amount"
+                           (input)="calcPrice()" required
+                           [(ngModel)]="exportLetter.amount"/>
+
+                    <div [hidden]="!(editForm.controls.amount?.dirty && editForm.controls.amount?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.amount?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label *ngIf="exportLetter.type !== ExportLetterType[ExportLetterType.NORMAL]" class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.baseRate"
+                           for="field_baseRate">Base Rate</label>
+                    <label *ngIf="exportLetter.type === ExportLetterType[ExportLetterType.NORMAL] && (!currency || currency.isNationalCurrency)" class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.baseRateNormal"
+                           for="field_baseRate">Base Rate</label>
+                    <label *ngIf="exportLetter.type === ExportLetterType[ExportLetterType.NORMAL] && currency && !currency.isNationalCurrency" class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.exportLetter.baseRateNormalCurrency" [translateValues]="{currency: currency.title.trim()}"
+                           for="field_baseRate">Base Rate</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="baseRate" id="field_baseRate"
+                           (input)="calcPrice()" required
+                           [(ngModel)]="exportLetter.baseRate"/>
+
+                    <div [hidden]="!(editForm.controls.baseRate?.dirty && editForm.controls.baseRate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.baseRate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.currencyId"
+                           for="field_currency">Currency Id</label>
+                    <select [disabled]="isView" class="form-control" id="field_currency"
+                            name="currency" required
+                            (ngModelChange)="changeCurrency($event)"
+                            [(ngModel)]="exportLetter.currencyId">
+                        <option *ngIf="!editForm.value.currency" [ngValue]="null" selected></option>
+                        <option [ngValue]="currencyOption.id"
+                                *ngFor="let currencyOption of currencies;">
+                            {{currencyOption.title}}
+                        </option>
+                    </select>
+
+                    <div [hidden]="!(editForm.controls.currencyId?.dirty && editForm.controls.currencyId?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.currencyId?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" *ngIf="exportLetter.type === ExportLetterType[ExportLetterType.EXCHANGE]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.sanaRate"
+                           for="field_sanaRate">Sana Rate</label>
+                    <input [disabled]="isView || currency?.isNationalCurrency" type="number" class="form-control"
+                           name="sanaRate" id="field_sanaRate"
+                           (input)="calcPrice()" required
+                           [(ngModel)]="exportLetter.sanaRate"/>
+                    <div [hidden]="!(editForm.controls.sanaRate?.dirty && editForm.controls.sanaRate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.sanaRate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" *ngIf="exportLetter.type === ExportLetterType[ExportLetterType.NORMAL]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.paymentPeriod"
+                           for="field_paymentPeriod">payment Period</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="paymentPeriod"
+                           id="field_paymentPeriod"
+                           [(ngModel)]="exportLetter.paymentPeriod"/>
+                </div>
+            </div>
+            <div class="col-md-5" *ngIf="exportLetter.type === ExportLetterType[ExportLetterType.EXCHANGE]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.agentBroker"
+                           for="field_agentBroker">Agent Broker</label>
+                    <app-person-selector widthGrid="600px"
+                                         [selectObject]="false"
+                                         [(ngModel)]="exportLetter.agentBrokerId"
+                                         [disabled]="isView"
+                                         class="form-control" id="field_agentBroker" name="agentBroker">
+                    </app-person-selector>
+                </div>
+            </div>
+            <div class="col-md-5" *ngIf="exportLetter.type === ExportLetterType[ExportLetterType.EXCHANGE]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.buyerAgentBroker"
+                           for="field_buyerAgentBroker">Buyer Agent Broker</label>
+                    <app-person-selector widthGrid="600px"
+                                         [selectObject]="false"
+                                         [(ngModel)]="exportLetter.buyerAgentBrokerId"
+                                         [disabled]="isView"
+                                         class="form-control" id="field_buyerAgentBroker" name="buyerAgentBroker">
+                    </app-person-selector>
+                </div>
+            </div>
+
+            <!--            <div class="col-md-2">-->
+            <!--                <div class="form-group">-->
+            <!--                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.longTerm"-->
+            <!--                           for="field_longTerm">Long Term</label>-->
+            <!--                    <input [disabled]="isView" type="checkbox" class="form-control" name="longTerm" id="field_longTerm"-->
+            <!--                           [(ngModel)]="exportLetter.longTerm"/>-->
+            <!--                </div>-->
+            <!--            </div>-->
+
+            <div class="col-md-12" *ngIf="exportLetter.type === ExportLetterType[ExportLetterType.NORMAL]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.exclusiveConditions"
+                           for="field_exclusiveConditions">Exclusive Conditions</label>
+                    <textarea cols="40" rows="5" [disabled]="isView" class="form-control" name="exclusiveConditions"
+                              id="field_exclusiveConditions"
+                              [(ngModel)]="exportLetter.exclusiveConditions"></textarea>
+                </div>
+            </div>
+            <div class="col-md-12" *ngIf="exportLetter.type === ExportLetterType[ExportLetterType.NORMAL]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportLetter.generalConditions"
+                           for="field_generalConditions">General Conditions</label>
+                    <textarea [disabled]="isView" cols="40" rows="5" class="form-control" name="generalConditions"
+                              id="field_generalConditions"
+                              [(ngModel)]="exportLetter.generalConditions"></textarea>
+                </div>
+            </div>
+
+
+        </div>
+        <div
+            *ngIf="exportLetter.type === ExportLetterType[ExportLetterType.EXCHANGE] && exportLetter.amount && exportLetter.baseRate && exportLetter.sanaRate">
+            <hr/>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.exportLetter.currencyPrice">Price</label>
+                                <div class="form-control"
+                                     style="text-align: left">{{exportLetter.price | separator}}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.exportLetter.rialPrice">Price</label>
+                                <div class="form-control" style="text-align: left">{{rialPrice | separator}}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.exportLetter.settlementPrice">Price</label>
+                                <div class="form-control" style="text-align: left">{{settlementPrice | separator}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <span jhiTranslate="niopdcgatewayApp.exportLetter.agentBrokerWage">agentBrokerWage</span>
+                        </div>
+                        <div class="col-sm-4" style="text-align: left">
+                            <span>{{agentBrokerWage | separator}}</span>
+                        </div>
+                        <div class="col-sm-8">
+                            <span jhiTranslate="niopdcgatewayApp.exportLetter.exchangeWage">exchangeWage</span>
+                        </div>
+                        <div class="col-sm-4" style="text-align: left">
+                            <span>{{exchangeWage | separator}}</span>
+                        </div>
+                        <div class="col-sm-8">
+                            <span
+                                jhiTranslate="niopdcgatewayApp.exportLetter.exchangeRelevantWage">exchangeRelevantWage</span>
+                        </div>
+                        <div class="col-sm-4" style="text-align: left">
+                            <span>{{exchangeRelevantWage | separator}}</span>
+                        </div>
+                        <div class="col-sm-8">
+                            <span jhiTranslate="niopdcgatewayApp.exportLetter.itWage">itWage</span>
+                        </div>
+                        <div class="col-sm-4" style="text-align: left">
+                            <span>{{itWage | separator}}</span>
+                        </div>
+                        <div class="col-sm-8">
+                            <span jhiTranslate="niopdcgatewayApp.exportLetter.rayanCenterWage">rayanCenterWage</span>
+                        </div>
+                        <div class="col-sm-4" style="text-align: left">
+                            <span>{{rayanCenterWage | separator}}</span>
+                        </div>
+
+                        <div class="col-sm-8" style="border-top: 1px solid black;
+                                                    padding-top: 5px;
+                                                    margin-top: 5px;">
+
+                            <span jhiTranslate="niopdcgatewayApp.exportLetter.sumWage">sumWage</span>
+                        </div>
+                        <div class="col-sm-4" style="text-align: left;
+                                                    border-top: 1px solid black;
+                                                    padding-top: 5px;
+                                                    margin-top: 5px;">
+                            <span>{{sumWage | separator}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,36 @@
+
+{
+    "niopdcgatewayApp": {
+        "requestFilterElement" : {
+            "home": {
+                "title": "Request Filter Elements",
+                "createLabel": "Create a new Request Filter Element",
+                "createOrEditLabel": "Create or edit a Request Filter Element"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Request Filter Element {{ id }}?"
+            },
+            "detail": {
+                "title": "Request Filter Element"
+            },
+            "filterLocation": "Filter Location",
+            "productId": "Product Id",
+            "maximumPressureDifference": "Maximum Pressure Difference",
+            "elementRequestReason": "Element Request Reason",
+            "amountOfFuelPassed": "Amount Of Fuel Passed",
+            "requestStatus": "Request Status",
+            "draftUser": "Draft User",
+            "confirmUser": "Confirm User",
+            "sendUser": "Send User",
+            "refuelCenter": "Refuel Center",
+            "filter": "Filter"
+        }
+    },
+    "niopdcaoApp": {
+        "requestFilterElement" : {
+            "created": "A new Request Filter Element is created with identifier {{ param }}",
+            "updated": "A Request Filter Element is updated with identifier {{ param }}",
+            "deleted": "A Request Filter Element is deleted with identifier {{ param }}"
+        }
+    }
+}

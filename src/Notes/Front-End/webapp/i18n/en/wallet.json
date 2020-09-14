@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "wallet" : {
+            "home": {
+                "title": "Wallets",
+                "createLabel": "Create a new Wallet",
+                "createOrEditLabel": "Create or edit a Wallet"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Wallet {{ id }}?"
+            },
+            "detail": {
+                "title": "Wallet"
+            },
+            "personId": "Person Id",
+            "customerId": "Customer Id",
+            "amount": "Amount"
+        }
+    },
+    "niopdcpaymentApp": {
+        "wallet" : {
+            "created": "A new Wallet is created with identifier {{ param }}",
+            "updated": "A Wallet is updated with identifier {{ param }}",
+            "deleted": "A Wallet is deleted with identifier {{ param }}"
+        }
+    }
+}

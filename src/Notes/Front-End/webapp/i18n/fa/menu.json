@@ -1,0 +1,40 @@
+
+{
+    "niopdcgatewayApp": {
+        "menu" : {
+            "home": {
+                "title": "منو",
+                "createLabel": "ایجاد خبر",
+                "createOrEditLabel": "ویرایش خبر"
+            },
+            "delete": {
+                "question": "آیا برای حذف منو مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "منو"
+            },
+            "title": "عنوان",
+            "icon": "آیکن",
+            "routerLink": "مسیر",
+            "queryParams": "queryParams",
+            "auth": "دسترسی ها",
+            "count": "تعداد",
+            "picture1": "تصویر اول",
+            "picture2": "تصویر دوم",
+            "file":"فایل پیوست ",
+            "showMenu": "نمایش به صورت پیشفرض",
+            "content": "محتوا",
+            "priority": "اولویت",
+            "menusType": "نوع خبر",
+            "menusAccessType": "نوع دسترسی",
+            "location": "ناحیه"
+        }
+    },
+    "niopdcbaseApp": {
+        "menus" : {
+            "created": "خبر با موفقیت ایجاد شد.",
+            "updated": "خبر با موفقیت ویرایش شد.",
+            "deleted": "خبر با موفقیت حذف شد."
+        }
+    }
+}

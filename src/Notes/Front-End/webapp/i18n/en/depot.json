@@ -1,0 +1,34 @@
+
+{
+    "niopdcgatewayApp": {
+        "depot" : {
+            "home": {
+                "title": "Depots",
+                "createLabel": "Create a new Depot",
+                "createOrEditLabel": "Create or edit a Depot"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Depot {{ id }}?"
+            },
+            "detail": {
+                "title": "Depot"
+            },
+            "title": "Title",
+            "code": "Code",
+            "accCode": "Acc Code",
+            "refuelCenterId": "Refuel Center Id",
+            "depotType": "Depot Type",
+            "location": "Location",
+            "product": "Product",
+            "location": "Location",
+            "sellContractProduct": "Sell Contract Product"
+        }
+    },
+    "niopdcbaseApp": {
+        "depot" : {
+            "created": "A new Depot is created with identifier {{ param }}",
+            "updated": "A Depot is updated with identifier {{ param }}",
+            "deleted": "A Depot is deleted with identifier {{ param }}"
+        }
+    }
+}

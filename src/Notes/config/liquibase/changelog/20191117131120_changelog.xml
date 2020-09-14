@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="taghavi (generated)" id="1573996379496-1">
+        <addColumn tableName="car_rf_id">
+            <column name="location_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="taghavi (generated)" id="1573996379496-2">
+        <addColumn tableName="car_rf_id_aud">
+            <column name="location_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="taghavi (generated)" id="1573996379496-0">
+        <dropIndex tableName="car_rf_id" indexName="_dta_index_car_rf_id_14_1366295927__K8_K6_1_2_3_4_5_7_9_10_11"/>
+    </changeSet>
+
+    <changeSet author="taghavi (generated)" id="1573996379496-3">
+        <dropForeignKeyConstraint baseTableName="car_rf_id" constraintName="FKd5xqyr77vnhfw8v6l5c25797v"/>
+    </changeSet>
+    <changeSet author="taghavi (generated)" id="1573996379496-4">
+        <dropUniqueConstraint constraintName="U_CustomerType_Code" tableName="CustomerType"/>
+    </changeSet>
+    <changeSet author="taghavi (generated)" id="1573996379496-5">
+        <dropUniqueConstraint constraintName="U_CustomerUseType_Code" tableName="CustomerUseType"/>
+    </changeSet>
+    <changeSet author="taghavi (generated)" id="1573996379496-6">
+        <dropTable tableName="CustomerType"/>
+    </changeSet>
+    <changeSet author="taghavi (generated)" id="1573996379496-7">
+        <dropTable tableName="CustomerTypeUse"/>
+    </changeSet>
+    <changeSet author="taghavi (generated)" id="1573996379496-8">
+        <dropTable tableName="CustomerUseType"/>
+    </changeSet>
+    <changeSet author="taghavi (generated)" id="1573996379496-9">
+        <dropColumn columnName="price" tableName="car_rf_id"/>
+    </changeSet>
+    <changeSet author="taghavi (generated)" id="1573996379496-10">
+        <dropColumn columnName="price" tableName="car_rf_id_aud"/>
+    </changeSet>
+    <changeSet author="taghavi (generated)" id="1573996379496-11">
+        <dropColumn columnName="tag_rate_id" tableName="car_rf_id"/>
+    </changeSet>
+    <changeSet author="taghavi (generated)" id="1573996379496-12">
+        <dropColumn columnName="tag_rate_id" tableName="car_rf_id_aud"/>
+    </changeSet>
+
+
+</databaseChangeLog>

@@ -1,0 +1,40 @@
+
+{
+    "niopdcgatewayApp": {
+        "exportPiCredit" : {
+            "home": {
+                "title": "اعتبارات پروفرم",
+                "exportPiTitle": "پروفرم"
+            },
+            "delete": {
+                "question": "آیا برای حذف این اعتبار مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "اعتبارات پروفرم"
+            },
+            "paymentId": "Payment Id",
+            "price": "مبلغ(ریال)",
+            "sanaRate": "نرخ سنا",
+            "sanaRateBuy": "نرخ سنا خرید",
+            "sanaRateSell": "نرخ سنا فروش",
+            "registerDate": "تاریخ واریز",
+            "receiptNo": "شماره رسید",
+            "hashCode": "Hash Code",
+            "exportPi": "Export Pi",
+            "percent": "درصد",
+            "avgSanaRate": "نرخ کلی سنا",
+            "sumPrice": "جمع مبلغ(ریال)",
+            "sumPriceCurrency": "معادل نرخ ارزی",
+            "quota": "سهم",
+            "baseRate": "نرخ ارزی",
+            "value": "معادل"
+        }
+    },
+    "niopdcbaseApp": {
+        "exportPiCredit" : {
+            "created": " اعتبار پروفرم با موفقیت ایجاد شد.",
+            "updated": "اعتبار پروفرم با موفقیت ویرایش شد.",
+            "deleted": "اعتبار پروفرم با موفقیت حذف شد."
+        }
+    }
+}

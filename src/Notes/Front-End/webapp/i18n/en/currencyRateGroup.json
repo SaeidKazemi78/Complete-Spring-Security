@@ -1,0 +1,26 @@
+
+{
+    "niopdcgatewayApp": {
+        "currencyRateGroup" : {
+            "home": {
+                "title": "Currency Rate Groups",
+                "createLabel": "Create a new Currency Rate Group",
+                "createOrEditLabel": "Create or edit a Currency Rate Group"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Currency Rate Group {{ id }}?"
+            },
+            "detail": {
+                "title": "Currency Rate Group"
+            },
+            "title": "Title"
+        }
+    },
+    "niopdcrateApp": {
+        "currencyRateGroup" : {
+            "created": "A new Currency Rate Group is created with identifier {{ param }}",
+            "updated": "A Currency Rate Group is updated with identifier {{ param }}",
+            "deleted": "A Currency Rate Group is deleted with identifier {{ param }}"
+        }
+    }
+}

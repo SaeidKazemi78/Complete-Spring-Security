@@ -1,0 +1,12 @@
+{
+    "niopdcgatewayApp": {
+        "ElementType" : {
+            "null": "",
+            "COALESCER": "ذره گیر دو مرحله ای",
+            "MICROFILTER": "میکرو فیلتر",
+            "SEPARATOR": "جدا کننده آب دو مرحله ای",
+            "MONITOR": "مانیتور",
+            "CLAY": "کلی"
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "ResponseStatus" : {
+            "null": "",
+            "CONFIRM": "تایید",
+            "REJECT": "رد"
+        }
+    }
+}

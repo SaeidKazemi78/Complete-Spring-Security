@@ -1,0 +1,70 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="customerTypeProductConsumption.id==null" class="modal-title" id="createLabel" jhiTranslate="niopdcgatewayApp.customerTypeProductConsumption.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="customerTypeProductConsumption.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.customerTypeProductConsumption.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.customerTypeProductConsumption.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.customerTypeProductConsumption.consumption"
+                           for="field_consumption">Consumption</label>
+                    <select [disabled]="isView" class="form-control" id="field_consumption" name="consumption"
+                            [(ngModel)]="customerTypeProductConsumption.consumptionId" required>
+                        <option [ngValue]="consumptionOption.id"
+                                *ngFor="let consumptionOption of consumptions; trackBy: trackConsumptionById">
+                            {{consumptionOption.title}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.consumption?.dirty && editForm.controls.consumption?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.consumption?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.customerTypeProductConsumption.customerType"
+                           for="field_customerType">customerType</label>
+                    <select [disabled]="isView" class="form-control" id="field_customerType" name="customerType"
+                            [(ngModel)]="customerTypeProductConsumption.customerTypeId">
+                        <option [ngValue]="customerTypeOption.id"
+                                *ngFor="let customerTypeOption of customerTypes; trackBy: trackCustomerTypeById">
+                            {{customerTypeOption.title}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.customerType?.dirty && editForm.controls.customerType?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.customerType?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" *ngIf="!isView" [disabled]="editForm.form.invalid || isSaving"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

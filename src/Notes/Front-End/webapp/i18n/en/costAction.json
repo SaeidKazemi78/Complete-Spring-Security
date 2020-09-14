@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "CostAction" : {
+            "null": "",
+            "REDUCER": "REDUCER",
+            "MULTIPLIER": "MULTIPLIER"
+        }
+    }
+}

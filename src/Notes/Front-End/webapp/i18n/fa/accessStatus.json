@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "accessStatus" : {
+            "null": "",
+            "ACCESS": "مجاز",
+            "DENY": "غیر مجاز"
+        }
+    }
+}

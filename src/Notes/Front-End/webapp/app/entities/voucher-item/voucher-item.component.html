@@ -1,0 +1,179 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <p-dataTable [sortField]="predicate" [sortOrder]="reverse ? -1 : 1" #dt [value]="voucherItems"
+                 [lazy]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20,totalItems]"
+                 [paginator]="true" [responsive]="true" [stacked]="false"
+                 [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)"
+                 [emptyMessage]="'global.messages.info.emptyRecords' | translate">
+
+        <p-headerColumnGroup>
+            <p-row>
+                <p-column field="rowNo" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.voucherItem.rowNo">Row No</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="extra" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.voucherItem.extra">Extra</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="special" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.voucherItem.special">Special</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="credit" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.voucherItem.credit">Credit</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="debit" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.voucherItem.debit">Debit</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="description" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.voucherItem.description">Description</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="accountNo" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.voucherItem.accountNo">Account No</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="suffix" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.voucherItem.suffix">Suffix</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="key" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.voucherItem.key">Key</span>
+                    </ng-template>
+                </p-column>
+                <p-column styleClass="col-button"></p-column>
+            </p-row>
+            <p-row>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control"
+
+                               name="rowNo" id="field_rowNo"
+                               [(ngModel)]="voucherItem.rowNo"
+                               [numeric]
+                               search-after-typed (onSearch)="search()"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="extra" id="field_extra"
+                               [(ngModel)]="voucherItem.extra"
+                               maxlength="20"
+                               search-after-typed (onSearch)="search()"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="special" id="field_special"
+                               [(ngModel)]="voucherItem.special"
+                               maxlength="20"
+                               search-after-typed (onSearch)="search()"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control"
+
+                               name="credit" id="field_credit"
+                               [(ngModel)]="voucherItem.credit"
+                               [numeric]
+                               search-after-typed (onSearch)="search()"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control"
+
+                               name="debit" id="field_debit"
+                               [(ngModel)]="voucherItem.debit"
+                               [numeric]
+                               search-after-typed (onSearch)="search()"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="description" id="field_description"
+                               [(ngModel)]="voucherItem.description"
+                               maxlength="200"
+                               search-after-typed (onSearch)="search()"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="accountNo" id="field_accountNo"
+                               [(ngModel)]="voucherItem.accountNo"
+                               maxlength="23"
+                               search-after-typed (onSearch)="search()"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="suffix" id="field_suffix"
+                               [(ngModel)]="voucherItem.suffix"
+                               maxlength="8"
+                               search-after-typed (onSearch)="search()"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="key" id="field_key"
+                               [(ngModel)]="voucherItem.key"
+                               search-after-typed (onSearch)="search()"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <button class="btn btn-info" (click)="search()">
+                            <span class="fa fa-search"></span>
+                        </button>
+                        <button class=" btn btn-danger" (click)="clear()">
+                            <span class="fa fa-remove"></span>
+                        </button>
+                    </ng-template>
+                </p-column>
+            </p-row>
+        </p-headerColumnGroup>
+
+        <p-column field="rowNo" [header]="'niopdcgatewayApp.voucherItem.rowNo' | translate"></p-column>
+        <p-column field="extra" [header]="'niopdcgatewayApp.voucherItem.extra' | translate"></p-column>
+        <p-column field="special" [header]="'niopdcgatewayApp.voucherItem.special' | translate"></p-column>
+        <p-column field="credit" [header]="'niopdcgatewayApp.voucherItem.credit' | translate"></p-column>
+        <p-column field="debit" [header]="'niopdcgatewayApp.voucherItem.debit' | translate"></p-column>
+        <p-column field="description" [header]="'niopdcgatewayApp.voucherItem.description' | translate"></p-column>
+        <p-column field="accountNo" [header]="'niopdcgatewayApp.voucherItem.accountNo' | translate"></p-column>
+        <p-column field="suffix" [header]="'niopdcgatewayApp.voucherItem.suffix' | translate"></p-column>
+        <p-column field="key" [header]="'niopdcgatewayApp.voucherItem.key' | translate"></p-column>
+        <p-column class="component">
+        </p-column>
+    </p-dataTable>
+
+</div>

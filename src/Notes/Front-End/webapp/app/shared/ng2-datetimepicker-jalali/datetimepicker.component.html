@@ -1,0 +1,107 @@
+<div>
+    <style type="text/css">
+        .time {
+            direction: ltr;
+            align-self: center;
+            display: none !important;
+        }
+
+        .date {
+            align-self: center;
+        }
+
+        .time .form-control {
+            width: 100%;
+        }
+
+        ng2-datetimepicker.form-control {
+            padding: 0;
+        }
+
+        .datetime {
+            padding: 0;
+            position: absolute;
+
+            z-index: 1000;
+            display: none;
+            float: left;
+            min-width: 10rem;
+            margin: .125rem 0 0;
+            font-size: 1rem;
+            color: #292b2c;
+            text-align: left;
+            list-style: none;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, .15);
+            border-radius: .25rem;
+        }
+
+        .ml-3 {
+            margin-right: 0 !important;
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        .rtl-btn {
+            margin-right: 0;
+            border-color: #ced4da;
+            border-width: 0 1px 0 0;
+            border-radius: .25rem 0 0 .25rem;
+        }
+
+        .ltr-btn {
+            margin-left: 0;
+            border-color: #ced4da;
+            border-width: 0 0 0 1px;
+            border-radius: 0 .25rem .25rem 0;
+        }
+
+    </style>
+    <div [class.has-danger]="!getValidDate()" class="input-group" style="border-width: 1px 0 0 0;"
+         [dir]="rtlActive === false ? 'ltr' : 'rtl'">
+        <input #inp class="textInput form-control" style="border: 0; height: unset; direction: ltr"
+               [disabled]="disabled"
+               [placeholder]="(disableDate ? '' : 'yyyy/mm/dd') + (disableTime ? '' : (disableDate ? 'HH:MM' : ' HH:MM'))"
+               [mask]="mask"
+               [(ngModel)]="_dateTimeFormat" (blur)="inputBlur()"
+               name="dp" autocomplete="off"
+               (focus)="onMouseClick()">
+    </div>
+    <div [style.visibility]="!overlayVisible || (disableDate && !disableTime) ? 'hidden' : 'visible'"
+         class="d-inline-block rounded datetime"
+         [ngClass]="{rtl: rtlActive === false && dir === 'rtl'}" style="padding: 0; height: unset;">
+        <ng-container *ngIf="!disableDate">
+            <ngb-datepicker class="rtl" #dp (click)="_panelClick = true" [(ngModel)]="_date"
+                            [displayMonths]="displayMonths"
+                            (ngModelChange)="changedDate()" [maxDate]="maxDate" [minDate]="minDate"
+                            [firstDayOfWeek]="6"></ngb-datepicker>
+
+            <div class="d-flex justify-content-center btn-group btn-group-sm" role="group"
+                 aria-label="Small button group">
+                <button type="button" [disabled]="disableToday" (click)="selectToday()" class="btn btn-primary btn-full">امروز</button>
+                <button type="button" (click)="clear2()" class="btn btn-success" style="width: 50px">
+                    <span class="fa fa-eraser"></span>
+                </button>
+                <button type="button" (click)="close()" class="btn btn-danger " style="width: 50px">
+                    <span class="fa fa-remove"></span>
+                </button>
+                <!--&times;-->
+            </div>
+        </ng-container>
+
+        <!--    <div *ngIf="!disableTime" [class.has-danger]="!getValidTime()"
+                 class="time d-block d-flex justify-content-center" style="display: flex;"
+                 dir="ltr">-->
+        <div *ngIf="!disableTime" [class.has-danger]="!getValidTime()"
+             style="display: flex;"
+             class="justify-content-center"
+             dir="ltr">
+
+            <ngb-timepicker [(ngModel)]="_time" (ngModelChange)="changedTime()" dir="ltr"></ngb-timepicker>
+        </div>
+    </div>
+</div>
+

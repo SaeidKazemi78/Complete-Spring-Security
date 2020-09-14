@@ -1,0 +1,238 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="factor.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="factor.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.factor.startDate"
+                                   for="field_startDate">Start Date</label>
+                            <div class="d-flex">
+                                <ng2-datetimepicker [disableTime]="true" [disabled]="factor.id" [rtlActive]="true"
+                                                    time="00:00:00"
+                                                    id="field_startDate"
+                                                    (onChangeDateTime)="onChangeStartDate($event)"
+                                                    class="form-control"
+                                                    name="startDate" [(ngModel)]="factor.startDate"
+                                                    required></ng2-datetimepicker>
+                            </div>
+                            <div
+                                [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.startDate?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                                       jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                    This field should be a date and time.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.factor.finishDate"
+                                   for="field_finishDate">Finish Date</label>
+                            <div class="d-flex">
+                                <ng2-datetimepicker [disabled]="factor.id" [rtlActive]="true" time="23:59:59"
+                                                    id="field_finishDate"
+                                                    [disableTime]="true"
+                                                    class="form-control"
+                                                    (onChangeDateTime)="onChangeFinishDate($event)"
+                                                    name="finishDate" [(ngModel)]="factor.finishDate"
+                                                    required></ng2-datetimepicker>
+                            </div>
+                            <div
+                                [hidden]="!(editForm.controls.finishDate?.dirty && editForm.controls.finishDate?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.finishDate?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.finishDate?.errors?.ZonedDateTimelocal"
+                                       jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                    This field should be a date and time.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.factor.factorType"
+                                   for="field_factorType">Oil Tank Type</label>
+                            <select [disabled]="factor.id" (change)="loadFactors()" class="form-control" name="factorType"
+                                    [(ngModel)]="factor.factorType" id="field_factorType" required>
+                                <option value="PRICE">{{'niopdcgatewayApp.FactorType.PRICE' | translate}}</option>
+                                <option value="COST">{{'niopdcgatewayApp.FactorType.COST' | translate}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.factor.person"
+                                   for="field_personId">Customer Id</label>
+                            <app-sell-contract-person-selector
+                                id="field_personId"
+                                *ngIf="!factor.id"
+                                class="form-control"
+                                [disabled]="isView || factor.id"
+                                [(ngModel)]="factor.sellContractPersonId"
+                                (ngModelChange)="changePerson($event)"
+                                [ngModelOptions]="{standalone: true}"
+                                [sellContractPersons]="sellContractPersons">
+
+                            </app-sell-contract-person-selector>
+                            <input [disabled]="true" *ngIf="factor.id" type="text" class="form-control"
+                                   name="personName"
+                                   id="field_personName"
+                                   [(ngModel)]="personName" required/>
+                            <div
+                                [hidden]="!(editForm.controls.customerId?.dirty && editForm.controls.customerId?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.customerId?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.customerId?.errors?.number"
+                                       jhiTranslate="entity.validation.number">
+                                    This field should be a number.
+                                </small>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <ng-container *ngIf="isView || factor.id">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.factor.price"
+                                       for="field_price">Price</label>
+                                <input [disabled]="true" type="number" class="form-control" name="price1"
+                                       id="field_price1"
+                                       [(ngModel)]="factor.price" required/>
+                                <div [hidden]="!(editForm.controls.price?.dirty && editForm.controls.price?.invalid)">
+                                    <small class="form-text text-danger"
+                                           [hidden]="!editForm.controls.price?.errors?.required"
+                                           jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                    <small class="form-text text-danger"
+                                           [hidden]="!editForm.controls.price?.errors?.number"
+                                           jhiTranslate="entity.validation.number">
+                                        This field should be a number.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+        </div>
+        <div class="row" *ngIf="!factor.id && factors && factors.length > 0">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <input [disabled]="factor.id" type="checkbox" class="form-control" name="active"
+                           id="field_active"
+                           [(ngModel)]="factor.active"/>
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.factor.active"
+                           for="field_active">Active</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p-dataTable [hidden]="factor.id" #dt [value]="factors"
+                             [immutable]="false"
+                             [paginator]="false" [responsive]="true" [stacked]="false">
+                    <p-headerColumnGroup>
+                        <p-row>
+                            <p-column field="registerDate" [sortable]="false">
+                                <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.factor.registerDate">NozzleProductType</span>
+                                </ng-template>
+                            </p-column>
+                            <p-column field="factorNo" [sortable]="false">
+                                <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.factor.factorNo">NozzleCount</span>
+                                </ng-template>
+                            </p-column>
+                            <p-column field="startDate" [sortable]="false">
+                                <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.factor.startDate">NozzleCount</span>
+                                </ng-template>
+                            </p-column>
+                            <p-column field="finishDate" [sortable]="false">
+                                <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.factor.finishDate">NozzleCount</span>
+                                </ng-template>
+                            </p-column>
+                            <p-column field="price" [sortable]="false">
+                                <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.factor.price">NozzleCount</span>
+                                </ng-template>
+                            </p-column>
+                        </p-row>
+                    </p-headerColumnGroup>
+
+                    <p-column field="registerDate">
+                        <ng-template let-item="rowData" pTemplate="body">
+                            <span>{{item.registerDate| dateJalali}}</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="factorNo"></p-column>
+                    <p-column field="startDate">
+                        <ng-template let-item="rowData" pTemplate="body">
+                            <span>{{item.startDate| dateJalali}}</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="finishDate">
+                        <ng-template let-item="rowData" pTemplate="body">
+                            <span>{{item.finishDate| dateJalali}}</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="price"></p-column>
+                </p-dataTable>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit"
+                [disabled]="editForm.form.invalid || isSaving || (factors && factors.length > 0 && !factor.active)"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

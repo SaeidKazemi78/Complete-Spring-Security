@@ -1,0 +1,15 @@
+{
+    "niopdcgatewayApp": {
+        "userType": {
+            "null": "",
+            "HEAD": "ستاد",
+            "AREA": "منطقه",
+            "ZONE": "ناحیه",
+            "PERSON": "صاحب امتیاز",
+            "REFUEL_CENTER": "مرکز سوختگیری",
+            "BOUNDARY": "مرز",
+            "PROP": "دستگاه اندازه گیری",
+            "DEPOT": "انبار"
+        }
+    }
+}

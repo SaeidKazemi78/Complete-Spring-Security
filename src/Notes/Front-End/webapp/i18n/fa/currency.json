@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "currency" : {
+            "home": {
+                "title": "واحد پولی",
+                "createLabel": "ایجاد واحد پولی",
+                "createOrEditLabel": "ویرایش واحد پولی",
+                "view":"نمایش واحد پولی"
+            },
+            "delete": {
+                "question": "آیا برای حذف واحد پولی  {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "واحد پولی"
+            },
+            "title": "عنوان",
+            "isNationalCurrency": "ارز ملی",
+            "isNationalCurrencyTrue":"بله",
+            "isNationalCurrencyFalse":"خیر"
+        }
+    },
+    "niopdcrateApp": {
+        "currency" : {
+            "created": "واحد پولی با موفقیت ایجاد شد.",
+            "updated": "واحد پولی با موفقیت ویرایش شد.",
+            "deleted": "واحد پولی با موفقیت حذف شد."
+        }
+    }
+}

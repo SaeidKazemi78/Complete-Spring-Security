@@ -1,0 +1,100 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <form name="editForm" role="form" novalidate (ngSubmit)="loadAll()" #editForm="ngForm">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.dailySales.startDate"
+                           for="field_startDate">startDate</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disableTime]="true" [rtlActive]="true" time="00:00:00"
+                                            id="field_startDate"
+                                            class="form-control"
+                                            (onChangeDateTime)="changeDate('startDate')"
+                                            name="startDate" [(ngModel)]="req.startDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.dailySales.finishDate"
+                           for="field_finishDate">finishDate</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disableTime]="true" [rtlActive]="true" time="23:59:59"
+                                            id="field_finishDate"
+                                            class="form-control"
+                                            name="finishDate"
+                                            (onChangeDateTime)="changeDate('finishDate')"
+                                            [(ngModel)]="req.finishDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.finishDate?.dirty && editForm.controls.finishDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.finishDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.finishDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer text-center">
+            <button type="submit" class="btn btn-primary "
+                    [disabled]="editForm.form.invalid ">
+                <span class="fa fa-search"></span>&nbsp;<span
+                jhiTranslate="report.search">Save</span>
+            </button>
+        </div>
+    </form>
+    <br/>
+    <dx-data-grid id="gridContainer"
+                  [rtlEnabled]="true"
+                  [dataSource]="boundaryHistoryEditCarTanks"
+                  [masterDetail]="{ enabled: true, template: 'detail' }"
+                  keyExpr="customerId"
+                  [showBorders]="true">
+        <dxi-column dataField="plaqueOne" caption="پلاک اول"></dxi-column>
+        <dxi-column dataField="plaqueTwo" caption="پلاک دوم"></dxi-column>
+        <dxi-column dataField="carRfId" caption="تگ"></dxi-column>
+
+        <div *dxTemplate="let d of 'detail'">
+            <dx-data-grid
+                [dataSource]="getTasks(d.key)"
+                [showBorders]="true"
+                [columnAutoWidth]="true">
+                <dxi-column dataField="tankType" caption="نوع باک"></dxi-column>
+                <dxi-column dataField="height" caption="ارتفاع"></dxi-column>
+                <dxi-column dataField="latitude" caption="عرض" ></dxi-column>
+                <dxi-column dataField="longitude" caption="طول" ></dxi-column>
+                <dxi-column dataField="tankNo" caption="شماره باک" ></dxi-column>
+                <dxi-column dataField="timestamp" caption="تاریخ" ></dxi-column>
+            </dx-data-grid>
+        </div>
+    </dx-data-grid>
+    <br/>
+</div>

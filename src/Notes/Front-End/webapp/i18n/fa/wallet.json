@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "wallet" : {
+            "home": {
+                "title": "کیف پول",
+                "createLabel": "Create a new Wallet",
+                "createOrEditLabel": "Create or edit a Wallet"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Wallet {{ id }}?"
+            },
+            "detail": {
+                "title": "کیف پول"
+            },
+            "add":"افزایش اعتبار کیف پول",
+            "personId": "Person Id",
+            "customer": "مشتری / صاحب امتیاز",
+            "amount": "مبلغ",
+            "bankAccountType":"نوع حساب"
+        }
+    },
+    "niopdcpaymentApp": {
+        "wallet" : {
+            "created": "A new Wallet is created with identifier {{ param }}",
+            "updated": "A Wallet is updated with identifier {{ param }}",
+            "deleted": "A Wallet is deleted with identifier {{ param }}"
+        }
+    }
+}

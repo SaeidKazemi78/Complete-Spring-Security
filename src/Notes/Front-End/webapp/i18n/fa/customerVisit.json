@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "customerVisit" : {
+            "home": {
+                "title": "بازدید",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "Create or edit a Customer Visit",
+                "customerTitle":"مشتری"
+            },
+            "delete": {
+                "question": "آیا از حذف ایتم مورد نظر اطمینان دارید ؟"
+            },
+            "detail": {
+                "title": "بازدید مشتری"
+            },
+            "description": "توضیحات",
+            "createdDate":"تاریخ ایجاد",
+            "customer": "مشتری",
+            "createDescription":"ایجاد توضیحات"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerVisit" : {
+            "created": "آیتم مورد نظر ایجاد شد",
+            "updated": "آیتم مورد نظر به روز رسانی شد.",
+            "deleted": "آیتم مورد نظر حذف شد."
+        }
+    }
+}

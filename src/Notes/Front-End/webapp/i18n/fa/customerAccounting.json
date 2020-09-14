@@ -1,0 +1,20 @@
+{
+    "niopdcgatewayApp": {
+        "customerAccounting": {
+            "home": {
+                "homeTitle": "خانه",
+                "title": "ثبت حساب مشتریان"
+            },
+            "person": "صاحب امتیاز",
+            "customer": "مشتری",
+            "creditAccountCustomer":"حساب اعتباری مشتری",
+            "creditAccountPerson":"حساب اعتباری صاحب امتیاز",
+            "bankAccountId":"حساب بانکی"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerAccounting": {
+            "updated": "حساب مشتریان با موفقیت ویرایش شد."
+        }
+    }
+}

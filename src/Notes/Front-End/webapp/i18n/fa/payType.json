@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "PayType" : {
+            "null": "",
+            "WITH_ORDER": "با حواله/رسید سوخت",
+            "SEPARATE_RECEIPT": "رسید مجزا",
+            "BILL": "صورت حساب"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "customerCapacity" : {
+            "home": {
+                "customerTitle":"مشتری",
+                "title": "ظرفیت مخازن مشتری"
+            },
+            "delete": {
+                "question": "آیا برای حذف ظرفیت مشتری {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "ظرفیت مشتری"
+            },
+            "capacity": "ظرفیت",
+            "customer": "مشتری",
+            "productGroup": "گروه فرآورده"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerCapacity" : {
+            "created": "ظرفیت مشتری با موفقیت  ایجاد شد.",
+            "updated": "ظرفیت مشتری با موفقیت  ویرایش شد.",
+            "deleted": "ظرفیت مشتری با موفقیت  حذف شد."
+
+
+        }
+    }
+}

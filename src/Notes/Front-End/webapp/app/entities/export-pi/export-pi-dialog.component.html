@@ -1,0 +1,116 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+    <div class="modal-header">
+        <h4 *ngIf="exportPi.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="exportPi.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="alert alert-danger" *ngIf="this.maxAmount <= 0">
+                 <span
+                     jhiTranslate="niopdcgatewayApp.exportPi.message.maxAmount">
+                     This field is required.</span>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportPi.registerDate"
+                           for="field_registerDate">Register Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                            id="field_registerDate" class="form-control"
+                                            name="registerDate" [(ngModel)]="exportPi.registerDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div [hidden]="!(editForm.controls.registerDate?.dirty && editForm.controls.registerDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.registerDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.registerDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportPi.piNumber"
+                           for="field_piNumber">Pi Number</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="piNumber" id="field_piNumber"
+                           [(ngModel)]="exportPi.piNumber" required [minlength]="6" [maxlength]="13"/>
+                    <div [hidden]="!(editForm.controls.piNumber?.dirty && editForm.controls.piNumber?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.piNumber?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.piNumber?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 6 }">
+                            This field is required to be at least 6 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.piNumber?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 13 }">
+                            This field cannot be longer than 13 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportPi.amount"
+                           for="field_amount">Amount</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="amount" id="field_amount"
+                           required
+                           [numeric]="{max: maxAmount, min: 0}"
+                           [(ngModel)]="exportPi.amount"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.exportPi.price" for="field_price">Price</label>
+                    <input [disabled]="true" type="number" class="form-control" name="price" id="field_price"
+                           required
+                           [ngModel]="exportPi.amount * exportletter?.baseRate"/>
+                </div>
+            </div>
+            <div class="col-md-4 vertical-center-group">
+                <div class="form-group">
+                    <input [disabled]="isView" type="checkbox" class="form-control"
+                           name="active"
+                           id="field_active"
+                           [(ngModel)]="exportPi.active"
+                    />
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.exportPi.active"
+                           for="field_active">active</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

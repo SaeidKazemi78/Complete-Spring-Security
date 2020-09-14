@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "Referrer" : {
+            "null": "",
+            "BILL": "BILL",
+            "ORDER": "ORDER",
+            "NORMAL": "NORMAL",
+            "VOUCHER_PAYMENT": "VOUCHER_PAYMENT"
+        }
+    }
+}

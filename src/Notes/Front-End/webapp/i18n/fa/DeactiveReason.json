@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "DeactiveReason" : {
+            "null": "",
+            "DEBTOR": "تخلف",
+            "DOCUMENT_DEFECT" : "نقص مدارک",
+            "NOT_SETTLEMENTS":"عدم تسویه حساب",
+            "OTHERS":"سایر"
+        }
+    }
+}

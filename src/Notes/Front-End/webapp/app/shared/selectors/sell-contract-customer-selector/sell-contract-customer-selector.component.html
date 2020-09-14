@@ -1,0 +1,53 @@
+<div>
+    <div class="input-group">
+        <input #inp class="textInput form-control" style="border:0; height: unset;"
+               [readonly]="!disabled" [disabled]="disabled"
+               [ngModel]="(multiSelect) ? ((selects && selects.length && selects.length > 0) ? selects.length + ' مورد انتخاب شد' : 'موردی انتخاب نشده است') : selects ? selects.customerName+' - '+selects.contractNo: ''"
+               (focus)="showTable()">
+        <a *ngIf="!disabled" class="input-group-append btn btn-outline-secondary rtl-btn" (click)="showTable()">
+            <span class="fa fa-search"></span>
+        </a>
+    </div>
+    <div [style.visibility]="!overlayVisible ? 'collapse' : 'visible'"
+         [style.height]="!overlayVisible ? '0' : 'none'"
+         [style.overflow]="!overlayVisible ? 'hidden' : 'visible'"
+         [style.width]="widthGrid" style="padding: 0;"
+         class="d-inline-block rounded dataGrid">
+        <p-dataTable [value]="customerSellContracts"
+                     [selectionMode]="multiSelect ? 'multiple' : 'single'"
+                     [(selection)]="selects"
+                     (onRowUnselect)="onSelect($event, false)"
+                     (onRowSelect)="onSelect($event, true)"
+                     [rows]="5"
+                     [rowsPerPageOptions]="[5,10,20]"
+                     [paginator]="true"
+                     [responsive]="true"
+                     [stacked]="false"
+                     #dt>
+
+            <p-headerColumnGroup>
+                <p-row>
+                    <p-column></p-column>
+                    <p-column field="customerName" [sortable]="true">
+                        <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.customer.name">Person</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="contractNo" [sortable]="true">
+                        <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.customer.contractNo">Person</span>
+                        </ng-template>
+                    </p-column>
+                </p-row>
+            </p-headerColumnGroup>
+            <p-column [style]="{'width':'38px'}" [selectionMode]="multiSelect ? 'multiple' : 'single'"></p-column>
+            <p-column field="customerName" [filter]="true" filterMatchMode="contains" [sortable]="true">
+            </p-column>
+            <p-column field="contractNo" [filter]="true" filterMatchMode="contains" [sortable]="true"></p-column>
+        </p-dataTable>
+    </div>
+</div>
+
+

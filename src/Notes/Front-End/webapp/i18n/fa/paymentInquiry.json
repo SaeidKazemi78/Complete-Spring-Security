@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "PaymentInquiry":{
+            "PC_POS":"PC-POS",
+            "INTERNET":"اینترنت بانک",
+            "RECEIPT":"رسید بانکی"
+        }
+    }
+}

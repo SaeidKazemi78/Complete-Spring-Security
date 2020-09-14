@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "CostRelated" : {
+            "null": "",
+            "TAX": "TAX",
+            "COMPLICATION": "COMPLICATION",
+            "RENOVATION": "RENOVATION",
+            "POLLUTION": "POLLUTION"
+        }
+    }
+}

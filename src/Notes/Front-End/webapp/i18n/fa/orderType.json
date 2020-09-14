@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "OrderType" : {
+            "null": "",
+            "BOUNDARY_TRANSIT": "مرزی-پایانه",
+            "BOUNDARY_TRANSHIP": "مرزی-بازارچه"
+        }
+    }
+}

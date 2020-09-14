@@ -1,0 +1,261 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="customerDeactiveRule.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="customerDeactiveRule.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customerDeactiveRule.startDate"
+                           for="field_startDate">Start Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [disableTime]="false" [rtlActive]="true"
+                                            id="field_startDate" class="form-control"
+                                            name="startDate" [(ngModel)]="customerDeactiveRule.startDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customerDeactiveRule.finishDate"
+                           for="field_finishDate">Finish Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [disableTime]="true" [rtlActive]="true"
+                                            id="field_finishDate" class="form-control"
+                                            name="finishDate" [(ngModel)]="customerDeactiveRule.finishDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <input [disabled]="isView" type="checkbox" class="form-control"
+                           name="periodic" id="field_periodic"
+
+                           [(ngModel)]="customerDeactiveRule.periodic"/>
+                    <label jhiTranslate="niopdcgatewayApp.customerDeactiveRule.periodic"
+                           for="field_periodic">Depot</label>
+
+                </div>
+            </div>
+
+            <div class="col-xs-12  col-md-4" *ngIf="customerDeactiveRule.periodic">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.customerDeactiveRule.startPeriodDay"
+                           for="field_startPeriodDay">startPeriodDay</label>
+                    <input type="text" id="field_startPeriodDay" name="startPeriodDay" [numeric]="{min: 1 ,max: 31}"
+                           [(ngModel)]="customerDeactiveRule.startPeriodDay" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="col-xs-12  col-md-4" *ngIf="customerDeactiveRule.periodic">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customerDeactiveRule.endPeriodDay"
+                           for="field_endPeriodDay">endPeriodDay</label>
+                    <input type="text" id="field_endPeriodDay" name="endPeriodDay" [numeric]="{min: 1 ,max: 31}"
+                           [(ngModel)]="customerDeactiveRule.endPeriodDay" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <input [disabled]="isView" type="checkbox" class="form-control"
+                           name="byCustomerType" id="field_byCustomerType"
+
+                           [(ngModel)]="customerDeactiveRule.byCustomerType"/>
+                    <label jhiTranslate="niopdcgatewayApp.customerDeactiveRule.byCustomerType"
+                           for="field_byCustomerType">byCustomerType</label>
+
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4" *ngIf="!customerDeactiveRule.byCustomerType">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.customerDeactiveRule.customerCode"
+                           for="field_customer">Customer Code</label>
+                    <jhi-customer-selector
+                        [multiSelect]="false"
+                        [selectObject]="false"
+                        [creator]="true"
+                        [disabled]="isView"
+                        [(ngModel)]="customerDeactiveRule.customerId"
+                        class="form-control"
+                        id="field_customer"
+                        name="customerId"
+                        required >
+
+                    </jhi-customer-selector>
+
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4" *ngIf="customerDeactiveRule.byCustomerType">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.customerDeactiveRule.exceptionCustomers"
+                           for="field_exceptionCustomers">Customer Code</label>
+                    <jhi-customer-selector
+                        [multiSelect]="true"
+                        [selectObject]="false"
+                        [creator]="true"
+                        [disabled]="isView"
+                        [(ngModel)]="customerDeactiveRule.exceptionCustomers"
+                        class="form-control"
+                        id="field_exceptionCustomers"
+                        name="exceptionCustomers"
+                    >
+
+                    </jhi-customer-selector>
+
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.customerDeactiveRule.location"
+                           for="field_location">Location</label>
+                    <input-location-selector [disabled]="isView" class="form-control" id="field_location"
+                                             name="location"
+                                             [(ngModel)]="customerDeactiveRule.locations"
+                                             [ngModelOptions]="{standalone: true}"
+                                             [idSelector]="false"
+
+                                             [selectOfLevel]="'all'"
+                                             [selectByPriority]="true"
+                                             required
+                    ></input-location-selector>
+                <!--    [selectOfLevel]="[2]"-->
+                   <!-- <input-location-selector class="form-control" [idSelector]="true"
+                                             [oneSelection]="false"
+                                             [(ngModel)]="user.locationIds"
+
+                                             [selectOfLevel]="'all'"
+                                             id="field_location" name="location"
+                    ></input-location-selector>-->
+
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-4" *ngIf="customerDeactiveRule.byCustomerType">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.customerType.customerGroup"
+                           for="field_customerGroup">Customer Group</label>
+                    <select [disabled]="isView" class="form-control" name="customerGroup"
+                            (ngModelChange)="onChangeCustomerGroup($event)"
+                            [(ngModel)]="customerDeactiveRule.customerGroup" id="field_customerGroup" required>
+
+                        <option [ngValue]="null" jhiTranslate="niopdcgatewayApp.CustomerGroup.null">
+                        </option>
+                        <option value="STATION" jhiTranslate="niopdcgatewayApp.CustomerGroup.STATION">
+                            SUPPLIER
+                        </option>
+                        <option value="SELLER" jhiTranslate="niopdcgatewayApp.CustomerGroup.SELLER">
+                            CONSUMER
+                        </option>
+                        <option value="MAJOR_CONSUMER"
+                                jhiTranslate="niopdcgatewayApp.CustomerGroup.MAJOR_CONSUMER">
+                            SUPPLIER
+                        </option>
+                        <option value="AIRPLANE" jhiTranslate="niopdcgatewayApp.CustomerGroup.AIRPLANE">
+                            AIRLINE
+                        </option>
+                        <option value="LIQUID_GAS">{{'niopdcgatewayApp.CustomerGroup.LIQUID_GAS' | translate}}
+                        </option>
+
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.customerGroup?.dirty && editForm.controls.customerGroup?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.customerGroup?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xs-12 col-md-4" *ngIf="customerDeactiveRule.byCustomerType">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.customerDeactiveRule.customerType" for="field_customerType">Customer
+                        Type</label>
+                    <p-multiSelect [disabled]="isView" class="form-control" id="field_customerType"
+                                   [options]="customertypes"
+                                   name="customerType"
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                   [(ngModel)]="selectedCustomertypes"
+                                   [ngModelOptions]="{standalone: true}"
+                                   required
+                    ></p-multiSelect>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.customerDeactiveRule.deactiveReason"
+                           for="field_deactiveReasons">Customer Type</label>
+                    <p-multiSelect [disabled]="isView" class="form-control" id="field_deactiveReasons"
+                                   [options]="deactiveReasons"
+                                   name="deactiveReasons"
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                   [(ngModel)]="customerDeactiveRule.deactiveReasons"
+                                   [ngModelOptions]="{standalone: true}"
+                                   required="true"
+                    ></p-multiSelect>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customerDeactiveRule.description"
+                           for="field_description">Description</label>
+                    <textarea [disabled]="isView" type="text" class="form-control" name="description"
+                              id="field_description"
+                              [(ngModel)]="customerDeactiveRule.description"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

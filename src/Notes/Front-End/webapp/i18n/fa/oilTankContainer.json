@@ -1,0 +1,34 @@
+{
+    "niopdcgatewayApp": {
+        "oilTankContainer" : {
+            "home": {
+                "title": "مخزن مظروف",
+                "titleProductUnit": "ظرف خالی",
+                "createLabel":"ایجاد مخزن مظروف",
+                "createProductUnitLabel":"ایجاد ظرف خالی",
+                "createOrEditLabel":"ویرایش مخزن مظروف",
+                "createOrEditProductUnitLabel":"ویرایش ظرف خالی",
+                "view":"نمایش مخزن مظروف",
+                "viewProductUnit":"نمایش ظرف خالی",
+                "search": "جستجو"
+            },
+            "delete": {
+                "question": "آیا برای حذف این مخزن مظروف مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "مخزن مظروف"
+            },
+            "productId": "فرآورده مظروف",
+            "productUnitId": "ظرف",
+            "amount": "تعداد",
+            "refuelCenter": "مرکز سوخت گیری"
+        }
+    },
+    "niopdcaoApp": {
+        "oilTankContainer" : {
+            "created": "مخزن مظروف با موفقیت ایجاد شد.",
+            "updated": "مخزن مظروف با موفقیت ویرایش شد.",
+            "deleted": "مخزن مظروف با موفقیت حذف شد."
+        }
+    }
+}

@@ -1,0 +1,34 @@
+
+{
+    "niopdcgatewayApp": {
+        "bill" : {
+            "home": {
+                "title": "Bills",
+                "createLabel": "Create a new Bill",
+                "createOrEditLabel": "Create or edit a Bill"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Bill {{ id }}?"
+            },
+            "detail": {
+                "title": "Bill"
+            },
+            "customerId": "Customer Id",
+            "sellContractId": "Sell Contract Id",
+            "customerScore": "Customer Score",
+            "paymentPeriod": "Payment Period",
+            "day": "Day",
+            "month": "Month",
+            "year": "Year",
+            "totalPrice": "Total Price",
+            "billItem": "Bill Item"
+        }
+    },
+    "niopdcaccountingApp": {
+        "bill" : {
+            "created": "A new Bill is created with identifier {{ param }}",
+            "updated": "A Bill is updated with identifier {{ param }}",
+            "deleted": "A Bill is deleted with identifier {{ param }}"
+        }
+    }
+}

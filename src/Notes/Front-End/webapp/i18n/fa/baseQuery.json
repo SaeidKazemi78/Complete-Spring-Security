@@ -1,0 +1,41 @@
+
+{
+    "niopdcgatewayApp": {
+        "baseQuery" : {
+            "home": {
+                "title": "کوئری های پایه",
+                "createLabel": "ایجاد کوئری پایه",
+                "createOrEditLabel": "ویرایش کوئری پایه",
+                "view":"نمایش کوئری پایه"
+            },
+            "delete": {
+                "question": "آیا برای حذف کوئری پایه {{param}} مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "کوئری پایه"
+            },
+            "title": "عنوان",
+            "queryCategory": "دسته بندی سند",
+            "tempQuery": "متن کوئری",
+            "parameters": "پارامترهای ورودی",
+            "date": "تاریخ روز (date:)",
+            "startDate": "تاریخ شروع (startDate:)",
+            "finishDate": "تاریخ پایان (finishDate:)",
+            "location": "ناحیه (location:)",
+            "customer": "مشتری (customer:)",
+            "locationAirplane": "مرکز سوختگیری (location:)",
+            "baseCategories": {
+                "null": "",
+                "airplane": "سوخت های هوایی",
+                "boundary": "مرزی"
+            }
+        }
+    },
+    "niopdcaccountingApp": {
+        "baseQuery" : {
+            "created": "کوئری با موفقیت ایجاد شد.",
+            "updated": "کوئری با موفقیت ویرایش شد.",
+            "deleted": "کوئری با موفقیت حذف شد."
+        }
+    }
+}

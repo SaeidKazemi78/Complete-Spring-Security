@@ -1,0 +1,11 @@
+
+.ui-tree .ui-treenode-children {
+    margin: 0;
+    padding:0  0 0 1em !important;
+}
+
+.fa-caret-right:before{content:"\f0d9" !important;}
+
+app-location-selector.form-control {
+    padding: 0;
+}

@@ -1,0 +1,139 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="waterMethanolMixer.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.waterMethanolMixer.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="waterMethanolMixer.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.waterMethanolMixer.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel"
+            jhiTranslate="niopdcgatewayApp.waterMethanolMixer.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.waterMethanolMixer.waterAmount"
+                           for="field_waterAmount">Water Amount</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="waterAmount"
+                           id="field_waterAmount"
+                           [(ngModel)]="waterMethanolMixer.waterAmount" required/>
+                    <div [hidden]="!(editForm.controls.waterAmount?.dirty && editForm.controls.waterAmount?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.waterAmount?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.waterAmount?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.waterMethanolMixer.methanolAmount"
+                           for="field_methanolAmount">Methanol Amount</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="methanolAmount"
+                           id="field_methanolAmount"
+                           [(ngModel)]="waterMethanolMixer.methanolAmount" required/>
+                    <div
+                        [hidden]="!(editForm.controls.methanolAmount?.dirty && editForm.controls.methanolAmount?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.methanolAmount?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.methanolAmount?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.waterMethanolMixer.water"
+                           for="field_water">Water</label>
+                    <select class="form-control" id="field_water" name="water" [(ngModel)]="waterMethanolMixer.waterId"
+                            required>
+                        <option *ngIf="!editForm.value.water" [ngValue]="null" selected></option>
+                        <option [ngValue]="oilTankOption.id"
+                                *ngFor="let oilTankOption of oiltanks; trackBy: trackOilTankById">
+                            {{oilTankOption.registerNo}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.waterMethanolMixer.methanol"
+                           for="field_methanol">Methanol</label>
+                    <select class="form-control" id="field_methanol" name="methanol"
+                            [(ngModel)]="waterMethanolMixer.methanolId" required>
+                        <option *ngIf="!editForm.value.methanol" [ngValue]="null" selected></option>
+                        <option [ngValue]="oilTankOption.id"
+                                *ngFor="let oilTankOption of oiltanks; trackBy: trackOilTankById">
+                            {{oilTankOption.registerNo}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.waterMethanolMixer.methanolMixer"
+                           for="field_methanolMixer">Methanol Mixer</label>
+                    <select class="form-control" id="field_methanolMixer" name="methanolMixer"
+                            [(ngModel)]="waterMethanolMixer.methanolMixerId" required>
+                        <option *ngIf="!editForm.value.methanolMixer" [ngValue]="null" selected></option>
+                        <option [ngValue]="oilTankOption.id"
+                                *ngFor="let oilTankOption of oiltanks; trackBy: trackOilTankById">
+                            {{oilTankOption.registerNo}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div [hidden]="!(editForm.controls.water?.dirty && editForm.controls.water?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.water?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
+                </small>
+            </div>
+
+            <div [hidden]="!(editForm.controls.methanol?.dirty && editForm.controls.methanol?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.methanol?.errors?.required"
+                       jhiTranslate="entity.validation.required">
+                    This field is required.
+                </small>
+            </div>
+
+            <div [hidden]="!(editForm.controls.methanolMixer?.dirty && editForm.controls.methanolMixer?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.methanolMixer?.errors?.required"
+                       jhiTranslate="entity.validation.required">
+                    This field is required.
+                </small>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

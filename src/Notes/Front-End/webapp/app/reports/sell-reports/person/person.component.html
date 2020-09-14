@@ -1,0 +1,259 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <form name="editForm" role="form" novalidate (ngSubmit)="loadAll()" #editForm="ngForm">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <h5 class="col-md-3"
+                        jhiTranslate="report.search">Search
+                    </h5>
+                </div>
+            </div>
+            <div class="card-block container">
+                //todo fix filter
+                <!--<div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.personReport.startDate"
+                                   for="field_startDate">startDate</label>
+                            <div class="d-flex">
+                                <ng2-datetimepicker [disableTime]="true" [rtlActive]="true" time="08:00"
+                                                    id="field_startDate"
+                                                    class="form-control"
+                                                    name="startDate" [(ngModel)]="req.startDate"
+                                                    required></ng2-datetimepicker>
+                            </div>
+                            <div
+                                [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.startDate?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                                       jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                    This field should be a date and time.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.personReport.finishDate"
+                                   for="field_finishDate">finishDate</label>
+                            <div class="d-flex">
+                                <ng2-datetimepicker [disableTime]="true" [rtlActive]="true" time="23:59"
+                                                    id="field_finishDate"
+                                                    class="form-control"
+                                                    name="finishDate"
+                                                    [(ngModel)]="req.finishDate"
+                                                    required></ng2-datetimepicker>
+                            </div>
+                            <div
+                                [hidden]="!(editForm.controls.finishDate?.dirty && editForm.controls.finishDate?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.finishDate?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.finishDate?.errors?.ZonedDateTimelocal"
+                                       jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                    This field should be a date and time.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="checkbox" class="form-control"
+                                   name="allLocations" id="field_location"
+                                   [(ngModel)]="allRegion"/>
+                            <label jhiTranslate="niopdcgatewayApp.personReport.location"
+                                   for="field_location">Location</label>
+
+                            <input-region-selector *ngIf="!allRegion"
+                                                   class="form-control" required
+                                                   [oneSelection]="false"
+                                                   [idSelector]="true"
+                                                   [(ngModel)]="req.customerGroup"
+                                                   name="locations"
+                                                   [selectOfLevel]="'all'">
+                            </input-region-selector>
+                            <input *ngIf="allRegion" disabled type="text"
+                                   class="form-control"
+                                   name="locations"
+                                   [ngModel]="'همه'"/>
+                            <div
+                                [hidden]="!(editForm.controls.location?.dirty && editForm.controls.location?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.location?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.customerType.customerGroup"
+                                   for="field_customerGroup">Customer Group</label>
+                            <select class="form-control" name="customerGroup"
+                                    [(ngModel)]="req.customerGroup" (ngModelChange)="onChangeCustomerGroup($event)"
+                                    id="field_customerGroup">
+                                <option value="LEGAL" jhiTranslate="niopdcgatewayApp.Personality.LEGAL">
+                                    SUPPLIER
+                                </option>
+                                <option value="NATURAL" jhiTranslate="niopdcgatewayApp.Personality.NATURAL">
+                                    CONSUMER
+                                </option>
+                            </select>
+                            <div
+                                [hidden]="!(editForm.controls.customerGroup?.dirty && editForm.controls.customerGroup?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.customerGroup?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-group">
+                            <label jhiTranslate="niopdcgatewayApp.customer.type"
+                                   for="field_type">Type</label>
+                            <select class="form-control" id="field_type" name="type"
+                                    [(ngModel)]="req.customerType">
+                                <option [ngValue]="null" jhiTranslate="global.string.all"></option>
+                                <option [ngValue]="customerTypeOption.id"
+                                        *ngFor="let customerTypeOption of customertypes; trackBy: trackCustomerTypeById">
+                                    {{customerTypeOption.title}}
+                                </option>
+                            </select>
+                        </div>
+                        <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.type?.errors?.required"
+                                   jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+            <div class="card-footer text-center">
+                <button type="submit" class="btn btn-primary "
+                        [disabled]="editForm.form.invalid ">
+                    <span class="fa fa-search"></span>&nbsp;<span
+                    jhiTranslate="report.search">Save</span>
+                </button>
+            </div>
+        </div>
+    </form>
+    <br/>
+
+    <kendo-grid
+        [disabled]="editForm.form.invalid "
+        [data]="gridData"
+        [pageSize]="state.take"
+        [skip]="state.skip"
+        [sort]="state.sort"
+        [group]="state.group"
+        [resizable]="true"
+        [sortable]="{ mode: 'multiple' }"
+        [pageable]="{ pageSizes: [ 10,25,50,100,person?.length] }"
+        [groupable]="{ showFooter: true}"
+        scrollable="scrollable"
+        (dataStateChange)="dataStateChange($event)">
+        <ng-template kendoGridToolbarTemplate>
+
+            <button type="button" kendoGridExcelCommand icon="file-excel" jhiTranslate="report.exportToExcel">Export to
+                Excel
+            </button>
+        </ng-template>
+
+        <kendo-grid-column field="fullName" [title]="'niopdcgatewayApp.personReport.name' | translate" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="fatherName" [title]="'niopdcgatewayApp.personReport.fatherName' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="postalCode" [title]="'niopdcgatewayApp.personReport.postalCode' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="code" [title]="'niopdcgatewayApp.personReport.code' | translate" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="email" [title]="'niopdcgatewayApp.personReport.email' | translate" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="birthRegionTitle"
+                           [title]="'niopdcgatewayApp.personReport.birthRegionTitle' | translate" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="birthDay" [title]="'niopdcgatewayApp.personReport.birthDate' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="costAccount" [title]="'niopdcgatewayApp.personReport.costAccount' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="creditAccount" [title]="'niopdcgatewayApp.personReport.creditAccount' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="cellPhone" [title]="'niopdcgatewayApp.personReport.cellPhone' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="economicCode" [title]="'niopdcgatewayApp.personReport.economicCode' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="registerNo" [title]="'niopdcgatewayApp.personReport.registerNo' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="status" [title]="'niopdcgatewayApp.personReport.status' | translate" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <span jhiTranslate="{{'niopdcgatewayApp.VerifyStatus.' + dataItem.status}}">{{dataItem.status}}</span>
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="telephone" [title]="'niopdcgatewayApp.personReport.telephone' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="nationality" [title]="'niopdcgatewayApp.personReport.nationality' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="country" [title]="'niopdcgatewayApp.personReport.country' | translate" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="createdDate" [title]="'niopdcgatewayApp.personReport.createdDate' | translate" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-messages
+            [pagerOf]="'report.pagerOf' | translate"
+            [pagerItems]="'report.pagerItems' | translate"
+            [groupPanelEmpty]="'report.headerMessage' | translate"
+            [noRecords]="'global.messages.info.emptyRecords' | translate"
+            [pagerItemsPerPage]="'report.pagerItemsPerPage' | translate">
+        </kendo-grid-messages>
+
+        <kendo-grid-excel fileName="person.xlsx"></kendo-grid-excel>
+    </kendo-grid>
+    <br/>
+</div>

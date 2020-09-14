@@ -1,0 +1,39 @@
+
+{
+    "niopdcgatewayApp": {
+        "receivedProductContainer" : {
+            "home": {
+                "title": "فرآورده های دریافتی مظروف",
+                "createLabel":"ایجاد فرآورده دریافتی مظروف",
+                "createOrEditLabel":"ویرایش فرآورده دریافتی مظروف",
+                "view":"نمایش فرآورده دریافتی مظروف",
+                "dayDepotContainerTitle":"روز مخزن مظروف"
+            },
+            "delete": {
+                "question": "آیا برای حذف فرآورده دریافتی مظروف مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "فرآورده دریافتی مظروف"
+            },
+            "registerDate": "تاریخ ثبت",
+            "inventoryId": "شناسه موجودی",
+            "truckNumber": "شماره کامیون",
+            "truckSerial": "سریال کامیون",
+            "waybillNumber": "شماره بارنامه",
+            "driverName": "نام راننده",
+            "contractorNumber": "شماره قرارداد",
+            "sendCount": "تعداد ارسالی",
+            "receiveCount": "تعداد دریافتی",
+            "description": "توضیحات",
+            "oilTankContainer": "مخزن مظروف",
+            "dayDepotContainer": "انبار روز مظروف"
+        }
+    },
+    "niopdcaoApp": {
+        "receivedProductContainer" : {
+            "created": "فرآورده دریافتی مظروف با موفقیت ایجاد شد.",
+            "updated": "فرآورده دریافتی مظروف با موفقیت ویرایش شد.",
+            "deleted": "A فرآورده دریافتی مظروف با موفقیت حذف شد."
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "FuelType" : {
+            "null": "",
+            "RE_FUEL": "RE_FUEL",
+            "DE_FUEL": "DE_FUEL"
+        }
+    }
+}

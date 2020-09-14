@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="jafari (generated)" id="1574252717908-1">
+        <sql>
+            DROP STATISTICS [dbo].[car_tank].[_dta_stat_1414296098_8_7]
+        </sql>
+    </changeSet>
+    <changeSet author="jafari (generated)" id="1574252717908-2">
+        <sql>
+            DROP STATISTICS [dbo].[car_tank].[_dta_stat_1414296098_1_8]
+        </sql>
+    </changeSet>
+    <changeSet author="jafari (generated)" id="1574252717908-3">
+        <sql>
+            DROP STATISTICS [dbo].[car_tank].[_dta_stat_1414296098_1_7_8]
+        </sql>
+    </changeSet>
+    <changeSet author="jafari (generated)" id="1574252717908-4">
+        <sql>
+            ALTER TABLE [dbo].[car_tank] DROP CONSTRAINT [UKd2af3sygq5u9wbuydl61jsry5]
+            DROP STATISTICS [dbo].[car_tank].[UKd2af3sygq5u9wbuydl61jsry5]
+        </sql>
+    </changeSet>
+    <changeSet author="jafari (generated)" id="1574252717908-5">
+        <modifyDataType tableName="car_tank" columnName="tank_no" newDataType="smallint" schemaName="dbo"/>
+    </changeSet>
+    <changeSet author="jafari (generated)" id="1574252717908-6">
+        <sql>
+            update car_tank_aud set tank_no = '0'  where
+            not (tank_no = '1' or
+            tank_no = '2' or
+            tank_no = '3' or
+            tank_no = '4' or
+            tank_no = '5' or
+            tank_no = '6' )
+        </sql>
+    </changeSet>
+    <changeSet author="jafari (generated)" id="1574252717908-7">
+        <sql>
+            update car_tank set tank_no = '0'  where
+            not (tank_no = '1' or
+            tank_no = '2' or
+            tank_no = '3' or
+            tank_no = '4' or
+            tank_no = '5' or
+            tank_no = '6' )
+        </sql>
+    </changeSet>
+    <changeSet author="jafari (generated)" id="1574252717908-8">
+        <modifyDataType tableName="car_tank_aud" columnName="tank_no" newDataType="smallint" schemaName="dbo"/>
+    </changeSet>
+
+</databaseChangeLog>

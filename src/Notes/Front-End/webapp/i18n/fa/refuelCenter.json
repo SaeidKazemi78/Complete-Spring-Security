@@ -1,0 +1,41 @@
+{
+    "niopdcgatewayApp": {
+        "refuelCenter": {
+            "home": {
+                "title": "مرکز سوختگیری",
+                "createLabel": "ایجاد مرکز سوختگیری",
+                "createOrEditLabel": "ویرایش مرکز سوختگیری",
+                "view": "نمایش مرکز سوخت گیری"
+            },
+            "delete": {
+                "question": "آیا برای حذف مرکز سوخت گیری {{param}} مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "مرکز سوخت گیری"
+            },
+            "persianTitle": "نام فارسی",
+            "englishTitle": "نام انگلیسی",
+            "code": "کد",
+            "locationId": "ناحیه",
+            "regionId": "شهر",
+            "fuelReceiptStartNumber": "شماره شروع رسید سوخت",
+            "fuelReceiptEndNumber": "شماره پایان رسید سوخت",
+            "fuelReceiptCurrentNumber": "شماره جاری رسید سوخت",
+            "wayBillStartNumber": "شماره شروع بارنامه",
+            "wayBillEndNumber": "شماره پایان بارنامه",
+            "wayBillCurrentNumber": "شماره جاری بارنامه",
+            "depot": "انبار",
+            "transferTypes": "انواع انتقالات",
+            "targetRefuelCenters": "مرکز سوخت گیری های مجاز",
+            "airport": "فرودگاه های تحت پوشش",
+            "maxDifferenceAmount": "حداکثر پورسانت"
+        }
+    },
+    "niopdcaoApp": {
+        "refuelCenter": {
+            "created": "مرکز سوخت گیری با موفقیت ایجاد شد.",
+            "updated": "مرکز سوخت گیری با موفقیت ویرایش شد.",
+            "deleted": "مرکز سوخت گیری با موفقیت حذف شد."
+        }
+    }
+}

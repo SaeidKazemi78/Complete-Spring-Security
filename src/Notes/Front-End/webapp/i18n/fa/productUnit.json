@@ -1,0 +1,27 @@
+{
+    "niopdcgatewayApp": {
+        "productUnit" : {
+            "home": {
+                "title": "واحد فرآورده",
+                "createLabel":"ایجاد واحد فرآورده",
+                "createOrEditLabel":"ویرایش واحد فرآورده",
+                "view":"نمایش واحد فرآورده"
+            },
+            "delete": {
+                "question": "آیا برای حذف واحد فرآورده  {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "واحد فرآورده"
+            },
+            "title": "عنوان",
+            "code": "كد"
+        }
+    },
+    "niopdcbaseApp": {
+        "productUnit" : {
+            "created": "واحد فرآورده با موفقیت  ایجاد شد.",
+            "updated": "واحد فرآورده با موفقیت  ویرایش شد.",
+            "deleted": "واحد فرآورده با موفقیت  حذف شد."
+        }
+    }
+}

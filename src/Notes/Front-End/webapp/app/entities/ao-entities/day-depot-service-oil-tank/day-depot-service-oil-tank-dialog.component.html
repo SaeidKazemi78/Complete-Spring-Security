@@ -1,0 +1,494 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="dayDepotServiceOilTank.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.dayDepotServiceOilTank.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="dayDepotServiceOilTank.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.dayDepotServiceOilTank.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel"
+            jhiTranslate="niopdcgatewayApp.dayDepotServiceOilTank.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.dayDepotServiceOilTank.oilTankService"
+                           for="field_oilTank">Oil
+                        Tank</label>
+                    <input [disabled]="true" class="form-control" id="field_oilTank" name="oilTank"
+                           [(ngModel)]="dayDepotServiceOilTank.oilTankServiceTitle"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"
+                    jhiTranslate="niopdcgatewayApp.dayDepotServiceOilTank.home.start">
+                </h5>
+            </div>
+            <div class="card-block container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.measurementOilTank.sixtyAmount"
+                                   for="field_sixtyAmount">Sixty Amount</label>
+                            <input [disabled]="true" type="number" class="form-control" name="sixtyAmount"
+                                   id="field_sixtyAmount"
+                                   [(ngModel)]="dayDepotServiceOilTank.startMeasurementOilTankSixtyAmount" required/>
+                            <div
+                                [hidden]="!(editForm.controls.sixtyAmount?.dirty && editForm.controls.sixtyAmount?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.sixtyAmount?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.sixtyAmount?.errors?.number"
+                                       jhiTranslate="entity.validation.number">
+                                    This field should be a number.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.measurementOilTank.specialWeight"
+                                   for="field_specialWeight">Special Weight</label>
+                            <input [disabled]="isView || disableStart" pattern="(^(?:0)\.[0-9]+$|(1)|(0))"
+                                   class="form-control"
+                                   name="specialWeight"
+                                   id="field_specialWeight"
+                                   [(ngModel)]="dayDepotServiceOilTank.startMeasurementOilTankSpecialWeight" required/>
+                            <div
+                                [hidden]="!(editForm.controls.specialWeight?.dirty && editForm.controls.specialWeight?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.specialWeight?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.specialWeight?.errors?.number"
+                                       jhiTranslate="entity.validation.number">
+                                    This field should be a number.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.measurementOilTank.environmentTemperature"
+                                   for="field_environmentTemperature">Environment Temperature</label>
+                            <input [disabled]="isView || disableStart" type="number" class="form-control"
+                                   name="environmentTemperature"
+                                   id="field_environmentTemperature"
+                                   [(ngModel)]="dayDepotServiceOilTank.startMeasurementOilTankEnvironmentTemperature"
+                                   required/>
+                            <div
+                                [hidden]="!(editForm.controls.environmentTemperature?.dirty && editForm.controls.environmentTemperature?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.environmentTemperature?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.environmentTemperature?.errors?.number"
+                                       jhiTranslate="entity.validation.number">
+                                    This field should be a number.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.measurementOilTank.productTemperature"
+                                   for="field_productTemperature">Product Temperature</label>
+                            <input [disabled]="isView || disableStart" type="number" class="form-control"
+                                   name="productTemperature"
+                                   id="field_productTemperature"
+                                   [(ngModel)]="dayDepotServiceOilTank.startMeasurementOilTankProductTemperature"
+                                   required/>
+                            <div
+                                [hidden]="!(editForm.controls.productTemperature?.dirty && editForm.controls.productTemperature?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.productTemperature?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.productTemperature?.errors?.number"
+                                       jhiTranslate="entity.validation.number">
+                                    This field should be a number.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.dayDepot.startMeasurementOilTankAmountDeep"
+                                   for="field_description">Description</label>
+                            <select
+                                *ngIf="serviceOilTank && serviceOilTank.measureType===MeasureType[MeasureType.NORMAL]"
+                                [disabled]="isView ||isHaveOldDayDepot"
+                                class="form-control"
+                                id="field_startMeasurementOilTankAmountDeep"
+                                name="startMeasurementOilTankAmountDeep"
+                                [(ngModel)]="dayDepotServiceOilTank.startMeasurementOilTankAmountDeep"
+                                (ngModelChange)="onStartMeasurementOilTankAmountDeep($event)"
+                                required>
+                                <option *ngIf="!editForm.value.startMeasurementOilTankAmountDeep" [ngValue]="null"
+                                        selected></option>
+                                <option [ngValue]="startMeasurementOilTankAmountDeepOption.millimeter"
+                                        *ngFor="let startMeasurementOilTankAmountDeepOption of literatureVolumeOilTanks; ">
+                                    {{startMeasurementOilTankAmountDeepOption.millimeter}}
+                                </option>
+                            </select>
+
+                            <input [disabled]="isView||isHaveOldDayDepot"
+                                   *ngIf="serviceOilTank && serviceOilTank.measureType===MeasureType[MeasureType.RATIO]"
+                                   type="number"
+                                   (blur)="onBlurStartDeep()"
+                                   class="form-control" name="startMeasurementOilTankAmountDeepServiceTankRatio"
+                                   id="field_startMeasurementOilTankAmountDeepServiceTankRatio"
+                                   [(ngModel)]="dayDepotServiceOilTank.startMeasurementOilTankAmountDeep"/>
+                            <div
+                                [hidden]="!(editForm.controls.startMeasurementOilTankAmountDeep?.dirty && editForm.controls.startMeasurementOilTankAmountDeep?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.startMeasurementOilTankAmountDeep?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.startMeasurementOilTankAmountDeep?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                                    This field cannot be longer than 200 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.dayDepot.startMeasurementOilTankAmount"
+                                   for="field_description">Description</label>
+                            <input [disabled]="true" type="number" class="form-control"
+                                   name="startMeasurementOilTankAmount"
+                                   id="field_startMeasurementOilTankAmount"
+                                   [(ngModel)]="dayDepotServiceOilTank.startMeasurementOilTankAmount"/>
+                            <div
+                                [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.description?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.description?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                                    This field cannot be longer than 200 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.dayDepot.startMeasurementOilTankRegisterDate"
+                                   for="field_startMeasurementOilTankRegisterDate">Register Date</label>
+                            <div class="d-flex">
+                                <ng2-datetimepicker [disabled]="isView" [rtlActive]="true"
+                                                    time="00:00:00"
+                                                    id="field_startMeasurementOilTankRegisterDate"
+                                                    class="form-control"
+                                                    name="startMeasurementOilTankRegisterDate"
+                                                    [(ngModel)]="dayDepotServiceOilTank.startMeasurementOilTankRegisterDate"
+                                                    required></ng2-datetimepicker>
+                            </div>
+                            <div
+                                [hidden]="!(editForm.controls.registerDate?.dirty && editForm.controls.registerDate?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.registerDate?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.registerDate?.errors?.ZonedDateTimelocal"
+                                       jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                    This field should be a date and time.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1" style="align-items: center;display: flex">
+                        <button name="refreshStart" type="button" (click)="refreshStart()">
+                            <span class="fa fa-refresh"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"
+                    jhiTranslate="niopdcgatewayApp.dayDepotServiceOilTank.home.end">
+                </h5>
+            </div>
+            <div class="card-block container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.measurementOilTank.sixtyAmount"
+                                   for="field_endSixtyAmount">Sixty Amount</label>
+                            <input [disabled]="true" type="number" class="form-control" name="endSixtyAmount"
+                                   id="field_endSixtyAmount"
+                                   [(ngModel)]="dayDepotServiceOilTank.endMeasurementOilTankSixtyAmount" required/>
+                            <div
+                                [hidden]="!(editForm.controls.sixtyAmount?.dirty && editForm.controls.sixtyAmount?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.sixtyAmount?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.sixtyAmount?.errors?.number"
+                                       jhiTranslate="entity.validation.number">
+                                    This field should be a number.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.measurementOilTank.specialWeight"
+                                   for="field_endSpecialWeight">Special Weight</label>
+                            <input [disabled]="isView || disableEnd" pattern="(^(?:0)\.[0-9]+$|(1)|(0))"
+                                   class="form-control"
+                                   name="sendSpecialWeight"
+                                   id="field_endSpecialWeight"
+                                   [(ngModel)]="dayDepotServiceOilTank.endMeasurementOilTankSpecialWeight" required/>
+                            <div
+                                [hidden]="!(editForm.controls.specialWeight?.dirty && editForm.controls.specialWeight?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.specialWeight?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.specialWeight?.errors?.number"
+                                       jhiTranslate="entity.validation.number">
+                                    This field should be a number.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.measurementOilTank.environmentTemperature"
+                                   for="field_endEnvironmentTemperature">Environment Temperature</label>
+                            <input [disabled]="isView || disableEnd" type="number" class="form-control"
+                                   name="endEnvironmentTemperature"
+                                   id="field_endEnvironmentTemperature"
+                                   [(ngModel)]="dayDepotServiceOilTank.endMeasurementOilTankEnvironmentTemperature"
+                                   required/>
+                            <div
+                                [hidden]="!(editForm.controls.environmentTemperature?.dirty && editForm.controls.environmentTemperature?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.environmentTemperature?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.environmentTemperature?.errors?.number"
+                                       jhiTranslate="entity.validation.number">
+                                    This field should be a number.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.measurementOilTank.productTemperature"
+                                   for="field_endProductTemperature">Product Temperature</label>
+                            <input [disabled]="isView || disableEnd" type="number" class="form-control"
+                                   name="endProductTemperature"
+                                   id="field_endProductTemperature"
+                                   [(ngModel)]="dayDepotServiceOilTank.endMeasurementOilTankProductTemperature"
+                                   required/>
+                            <div
+                                [hidden]="!(editForm.controls.productTemperature?.dirty && editForm.controls.productTemperature?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.productTemperature?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.productTemperature?.errors?.number"
+                                       jhiTranslate="entity.validation.number">
+                                    This field should be a number.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.dayDepot.endMeasurementOilTankAmountDeep"
+                                   for="field_description">Description</label>
+                            <select
+                                *ngIf="serviceOilTank && serviceOilTank.measureType===MeasureType[MeasureType.NORMAL]"
+                                [disabled]="isView"
+                                class="form-control"
+                                id="field_endMeasurementOilTankAmountDeep"
+                                name="endMeasurementOilTankAmountDeep"
+                                [(ngModel)]="dayDepotServiceOilTank.endMeasurementOilTankAmountDeep"
+                                (ngModelChange)="onEndMeasurementOilTankAmountDeep($event)"
+                                required>
+                                <option *ngIf="!editForm.value.endMeasurementOilTankAmountDeep" [ngValue]="null"
+                                        selected></option>
+                                <option [ngValue]="endMeasurementOilTankAmountDeepOption.millimeter"
+                                        *ngFor="let endMeasurementOilTankAmountDeepOption of literatureVolumeOilTanks; ">
+                                    {{endMeasurementOilTankAmountDeepOption.millimeter}}
+                                </option>
+                            </select>
+                            <input [disabled]="isView"
+                                   *ngIf="serviceOilTank && serviceOilTank.measureType===MeasureType[MeasureType.RATIO]"
+                                   type="number"
+                                   (blur)="onBlurEndDeep()"
+                                   class="form-control" name="endMeasurementOilTankAmountDeepServiceTankRatio"
+                                   id="field_endMeasurementOilTankAmountDeepServiceTankRatio"
+                                   [(ngModel)]="dayDepotServiceOilTank.endMeasurementOilTankAmountDeep"/>
+                            <div
+                                [hidden]="!(editForm.controls.endMeasurementOilTankAmountDeep?.dirty && editForm.controls.endMeasurementOilTankAmountDeep?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.endMeasurementOilTankAmountDeep?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.endMeasurementOilTankAmountDeep?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                                    This field cannot be longer than 200 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.dayDepot.endMeasurementOilTankAmount"
+                                   for="field_endMeasurementOilTankAmount">Description</label>
+                            <input [disabled]="true" type="number" class="form-control"
+                                   name="endMeasurementOilTankAmount"
+                                   id="field_endMeasurementOilTankAmount"
+                                   [(ngModel)]="dayDepotServiceOilTank.endMeasurementOilTankAmount" minlength="3"
+                                   maxlength="200"/>
+                            <div
+                                [hidden]="!(editForm.controls.endMeasurementOilTankAmount?.dirty && editForm.controls.endMeasurementOilTankAmount?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.description?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.description?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                                    This field cannot be longer than 200 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.dayDepot.endMeasurementOilTankRegisterDate"
+                                   for="field_endMeasurementOilTankDate">Register Date</label>
+                            <div class="d-flex">
+                                <ng2-datetimepicker [disabled]="isView" [rtlActive]="true"
+                                                    time="23:59:59"
+                                                    id="field_endMeasurementOilTankDate"
+                                                    class="form-control"
+                                                    name="endMeasurementOilTankDate"
+                                                    [(ngModel)]="dayDepotServiceOilTank.endMeasurementOilTankRegisterDate"
+                                                    required></ng2-datetimepicker>
+                            </div>
+                            <div
+                                [hidden]="!(editForm.controls.registerDate?.dirty && editForm.controls.registerDate?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.registerDate?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.registerDate?.errors?.ZonedDateTimelocal"
+                                       jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                    This field should be a date and time.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1" style="align-items: center;display: flex">
+                        <button name="refreshEnd" type="button" (click)="refreshEnd()">
+                            <span class="fa fa-refresh"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.dayDepotServiceOilTank.description"
+                           for="field_description">Description</label>
+                    <textarea [disabled]="isView" type="text" class="form-control" name="description"
+                              id="field_description"
+                              [(ngModel)]="dayDepotServiceOilTank.description" minlength="3" maxlength="200"></textarea>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.description?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.description?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                            This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancelShort">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.saveShort">Save</span>
+        </button>
+        <button *ngIf="!isView" type="button" (click)="save(true)" [disabled]="editForm.form.invalid || isSaving"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.saveAndNextShort">Save</span>
+        </button>
+    </div>
+</form>

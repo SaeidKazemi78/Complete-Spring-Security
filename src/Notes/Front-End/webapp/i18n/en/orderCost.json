@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "orderCost" : {
+            "home": {
+                "title": "Order Costs",
+                "createLabel": "Create a new Order Cost",
+                "createOrEditLabel": "Create or edit a Order Cost"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Order Cost {{ id }}?"
+            },
+            "detail": {
+                "title": "Order Cost"
+            },
+            "costId": "Cost Id",
+            "rate": "Rate",
+            "productId": "Product Id",
+            "order": "Order",
+            "orderProduct": "Order Product"
+        }
+    },
+    "niopdcorderApp": {
+        "orderCost" : {
+            "created": "A new Order Cost is created with identifier {{ param }}",
+            "updated": "A Order Cost is updated with identifier {{ param }}",
+            "deleted": "A Order Cost is deleted with identifier {{ param }}"
+        }
+    }
+}

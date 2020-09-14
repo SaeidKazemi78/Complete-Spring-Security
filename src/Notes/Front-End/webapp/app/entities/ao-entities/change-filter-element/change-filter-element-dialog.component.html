@@ -1,0 +1,257 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="changeFilterElement.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="changeFilterElement.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.changeFilterElement.responseStatus"
+                           for="field_responseStatus">Response Status</label>
+                    <select [disabled]="isView" class="form-control" name="responseStatus"
+                            [(ngModel)]="changeFilterElement.responseStatus" id="field_responseStatus" required>
+                        <option value="CONFIRM">{{'niopdcgatewayApp.ResponseStatus.CONFIRM' | translate}}</option>
+                        <option value="REJECT">{{'niopdcgatewayApp.ResponseStatus.REJECT' | translate}}</option>
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.responseStatus?.dirty && editForm.controls.responseStatus?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.responseStatus?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="changeFilterElement.responseStatus=='CONFIRM'" class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.changeFilterElement.pdReading"
+                           for="field_pdReading">Pd Reading</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="pdReading" id="field_pdReading"
+                           [(ngModel)]="changeFilterElement.pdReading"/>
+                </div>
+            </div>
+            <div *ngIf="changeFilterElement.responseStatus=='CONFIRM'" class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.changeFilterElement.flowTest"
+                           for="field_flowTest">Flow Test</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="flowTest" id="field_flowTest"
+                           [(ngModel)]="changeFilterElement.flowTest"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <p-dataTable [sortField]="predicate" [sortOrder]="reverse ? -1 : 1" #dt
+                         [value]="changeFilterElement.changeRequestElements"
+                         [lazy]="false"
+                         [responsive]="true" [stacked]="false" [editable]="true"
+                         [emptyMessage]="'global.messages.info.emptyRecords' | translate">
+
+                <p-headerColumnGroup>
+                    <p-row>
+                        <p-column field="title">
+                            <ng-template pTemplate="header">
+                                <span jhiTranslate="niopdcgatewayApp.element.title">Title</span>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="count">
+                            <ng-template pTemplate="header">
+                                <span jhiTranslate="niopdcgatewayApp.element.count">Title</span>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="originalModel">
+                            <ng-template pTemplate="header">
+                                <span jhiTranslate="niopdcgatewayApp.element.originalModel">Original Model</span>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="currentModel">
+                            <ng-template pTemplate="header">
+                                <span jhiTranslate="niopdcgatewayApp.element.currentModel">Current Model</span>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="model">
+                            <ng-template pTemplate="header">
+                                <span jhiTranslate="niopdcgatewayApp.changeRequestElement.model">Current Model</span>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="walked">
+                            <ng-template pTemplate="header">
+                                <span jhiTranslate="niopdcgatewayApp.changeRequestElement.walked">walked</span>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="lastChangeDate">
+                            <ng-template pTemplate="header">
+                                <span jhiTranslate="niopdcgatewayApp.element.lastChangeDate">Last Change Date</span>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="elementRequestReason">
+                            <ng-template pTemplate="header">
+                                <span
+                                    jhiTranslate="niopdcgatewayApp.element.elementRequestReason">Last Change Date</span>
+                            </ng-template>
+                        </p-column>
+                    </p-row>
+                </p-headerColumnGroup>
+
+                <p-column field="title" [header]="'niopdcgatewayApp.element.title' | translate"></p-column>
+                <p-column field="count" [header]="'niopdcgatewayApp.element.count' | translate"></p-column>
+                <p-column field="originalModel"
+                          [header]="'niopdcgatewayApp.element.originalModel' | translate"></p-column>
+                <p-column field="currentModel"
+                          [header]="'niopdcgatewayApp.element.currentModel' | translate"></p-column>
+                <p-column field="model"
+                          [header]="'niopdcgatewayApp.changeRequestElement.model' | translate" [editable]="true">
+                    <!--<ng-template let-row="rowData" let-index="rowIndex" let-col pTemplate="editor">
+                        <input  type="text"  [(ngModel)]="row[col.field]"/>
+                    </ng-template>-->
+                </p-column>
+                <p-column field="walked"
+                          [header]="'niopdcgatewayApp.changeRequestElement.walked' | translate"
+                          [editable]="true"></p-column>
+                <p-column field="lastChangeDate" [header]="'niopdcgatewayApp.element.lastChangeDate' | translate">
+                    <ng-template let-item="rowData" pTemplate="body">
+                        <span>{{item.lastChangeDate | dateTimeJalali}}</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="elementRequestReason"
+                          [header]="'niopdcgatewayApp.element.elementRequestReason' | translate">
+                    <ng-template let-item="rowData" pTemplate="body">
+                        <span>{{'niopdcgatewayApp.ElementRequestReason.'+item.elementRequestReason | translate}}</span>
+                    </ng-template>
+                </p-column>
+            </p-dataTable>
+        </div>
+        <div *ngIf="changeFilterElement.responseStatus=='CONFIRM'" class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.changeFilterElement.conditionOfCartridges"
+                           for="field_conditionOfCartridges">Condition Of Cartridges</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="conditionOfCartridges"
+                           id="field_conditionOfCartridges"
+                           [(ngModel)]="changeFilterElement.conditionOfCartridges"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.changeFilterElement.conditionOfSeals"
+                           for="field_conditionOfSeals">Condition Of Seals</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="conditionOfSeals"
+                           id="field_conditionOfSeals"
+                           [(ngModel)]="changeFilterElement.conditionOfSeals"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.changeFilterElement.conditionOfCoating"
+                           for="field_conditionOfCoating">Condition Of Coating</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="conditionOfCoating"
+                           id="field_conditionOfCoating"
+                           [(ngModel)]="changeFilterElement.conditionOfCoating"/>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="changeFilterElement.responseStatus=='CONFIRM'" class="row">
+
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.changeFilterElement.pdGauge"
+                           for="field_pdGauge">Pd Gauge</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="pdGauge" id="field_pdGauge"
+                           [(ngModel)]="changeFilterElement.pdGauge"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.changeFilterElement.airEliminator"
+                           for="field_airEliminator">Air Eliminator</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="airEliminator"
+                           id="field_airEliminator"
+                           [(ngModel)]="changeFilterElement.airEliminator"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.changeFilterElement.reliefValue"
+                           for="field_reliefValue">Relief Value</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="reliefValue"
+                           id="field_reliefValue"
+                           [(ngModel)]="changeFilterElement.reliefValue"/>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="changeFilterElement.responseStatus=='CONFIRM'" class="row">
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.changeFilterElement.sampleDrainValue"
+                           for="field_sampleDrainValue">Sample Drain Value</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="sampleDrainValue"
+                           id="field_sampleDrainValue"
+                           [(ngModel)]="changeFilterElement.sampleDrainValue"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.changeFilterElement.namePlate"
+                           for="field_namePlate">Name Plate</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="namePlate"
+                           id="field_namePlate"
+                           [(ngModel)]="changeFilterElement.namePlate"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.changeFilterElement.description"
+                           for="field_description">Description</label>
+                    <textarea [disabled]="isView" type="text" class="form-control" name="description"
+                              id="field_description"
+                              [(ngModel)]="changeFilterElement.description">
+                    </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView && mode=='response-draft'" type="submit" [disabled]="editForm.form.invalid || isSaving"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+        <button *ngIf="mode=='response-confirm'" (click)="confirm()" [disabled]="editForm.form.invalid || isSaving"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.confirm">Save</span>
+        </button>
+        <button *ngIf="mode=='response-send'" (click)="send()" [disabled]="editForm.form.invalid || isSaving"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.send">Save</span>
+        </button>
+    </div>
+</form>

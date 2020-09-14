@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "passCard" : {
+            "home": {
+                "title": "کارت تردد",
+                "createLabel": "ایجاد کارت تردد",
+                "createOrEditLabel": "ویرایش کارت تردد",
+                "driverTitle":"راننده"
+            },
+            "delete": {
+                "question": "آیا برای حذف کارت تردد مطمئن هستید ؟ "
+            },
+            "detail": {
+                "title": "کارت تردد"
+            },
+            "fromDate": "از تاریخ",
+            "toDate": "تا تاریخ",
+            "serial": "سریال کارت تردد",
+            "driver": "راننده"
+        }
+    },
+    "niopdcbaseApp": {
+        "passCard" : {
+            "created": "کارت تردد با موفقیت ایجاد شد.",
+            "updated": "کارت تردد با موفقیت ویرایش شد.",
+            "deleted": "کارت تردد با موفقیت حذف شد."
+        }
+    }
+}

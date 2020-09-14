@@ -1,0 +1,293 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="news.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="news.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.news.title"
+                           for="field_title">Title</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="title" id="field_title"
+                           [(ngModel)]="news.title" required/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.news.startDate"
+                           for="field_startDate">Start Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" id="field_startDate"
+                                            class="form-control"
+                                            name="startDate" [(ngModel)]="news.startDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.news.finishDate"
+                           for="field_finishDate">Finish Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="23:59:59" id="field_finishDate"
+                                            class="form-control"
+                                            name="finishDate" [(ngModel)]="news.finishDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.news.newsType"
+                           for="field_newsType">News Type</label>
+                    <select [disabled]="isView" class="form-control" name="newsType" [(ngModel)]="news.newsType"
+                            id="field_newsType" required>
+                        <option value="ALERT">{{'niopdcgatewayApp.NewsType.ALERT' | translate}}</option>
+                        <option value="NEWS">{{'niopdcgatewayApp.NewsType.NEWS' | translate}}</option>
+                        <option value="EVENT">{{'niopdcgatewayApp.NewsType.EVENT' | translate}}</option>
+                        <option value="INFO">{{'niopdcgatewayApp.NewsType.INFO' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.newsType?.dirty && editForm.controls.newsType?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.newsType?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.news.newsAccessType"
+                           for="field_newsAccessType">News Access Type</label>
+                    <select class="form-control" name="newsAccessType" [(ngModel)]="news.newsAccessType"
+                            id="field_newsAccessType" required>
+                        <option value="PUBLIC">{{'niopdcgatewayApp.NewsAccessType.PUBLIC' | translate}}
+                        </option>
+                        <option value="INTERNAL">{{'niopdcgatewayApp.NewsAccessType.INTERNAL' | translate}}
+                        </option>
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.newsAccessType?.dirty && editForm.controls.newsAccessType?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.newsAccessType?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6" style="height: 100%"
+                 *ngIf="news.newsAccessType===NewsAccessType[NewsAccessType.INTERNAL]">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.news.location" for="field_location">Location</label>
+                    <input-location-selector
+                                             class="form-control"
+                                             [disabled]="isView"
+                                             [idSelector]="true"
+                                             [oneSelection]="false"
+                                             [(ngModel)]="news.locations"
+                                             [selectByPriority]="true"
+                                             [selectOfLevel]="'all'"
+                                             id="field_location" name="location"
+
+                    ></input-location-selector>
+                </div>
+                <div [hidden]="!(editForm.controls.locations?.dirty && editForm.controls.locations?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.locations?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-6" *ngIf="news.newsAccessType===NewsAccessType[NewsAccessType.INTERNAL]">
+                <div class="form-group">
+
+                    <label class="form-control-label" jhiTranslate="userManagement.userType"
+                           for="field_userTypes">Oil Tank Type</label>
+                    <p-multiSelect
+                        [disabled]="isView"
+                        class="form-control"
+                        name="userTypes"
+                        id="field_userTypes"
+                        (onChange)="onChangeUserType($event)"
+                        [options]="userTypesOptions"
+                        [(ngModel)]="news.userTypes"
+                        [defaultLabel]="'global.messages.info.choose' | translate"
+                        [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                        required
+                    >
+                    </p-multiSelect>
+
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-6" *ngIf="news.newsAccessType===NewsAccessType[NewsAccessType.INTERNAL]  && showRefuelCenter">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.userRefuelCenter.refuelCenter" for="field_refuelCenter">RefuelCenter</label>
+                    <p-multiSelect class="form-control" id="field_refuelCenter"
+                                   [options]="refuelCenters"
+                                   name="refuelCenter"
+
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                   [(ngModel)]="news.refuelCenters"
+                                   [ngModelOptions]="{standalone: true}"
+                    ></p-multiSelect>
+                </div>
+                <div [hidden]="!(editForm.controls.refuelCenter?.dirty && editForm.controls.refuelCenter?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.refuelCenter?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.news.picture1"
+                           for="field_picture">Picture</label>
+                    <div>
+                        <img [src]="'data:' + news.thumbnailContentType + ';base64,' + news.thumbnail"
+                             style="max-height: 100px;" *ngIf="news.thumbnail" alt="news image"/>
+                        <div *ngIf="news.thumbnail" class="form-text text-danger clearfix">
+                                    <span
+                                        class="pull-left">{{news.thumbnailContentType}}, {{byteSize(news.thumbnail)}}</span>
+                            <button type="button"
+                                    (click)="clearInputImage('thumbnail', 'thumbnailContentType', 'fileImage')"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <span class="fa fa-times"></span>
+                            </button>
+                        </div>
+                        <input type="file" id="file_thumbnail" [disabled]="isView"
+                               (change)="setFileData($event, news, 'thumbnail', true)" accept="image/*"
+                               jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="thumbnail" id="field_thumbnail"
+                           [(ngModel)]="news.thumbnail"/>
+                    <input type="hidden" class="form-control" name="thumbnailContentType"
+                           id="field_thumbnailContentType"
+                           [(ngModel)]="news.thumbnailContentType"/>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.news.picture2"
+                           for="field_picture">Picture</label>
+                    <div>
+                        <img [src]="'data:' + news.pictureContentType + ';base64,' + news.picture"
+                             style="max-height: 100px;" *ngIf="news.picture" alt="news image"/>
+                        <div *ngIf="news.picture" class="form-text text-danger clearfix">
+                                    <span
+                                        class="pull-left">{{news.pictureContentType}}, {{byteSize(news.picture)}}</span>
+                            <button type="button"
+                                    (click)="clearInputImage('picture', 'pictureContentType', 'fileImage')"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <span class="fa fa-times"></span>
+                            </button>
+                        </div>
+                        <input type="file" id="file_picture" [disabled]="isView"
+                               (change)="setFileData($event, news, 'picture', true)" accept="image/*"
+                               jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="picture" id="field_picture"
+                           [(ngModel)]="news.picture"/>
+                    <input type="hidden" class="form-control" name="pictureContentType"
+                           id="field_pictureContentType"
+                           [(ngModel)]="news.pictureContentType"/>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="file" jhiTranslate="niopdcgatewayApp.news.file">Choose File</label>
+                    <input type="file"
+                           id="file"
+                           (change)="handleFileInput($event.target.files)">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.news.showNews"
+                           for="field_picture">showNews</label>
+                    <input type="checkbox" [checked]="news.showNews == true" (change)="toggleShowNews()" id="showNews"/>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.news.summary" for="field_summary">Summary</label>
+                    <textarea [disabled]="isView" type="text" class="form-control" name="summary" id="field_summary"
+                              [(ngModel)]="news.summary"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <!--                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.news.content"
+
+                                               for="field_content">Content</label>-->
+
+                    <!--             <input [disabled]="isView" type="text" class="form-control" name="content" id="field_content"
+                                        [(ngModel)]="news.content"/>-->
+                    <p-editor [disabled]="isView" [(ngModel)]="news.content" id="field_content" name="content"
+                              [style]="{'height':'320px'}">
+
+                    </p-editor>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving || fileUploading"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

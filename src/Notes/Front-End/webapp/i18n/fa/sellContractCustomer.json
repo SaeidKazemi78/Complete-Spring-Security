@@ -1,0 +1,37 @@
+
+{
+    "niopdcgatewayApp": {
+        "sellContractCustomer" : {
+            "home": {
+                "title": "مشتریان قرارداد",
+                "sellContractTitle": "مشتریان",
+                "cardTitle":"مشخصات مشتریان",
+                "createLabel":"ایجاد صاحب امتیاز قرارداد",
+                "createOrEditLabel":"ویرایش صاحب امتیاز قرارداد",
+                "view":"نمایش صاحب امتیاز قرارداد"
+            },
+            "delete": {
+                "question": "آیا برای حذف این صاحب امتیاز از قرارداد مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "صاحب امتیازان قرارداد"
+            },
+            "hasTransport": "حمل برعهده مشتری",
+            "sellContract": "قرارداد",
+            "customer": "مشتریان",
+            "creditAccount": "حساب اعتباری",
+            "location": "ناحیه",
+            "sellContractProduct": "Sell Contract Product",
+            "personExists":"مشتری از قبل وجود دارد",
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ"
+        }
+    },
+    "niopdcbaseApp": {
+        "sellContractCustomer" : {
+            "created": "قرارداد فروش با موفقیت ایجاد شد.",
+            "updated": "قرارداد فروش با موفقیت ویرایش شد.",
+            "deleted": "قرارداد فروش با موفقیت حذف شد."
+        }
+    }
+}

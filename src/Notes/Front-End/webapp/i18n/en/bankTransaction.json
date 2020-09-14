@@ -1,0 +1,34 @@
+
+{
+    "niopdcgatewayApp": {
+        "bankTransaction" : {
+            "home": {
+                "title": "Bank Transactions",
+                "createLabel": "Create a new Bank Transaction",
+                "createOrEditLabel": "Create or edit a Bank Transaction"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Bank Transaction {{ id }}?"
+            },
+            "detail": {
+                "title": "Bank Transaction"
+            },
+            "identifier": "Identifier",
+            "username": "Username",
+            "requestDate": "Request Date",
+            "bankTransactionState": "Bank Transaction State",
+            "type": "Type",
+            "responseBody": "Response Body",
+            "responseDate": "Response Date",
+            "error": "Error",
+            "bankTransactionRef": "Bank Transaction Ref"
+        }
+    },
+    "niopdcpaymentApp": {
+        "bankTransaction" : {
+            "created": "A new Bank Transaction is created with identifier {{ param }}",
+            "updated": "A Bank Transaction is updated with identifier {{ param }}",
+            "deleted": "A Bank Transaction is deleted with identifier {{ param }}"
+        }
+    }
+}

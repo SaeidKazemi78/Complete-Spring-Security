@@ -1,0 +1,12 @@
+{
+    "niopdcgatewayApp": {
+        "FilterLocation" : {
+            "null": "",
+            "DRAIN_TANKER": "DRAIN_TANKER",
+            "BETWEEN_MAIN_AND_SERVICE": "BETWEEN_MAIN_AND_SERVICE",
+            "LADING_UNIT": "LADING_UNIT",
+            "OIL_DEPOT": "OIL_DEPOT",
+            "UNIT": "UNIT"
+        }
+    }
+}

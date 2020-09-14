@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "userPosDevice" : {
+            "home": {
+                "title": "User Pos Devices",
+                "createLabel": "Create a new User Pos Device",
+                "createOrEditLabel": "Create or edit a User Pos Device"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete User Pos Device {{ id }}?"
+            },
+            "detail": {
+                "title": "User Pos Device"
+            },
+            "internalIp": "Internal Ip",
+            "isDefault": "Is Default",
+            "username": "Username",
+            "posDevice": "Pos Device",
+            "posDevice": "Pos Device"
+        }
+    },
+    "niopdcpaymentApp": {
+        "userPosDevice" : {
+            "created": "A new User Pos Device is created with identifier {{ param }}",
+            "updated": "A User Pos Device is updated with identifier {{ param }}",
+            "deleted": "A User Pos Device is deleted with identifier {{ param }}"
+        }
+    }
+}

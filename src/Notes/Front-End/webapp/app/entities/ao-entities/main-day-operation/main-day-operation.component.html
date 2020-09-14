@@ -1,0 +1,142 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <p-dataTable [sortField]="predicate" [sortOrder]="reverse ? -1 : 1" #dt [value]="mainDayOperations" [lazy]="true"
+                 [rows]="itemsPerPage"
+                 [rowsPerPageOptions]="[5,10,20,totalItems]"
+                 [paginator]="true" [responsive]="true" [stacked]="false"
+                 [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)"
+                 [emptyMessage]="'global.messages.info.emptyRecords' | translate">
+        <p-header>
+            <div class="ui-helper-clearfix">
+                <button class="btn btn-primary float-right create-entity"
+                        *jhiHasAnyAuthority="['ROLE_ADMIN', 'CREATE_MAIN_DAY_OPERATION']"
+                        [routerLink]="['/', 'main-day-operation', { outlets: { popup: ['new' ] } }]">
+                    <span class="fa fa-plus"></span>
+                    <span jhiTranslate="entity.action.createShort">Create</span>
+                </button>
+            </div>
+        </p-header>
+
+        <p-headerColumnGroup>
+            <p-row>
+                <p-column field="day" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.mainDayDepot.day">Day</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="refuelCenterPersianTitle" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.mainDayOperation.refuelCenter">RefuelCenter</span>
+                    </ng-template>
+                </p-column>
+                <p-column styleClass="col-button"></p-column>
+            </p-row>
+            <p-row>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <ng2-datetimepicker [disableTime]="true" class="form-control" name="startDate"
+                                            [rtlActive]="true" time="00:00:00"
+                                            [(ngModel)]="mainDayOperation.day">
+                        </ng2-datetimepicker>
+                    </ng-template>
+                </p-column>
+
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <select class="form-control" id="field_refuelCenter" (change)="search()"
+                                name="refuelCenter"
+                                [(ngModel)]="mainDayOperation.refuelCenterId">
+                            <option [ngValue]="null"></option>
+                            <option *ngFor="let refuelCenterOption of refuelCenters; trackBy: trackRefuelCenterById"
+                                    [ngValue]="refuelCenterOption.id">{{refuelCenterOption.persianTitle}}
+                            </option>
+                        </select>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <button class="btn btn-info" (click)="search()">
+                            <span class="fa fa-search"></span>
+                        </button>
+                        <button class=" btn btn-danger" (click)="clear()">
+                            <span class="fa fa-remove"></span>
+                        </button>
+                    </ng-template>
+                </p-column>
+            </p-row>
+        </p-headerColumnGroup>
+
+        <p-column field="day" [header]="'niopdcgatewayApp.mainDayDepot.day' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span>{{item.day | dateJalali}}</span>
+            </ng-template>
+        </p-column>
+
+        <p-column field="refuelCenterPersianTitle"
+                  [header]="'niopdcgatewayApp.mainDayOperation.refuelCenter' | translate"></p-column>
+        <p-column class="component">
+            <ng-template let-item="rowData" pTemplate="body">
+                <div class="btn-group" ngbDropdown placement="right">
+                    <button type="button" class="btn btn-primary"
+                            *jhiHasAnyAuthorityDisabled="['ROLE_ADMIN', 'EDIT_MAIN_DAY_OPERATION']"
+                            replaceUrl="true"
+                            [disabled]="item.close"
+                            [routerLink]="['/', 'main-day-operation',  { outlets: { popup: item.id + '/edit'} }]">
+                        <span class="fa fa-edit"></span>
+                        <span jhiTranslate="entity.action.edit">ویرایش</span>
+                    </button>
+
+                    <button class="btn btn-primary"
+                            *jhiHasAnyAuthorityDisabled="['ROLE_ADMIN', 'VIEW_MAIN_DAY_OPERATION', 'DELETE_MAIN_DAY_OPERATION', 'UPDATE_MAIN_DAY_OPERATION','CLOSE_MAIN_DAY_OPERATION','LIST_DAY_DEPOT']"
+                            ngbDropdownToggle></button>
+                    <div class="dropdown-menu" ngbDropdownMenu>
+                        <button class="dropdown-item"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN', 'VIEW_MAIN_DAY_OPERATION']"
+                                replaceUrl="true"
+                                [routerLink]="['/', 'main-day-operation', { outlets: { popup:item.id + '/view'} }]">
+                            <span class="fa fa-eye"></span>
+                            <span jhiTranslate="entity.action.view">نمایش</span>
+                        </button>
+                        <div *ngIf="item.close">
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'OPEN_MAIN_DAY_OPERATION']"
+                                    replaceUrl="true"
+                                    [routerLink]="['/', 'main-day-operation', { outlets: { popup: item.id + '/open'} }]">
+                                <span class="fa fa-folder-open"></span>
+                                <span jhiTranslate="entity.action.openDay">به روز رسانی</span>
+                            </button>
+                        </div>
+                        <div *ngIf="!item.close">
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'UPDATE_MAIN_DAY_OPERATION']"
+                                    replaceUrl="true"
+                                    [routerLink]="['/', 'main-day-operation', { outlets: { popup: item.id + '/update'} }]">
+                                <span class="fa fa-refresh"></span>
+                                <span jhiTranslate="entity.action.update">به روز رسانی</span>
+                            </button>
+                        </div>
+                        <div *ngIf="!item.close">
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'CLOSE_MAIN_DAY_OPERATION']"
+                                    replaceUrl="true"
+                                    [routerLink]="['/', 'main-day-operation', { outlets: { popup: item.id + '/close'} }]">
+                                <span class="fa fa-close"></span>
+                                <span jhiTranslate="entity.action.close">close</span>
+                            </button>
+                        </div>
+                        <button class="dropdown-item"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN', 'LIST_DAY_DEPOT']"
+                                [routerLink]="['/main-day-operation', item.id, 'day-depot']">
+                            <span class="fa fa-external-link"></span>
+                            <span jhiTranslate="niopdcgatewayApp.dayDepot.home.operationDay">Day Depot</span>
+                        </button>
+
+                    </div>
+                </div>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+
+</div>

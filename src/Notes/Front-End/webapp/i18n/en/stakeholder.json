@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "stakeholder" : {
+            "home": {
+                "title": "Stakeholders",
+                "createLabel": "Create a new Stakeholder",
+                "createOrEditLabel": "Create or edit a Stakeholder"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Stakeholder {{ id }}?"
+            },
+            "detail": {
+                "title": "Stakeholder"
+            },
+            "sharePercent": "Share Percent",
+            "stakeholderType": "Stakeholder Type",
+            "company": "Company",
+            "person": "Person"
+        }
+    },
+    "niopdcbaseApp": {
+        "stakeholder" : {
+            "created": "A new Stakeholder is created with identifier {{ param }}",
+            "updated": "A Stakeholder is updated with identifier {{ param }}",
+            "deleted": "A Stakeholder is deleted with identifier {{ param }}"
+        }
+    }
+}

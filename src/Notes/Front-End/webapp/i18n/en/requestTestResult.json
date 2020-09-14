@@ -1,0 +1,40 @@
+
+{
+    "niopdcgatewayApp": {
+        "requestTestResult" : {
+            "home": {
+                "title": "Request Test Results",
+                "createLabel": "Create a new Request Test Result",
+                "createOrEditLabel": "Create or edit a Request Test Result"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Request Test Result {{ id }}?"
+            },
+            "detail": {
+                "title": "Request Test Result"
+            },
+            "productId": "Product Id",
+            "date": "Date",
+            "sampleValue": "Sample Value",
+            "oilTankInventory": "Oil Tank Inventory",
+            "sourceOilTankNumber": "Source Oil Tank Number",
+            "requestStatus": "Request Status",
+            "draftUser": "Draft User",
+            "confirmUser": "Confirm User",
+            "sendUser": "Send User",
+            "electricalConductivity": "Electrical Conductivity",
+            "samplerName": "Sampler Name",
+            "testResultType": "Test Result Type",
+            "testResult": "Test Result",
+            "oilTank": "Oil Tank",
+            "refuelCenter": "RefuelCenter"
+        }
+    },
+    "niopdcaoApp": {
+        "requestTestResult" : {
+            "created": "A new Request Test Result is created with identifier {{ param }}",
+            "updated": "A Request Test Result is updated with identifier {{ param }}",
+            "deleted": "A Request Test Result is deleted with identifier {{ param }}"
+        }
+    }
+}

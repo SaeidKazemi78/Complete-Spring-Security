@@ -1,0 +1,114 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="bankAccount.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="bankAccount.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.bankAccount.bank" for="field_bank">Bank</label>
+                    <select [disabled]="isView" class="form-control" id="field_bank" name="bank" [(ngModel)]="bankAccount.bankId" required>
+                        <option *ngIf="!editForm.value.bank" [ngValue]="null" selected></option>
+                        <option [ngValue]="bankOption.id" *ngFor="let bankOption of banks; trackBy: trackBankById">
+                            {{bankOption.name}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.bank?.dirty && editForm.controls.bank?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.bank?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.bankAccount.accountNumber"
+                           for="field_accountNumber">Account Number</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="accountNumber"
+                           id="field_accountNumber"
+                           [(ngModel)]="bankAccount.accountNumber" required/>
+                    <div
+                        [hidden]="!(editForm.controls.accountNumber?.dirty && editForm.controls.accountNumber?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.accountNumber?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.bankAccount.shabaNumber"
+                           for="field_shabaNumber">Shaba Number</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="shabaNumber"
+                           id="field_shabaNumber" [pattern]="shabaNumberPattern"
+                           [(ngModel)]="bankAccount.shabaNumber" minlength="25" maxlength="25"/>
+                    <div [hidden]="!(editForm.controls.shabaNumber?.dirty && editForm.controls.shabaNumber?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.shabaNumber?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 25 }">
+                            This field is required to be at least 25 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.shabaNumber?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 25 }">
+                            This field cannot be longer than 25 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.shabaNumber?.errors?.pattern"
+                               jhiTranslate="niopdcgatewayApp.bankAccount.shabaNumberPattern">
+                            This field cannot be longer than 25 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.bankAccount.cardNumber"
+                           for="field_cardNumber">Card Number</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="cardNumber" id="field_cardNumber"
+                           [(ngModel)]="bankAccount.cardNumber" minlength="16" maxlength="20"/>
+                    <div [hidden]="!(editForm.controls.cardNumber?.dirty && editForm.controls.cardNumber?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.cardNumber?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 16 }">
+                            This field is required to be at least 16 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.cardNumber?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 20 }">
+                            This field cannot be longer than 20 characters.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

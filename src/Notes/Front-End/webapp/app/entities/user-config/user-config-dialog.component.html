@@ -1,0 +1,88 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="userConfig.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="userConfig.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.userConfig.typeOfFuelReceipt"
+                           for="field_typeOfFuelReceipt">Type Of Fuel Receipt</label>
+                    <select [disabled]="isView" class="form-control" name="typeOfFuelReceipt"
+                            [(ngModel)]="userConfig.typeOfFuelReceipt" id="field_typeOfFuelReceipt">
+                        <option value="TANKER_SALES">{{'niopdcgatewayApp.TypeOfFuelReceipt.TANKER_SALES' | translate}}
+                        </option>
+                        <option value="PIPE_LINE_SALES">{{'niopdcgatewayApp.TypeOfFuelReceipt.PIPE_LINE_SALES' |
+                            translate}}
+                        </option>
+                        <option value="UNIT_TO_AIRPLANE">{{'niopdcgatewayApp.TypeOfFuelReceipt.UNIT_TO_AIRPLANE' |
+                            translate}}
+                        </option>
+                        <option value="UNIT_TO_CUSTOMERS">{{'niopdcgatewayApp.TypeOfFuelReceipt.UNIT_TO_CUSTOMERS' |
+                            translate}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.userConfig.customer"
+                           for="field_customer">Customer</label>
+                    <select class="form-control" id="field_customer" name="customer"
+                            [(ngModel)]="userConfig.customerId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="customerOption.id"
+                                *ngFor="let customerOption of customers; trackBy: trackCustomerById">
+                            {{customerOption.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.userConfig.depot"
+                           for="field_depot">Depot</label>
+                    <select class="form-control" id="field_depot" name="depot" [(ngModel)]="userConfig.depotId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="depotOption.id" *ngFor="let depotOption of depots; trackBy: trackDepotById">
+                            {{depotOption.title}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.userConfig.product"
+                           for="field_product">Product</label>
+                    <select class="form-control" id="field_product" name="product" [(ngModel)]="userConfig.productId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="productOption.id"
+                                *ngFor="let productOption of products; trackBy: trackProductById">
+                            {{productOption.title}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,37 @@
+{
+    "niopdcgatewayApp": {
+        "factor": {
+            "home": {
+                "title": "لیست فاکتورها",
+                "createLabel": "Create a new Factor",
+                "createOrEditLabel": "Create or edit a Factor",
+                "report": "گزارش",
+                "reportAggregate": "گزارش تجمیعی"
+            },
+            "delete": {
+                "question": "آیا برای حذف فاکتور با شماره {{ factorNo }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "فاکتور"
+            },
+            "registerDate": "تاریخ ثبت",
+            "personId": "Person Id",
+            "factorNo": "شماره فاکتور",
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "price": "قیمت کل",
+            "active": "برای این بازه فاکتور صادر شده است، در صورت فعال کردن این گزینه فاکتورهای قبلی حذف میشوند.",
+            "activeTrue": "فعال",
+            "activeFalse": "غیر فعال",
+            "person": "صاحب امتیار",
+            "factorType": "نوع فاکتور"
+        }
+    },
+    "niopdcaccountingApp": {
+        "factor": {
+            "created": "فاکتور با موفقیت ایجاد شد.",
+            "updated": "فاکتور با موفقیت ویرایش شد.",
+            "deleted": "فاکتور با موفقیت حذف شد."
+        }
+    }
+}

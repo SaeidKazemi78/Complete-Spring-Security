@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "plaque" : {
+            "home": {
+                "title": "پلاک ها",
+                "createLabel": "Create a new Plaque",
+                "createOrEditLabel": "Create or edit a Plaque"
+            },
+            "delete": {
+                "question": "آیا برای حذف این پلاک مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "Plaque"
+            },
+            "title": "عنوان",
+            "pattern": "الگو",
+             "code": "کدپلاک"
+        }
+    },
+    "niopdcbaseApp": {
+        "plaque" : {
+            "created": "پلاک با موفقیت ایجاد شد.",
+            "updated": "پلاک با موفقیت ویرایش شد.",
+            "deleted": "پلاک با موفقیت حذف شد."
+        }
+    }
+}

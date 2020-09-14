@@ -1,0 +1,175 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="voucherMaster.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="voucherMaster.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherMaster.confirmDate"
+                           for="field_confirmDate">Confirm Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" id="field_confirmDate"
+                                            class="form-control"
+                                            name="confirmDate" [(ngModel)]="voucherMaster.confirmDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div [hidden]="!(editForm.controls.confirmDate?.dirty && editForm.controls.confirmDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.confirmDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.confirmDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherMaster.locationId"
+                           for="field_locationId">Location Id</label>
+                    <input-location-selector [disabled]="isView" class="form-control"
+                                             [(ngModel)]="voucherMaster.locationId"
+                                             [oneSelection]="true"
+                                             id="field_locationId"
+                                             name="location"
+                                             [selectOfLevel]="[2]"
+                                             [selectByPriority]="true"
+                                             [idSelector]="true"
+                    ></input-location-selector>
+                    <div [hidden]="!(editForm.controls.locationId?.dirty && editForm.controls.locationId?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.locationId?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.locationId?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherMaster.userConfirm"
+                           for="field_userConfirm">User Confirm</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="userConfirm"
+                           id="field_userConfirm"
+                           [(ngModel)]="voucherMaster.userConfirm" required/>
+                    <div [hidden]="!(editForm.controls.userConfirm?.dirty && editForm.controls.userConfirm?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.userConfirm?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherMaster.docNumber"
+                           for="field_docNumber">Doc Number</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="docNumber" id="field_docNumber"
+                           [(ngModel)]="voucherMaster.docNumber" maxlength="30"/>
+                    <div [hidden]="!(editForm.controls.docNumber?.dirty && editForm.controls.docNumber?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.docNumber?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 30 }">
+                            This field cannot be longer than 30 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherMaster.status" for="field_status">Status</label>
+                    <select class="form-control" name="status" [(ngModel)]="voucherMaster.status" id="field_status"  required>
+                        <option value="CONFIRM">{{'niopdcgatewayApp.VoucherMasterStatus.CONFIRM' | translate}}</option>
+                        <option value="PENDING">{{'niopdcgatewayApp.VoucherMasterStatus.PENDING' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.status?.dirty && editForm.controls.status?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.status?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherMaster.voucherType"
+                           for="field_voucherType">Voucher Type</label>
+                    <select class="form-control" id="field_voucherType" name="voucherType"
+                            [(ngModel)]="voucherMaster.voucherTypeId" required>
+                        <option *ngIf="!editForm.value.voucherType" [ngValue]="null" selected></option>
+                        <option [ngValue]="voucherTypeOption.id"
+                                *ngFor="let voucherTypeOption of vouchertypes; trackBy: trackVoucherTypeById">
+                            {{voucherTypeOption.title}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.voucherType?.dirty && editForm.controls.voucherType?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.voucherType?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherMaster.description"
+                           for="field_description">Description</label>
+                    <textarea [disabled]="isView" type="text" class="form-control" name="description"
+                           id="field_description"
+                           [(ngModel)]="voucherMaster.description" minlength="3" maxlength="200"></textarea>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.description?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.description?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                            This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

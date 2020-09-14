@@ -1,0 +1,8 @@
+{
+    "niopdcgatewayApp": {
+        "LoanReason" : {
+            "null": "",
+            "REPAIRS": "REPAIRS"
+        }
+    }
+}

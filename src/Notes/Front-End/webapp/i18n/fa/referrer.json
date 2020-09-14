@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "Referrer" : {
+            "null": "",
+            "BILL": "صورت حساب",
+            "ORDER": "حواله",
+            "NORMAL": "به صورت دستی",
+            "VOUCHER_PAYMENT": "سند پرداخت"
+        }
+    }
+}

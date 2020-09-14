@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+   <changeSet author="sajad" id="customer_type_view2">
+       <createView replaceIfExists="true"
+                   viewName="customer_type_view">
+           select c.*, u.username
+           from user_location u, customer_type c
+           union
+           select c.*, u.username
+           from user_location_region u, customer_type c
+           union
+           select c.*, u.username
+           from user_location_person u, customer_type c
+           union
+           select c.*, u.username
+           from user_location_region_person u, customer_type c
+           union
+           select c.*, u.username
+           from user_location_person_customer u, customer_type c
+           union
+           select c.*, u.username
+           from user_location_region_person_customer u, customer_type c
+           union
+           select c.*, u.username
+           from user_contract_type u, customer_type c
+           union
+           select c.*, u.username
+           from user_customer_type u
+           inner join customer_type c on u.customer_type_id = c.id
+           union
+           select c.*, u.username
+           from user_location_contract_type u, customer_type c
+           union
+           select c.*, u.username
+           from user_location_region_contract_type u, customer_type c
+           union
+           select c.*, u.username
+           from user_location_customer_type u
+           inner join customer_type c on u.customer_type_id = c.id
+           union
+           select c.*, u.username
+           from user_location_region_customer_type u
+           inner join customer_type c on u.customer_type_id = c.id
+           union
+           select c.*, u.username
+           from user_location_region_contract_type_customer_type u
+           inner join customer_type c on u.customer_type_id = c.id
+           union
+           select c.*, u.username
+           from user_contract_type_customer_type u
+           inner join customer_type c on u.customer_type_id = c.id
+       </createView>
+   </changeSet>
+   <changeSet author="sajad" id="customer_type_view3">
+       <createView replaceIfExists="true"
+                   viewName="customer_type_view">
+           select c.*, u.username
+           from user_location u, customer_type c
+           union
+           select c.*, u.username
+           from user_location_region u, customer_type c
+           union
+           select c.*, u.username
+           from user_location_person u, customer_type c
+           union
+           select c.*, u.username
+           from user_location_region_person u, customer_type c
+           union
+           select c.*, u.username
+           from user_location_person_customer u, customer_type c
+           union
+           select c.*, u.username
+           from user_location_region_person_customer u, customer_type c
+           union
+           select c.*, u.username
+           from user_contract_type u, customer_type c
+           union
+           select c.*, u.username
+           from user_customer_type u
+           inner join customer_type c on u.customer_type_id = c.id
+           union
+           select c.*, u.username
+           from user_location_contract_type u, customer_type c
+           union
+           select c.*, u.username
+           from user_location_region_contract_type u, customer_type c
+           union
+           select c.*, u.username
+           from user_location_customer_type u
+           inner join customer_type c on u.customer_type_id = c.id
+           union
+           select c.*, u.username
+           from user_location_region_customer_type u
+           inner join customer_type c on u.customer_type_id = c.id
+           union
+           select c.*, u.username
+           from user_location_region_contract_type_customer_type u
+           inner join customer_type c on u.customer_type_id = c.id
+           union
+           select c.*, u.username
+           from user_contract_type_customer_type u
+           inner join customer_type c on u.customer_type_id = c.id
+           union
+           select c.*, u.username
+           from user_location_contract_type_customer_type u
+           inner join customer_type c on u.customer_type_id = c.id
+       </createView>
+   </changeSet>
+   <changeSet author="sajad" id="customer_type_view4" runAlways="true">
+       <createView replaceIfExists="true"
+                   viewName="customer_type_view">
+
+           select c.id, u.username
+           from user_location u, customer_type c
+           union
+           select c.id, u.username
+           from user_location_region u, customer_type c
+           union
+           select c.id, u.username
+           from user_location_person u, customer_type c
+           union
+           select c.id, u.username
+           from user_location_region_person u, customer_type c
+           union
+           select c.id, u.username
+           from user_location_person_customer u, customer_type c
+           union
+           select c.id, u.username
+           from user_location_region_person_customer u, customer_type c
+           union
+           select c.id, u.username
+           from user_contract_type u, customer_type c
+           union
+           select c.id, u.username
+           from user_customer_type u
+           inner join customer_type c on u.customer_type_id = c.id
+           union
+           select c.id, u.username
+           from user_location_contract_type u, customer_type c
+           union
+           select c.id, u.username
+           from user_location_region_contract_type u, customer_type c
+           union
+           select c.id, u.username
+           from user_location_customer_type u
+           inner join customer_type c on u.customer_type_id = c.id
+           union
+           select c.id, u.username
+           from user_location_region_customer_type u
+           inner join customer_type c on u.customer_type_id = c.id
+           union
+           select c.id, u.username
+           from user_location_region_contract_type_customer_type u
+           inner join customer_type c on u.customer_type_id = c.id
+           union
+           select c.id, u.username
+           from user_contract_type_customer_type u
+           inner join customer_type c on u.customer_type_id = c.id
+           union
+           select c.id, u.username
+           from user_location_contract_type_customer_type u
+           inner join customer_type c on u.customer_type_id = c.id
+
+       </createView>
+   </changeSet>
+</databaseChangeLog>

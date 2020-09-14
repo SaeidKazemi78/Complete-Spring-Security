@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "boundaryTag" : {
+            "home": {
+                "title": "تگ ها",
+                "createLabel": "Create a new Boundary Tag",
+                "createOrEditLabel": "Create or edit a Boundary Tag",
+                "locationTitle":"ناحیه مرزی"
+            },
+            "delete": {
+                "question": "آیا برای حذف این تگ مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "تگ"
+            },
+            "amount": "تعداد",
+            "buyPrice": "قیمت خرید",
+            "buyDate": "تاریخ خرید",
+            "location": "ناحیه مرزی"
+        }
+    },
+    "niopdcbaseApp": {
+        "boundaryTag" : {
+            "created": "تگ با موفقیت ایجاد شد.",
+            "updated": "تگ با موفقیت ویرایش شد.",
+            "deleted": "تگ با موفقیت حذف شد."
+        }
+    }
+}

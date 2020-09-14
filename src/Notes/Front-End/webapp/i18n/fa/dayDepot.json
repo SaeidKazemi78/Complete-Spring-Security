@@ -1,0 +1,57 @@
+
+{
+    "niopdcgatewayApp": {
+        "dayDepot" : {
+            "home": {
+                "title": "روز انبار",
+                "operationDay": "روز عملیات",
+                "createLabel":"ایجاد روز انبار",
+                "createOrEditLabel":"ویرایش روز انبار",
+                "view":"نمایش روز انبار",
+                "mainDayDepotTitle":"حساب روز انبار",
+                "start":"شروع اندازه گیری",
+                "end":"پایان اندازه گیری"
+            },
+            "delete": {
+                "question": "آیا برای حذف این روز انبار مطمئن هستید ؟"
+            },
+            "fullEndMeasurement": {
+                "question": "آیا دیپ شروع و پایان مخزن یکسان می باشد ؟"
+            },
+            "detail": {
+                "title": "روز انبار"
+            },
+            "natureDeductible": "کسری مقدار طبیعی",
+            "natureAddition": "سرک مقدار طبیعی",
+            "sixtyDeductible": "کسری مقدار 60 درجه",
+            "sixtyAddition": "سرک مقدار 60 درجه",
+            "receivedNatureSystemAmount": "مقدار طبیعی دریافتی",
+            "sendNatureSystemAmount": "مقدار طبیعی ارسالی",
+            "sendSixtySystemAmount": "مقدار 60 درجه ارسالی",
+            "receivedSixtySystemAmount": "مقدار 60 درجه دریافتی",
+            "description": "جزيیات",
+            "startMeasurementOilTank": "شروع اندازه گیری در مخزن",
+            "endMeasurementOilTank": "پایان اندازه گیری در مخزن",
+            "oilTank": "مخزن",
+            "oilTankOilTankType":"نوع مخزن",
+            "mainDayDepot": "حساب روز انبار",
+            "mainDayOperation": "عملیات روزانه",
+            "endMeasurementOilTankAmountDeep":"عمق مخزن",
+            "endMeasurementOilTankAmount":"مقدار مخزن",
+            "endMeasurementOilTankAmountList":"مقدار پایان",
+            "startMeasurementOilTankAmountDeep":"عمق مخزن",
+            "startMeasurementOilTankAmount":"مقدار مخزن",
+            "startMeasurementOilTankAmountList":"مقدار شروع",
+            "startMeasurementOilTankRegisterDate":"زمان دیپ شروع",
+            "endMeasurementOilTankRegisterDate":"زمان دیپ پایان"
+        }
+    },
+    "niopdcaoApp": {
+        "dayDepot" : {
+            "created": "روز انبار با موفقیت انجام شد.",
+            "updated": "روز انبار با موفقیت ویرایش شد.",
+            "deleted": "روز انبار با موفقیت حذف شد.",
+            "fullEndMeasurement": "مقدار پایان با موفقیت ذخیره شد."
+        }
+    }
+}

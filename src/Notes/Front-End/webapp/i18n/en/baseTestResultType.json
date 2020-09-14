@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "BaseTestResultType" : {
+            "null": "",
+            "WATER_TYPE": "WATER_TYPE",
+            "OIL_TYPE": "OIL_TYPE"
+        }
+    }
+}

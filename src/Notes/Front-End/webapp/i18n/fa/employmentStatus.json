@@ -1,0 +1,12 @@
+{
+    "niopdcgatewayApp": {
+        "employmentStatus" : {
+            "null": "",
+            "OFFICIAL": "رسمی",
+            "TEMPORARYـCONTRACT": "قرارداد موقت",
+            "DEFINITEـCONTRACT": "قرارداد معین",
+            "CONTRACTING": "پیمانکاری",
+            "OTHERS": "سایر"
+        }
+    }
+}

@@ -1,0 +1,76 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="seal.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="seal.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.seal.boxNo" for="field_boxNo">Box
+                        No</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="boxNo" id="field_boxNo"
+                           [(ngModel)]="seal.boxNo"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.seal.prefix" for="field_prefix">Prefix</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="prefix" id="field_prefix"
+                           [(ngModel)]="seal.prefix"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.seal.startSealNumber"
+                           for="field_startSealNumber">Start Seal Number</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="startSealNumber"
+                           id="field_startSealNumber"
+                           [(ngModel)]="seal.startSealNumber"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.seal.endSealNumber"
+                           for="field_endSealNumber">End Seal Number</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="endSealNumber"
+                           id="field_endSealNumber"
+                           [(ngModel)]="seal.endSealNumber"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.seal.currentSealNumber"
+                           for="field_currentSealNumber">Current Seal Number</label>
+                    <input [disabled]="seal.id" type="number" class="form-control" name="currentSealNumber"
+                           id="field_currentSealNumber"
+                           [(ngModel)]="seal.currentSealNumber"/>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

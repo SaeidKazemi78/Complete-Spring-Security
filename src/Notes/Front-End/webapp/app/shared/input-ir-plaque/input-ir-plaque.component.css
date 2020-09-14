@@ -1,0 +1,141 @@
+jhi-ir-plaque.form-control {
+    padding: 0;
+    max-width: 330px;
+}
+
+
+.plaque-select {
+    width: 64px;
+    margin: 0 2px 0;
+    font-size: 12px !important;
+    max-height: 35px;
+}
+
+.plaqueSelectCustom {
+    /*max-height: 30px;*/
+
+}
+
+.plaque-none {
+    width: 30%;
+    /*height: 30px;*/
+}
+
+/*
+jhi-ir-plaque.ng-touched.ng-dirty.ng-invalid{
+    border-left: none!important;
+}
+jhi-ir-plaque#field_plaque.ng-touched.ng-dirty.ng-invalid{
+    border-left: none!important;
+}
+jhi-ir-plaque#field_plaque.ng-touched.ng-dirty.ng-valid{
+    border-left: none!important;
+}
+jhi-ir-plaque#field_plaque.ng-untouched.ng-dirty.ng-invalid{
+    border-left: none!important;
+}
+
+jhi-ir-plaque.ng-untouched.ng-dirty.ng-invalid{
+    border-left: none!important;
+}*/
+.plaque-control {
+    display: block;
+    font-size: 1rem;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    /*height: 36px;*/
+}
+
+.plaque-custom {
+    border: groove #3E4095;
+    /*min-height: 30px;*/
+    direction: rtl;
+}
+
+.plaque-p {
+    inline-size: max-content;
+    min-height: 30px;
+    border: tan
+}
+
+.plaque-p-1 {
+    background: white url(/content/images/transit_plaque_icon.jpg) no-repeat;
+    width: 25%;
+    background-size: 20px 32px;
+    padding-right: 30px;
+    float: right;
+    height: 32px;
+}
+
+.plaque-p-2 {
+    width: 20%;
+    background-color: #cc3838;
+    color: black;
+    padding-right: 0px;
+    float: right;
+    height: 32px;
+}
+
+.plaque-p-5 {
+    width: 20%;
+    background-color: #cc3838;
+    color: black;
+    padding-right: 0px;
+    float: right;
+    height: 32px;
+}
+
+.plaque-p-2 option {
+    background-color: white;
+}
+
+.plaque-p-3 {
+
+    width: 20%;
+    padding-right: 8px;
+    float: right;
+    height: 32px;
+}
+
+.plaque-p-4 {
+    width: 15%;
+    background-color: #3E4095;
+    color: ivory;
+    padding-right: 5px;
+    height: 32px;
+
+}
+
+.plaque-p-6 {
+    width: 20%;
+    border: black solid 1px;
+    background-color: #faff23;
+    color: black;
+    padding-right: 0px;
+    float: right;
+    height: 32px;
+}
+
+.plaque-p-7 {
+    width: 50%;
+    float: right;
+    border: black solid 1px;
+    background-color: #faff23;
+    color: black;
+    padding-right: 5px;
+    height: 32px;
+
+}
+
+.plaque-p-8 {
+    width: 30%;
+    border: black solid 1px;
+    background-color: #faff23;
+    color: black;
+    padding-right: 0px;
+    float: right;
+    height: 32px;
+}

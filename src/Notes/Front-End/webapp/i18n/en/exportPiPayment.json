@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "exportPiPayment" : {
+            "home": {
+                "title": "Export Pi Payments",
+                "createLabel": "Create a new Export Pi Payment",
+                "createOrEditLabel": "Create or edit a Export Pi Payment"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Export Pi Payment {{ id }}?"
+            },
+            "detail": {
+                "title": "Export Pi Payment"
+            },
+            "paymentId": "Payment Id",
+            "price": "Price",
+            "receiptNo": "Receipt No",
+            "hashCode": "Hash Code",
+            "exportPi": "Export Pi"
+        }
+    },
+    "niopdcbaseApp": {
+        "exportPiPayment" : {
+            "created": "A new Export Pi Payment is created with identifier {{ param }}",
+            "updated": "A Export Pi Payment is updated with identifier {{ param }}",
+            "deleted": "A Export Pi Payment is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,0 +1,203 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns0="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns1="http://schemas.datacontract.org/2004/07/PDN.CII.ViewModels" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:tns="http://tempuri.org/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" targetNamespace="http://tempuri.org/">
+    <wsp:Policy wsu:Id="UTOverTransport">
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+                    <wsp:Policy>
+                        <sp:TransportToken>
+                            <wsp:Policy>
+                                <sp:HttpsToken RequireClientCertificate="false"/>
+                            </wsp:Policy>
+                        </sp:TransportToken>
+                        <sp:AlgorithmSuite>
+                            <wsp:Policy>
+                                <sp:Basic256/>
+                            </wsp:Policy>
+                        </sp:AlgorithmSuite>
+                        <sp:Layout>
+                            <wsp:Policy>
+                                <sp:Lax/>
+                            </wsp:Policy>
+                        </sp:Layout>
+                        <sp:IncludeTimestamp/>
+                    </wsp:Policy>
+                </sp:TransportBinding>
+                <sp:SignedSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+                    <wsp:Policy>
+                        <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient"/>
+                    </wsp:Policy>
+                </sp:SignedSupportingTokens>
+            </wsp:All>
+        </wsp:ExactlyOne>
+    </wsp:Policy>
+    <wsdl:types>
+        <xsd:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+            <xsd:import namespace="http://schemas.datacontract.org/2004/07/PDN.CII.ViewModels"/>
+            <xsd:element name="InquiryByNationalCode">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="parameter" nillable="true" type="ns1:Parameter"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="InquiryByNationalCodeResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="InquiryByNationalCodeResult" nillable="true" type="ns1:Result"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+        <xsd:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/">
+            <xsd:element name="anyType" nillable="true" type="xsd:anyType"/>
+            <xsd:element name="anyURI" nillable="true" type="xsd:anyURI"/>
+            <xsd:element name="base64Binary" nillable="true" type="xsd:base64Binary"/>
+            <xsd:element name="boolean" nillable="true" type="xsd:boolean"/>
+            <xsd:element name="byte" nillable="true" type="xsd:byte"/>
+            <xsd:element name="dateTime" nillable="true" type="xsd:dateTime"/>
+            <xsd:element name="decimal" nillable="true" type="xsd:decimal"/>
+            <xsd:element name="double" nillable="true" type="xsd:double"/>
+            <xsd:element name="float" nillable="true" type="xsd:float"/>
+            <xsd:element name="int" nillable="true" type="xsd:int"/>
+            <xsd:element name="long" nillable="true" type="xsd:long"/>
+            <xsd:element name="QName" nillable="true" type="xsd:QName"/>
+            <xsd:element name="short" nillable="true" type="xsd:short"/>
+            <xsd:element name="string" nillable="true" type="xsd:string"/>
+            <xsd:element name="unsignedByte" nillable="true" type="xsd:unsignedByte"/>
+            <xsd:element name="unsignedInt" nillable="true" type="xsd:unsignedInt"/>
+            <xsd:element name="unsignedLong" nillable="true" type="xsd:unsignedLong"/>
+            <xsd:element name="unsignedShort" nillable="true" type="xsd:unsignedShort"/>
+            <xsd:element name="char" nillable="true" type="ns0:char"/>
+            <xsd:simpleType name="char">
+                <xsd:restriction base="xsd:int"/>
+            </xsd:simpleType>
+            <xsd:element name="duration" nillable="true" type="ns0:duration"/>
+            <xsd:simpleType name="duration">
+                <xsd:restriction base="xsd:duration">
+                    <xsd:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+                    <xsd:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+                    <xsd:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:element name="guid" nillable="true" type="ns0:guid"/>
+            <xsd:simpleType name="guid">
+                <xsd:restriction base="xsd:string">
+                    <xsd:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+            <xsd:attribute name="FactoryType" type="xsd:QName"/>
+            <xsd:attribute name="Id" type="xsd:ID"/>
+            <xsd:attribute name="Ref" type="xsd:IDREF"/>
+        </xsd:schema>
+        <xsd:schema xmlns:tns="http://schemas.datacontract.org/2004/07/PDN.CII.ViewModels" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/PDN.CII.ViewModels">
+            <xsd:complexType name="Parameter">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="NationalCode" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="Parameter" nillable="true" type="ns1:Parameter"/>
+            <xsd:complexType name="Result">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="Address" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="BranchList" nillable="true" type="ns1:ArrayOfResult"/>
+                    <xsd:element minOccurs="0" name="BreakUpDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="EstablishmentDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="FollowUpNo" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="IsBranch" type="xsd:boolean"/>
+                    <xsd:element minOccurs="0" name="IsBreakUp" type="xsd:boolean"/>
+                    <xsd:element minOccurs="0" name="IsDbResult" type="xsd:boolean"/>
+                    <xsd:element minOccurs="0" name="IsSettle" type="xsd:boolean"/>
+                    <xsd:element minOccurs="0" name="LegalPersonType" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="Message" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="Name" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="NationalCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="ParentLegalPerson" nillable="true" type="ns1:Result"/>
+                    <xsd:element minOccurs="0" name="PostCode" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="RegisterDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="RegisterNumber" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="RegisterUnit" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="Residency" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="SettleDate" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="State" nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="Successful" type="xsd:boolean"/>
+                    <xsd:element minOccurs="0" name="UserId" type="xsd:int"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="Result" nillable="true" type="ns1:Result"/>
+            <xsd:complexType name="ArrayOfResult">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="Result" nillable="true" type="ns1:Result"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="ArrayOfResult" nillable="true" type="ns1:ArrayOfResult"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="ICiiService_InquiryByNationalCode_InputMessage">
+        <wsdl:part name="parameters" element="tns:InquiryByNationalCode"/>
+    </wsdl:message>
+    <wsdl:message name="ICiiService_InquiryByNationalCode_OutputMessage">
+        <wsdl:part name="parameters" element="tns:InquiryByNationalCodeResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="GetLegalPersonInfoDBPortType" wsp:PolicyURIs="#UTOverTransport">
+        <wsdl:operation name="InquiryByNationalCode">
+            <wsdl:input message="tns:ICiiService_InquiryByNationalCode_InputMessage" wsaw:Action="http://tempuri.org/ICiiService/InquiryByNationalCode"/>
+            <wsdl:output message="tns:ICiiService_InquiryByNationalCode_OutputMessage" wsaw:Action="//tempuri.org/ICiiService/InquiryByNationalCodeResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="GetLegalPersonInfoDBSoap11Binding" type="tns:GetLegalPersonInfoDBPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="InquiryByNationalCode">
+            <soap:operation soapAction="http://tempuri.org/ICiiService/InquiryByNationalCode" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="GetLegalPersonInfoDBSoap12Binding" type="tns:GetLegalPersonInfoDBPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="InquiryByNationalCode">
+            <soap12:operation soapAction="http://tempuri.org/ICiiService/InquiryByNationalCode" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="GetLegalPersonInfoDBHttpBinding" type="tns:GetLegalPersonInfoDBPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="InquiryByNationalCode">
+            <http:operation location="InquiryByNationalCode"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="GetLegalPersonInfoDB">
+        <wsdl:port name="GetLegalPersonInfoDBHttpsSoap11Endpoint" binding="tns:GetLegalPersonInfoDBSoap11Binding">
+            <soap:address location="https://sr-cix.ntsw.ir/services/GetLegalPersonInfoDB.GetLegalPersonInfoDBHttpsSoap11Endpoint"/>
+        </wsdl:port>
+        <wsdl:port name="GetLegalPersonInfoDBHttpSoap11Endpoint" binding="tns:GetLegalPersonInfoDBSoap11Binding">
+            <soap:address location="http://sr-cix.ntsw.ir/services/GetLegalPersonInfoDB.GetLegalPersonInfoDBHttpSoap11Endpoint"/>
+        </wsdl:port>
+        <wsdl:port name="GetLegalPersonInfoDBHttpSoap12Endpoint" binding="tns:GetLegalPersonInfoDBSoap12Binding">
+            <soap12:address location="http://sr-cix.ntsw.ir/services/GetLegalPersonInfoDB.GetLegalPersonInfoDBHttpSoap12Endpoint"/>
+        </wsdl:port>
+        <wsdl:port name="GetLegalPersonInfoDBHttpsSoap12Endpoint" binding="tns:GetLegalPersonInfoDBSoap12Binding">
+            <soap12:address location="https://sr-cix.ntsw.ir/services/GetLegalPersonInfoDB.GetLegalPersonInfoDBHttpsSoap12Endpoint"/>
+        </wsdl:port>
+        <wsdl:port name="GetLegalPersonInfoDBHttpEndpoint" binding="tns:GetLegalPersonInfoDBHttpBinding">
+            <http:address location="http://sr-cix.ntsw.ir/services/GetLegalPersonInfoDB.GetLegalPersonInfoDBHttpEndpoint"/>
+        </wsdl:port>
+        <wsdl:port name="GetLegalPersonInfoDBHttpsEndpoint" binding="tns:GetLegalPersonInfoDBHttpBinding">
+            <http:address location="https://sr-cix.ntsw.ir/services/GetLegalPersonInfoDB.GetLegalPersonInfoDBHttpsEndpoint"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

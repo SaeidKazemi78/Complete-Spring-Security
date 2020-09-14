@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "connectDepot" : {
+            "home": {
+                "title": "ارتباط به انبار"
+            },
+            "location": "ناحیه",
+            "depotSendCode": "کد ارسال به انبار",
+            "depotSendDate": "تاریخ ارسال به انبار",
+            "depot": "انبار",
+            "newDepot": "انبار جدید",
+            "oldDepot": "انبار قدیم",
+            "product": "فرآورده",
+            "startOrderNumber": "شماره شروع حواله",
+            "endOrderNumber": "شماره پایان حواله",
+            "startDate": "تاریخ شروع",
+            "endDate": "تاریخ پایان"
+        }
+    },
+    "niopdcrateApp": {
+        "cost" : {
+            "created": "هزینه با موفقیت ایجاد شد.",
+            "updated": "هزینه با موفقیت ویرایش شد.",
+            "deleted": "هزینه با موفقیت حذف شد."
+        }
+    }
+}

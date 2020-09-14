@@ -1,0 +1,36 @@
+
+{
+    "niopdcgatewayApp": {
+        "customerOrderCapacity" : {
+            "home": {
+                "title": "ظرفیت حمل و نقل مشتری",
+                "customerTitle": "مشتری"
+            },
+            "question": {
+                "active": "ایا برای فعال کردن ظرفیت {{param}} مطمئن هستید ؟",
+                "deActive": "ایا برای غیرفعال کردن ظرفیت {{param}} مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "درجه بندی مشتری"
+            },
+            "active": "فعال",
+            "deActive": "غیر فعال",
+            "DEPOT": "انبار شخص",
+            "PERSON_TRANSPOR": "کد حمل شخص",
+            "DEFAULT": "پیشفرض",
+            "NULL": "نامشخص",
+            "resource": "منبع داده",
+            "capacity": "ظرفیت",
+            "productGroupTitle": "عنوان گروه فرآورده",
+            "personTransportCode": "کد حمل و نقل",
+            "status": "وضعیت",
+            "updateCapacity":"بارگذاری مجدد ظرفیت ها"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerOrderCapacity" : {
+            "active": "ظرفیت حمل و نقل مشتری با موفقیت فعال شد.",
+            "deActive": "ظرفیت حمل و نقل مشتری با موفقیت غیرفعال شد."
+        }
+    }
+}

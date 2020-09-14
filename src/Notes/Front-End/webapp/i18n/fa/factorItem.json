@@ -1,0 +1,36 @@
+
+{
+    "niopdcgatewayApp": {
+        "factorItem" : {
+            "home": {
+                "title": "Factor Items",
+                "createLabel": "Create a new Factor Item",
+                "createOrEditLabel": "Create or edit a Factor Item"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Factor Item {{ id }}?"
+            },
+            "detail": {
+                "title": "Factor Item"
+            },
+            "orderId": "Order Id",
+            "orderNo": "Order No",
+            "orderProductId": "Order Product Id",
+            "description": "Description",
+            "amount": "Amount",
+            "productUnit": "Product Unit",
+            "productRatePrice": "Product Rate Price",
+            "basePrice": "Base Price",
+            "costPrice": "Cost Price",
+            "totalPrice": "Total Price",
+            "factor": "Factor"
+        }
+    },
+    "niopdcaccountingApp": {
+        "factorItem" : {
+            "created": "A new Factor Item is created with identifier {{ param }}",
+            "updated": "A Factor Item is updated with identifier {{ param }}",
+            "deleted": "A Factor Item is deleted with identifier {{ param }}"
+        }
+    }
+}

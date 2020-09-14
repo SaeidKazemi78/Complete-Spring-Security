@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="sajad" id="region_view_3">
+        <createView replaceIfExists="true"
+                    viewName="region_view">
+            select
+            region.*,
+            u.username
+            from user_location u, region
+            union
+            select
+            region.*,
+            u.username
+            from user_location_region u
+            inner join region on region.id = u.region_id
+            union
+            select
+            region.*,
+            u.username
+            from user_location_person u, region
+            union
+            select
+            region.*,
+            u.username
+            from user_location_region_person u
+            inner join region on region.id = u.region_id
+            union
+            select
+            region.*,
+            u.username
+            from user_location_person_customer u, region
+            union
+            select
+            region.*,
+            u.username
+            from user_location_region_person_customer u
+            inner join region on region.id = u.region_id
+            union
+            select
+            region.*,
+            u.username
+            from user_contract_type u, region
+            union
+            select
+            region.*,
+            u.username
+            from region, user_customer_type u
+            union
+            select
+            region.*,
+            u.username
+            from region, user_location_contract_type u
+            union
+            select
+            region.*,
+            u.username
+            from user_location_region_contract_type u
+            inner join region on u.region_id = region.id
+            union
+            select
+            region.*,
+            u.username
+            from region, user_location_customer_type u
+            union
+            select
+            region.*,
+            u.username
+            from user_location_region_customer_type u
+            inner join region on u.region_id = region.id
+            union
+            select
+            region.*,
+            u.username
+            from user_location_region_contract_type_customer_type u
+            inner join region on u.region_id = region.id
+            union
+            select
+            region.*,
+            u.username
+            from user_contract_type_customer_type u, region
+        </createView>
+    </changeSet>
+    <changeSet author="sajad" id="region_view_4" >
+        <createView replaceIfExists="true"
+                    viewName="region_view">
+            select
+            region.id,
+            u.username
+            from (select distinct u.username from user_location u) u, region
+            union
+            select distinct
+            u.region_id,
+            u.username
+            from user_location_region u
+            union
+            select
+            region.id,
+            u.username
+            from (select distinct u.username from user_location_person u) u, region
+            union
+            select distinct
+            u.region_id,
+            u.username
+            from user_location_region_person u
+            union
+            select
+            region.id,
+            u.username
+            from (select distinct u.username from user_location_person_customer u) u, region
+            union
+            select distinct
+            u.region_id,
+            u.username
+            from user_location_region_person_customer u
+            union
+            select
+            region.id,
+            u.username
+            from (select distinct u.username from user_contract_type u) u, region
+            union
+            select
+            region.id,
+            u.username
+            from region, (select distinct u.username from user_customer_type u) u
+            union
+            select
+            region.id,
+            u.username
+            from region, (select distinct u.username from user_location_contract_type u) u
+            union
+            select distinct
+            u.region_id,
+            u.username
+            from user_location_region_contract_type u
+            union
+            select
+            region.id,
+            u.username
+            from region, (select distinct u.username from user_location_customer_type u) u
+            union
+            select distinct
+            u.region_id,
+            u.username
+            from user_location_region_customer_type u
+            union
+            select distinct
+            u.region_id,
+            u.username
+            from user_location_region_contract_type_customer_type u
+            union
+            select
+            region.id,
+            u.username
+            from (select distinct u.username from user_contract_type_customer_type u) u, region
+        </createView>
+    </changeSet>
+    <changeSet author="sajad" id="region_view_5">
+        <createView replaceIfExists="true"
+                    viewName="region_view">
+            select
+            region.id id,
+            u.username
+            from (select distinct u.username from user_location u) u, region
+            union
+            select distinct
+            u.region_id id,
+            u.username
+            from user_location_region u
+            union
+            select
+            region.id id,
+            u.username
+            from (select distinct u.username from user_location_person u) u, region
+            union
+            select distinct
+            u.region_id id,
+            u.username
+            from user_location_region_person u
+            union
+            select
+            region.id id,
+            u.username
+            from (select distinct u.username from user_location_person_customer u) u, region
+            union
+            select distinct
+            u.region_id id,
+            u.username
+            from user_location_region_person_customer u
+            union
+            select
+            region.id id,
+            u.username
+            from (select distinct u.username from user_contract_type u) u, region
+            union
+            select
+            region.id id,
+            u.username
+            from region, (select distinct u.username from user_customer_type u) u
+            union
+            select
+            region.id id,
+            u.username
+            from region, (select distinct u.username from user_location_contract_type u) u
+            union
+            select distinct
+            u.region_id id,
+            u.username
+            from user_location_region_contract_type u
+            union
+            select
+            region.id id,
+            u.username
+            from region, (select distinct u.username from user_location_customer_type u) u
+            union
+            select distinct
+            u.region_id id,
+            u.username
+            from user_location_region_customer_type u
+            union
+            select distinct
+            u.region_id id,
+            u.username
+            from user_location_region_contract_type_customer_type u
+            union
+            select
+            region.id id,
+            u.username
+            from (select distinct u.username from user_contract_type_customer_type u) u, region
+        </createView>
+    </changeSet>
+    <changeSet author="sajad" id="region_view_6" >
+        <createView replaceIfExists="true"
+                    viewName="region_view">
+            select
+            region.id id,
+            u.username
+            from user_location u, region
+            union
+            select
+            u.region_id id,
+            u.username
+            from user_location_region u
+            union
+            select
+            region.id id,
+            u.username
+            from user_location_person u, region
+            union
+            select
+            u.region_id id,
+            u.username
+            from user_location_region_person u
+            union
+            select
+            region.id id,
+            u.username
+            from user_location_person_customer u, region
+            union
+            select
+            u.region_id id,
+            u.username
+            from user_location_region_person_customer u
+            union
+            select
+            region.id id,
+            u.username
+            from user_contract_type u, region
+            union
+            select
+            region.id id,
+            u.username
+            from region, user_customer_type u
+            union
+            select
+            region.id id,
+            u.username
+            from region, user_location_contract_type u
+            union
+            select
+            u.region_id id,
+            u.username
+            from user_location_region_contract_type u
+            union
+            select
+            region.id id,
+            u.username
+            from region, user_location_customer_type u
+            union
+            select
+            u.region_id id,
+            u.username
+            from user_location_region_customer_type u
+            union
+            select
+            u.region_id id,
+            u.username
+            from user_location_region_contract_type_customer_type u
+            union
+            select
+            region.id id,
+            u.username
+            from user_contract_type_customer_type u, region
+        </createView>
+    </changeSet>
+    <changeSet author="sajad" id="region_view_7" runAlways="true">
+        <createView replaceIfExists="true"
+                    viewName="region_view">
+            select
+            region.id id,
+            u.username
+            from user_location u, region
+            union
+            select
+            u.region_id id,
+            u.username
+            from user_location_region u
+            union
+            select
+            region.id id,
+            u.username
+            from user_location_person u, region
+            union
+            select
+            u.region_id id,
+            u.username
+            from user_location_region_person u
+            union
+            select
+            region.id id,
+            u.username
+            from user_location_person_customer u, region
+            union
+            select
+            u.region_id id,
+            u.username
+            from user_location_region_person_customer u
+            union
+            select
+            region.id id,
+            u.username
+            from user_contract_type u, region
+            union
+            select
+            region.id id,
+            u.username
+            from region, user_customer_type u
+            union
+            select
+            region.id id,
+            u.username
+            from region, user_location_contract_type u
+            union
+            select
+            u.region_id id,
+            u.username
+            from user_location_region_contract_type u
+            union
+            select
+            region.id id,
+            u.username
+            from region, user_location_customer_type u
+            union
+            select
+            u.region_id id,
+            u.username
+            from user_location_region_customer_type u
+            union
+            select
+            u.region_id id,
+            u.username
+            from user_location_region_contract_type_customer_type u
+            union
+            select
+            region.id id,
+            u.username
+            from user_contract_type_customer_type u, region
+            union
+            select
+            region.id id,
+            u.username
+            from user_location_contract_type_customer_type u, region
+        </createView>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,39 @@
+{
+    "niopdcgatewayApp": {
+        "dailySales": {
+            "home": {
+                "title": "فروش روزانه"
+            },
+            "timeBy":"تاریخ با",
+            "timeByOrderCreate":"صدور حواله",
+            "timeByExportFromDepot":"خروج از انبار",
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "location": "ناحیه",
+            "product":"فرآورده",
+            "currency":"واحد پولی",
+            "customer":"مشتری",
+            "person":"صاحب امتیاز",
+            "depot":"انبار",
+            "orderNo": "شماره حواله",
+            "depotTitle": "نام انبار",
+            "productTitle": "نام فرآورده",
+            "locationTitle": "ناحیه",
+            "ratePrice": "نرخ فرآورده",
+            "amount": "مقدار",
+            "totalPrice": "بهای کل",
+            "basePrice": "مبلغ خالص",
+            "customerName": "نام مشتری",
+            "personName": "نام صاحب امتیاز",
+            "personFirstName": "نام صاحب امتیاز",
+            "personLastName": "نام خانوادگی صاحب امتیاز",
+            "buyGroup": "نوع خرید",
+            "status": "وضعیت حواله",
+            "costPrice": "هزینه بالاسری",
+            "customerTypeTitle": "نوع مشتری",
+            "consumptionTitle": "نوع مصرف",
+            "recipNo":"شماره فیش",
+            "creditNo":"مجوز"
+        }
+    }
+}

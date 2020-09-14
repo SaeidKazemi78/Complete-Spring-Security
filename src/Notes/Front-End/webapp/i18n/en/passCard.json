@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "passCard" : {
+            "home": {
+                "title": "Pass Cards",
+                "createLabel": "Create a new Pass Card",
+                "createOrEditLabel": "Create or edit a Pass Card"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Pass Card {{ id }}?"
+            },
+            "detail": {
+                "title": "Pass Card"
+            },
+            "fromDate": "From Date",
+            "toDate": "To Date",
+            "serial": "Serial",
+            "driver": "Driver"
+        }
+    },
+    "niopdcbaseApp": {
+        "passCard" : {
+            "created": "A new Pass Card is created with identifier {{ param }}",
+            "updated": "A Pass Card is updated with identifier {{ param }}",
+            "deleted": "A Pass Card is deleted with identifier {{ param }}"
+        }
+    }
+}

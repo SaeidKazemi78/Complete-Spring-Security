@@ -1,0 +1,31 @@
+{
+    "niopdcgatewayApp": {
+        "currencyRate" : {
+            "home": {
+                "currencyTitle": "واحد پولی",
+                "createLabel": "ایجاد نرخ واحد پولی",
+                "createOrEditLabel": "ویرایش نرخ واحد پولی",
+                "view": "نمایش نرخ واحد پولی",
+                "title": "نرخ واحد پولی"
+            },
+            "delete": {
+                "question": "آیا برای حذف این نرخ واحد پولی مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "نرخ واحد پولی"
+            },
+            "rate": "نرخ",
+            "activeStartDate": "تاریخ شروع",
+            "activeFinishDate": "تاریخ اتمام",
+            "currency": "Currency",
+            "currencyRateGroup": "گروه واحد پولی"
+        }
+    },
+    "niopdcrateApp": {
+        "currencyRate" : {
+            "created": "نرخ واحد پولی با موفقیت ایجاد شد.",
+            "updated": "نرخ واحد پولی با موفقیت ویرایش شد.",
+            "deleted": "نرخ واحد پولی با موفقیت حذف شد."
+        }
+    }
+}

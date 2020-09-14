@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+   <changeSet id="function_create" author="mohamamd">
+       <sql dbms="mssql"
+            endDelimiter="\nGO"
+            splitStatements="true"
+            stripComments="true">
+           create function regionByLevel(@id bigint, @level int)
+           returns BIGINT as
+           begin
+           declare @regionId as bigint;
+
+           WITH regTbl AS
+           (
+           SELECT
+           l.id,
+           l.name,
+           l.jhi_level,
+           l.parent_id
+           FROM region l
+           WHERE l.id in (@id)
+           UNION ALL
+           SELECT
+           l.id,
+           l.name,
+           l.jhi_level,
+           l.parent_id
+           FROM region l
+           INNER JOIN regTbl ON regTbl.parent_id = l.id
+           )
+           select top 1 @regionId = id
+           from regTbl
+           where regTbl.jhi_level = @level
+           return @regionId
+           end;
+       </sql>
+   </changeSet>
+</databaseChangeLog>

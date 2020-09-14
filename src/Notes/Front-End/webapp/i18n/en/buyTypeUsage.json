@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "BuyTypeUsage" : {
+            "null": "",
+            "COST": "COST",
+            "PRODUCT": "PRODUCT",
+            "BOTH": "BOTH"
+        }
+    }
+}

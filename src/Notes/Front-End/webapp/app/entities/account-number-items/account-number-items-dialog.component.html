@@ -1,0 +1,64 @@
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="accountNumberItems.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="accountNumberItems.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="form-group" class="col-md-4">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.accountNumberItems.part" for="field_part">Part</label>
+                    <select [disabled]="isView" class="form-control" name="part" [(ngModel)]="accountNumberItems.part"  (ngModelChange)="onChangePart($event)" id="field_part"  required>
+                        <option value="PART1">{{'niopdcgatewayApp.Parts.PART1' | translate}}</option>
+                        <option value="PART2">{{'niopdcgatewayApp.Parts.PART2' | translate}}</option>
+                        <option value="PART3">{{'niopdcgatewayApp.Parts.PART3' | translate}}</option>
+                        <option value="PART4">{{'niopdcgatewayApp.Parts.PART4' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.part?.dirty && editForm.controls.part?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.part?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
+                </div>
+
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.accountNumberItems.title" for="field_title">Title</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="title" id="field_title"
+                           [(ngModel)]="accountNumberItems.title"  />
+                    </div>
+                    </div>
+
+                <div  class="col-md-4">
+                    <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.accountNumberItems.content" for="field_content">Content</label>
+                    <input [disabled]="isView" [maxLength]="maxLength" type="text" class="form-control" name="content" id="field_content"
+                        [(ngModel)]="accountNumberItems.content"  />
+                </div>
+                </div>
+    </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+
+</form>

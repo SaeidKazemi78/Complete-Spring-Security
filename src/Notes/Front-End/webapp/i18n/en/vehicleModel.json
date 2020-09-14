@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "vehicleModel" : {
+            "home": {
+                "title": "Vehicle Models",
+                "createLabel": "Create a new Vehicle Model",
+                "createOrEditLabel": "Create or edit a Vehicle Model"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Vehicle Model {{ id }}?"
+            },
+            "detail": {
+                "title": "Vehicle Model"
+            },
+            "title": "Title",
+            "customerGroup": "Customer Group",
+            "vehicleModelType": "Vehicle Model Type",
+            "vehicleCapacity": "Vehicle Capacity"
+        }
+    },
+    "niopdcbaseApp": {
+        "vehicleModel" : {
+            "created": "A new Vehicle Model is created with identifier {{ param }}",
+            "updated": "A Vehicle Model is updated with identifier {{ param }}",
+            "deleted": "A Vehicle Model is deleted with identifier {{ param }}"
+        }
+    }
+}

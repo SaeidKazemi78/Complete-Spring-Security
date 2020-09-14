@@ -1,0 +1,37 @@
+{
+    "niopdcgatewayApp": {
+        "metre": {
+            "home": {
+                "title": "میتر",
+                "createLabel": "ایجاد میتر",
+                "createOrEditLabel": "ویرایش میتر",
+                "view": "نمایش میتر",
+                "search": "جستجو",
+                "oilTankTitle": "مخزن"
+            },
+            "delete": {
+                "question": "آیا برای حذف میتر  {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "میتر"
+            },
+            "title": "کد رجیستری",
+            "maxMetre": "شماره پایانی",
+            "amount": "شماره شروع",
+            "oilTank": "مخزن",
+            "active": "فعال",
+            "activeTrue": "فعال",
+            "activeFalse": "غیر فعال",
+            "created": "میتر با موفقیت  ایجاد شد.",
+            "updated": "میتر با موفقیت  ویرایش شد.",
+            "deleted": "میتر با موفقیت  حذف شد."
+        }
+    },
+    "niopdcaoApp": {
+        "metre": {
+            "created": "میتر {{param}} با موفقیت ایجاد شد.",
+            "updated": "میتر {{param}} با موفقیت ویرایش شد.",
+            "deleted": "میتر {{param}} با موفقیت حذف شد."
+        }
+    }
+}

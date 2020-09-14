@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "ActiveMetre" : {
+            "null": "",
+            "SOURCE": "SOURCE",
+            "TARGET": "TARGET"
+        }
+    }
+}

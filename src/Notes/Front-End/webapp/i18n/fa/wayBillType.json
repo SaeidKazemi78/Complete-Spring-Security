@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "WayBillType" : {
+            "null": "",
+            "SEND": "ارسال",
+            "RECEIVE": "دریافت"
+        }
+    }
+}

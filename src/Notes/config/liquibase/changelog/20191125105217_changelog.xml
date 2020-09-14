@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="jafari (generated)" id="1574679201490-1">
+        <addColumn tableName="customer">
+            <column name="has_free_quota" type="bit"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="jafari (generated)" id="1574679201490-2">
+        <addColumn tableName="customer_aud">
+            <column name="has_free_quota" type="bit"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="jafari (generated)" id="1574679201490-3">
+        <dropColumn tableName="customer">
+            <column name="has_free_quota" type="bit"/>
+        </dropColumn>
+    </changeSet>
+    <changeSet author="jafari (generated)" id="1574679201490-4">
+        <dropColumn tableName="customer_aud">
+            <column name="has_free_quota" type="bit"/>
+        </dropColumn>
+    </changeSet>
+</databaseChangeLog>

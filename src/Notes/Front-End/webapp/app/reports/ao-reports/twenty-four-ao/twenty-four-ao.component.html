@@ -1,0 +1,126 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <form name="editForm" role="form" novalidate (ngSubmit)="loadAll()" #editForm="ngForm">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <h5 class="col-md-3"
+                        jhiTranslate="report.search">Search
+                    </h5>
+                </div>
+            </div>
+            <div class="card-block container">
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTank.refuelCenter"
+                                   for="field_refuelCenter">RefuelCenter</label>
+                            <select class="form-control" id="field_refuelCenter"
+                                    name="refuelCenter"
+                                    [(ngModel)]="req.refuelCenterId"
+                                    required
+                            >
+                                <option [ngValue]="null" selected></option>
+                                <option [ngValue]="refuelCenterOption.id"
+                                        *ngFor="let refuelCenterOption of refuelCenters">
+                                    {{refuelCenterOption.persianTitle}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.twentyFourAo.startDate"
+                                   for="field_startDate">startDate</label>
+                            <div class="d-flex">
+                                <ng2-datetimepicker  [rtlActive]="true" time="00:00:00"
+                                                    id="field_startDate"
+                                                    class="form-control"
+                                                    name="startDate" [(ngModel)]="req.startDate"
+                                                    required></ng2-datetimepicker>
+                            </div>
+                            <div
+                                [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.startDate?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                                       jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                    This field should be a date and time.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.twentyFourAo.finishDate"
+                                   for="field_finishDate">finishDate</label>
+                            <div class="d-flex">
+                                <ng2-datetimepicker  [rtlActive]="true" time="23:59:59"
+                                                    id="field_finishDate"
+                                                    class="form-control"
+                                                    name="finishDate"
+                                                    [(ngModel)]="req.finishDate"
+                                                    required></ng2-datetimepicker>
+                            </div>
+                            <div
+                                [hidden]="!(editForm.controls.finishDate?.dirty && editForm.controls.finishDate?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.finishDate?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.finishDate?.errors?.ZonedDateTimelocal"
+                                       jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                    This field should be a date and time.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer text-center">
+                <button type="submit" class="btn btn-primary "
+                        [disabled]="editForm.form.invalid ">
+                    <span class="fa fa-search"></span>&nbsp;<span
+                    jhiTranslate="report.search">Save</span>
+                </button>
+            </div>
+        </div>
+    </form>
+    <br/>
+
+    <div id="pivot-twenty-four">
+        <dx-chart id="twenty-four-chart" [rtlEnabled]="true">
+            <dxo-common-series-settings dir-rtl type="bar"></dxo-common-series-settings>
+            <dxo-size [height]="320"></dxo-size>
+            <dxo-adaptive-layout [width]="450"></dxo-adaptive-layout>
+            <dxo-tooltip  [enabled]="true" dir-rtl [text]="customizeTooltip"></dxo-tooltip>
+        </dx-chart>
+        <dx-pivot-grid id="pivot-grid-twenty-four"
+        [allowSortingBySummary]="true"
+        [allowFiltering]="true"
+                       [rtlEnabled]="true"
+                       [showBorders]="true"
+                       [showColumnGrandTotals]="true"
+                       [showRowTotals]="true"
+                       [showColumnTotals]="true"
+                       [height]="520"
+                       [dataSource]="pivotGridDataSource"
+        >
+            <dxo-field-chooser [enabled]="true"></dxo-field-chooser>
+            <dxo-scrolling mode="virtual"></dxo-scrolling>
+            <dxo-export [enabled]="true" fileName="twenty-four"></dxo-export>
+        </dx-pivot-grid>
+    </div>
+    <br/>
+</div>

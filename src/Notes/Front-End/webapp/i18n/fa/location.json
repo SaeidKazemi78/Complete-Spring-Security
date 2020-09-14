@@ -1,0 +1,86 @@
+{
+    "niopdcgatewayApp": {
+        "location": {
+            "home": {
+                "title": "ستاد/منطقه/ناحیه",
+                "title0": "ستاد",
+                "title1": "مناطق",
+                "title2": "نواحی",
+                "title3": "نقاط مرزی",
+                "createLabel": "ایجاد ستاد",
+                "createLabelArea": "ایجاد منطقه",
+                "createLabelZone": "ایجاد ناحیه",
+                "createLabelBoundarySell": "ایجاد نقطه مرزی",
+                "createOrEditLabel": "ویرایش ستاد",
+                "createOrEditLabelArea": "ویرایش منطقه",
+                "createOrEditLabelZone": "ویرایش ناحیه",
+                "createOrEditLabelBoundarySell": "ویرایش نقطه مرزی",
+                "view": "نمایش ستاد",
+                "viewArea": "نمایش منطقه",
+                "viewZone": "نمایش ناحیه",
+                "viewBoundarySell": "نمایش نقطه مرزی"
+            },
+            "delete": {
+                "question": "آیا شما میخواهید   {{ id }}  را حذف کنید؟"
+            },
+            "open": {
+                "question": "آیا شما میخواهید  {{ id }} را باز کنید؟"
+            },
+            "close": {
+                "question": "آیا شما میخواهید  {{ id }} را ببندید؟"
+            },
+            "detail": {
+                "title": "ستاد"
+            },
+            "name": "عنوان",
+            "level2name": "منطقه",
+            "level3name": "عنوان",
+            "code": "کد",
+            "stateCode": "کد بانک مرکزی",
+            "financialCode": "کد مالی",
+            "costAccount": "حساب هزینه",
+            "location": "ستاد / منطقه",
+            "subLocation": "منطقه",
+            "subSubLocation": "ناحیه",
+            "news": "اخبار",
+            "open-name": "باز کردن روز",
+            "close-name": "بستن روز",
+            "region": "تقسیمات کشوری",
+            "haveBoundarySell": "نقاط مرزی دارد",
+            "boundarySell": "نقاط مرزی",
+            "primitiveMeasure": "نوع ترانشیپ",
+            "beforeControl": "جایگاه پیمانکاری (ترانزیت)",
+            "beforeControlTranship": "جایگاه پیمانکاری (ترانشیپ)",
+            "boundaryRateGroupTransitId": "گروه نرخی مرزی ترانزیت",
+            "boundaryRateGroupTranshipId": "گروه نرخی مرزی ترانشیپ",
+            "differenceRateGroupTransitId": "گروه نرخی ما به تفاوت ترانزیت",
+            "differenceRateGroupTranshipId": "گروه نرخی ما به تفاوت ترانشیپ",
+            "tolerance": "تلرانس",
+            "draftHour": "ساعت مجاز حواله های پیشنویس",
+            "boundaryExemption": "معافیت",
+            "hasDepot": "دارای انبار",
+            "docForParentLocation": "استفاده از کدمالی منطقه در سند",
+            "checkbookAccountNumber": "حساب دسته چک",
+            "orderNumber": "تعریف بازه شماره حواله",
+            "farCountry":"سایرکشورهای فراتر",
+            "pumpBeforeControl":"عرضه قبل ازکنترل",
+            "country":"کشور"
+
+        }
+    },
+    "niopdcbaseApp": {
+        "location": {
+            "created": "ستاد با موفقیت  ایجاد شد.",
+            "createdArea": "منطقه با موفقیت  ایجاد شد.",
+            "createdZone": "ناحیه با موفقیت  ایجاد شد.",
+            "updated": "ستاد با موفقیت  ویرایش شد.",
+            "updatedArea": "منطقه با موفقیت  ویرایش شد.",
+            "updatedZone": "ناحیه با موفقیت  ویرایش شد.",
+            "deleted": "ستاد با موفقیت  حذف شد.",
+            "open": "روز با موفقیت  باز شد.",
+            "close": "روز با موفقیت  بسته شد.",
+            "deletedArea": "منطقه با موفقیت  حذف شد.",
+            "deletedZone": "ناحیه با موفقیت  حذف شد."
+        }
+    }
+}

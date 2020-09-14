@@ -1,0 +1,33 @@
+
+{
+    "niopdcgatewayApp": {
+        "productRateDifference" : {
+            "home": {
+                "title": "Product Rate Differences",
+                "createLabel": "Create a new Product Rate Difference",
+                "createOrEditLabel": "Create or edit a Product Rate Difference"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Product Rate Difference {{ id }}?"
+            },
+            "detail": {
+                "title": "Product Rate Difference"
+            },
+            "rate": "Rate",
+            "amount": "Amount",
+            "date": "Date",
+            "secondDifference": "Second Difference",
+            "fromRateGroupId": "From Rate Group Id",
+            "toRateGroupId": "To Rate Group Id",
+            "customer": "Customer",
+            "product": "Product"
+        }
+    },
+    "niopdcbaseApp": {
+        "productRateDifference" : {
+            "created": "A new Product Rate Difference is created with identifier {{ param }}",
+            "updated": "A Product Rate Difference is updated with identifier {{ param }}",
+            "deleted": "A Product Rate Difference is deleted with identifier {{ param }}"
+        }
+    }
+}

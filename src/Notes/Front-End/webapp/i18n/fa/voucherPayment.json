@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "voucherPayment" : {
+            "home": {
+                "title": "سند پرداخت",
+                "createLabel": "ایجاد سند پرداخت",
+                "createOrEditLabel": "ویرایش سند پرداخت",
+                "view":"نمایش الگوی سند"
+            },
+            "delete": {
+                "question": "آیا برای حذف سند پرداخت مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "سند پرداخت"
+            },
+            "locationId": "ناحیه",
+            "customer": "مشتری",
+            "voucherType": "نوع سند"
+        }
+    },
+    "niopdcaccountingApp": {
+        "voucherTemplate" : {
+            "created": "سند پرداخت با موفقیت ایجاد شد.",
+            "updated": "سند پرداخت با موفقیت ویرایش شد.",
+            "deleted": "اسند پرداخت با موفقیت حذف شد."
+        }
+    }
+}

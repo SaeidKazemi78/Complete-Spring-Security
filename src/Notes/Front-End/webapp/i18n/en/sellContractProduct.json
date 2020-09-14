@@ -1,0 +1,36 @@
+
+{
+    "niopdcgatewayApp": {
+        "sellContractProduct" : {
+            "home": {
+                "title": "Sell Contract Products",
+                "createLabel": "Create a new Sell Contract Product",
+                "createOrEditLabel": "Create or edit a Sell Contract Product"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Sell Contract Product {{ id }}?"
+            },
+            "detail": {
+                "title": "Sell Contract Product"
+            },
+            "rateGroupId": "Rate Group Id",
+            "currencyRateGroupId": "Currency Rate Group Id",
+            "startDate": "Start Date",
+            "finishDate": "Finish Date",
+            "active": "Active",
+            "consumption": "Consumption",
+            "product": "Product",
+            "sellContractCustomer": "Sell Contract Customer",
+            "sellContract": "Sell Contract",
+            "depot": "Depot",
+            "buyType": "Buy Type"
+        }
+    },
+    "niopdcbaseApp": {
+        "sellContractProduct" : {
+            "created": "A new Sell Contract Product is created with identifier {{ param }}",
+            "updated": "A Sell Contract Product is updated with identifier {{ param }}",
+            "deleted": "A Sell Contract Product is deleted with identifier {{ param }}"
+        }
+    }
+}

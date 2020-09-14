@@ -1,0 +1,58 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()"  #editForm="ngForm">
+    <jhi-alert-error></jhi-alert-error>
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="urlMapping" jhiTranslate="entity.action.urlMapping">urlMapping</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.actionLog.url"
+                           for="field_url">url</label>
+                    <input dir="ltr" type="text" class="form-control" disabled name="url" id="field_url"
+                           [(ngModel)]="actionLogMapping.url"/>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.actionLog.templateUrl"
+                           for="field_templateUrl">templateUrl</label>
+                    <input dir="ltr" type="text" required class="form-control" name="templateUrl" id="field_templateUrl"
+                           [(ngModel)]="actionLogMapping.templateUrl"/>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.actionLog.persianName"
+                           for="field_persianName">persianName</label>
+                    <input type="text" class="form-control" required name="persianName" id="field_persianName"
+                           [(ngModel)]="actionLogMapping.persianName"/>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.actionLog.method"
+                           for="field_method">method</label>
+                    <input type="text" class="form-control" required disabled name="method" id="field_method"
+                           [(ngModel)]="actionLogMapping.method"/>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="!(actionLogMapping.persianName && actionLogMapping.templateUrl)"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

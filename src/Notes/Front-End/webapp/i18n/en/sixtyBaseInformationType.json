@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "SixtyBaseInformationType" : {
+            "null": "",
+            "OPERATION": "OPERATION",
+            "DEPOT": "DEPOT"
+        }
+    }
+}

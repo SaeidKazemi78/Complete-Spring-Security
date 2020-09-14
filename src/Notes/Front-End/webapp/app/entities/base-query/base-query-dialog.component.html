@@ -1,0 +1,229 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="baseQuery.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.baseQuery.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="baseQuery.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.baseQuery.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.baseQuery.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.baseQuery.title"
+                               for="field_title">Title</label>
+                        <input [disabled]="isView" type="text" class="form-control" name="title"
+                               id="field_title"
+                               [(ngModel)]="baseQuery.title" required maxlength="100"/>
+                        <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.title?.errors?.required"
+                                   jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.title?.errors?.maxlength"
+                                   jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
+                                This field cannot be longer than 30 characters.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group"><label class="form-control-label"
+                                                   jhiTranslate="niopdcgatewayApp.userDataAccess.location"
+                                                   for="location">Location</label>
+                        <input-location-selector [disabled]="isView"  class="form-control" [idSelector]="true" [oneSelection]="false"
+                                                 [(ngModel)]="baseQuery.locationIds" [selectByPriority]="true" [selectOfLevel]="'all'"
+                                                 id="location" name="location"></input-location-selector>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.baseQuery.queryCategory"
+                               for="field_queryCategory">Voucher Date Type</label>
+                        <select [disabled]="isView" class="form-control" id="field_queryCategory" name="queryCategory"
+                                [(ngModel)]="baseQuery.queryCategory" required>
+                            <option [ngValue]="null" selected></option>
+                            <option value="AIRPLANE">{{'niopdcgatewayApp.baseQuery.baseCategories.airplane' | translate}}</option>
+                            <option value="BOUNDARY">{{'niopdcgatewayApp.baseQuery.baseCategories.boundary' | translate}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               jhiTranslate="niopdcgatewayApp.baseQuery.parameters"
+                               for="field_parameters">parameters</label>
+                        <p-multiSelect [disabled]="isView" class="form-control" id="field_parameters"
+                                       [options]="parameters"
+                                       (onChange)="onChangeParameters()"
+                                       name="role"
+                                       [defaultLabel]="'global.messages.info.choose' | translate"
+                                       [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                       [(ngModel)]="baseQuery.parameters"
+                                       [ngModelOptions]="{standalone: true}"
+                        ></p-multiSelect>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="background-color: #deedf7;">
+                <div class="col-md-6" *ngIf="parameterDate">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.baseQuery.date"
+                           for="field_date">Date</label>
+                    <ng2-datetimepicker [disableTime]="true" [rtlActive]="true"
+                                        id="field_date"
+                                        class="form-control"
+                                        name="date"
+                                        [(ngModel)]="date"
+                    >
+                    </ng2-datetimepicker>
+                </div>
+                <div class="col-md-6" *ngIf="parameterStartDate">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.baseQuery.startDate"
+                           for="field_startDate">Date</label>
+                    <ng2-datetimepicker [disableTime]="true" [rtlActive]="true"
+                                        id="field_startDate"
+                                        class="form-control"
+                                        name="startDate"
+                                        [(ngModel)]="startDate"
+                    >
+                    </ng2-datetimepicker>
+                </div>
+                <div class="col-md-6" *ngIf="parameterFinishDate">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.baseQuery.finishDate"
+                           for="field_finishDate">Date</label>
+                    <ng2-datetimepicker [disableTime]="true" [rtlActive]="true"
+                                        id="field_finishDate"
+                                        class="form-control"
+                                        name="finishDate"
+                                        [(ngModel)]="finishDate"
+                    >
+                    </ng2-datetimepicker>
+                </div>
+                <div class="col-md-6" *ngIf="parameterCustomer">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.baseQuery.customer"
+                           for="field_customer">customer</label>
+                    <jhi-customer-selector
+                        [multiSelect]="false"
+                        [selectObject]="false"
+                        [disabled]="isView"
+                        [(ngModel)]="customerId"
+                        class="form-control"
+                        id="field_customer"
+                        name="field_customer"
+                    >
+                    </jhi-customer-selector>
+                </div>
+                <div class="col-md-6" *ngIf="parameterLocation && baseQuery.queryCategory === 'BOUNDARY'">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.baseQuery.location"
+                           for="field_location">Location</label>
+                    <input-location-selector
+                        [idSelector]="true"
+                        [oneSelection]="true"
+                        [selectByPriority]="true"
+                        class="form-control" id="field_location" name="location"
+                        [(ngModel)]="locationId"
+                    >
+                    </input-location-selector>
+                </div>
+                <div class="col-md-6" *ngIf="parameterLocation && baseQuery.queryCategory === 'AIRPLANE'">
+                    <div class="form-group">
+                        <label  class="form-control-label"
+                               jhiTranslate="niopdcgatewayApp.baseQuery.locationAirplane"
+                               for="field_depotId">Depot
+                            Id</label>
+                        <select class="form-control"
+                                name="depotId"
+                                [disabled]="isView"
+                                [(ngModel)]="locationId"
+                                id="field_depotId"
+                                >
+                            <option [ngValue]="refuelCenter.id" *ngFor="let refuelCenter of refuelCenters">
+                                {{refuelCenter.persianTitle}}
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.baseQuery.tempQuery"
+                               for="field_tempQuery">Temp Query</label>
+                        <textarea [disabled]="isView" style="direction: ltr;height: 300px" type="text"
+                                  class="form-control"
+                                  name="tempQuery" id="field_tempQuery"
+                                  [(ngModel)]="baseQuery.tempQuery" required>
+
+                    </textarea>
+                        <div
+                            [hidden]="!(editForm.controls.tempQuery?.dirty && editForm.controls.tempQuery?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.tempQuery?.errors?.required"
+                                   jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.tempQuery?.errors?.maxlength"
+                                   jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 1000 }">
+                                This field cannot be longer than 1000 characters.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-info"
+                            [disabled]="baseQuery.tempQuery==null"
+                            (click)="runQuery()">
+                        <span class="fa fa-search"></span>&nbsp;<span
+                        jhiTranslate="entity.action.show">Save</span>
+                    </button>
+                </div>
+                <div class="col-md-5"></div>
+            </div>
+
+            <kendo-grid
+                [data]="resultList"
+                [resizable]="true"
+                [scrollable]="true"
+                width="100%"
+                scrollable="scrollable">
+
+                <kendo-grid-column *ngFor="let col of cols" [field]="col.field" [title]="col.header" width="130">
+                    <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+                </kendo-grid-column>
+
+                <kendo-grid-messages
+                    [pagerOf]="'report.pagerOf' | translate"
+                    [pagerItems]="'report.pagerItems' | translate"
+                    [groupPanelEmpty]="'report.headerMessage' | translate"
+                    [noRecords]="'global.messages.info.emptyRecords' | translate"
+                    [pagerItemsPerPage]="'report.pagerItemsPerPage' | translate">
+                </kendo-grid-messages>
+            </kendo-grid>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

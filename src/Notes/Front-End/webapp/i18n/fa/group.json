@@ -1,0 +1,34 @@
+{
+    "niopdcgatewayApp": {
+        "group" : {
+            "home": {
+                "title": "گروه ها",
+                "homeTitle": "خانه",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "Create or edit a Group",
+                "search": "جستجو"
+            },
+            "delete": {
+                "question": "آیا برای حذف گروه  {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "گروه ها"
+            },
+            "name": "نام",
+            "activated": "فعال",
+            "activatedTrue": "فعال",
+            "activatedFalse": "غیر فعال",
+            "roles": "نقش ها",
+            "authorities": "دسترسی ها",
+            "denyAuthorities": "عدم دسترسی ها",
+            "location":"ناحیه/منطقه"
+        }
+    },
+    "niopdcuaaApp": {
+        "group" : {
+            "created": "گروه با موفقیت ایجاد شد.",
+            "updated": "گروه با موفقیت ویرایش شد.",
+            "deleted": "گروه با موفقیت حذف شد."
+        }
+    }
+}

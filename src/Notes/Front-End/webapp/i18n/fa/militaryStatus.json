@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "MilitaryStatus" : {
+            "null": "",
+            "COMPLETE": "اتمام خدمت",
+            "EXEMPT": "معافیت"
+        }
+    }
+}

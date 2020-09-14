@@ -1,0 +1,21 @@
+{
+    "niopdcgatewayApp": {
+        "depositIdentifier": {
+            "title": "شناسه واریز",
+            "delete": {
+                "question": "آیا برای حذف این شناسه واریز مطمئن هستید؟"
+            },
+            "bank": "بانک",
+            "priority": "اولویت",
+            "code": "شناسه واریز",
+            "empty": "هیچ شناسه واریزی ثبت نشده است."
+        }
+    },
+    "niopdcpaymentApp": {
+        "depositIdentifier": {
+            "created": "شناسه واریز با موفقیت ایجاد شد.",
+            "updated": "شناسه واریز با موفقیت ویرایش شد.",
+            "deleted": "شناسه واریز با موفقیت حذف شد."
+        }
+    }
+}

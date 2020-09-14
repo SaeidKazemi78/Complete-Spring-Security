@@ -1,0 +1,21 @@
+{
+    "niopdcgatewayApp": {
+        "totalPlatform": {
+            "home": {
+                "title": "میزان کارکرد سکوها"
+            },
+            "title": "عنوان",
+            "date": "تاریخ",
+            "startMetre": "عنوان",
+            "product": "فرآورده",
+            "endMetre": "عنوان",
+            "amount": "مقدار",
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "refuelCenter": "مرکز سوختگیری",
+            "platformSell": "فروش به متفرقه",
+            "unitToPlatform": "انتقال به عملیات",
+            "totalAmount": "مقدار کل"
+        }
+    }
+}

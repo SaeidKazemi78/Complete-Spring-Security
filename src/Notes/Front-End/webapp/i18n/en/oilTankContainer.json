@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "oilTankContainer" : {
+            "home": {
+                "title": "Oil Tank Containers",
+                "createLabel": "Create a new Oil Tank Container",
+                "createOrEditLabel": "Create or edit a Oil Tank Container"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Oil Tank Container {{ id }}?"
+            },
+            "detail": {
+                "title": "Oil Tank Container"
+            },
+            "productId": "Product Id",
+            "productUnitId": "Product Unit Id",
+            "amount": "Amount",
+            "refuelCenter": "RefuelCenter"
+        }
+    },
+    "niopdcaoApp": {
+        "oilTankContainer" : {
+            "created": "A new Oil Tank Container is created with identifier {{ param }}",
+            "updated": "A Oil Tank Container is updated with identifier {{ param }}",
+            "deleted": "A Oil Tank Container is deleted with identifier {{ param }}"
+        }
+    }
+}

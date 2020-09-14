@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "shiftWork" : {
+            "home": {
+                "title": "Shift Works",
+                "createLabel": "Create a new Shift Work",
+                "createOrEditLabel": "Create or edit a Shift Work"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Shift Work {{ id }}?"
+            },
+            "detail": {
+                "title": "Shift Work"
+            },
+            "fromDate": "From Date",
+            "toDate": "To Date",
+            "location": "Location"
+        }
+    },
+    "niopdcbaseApp": {
+        "shiftWork" : {
+            "created": "A new Shift Work is created with identifier {{ param }}",
+            "updated": "A Shift Work is updated with identifier {{ param }}",
+            "deleted": "A Shift Work is deleted with identifier {{ param }}"
+        }
+    }
+}

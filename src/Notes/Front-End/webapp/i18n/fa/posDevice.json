@@ -1,0 +1,36 @@
+{
+    "niopdcgatewayApp": {
+        "posDevice": {
+            "home": {
+                "title": "Pos دستگاه های"
+            },
+            "delete": {
+                "question": "آیا برای حذف دستگاه {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "Pc-Pos"
+            },
+            "name": "عنوان",
+            "externalIp": "",
+            "internalIp": "Ip Address",
+            "type": "بانک",
+            "accountNumber": "شماه حساب",
+            "active": "فعال",
+            "activeTrue": "فعال",
+            "activeFalse": "غیر فعال",
+            "isDefault": "پیشفرض",
+            "pcId": "شناسه دستگاه Pc-Pos",
+            "payerId": "شناسه واریز پیشفرض",
+            "serviceTypes": "سرویس های فعال دستگاه",
+            "bankAccount": "شماره حساب",
+            "accountIdentifier": "شناسه حساب"
+        }
+    },
+    "niopdcpaymentApp": {
+        "posDevice": {
+            "created": "دستگاه pos با موفقیت ایجاد شد.",
+            "updated": "دستگاه pos با موفقیت ویرایش شد.",
+            "deleted": "دستگاه pos با موفقیت حذف شد."
+        }
+    }
+}

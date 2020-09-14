@@ -1,0 +1,29 @@
+{
+    "login": {
+        "title": "ورود",
+        "title.recovery": "بازیابی رمز عبور",
+        "form": {
+            "password": "رمزعبور",
+            "password.placeholder": "رمزعبور شما",
+            "rememberme": "مرا بخاطر بسپار",
+            "button": "ورود",
+            "oblivion.password":"فراموشی رمزعبور",
+            "retrieve.sms":"از طریق پیام کوتاه",
+            "retrieve.email":"از طریق ایمیل",
+            "button.reset":"بازنشانی",
+            "button.otpCode":"ارسال کد امنیتی",
+            "button.otpCode.try":"ارسال مجدد کد امنیتی",
+            "new.password":"کلمه عبور جدید",
+            "otp.code":"کد امنیتی ",
+            "confirm.password":"تکرار کلمه عبور"
+        },
+        "messages": {
+            "error": {
+                "authentication": "<strong>خطا در هنگام ورود!</strong> لطفا نام‌کاربری و رمزعبور خود را چک کنید و دوباره تلاش  کنید"
+            }
+        },
+        "password" : {
+            "forgot": "آیا رمزعبور خود را فراموش کردید؟"
+        }
+    }
+}

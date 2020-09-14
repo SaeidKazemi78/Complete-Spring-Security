@@ -1,0 +1,614 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+    <div style="margin: 15px">
+        <p-breadcrumb [model]="mapSiteItems"></p-breadcrumb>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <!--sellContract-->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"
+                    jhiTranslate="niopdcgatewayApp.sellContract.home.baseInfo">
+                    Create or edit a Customer
+                </h5>
+            </div>
+            <div class="card-block container">
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.sellContract.contractType"
+                                   for="field_contractType">Contract Type</label>
+                            <select
+                                [disabled]="isView || sellContract.id || sellContract.sellContractCustomers?.length > 0 || customerCreate || sellContractCustomerEdit"
+                                class="form-control" name="contractType"
+                                (change)="sellContractTypeChange()"
+                                [(ngModel)]="sellContract.contractType"
+                                id="field_contractType"
+                                required>
+                                <option [ngValue]="contractTypeOption"
+                                        *ngFor="let contractTypeOption of contractTypes">
+                                    {{('niopdcgatewayApp.ContractType.' + contractTypeOption) | translate}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.sellContract.contractNo"
+                                   for="field_contractNo">Contract No</label>
+                            <input [disabled]="isView || sellContract.contractType!==ContractType[ContractType.EXPORT]"
+                                   type="text" class="form-control" name="contractNo"
+                                   id="field_contractNo"
+                                   [(ngModel)]="sellContract.contractNo"
+                                   required minlength="5" maxlength="15"/>
+                            <div
+                                [hidden]="!(editForm.controls.contractNo?.dirty && editForm.controls.contractNo?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.contractNo?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.contractNo?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 5 }">
+                                    This field is required to be at least 5 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.contractNo?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 15 }">
+                                    This field cannot be longer than 15 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4 vertical-center-group">
+                        <div class="form-group">
+                            <input [disabled]="isView" type="checkbox" class="form-control"
+                                   name="calculateTax"
+                                   id="field_calculateTax"
+                                   [(ngModel)]="sellContract.calculateTax"
+                            />
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.sellContract.calculateTax"
+                                   for="field_calculateTax">Calculate Tax</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.sellContract.startDate"
+                                   for="field_startDate">Start Date</label>
+                            <div class="d-flex">
+                                <ng2-datetimepicker [disableTime]="true" [disabled]="isView || (sellContract.id && sellContract.contractType!==ContractType[ContractType.EXPORT])"
+                                                    id="field_startDate"
+                                                    type="datetime-local"
+                                                    class="form-control"
+                                                    name="startDate"
+                                                    [rtlActive]="true"
+                                                    time="00:00:00" [maxDateTime]="sellContract.finishDate"
+                                                    [(ngModel)]="sellContract.startDate"
+                                                    required></ng2-datetimepicker>
+                            </div>
+                            <div
+                                [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.startDate?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                                       jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                    This field should be a date and time.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.sellContract.finishDate"
+                                   for="field_finishDate">Finish Date</label>
+                            <div class="d-flex">
+                                <ng2-datetimepicker [disableTime]="true" [disabled]="isView" id="field_finishDate"
+                                                    type="datetime-local"
+                                                    class="form-control"
+                                                    name="finishDate"
+                                                    [rtlActive]="true" [minDateTime]="sellContract.startDate"
+                                                    time="23:59:59"
+                                                    [(ngModel)]="sellContract.finishDate"
+                                                    required></ng2-datetimepicker>
+                            </div>
+                            <div
+                                [hidden]="!(editForm.controls.finishDate?.dirty && editForm.controls.finishDate?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.finishDate?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.finishDate?.errors?.ZonedDateTimelocal"
+                                       jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                    This field should be a date and time.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.sellContract.exportationDate"
+                                   for="field_exportationDate">Exportation Date</label>
+                            <div class="d-flex">
+                                <ng2-datetimepicker [disableTime]="true" [disabled]="isView || (sellContract.id && sellContract.contractType!==ContractType[ContractType.EXPORT])"
+                                                    id="field_exportationDate"
+                                                    type="datetime-local"
+                                                    class="form-control"
+                                                    name="exportationDate"
+                                                    [rtlActive]="true"
+                                                    time="00:00:00"
+                                                    [(ngModel)]="sellContract.exportationDate"
+                                                    required></ng2-datetimepicker>
+                            </div>
+                            <div
+                                [hidden]="!(editForm.controls.exportationDate?.dirty && editForm.controls.exportationDate?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.exportationDate?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.exportationDate?.errors?.ZonedDateTimelocal"
+                                       jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                    This field should be a date and time.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-4" *ngIf="sellContract.id">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.sellContract.createdDate"
+                                   for="field_createdDate">Exportation Date</label>
+                            <div class="d-flex">
+                                <ng2-datetimepicker [disableTime]="true" [disabled]="true"
+                                                    id="field_createdDate"
+                                                    type="datetime-local"
+                                                    class="form-control"
+                                                    name="createdDate"
+                                                    [rtlActive]="true"
+                                                    time="00:00:00"
+                                                    [(ngModel)]="sellContract.createdDate"
+                                                    required></ng2-datetimepicker>
+                            </div>
+                            <div
+                                [hidden]="!(editForm.controls.createdDate?.dirty && editForm.controls.createdDate?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.createdDate?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.createdDate?.errors?.Instant"
+                                       jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                    This field should be a date and time.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.sellContract.description"
+                                   for="field_description">Description</label>
+                            <textarea [disabled]="isView" type="text" class="form-control" name="description"
+                                      id="field_description"
+                                      [(ngModel)]="sellContract.description"
+                                      minlength="3" maxlength="255">
+                            </textarea>
+                            <div
+                                [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.description?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.description?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                                    This field cannot be longer than 255 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <!--sellContractPerson-->
+        <div class="card">
+            <div class="card-header">
+
+                <div class="row">
+                    <h5 class="col-md-3"
+                        jhiTranslate="niopdcgatewayApp.sellContractPerson.home.cardTitle">
+                        Create or edit
+                    </h5>
+                    <div class="col-md-8"></div>
+                    <button type="button" *ngIf="!isView && !sellContract.addendumNumber && !sharePercentMaxed"
+                            class="btn btn-primary col-md-1"
+                            [disabled]="isView" (click)="newSellContractPerson()">
+                        <span class="fa fa-plus"></span>
+                        <span jhiTranslate="entity.action.create">Create</span>
+                    </button>
+                </div>
+            </div>
+            <div class="card-block container" *ngIf="!isView && !sellContract.addendumNumber"
+                 [hidden]="!personCreate && !sellContractPeopleEdit">
+                <form name="editFormPerson" role="form" novalidate (ngSubmit)="save()" #editFormPerson="ngForm">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-4">
+                            <label jhiTranslate="niopdcgatewayApp.sellContractPerson.person"
+                                   for="field_person">Person</label>
+                            <app-person-selector widthGrid="600px"
+                                                 [selectObject]="false"
+                                                 [creator]="true"
+                                                 (selectedItem)="personSelected($event)"
+                                                 [(ngModel)]="sellContractPerson.personId" required
+                                                 [disabled]="isView || sellContractPeopleEdit"
+                                                 class="form-control" id="field_person" name="person">
+                            </app-person-selector>
+                            <div
+                                [hidden]="!(editFormPerson.controls.person?.dirty && editFormPerson.controls.person?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editFormPerson.controls.person?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                            </div>
+                            <div [hidden]="!personExists">
+                                <small class="form-text text-danger"
+                                       jhiTranslate="niopdcgatewayApp.sellContractPerson.personExists">
+                                    This field is required.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.sellContractPerson.sharePercent"
+                                       for="field_sharePercent">Share Percent</label>
+                                <input type="number" class="form-control" name="sharePercent"
+                                       id="field_sharePercent"
+                                       [numeric]="{min:0,max:100}"
+                                       required
+                                       [(ngModel)]="sellContractPerson.sharePercent"/>
+                                <div
+                                    [hidden]="!(editFormPerson.controls.sharePercent?.dirty && editFormPerson.controls.sharePercent?.invalid)">
+                                    <small class="form-text text-danger"
+                                           [hidden]="!editFormPerson.controls.sharePercent?.errors?.required"
+                                           jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                </div>
+                                <div
+                                    [hidden]="!sharePercentMax">
+                                    <small class="form-text text-danger"
+                                           jhiTranslate="niopdcgatewayApp.sellContractPerson.sharePercentMax">
+                                        This field is required.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input [disabled]="sellContractPerson.disableMain" type="checkbox" class="form-control"
+                                       name="checkNationalCode"
+                                       id="field_main"
+                                       [(ngModel)]="sellContractPerson.main"/>
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.sellContractPerson.main"
+                                       for="field_main">Check National Code</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="sellContract.contractType !== ContractType[ContractType.BRAND]">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.sellContractPerson.creditAccount"
+                                       for="field_creditAccount">creditAccount</label>
+                                <input type="text" class="form-control" name="creditAccount"
+                                       id="field_creditAccount" disabled
+                                       [(ngModel)]="sellContractPerson.creditAccount"/>
+                                <div
+                                    [hidden]="!(editFormPerson.controls.creditAccount?.dirty && editFormPerson.controls.creditAccount?.invalid)">
+                                    <small class="form-text text-danger"
+                                           [hidden]="!editFormPerson.controls.creditAccount?.errors?.required"
+                                           jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-footer text-center" *ngIf="!isView && !sellContract.addendumNumber"
+                         [hidden]="!personCreate && !sellContractPeopleEdit">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelPerson()">
+                            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="button" class="btn btn-primary"
+                                [disabled]="editFormPerson?.form.invalid || isSaving"
+                                (click)="addSellContractPerson()">
+                            <span class="fa fa-save"></span>&nbsp;<span
+                            jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <p-dataTable [hidden]="personCreate || sellContractPeopleEdit" [value]="sellContract.sellContractPeople"
+                         [immutable]="false"
+                         [paginator]="false" [responsive]="true" [stacked]="false">
+
+                <p-headerColumnGroup>
+                    <p-row>
+                        <p-column field="personFullName" [sortable]="true">
+                            <ng-template pTemplate="header">
+                                <span jhiTranslate="niopdcgatewayApp.sellContractPerson.person">Person</span>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="sharePercent" [sortable]="true">
+                            <ng-template pTemplate="header">
+                                <span
+                                    jhiTranslate="niopdcgatewayApp.sellContractPerson.sharePercent">Share Percent</span>
+                            </ng-template>
+                        </p-column>
+                        <p-column field="main" [sortable]="true">
+                            <ng-template pTemplate="header">
+                                <span
+                                    jhiTranslate="niopdcgatewayApp.sellContractPerson.main">Share Percent</span>
+                            </ng-template>
+                        </p-column>
+                        <p-column styleClass="col-button2"
+                                  *ngIf="!isView && !sellContract.addendumNumber && (!sellContract.id || !sellContract.active)">
+                            <ng-template pTemplate="header">
+                            </ng-template>
+                        </p-column>
+                    </p-row>
+                </p-headerColumnGroup>
+
+                <p-column field="personFullName"
+                          [header]="'niopdcgatewayApp.sellContractPerson.person' | translate"></p-column>
+                <p-column field="sharePercent"
+                          [header]="'niopdcgatewayApp.sellContractPerson.sharePercent' | translate"></p-column>
+                <p-column field="active" [header]="'niopdcgatewayApp.carRfId.active' | translate">
+                    <ng-template let-item="rowData" pTemplate="body">
+                        <span class="fa" [ngClass]="{'fa-check':item.main,'fa-close':!item.main}"></span>
+                    </ng-template>
+                </p-column>
+                <p-column class="component"
+                          *ngIf="!isView && !sellContract.addendumNumber && (!sellContract.id || !sellContract.active)">
+                    <ng-template let-item="rowData" pTemplate="body">
+                        <div class="btn-group" ngbDropdown placement="right">
+                            <button type="button" class="btn btn-danger"
+                                    (click)="removePerson(item.personId)">
+                                <span class="fa fa-remove"></span>
+                                <span jhiTranslate="entity.action.delete">delete</span>
+                            </button>
+                            <button type="button" class="btn btn-info"
+                                    (click)="editPerson(item.personId)">
+                                <span class="fa fa-edit"></span>
+                                <span jhiTranslate="entity.action.edit">edit</span>
+                            </button>
+                        </div>
+                    </ng-template>
+                </p-column>
+            </p-dataTable>
+        </div>
+        <br>
+        <!--sellContractCustomer-->
+        <div class="card"
+             *ngIf="sellContract.contractType !== ContractType[ContractType.EXPORT]">
+            <div class="card-header">
+                <div class="row">
+                    <h5 class="col-md-3"
+                        jhiTranslate="niopdcgatewayApp.sellContractCustomer.home.cardTitle">
+                        Create or edit
+                    </h5>
+                    <div class="col-md-8"></div>
+                    <button type="button" class="btn btn-primary col-md-1"
+                            *ngIf="!(isView || !sellContract.contractType ||((sellContract.contractType===ContractType[ContractType.SUPPLY_CHANNEL] ||
+                            sellContract.contractType===ContractType[ContractType.CONSUMER])&&sellContract.sellContractCustomers?.length > 0))"
+                            (click)="newSellContractCustomer()">
+                        <span class="fa fa-plus"></span>
+                        <span jhiTranslate="entity.action.create">Create</span>
+                    </button>
+                </div>
+            </div>
+            <div class="card-block container" [hidden]="!customerCreate && !sellContractCustomerEdit">
+                <form name="editFormCustomer" role="form" novalidate #editFormCustomer="ngForm">
+                    <div class="row">
+                        <div class="col-xs-12"
+                             [ngClass]="{
+                             'col-md-4': (sellContract.contractType === ContractType[ContractType.SUPPLY_CHANNEL]),
+                             'col-md-6': (sellContract.contractType !== ContractType[ContractType.SUPPLY_CHANNEL])
+                             }"
+                        >
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.sellContractCustomer.customer"
+                                       for="field_customer">customer</label>
+                                <jhi-customer-selector
+                                    [multiSelect]="false"
+                                    [selectObject]="false"
+                                    [creator]="true"
+                                    (ngModelChange)="onChangeCustomer($event)"
+                                    [disabled]="sellContractCustomerEdit"
+                                    [customerHaveSellContract]="false"
+                                    [contractType]="sellContract.contractType"
+                                    [(ngModel)]="sellContractCustomer.customerId"
+                                    class="form-control"
+                                    (selectedItem)="customerSelected($event)"
+                                    id="field_customer"
+                                    [widthGrid]="'800px'"
+                                    name="customer" required
+                                >
+                                </jhi-customer-selector>
+                            </div>
+                            <div *ngIf="!activeCustomer">
+                                <small class="form-text text-danger"
+                                       jhiTranslate="error.customer.not.active"></small>
+                            </div>
+                        </div>
+                        <!--<div class="col-xs-12 col-md-4 vertical-center-group"
+                             *ngIf="sellContract.contractType === ContractType[ContractType.SUPPLY_CHANNEL]">
+                            <div class="form-group">
+                                <input [disabled]="isView"
+                                       type="checkbox" class="form-control"
+                                       name="hasTransport"
+                                       id="field_hasTransport"
+                                       [(ngModel)]="sellContractCustomer.hasTransport"
+                                />
+                                <label jhiTranslate="niopdcgatewayApp.sellContractCustomer.hasTransport"
+                                       for="field_hasTransport">Has Transport</label>
+                            </div>
+                        </div>-->
+                        <div [ngClass]="{
+                             'col-md-4': (sellContract.contractType === ContractType[ContractType.SUPPLY_CHANNEL]),
+                             'col-md-6': (sellContract.contractType !== ContractType[ContractType.SUPPLY_CHANNEL])}">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.sellContractPerson.creditAccount"
+                                       for="field_creditAccount2">creditAccount</label>
+                                <input type="text" class="form-control" name="creditAccount2"
+                                       id="field_creditAccount2"
+                                       minlength="1" maxlength="5"
+                                       disabled
+                                       [(ngModel)]="sellContractCustomer.creditAccount"/>
+                                <div
+                                    [hidden]="!(editFormCustomer.controls.creditAccount2?.dirty && editFormCustomer.controls.creditAccount2?.invalid)">
+                                    <small class="form-text text-danger"
+                                           [hidden]="!editFormCustomer.controls.creditAccount2?.errors?.required"
+                                           jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center" [hidden]="!customerCreate && !sellContractCustomerEdit">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelCustomer()">
+                    <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="button" class="btn btn-primary"
+                        [disabled]="editFormCustomer.form.invalid || isSaving || !activeCustomer"
+                        (click)="addSellContractCustomer()">
+                    <span class="fa fa-save"></span>&nbsp;<span
+                    jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+            <p-dataTable [hidden]="customerCreate || sellContractCustomerEdit" #dt
+                         [value]="sellContract.sellContractCustomers" [immutable]="false"
+                         [paginator]="false" [responsive]="true" [stacked]="false">
+
+                <p-headerColumnGroup>
+                    <p-row>
+                        <p-column field="customerName" [sortable]="true">
+                            <ng-template pTemplate="header">
+                                <span jhiTranslate="niopdcgatewayApp.sellContractCustomer.customer">Customer</span>
+                            </ng-template>
+                        </p-column>
+                        <!--<p-column field="hasTransport" [sortable]="true"
+                                  *ngIf="sellContract.contractType === ContractType[ContractType.SUPPLY_CHANNEL]">
+                            <ng-template pTemplate="header">
+                                <span
+                                    jhiTranslate="niopdcgatewayApp.sellContractCustomer.hasTransport">Has Transport</span>
+                            </ng-template>
+                        </p-column>-->
+                        <p-column styleClass="col-button2" *ngIf="!isView">
+                            <ng-template pTemplate="header">
+                            </ng-template>
+                        </p-column>
+                    </p-row>
+                </p-headerColumnGroup>
+
+                <p-column field="customerName"
+                          [header]="'niopdcgatewayApp.sellContractCustomer.customer' | translate"></p-column>
+                <!-- <p-column field="hasTransport"
+                           *ngIf="sellContract.contractType === ContractType[ContractType.SUPPLY_CHANNEL]"
+                           [header]="'niopdcgatewayApp.sellContractCustomer.hasTransport' | translate">
+                     <ng-template let-item="rowData" pTemplate="body">
+                         <span class="fa"
+                               [ngClass]="{'fa-check':item.hasTransport,'fa-close':!item.hasTransport}"></span>
+                     </ng-template>
+                 </p-column>-->
+                <p-column class="component" *ngIf="!isView">
+                    <ng-template let-item="rowData" pTemplate="body">
+                        <div class="btn-group" ngbDropdown placement="right">
+                            <button type="button" class="btn btn-danger"
+                                    (click)="removeCustomer(item.customerId)">
+                                <span class="fa fa-remove"></span>
+                                <span jhiTranslate="entity.action.delete">delete</span>
+                            </button>
+                            <button type="button" class="btn btn-info"
+                                    (click)="editCustomer(item.customerId)">
+                                <span class="fa fa-edit"></span>
+                                <span jhiTranslate="entity.action.edit">edit</span>
+                            </button>
+                        </div>
+                    </ng-template>
+                </p-column>
+            </p-dataTable>
+        </div>
+        <!--location for ContractType EXPORT -->
+        <div
+            *ngIf="sellContract.contractType === ContractType[ContractType.EXPORT] ">
+
+            <div class="form-group">
+                <label jhiTranslate="niopdcgatewayApp.sellContractCustomer.location"
+                       for="field_location_sellContract">Location</label>
+                <input-location-selector [disabled]="isView"
+                                         class="form-control" required
+                                         [oneSelection]="false"
+                                         [idSelector]="true"
+                                         [(ngModel)]="sellContract.locationIds"
+                                         id="field_location_sellContract"
+                                         name="location"
+                                         [selectOfLevel]="[2]"
+                                         [selectByPriority]="true">
+                </input-location-selector>
+                <div
+                    [hidden]="!(editForm.controls.location?.dirty && editForm.controls.location?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.location?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit"
+                [disabled]="editForm.form.invalid || isSaving ||
+                (sellContract.contractType !== ContractType[ContractType.EXPORT]  &&
+                    (!this.sellContract.sellContractCustomers || this.sellContract.sellContractCustomers.length <= 0)) ||
+                !this.sellContract.sellContractPeople || this.sellContract.sellContractPeople.length <= 0 ||
+                 this.customerCreate ||this.sellContractCustomerEdit || this.personCreate|| this.sellContractPeopleEdit|| notExistMainPerson"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

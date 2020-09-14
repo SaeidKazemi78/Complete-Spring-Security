@@ -1,0 +1,165 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <form name="editForm" role="form" novalidate (ngSubmit)="loadAll()" #editForm="ngForm">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.order.startDate"
+                           for="field_startDate">startDate</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [rtlActive]="true" time="00:00:00"
+                                            id="field_startDate"
+                                            class="form-control"
+                                            name="startDate" [(ngModel)]="req.startDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.order.finishDate"
+                           for="field_finishDate">finish Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [rtlActive]="true" time="00:00:00"
+                                            id="field_finishDate"
+                                            class="form-control"
+                                            name="finishDate" [(ngModel)]="req.finishDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label jhiTranslate="niopdcgatewayApp.order.locationId"
+                       for="field_locations">Location</label>
+                <p-dropdown required [options]="customLocation" [(ngModel)]="req.locationId"
+                            [filter]="true"
+                            class="form-control"
+                            filterBy="label"
+                            id="field_locations"
+                            name="location"
+                            ngDefaultControl
+                ></p-dropdown>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTank.productId"
+                           for="field_product">Product</label>
+                    <p-dropdown [options]="customProducts" [(ngModel)]="req.productId"
+                                [filter]="true"
+                                class="form-control"
+                                filterBy="label"
+                                id="field_product"
+                                name="productId"
+                                ngDefaultControl
+                    >
+                    </p-dropdown>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <button type="submit" class="btn btn-primary "
+                    [disabled]="editForm.form.invalid ">
+                <span class="fa fa-search"></span>&nbsp;<span
+                jhiTranslate="report.search">Save</span>
+            </button>
+        </div>
+    </form>
+    <br/>
+    <kendo-grid
+        [disabled]="editForm.form.invalid "
+        [data]="gridData"
+        [pageSize]="state.take"
+        [skip]="state.skip"
+        [sort]="state.sort"
+        [group]="state.group"
+        [resizable]="true"
+        [sortable]="{ mode: 'multiple' }"
+        [pageable]="{ pageSizes: [ 10,25,50,100,boundarySellShiftReports?.length] }"
+        [groupable]="{ showFooter: true}"
+        scrollable="scrollable"
+        (dataStateChange)="dataStateChange($event)">
+        <ng-template kendoGridToolbarTemplate>
+
+            <button type="button" kendoGridExcelCommand icon="file-excel" jhiTranslate="report.exportToExcel">Export to
+                Excel
+            </button>
+        </ng-template>
+
+        <kendo-grid-column field="title" [title]="'niopdcgatewayApp.boundarySell.customerType' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="count" [title]="'niopdcgatewayApp.boundarySell.count' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+            <ng-template
+                kendoGridFooterTemplate
+                let-column="column">
+                {{('niopdcgatewayApp.amountReport.totalSum' | translate) + ':' + total['count']?.sum }}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="amount" [title]="'niopdcgatewayApp.boundarySell.amount' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+            <ng-template
+                kendoGridFooterTemplate
+                let-column="column">
+                {{('niopdcgatewayApp.amountReport.totalSum' | translate) + ':' + total['amount']?.sum }}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="price" [title]="'niopdcgatewayApp.boundarySell.prices' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+            <ng-template
+                kendoGridFooterTemplate
+                let-column="column">
+                {{('niopdcgatewayApp.amountReport.totalSum' | translate) + ':' + total['price']?.sum }}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="productRatePrice" [title]="'niopdcgatewayApp.boundarySell.productRatePrice' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+
+        <kendo-grid-messages
+            [pagerOf]="'report.pagerOf' | translate"
+            [pagerItems]="'report.pagerItems' | translate"
+            [groupPanelEmpty]="'report.headerMessage' | translate"
+            [noRecords]="'global.messages.info.emptyRecords' | translate"
+            [pagerItemsPerPage]="'report.pagerItemsPerPage' | translate">
+        </kendo-grid-messages>
+
+        <kendo-grid-excel fileName="billWithoutContainer.xlsx"></kendo-grid-excel>
+    </kendo-grid>
+    <br/>
+</div>

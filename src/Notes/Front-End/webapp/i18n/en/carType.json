@@ -1,0 +1,26 @@
+
+{
+    "niopdcgatewayApp": {
+        "carType" : {
+            "home": {
+                "title": "Car Types",
+                "createLabel": "Create a new Car Type",
+                "createOrEditLabel": "Create or edit a Car Type"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Car Type {{ id }}?"
+            },
+            "detail": {
+                "title": "Car Type"
+            },
+            "title": "Title"
+        }
+    },
+    "niopdcbaseApp": {
+        "carType" : {
+            "created": "A new Car Type is created with identifier {{ param }}",
+            "updated": "A Car Type is updated with identifier {{ param }}",
+            "deleted": "A Car Type is deleted with identifier {{ param }}"
+        }
+    }
+}

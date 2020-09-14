@@ -1,0 +1,126 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <form name="editForm" role="form" novalidate (ngSubmit)="loadAll()" #editForm="ngForm">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.consumptionReport.startDate"
+                           for="field_startDate">startDate</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker  [rtlActive]="true" time="00:00:00"
+                                             id="field_startDate"
+                                             class="form-control"
+                                             name="startDate" [(ngModel)]="req.startDate"
+                                             required></ng2-datetimepicker>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.consumptionReport.finishDate"
+                           for="field_finishDate">finishDate</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker  [rtlActive]="true" time="23:59:59"
+                                             id="field_finishDate"
+                                             class="form-control"
+                                             name="finishDate"
+                                             [(ngModel)]="req.finishDate"
+                                             required></ng2-datetimepicker>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.finishDate?.dirty && editForm.controls.finishDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.finishDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.finishDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.boundaryReport.carRfId"
+                           for="field_carRfId">carRfId</label>
+                    <input type="text" class="form-control" name="carRfId"
+                           id="field_carRfId" [(ngModel)]="req.carRfId"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customer.plaque"
+                       for="field_searchPlaque1">Name</label>
+                <jhi-ir-plaque
+                    id="field_searchPlaque1"
+                    [searchMode]="true"
+                    [(ngModel)]="req.plaqueModel"
+                    defaultTemplateCode="TR"
+                    name="plaqueModel"
+                    class="form-control"
+                    [ngModelOptions]="{standalone: true}"
+                    ></jhi-ir-plaque>
+            </div>
+        </div>
+
+        <div class="card-footer text-center">
+            <button type="submit" class="btn btn-primary "
+                    [disabled]="editForm.form.invalid || searching ">
+                <span class="fa fa-search"></span>&nbsp;<span
+                jhiTranslate="report.search">Save</span>
+            </button>
+        </div>
+    </form>
+
+    <br/>
+    <dx-data-grid id="infoList"
+                  [dataSource]="boundarySellReports.info"
+                  [masterDetail]="{ enabled: true, template: 'detail' }"
+                  keyExpr="customerId"
+                  [showBorders]="true"
+                  [columnAutoWidth]="true">
+        <dxi-column dataField="carRfId"
+                    caption=" {{'niopdcgatewayApp.boundaryReport.carRfId' | translate}}"></dxi-column>
+        <dxi-column dataField="plaque" caption=" {{'niopdcgatewayApp.boundaryReport.plaque' | translate}}"></dxi-column>
+        <dxi-column dataField="plaqueTwo"
+                    caption=" {{'niopdcgatewayApp.boundaryReport.plaqueTow' | translate}}"></dxi-column>
+
+        <div *dxTemplate="let carRfId of 'detail'">
+            <div class="master-detail-caption"></div>
+            <dx-data-grid
+                [dataSource]="getDetails(carRfId.key)"
+                [showBorders]="true"
+                [columnAutoWidth]="true">
+                <dxi-column dataField="carRfId"
+                            caption=" {{'niopdcgatewayApp.boundaryReport.carRfId' | translate}}"></dxi-column>
+                <dxi-column dataField="createdBy"
+                            caption=" {{'niopdcgatewayApp.boundaryReport.login' | translate}}"></dxi-column>
+                <dxi-column dataField="createdDate"
+                            caption=" {{'niopdcgatewayApp.boundaryReport.createdDate' | translate}}"></dxi-column>
+                <dxi-column dataField="locationTitle"
+                            caption=" {{'niopdcgatewayApp.boundaryReport.locationName' | translate}}"></dxi-column>
+            </dx-data-grid>
+        </div>
+    </dx-data-grid>
+
+    <br/>
+</div>

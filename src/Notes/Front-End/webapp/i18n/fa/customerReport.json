@@ -1,0 +1,46 @@
+{
+    "niopdcgatewayApp": {
+        "customerReport": {
+            "startDate":"شروع تاریخ ثبت",
+            "finishDate":"پایان تاریخ ثبت",
+
+            "name": "نام مشتری",
+            "code": "کد",
+            "postalCode": "کدپستی",
+            "registerCode": "شماره رجیستری",
+            "movableCode": "کد متحرک",
+            "registerDate": "تاریخ ثبت",
+            "telephone": "تلفن",
+            "address": "آدرس",
+            "buyOneToMany": "خريد يك به چند",
+            "salesPermit": "مجوز فروش",
+            "identifyCode": "کد 9 رقمی فروش",
+            "gsId": "Gs Id",
+            "typeTitle": "نوع مشتری",
+            "location": "حوزه فعالیت",
+            "region": "شهر",
+            "airplaneModel": "نوع هواپیما",
+            "customerGroupTitle": "گروه مشتری",
+            "selfCode": "شناسه",
+            "rfId": "تگ",
+            "plaque": "شماره پلاک",
+            "transitPlaque": "شماره پلاک ترانزیت",
+            "searchRfId": "جستجو بر اساس تگ",
+            "searchPlaque": "جستجو بر اساس شماره پلاک",
+            "searchTransitPlaque": "جستجو بر اساس   شماره پلاک ترانزیت",
+            "vehicleModelTitle": "نوع ماشین",
+            "productTitle": "فرآورده",
+            "creditAccount": "حساب اعتباری",
+            "contractNo":"شماره قرارداد"
+        }
+    },
+    "niopdcbaseApp": {
+        "customer": {
+            "created": "مشتری با موفقیت  ایجاد شد.",
+            "carCreated": "ماشین با موفقیت  ایجاد شد.",
+            "updated": "مشتری با موفقیت  ویرایش شد.",
+            "carUpdated": "ماشین با موفقیت  ویرایش شد.",
+            "deleted": "مشتری با موفقیت  حذف شد."
+        }
+    }
+}

@@ -1,0 +1,31 @@
+
+{
+    "niopdcgatewayApp": {
+        "transportContract" : {
+            "home": {
+                "title": "Transport Contracts",
+                "createLabel": "Create a new Transport Contract",
+                "createOrEditLabel": "Create or edit a Transport Contract"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Transport Contract {{ id }}?"
+            },
+            "detail": {
+                "title": "Transport Contract"
+            },
+            "contractCode": "Contract Code",
+            "startDate": "Start Date",
+            "finishDate": "Finish Date",
+            "customer": "Customer",
+            "person": "Person",
+            "car": "Car"
+        }
+    },
+    "niopdcbaseApp": {
+        "transportContract" : {
+            "created": "A new Transport Contract is created with identifier {{ param }}",
+            "updated": "A Transport Contract is updated with identifier {{ param }}",
+            "deleted": "A Transport Contract is deleted with identifier {{ param }}"
+        }
+    }
+}

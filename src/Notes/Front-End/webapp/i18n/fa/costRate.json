@@ -1,0 +1,35 @@
+
+{
+    "niopdcgatewayApp": {
+        "costRate" : {
+            "home": {
+                "title": "نرخ های هزینه",
+                "createLabel": "ایجاد نرخ هزینه",
+                "createOrEditLabel": "ویرایش نرخ هزینه",
+                "view":"نمایش نرخ هزینه",
+                "costTitle":"هزینه",
+                "costGroupTitle":"گروه هزینه"
+            },
+            "delete": {
+                "question": "آیا برای حذف این نرخ هزینه مطمئن هستید ؟ "
+            },
+            "detail": {
+                "title": "نرخ هزینه"
+            },
+            "startDate": "تاریخ شروع",
+            "finishDate": "تاریخ پایان",
+            "rate": "نرخ",
+            "currency": "واحد پولی",
+            "currencyRateGroup": "گروه نرخ هزینه",
+            "cost": "هزینه",
+            "stepNo": "شماره پلکان"
+        }
+    },
+    "niopdcrateApp": {
+        "costRate" : {
+            "created": "هزینه با موفقیت ایجاد شد.",
+            "updated": "هزینه با موفقیت ویرایش شد.",
+            "deleted": "هزینه با موفقیت حذف شد."
+        }
+    }
+}

@@ -1,0 +1,1732 @@
+<form name="editForm" role="form" novalidate #editForm="ngForm">
+    <div style="margin: 15px">
+        <p-breadcrumb [model]="breadCrumbs"></p-breadcrumb>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <jhi-alert-success></jhi-alert-success>
+        <p-steps [(activeIndex)]="activeIndex" [model]="items"
+                 styleClass="steps-custom {{!isUserPaid? 'steps-custom4': 'steps-custom3'}}"></p-steps>
+
+        <div class="card-body" style="text-align: center" *ngIf="!boundarySell">
+            <p *ngIf="isLoading" jhiTranslate="niopdcgatewayApp.order.loading"></p>
+            <p *ngIf="errorLoad" jhiTranslate="niopdcgatewayApp.order.errorLoad"
+               [translateValues]="{id: orderId}"></p>
+            <ng-container *ngIf="errorLoad">
+                <button type="button" class="btn btn-info" (click)="loadActiveIndex()">
+                    <span class="fa fa-refresh"></span>&nbsp;<span
+                    jhiTranslate="entity.action.tryAgain">tryAgain</span>
+                </button>
+            </ng-container>
+        </div>
+
+
+        <div *ngIf="boundarySell">
+            <div class="alert alert-danger"
+                 *ngIf="shiftWork?.type === 'OPEN_TIMEOUT' || shiftWork?.type === 'CLOSE' || (shiftWork && !shiftWork?.orderNumber)">
+                <div *ngIf="shiftWork?.type === 'OPEN_TIMEOUT'"
+                     jhiTranslate="niopdcgatewayApp.order.shiftWork.isTimeout">
+                    This field is required.
+                </div>
+
+                <div *ngIf="shiftWork?.type === 'CLOSE'">
+                <span
+                    jhiTranslate="niopdcgatewayApp.order.shiftWork.notFind">
+                    This field is required.
+                </span>
+                    <span>
+                    <button class="btn btn-primary" type="button"
+                            *jhiHasAnyAuthority="['ROLE_ADMIN', 'OPEN_SHIFT_WORK']"
+                            [routerLink]="[ { outlets: { popup: ['location' , boundarySell.locationId, 'shift', 'open'] } }]"
+                            [queryParams]="route.snapshot.queryParams">
+                    <span class="fa fa-check"></span>
+                    <span jhiTranslate="entity.action.open">Create</span>
+                </button>
+                </span>
+                </div>
+                <div *ngIf="(shiftWork && !shiftWork?.orderNumber)"
+                     jhiTranslate="niopdcgatewayApp.order.shiftWork.orderNumber">
+                    This field is required.
+                </div>
+            </div>
+
+            <!-- activeIndex = 0 and view customer-->
+            <div>
+                <!-- search -->
+                <p-accordion *ngIf="activeIndex === 0 && !orderId">
+                    <p-accordionTab header="جستجو" [selected]="expand">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.customer.searchRfId"
+                                       for="field_searchRfId">Order
+                                    No</label>
+                                <input [disabled]="isView" type="text" class="form-control" name="searchRfId"
+                                       id="field_searchRfId"
+                                       [(ngModel)]="searchRfId"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customer.plaque"
+                                       for="field_searchPlaque1">Name</label>
+                                <jhi-ir-plaque [disabled]="isView"
+                                               id="field_searchPlaque1"
+                                               [(ngModel)]="searchPlaque"
+                                               [searchMode]="true"
+                                               defaultTemplateCode="TR"
+                                               class="form-control"
+                                               [ngModelOptions]="{standalone: true}"></jhi-ir-plaque>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="text-center">
+                            <button type="button" style="width: 120px" (click)="search()" class="btn btn-primary">
+                                <span jhiTranslate="entity.action.search">Save</span>
+                                <span class="fa fa-search"></span>
+                            </button>
+                            <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'CREATE_BOUNDARY_CUSTOMER']"
+                                    type="button" style="width: 120px" (click)="create()" class="btn btn-primary">
+                                <span jhiTranslate="entity.action.create">Save</span>
+                                <span class="fa fa-plus"></span>
+                            </button>
+                        </div>
+                        <br>
+                        <p-dataTable [value]="customers" *ngIf="!(this.customerCreate || existCustomer)"
+                                     [immutable]="false"
+                                     [paginator]="false" [responsive]="true" [stacked]="false"
+                                     [emptyMessage]="'global.messages.info.emptyRecords' | translate">
+
+                            <p-headerColumnGroup>
+                                <p-row>
+                                    <p-column field="vehicleModelTitle" [sortable]="false">
+                                        <ng-template pTemplate="header">
+                                            <span jhiTranslate="niopdcgatewayApp.customer.vehicleModel">Type</span>
+                                        </ng-template>
+                                    </p-column>
+                                    <p-column field="customPlaque.plaque" [sortable]="false">
+                                        <ng-template pTemplate="header">
+                                            <span jhiTranslate="niopdcgatewayApp.customer.plaque">Type</span>
+                                        </ng-template>
+                                    </p-column>
+                                    <p-column field="customPlaqueTwo.plaque" [sortable]="false">
+                                        <ng-template pTemplate="header">
+                                            <span jhiTranslate="niopdcgatewayApp.customer.plaqueTwo">Type</span>
+                                        </ng-template>
+                                    </p-column>
+                                    <p-column field="carRfId" [sortable]="false">
+                                        <ng-template pTemplate="header">
+                                            <span jhiTranslate="niopdcgatewayApp.customer.rfId">Type</span>
+                                        </ng-template>
+                                    </p-column>
+                                    <p-column styleClass="col-button"></p-column>
+                                </p-row>
+                            </p-headerColumnGroup>
+
+
+                            <p-column field="vehicleModelTitle"
+                                      [header]="'niopdcgatewayApp.customer.type' | translate"></p-column>
+                            <p-column field="customPlaque.plaque"
+                                      [header]="'niopdcgatewayApp.customer.plaque' | translate"></p-column>
+                            <p-column field="customPlaqueTwo.plaque"
+                                      [header]="'niopdcgatewayApp.customer.plaqueTwo' | translate"></p-column>
+                            <p-column field="carRfId" [header]="'niopdcgatewayApp.customer.carRfId' | translate">
+                                <ng-template let-item="rowData" pTemplate="body">
+                                    <span style="font-family: Arvo, serif">{{item.carRfId}}</span>
+                                </ng-template>
+                            </p-column>
+                            <p-column class="component">
+                                <ng-template let-item="rowData" pTemplate="body">
+                                    <button type="button" class="btn btn-primary"
+                                            (click)="selectCustomer(item)">
+                                        <span class="fa fa-edit"></span>
+                                        <span jhiTranslate="entity.action.select">ویرایش</span>
+                                    </button>
+                                </ng-template>
+                            </p-column>
+                        </p-dataTable>
+                    </p-accordionTab>
+                </p-accordion>
+
+                <div
+                    *ngIf="(activeIndex === 0 || activeIndex === 1 || activeIndex === 2) && (existCustomer || customerCreate)"
+                    class="card"
+                    style="margin-top: 25px">
+                    <div *ngIf="offender" class="alert alert-danger">
+                        <span
+                            jhiTranslate="error.customer.is.offender">
+                            This field is required.
+                        </span>
+                                <span>
+                            <button class="btn btn-primary" type="button"
+                                    [routerLink]="['/','customer', 'boundary-customer', customer.id ,'infringement']">
+                            <span class="fa fa-check"></span>
+                            <span jhiTranslate="entity.action.view">view</span>
+                        </button>
+                        </span>
+                    </div>
+                    <div *ngIf="attention" class="alert alert-warning">
+                        <span
+                            jhiTranslate="error.customer.is.attention">
+                            This field is required.
+                        </span>
+                        <span>
+                            <button class="btn btn-primary" type="button"
+                                    [routerLink]="['/','customer', 'boundary-customer', customer.id ,'infringement']">
+                            <span class="fa fa-check"></span>
+                            <span jhiTranslate="entity.action.view">view</span>
+                        </button>
+                        </span>
+                    </div>
+                    <div class="card-header">
+                        <h5 class="mb-0"
+                            jhiTranslate="niopdcgatewayApp.boundarySell.home.carInfo">
+                            Create or edit a Customer
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- view customer -->
+                        <div *ngIf="customer.id">
+                            <div class="alert" [ngClass]="{'alert-danger': customer.vehicleModelType === VehicleModelType[VehicleModelType.CAR] && !customer.vehicleModelId,
+                        'alert-warning': customer.vehicleModelType !== VehicleModelType[VehicleModelType.CAR] || customer.vehicleModelId}"
+                                 *ngIf="!customer.valid && activeIndex === 0">
+                                <span jhiTranslate="niopdcgatewayApp.boundarySell.invalid.customer"> </span>
+                                <span>
+                                <button type="button" class="btn btn-primary"
+                                        *jhiHasAnyAuthority="['ROLE_ADMIN', 'EDIT_BOUNDARY_CUSTOMER']"
+                                        [routerLink]="[ { outlets: { popup: 'boundary-customer/'+ customer.id + '/edit'} } ]"
+                                        [queryParams]="route.snapshot.queryParams">
+                                    <span class="fa fa-edit"></span>
+                                    <span jhiTranslate="entity.action.edit">ویرایش</span>
+                                </button>
+                            </span>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.vehicleModel.home.title"
+                                               for="field_vehicleModel1">Product</label>
+                                        <input disabled type="text" class="form-control" name="vehicleModel1"
+                                               id="field_vehicleModel1"
+                                               [ngModel]="customer.vehicleModelTitle"/>
+                                    </div>
+                                    <div
+                                        [hidden]="!(editForm.controls.product?.dirty && editForm.controls.product?.invalid)">
+                                        <small class="form-text text-danger"
+                                               [hidden]="!editForm.controls.product?.errors?.required"
+                                               jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.customer.type"
+                                               for="field_customerType1">Product</label>
+                                        <input disabled type="text" class="form-control" name="customerType1"
+                                               id="field_customerType1"
+                                               [ngModel]="customer.typeTitle"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4"
+                                     *ngIf="customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR]">
+                                    <div class="form-group">
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.oilTank.productId"
+                                               for="field_product">Product</label>
+                                        <input disabled type="text" class="form-control" name="product"
+                                               id="field_product"
+                                               [ngModel]="customer.productTitle"/>
+                                    </div>
+                                    <div
+                                        [hidden]="!(editForm.controls.product?.dirty && editForm.controls.product?.invalid)">
+                                        <small class="form-text text-danger"
+                                               [hidden]="!editForm.controls.product?.errors?.required"
+                                               jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.customer.plaqueOne"
+                                               for="field_customPlaque1">Name</label>
+                                        <jhi-ir-plaque [disabled]="true"
+                                                       id="field_customPlaque1"
+                                                       name="customPlaque1"
+                                                       defaultTemplateCode="TR"
+                                                       [ngModel]="customer.customPlaque"
+                                                       class="form-control"
+                                                       [ngModelOptions]="{standalone: true}"></jhi-ir-plaque>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.customer.plaqueTwo"
+                                               for="field_customPlaqueTwo1">Name</label>
+                                        <jhi-ir-plaque [disabled]="true"
+                                                       id="field_customPlaqueTwo1"
+                                                       name="customPlaqueTwo1"
+                                                       [ngModel]="customer.customPlaqueTwo" class="form-control"
+                                                       [ngModelOptions]="{standalone: true}"></jhi-ir-plaque>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customer.rfId"
+                                               for="field_carRfId1">Name</label>
+                                        <input disabled type="text" class="form-control" name="carRfId1"
+                                               id="field_carRfId1"
+                                               [ngModel]="customer.carRfId"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- create customer -->
+                        <div class="row" *ngIf="!customer.id">
+                            <form *ngIf="customerCreate" name="editFormCustomer" role="form" novalidate
+                                  #editFormCustomer="ngForm">
+                                <div class="row">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label jhiTranslate="niopdcgatewayApp.customer.type"
+                                                   for="field_type">Type</label>
+                                            <select class="form-control" id="field_type" name="type"
+                                                    (ngModelChange)="onChangeCustomerType($event)"
+                                                    [(ngModel)]="customer.typeId" required>
+                                                <option [ngValue]="customerTypeOption.id"
+                                                        *ngFor="let customerTypeOption of customerTypes | sortBy:'title'; trackBy: trackCustomerTypeById">
+                                                    {{customerTypeOption.title}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label"
+                                                   jhiTranslate="niopdcgatewayApp.vehicleModel.home.title"
+                                                   for="field_vehicleModel">Vehicle Model</label>
+                                            <p-dropdown [options]="customVehicleModels"
+                                                        [(ngModel)]="customer.vehicleModelId"
+                                                        [filter]="true"
+                                                        (ngModelChange)="onChangeVehicleModel($event)"
+                                                        class="form-control"
+                                                        filterBy="label"
+                                                        id="field_vehicleModel"
+                                                        name="vm1" required ngDefaultControl>
+                                                <!--[required]="customer.vehicleModelType === VehicleModelType[VehicleModelType.CAR]"-->
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label"
+                                                   jhiTranslate="niopdcgatewayApp.country.home.title"
+                                                   for="field_country1">Country</label>
+                                            <p-dropdown [options]="customCountries"
+                                                        [(ngModel)]="customer.countryId"
+                                                        [filter]="true"
+                                                        [disabled]="isView || customer.used || customer.iranian"
+                                                        class="form-control"
+                                                        filterBy="label"
+                                                        id="field_country1"
+                                                        name="countryId"
+                                                        ngDefaultControl
+                                                        required>
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.customer.plaqueOne"
+                                               for="field_plaque">Name</label>
+                                        <jhi-ir-plaque required
+                                                       id="field_plaque"
+                                                       name="plaque"
+                                                       class="form-control"
+                                                       [disabled]="isView || customer.used"
+                                                       defaultTemplateCode="TR"
+                                                       [(ngModel)]="customer.customPlaque"></jhi-ir-plaque>
+                                        <div
+                                            [hidden]="!(editFormCustomer.controls.plaque?.dirty && editFormCustomer.controls.plaque?.invalid)">
+                                            <small class="form-text text-danger"
+                                                   [hidden]="!editFormCustomer.controls.plaque?.errors?.required"
+                                                   jhiTranslate="entity.validation.required">
+                                                This field is required.
+                                            </small>
+                                            <small class="form-text text-danger"
+                                                   [hidden]="!editFormCustomer.controls.plaque?.errors?.wrong">
+                                                فرمت پلاک نامعتبر است
+                                            </small>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.customer.plaqueTwo"
+                                               for="field_plaqueTwo">Name</label>
+                                        <jhi-ir-plaque class="form-control"
+                                                       id="field_plaqueTwo"
+                                                       name="plaqueTwo"
+                                                       [disabled]="isView || customer.used"
+                                                       defaultTemplateCode="IR"
+                                                       [(ngModel)]="customer.customPlaqueTwo"></jhi-ir-plaque>
+                                        <div
+                                            [hidden]="!(editFormCustomer.controls.plaqueTwo?.dirty && editFormCustomer.controls.plaqueTwo?.invalid)">
+
+                                            <small class="form-text text-danger"
+                                                   [hidden]="!editFormCustomer.controls.plaqueTwo?.errors?.wrong">
+                                                فرمت پلاک نامعتبر است
+                                            </small>
+                                        </div>
+                                    </div>
+
+<!--                                    New Created by saeed-->
+                                    <div class="col-md-6">
+
+                                        <!--                Here its is -->
+                                        <div class="form-group">
+                                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.carRfId.code"
+                                                   for="field_id">Code</label>
+                                            <p-dropdown [options]="carRfIdOptions | sortBy: 'label'"
+                                                        [(ngModel)]="customer.carRfId"
+                                                        [filter]="true"
+                                                        [disabled]="isView || customer.id"
+                                                        class="form-control"
+                                                        filterBy="label"
+                                                        id="field_id"
+                                                        name="field_id"
+                                                        ngDefaultControl>
+                                            </p-dropdown>
+                                        </div>
+                                    </div>
+<!--                                    <div class="col-md-6">-->
+<!--                                        <div class="form-group">-->
+<!--                                            <label class="form-control-label"-->
+<!--                                                   jhiTranslate="niopdcgatewayApp.customer.rfId"-->
+<!--                                                   for="field_rfId">Name</label>-->
+<!--                                            <input type="text" class="form-control"-->
+<!--                                                   name="rfId"-->
+<!--                                                   id="field_rfId"-->
+<!--                                                   [(ngModel)]="customer.carRfId"/>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- list carTanks -->
+                <div class="card" style="margin-top: 25px"
+                     *ngIf="activeIndex === 0 && (existCustomer || customerCreate) && (customer?.vehicleModelType !== VehicleModelType[VehicleModelType.CAR])">
+                    <div class="card-header">
+                        <div class="row">
+                            <h5 class="col-md-3"
+                                jhiTranslate="niopdcgatewayApp.boundarySell.home.carTankInfo">
+                                Create or edit
+                            </h5>
+                            <div class="col-md-8"></div>
+                            <button type="button" class="btn btn-primary col-md-1"
+                                    *ngIf="!customer.id && !carTankCreate"
+                                    (click)="newCarTank()">
+                                <span class="fa fa-plus"></span>
+                                <span jhiTranslate="entity.action.create">Create</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- view carTanks -->
+                        <div *ngIf="customer.id">
+                            <p-dataTable *ngIf="customer.carTanks && customer.carTanks.length"
+                                         [value]="customer.carTanks"
+                                         [immutable]="false"
+                                         [paginator]="false" [responsive]="true" [stacked]="false">
+                                <p-headerColumnGroup>
+                                    <p-row>
+                                        <p-column field="tankNo" [sortable]="false">
+                                            <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.carTank.tankNo">Person</span>
+                                            </ng-template>
+                                        </p-column>
+                                        <p-column field="tankType" [sortable]="false">
+                                            <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.carTank.tankType">tankType</span>
+                                            </ng-template>
+                                        </p-column>
+                                    </p-row>
+                                </p-headerColumnGroup>
+                                <p-column field="tankNo"
+                                          [header]="'niopdcgatewayApp.carTank.tankNo' | translate"></p-column>
+                                <p-column field="tankType"
+                                          [header]="'niopdcgatewayApp.oilTank.oilTankType' | translate">
+                                    <ng-template let-item="rowData" pTemplate="body">
+                                        <span>{{item.title}}</span>
+                                    </ng-template>
+                                </p-column>
+                            </p-dataTable>
+                            <div class="alert alert-danger"
+                                 *ngIf="  customer.vehicleModelType !== VehicleModelType[VehicleModelType.CAR] && (!customer.carTanks || !customer.carTanks.length)">
+                              <span>
+                              </span>
+                                <span
+                                    jhiTranslate="niopdcgatewayApp.order.customer.carTanksIsEmpty">
+
+                                </span>
+                                <span>
+                                    <button class="btn btn-primary" type="button"
+                                            *jhiHasAnyAuthority="['ROLE_ADMIN','LIST_CAR_TANK']"
+                                            [routerLink]="['/customer','boundary-customer', customer.id, 'car-tank']">
+                                    <span class="fa fa-check"></span>
+                                    <span
+                                        jhiTranslate="niopdcgatewayApp.customer.gotoBoundaryCustomerList">Create</span>
+                                </button>
+                                </span>
+
+                            </div>
+                        </div>
+                        <!-- create carTanks -->
+                        <div *ngIf="!customer.id">
+                            <form *ngIf="carTankCreate || carTankEdit" name="editFormCarTank" role="form" novalidate
+                                  #editFormCarTank="ngForm">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label jhiTranslate="niopdcgatewayApp.carTank.tankNo"
+                                                   for="field_tankNo">Type</label>
+                                            <select [disabled]="isView" class="form-control" name="tankNo1"
+                                                    id="field_tankNo" [(ngModel)]="carTank.tankNo" required>
+                                                <option [value]="null"></option>
+                                                <option [value]="1">1</option>
+                                                <option [value]="2">2</option>
+                                                <option [value]="3">3</option>
+                                                <option [value]="4">4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label jhiTranslate="niopdcgatewayApp.carTank.tankType"
+                                                   for="field_tankType">Type</label>
+                                            <select [disabled]="isView" class="form-control" name="tankType"
+                                                    [(ngModel)]="carTank.tankType"
+                                                    (ngModelChange)="changeTankType()"
+                                                    id="field_tankType" required>
+                                                <option value="CUBE">{{'niopdcgatewayApp.TankType.CUBE' | translate}}
+                                                </option>
+                                                <option value="CYLINDER">{{'niopdcgatewayApp.TankType.CYLINDER' |
+                                                    translate}}
+                                                </option>
+                                                <option
+                                                    value="D_SHAPE">{{'niopdcgatewayApp.TankType.D_SHAPE' | translate}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label jhiTranslate="niopdcgatewayApp.carTank.longitude"
+                                                   for="field_longitude">Type</label>
+                                            <input [disabled]="isView" class="form-control" id="field_longitude"
+                                                   name="longitude"
+                                                   [numeric]="{min:0}"
+                                                   [(ngModel)]="carTank.longitude" required/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label jhiTranslate="niopdcgatewayApp.carTank.latitude"
+                                                   for="field_latitude">Type</label>
+                                            <input [disabled]="isView" class="form-control" id="field_latitude"
+                                                   name="latitude"
+                                                   [numeric]="{min:0}"
+                                                   [(ngModel)]="carTank.latitude" required/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label jhiTranslate="niopdcgatewayApp.carTank.height"
+                                                   for="field_height">Type</label>
+                                            <input [disabled]="isView" class="form-control" id="field_height"
+                                                   name="height"
+                                                   [numeric]="{min:0}"
+                                                   [(ngModel)]="carTank.height" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <p-dataTable [hidden]="carTankCreate || carTankEdit" #dt [value]="customer.carTanks"
+                                         [immutable]="false"
+                                         [paginator]="false" [responsive]="true" [stacked]="false">
+                                <p-headerColumnGroup>
+                                    <p-row>
+                                        <p-column field="tankNo" [sortable]="false">
+                                            <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.carTank.tankNo">Person</span>
+                                            </ng-template>
+                                        </p-column>
+                                        <p-column field="tankType" [sortable]="false">
+                                            <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.carTank.tankType">Share Percent</span>
+                                            </ng-template>
+                                        </p-column>
+                                        <p-column styleClass="col-button2" *ngIf="!isView">
+                                            <ng-template pTemplate="header">
+                                            </ng-template>
+                                        </p-column>
+                                    </p-row>
+                                </p-headerColumnGroup>
+                                <p-column field="tankNo"
+                                          [header]="'niopdcgatewayApp.carTank.tankNo' | translate"></p-column>
+                                <p-column field="tankType"
+                                          [header]="'niopdcgatewayApp.oilTank.oilTankType' | translate">
+                                    <ng-template let-item="rowData" pTemplate="body">
+                                        <span>{{item.title}}</span>
+                                    </ng-template>
+                                </p-column>
+                                <p-column class="component" *ngIf="!isView">
+                                    <ng-template let-item="rowData" pTemplate="body">
+                                        <div class="btn-group" ngbDropdown placement="right">
+                                            <button type="button" class="btn btn-danger"
+                                                    (click)="deleteCarTank(item)">
+                                                <span class="fa fa-remove"></span>
+                                                <span jhiTranslate="entity.action.delete">delete</span>
+                                            </button>
+                                            <button type="button" class="btn btn-info"
+                                                    (click)="editCarTank(item)">
+                                                <span class="fa fa-edit"></span>
+                                                <span jhiTranslate="entity.action.edit">edit</span>
+                                            </button>
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+                            </p-dataTable>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center" [hidden]="!carTankCreate && !carTankEdit">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelCarTank()">
+                            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="button" class="btn btn-primary"
+                                [disabled]="!carTank.tankType ||!carTank.tankNo || !carTank.height ||
+                             (carTank.tankType!==TankType[TankType.CYLINDER]&&(!carTank.latitude || !carTank.longitude)) ||
+                             (carTank.tankType===TankType[TankType.CYLINDER]&& !carTank.latitude)"
+                                (click)="saveCarTank()">
+                            <span class="fa fa-save"></span>&nbsp;<span
+                            jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 25px"
+                     *ngIf="activeIndex === 0 && existCustomer">
+                    <div class="card-header">
+                        <div class="row">
+                            <h5 class="col-md-6"
+                                jhiTranslate="niopdcgatewayApp.boundarySell.home.carHistory">
+                                carHistory
+                            </h5>
+                            <div class="col-md-6"></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- view carTanks -->
+                        <div *ngIf="customer.id">
+                            <p-dataTable *ngIf="ordersHistory && ordersHistory.length"
+                                         [value]="ordersHistory"
+                                         [immutable]="false"
+                                         [paginator]="false" [responsive]="true" [stacked]="false">
+                                <p-headerColumnGroup>
+                                    <p-row>
+                                        <p-column field="orderNo" [sortable]="false">
+                                            <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.order.orderNo">orderNo</span>
+                                            </ng-template>
+                                        </p-column>
+                                        <p-column field="registerDate" [sortable]="false">
+                                            <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.order.registerDate">registerDate</span>
+                                            </ng-template>
+                                        </p-column>
+                                        <p-column field="status" [sortable]="false">
+                                            <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.order.status">status</span>
+                                            </ng-template>
+                                        </p-column>
+                                        <p-column field="price" [sortable]="false">
+                                            <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.order.price">price</span>
+                                            </ng-template>
+                                        </p-column>
+                                    </p-row>
+                                </p-headerColumnGroup>
+                                <p-column field="orderNo"
+                                          [header]="'niopdcgatewayApp.order.orderNo' | translate"></p-column>
+                                <p-column field="registerDate"
+                                          [header]="'niopdcgatewayApp.order.registerDate' | translate">
+                                    <ng-template let-item="rowData" pTemplate="body">
+                                        <span>{{item.registerDate | dateTimeJalali}}</span>
+                                    </ng-template>
+                                </p-column>
+                                <p-column field="tankType"
+                                          [header]="'niopdcgatewayApp.order.status' | translate">
+                                    <ng-template let-item="rowData" pTemplate="body">
+                                        <span
+                                            jhiTranslate="{{'niopdcgatewayApp.OrderStatus.' + item.status}}">{{item.status}}</span>
+                                    </ng-template>
+                                </p-column>
+                                <p-column field="price"
+                                          [header]="'niopdcgatewayApp.order.price' | translate"></p-column>
+
+                            </p-dataTable>
+                        </div>
+                        <!-- create carTanks -->
+                        <div *ngIf="!customer.id">
+                            <form *ngIf="carTankCreate || carTankEdit" name="editFormCarTank" role="form" novalidate
+                                  #editFormCarTank="ngForm">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label jhiTranslate="niopdcgatewayApp.carTank.tankNo"
+                                                   for="field_tankNo">Type</label>
+                                            <select [disabled]="isView" class="form-control" name="tankNo1"
+                                                    [(ngModel)]="carTank.tankNo" required>
+                                                <option [value]="null"></option>
+                                                <option [value]="1">1</option>
+                                                <option [value]="2">2</option>
+                                                <option [value]="3">3</option>
+                                                <option [value]="4">4</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label jhiTranslate="niopdcgatewayApp.carTank.tankType"
+                                                   for="field_tankType">Type</label>
+                                            <select [disabled]="isView" class="form-control" name="tankType"
+                                                    [(ngModel)]="carTank.tankType"
+                                                    (ngModelChange)="changeTankType()"
+                                                    id="field_tankType" required>
+                                                <option value="CUBE">{{'niopdcgatewayApp.TankType.CUBE' | translate}}
+                                                </option>
+                                                <option value="CYLINDER">{{'niopdcgatewayApp.TankType.CYLINDER' |
+                                                    translate}}
+                                                </option>
+                                                <option
+                                                    value="D_SHAPE">{{'niopdcgatewayApp.TankType.D_SHAPE' | translate}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" *ngIf="carTank.tankType===TankType[TankType.CUBE]">
+                                        <div class="form-group">
+                                            <label jhiTranslate="niopdcgatewayApp.carTank.longitude"
+                                                   for="field_longitude">Type</label>
+                                            <input [disabled]="isView" class="form-control" id="field_longitude"
+                                                   name="longitude"
+                                                   [numeric]="{min:0}"
+                                                   [(ngModel)]="carTank.longitude" required/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label *ngIf="carTank.tankType === TankType[TankType.CUBE]"
+                                                   class="form-control-label"
+                                                   jhiTranslate="niopdcgatewayApp.carTank.latitude"
+                                                   for="field_latitude">Latitude</label>
+                                            <label *ngIf="carTank.tankType !== TankType[TankType.CUBE]"
+                                                   class="form-control-label"
+                                                   jhiTranslate="niopdcgatewayApp.carTank.radius"
+                                                   for="field_latitude">Latitude</label>
+                                            <input [disabled]="isView" class="form-control" id="field_latitude"
+                                                   name="latitude"
+                                                   [numeric]="{min:0}"
+                                                   [(ngModel)]="carTank.latitude" required/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label jhiTranslate="niopdcgatewayApp.carTank.height"
+                                                   for="field_height">Type</label>
+                                            <input [disabled]="isView" class="form-control" id="field_height"
+                                                   name="height"
+                                                   [numeric]="{min:0}"
+                                                   [(ngModel)]="carTank.height" required/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <p-dataTable [hidden]="carTankCreate || carTankEdit" #dt [value]="customer.carTanks"
+                                         [immutable]="false"
+                                         [paginator]="false" [responsive]="true" [stacked]="false">
+                                <p-headerColumnGroup>
+                                    <p-row>
+                                        <p-column field="tankNo" [sortable]="false">
+                                            <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.carTank.tankNo">Person</span>
+                                            </ng-template>
+                                        </p-column>
+                                        <p-column field="tankType" [sortable]="false">
+                                            <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.carTank.tankType">Share Percent</span>
+                                            </ng-template>
+                                        </p-column>
+                                        <p-column styleClass="col-button2" *ngIf="!isView">
+                                            <ng-template pTemplate="header">
+                                            </ng-template>
+                                        </p-column>
+                                    </p-row>
+                                </p-headerColumnGroup>
+                                <p-column field="tankNo"
+                                          [header]="'niopdcgatewayApp.carTank.tankNo' | translate"></p-column>
+                                <p-column field="tankType"
+                                          [header]="'niopdcgatewayApp.oilTank.oilTankType' | translate">
+                                    <ng-template let-item="rowData" pTemplate="body">
+                                        <span>{{item.title}}</span>
+                                    </ng-template>
+                                </p-column>
+                                <p-column class="component" *ngIf="!isView">
+                                    <ng-template let-item="rowData" pTemplate="body">
+                                        <div class="btn-group" ngbDropdown placement="right">
+                                            <button type="button" class="btn btn-danger"
+                                                    (click)="deleteCarTank(item)">
+                                                <span class="fa fa-remove"></span>
+                                                <span jhiTranslate="entity.action.delete">delete</span>
+                                            </button>
+                                            <button type="button" class="btn btn-info"
+                                                    (click)="editCarTank(item)">
+                                                <span class="fa fa-edit"></span>
+                                                <span jhiTranslate="entity.action.edit">edit</span>
+                                            </button>
+                                        </div>
+                                    </ng-template>
+                                </p-column>
+                            </p-dataTable>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center" [hidden]="!carTankCreate && !carTankEdit">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelCarTank()">
+                            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button type="button" class="btn btn-primary"
+                                [disabled]="!carTank.tankType ||!carTank.tankNo || !carTank.height ||
+                             (carTank.tankType!==TankType[TankType.CYLINDER]&&(!carTank.latitude || !carTank.longitude)) ||
+                             (carTank.tankType===TankType[TankType.CYLINDER]&& !carTank.latitude)"
+                                (click)="saveCarTank()">
+                            <span class="fa fa-save"></span>&nbsp;<span
+                            jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- activeIndex = 1 -->
+            <div *ngIf="activeIndex === 1">
+                <div class="card" style="margin-top: 25px">
+                    <div class="card-header">
+                        <h5 class="mb-0"
+                            jhiTranslate="niopdcgatewayApp.boundarySell.home.firstInformation">
+                            order Information
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label jhiTranslate="niopdcgatewayApp.order.locationId"
+                                       for="field_locations">Location</label>
+                                <p-dropdown required [options]="customLocation | sortBy: 'label'"
+                                            [(ngModel)]="boundarySell.locationId"
+                                            [filter]="true"
+                                            [disabled]="isView"
+                                            class="form-control"
+                                            (ngModelChange)="onChangeLocation($event)"
+                                            filterBy="label"
+                                            id="field_locations"
+                                            name="location"
+                                            ngDefaultControl
+                                ></p-dropdown>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.order.currency"
+                                           for="field_currency">Country</label>
+                                    <select [disabled]="true" class="form-control" id="field_currency" name="currency"
+                                            [(ngModel)]="boundarySell.currencyId"
+                                            required>
+                                        <option [ngValue]="null" selected></option>
+                                        <option *ngFor="let currencyOption of currencies; trackBy: trackCurrencyById"
+                                                [ngValue]="currencyOption.id"
+                                        >
+                                            {{currencyOption.title}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.boundarySell.carnet"
+                                       for="field_carnet">Order
+                                    No</label>
+                                <input [disabled]="isView" type="text" class="form-control" name="carnet"
+                                       id="field_carnet"
+                                       [(ngModel)]="boundarySell.carnet"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.boundarySell.capote"
+                                       for="field_capote">Order
+                                    No</label>
+                                <input [disabled]="isView" type="text" class="form-control" name="capote"
+                                       id="field_capote"
+                                       [(ngModel)]="boundarySell.capote"/>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.order.orderNo"
+                                       for="field_orderNo">Order
+                                    No</label>
+                                <input
+                                    [disabled]="true"
+                                    type="text" class="form-control" name="orderNo"
+                                    id="field_orderNo"
+                                    [(ngModel)]="boundarySell.orderNo"/>
+                            </div>
+                            <div class="col-md-4" *ngIf="boundarySell.alongFuelRegisterDate">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.boundarySell.alongFuelRegisterDate"
+                                       for="field_alongFuelRegisterDate">Order
+                                    No</label>
+                                <input
+                                    type="text" class="form-control" name="alongFuelRegisterDate"
+                                    id="field_alongFuelRegisterDate" disabled
+                                    [ngModel]="boundarySell.alongFuelRegisterDate | dateTimeJalali"/>
+                            </div>
+                            <div class="col-md-4" *ngIf="boundarySell.pumpNozzleRegisterDate">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.boundarySell.pumpNozzleRegisterDate"
+                                       for="field_pumpNozzleRegisterDate">Order
+                                    No</label>
+                                <input
+                                    type="text" class="form-control" name="pumpNozzleRegisterDate"
+                                    id="field_pumpNozzleRegisterDate" disabled
+                                    [ngModel]="boundarySell.pumpNozzleRegisterDate | dateTimeJalali"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 25px">
+                    <div class="card-header">
+                        <h5 class="mb-0"
+                            jhiTranslate="niopdcgatewayApp.boundarySell.home.supplementaryInformation">
+                            discount
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <ng-container *jhiHasAnyAuthority="['ROLE_ADMIN','ALONG_FUEL_BOUNDARY_TRANSIT_WEB_SELL']">
+                                <div class="col-md-4"
+                                     *ngIf="boundarySell.orderType === OrderType[OrderType.BOUNDARY_TRANSIT] && customer.vehicleModelType === VehicleModelType[VehicleModelType.TRUCK]">
+                                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.boundarySell.cmr"
+                                           for="field_cmr">CMR</label>
+
+                                    <div class="input-group mb-3">
+                                        <input [disabled]="isView || inquiringCmr" type="text" class="form-control"
+                                               name="cmr"
+                                               id="field_cmr" dir="ltr"
+                                               [mask]="'00-00-00-00000000'"
+                                               placeholder="__-__-__-________"
+                                               (blur)="onCmrChange(false)"
+                                               [(ngModel)]="boundarySell.cmr"/>
+                                        <div class="input-group-append">
+                                            <button type="button" [disabled]="isView || inquiringCmr"
+                                                    class="btn btn-primary"
+                                                    data-dismiss="modal" (click)="onCmrChange(true)">
+                                                <span class="fa fa-search"></span>&nbsp;
+                                                <span jhiTranslate="niopdcgatewayApp.order.inquiryCmr">Cancel</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-md-4"
+                                     *ngIf="boundarySell.orderType === OrderType[OrderType.BOUNDARY_TRANSIT]  && customer.vehicleModelType === VehicleModelType[VehicleModelType.TRUCK]">
+                                    <div class="form-group">
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.order.discount.value"
+                                               for="field_rmtoCode">Country</label>
+                                        <input [disabled]="true" type="text" class="form-control" name="rmtoCode"
+                                               id="field_rmtoCode"
+                                               [(ngModel)]="boundaryDiscount.title"/>
+                                        <span class="alert-warning"
+                                              *ngIf="boundaryDiscount && boundaryDiscount.message ">{{ boundaryDiscount.message | translate }}</span>
+                                        <span class="alert-warning"
+                                              *ngIf="boundaryDiscount && boundaryDiscount.message && boundaryDiscount.transitHourLimit">{{ boundaryDiscount.message | translate  :boundaryDiscount.transitHourLimit}}</span>
+                                    </div>
+                                </div>
+                            </ng-container>
+
+                            <div class="col-md-4"
+                                 *ngIf="boundarySell.orderType === OrderType[OrderType.BOUNDARY_TRANSIT]">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           jhiTranslate="niopdcgatewayApp.order.targetCountry"
+                                           for="field_countries">Country</label>
+                                    <p-dropdown required [options]="customCountries"
+                                                [(ngModel)]="boundarySell.targetCountryId"
+                                                [filter]="true"
+                                                [disabled]="isView || (inquiry && inquiry.country && inquiry.country.id )"
+                                                class="form-control"
+                                                filterBy="label"
+                                                id="field_countries"
+                                                name="countryId"
+                                                ngDefaultControl>
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.boundarySell.driverFirstName"
+                                       for="field_personFirstName">driverFirstName</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control"
+                                           [disabled]="isView || (inquiry && inquiry.driverFirstName && inquiry.driverFirstName.length)"
+                                           [(ngModel)]="boundarySell.personFirstName" name="personFirstName"
+                                           id="field_personFirstName" [required]="true">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.boundarySell.driverLastName"
+                                       for="field_personLastName">driverLastName</label>
+                                <div class="form-group">
+
+                                    <input type="text" class="form-control"
+                                           [disabled]="isView || (inquiry && inquiry.driverLastName && inquiry.driverLastName.length)"
+                                           [(ngModel)]="boundarySell.personLastName" name="personLastName"
+                                           id="field_personLastName" [required]="true">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <ng-container
+                    *ngIf="selectedLocation && boundarySell.boundarySellItems && boundarySell.boundarySellItems.length">
+                    <div class="card" style="margin-top: 25px"
+                         *ngIf="boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSHIP] && (selectedLocation.transhipType === TranshipType[TranshipType.OUT_TO_INSIDE_WHIT_PRIMITIVE] ||
+                            selectedLocation.transhipType === TranshipType[TranshipType.INSIDE_TO_OUT])">
+                        <div class="card-header">
+                            <h5 class="mb-0"
+                                jhiTranslate="entity.action.primitiveOrderProductInformation">
+                                Create or edit a Customer
+                            </h5>
+                        </div>
+                        <div class="card-block container">
+                            <div class="row">
+                                <p-dataTable #dt [value]="boundarySell.boundarySellItems | sortBy : 'tankNo'"
+                                             [immutable]="false"
+                                             [paginator]="false" [responsive]="true" [stacked]="false">
+                                    <p-headerColumnGroup>
+                                        <p-row>
+                                            <p-column
+                                                *ngIf="customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR]"
+                                                field="tankType"
+                                                [sortable]="false">
+                                                <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.carTank.tankType">Share Percent</span>
+                                                </ng-template>
+                                            </p-column>
+                                            <p-column
+                                                *ngIf="customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR]"
+                                                field="measureHeight"
+                                                [sortable]="false">
+                                                <ng-template pTemplate="header">
+                                <span
+                                    jhiTranslate="niopdcgatewayApp.orderProduct.measureHeight">Share Percent</span>
+                                                </ng-template>
+                                            </p-column>
+                                            <ng-container
+                                                *ngIf="boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSIT]">
+                                                <p-column
+                                                    *ngIf="customer.vehicleModelType===VehicleModelType[VehicleModelType.CAR]"
+                                                    field="amount"
+                                                    [sortable]="false">
+                                                    <ng-template pTemplate="header">
+                                <span
+                                    jhiTranslate="niopdcgatewayApp.orderProduct.amount"></span>
+                                                    </ng-template>
+                                                </p-column>
+                                                <p-column
+                                                    *ngIf="customer.vehicleModelType===VehicleModelType[VehicleModelType.CAR]"
+                                                    field="productTitle"
+                                                    [sortable]="false">
+                                                    <ng-template pTemplate="header">
+                                <span
+                                    jhiTranslate="niopdcgatewayApp.orderProduct.productId">Share Percent</span>
+                                                    </ng-template>
+                                                </p-column>
+                                            </ng-container>
+                                        </p-row>
+                                    </p-headerColumnGroup>
+                                    <ng-container
+                                        *ngIf="customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR]">
+                                        <p-column class="component">
+                                            <ng-template let-item="rowData" pTemplate="body">
+                                            <span
+                                                *ngIf="item.amountType===AmountType[AmountType.NORMAL] && (ALONG_FUEL_BOUNDARY_TRANSHIP_WEB_SELL || ALONG_FUEL_BOUNDARY_TRANSIT_WEB_SELL)">باک {{item.carTank?.tankNo}}
+                                                - {{item.carTank?.title}}</span>
+                                                <span
+                                                    *ngIf="item.amountType===AmountType[AmountType.PUMP_NOZZLE_AMOUNT] && customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR] && (PUMP_NOZZLE_BOUNDARY_TRANSHIP_WEB_SELL || PUMP_NOZZLE_BOUNDARY_TRANSIT_WEB_SELL)">از تلمبه</span>
+                                                <span
+                                                    *ngIf="item.amountType===AmountType[AmountType.CAR_TANK_4_AMOUNT] && customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR] && (ALONG_FUEL_BOUNDARY_TRANSHIP_WEB_SELL || ALONG_FUEL_BOUNDARY_TRANSIT_WEB_SELL)">باک 4</span>
+                                            </ng-template>
+                                        </p-column>
+
+                                        <p-column field="measureHeight"
+                                                  [header]="'niopdcgatewayApp.carTank.radius'| translate">
+                                            <ng-template let-item="rowData" pTemplate="body">
+                                                <div class="row"
+                                                     *ngIf="item.amountType===AmountType[AmountType.NORMAL] && (ALONG_FUEL_BOUNDARY_TRANSHIP_WEB_SELL || ALONG_FUEL_BOUNDARY_TRANSIT_WEB_SELL)">
+                                                    <div class="col-md-6">
+                                                        <input
+                                                            [disabled]="isView || !(transhipAlongFuelAmountSetter || transitAlongFuelAmountSetter) "
+                                                            (blur)="validateAmounts()" class="form-control col-md-12"
+                                                            [numeric]="{min: item.primitiveHeightMin, max: item.carTank?.maxHeight}"
+                                                            [name]="'primitive-measureHeight' + item.carTankId"
+                                                            [(ngModel)]="item.primitiveHeight"/>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <span class="form-control"
+                                                              style="background: #f2f5f7;border:0;">میلی متر</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row"
+                                                     *ngIf="item.amountType === AmountType[AmountType.CAR_TANK_4_AMOUNT] &&  (ALONG_FUEL_BOUNDARY_TRANSHIP_WEB_SELL || ALONG_FUEL_BOUNDARY_TRANSIT_WEB_SELL)">
+                                                    <div class="col-md-6">
+                                                        <input
+                                                            [disabled]="isView || !(transhipAlongFuelAmountSetter || transitAlongFuelAmountSetter) "
+                                                            (blur)="validateAmounts()" class="form-control col-md-12"
+                                                            [fuel]="{ min: item.primitiveAmountMin }"
+                                                            [name]="'primitive-measureHeight' + item.amountType"
+                                                            [(ngModel)]="item.primitiveAmount"/>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                <span class="form-control"
+                                                      style="background: #f2f5f7;border:0;">لیتر</span>
+                                                    </div>
+                                                </div>
+                                                <input [disabled]="true"
+                                                       (blur)="validateAmounts()" class="form-control col-md-12"
+                                                       *ngIf="item.amountType === AmountType[AmountType.PUMP_NOZZLE_AMOUNT] && (PUMP_NOZZLE_BOUNDARY_TRANSHIP_WEB_SELL || PUMP_NOZZLE_BOUNDARY_TRANSIT_WEB_SELL)"
+                                                       [fuel]="{}"
+                                                       [name]="'primitive-measureHeight' + item.amountType"
+                                                       [(ngModel)]="item.primitiveAmount"/>
+                                            </ng-template>
+                                        </p-column>
+                                    </ng-container>
+                                    <ng-container
+                                        *ngIf="boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSIT]">
+                                        <p-column
+                                            *ngIf="customer.vehicleModelType===VehicleModelType[VehicleModelType.CAR]"
+                                            field="amount"
+                                            [header]="'niopdcgatewayApp.carTank.radius'| translate"></p-column>
+                                        <p-column
+                                            *ngIf="customer.vehicleModelType===VehicleModelType[VehicleModelType.CAR]"
+                                            field="productTitle"
+                                            [header]="'niopdcgatewayApp.carTank.radius'| translate"></p-column>
+                                    </ng-container>
+                                </p-dataTable>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top: 25px">
+                        <div class="card-header">
+                            <h5 class="mb-0"
+                                *ngIf="boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSIT] ||
+                         (boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSHIP] &&
+                         selectedLocation.transhipType!==TranshipType[TranshipType.INSIDE_TO_OUT] &&
+                         selectedLocation.transhipType!==TranshipType[TranshipType.OUT_TO_INSIDE_WHIT_PRIMITIVE])"
+                                jhiTranslate="entity.action.orderProductInformation">
+                                Create or edit a Customer
+                            </h5>
+                            <h5 class="mb-0"
+                                *ngIf="boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSHIP] &&(
+                         selectedLocation.transhipType===TranshipType[TranshipType.INSIDE_TO_OUT] ||
+                         selectedLocation.transhipType===TranshipType[TranshipType.OUT_TO_INSIDE_WHIT_PRIMITIVE])"
+                                jhiTranslate="entity.action.finalOrderProductInformation">
+                                Create or edit a Customer
+                            </h5>
+                        </div>
+                        <div class="card-block container">
+                            <div class="row">
+                                <p-dataTable #dt [value]="boundarySell.boundarySellItems | sortBy : 'tankNo'"
+                                             [immutable]="false"
+                                             [paginator]="false" [responsive]="true" [stacked]="false">
+                                    <p-headerColumnGroup>
+                                        <p-row>
+                                            <p-column
+                                                *ngIf="customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR]"
+                                                field="tankType"
+                                                [sortable]="false">
+                                                <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.carTank.tankType">Share Percent</span>
+                                                </ng-template>
+                                            </p-column>
+                                            <p-column
+                                                *ngIf="customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR]"
+                                                field="measureHeight"
+                                                [sortable]="false">
+                                                <ng-template pTemplate="header">
+                                <span
+                                    jhiTranslate="niopdcgatewayApp.orderProduct.measureHeight">Share Percent</span>
+                                                </ng-template>
+                                            </p-column>
+                                            <ng-container
+                                                *ngIf="boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSIT]">
+                                                <p-column
+                                                    *ngIf="customer.vehicleModelType===VehicleModelType[VehicleModelType.CAR]"
+                                                    field="amount"
+                                                    [sortable]="false">
+                                                    <ng-template pTemplate="header">
+                                <span
+                                    jhiTranslate="niopdcgatewayApp.orderProduct.amount">Share Percent</span>
+                                                    </ng-template>
+                                                </p-column>
+                                                <p-column
+                                                    *ngIf="customer.vehicleModelType===VehicleModelType[VehicleModelType.CAR]"
+                                                    field="productTitle"
+                                                    [sortable]="false">
+                                                    <ng-template pTemplate="header">
+                                <span
+                                    jhiTranslate="niopdcgatewayApp.orderProduct.productId">Share Percent</span>
+                                                    </ng-template>
+                                                </p-column>
+                                            </ng-container>
+                                        </p-row>
+                                    </p-headerColumnGroup>
+                                    <ng-container
+                                        *ngIf="customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR]">
+                                        <p-column class="component">
+                                            <ng-template let-item="rowData" pTemplate="body">
+                                            <span
+                                                *ngIf="item.amountType===AmountType[AmountType.NORMAL]  && (ALONG_FUEL_BOUNDARY_TRANSHIP_WEB_SELL || ALONG_FUEL_BOUNDARY_TRANSIT_WEB_SELL)">باک {{item.carTank?.tankNo}}
+                                                - {{item.carTank?.title}}</span>
+                                                <span
+                                                    *ngIf="(item.amountType===AmountType[AmountType.PUMP_NOZZLE_AMOUNT] && customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR] && !((boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSIT] && selectedLocation.beforeControl) || (boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSHIP] && selectedLocation?.beforeControlTranship))) && (PUMP_NOZZLE_BOUNDARY_TRANSHIP_WEB_SELL || PUMP_NOZZLE_BOUNDARY_TRANSIT_WEB_SELL)">از تلمبه</span>
+                                                <span
+                                                    *ngIf="(item.amountType===AmountType[AmountType.PUMP_NOZZLE_AMOUNT] && customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR] && ((boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSIT] && selectedLocation?.beforeControl) || (boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSHIP] && selectedLocation?.beforeControlTranship))) && (PUMP_NOZZLE_BOUNDARY_TRANSHIP_WEB_SELL || PUMP_NOZZLE_BOUNDARY_TRANSIT_WEB_SELL) ">از تلمبه(پرداخت شده)</span>
+                                                <span
+                                                    *ngIf="(item.amountType===AmountType[AmountType.CAR_TANK_4_AMOUNT] && customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR] )&& (ALONG_FUEL_BOUNDARY_TRANSHIP_WEB_SELL || ALONG_FUEL_BOUNDARY_TRANSIT_WEB_SELL)">باک 4</span>
+                                            </ng-template>
+                                        </p-column>
+
+                                        <p-column field="measureHeight"
+                                                  [header]="'niopdcgatewayApp.carTank.height'| translate">
+                                            <ng-template let-item="rowData" pTemplate="body">
+                                                <div class="row"
+                                                     *ngIf="item.amountType===AmountType[AmountType.NORMAL]  && (ALONG_FUEL_BOUNDARY_TRANSHIP_WEB_SELL || ALONG_FUEL_BOUNDARY_TRANSIT_WEB_SELL)">
+                                                    <div class="col-md-6">
+                                                        <input
+                                                            [disabled]="isView || !(transhipAlongFuelAmountSetter || transitAlongFuelAmountSetter) "
+                                                            (blur)="validateAmounts()" class="form-control col-md-12"
+                                                            [numeric]="{ min: item.heightMin, max: item.carTank?.maxHeight }"
+                                                            [name]="'measureHeight' + item.carTankId"
+                                                            [(ngModel)]="item.height"/>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <span class="form-control"
+                                                              style="background: #f2f5f7;border:0;">میلی متر</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row"
+                                                     *ngIf="item.amountType===AmountType[AmountType.PUMP_NOZZLE_AMOUNT]  && (PUMP_NOZZLE_BOUNDARY_TRANSHIP_WEB_SELL || PUMP_NOZZLE_BOUNDARY_TRANSIT_WEB_SELL) &&
+                                                        (
+                                                            (boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSHIP] && (
+                                                                    (
+                                                                        selectedLocation.transhipType!==TranshipType[TranshipType.INSIDE_TO_INSIDE] &&
+                                                                        selectedLocation.transhipType!==TranshipType[TranshipType.INSIDE_TO_OUT]
+                                                                    )
+                                                                ) ||
+                                                                boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSIT]
+                                                            )
+                                                        )">
+                                                    <div class="col-md-6">
+                                                        <input
+                                                            [disabled]="isView || !(transhipPumpNozzleAmountSetter || transitPumpNozzleAmountSetter) "
+                                                            (blur)="validateAmounts()" class="form-control col-md-12"
+                                                            [fuel]="{min: item.amountMin }"
+                                                            [name]="'measureHeight' + item.amountType"
+                                                            [(ngModel)]="item.realAmount"/>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                <span class="form-control"
+                                                      style="background: #f2f5f7;border:0;">لیتر</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row"
+                                                     *ngIf="item.amountType===AmountType[AmountType.CAR_TANK_4_AMOUNT] && (ALONG_FUEL_BOUNDARY_TRANSHIP_WEB_SELL || ALONG_FUEL_BOUNDARY_TRANSIT_WEB_SELL) && selectedLocation && (selectedLocation.transhipType === TranshipType[TranshipType.OUT_TO_INSIDE_WHIT_PRIMITIVE]
+                                                  ||selectedLocation.transhipType === TranshipType[TranshipType.INSIDE_TO_OUT]) && boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSHIP]">
+                                                    <div class="col-md-6">
+                                                        <input
+                                                            [disabled]="isView || !(transhipAlongFuelAmountSetter || transitAlongFuelAmountSetter)"
+                                                            (blur)="validateAmounts()" class="form-control col-md-12"
+                                                            [fuel]="{ }"
+                                                            [name]="'measureHeight' + item.amountType + item.secondaryAmount"
+                                                            [(ngModel)]="item.secondaryAmount"/>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                <span class="form-control"
+                                                      style="background: #f2f5f7;border:0;">لیتر</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row"
+                                                     *ngIf="item.amountType===AmountType[AmountType.CAR_TANK_4_AMOUNT] && (ALONG_FUEL_BOUNDARY_TRANSHIP_WEB_SELL || ALONG_FUEL_BOUNDARY_TRANSIT_WEB_SELL) &&
+                                                    ((selectedLocation &&
+                                                        (
+                                                        selectedLocation.transhipType === TranshipType[TranshipType.OUT_TO_INSIDE_WHIT_OUT_PRIMITIVE] ||
+                                                        selectedLocation.transhipType === TranshipType[TranshipType.INSIDE_TO_INSIDE]
+                                                        )
+                                                     && boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSHIP]) ||
+                                                      (boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSIT]))">
+                                                    <div class="col-md-6">
+                                                        <input
+                                                            [disabled]="isView || !(transhipAlongFuelAmountSetter || transitAlongFuelAmountSetter)"
+                                                            (blur)="validateAmounts()" class="form-control col-md-12"
+                                                            [fuel]="{}"
+                                                            [name]="'measureHeight' + item.amountType"
+                                                            [(ngModel)]="item.realAmount"/>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                <span class="form-control"
+                                                      style="background: #f2f5f7;border:0;">لیتر</span>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </p-column>
+                                    </ng-container>
+                                    <ng-container
+                                        *ngIf="boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSIT]">
+                                        <p-column
+                                            *ngIf="customer.vehicleModelType === VehicleModelType[VehicleModelType.CAR]"
+                                            field="amount">
+                                            <ng-template let-item="rowData" pTemplate="body">
+                                                <input name="editableLiter" id="editableLiter"
+                                                       [(ngModel)]="item.realAmount"
+                                                       class="form-control" type="number"
+                                                       [numeric]="{min:item.maxAmount}"
+                                                       [disabled]="isView || !(transhipAlongFuelAmountSetter || transitAlongFuelAmountSetter)"/>
+                                            </ng-template>
+                                        </p-column>
+                                        <p-column
+                                            *ngIf="customer.vehicleModelType === VehicleModelType[VehicleModelType.CAR]"
+                                            [header]="'niopdcgatewayApp.carTank.radius'| translate">
+                                            <ng-template let-item="rowData" pTemplate="body">
+                                                <span>{{item.productTitle ? item.productTitle : customer.productTitle}}</span>
+                                            </ng-template>
+                                        </p-column>
+                                    </ng-container>
+                                </p-dataTable>
+                                <div class="alert alert-warning"
+                                     *jhiHasNotAnyAuthority="['ROLE_ADMIN', (boundarySell.orderCreationMethod === 'MEASURING_DEVICE' ? 'MEASURING_DEVICE_EDIT_ORDER' : null)]">
+                                    <span class="form-control"
+                                          jhiTranslate="niopdcgatewayApp.order.insertedByMeasuringDevice">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="text-center"
+                                 *ngIf="!isView && (paymentAccess || customer.vehicleModelType==VehicleModelType[VehicleModelType.CAR])">
+                                <button
+                                    [disabled]="editForm.form.invalid"
+                                    type="button"
+                                    style="width: 150px; margin: 10px"
+                                    class="form-control btn btn-primary"
+                                    id="field_calculatePrice"
+                                    (click)="calculatePrice()">
+                                        <span class="fa fa-calculator">&nbsp;<span
+                                            jhiTranslate="entity.action.calculatePrice"></span></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <div class="card" style="margin-top: 25px"
+                     *ngIf="showPriceTable && selectedLocation && (paymentAccess || customer.vehicleModelType==VehicleModelType[VehicleModelType.CAR])">
+                    <div class="card-header">
+                        <h5 class="mb-0"
+                            jhiTranslate="entity.action.orderPriceInformation">
+                            Create or edit a Customer
+                        </h5>
+                    </div>
+                    <div>
+                        <p-dataTable #dt [value]="boundarySellPrice.boundarySellItems | sortBy : 'tankNo'"
+                                     [immutable]="false"
+                                     [paginator]="false" [responsive]="true" [stacked]="false">
+                            <p-headerColumnGroup>
+                                <p-row>
+                                    <p-column
+                                        *ngIf="(boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSIT] && customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR])|| (boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSHIP])"
+                                        field="code" [sortable]="false">
+                                        <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.orderProduct.amountType">amountType</span>
+                                        </ng-template>
+                                    </p-column>
+                                    <p-column field="realAmount" [sortable]="false">
+                                        <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.orderProduct.realAmount">realAmount</span>
+                                        </ng-template>
+                                    </p-column>
+                                    <p-column field="amount" [sortable]="false">
+                                        <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.orderProduct.boundaryAmount">amount</span>
+                                        </ng-template>
+                                    </p-column>
+                                    <p-column field="productRatePrice" [sortable]="false">
+                                        <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.orderProduct.productRatePrice">Share Percent</span>
+                                        </ng-template>
+                                    </p-column>
+                                    <p-column field="basePrice" [sortable]="false">
+                                        <ng-template pTemplate="header">
+                                            <span
+                                                jhiTranslate="niopdcgatewayApp.orderProduct.productPrice">productPrice</span>
+                                        </ng-template>
+                                    </p-column>
+                                    <p-column field="productCost" [sortable]="false">
+                                        <ng-template pTemplate="header">
+                                <span
+                                    jhiTranslate="niopdcgatewayApp.orderProduct.productCost">Share Percent</span>
+                                        </ng-template>
+                                    </p-column>
+                                    <p-column field="totalPrice" [sortable]="false">
+                                        <ng-template pTemplate="header">
+                                <span
+                                    jhiTranslate="niopdcgatewayApp.orderProduct.totalPrice">Share Percent</span>
+                                        </ng-template>
+                                    </p-column>
+                                </p-row>
+                            </p-headerColumnGroup>
+                            <p-column class="component"
+                                      *ngIf="(boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSIT] && customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR])|| (boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSHIP])">
+                                <ng-template let-item="rowData" pTemplate="body">
+                                <span
+                                    *ngIf="item.amountType===AmountType[AmountType.NORMAL]">باک {{item.carTank?.tankNo}}</span>
+                                    <span
+                                        *ngIf="item.amountType===AmountType[AmountType.PUMP_NOZZLE_AMOUNT] && customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR] && !((boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSIT] && selectedLocation?.beforeControl) || (boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSHIP] && selectedLocation.beforeControlTranship))">از تلمبه</span>
+                                    <span
+                                        *ngIf="item.amountType===AmountType[AmountType.PUMP_NOZZLE_AMOUNT] && customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR] && ((boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSIT] && selectedLocation?.beforeControl) || (boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSHIP] && selectedLocation.beforeControlTranship))">از تلمبه(پرداخت شده)</span>
+                                    <span
+                                        *ngIf="item.amountType===AmountType[AmountType.CAR_TANK_4_AMOUNT] && customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR] ">باک ۴</span>
+                                </ng-template>
+                            </p-column>
+                            <p-column field="realAmount"
+                                      [header]="'niopdcgatewayApp.carTank.realAmount' | translate"></p-column>
+                            <p-column field="amount"
+                                      [header]="'niopdcgatewayApp.carTank.amount' | translate"></p-column>
+                            <p-column field="productRatePrice"
+                                      [header]="'niopdcgatewayApp.orderProduct.productRatePrice' | translate">
+                                <ng-template let-item="rowData" pTemplate="body">
+                                    <span>
+                                        {{(item.productRatePrice) | separator}}
+                                    </span>
+                                </ng-template>
+                            </p-column>
+                            <p-column field="basePrice"
+                                      [header]="'niopdcgatewayApp.orderProduct.productPrice' | translate">
+                                <ng-template let-item="rowData" pTemplate="body">
+                                    <span>
+                                        {{(item.basePrice) | separator}}
+                                    </span>
+                                </ng-template>
+                            </p-column>
+                            <p-column field="productCost"
+                                      [header]="'niopdcgatewayApp.orderProduct.productCost' | translate">
+                                <ng-template let-item="rowData" pTemplate="body">
+                                    <app-order-cost-table
+                                        [costResponses]="item.costResponses"
+                                        id="field_productCost"
+                                        widthGrid="500px"
+                                        ngDefaultControl
+                                        name="productCost"
+                                    >
+                                    </app-order-cost-table>
+                                </ng-template>
+                            </p-column>
+                            <p-column field="totalPrice"
+                                      [header]="'niopdcgatewayApp.orderProduct.totalPrice' | translate">
+                                <ng-template let-item="rowData" pTemplate="body">
+                                    {{(item.totalPrice ? item.totalPrice : 0) | separator}}
+                                </ng-template>
+                            </p-column>
+                        </p-dataTable>
+                        <br>
+                        <div class="row" style="text-align: center" *ngIf="boundarySellPrice">
+                            <div class="col-md-3"
+                                 *ngIf="boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSIT]">
+                                <label jhiTranslate="niopdcgatewayApp.boundarySell.discountPrice">discountPrice</label>
+                                <br>
+                                <label>{{(boundarySellPrice.totalDiscountPrice ? boundarySellPrice.totalDiscountPrice : 0) | separator}}</label>
+                            </div>
+                            <div class="col-md-3"
+                                 *ngIf="boundarySell.orderType===OrderType[OrderType.BOUNDARY_TRANSHIP] && boundarySellPrice.tolerance">
+                                <label jhiTranslate="niopdcgatewayApp.boundarySell.tolerance">tolerance</label>
+                                <br>
+                                <label>{{(boundarySellPrice.tolerance ? boundarySellPrice.tolerance : 0) | separator}}</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label
+                                    jhiTranslate="niopdcgatewayApp.boundarySell.alongFuelAmount">alongFuelAmount</label>
+                                <br>
+                                <label>{{totalAmount | separator}}</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label
+                                    jhiTranslate="niopdcgatewayApp.boundarySell.alongFuelPrice">alongFuelPrice</label>
+                                <br>
+                                <label>{{(boundarySellPrice.alongFuelPrice ? boundarySellPrice.alongFuelPrice : 0) | separator}}</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label jhiTranslate="niopdcgatewayApp.order.price">مبلغ کل</label>
+                                <br>
+                                <label>{{(boundarySellPrice.price ? boundarySellPrice.price : 0) | separator}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- activeIndex = 2 -->
+            <div *ngIf="activeIndex === 2">
+                <div class="card" *ngIf="boundarySell">
+                    <div class="card-header">
+                        <div class="row">
+                            <h5 class="col-md-3"
+                                jhiTranslate="niopdcgatewayApp.boundarySell.home.prePayInfo">
+                                Create or edit
+                            </h5>
+                            <div class="col-md-8"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <p-table [value]="boundarySell.orderPrePays | sortBy : 'niopdcBankAccountTypeId'"
+                                 [responsive]="true">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th jhiTranslate="niopdcgatewayApp.orderPrePay.niopdcBankAccountTypeTitle"
+                                        style="width: 15%"></th>
+                                    <th jhiTranslate="niopdcgatewayApp.orderPrePay.price" style="width: 15%"></th>
+                                    <th jhiTranslate="niopdcgatewayApp.orderPrePay.remainPrice" style="width: 15%"></th>
+                                    <th jhiTranslate="niopdcgatewayApp.orderPrePay.status" style="width: 15%"></th>
+                                    <th jhiTranslate="niopdcgatewayApp.orderPrePay.receiptNumber"
+                                        style="width: 40%"></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-item style="color: black">
+                                <tr>
+                                    <td style="width: 15%">{{item.niopdcBankAccountTypeTitle}}</td>
+                                    <td style="width: 15%">{{item.price | separator}}</td>
+                                    <td style="width: 15%">{{item.remainPrice | separator}}</td>
+                                    <td style="width: 15%">
+                                        {{'niopdcgatewayApp.OrderPrePayStatus.' + item.status | translate }}
+                                    </td>
+                                    <td class="col-button" style="width: 40%">
+                                        <ul class="list-group" *ngIf="item.receiptNos && item.receiptNos.length">
+                                            <li class="list-group-item"
+                                                *ngFor="let receipt of item.receiptNos">{{receipt}}</li>
+                                        </ul>
+
+                                        <div *ngIf="!isUserPaid && item.remainPrice && item.remainPrice > 0"
+                                             class="btn-group"
+                                             ngbDropdown placement="right">
+                                            <button type="button" class="btn btn-primary"
+                                                    (click)="startBankTransactionByPrePay(item)">
+                                                <span class="fa fa-paypal"></span>
+                                                <span jhiTranslate="entity.action.pay">pay</span>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        <br>
+                        <div class="row" style="text-align: center" *ngIf="boundarySellPrice">
+                            <div class="col-md-3"
+                                 *ngIf="boundarySell.orderType === OrderType[OrderType.BOUNDARY_TRANSIT]">
+                                <label jhiTranslate="niopdcgatewayApp.boundarySell.discountPrice">discountPrice</label>
+                                <br>
+                                <label>{{(boundarySell.totalDiscountPrice ? boundarySell.totalDiscountPrice : 0) | separator}}</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label
+                                    jhiTranslate="niopdcgatewayApp.boundarySell.alongFuelPrice">alongFuelPrice</label>
+                                <br>
+                                <label>{{boundarySell.alongFuelPrice | separator}}</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label
+                                    jhiTranslate="niopdcgatewayApp.boundarySell.pumpNozzlePrice">pumpNozzlePrice</label>
+                                <br>
+                                <label>{{boundarySell.pumpNozzlePrice | separator}}</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label jhiTranslate="niopdcgatewayApp.order.price">مبلغ کل</label>
+                                <br>
+                                <label>{{(boundarySell.price ? boundarySell.price : 0) | separator}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- activeIndex = 2 -->
+            <div *ngIf="activeIndex === 3">
+                <jhi-e-payment #ePayment [requestIdentifier]="identifier"
+                               [showButton]="false" (canPay)="payEnable = $event"
+                               (status)="onPayStatus($event)"></jhi-e-payment>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <!-- delete button (2 and draft ) -->
+
+<!--        <ng-container *jhiHasAnyAuthority="['ROLE_ADMIN', 'DELETE_BOUNDARY_SELL']">-->
+<!--            <button type="button"-->
+<!--                    *ngIf="(activeIndex === 1 || activeIndex === 2) &&-->
+<!--                        boundarySell && boundarySell.id && boundarySell.status === OrderStatus[OrderStatus.DRAFT]"-->
+<!--                    class="btn btn-danger margin-left-auto" data-dismiss="modal"-->
+<!--                    [routerLink]="['/', { outlets: { popup: boundarySell.id + '/delete'} }]">-->
+<!--                <span class="fa fa-remove"></span>&nbsp;<span-->
+<!--                jhiTranslate="entity.action.delete">delete</span>-->
+<!--            </button>-->
+<!--        </ng-container>-->
+
+        <!-- cancel or exit button (all) -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;
+            <span *ngIf="!boundarySell || (boundarySell.status !== OrderStatus[OrderStatus.PAID] && boundarySell.status !== OrderStatus[OrderStatus.DE_ACTIVE])"
+                  jhiTranslate="entity.action.cancel">Cancel</span>
+            <span *ngIf="boundarySell && (boundarySell.status === OrderStatus[OrderStatus.PAID] || boundarySell.status === OrderStatus[OrderStatus.DE_ACTIVE])"
+                  jhiTranslate="entity.action.exit">Cancel</span>
+        </button>
+
+        <!-- back  button (not 0) -->
+        <button type="button"
+                *ngIf="activeIndex !== 0"
+                class="btn btn-primary"
+                data-dismiss="modal"
+                (click)="previousStep()">
+            <span class="fa fa-arrow-right"></span>&nbsp;<span
+            jhiTranslate="entity.action.back">Cancel</span>
+        </button>
+
+        <!-- save car or next step button (0) -->
+        <button
+            [disabled]="editForm.form.invalid || offender || !(existCustomer || customerCreate) || !customer.vehicleModelType || !customer.typeId || !((customer.customPlaque && customer.customPlaque.plaque) || (customer.customPlaqueTwo && customer.customPlaqueTwo.plaque)) ||
+                    (customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR] && !(customer.carTanks && customer.carTanks.length)) ||
+                    (customer.vehicleModelType === VehicleModelType[VehicleModelType.CAR] && !customer.vehicleModelId)"
+            type="button"
+            *ngIf="activeIndex === 0 && boundarySell"
+            class="btn btn-primary"
+            data-dismiss="modal"
+            (click)="saveCustomer()">
+            <span class="fa fa-arrow-left"></span>&nbsp;
+            <span *ngIf="customerCreate"
+                  jhiTranslate="entity.action.saveAndNextStep">save And Next Step</span>
+            <span *ngIf="!customerCreate" jhiTranslate="entity.action.nextStep">nextStep</span>
+        </button>
+
+        <!-- save boundary sell button (1 and not paid) -->
+        <button type="button"
+                [disabled]="editForm.form.invalid ||
+                    (customer.vehicleModelType!==VehicleModelType[VehicleModelType.CAR] &&
+                        (!boundarySell?.boundarySellItems || !boundarySell?.boundarySellItems.length) &&
+                        boundarySell?.orderType===OrderType[OrderType.BOUNDARY_TRANSIT]) || isView || isSaving"
+                *ngIf="activeIndex === 1 && boundarySell && (!boundarySell.id || !isView)"
+                class="btn btn-primary" data-dismiss="modal"
+                (click)="saveOrder(false)">
+            <span class="fa fa-save"></span>&nbsp;<span
+            jhiTranslate="entity.action.save">save</span>
+        </button>
+        <!-- save boundary sell and next step or only next step button (1) -->
+        <button type="button"
+                [disabled]="editForm.form.invalid || isSaving"
+                *ngIf="activeIndex === 1 && boundarySell &&  (paymentAccess || customer.vehicleModelType==VehicleModelType[VehicleModelType.CAR]) "
+                class="btn btn-primary" data-dismiss="modal"
+                (click)="saveOrder(true)">
+            <span *ngIf="!boundarySell.id || boundarySell.status === OrderStatus[OrderStatus.DRAFT]"
+                  class="fa fa-save"></span>&nbsp;
+            <span class="fa fa-arrow-left"></span>&nbsp;
+            <span *ngIf="!boundarySell.id || !isView"
+                  jhiTranslate="entity.action.saveAndNextStep">save And Next Step</span>
+            <span *ngIf="boundarySell.id && isView"
+                  jhiTranslate="entity.action.nextStep">save And Next Step</span>
+        </button>
+
+        <!-- start bank transaction (2 and draft) -->
+        <button type="button"
+                [disabled]="editForm.form.invalid"
+                *ngIf="(activeIndex === 2) && boundarySell && !isView"
+                class="btn btn-primary" data-dismiss="modal"
+                (click)="startBankTransaction()">
+            <span class="fa fa-paypal"></span>&nbsp;
+            <span jhiTranslate="entity.action.multiPay">save And Next Step</span>
+        </button>
+
+        <!-- pay (2 and draft) -->
+        <button type="button"
+                class="btn btn-success"
+                [disabled]="!payEnable || editForm.form.invalid "
+                (click)="ePaymentComponent.pay()"
+                *ngIf="activeIndex === 3 && boundarySell && !isUserPaid && payStatus === 'BEGIN'">
+            <span class="fa fa-paypal"></span>&nbsp;<span jhiTranslate="entity.action.pay">payment</span>
+        </button>
+
+        <!-- restart bank transaction (2 and draft) -->
+        <button type="button"
+                [disabled]="editForm.form.invalid"
+                class="btn btn-success"
+                (click)="restartBankTransaction()"
+                *ngIf="(activeIndex === 3 && boundarySell && !isUserPaid && !(payStatus === 'BEGIN' || payStatus === 'COMPLETE'))">
+            <span class="fa fa-refresh"></span>&nbsp;<span jhiTranslate="entity.action.tryAgain">payment Again</span>
+        </button>
+
+        <!-- print button (paid) -->
+        <ng-container
+            *ngIf="boundarySell && isUserPaid">
+            <button class="btn btn-success"
+                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'PRINT_BOUNDARY_CUSTOMER_REPORT']"
+                    replaceUrl="true"
+                    [routerLink]="['/','boundary-sell', orderId ,'print']" [queryParams]="{type:'CUSTOMER'}">
+                <span class="fa fa-print"></span>
+                <span jhiTranslate="entity.action.print">چاپ</span>
+            </button>
+        </ng-container>
+
+
+    </div>
+
+</form>
+<router-outlet name="popup"></router-outlet>

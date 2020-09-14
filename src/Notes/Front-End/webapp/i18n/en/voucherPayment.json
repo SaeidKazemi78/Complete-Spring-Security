@@ -1,0 +1,27 @@
+
+{
+    "niopdcgatewayApp": {
+        "voucherPayment" : {
+            "home": {
+                "title": "Voucher Payments",
+                "createLabel": "Create a new Voucher Payment",
+                "createOrEditLabel": "Create or edit a Voucher Payment"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Voucher Payment {{ id }}?"
+            },
+            "detail": {
+                "title": "Voucher Payment"
+            },
+            "locationId": "Location Id",
+            "voucherType": "Voucher Type"
+        }
+    },
+    "niopdcaccountingApp": {
+        "voucherPayment" : {
+            "created": "A new Voucher Payment is created with identifier {{ param }}",
+            "updated": "A Voucher Payment is updated with identifier {{ param }}",
+            "deleted": "A Voucher Payment is deleted with identifier {{ param }}"
+        }
+    }
+}

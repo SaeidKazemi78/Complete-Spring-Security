@@ -1,0 +1,30 @@
+{
+    "niopdcgatewayApp": {
+        "changeContainer" : {
+            "home": {
+                "title": "Change Containers",
+                "createLabel": "Create a new Change Container",
+                "createOrEditLabel": "Create or edit a Change Container"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Change Container {{ id }}?"
+            },
+            "detail": {
+                "title": "Change Container"
+            },
+            "amount": "Amount",
+            "count": "Count",
+            "changeContainerType": "Change Container Type",
+            "source": "Source",
+            "target": "Target",
+            "dayDepot": "Day Depot"
+        }
+    },
+    "niopdcaoApp": {
+        "changeContainer" : {
+            "created": "A new Change Container is created with identifier {{ param }}",
+            "updated": "A Change Container is updated with identifier {{ param }}",
+            "deleted": "A Change Container is deleted with identifier {{ param }}"
+        }
+    }
+}

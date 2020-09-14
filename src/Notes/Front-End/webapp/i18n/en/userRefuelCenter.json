@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "userRefuelCenter" : {
+            "home": {
+                "title": "User RefuelCenters",
+                "createLabel": "Create a new User RefuelCenter",
+                "createOrEditLabel": "Create or edit a User RefuelCenter"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete User RefuelCenter {{ id }}?"
+            },
+            "detail": {
+                "title": "User RefuelCenter"
+            },
+            "username": "Username",
+            "accessType": "Access Type",
+            "refuelCenter": "RefuelCenter"
+        }
+    },
+    "niopdcaoApp": {
+        "userRefuelCenter" : {
+            "created": "A new User RefuelCenter is created with identifier {{ param }}",
+            "updated": "A User RefuelCenter is updated with identifier {{ param }}",
+            "deleted": "A User RefuelCenter is deleted with identifier {{ param }}"
+        }
+    }
+}

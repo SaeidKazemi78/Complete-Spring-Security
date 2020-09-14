@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "DepotType" : {
+            "null": "",
+            "DEPOT": "عادی",
+            "REFUELING_UNIT": "واحد سوخت گیری"
+        }
+    }
+}

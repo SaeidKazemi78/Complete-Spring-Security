@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "dangerousCertificate" : {
+            "home": {
+                "title": "Dangerous Certificates",
+                "createLabel": "Create a new Dangerous Certificate",
+                "createOrEditLabel": "Create or edit a Dangerous Certificate"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Dangerous Certificate {{ id }}?"
+            },
+            "detail": {
+                "title": "Dangerous Certificate"
+            },
+            "cardNumber": "Card Number",
+            "cardExpireDate": "Card Expire Date",
+            "type": "Type",
+            "driver": "Driver",
+            "depot": "Depot"
+        }
+    },
+    "niopdcbaseApp": {
+        "dangerousCertificate" : {
+            "created": "A new Dangerous Certificate is created with identifier {{ param }}",
+            "updated": "A Dangerous Certificate is updated with identifier {{ param }}",
+            "deleted": "A Dangerous Certificate is deleted with identifier {{ param }}"
+        }
+    }
+}

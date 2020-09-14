@@ -1,0 +1,219 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="refuelCenter.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.refuelCenter.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="refuelCenter.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.refuelCenter.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.refuelCenter.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.refuelCenter.persianTitle"
+                           for="field_persianTitle">Persian Title</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="persianTitle"
+                           id="field_persianTitle"
+                           [(ngModel)]="refuelCenter.persianTitle" required minlength="3" maxlength="42"/>
+                    <div
+                        [hidden]="!(editForm.controls.persianTitle?.dirty && editForm.controls.persianTitle?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.persianTitle?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.persianTitle?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.persianTitle?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 42 }">
+                            This field cannot be longer than 42 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.refuelCenter.englishTitle"
+                           for="field_englishTitle">English Title</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="englishTitle"
+                           id="field_englishTitle"
+                           [(ngModel)]="refuelCenter.englishTitle" required minlength="3" maxlength="42"/>
+                    <div
+                        [hidden]="!(editForm.controls.englishTitle?.dirty && editForm.controls.englishTitle?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.englishTitle?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.englishTitle?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.englishTitle?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 42 }">
+                            This field cannot be longer than 42 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.refuelCenter.code"
+                           for="field_code">Code</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="code" id="field_code"
+                           [(ngModel)]="refuelCenter.code" [numeric]="{min:0,max:9999} " required minlength="3"
+                           maxlength="4"/>
+                    <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 4 }">
+                            This field cannot be longer than 4 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="!foreignRefuelCenter">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.refuelCenter.airport" for="field_airport">Target
+                        RefuelCenters</label>
+                    <jhi-airport-selector class="form-control" id="field_airport"
+                                          [widthGrid]="'500px'"
+                                          [multiSelect]="true"
+                                          [disabled]="isView"
+                                          [selectObject]="true" required
+                                          [(ngModel)]="refuelCenter.airports"
+                                          [ngModelOptions]="{standalone: true}"
+
+                    ></jhi-airport-selector>
+                </div>
+                <div
+                    [hidden]="!(editForm.controls.targetRefuelCenters?.dirty && editForm.controls.targetRefuelCenters?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.targetRefuelCenters?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.refuelCenter.locationId"
+                           for="field_locationId">Location Id</label>
+                    <input-location-selector [disabled]="isView" class="form-control"
+                                             [(ngModel)]="refuelCenter.locationId"
+                                             [oneSelection]="true"
+                                             id="field_locationId"
+                                             name="location"
+                                             [selectOfLevel]="[0,2]"
+                                             [selectByPriority]="true"
+                                             [idSelector]="true"
+                    ></input-location-selector>
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="!foreignRefuelCenter">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.refuelCenter.transferTypes"
+                           for="field_transferType">Persian Title</label>
+                    <p-multiSelect [disabled]="isView" class="form-control" id="field_transferType"
+                                   [options]="transfertypes"
+                                   name="transferType" required
+                                   (onChange)="onChangeTransferType($event)"
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                   [(ngModel)]="transferTypeSelected"
+                                   [ngModelOptions]="{standalone: true}"
+                    ></p-multiSelect>
+                </div>
+                <div [hidden]="!(editForm.controls.transferType?.dirty && editForm.controls.transferType?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.transferType?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.refuelCenter.wayBillStartNumber"
+                           for="field_wayBillStartNumber">Way Bill Start Number</label>
+                    <input [disabled]="isView || disableWaybill"
+                           (input)="changeWayBillStartNumber($event.target.value)"
+                           type="number"
+                           [numeric]="{min:0}"
+                           class="form-control" name="wayBillStartNumber" id="field_wayBillStartNumber"
+                           [(ngModel)]="refuelCenter.wayBillStartNumber" required/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.refuelCenter.wayBillEndNumber"
+                           for="field_wayBillEndNumber">Way Bill End Number</label>
+                    <input [disabled]="isView" class="form-control" name="wayBillEndNumber" id="field_wayBillEndNumber"
+                           type="number"
+                           [numeric]="(refuelCenter.wayBillStartNumber)?{min:refuelCenter.wayBillStartNumber}:{min:0}"
+                           [(ngModel)]="refuelCenter.wayBillEndNumber" required/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.refuelCenter.wayBillCurrentNumber"
+                           for="field_wayBillCurrentNumber">Way Bill Current Number</label>
+                    <input [disabled]="true" class="form-control" name="wayBillCurrentNumber"
+                           id="field_wayBillCurrentNumber"
+                           type="number"
+                           [(ngModel)]="refuelCenter.wayBillCurrentNumber" required/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.refuelCenter.maxDifferenceAmount"
+                           for="field_maxDifferenceAmount">Way Bill Current Number</label>
+                    <input [disabled]="isView" class="form-control" name="maxDifferenceAmount"
+                           id="field_maxDifferenceAmount"
+                           type="number"
+                           [(ngModel)]="refuelCenter.maxDifferenceAmount" required/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancelShort">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.saveShort">Save</span>
+        </button>
+    </div>
+</form>

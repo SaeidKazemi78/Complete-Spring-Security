@@ -1,0 +1,47 @@
+{
+    "niopdcgatewayApp": {
+        "boundaryReport": {
+            "home": {
+                "title": "شرکت های هواپیمایی"
+            },
+            "locationName": "نام ناحیه",
+            "plaque": "پلاک",
+            "plaqueTow": "پلاک دوم",
+            "amount": "مقدار",
+            "fuelAmount": "میزان سوخت همراه",
+            "fuelPrice": "مبلغ سوخت همراه(ریال)",
+            "carRfId": "شماره تگ",
+            "countTag": "تعداد تگ",
+            "orderNo": "شماره حواله",
+            "registerDate": "تاریخ",
+            "login": "نام کاربری",
+            "lastModifiedBy": "آخرین ویرایش توسط ",
+            "lastModifiedDate": "تاریخ آخرین ویرایش",
+            "revtype": "تعداد ویرایش",
+            "price": "مبلغ(ریال)",
+            "count": "تعداد",
+            "bakProductRatePrice": "نرخ باک(ریال)",
+            "bakAmount": "مقدار باک",
+            "bakPrice": "مجموع مبلغ باک(ریال)",
+            "bakFourProductRatePrice": "نرخ باک ۴ (ریال)",
+            "bakFourAmount": "مقدار باک 4",
+            "bakFourPrice": "مبلغ باک 4 (ریال)",
+            "pumpProductRatePrice": "نرخ از تلمبه(ریال)",
+            "pumpAmount": "مقدار از تلمبه",
+            "pumpPrice": "مبلغ از تلمبه(ریال)",
+            "totalPrice": "مبلغ کل(ریال)",
+            "currentAmount": "تعداد فعلی",
+            "giveToCar": "مقدار تحویلی به وسایل نقلیه",
+            "buyPrice": "مبلغ خرید(ریال)",
+            "buyDate": "تاریخ خرید",
+            "previousCarRfIds":"تگ های قبلی",
+            "createdDate":"تاریخ ایجاد",
+            "registerTag": "تگ های ثبت شده",
+            "activeTag":"تگ های فعال",
+            "assignTag": "تگ های انتصاب داده شده",
+            "newTag": "تگ های جدید",
+            "missingTag":  "تگ های مفقودی",
+            "defectiveTag": "تگ های معیوب"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "productRateDifferencePayment" : {
+            "home": {
+                "title": "Product Rate Difference Payments",
+                "createLabel": "Create a new Product Rate Difference Payment",
+                "createOrEditLabel": "Create or edit a Product Rate Difference Payment"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Product Rate Difference Payment {{ id }}?"
+            },
+            "detail": {
+                "title": "Product Rate Difference Payment"
+            },
+            "paymentId": "Payment Id",
+            "price": "Price",
+            "data": "Data",
+            "productRateDifference": "Product Rate Difference"
+        }
+    },
+    "niopdcaccountingApp": {
+        "productRateDifferencePayment" : {
+            "created": "A new Product Rate Difference Payment is created with identifier {{ param }}",
+            "updated": "A Product Rate Difference Payment is updated with identifier {{ param }}",
+            "deleted": "A Product Rate Difference Payment is deleted with identifier {{ param }}"
+        }
+    }
+}

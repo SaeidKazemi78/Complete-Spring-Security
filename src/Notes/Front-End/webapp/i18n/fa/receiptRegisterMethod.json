@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "ReceiptRegisterMethod" : {
+            "null": "",
+            "BRANCH": "شعبه",
+            "EPAYMENT": "اينترنتي"
+        }
+    }
+}

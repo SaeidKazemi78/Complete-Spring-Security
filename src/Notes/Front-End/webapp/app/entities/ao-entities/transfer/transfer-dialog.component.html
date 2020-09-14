@@ -1,0 +1,375 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="transfer.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.transfer.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="transfer.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.transfer.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.transfer.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.transfer.registerDate"
+                           for="field_registerDate">Register Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00"
+                                            id="field_registerDate"
+                                            class="form-control"
+                                            name="registerDate" [(ngModel)]="transfer.registerDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div [hidden]="!(editForm.controls.registerDate?.dirty && editForm.controls.registerDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.registerDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.registerDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.transfer.sixtyAmount"
+                           for="field_sixtyAmount">Sixty Degree</label>
+                    <input [disabled]="true" type="number" class="form-control" name="sixtyAmount"
+                           [numeric]="{min:0}"
+                           id="field_sixtyAmount"
+                           [(ngModel)]="transfer.sixtyAmount" required/>
+                    <div [hidden]="!(editForm.controls.sixtyAmount?.dirty && editForm.controls.sixtyAmount?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.sixtyAmount?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.sixtyAmount?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <label class="form-control-label"
+                       for="field_sixtyAmount">محاسبه</label>
+
+                <button [disabled]="isView" type="button" (click)="calculateQuantity60()" class="btn btn-primary">
+                    <span class="fa fa-calculator"></span>
+                </button>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.transfer.natureAmount"
+                           for="field_natureAmount">Nature Amount</label>
+                    <input type="number" class="form-control" name="natureAmount" id="field_natureAmount"
+                           [disabled]="isView"
+                           (ngModelChange)="onChangeAmount($event)"
+                           [(ngModel)]="transfer.natureAmount"
+                           required/>
+                    <div [hidden]="!(editForm.controls.natureAmount?.dirty && editForm.controls.natureAmount?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.natureAmount?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.natureAmount?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" *ngIf="transferType && transferType.transferFrom !== OilTankType[OilTankType.CONTAMINATED]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.transfer.specialWeight"
+                           for="field_specialWeight">Special Weight</label>
+                    <input [disabled]="isView" pattern="(^(?:0)\.[0-9]+$|(1)|(0))" class="form-control"
+                           name="specialWeight"
+                           id="field_specialWeight"
+                           [(ngModel)]="transfer.specialWeight"
+                           required/>
+                    <div
+                        [hidden]="!(editForm.controls.specialWeight?.dirty && editForm.controls.specialWeight?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.specialWeight?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.specialWeight?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.transfer.environmentTemperature"
+                           for="field_environmentTemperature">Environment Temperature</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="environmentTemperature"
+                           id="field_environmentTemperature"
+                           [(ngModel)]="transfer.environmentTemperature" required/>
+                    <div
+                        [hidden]="!(editForm.controls.environmentTemperature?.dirty && editForm.controls.environmentTemperature?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.environmentTemperature?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.environmentTemperature?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.transfer.productTemperature"
+                           for="field_productTemperature">Product Temperature</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="productTemperature"
+                           id="field_productTemperature"
+                           [(ngModel)]="transfer.productTemperature" required/>
+                    <div
+                        [hidden]="!(editForm.controls.productTemperature?.dirty && editForm.controls.productTemperature?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.productTemperature?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.productTemperature?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.transfer.transferType"
+                           for="field_transferType">Transfer Type</label>
+                    <select [disabled]="isView" class="form-control" id="field_transferType" name="transferType"
+                            [(ngModel)]="transfer.transferTypeId"
+                            (ngModelChange)="onChangeTransferType($event)"
+                            required>
+                        <option *ngIf="!editForm.value.transferType" [ngValue]="null" selected></option>
+                        <option [ngValue]="transferTypeOption.id"
+                                *ngFor="let transferTypeOption of transfertypes; trackBy: trackTransferTypeById">
+                            {{transferTypeOption.title}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.transferType?.dirty && editForm.controls.transferType?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.transferType?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.transfer.fromOilTank"
+                           for="field_fromOilTank">From Oil Tank</label>
+                    <input [disabled]="true" class="form-control" id="field_fromOilTank" name="fromOilTank"
+                           [(ngModel)]="fromTitle"/>
+                    <!--<select [disabled]="true" class="form-control" id="field_fromOilTank" name="fromOilTank"
+                            [(ngModel)]="transfer.fromOilTankId"
+                            required>
+                        <option *ngIf="!editForm.value.fromOilTank" [ngValue]="null" selected></option>
+                        <option [ngValue]="oilTankOption.id"
+                                *ngFor="let oilTankOption of fromOilTanks; trackBy: trackOilTankById">
+                            {{oilTankOption.title}}
+                        </option>
+                    </select>-->
+                </div>
+                <div [hidden]="!(editForm.controls.fromOilTank?.dirty && editForm.controls.fromOilTank?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.fromOilTank?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.transfer.toOilTank"
+                           for="field_toOilTank">To Oil Tank</label>
+                    <select [disabled]="isView||transfer.transferTypeId===null||disableTarget" class="form-control"
+                            id="field_toOilTank"
+                            name="toOilTank"
+                            [(ngModel)]="transfer.toDayDepotId" (ngModelChange)="onChangeTargetOilTank($event)">
+                        <option value=""></option>
+                        <option *ngFor="let dayDepotOption of toDayDepots; trackBy: trackOilTankById"
+                                [ngValue]="dayDepotOption.id">
+                            {{dayDepotOption.oilTankTitle}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.transfer.transferByMetre"
+                           for="field_transferByMetre">Transfer By Metre</label>
+                    <input [disabled]="isView||activeMetre===null||(transfer.toDayDepotId===null&&!disableTarget)"
+                           type="checkbox"
+                           class="form-control"
+                           name="transferByMetre"
+                           (ngModelChange)="onChangeTransferByMetre($event)"
+                           id="field_transferByMetre"
+                           [(ngModel)]="transfer.transferByMetre"/>
+                    <div
+                        [hidden]="!(editForm.controls.transferByMetre?.dirty && editForm.controls.transferByMetre?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.transferByMetre?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div *ngIf="transfer.transferByMetre" class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.transfer.metre" for="field_metre">Metre</label>
+                    <select [disabled]="isView" class="form-control" id="field_metre" name="metre"
+                            [(ngModel)]="transfer.metreId"
+                            required>
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="metreOption.id" *ngFor="let metreOption of metres; trackBy: trackMetreById">
+                            {{metreOption.title}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div *ngIf="transfer.transferByMetre" class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metreLog.startMeter"
+                           for="field_startMeter">Start Meter</label>
+                    <input type="number" class="form-control" name="startMeter" id="field_startMeter"
+                           [disabled]="true"
+                           [(ngModel)]="transfer.startMeter" required/>
+                    <div [hidden]="!(editForm.controls.startMeter?.dirty && editForm.controls.startMeter?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startMeter?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startMeter?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="transfer.transferByMetre" class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metreLog.endMeter"
+                           for="field_endMeter">End Meter</label>
+                    <input type="number" class="form-control" name="endMeter" id="field_endMeter"
+                           [disabled]="true"
+                           [(ngModel)]="transfer.endMeter" required/>
+                    <div [hidden]="!(editForm.controls.endMeter?.dirty && editForm.controls.endMeter?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.endMeter?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.endMeter?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="transfer.transferByMetre" class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metreLog.amount"
+                           for="field_amount">Amount</label>
+                    <input [disabled]="true" type="number" class="form-control" name="amount" id="field_amount"
+                           [numeric]="{min:0,max:(metre)?maxEndMetreNumber:0}"
+                           [(ngModel)]="transfer.natureAmount" required/>
+                    <div [hidden]="!(editForm.controls.amount?.dirty && editForm.controls.amount?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.amount?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.amount?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.transfer.description"
+                           for="field_description">Description</label>
+                    <textarea [disabled]="isView" type="text" class="form-control" name="description"
+                              id="field_description"
+                              [(ngModel)]="transfer.description" minlength="3" maxlength="200">
+                    </textarea>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.description?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.description?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                            This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancelShort">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.saveShort">Save</span>
+        </button>
+        <button *ngIf="!isView && !transfer.id" type="button" (click)="save(true)"
+                [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.saveAndNextShort">Save</span>
+        </button>
+
+    </div>
+</form>

@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "NewsType" : {
+            "null": "",
+            "ALERT": "ALERT",
+            "NEWS": "NEWS",
+            "EVENT": "EVENT",
+            "INFO": "INFO"
+        }
+    }
+}

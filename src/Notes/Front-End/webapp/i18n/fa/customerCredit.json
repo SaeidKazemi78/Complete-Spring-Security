@@ -1,0 +1,89 @@
+{
+    "niopdcgatewayApp": {
+        "customerCredit": {
+            "home": {
+                "homeTitle": "خانه",
+                "title": "سهمیه/اعتبار مشتری",
+                "credit": "اعتبار",
+                "quota": "سهمیه",
+                "customerTitle": "مشتری",
+                "createQuotaLabel": "ایجاد سهمیه مشتری",
+                "createCreditLabel": "ایجاد اعتبار مشتری",
+                "editCreditLabel": "ویرایش اعتبار مشتری",
+                "editQuotaLabel": "ویرایش سهمیه مشتری",
+                "viewQuotaLabel": "نمایش سهمیه مشتری",
+                "viewCreditLabel": "نمایش اعتبار مشتری"
+            },
+            "delete": {
+                "question": "آیا برای حذف این سهمیه/اعتبار مشتری مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "سهمیه/اعتبار مشتری"
+            },
+            "startDate": "تاریخ شروع",
+            "finishDate": "تاریخ پایان",
+            "exportationDate": "تاریخ صدور",
+            "creditNumber": "شماره اعتبار",
+            "currentCredit": "اعتبار فعلی",
+            "credit": "اعتبار",
+            "currentAmount": "مقدار فعلی",
+            "amount": "مقدار",
+            "type": "نوع",
+            "use": "استفاده",
+            "currencyId": "واحد پولی",
+            "currencyRateGroupId": "گروه نرخ واحد پولی",
+            "product": "فرآورده",
+            "sellContract": "شماره قرارداد",
+            "parentBuyType": "نوع",
+            "person": "صاحب امتیاز",
+            "minCredit": "حداقل اعتبار",
+            "minAmount": "حداقل مقدار",
+            "customer": "مشتری",
+            "hasAllowedDays": "فقط روزهای مجاز",
+            "day": "روز",
+            "description": "توضیحات",
+            "active": "فعال",
+            "sellContractNo": "شماره قرارداد",
+            "archive": "آرشیو"
+        },
+        "personCredit": {
+            "home": {
+                "homeTitle": "خانه",
+                "title": "سهمیه/اعتبار صاحب امتیاز",
+                "personTitle": "صاحب امتیاز",
+                "createLabel": "ایجاد سهمیه/اعتبار صاحب امتیاز",
+                "createOrEditLabel": "ویرایش سهمیه/اعتبار صاحب امتیاز",
+                "view": "نمایش سهمیه/اعتبار صاحب امتیاز"
+            },
+            "delete": {
+                "question": "آیا برای حذف این سهمیه/اعتبار صاحب امتیاز مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "سهمیه/اعتبار صاحب امتیاز"
+            }
+        },
+        "sellContractProductCredit": {
+            "home": {
+                "homeTitle": "خانه",
+                "title": "سهمیه/اعتبار فرآورده قرارداد",
+                "sellContractTitle": "قرارداد",
+                "sellContractProductTitle": "فرآورده قرارداد",
+                "createLabel": "ایجاد سهمیه/اعتبار فرآورده قرارداد",
+                "createOrEditLabel": "ویرایش سهمیه/اعتبار فرآورده قرارداد",
+                "view": "نمایش سهمیه/اعتبار فرآورده قرارداد"
+            }
+        }
+    },
+    "niopdcbaseApp": {
+        "customerCredit": {
+            "created": "سهمیه/اعتبار مشتری با موفقیت  ایجاد شد.",
+            "updated": "سهمیه/اعتبار مشتری با موفقیت  ویرایش شد.",
+            "deleted": "سهمیه/اعتبار مشتری با موفقیت  حذف شد."
+        },
+        "personCredit": {
+            "created": "سهمیه/اعتبار صاحب امتیاز با موفقیت  ایجاد شد.",
+            "updated": "سهمیه/اعتبار صاحب امتیاز با موفقیت  ویرایش شد.",
+            "deleted": "سهمیه/اعتبار صاحب امتیاز با موفقیت  حذف شد."
+        }
+    }
+}

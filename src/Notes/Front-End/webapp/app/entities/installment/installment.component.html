@@ -1,0 +1,152 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <jhi-alert-error></jhi-alert-error>
+
+    <br/>
+
+    <p-menubar [model]="items">
+        <ng-container *jhiHasAnyAuthority="['ROLE_ADMIN', 'LOAN_INSTALLMENT_PAYMENT']">
+            <button
+                pButton class="ui-button-raised ui-button-success" *ngIf="loanDetail && !loan.completed"
+                [label]="'niopdcgatewayApp.installment.payment' | translate" (click)="pay()"
+                icon="fa fa-credit-card"></button>
+        </ng-container>
+    </p-menubar>
+
+    <div id="printLayout">
+        <div class="card" *ngIf="loan">
+            <div class="component">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.loan.customerId">Customer
+                                Id</label>
+                            <div class="form-control">{{loan.customerName}}</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.loan.loanType">Loan
+                                Type</label>
+                            <div class="form-control">{{loan.loanTypeTitle}}</div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.loan.amount">Amount</label>
+                            <div class="form-control">{{loan.amount}}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.loan.installmentCount">Installment
+                                Count</label>
+                            <div class="form-control">{{loan.installmentCount}}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.loan.firstPaymentDate">First
+                                Payment Date</label>
+                            <div class="form-control">{{loan.firstPaymentDate | dateJalali}}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.loan.amountMonth">amountMonth</label>
+                            <div class="form-control">{{getInstallmentPrice()}}</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.loan.penaltyDay"
+                            >Penalty Day</label>
+                            <div class="form-control">{{loan.penaltyDay?loan.penaltyDay:0}}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.loan.description">Description</label>
+                            <div class="form-control">{{loan.description?loan.description:'_'}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p-dataTable #dt *ngIf="loan" [value]="loanDetail.installments"
+                     [lazy]="false"
+                     [paginator]="false" [responsive]="true" [stacked]="false"
+                     [totalRecords]="totalItems"
+                     [emptyMessage]="'global.messages.info.emptyRecords' | translate">
+            <p-headerColumnGroup>
+                <p-row>
+                    <p-column field="price">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.installment.price">Price</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="penaltyPrice">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.installment.penaltyPrice">penaltyPrice</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="remainingPrice">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.installment.remainingPrice">payPrice</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="dates">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.installment.date">Data</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="dueDate">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.installment.dueDate">dueDate</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="status">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.installment.status">status</span>
+                        </ng-template>
+                    </p-column>
+                </p-row>
+            </p-headerColumnGroup>
+
+            <p-column field="price" [header]="'niopdcgatewayApp.installment.price' | translate"></p-column>
+            <p-column field="penaltyPrice"
+                      [header]="'niopdcgatewayApp.installment.penaltyPrice' | translate"></p-column>
+            <p-column field="remainingPrice" [header]="'niopdcgatewayApp.installment.remainingPrice' | translate">
+                <ng-template let-item="rowData" pTemplate="body">
+                    <span>{{item.remainingPrice + item.remainingPenaltyPrice}}</span>
+                </ng-template>
+            </p-column>
+            <p-column field="dates" [header]="'niopdcgatewayApp.installment.date' | translate">
+                <ng-template let-item="rowData" pTemplate="body">
+                    <ul class="list-group">
+                        <li *ngFor="let payment of item.payments"
+                            class="list-group-item">{{payment.date | dateJalali}}
+                            <span class="badge"
+                                  [ngClass]="{'badge-success':!payment.penalty,'badge-warning':payment.penalty}">
+                            ({{payment.price}})</span>
+                        </li>
+                    </ul>
+                </ng-template>
+            </p-column>
+            <p-column field="dueDate" [header]="'niopdcgatewayApp.installment.dueDate' | translate">
+                <ng-template let-item="rowData" pTemplate="body">
+                    <span>{{item.dueData | dateJalali}}</span>
+                </ng-template>
+            </p-column>
+            <p-column field="status" [header]="'niopdcgatewayApp.installment.status' | translate">
+                <ng-template let-item="rowData" pTemplate="body">
+                    <span>{{('niopdcgatewayApp.installmentStatus.' + item.status) | translate}}</span>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+    </div>
+</div>

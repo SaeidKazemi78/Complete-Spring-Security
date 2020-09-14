@@ -1,0 +1,34 @@
+{
+    "niopdcgatewayApp": {
+        "transferType": {
+            "home": {
+                "homeTitle": "خانه",
+                "title": "انواع انتقال",
+                "createLabel": "ایجاد نوع عملیات",
+                "createOrEditLabel": "ویرایش نوع عملیات",
+                "view": "نمایش نوع عملیات",
+                "search": "جستجو"
+            },
+            "delete": {
+                "question": "آیا برای حذف نوع عملیات {{param}} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "نوع عملیات"
+            },
+            "transferFrom": "انتقال از نوع مخزن",
+            "transferTo": "به نوع مخزن",
+            "title": "عنوان",
+            "transferToHimself": "انتقال به خود",
+            "transferToHimselfTrue": "انتقال به خود",
+            "transferToHimselfFalse": "انتقال به غیر",
+            "activeMetre": "میتر فعال"
+        }
+    },
+    "niopdcaoApp": {
+        "transferType": {
+            "created": "نوع انتقال با موفقیت ایجاد شد.",
+            "updated": "نوع انتقال با موفقیت ویرایش شد.",
+            "deleted": "نوع انتقال با موفقیت حذف شد."
+        }
+    }
+}

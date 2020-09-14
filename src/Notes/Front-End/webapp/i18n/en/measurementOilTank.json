@@ -1,0 +1,33 @@
+
+{
+    "niopdcgatewayApp": {
+        "measurementOilTank" : {
+            "home": {
+                "title": "Measurement Oil Tanks",
+                "createLabel": "Create a new Measurement Oil Tank",
+                "createOrEditLabel": "Create or edit a Measurement Oil Tank"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Measurement Oil Tank {{ id }}?"
+            },
+            "detail": {
+                "title": "Measurement Oil Tank"
+            },
+            "amount": "Amount",
+            "amountDeep": "Amount Deep",
+            "sixtyAmount": "Sixty Amount",
+            "specialWeight": "Special Weight",
+            "environmentTemperature": "Environment Temperature",
+            "productTemperature": "Product Temperature",
+            "registerDate": "Register Date",
+            "oilTank": "Oil Tank"
+        }
+    },
+    "niopdcaoApp": {
+        "measurementOilTank" : {
+            "created": "A new Measurement Oil Tank is created with identifier {{ param }}",
+            "updated": "A Measurement Oil Tank is updated with identifier {{ param }}",
+            "deleted": "A Measurement Oil Tank is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+  "niopdcgatewayApp": {
+    "userAccConfig": {
+      "home": {
+        "title": "تنظیمات Acc"
+      },
+      "financialYear": "سال مالی",
+      "accUsername": "نام کاربری Acc",
+      "tempDocNumber": "شماره موقت جاری"
+    }
+  },
+  "niopdcaccountingApp": {
+    "userAccConfig": {
+      "created": "اطلاعات با موفقیت بروز شد.",
+      "updated": "اطلاعات با موفقیت بروز شد."
+    }
+  }
+}

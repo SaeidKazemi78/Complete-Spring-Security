@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "exportPi" : {
+            "home": {
+                "title": "Export Pis",
+                "createLabel": "Create a new Export Pi",
+                "createOrEditLabel": "Create or edit a Export Pi"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Export Pi {{ id }}?"
+            },
+            "detail": {
+                "title": "Export Pi"
+            },
+            "registerDate": "Register Date",
+            "piNumber": "Pi Number",
+            "price": "Price",
+            "exportLetter": "Export Letter",
+            "payments": "Payments"
+        }
+    },
+    "niopdcbaseApp": {
+        "exportPi" : {
+            "created": "A new Export Pi is created with identifier {{ param }}",
+            "updated": "A Export Pi is updated with identifier {{ param }}",
+            "deleted": "A Export Pi is deleted with identifier {{ param }}"
+        }
+    }
+}

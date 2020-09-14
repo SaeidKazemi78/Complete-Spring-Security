@@ -1,0 +1,24 @@
+{
+    "niopdcgatewayApp": {
+        "aircraftRefuelingRecord": {
+            "home": {
+                "title": "سوابق سوختگيري هواپيماها"
+            },
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "receiptNo": "شماره رسید",
+            "dateTime": "تاریخ",
+            "personName": "صاحب امتیاز",
+            "airportName": "مرکز سوختگیری",
+            "customerName": "هواپیما",
+            "amount": "مقدار",
+            "productCode": "کد فرآورده",
+            "productTitle": "نام فرآورده",
+            "type": "نوع انتقال",
+            "currencyTitle": "واحد پولی",
+            "costAmount": "هزینه",
+            "userName": "نام کاربر"
+        }
+    }
+}
+

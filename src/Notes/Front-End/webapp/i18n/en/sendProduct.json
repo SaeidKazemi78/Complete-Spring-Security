@@ -1,0 +1,43 @@
+
+{
+    "niopdcgatewayApp": {
+        "sendProduct" : {
+            "home": {
+                "title": "Send Products",
+                "createLabel": "Create a new Send Product",
+                "createOrEditLabel": "Create or edit a Send Product"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Send Product {{ id }}?"
+            },
+            "detail": {
+                "title": "Send Product"
+            },
+            "sendDate": "Send Date",
+            "receivedDate": "Received Date",
+            "waybillNumber": "Waybill Number",
+            "receivedNatureAmount": "Received Nature Amount",
+            "receivedSixtyAmount": "Received Sixty Amount",
+            "receivedSpecialWeight": "Received Special Weight",
+            "receivedEnvironmentTemperature": "Received Environment Temperature",
+            "receivedProductTemperature": "Received Product Temperature",
+            "sendNatureAmount": "Send Nature Amount",
+            "sendSixtyAmount": "Send Sixty Amount",
+            "sendSpecialWeight": "Send Special Weight",
+            "sendEnvironmentTemperature": "Send Environment Temperature",
+            "sendProductTemperature": "Send Product Temperature",
+            "inventoryId": "Inventory Id",
+            "driverName": "Driver Name",
+            "vehicleId": "Vehicle Id",
+            "dayDepot": "Day Depot",
+            "oilTank": "Oil Tank"
+        }
+    },
+    "niopdcaoApp": {
+        "sendProduct" : {
+            "created": "A new Send Product is created with identifier {{ param }}",
+            "updated": "A Send Product is updated with identifier {{ param }}",
+            "deleted": "A Send Product is deleted with identifier {{ param }}"
+        }
+    }
+}

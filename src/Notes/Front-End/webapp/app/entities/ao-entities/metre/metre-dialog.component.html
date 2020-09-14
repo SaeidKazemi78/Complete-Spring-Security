@@ -1,0 +1,102 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="metre.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.metre.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="metre.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.metre.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.metre.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metre.title" for="field_title">Title</label>
+                    <input [disabled]="isView" class="form-control" name="title" id="field_title"
+                           [(ngModel)]="metre.title" required/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metre.amount" for="field_amount">Amount</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="amount" id="field_amount"
+                           [numeric]="{min:0}"
+                           (input)="onChangeValue($event)"
+                           [(ngModel)]="metre.amount" required/>
+                    <div [hidden]="!(editForm.controls.amount?.dirty && editForm.controls.amount?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.amount?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.amount?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metre.maxMetre"
+                           for="field_maxMetre">Max Metre</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="maxMetre" id="field_maxMetre"
+                           [numeric]="{min:0}"
+                           (input)="onChangeValue($event)"
+                           [(ngModel)]="metre.maxMetre" required/>
+                    <div [hidden]="!(editForm.controls.maxMetre?.dirty && editForm.controls.maxMetre?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.maxMetre?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.maxMetre?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metre.active" for="field_active">Active</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="active" id="field_active"
+                           [(ngModel)]="metre.active"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" *ngIf="!isView"
+                [disabled]="editForm.form.invalid || isSaving || disableSave"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "MethodType" : {
+            "null": "",
+            "POST": "ایجاد",
+            "GET": "واکشی",
+            "DELETE": "حذف",
+            "PUT": "ویرایش"
+        }
+    }
+}

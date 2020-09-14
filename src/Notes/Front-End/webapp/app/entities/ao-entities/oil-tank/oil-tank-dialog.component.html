@@ -1,0 +1,301 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="oilTank.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.oilTank.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="oilTank.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.oilTank.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.oilTank.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTank.title"
+                           for="field_title">Title</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="title" id="field_title"
+                           [(ngModel)]="oilTank.title" required minlength="3" maxlength="40"/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 40 }">
+                            This field cannot be longer than 40 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTank.code"
+                           for="field_code">Code</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="code" id="field_code"
+                           pattern="^[0-9]{4}$"
+                           [(ngModel)]="oilTank.code" required minlength="4" maxlength="4"/>
+                    <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 4 }">
+                            This field is required to be at least 4 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 4 }">
+                            This field cannot be longer than 4 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTank.refuelCenter"
+                           for="field_refuelCenter">RefuelCenter</label>
+                    <select [disabled]="isView" class="form-control" id="field_refuelCenter" name="refuelCenter"
+                            [(ngModel)]="oilTank.refuelCenterId"
+                            required>
+                        <option *ngIf="!editForm.value.refuelCenter" [ngValue]="null" selected></option>
+                        <option [ngValue]="refuelCenterOption.id"
+                                *ngFor="let refuelCenterOption of refuelCenters; trackBy: trackRefuelCenterById">
+                            {{refuelCenterOption.persianTitle}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.refuelCenter?.dirty && editForm.controls.refuelCenter?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.refuelCenter?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTank.oilTankType"
+                           for="field_oilTankType">Oil Tank Type</label>
+                    <select [disabled]="isView || useOilTankIdDayDepot || !oilTank.refuelCenterId" class="form-control"
+                            name="oilTankType"
+                            (ngModelChange)="oilTankChange($event)"
+                            [(ngModel)]="oilTank.oilTankType" id="field_oilTankType" required>
+                        <option value="MAIN">{{'niopdcgatewayApp.oilTankType.MAIN' | translate}}</option>
+                        <option value="CONTAMINATED">{{'niopdcgatewayApp.oilTankType.CONTAMINATED' | translate}}
+                        </option>
+                        <option value="SERVICE_TANK">{{'niopdcgatewayApp.oilTankType.SERVICE_TANK' | translate}}
+                        </option>
+                        <option value="UNIT">{{'niopdcgatewayApp.oilTankType.UNIT' | translate}}</option>
+                        <option value="PLATFORM">{{'niopdcgatewayApp.oilTankType.PLATFORM' | translate}}</option>
+                        <option value="WATER_METHANOL">{{'niopdcgatewayApp.oilTankType.WATER_METHANOL' | translate}}
+                        </option>
+                        <option value="EARTH">{{'niopdcgatewayApp.oilTankType.EARTH' | translate}}</option>
+                        <option value="BASE_PRODUCT">{{'niopdcgatewayApp.oilTankType.BASE_PRODUCT' | translate}}
+                        </option>
+                        <option value="RECYCLE">{{'niopdcgatewayApp.oilTankType.RECYCLE' | translate}}
+                        </option>
+                        <option value="PIPE">{{'niopdcgatewayApp.oilTankType.PIPE' | translate}}
+                        </option>
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.oilTankType?.dirty && editForm.controls.oilTankType?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.oilTankType?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3" *ngIf="oilTank.oilTankType === OilTankType[OilTankType.PIPE] ||
+oilTank.oilTankType === OilTankType[OilTankType.PLATFORM]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.dayDepot.oilTank"
+                           for="field_oilTank">Oil
+                        Tank</label>
+                    <select class="form-control"
+                            id="field_oilTank"
+                            (ngModelChange)="parentOilTankChange($event)"
+                            name="oilTank"
+                            [(ngModel)]="oilTank.parentId">
+                        <option [ngValue]="null" selected></option>
+                        <option [ngValue]="oilTankOption.id"
+                                *ngFor="let oilTankOption of oilTanks">
+                            {{oilTankOption.title}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTank.productId"
+                           for="field_product">Product</label>
+                    <p-dropdown [options]="customProducts" [(ngModel)]="selectedProduct"
+                                [filter]="true"
+                                [disabled]="isView || useOilTankIdDayDepot || oilTank.oilTankType === OilTankType[OilTankType.PIPE]
+                            || oilTank.oilTankType === OilTankType[OilTankType.PLATFORM]"
+                                class="form-control"
+                                (onChange)="onChangeProduct($event.value)"
+                                filterBy="label"
+                                id="field_product"
+                                name="productId"
+                                ngDefaultControl
+                    >
+                    </p-dropdown>
+                </div>
+                <div [hidden]="!(editForm.controls.product?.dirty && editForm.controls.product?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.product?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTank.virtualCapacity"
+                           for="field_virtualCapacity">Virtual Capacity</label>
+                    <input [disabled]="isView||oilTank.oilTankType === OilTankType[OilTankType.PLATFORM]|| oilTank.oilTankType === OilTankType[OilTankType.PIPE]||
+                        oilTank.oilTankType === OilTankType[OilTankType.SERVICE_TANK]" type="number"
+                           class="form-control" name="virtualCapacity"
+                           id="field_virtualCapacity"
+                           [numeric]="{min:1,max:2147483647}"
+                           [(ngModel)]="oilTank.virtualCapacity"
+                           required/>
+                    <div
+                        [hidden]="!(editForm.controls.virtualCapacity?.dirty && editForm.controls.virtualCapacity?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.virtualCapacity?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.virtualCapacity?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTank.capacity"
+                           for="field_capacity">Capacity</label>
+                    <input [disabled]="isView||oilTank.oilTankType===OilTankType[OilTankType.PLATFORM]|| oilTank.oilTankType === OilTankType[OilTankType.PIPE]||
+                        oilTank.oilTankType===OilTankType[OilTankType.SERVICE_TANK]" type="number" class="form-control"
+                           name="capacity"
+                           [numeric]="{min:1,max:(oilTank.virtualCapacity)?oilTank.virtualCapacity:2147483647}"
+                           id="field_capacity"
+                           [(ngModel)]="oilTank.capacity"
+                           required/>
+                    <div [hidden]="!(editForm.controls.capacity?.dirty && editForm.controls.capacity?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.capacity?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.capacity?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTank.oilTankStatus"
+                           for="field_oilTankStatus">Oil Tank Status</label>
+                    <select class="form-control" name="oilTankStatus" [(ngModel)]="oilTank.oilTankStatus"
+                            [disabled]="isView"
+                            id="field_oilTankStatus" required>
+                        <option value="ACTIVE" selected>{{'niopdcgatewayApp.OilTankStatus.ACTIVE' | translate}}</option>
+                        <option value="UNDER_REPAIR">{{'niopdcgatewayApp.OilTankStatus.UNDER_REPAIR' | translate}}
+                        </option>
+                        <option value="STAGNANT">{{'niopdcgatewayApp.OilTankStatus.STAGNANT' | translate}}</option>
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.oilTankStatus?.dirty && editForm.controls.oilTankStatus?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.oilTankStatus?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div
+                *ngIf="oilTank.oilTankType!==OilTankType[OilTankType.PLATFORM]&& oilTank.oilTankType!==OilTankType[OilTankType.SERVICE_TANK]&&oilTank.oilTankType!==OilTankType[OilTankType.PIPE]"
+                class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTank.measureType"
+                           for="field_measureType">Measure Type</label>
+                    <select [disabled]="isView||oilTank.id" class="form-control" name="measureType"
+                            [(ngModel)]="oilTank.measureType" id="field_measureType" required>
+                        <option value="NORMAL">{{'niopdcgatewayApp.MeasureType.NORMAL' | translate}}</option>
+                        <option value="RATIO">{{'niopdcgatewayApp.MeasureType.RATIO' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.measureType?.dirty && editForm.controls.measureType?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.measureType?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div
+                *ngIf="oilTank.oilTankType===OilTankType[OilTankType.UNIT]"
+                class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTank.contaminate"
+                           for="field_contaminate">Virtual Capacity</label>
+                    <input [disabled]="isView" type="number"
+                           class="form-control" name="contaminate"
+                           id="field_contaminate"
+                           [numeric]="{min:1,max:2147483647}"
+                           [(ngModel)]="oilTank.contaminate"
+                           required/>
+                    <div
+                        [hidden]="!(editForm.controls.contaminate?.dirty && editForm.controls.contaminate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.contaminate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.contaminate?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancelShort">Cancel</span>
+        </button>
+        <button type="submit" *ngIf="!isView" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.saveShort">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "dayDepotServiceOilTank" : {
+            "home": {
+                "title": "Day Depot Service Oil Tanks",
+                "createLabel": "Create a new Day Depot Service Oil Tank",
+                "createOrEditLabel": "Create or edit a Day Depot Service Oil Tank"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Day Depot Service Oil Tank {{ id }}?"
+            },
+            "detail": {
+                "title": "Day Depot Service Oil Tank"
+            },
+            "description": "Description",
+            "startMeasurementOilTank": "Start Measurement Oil Tank",
+            "endMeasurementOilTank": "End Measurement Oil Tank",
+            "oilTankService": "Oil Tank Service",
+            "dayDepot": "Day Depot"
+        }
+    },
+    "niopdcaoApp": {
+        "dayDepotServiceOilTank" : {
+            "created": "A new Day Depot Service Oil Tank is created with identifier {{ param }}",
+            "updated": "A Day Depot Service Oil Tank is updated with identifier {{ param }}",
+            "deleted": "A Day Depot Service Oil Tank is deleted with identifier {{ param }}"
+        }
+    }
+}

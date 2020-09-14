@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "CostGroupType" : {
+            "null": "",
+            "CASH": "CASH",
+            "LADDER": "LADDER",
+            "ENCOURAGEMENT": "ENCOURAGEMENT",
+            "SUPPLEMENT": "SUPPLEMENT"
+        }
+    }
+}

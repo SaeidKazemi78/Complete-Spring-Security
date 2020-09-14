@@ -1,0 +1,123 @@
+<form name="editForm" (ngSubmit)="confirm()" #editForm="ngForm">
+
+    <div class="modal-body">
+        <div class="component">
+            <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+            <jhi-alert-success></jhi-alert-success>
+            <jhi-alert-error></jhi-alert-error>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customerAccounting.person"
+                               for="field_person">creditAccount</label>
+                        <app-person-selector class="form-control" [selectObject]="false"
+                                             widthGrid="500px"
+                                             name="person" id="field_person"
+                                             [(ngModel)]="customerAccounting.personId"
+                                             (selectedItem)="personChange($event)"
+                        ></app-person-selector>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customerAccounting.customer"
+                               for="field_customer">creditAccount</label>
+                        <select class="form-control" id="field_customer" name="customer"
+                                [(ngModel)]="customerAccounting.customerId" required
+                                (change)="changeCustomer()">
+                            <option [ngValue]="customerOption.id"
+                                    *ngFor="let customerOption of customers | sortBy:'name'">
+                                {{customerOption.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4" >
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               jhiTranslate="niopdcgatewayApp.customerAccounting.bankAccountId"
+                               for="field_bankAccountId">bankAccountId</label>
+                        <div class="input-group">
+                            <select class="form-control" id="field_bankAccountId" name="bankAccountId"
+                                    [(ngModel)]="customerAccounting.bankAccountId" required>
+                                <option [ngValue]="bankAccountOption.id"
+                                        *ngFor="let bankAccountOption of bankAccounts | sortBy:'bankName'">
+                                    {{bankAccountOption.accountNumber + ' - ' + bankAccountOption.bankName}}
+                                </option>
+                            </select>
+                            <button class="input-group-append btn btn-outline-secondary" *jhiHasAnyAuthority="['ROLE_ADMIN', 'CREATE_BANK_ACCOUNT']"
+                                    type="button"
+                                    [routerLink]="['/', 'bank-account',{ outlets: { popup: ['new' , customerAccounting.personId] } }]">
+                                <span class="fa fa-plus"></span>
+                            </button>
+                        </div>
+                        <div
+                            [hidden]="!(editForm.controls.bankAccountId?.dirty && editForm.controls.bankAccountId?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.bankAccountId?.errors?.required"
+                                   jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" *ngIf="customerAccounting.contractType === ContractType[ContractType.BRAND]" >
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               jhiTranslate="niopdcgatewayApp.customerAccounting.creditAccountPerson"
+                               for="field_creditAccountPerson">creditAccountPerson</label>
+                        <input type="text" class="form-control" name="creditAccountPerson"
+                               id="field_creditAccountPerson"
+                               [(ngModel)]="customerAccounting.creditAccountPerson" minlength="1" maxlength="5"/>
+                        <div
+                            [hidden]="!(editForm.controls.creditAccount?.dirty && editForm.controls.creditAccount?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.creditAccount?.errors?.minlength"
+                                   jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 1 }">
+                                This field is required to be at least 10 characters.
+                            </small>
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.creditAccount?.errors?.maxlength"
+                                   jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 5 }">
+                                This field cannot be longer than 10 characters.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               jhiTranslate="niopdcgatewayApp.customerAccounting.creditAccountCustomer"
+                               for="field_creditAccountCustomer">creditAccountCustomer</label>
+                        <input type="text" class="form-control" name="creditAccountCustomer"
+                               id="field_creditAccountCustomer"
+                               [(ngModel)]="customerAccounting.creditAccountCustomer" minlength="1" maxlength="5"/>
+                        <div
+                            [hidden]="!(editForm.controls.creditAccount?.dirty && editForm.controls.creditAccount?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.creditAccount?.errors?.minlength"
+                                   jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 1 }">
+                                This field is required to be at least 10 characters.
+                            </small>
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.creditAccount?.errors?.maxlength"
+                                   jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 5 }">
+                                This field cannot be longer than 10 characters.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="editForm.form.invalid">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Delete</span>
+        </button>
+    </div>
+</form>

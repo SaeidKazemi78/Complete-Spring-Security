@@ -1,0 +1,31 @@
+{
+    "niopdcgatewayApp": {
+        "dailySalesStatistical": {
+            "home": {
+                "title": "گزارش آماری فروش روزانه"
+            },
+            "timeBy":"تاریخ با",
+            "timeByOrderCreate":"صدور حواله",
+            "timeByExportFromDepot":"خروج از انبار",
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "location": "ناحیه",
+            "product":"فرآورده",
+            "customer":"مشتریان",
+            "customerName":"مشتری",
+            "date": "تاریخ",
+            "locationTitle": "ناحیه",
+            "productSrc": "رمز فرآورده",
+            "productTitle": "نام فرآورده",
+            "ratePrice": "نرخ فرآورده",
+            "amount": "مقدار",
+            "count": "تعداد",
+            "totalPrice": "بهای کل",
+            "basePrice": "مبلغ خالص",
+            "buyGroup": "نوع خرید",
+            "costLadder": "کارمزد پلکانی",
+            "costPrice": "هزینه",
+            "costCash": "کارمزد نقدی"
+        }
+    }
+}

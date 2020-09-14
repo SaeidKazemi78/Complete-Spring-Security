@@ -1,0 +1,35 @@
+{
+    "niopdcgatewayApp": {
+        "mainAuthority" : {
+            "home": {
+                "title": "دسترسی ها",
+                "parentAuthorityTitle": "گروه دسترسی",
+                "createLabel":"ایجاد دسترسی",
+                "createOrEditLabel":"ویرایش دسترسی",
+                "view":"نمایش دسترسی",
+                "search": "جستجو"
+            },
+            "delete": {
+                "question": "آیا برای حذف دسترسی  {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "دسترسی ها"
+            },
+            "name": "لاتین",
+            "persianName": "عنوان"
+        }
+    },
+    "niopdcuaaApp": {
+        "mainAuthority" : {
+            "created": "دسترسی با موفقیت  ایجاد شد.",
+            "updated": "دسترسی با موفقیت  ویرایش شد.",
+            "deleted": "دسترسی با موفقیت  حذف شد."
+        },
+        "Authority" : {
+            "created": "دسترسی با موفقیت  ایجاد شد.",
+            "updated": "دسترسی با موفقیت  ویرایش شد.",
+            "deleted": "دسترسی با موفقیت  حذف شد."
+        }
+
+    }
+}

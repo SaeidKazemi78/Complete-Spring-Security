@@ -1,0 +1,12 @@
+{
+    "niopdcgatewayApp": {
+        "TranshipType": {
+            "null": "",
+            "INSIDE_TO_OUT": "داخل به خارج",
+            "OUT_TO_INSIDE_WHIT_PRIMITIVE": "خارج به داخل با اندازه گیری اولیه",
+            "OUT_TO_INSIDE_WHIT_OUT_PRIMITIVE": "خارج به داخل بدون اندازه گیری اولیه",
+            "ONLY_PUMP_NOZZLE": "فقط از تلمبه",
+            "INSIDE_TO_INSIDE": "داخل به داخل"
+        }
+    }
+}

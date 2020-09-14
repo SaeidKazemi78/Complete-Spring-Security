@@ -1,0 +1,47 @@
+
+{
+    "niopdcgatewayApp": {
+        "car" : {
+            "home": {
+                "title": "Cars",
+                "createLabel": "Create a new Car",
+                "createOrEditLabel": "Create or edit a Car"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Car {{ id }}?"
+            },
+            "detail": {
+                "title": "Car"
+            },
+            "title": "Title",
+            "plaqueNumber": "Plaque Number",
+            "serial": "Serial",
+            "serialNumber": "Serial Number",
+            "bakNumber": "Bak Number",
+            "ownerNationalId": "Owner National Id",
+            "cardNo": "Card No",
+            "cardDate": "Card Date",
+            "valveDate": "Valve Date",
+            "isBlock": "Is Block",
+            "blockReason": "Block Reason",
+            "startBlockDate": "Start Block Date",
+            "finishBlockDate": "Finish Block Date",
+            "description": "Description",
+            "permitDate": "Permit Date",
+            "registerDate": "Register Date",
+            "chassisNumber": "Chassis Number",
+            "buildDate": "Build Date",
+            "confirmDate": "Confirm Date",
+            "confirmBy": "Confirm By",
+            "deleted": "Deleted",
+            "deleteDate": "Delete Date"
+        }
+    },
+    "niopdcbaseApp": {
+        "car" : {
+            "created": "A new Car is created with identifier {{ param }}",
+            "updated": "A Car is updated with identifier {{ param }}",
+            "deleted": "A Car is deleted with identifier {{ param }}"
+        }
+    }
+}

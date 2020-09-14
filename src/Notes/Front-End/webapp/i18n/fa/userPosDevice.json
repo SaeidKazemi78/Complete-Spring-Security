@@ -1,0 +1,31 @@
+
+{
+    "niopdcgatewayApp": {
+        "userPosDevice" : {
+            "home": {
+                "title": "pc-pos کاربر",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ایجاد وبه روز رسانی"
+            },
+            "delete": {
+                "question": "آیا شما برای حذف دستگاه pos به شناسه {{ id }} اطمینان دارید ؟"
+            },
+            "detail": {
+                "title": "pc-pos کاربر"
+            },
+            "internalIp": "آدرس IP",
+            "defaultPos": "پیشفرض",
+            "defaultPosTrue": "پیشفرض",
+            "defaultPosFalse": "عادی",
+            "posDevice": "pc-pos"
+
+        }
+    },
+    "niopdcpaymentApp": {
+        "userPosDevice" : {
+            "created": "یک pc-pos  کاربر با شناسه {{ param }} ایجاد شد.",
+            "updated": "یک  pc-pos  کار بر با شناسه {{ param }} به روز رسانی شد.",
+            "deleted": "یک pc-pos  کاربر با شناسه {{ param }} حذف شد."
+        }
+    }
+}

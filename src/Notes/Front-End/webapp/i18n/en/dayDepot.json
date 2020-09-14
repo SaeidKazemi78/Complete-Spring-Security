@@ -1,0 +1,37 @@
+
+{
+    "niopdcgatewayApp": {
+        "dayDepot" : {
+            "home": {
+                "title": "Day Depots",
+                "createLabel": "Create a new Day Depot",
+                "createOrEditLabel": "Create or edit a Day Depot"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Day Depot {{ id }}?"
+            },
+            "detail": {
+                "title": "Day Depot"
+            },
+            "natureDeductible": "Nature Deductible",
+            "natureAddition": "Nature Addition",
+            "sixtyDeductible": "Sixty Deductible",
+            "sixtyAddition": "Sixty Addition",
+            "natureSystemAmount": "Nature System Amount",
+            "sixtySystemAmount": "Sixty System Amount",
+            "description": "Description",
+            "startMeasurementOilTank": "Start Measurement Oil Tank",
+            "endMeasurementOilTank": "End Measurement Oil Tank",
+            "oilTank": "Oil Tank",
+            "mainDayDepot": "Main Day Depot",
+            "mainDayOperation": "Main Day Operation"
+        }
+    },
+    "niopdcaoApp": {
+        "dayDepot" : {
+            "created": "A new Day Depot is created with identifier {{ param }}",
+            "updated": "A Day Depot is updated with identifier {{ param }}",
+            "deleted": "A Day Depot is deleted with identifier {{ param }}"
+        }
+    }
+}

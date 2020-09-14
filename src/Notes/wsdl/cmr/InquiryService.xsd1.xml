@@ -1,0 +1,203 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.datacontract.org/2004/07/CMR.Web.Services.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/CMR.Web.Services.DTO">
+    <xs:import schemaLocation="InquiryService.xsd2.xml" namespace="http://schemas.datacontract.org/2004/07/CMR.Web.Services.Enums"/>
+    <xs:import schemaLocation="InquiryService.xsd3.xml" namespace="http://schemas.datacontract.org/2004/07/System"/>
+    <xs:complexType name="Unit">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="FK_CountryID" nillable="true" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="Unit" nillable="true" type="tns:Unit"/>
+    <xs:complexType name="Carrier">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Unit">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="CompanyNameE" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="CompanyNameP" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="NationalID" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="Carrier" nillable="true" type="tns:Carrier"/>
+    <xs:complexType name="Driver">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Unit">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="ExternalID" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="FatherNameE" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="FatherNameP" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="LastNameE" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="LastNameP" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="LicenceNo" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="MotherNameE" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="MotherNameP" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="NameE" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="NameP" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="PassportNo" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="Driver" nillable="true" type="tns:Driver"/>
+    <xs:complexType name="Place">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Unit">
+                <xs:sequence/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="Place" nillable="true" type="tns:Place"/>
+    <xs:complexType name="CMRItem">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="ClientID" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="FK_GoodsClassID" nillable="true" type="xs:int"/>
+            <xs:element minOccurs="0" name="FK_PackageTypeID" nillable="true" type="xs:int"/>
+            <xs:element minOccurs="0" name="GoodsDescription" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="GrossWeight" nillable="true" type="xs:double"/>
+            <xs:element minOccurs="0" name="HSCODE" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="KotajNo" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="Marks" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="NetWeight" nillable="true" type="xs:double"/>
+            <xs:element minOccurs="0" name="Quantity" nillable="true" type="xs:double"/>
+            <xs:element minOccurs="0" name="StatisticalNumber" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="Volume" nillable="true" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="CMRItem" nillable="true" type="tns:CMRItem"/>
+    <xs:complexType name="CMRCategory">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="CMRCount" type="xs:int"/>
+            <xs:element minOccurs="0" name="CMRList" nillable="true" type="tns:ArrayOfCMR"/>
+            <xs:element minOccurs="0" name="ClientID" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="DocumentNo" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="Driver" nillable="true" type="tns:Driver"/>
+            <xs:element minOccurs="0" name="FK_InputBorderID" nillable="true" type="xs:int"/>
+            <xs:element minOccurs="0" name="FK_NationalityID" nillable="true" type="xs:int"/>
+            <xs:element minOccurs="0" name="FK_OutputBorderID" nillable="true" type="xs:int"/>
+            <xs:element minOccurs="0" name="FK_TransportTypeID" type="xs:int"/>
+            <xs:element minOccurs="0" name="HashData" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="LeaveDate" nillable="true" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="Number" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="Signature" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="Truck" nillable="true" type="tns:Truck"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="CMRCategory" nillable="true" type="tns:CMRCategory"/>
+    <xs:complexType name="ArrayOfCMR">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="CMR" nillable="true" type="tns:CMR"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfCMR" nillable="true" type="tns:ArrayOfCMR"/>
+    <xs:complexType name="CMR">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="AttachmentDocuments" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="BLNumber" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="CMRItems" nillable="true" type="tns:ArrayOfCMRItem"/>
+            <xs:element minOccurs="0" name="CarnetTirNo" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="ClientID" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="Consignee" nillable="true" type="tns:Unit"/>
+            <xs:element minOccurs="0" name="GoodsDescription" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="IssueDate" nillable="true" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="LoadingDate" nillable="true" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="Notify" nillable="true" type="tns:Unit"/>
+            <xs:element minOccurs="0" name="PlaceOfDischarge" nillable="true" type="tns:Place"/>
+            <xs:element minOccurs="0" name="PlaceOfIssue" nillable="true" type="tns:Place"/>
+            <xs:element minOccurs="0" name="PlaceOfLoading" nillable="true" type="tns:Place"/>
+            <xs:element minOccurs="0" name="PlaceOfReceipt" nillable="true" type="tns:Place"/>
+            <xs:element minOccurs="0" name="PrintSerialNo" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="ReceiptDate" nillable="true" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="ReferenceNo" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="Remark" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="Shipper" nillable="true" type="tns:Unit"/>
+            <xs:element minOccurs="0" name="TotalWeight" nillable="true" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="CMR" nillable="true" type="tns:CMR"/>
+    <xs:complexType name="ArrayOfCMRItem">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="CMRItem" nillable="true" type="tns:CMRItem"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfCMRItem" nillable="true" type="tns:ArrayOfCMRItem"/>
+    <xs:complexType name="Truck">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="ExternalID" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="FK_CountryID" nillable="true" type="xs:int"/>
+            <xs:element minOccurs="0" name="IsIranian" nillable="true" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="PlaqueType" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="TransitNo" nillable="true" type="xs:string"/>
+            <xs:element minOccurs="0" name="TruckNo" nillable="true" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="Truck" nillable="true" type="tns:Truck"/>
+    <xs:complexType name="ResultMessage">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Message">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="ResultValue" nillable="true" type="xs:anyType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="ResultMessage" nillable="true" type="tns:ResultMessage"/>
+    <xs:complexType name="Message">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string"/>
+            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/CMR.Web.Services.Enums" minOccurs="0" name="Type" type="q1:MessageType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="Message" nillable="true" type="tns:Message"/>
+    <xs:complexType name="DublicateErrorMessage">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:ErrorMessage">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="CMRCategory" nillable="true" type="tns:CMRCategory"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="DublicateErrorMessage" nillable="true" type="tns:DublicateErrorMessage"/>
+    <xs:complexType name="ErrorMessage">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:Message">
+                <xs:sequence>
+                    <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="Exception" nillable="true" type="q2:Exception"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="ErrorMessage" nillable="true" type="tns:ErrorMessage"/>
+    <xs:complexType name="CMRCategoryResultMessage">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:ResultMessage">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="CMRCategory" nillable="true" type="tns:CMRCategory"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="CMRCategoryResultMessage" nillable="true" type="tns:CMRCategoryResultMessage"/>
+    <xs:complexType name="CMRResultMessage">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:ResultMessage">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="CMR" nillable="true" type="tns:CMR"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="CMRResultMessage" nillable="true" type="tns:CMRResultMessage"/>
+    <xs:complexType name="InquiryResultMessage">
+        <xs:complexContent mixed="false">
+            <xs:extension base="tns:ResultMessage">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="CMRCategory" nillable="true" type="tns:CMRCategory"/>
+                    <xs:element minOccurs="0" name="Carrier" nillable="true" type="tns:Carrier"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="InquiryResultMessage" nillable="true" type="tns:InquiryResultMessage"/>
+</xs:schema>

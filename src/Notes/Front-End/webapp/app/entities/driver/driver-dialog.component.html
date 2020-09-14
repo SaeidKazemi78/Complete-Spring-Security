@@ -1,0 +1,267 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="driver.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="driver.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="card" style="margin-top: 25px;">
+            <div class="card-header">
+                <h4>اطلاعات عمومی</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driver.firstName"
+                                   for="field_firstName">First Name</label>
+                            <input [disabled]="isView" type="text" class="form-control" name="firstName"
+                                   id="field_firstName" #ft01
+                                   (keyup.enter)="keytab($event)"
+                                   [(ngModel)]="driver.firstName"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driver.lastName"
+                                   for="field_lastName">Last
+                                Name</label>
+                            <input [disabled]="isView" type="text" class="form-control" name="lastName"
+                                   id="field_lastName" #ft01
+                                   (keyup.enter)="keytab($event)"
+                                   [(ngModel)]="driver.lastName"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.driver.birthCertificateNumber"
+                                   for="field_birthCertificateNumber">Birth Certificate Number</label>
+                            <input [disabled]="isView" type="text" class="form-control"
+                                   name="birthCertificateNumber"
+                                   id="field_birthCertificateNumber"
+                                   [(ngModel)]="driver.birthCertificateNumber"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driver.picture"
+                                   for="field_picture">Picture</label>
+                            <div>
+                                <img [src]="'data:' + driver.pictureContentType + ';base64,' + driver.picture"
+                                     style="max-height: 100px;" *ngIf="driver.picture" alt="driver image"/>
+                                <div *ngIf="driver.picture" class="form-text text-danger clearfix">
+                                    <span
+                                        class="pull-left">{{driver.pictureContentType}}, {{byteSize(driver.picture)}}</span>
+                                    <button type="button"
+                                            (click)="clearInputImage('picture', 'pictureContentType', 'fileImage')"
+                                            class="btn btn-secondary btn-xs pull-right">
+                                        <span class="fa fa-times"></span>
+                                    </button>
+                                </div>
+                                <input type="file" id="file_picture"
+                                       (change)="setFileData($event, driver, 'picture', true)"
+                                       accept="image/*" jhiTranslate="entity.action.addimage"/>
+                            </div>
+                            <input [disabled]="isView" type="hidden" class="form-control" name="picture"
+                                   id="field_picture"
+                                   [(ngModel)]="driver.picture"/>
+                            <input [disabled]="isView" type="hidden" class="form-control" name="pictureContentType"
+                                   id="field_pictureContentType"
+                                   [(ngModel)]="driver.pictureContentType"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 25px;">
+            <div class="card-header">
+                <h4>اطلاعات گواهینامه</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.driver.drivingLicenseTypeCode"
+                                   for="field_drivingLicenseTypeCode">Driving License Type Code</label>
+                            <input [disabled]="isView" type="number" class="form-control" name="drivingLicenseTypeCode"
+                                   id="field_drivingLicenseTypeCode"
+                                   [(ngModel)]="driver.drivingLicenseTypeCode"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.driver.drivingLicenseNumber"
+                                   for="field_drivingLicenseNumber">Driving License Number</label>
+                            <input [disabled]="isView" type="text" class="form-control" name="drivingLicenseNumber"
+                                   id="field_drivingLicenseNumber"
+                                   [(ngModel)]="driver.drivingLicenseNumber"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.driver.drivingLicenseIssueDate"
+                                   for="field_drivingLicenseIssueDate">Driving License Issue Date</label>
+                            <div class="d-flex">
+                                <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00"
+                                                    [disableTime]="true"
+                                                    id="field_drivingLicenseIssueDate" class="form-control"
+                                                    name="drivingLicenseIssueDate"
+                                                    [(ngModel)]="driver.drivingLicenseIssueDate"
+                                ></ng2-datetimepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.driver.drivingLicenseExpireDate"
+                                   for="field_drivingLicenseExpireDate">Driving License Expire Date</label>
+                            <div class="d-flex">
+                                <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00"
+                                                    [disableTime]="true"
+                                                    id="field_drivingLicenseExpireDate" class="form-control"
+                                                    name="drivingLicenseExpireDate"
+                                                    [(ngModel)]="driver.drivingLicenseExpireDate"
+                                ></ng2-datetimepicker>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 25px;">
+            <div class="card-header">
+                <h4>سایر اطلاعات</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driver.expireViolationDate"
+                                   for="field_expireViolationDate">Expire Violation Date</label>
+                            <div class="d-flex">
+                                <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00"
+                                                    [disableTime]="true"
+                                                    id="field_expireViolationDate" class="form-control"
+                                                    name="expireViolationDate" [(ngModel)]="driver.expireViolationDate"
+                                ></ng2-datetimepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driver.smartCardNumber"
+                                   for="field_smartCardNumber">Smart Card Number</label>
+                            <input [disabled]="isView" type="text" class="form-control" name="smartCardNumber"
+                                   id="field_smartCardNumber"
+                                   [(ngModel)]="driver.smartCardNumber"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driver.desiredLengthWeight"
+                                   for="field_desiredLengthWeight">Desired Length Weight</label>
+                            <input [disabled]="isView" type="number" class="form-control" name="desiredLengthWeight"
+                                   id="field_desiredLengthWeight"
+                                   [(ngModel)]="driver.desiredLengthWeight"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driver.satisfactionWeight"
+                                   for="field_satisfactionWeight">Satisfaction Weight</label>
+                            <input [disabled]="isView" type="number" class="form-control" name="satisfactionWeight"
+                                   id="field_satisfactionWeight"
+                                   [(ngModel)]="driver.satisfactionWeight"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driver.behaviourWeight"
+                                   for="field_behaviourWeight">Behaviour Weight</label>
+                            <input [disabled]="isView" type="number" class="form-control" name="behaviourWeight"
+                                   id="field_behaviourWeight"
+                                   [(ngModel)]="driver.behaviourWeight"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driver.birthCity"
+                                   for="field_birthCity">Birth City</label>
+                            <select class="form-control" id="field_birthCity" name="birthCity"
+                                    [(ngModel)]="driver.birthCityId">
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="regionOption.id"
+                                        *ngFor="let regionOption of regions; trackBy: trackRegionById">
+                                    {{regionOption.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" style="text-align: center;margin-top: auto">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driver.mainDriver"
+                                   for="field_mainDriver">Main Driver</label>
+                            <input [disabled]="isView" type="checkbox" class="form-control" name="mainDriver"
+                                   id="field_mainDriver"
+                                   [(ngModel)]="driver.mainDriver"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="text-align: center;margin-top: auto">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driver.active"
+                                   for="field_active">Active</label>
+                            <input [disabled]="isView" type="checkbox" class="form-control" name="active"
+                                   id="field_active"
+                                   [(ngModel)]="driver.active"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driver.description"
+                                   for="field_description">Description</label>
+                            <textarea [disabled]="isView" type="text" class="form-control" name="description"
+                                   id="field_description"
+                                   [(ngModel)]="driver.description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

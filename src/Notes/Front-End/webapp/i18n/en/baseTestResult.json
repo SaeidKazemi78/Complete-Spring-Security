@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "baseTestResult" : {
+            "home": {
+                "title": "Base Test Results",
+                "createLabel": "Create a new Base Test Result",
+                "createOrEditLabel": "Create or edit a Base Test Result"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Base Test Result {{ id }}?"
+            },
+            "detail": {
+                "title": "Base Test Result"
+            },
+            "property": "Property",
+            "astm": "Astm",
+            "ip": "Ip",
+            "specification": "Specification",
+            "parentBaseTestResult": "Parent Base Test Result"
+        }
+    },
+    "niopdcaoApp": {
+        "baseTestResult" : {
+            "created": "A new Base Test Result is created with identifier {{ param }}",
+            "updated": "A Base Test Result is updated with identifier {{ param }}",
+            "deleted": "A Base Test Result is deleted with identifier {{ param }}"
+        }
+    }
+}

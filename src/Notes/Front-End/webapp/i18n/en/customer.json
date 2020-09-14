@@ -1,0 +1,49 @@
+
+{
+    "niopdcgatewayApp": {
+        "customer" : {
+            "home": {
+                "title": "Customers",
+                "createLabel": "Create a new Customer",
+                "createOrEditLabel": "Create or edit a Customer"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Customer {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer"
+            },
+            "name": "Name",
+            "code": "Code",
+            "postalCode": "Postal Code",
+            "registerCode": "Register Code",
+            "movableCode": "Movable Code",
+            "registerDate": "Register Date",
+            "startDate": "Start Date",
+            "finishDate": "Finish Date",
+            "telephone": "Telephone",
+            "address": "Address",
+            "buyOneToMany": "Buy One To Many",
+            "salesPermit": "Sales Permit",
+            "identifyCode": "Identify Code",
+            "gsId": "Gs Id",
+            "customerVisit": "Customer Visit",
+            "type": "Type",
+            "region": "Region",
+            "airplaneModel": "Airplane Model",
+            "vehicleModel": "Vehicle Model",
+            "person": "Person",
+            "location": "Location",
+            "customerStationInfo": "Customer Station Info",
+            "sellContractCustomer": "Sell Contract Customer",
+            "customerCapacities": "Customer Capacities"
+        }
+    },
+    "niopdcbaseApp": {
+        "customer" : {
+            "created": "A new Customer is created with identifier {{ param }}",
+            "updated": "A Customer is updated with identifier {{ param }}",
+            "deleted": "A Customer is deleted with identifier {{ param }}"
+        }
+    }
+}

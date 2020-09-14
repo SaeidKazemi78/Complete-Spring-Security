@@ -1,0 +1,200 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="niopdcBankAccount.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="niopdcBankAccount.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.niopdcBankAccount.title"
+                           for="field_title">Title</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="title" id="field_title"
+                           [(ngModel)]="niopdcBankAccount.title" required/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.niopdcBankAccount.bank"
+                           for="field_bank">bank</label>
+                    <select class="form-control" id="field_bank" name="bank" [disabled]="isView"
+                            [(ngModel)]="niopdcBankAccount.bank" required>
+                        <option value="MELLAT">{{'niopdcgatewayApp.Bank.MELLAT' | translate}}</option>
+                        <option value="MELLI">{{'niopdcgatewayApp.Bank.MELLI' | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.niopdcBankAccount.accountNumber"
+                           for="field_accountNumber">Account Number</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="accountNumber"
+                           id="field_accountNumber"
+                           [(ngModel)]="niopdcBankAccount.accountNumber" required/>
+                    <div
+                        [hidden]="!(editForm.controls.accountNumber?.dirty && editForm.controls.accountNumber?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.accountNumber?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.niopdcBankAccount.bankAccountType"
+                           for="field_bankAccountType">Bank Account Type</label>
+                    <p-multiSelect
+                        [disabled]="isView" class="form-control"
+                        [options]="customBankAccountType"
+                        multiple="true"
+                        id="field_bankAccountType"
+                        name="bankAccountType"
+                        (onChange)="onChangeNiopdcBankAccountType($event.value)"
+                        [defaultLabel]="'global.messages.info.choose' | translate"
+                        [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                        [(ngModel)]="selectedBankAccountType"
+                        [ngModelOptions]="{standalone: true}"
+                        required
+                    ></p-multiSelect>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label jhiTranslate="niopdcgatewayApp.rateGroup.locationId"
+                       for="field_location">Location</label>
+                <!--[firstSelect]="true"-->
+                <input-location-selector [disabled]="isView"
+                                         class="form-control" required
+                                         [(ngModel)]="niopdcBankAccount.locationIds"
+                                         id="field_location"
+                                         [oneSelection]="false"
+                                         [firstSelect]="false"
+                                         name="location"
+                                         [idSelector]="true"
+                                         [selectOfLevel]="[0,1,2,3]"
+                                         [selectByPriority]="false"
+                >
+                </input-location-selector>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3" *ngIf="niopdcBankAccount.bank === Bank[Bank.MELLAT]">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.niopdcBankAccount.mellatExtCustomerId"
+                           for="field_mellatExtCustomerId">Account Number</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="mellatExtCustomerId"
+                           id="field_mellatExtCustomerId"
+                           [(ngModel)]="niopdcBankAccount.mellatExtCustomerId" required/>
+                    <div
+                        [hidden]="!(editForm.controls.mellatExtCustomerId?.dirty && editForm.controls.mellatExtCustomerId?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.mellatExtCustomerId?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" *ngIf="niopdcBankAccount.bank === Bank[Bank.MELLAT]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.niopdcBankAccount.mellatUsername"
+                           for="field_mellatUsername">Account Number</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="mellatUsername"
+                           id="field_mellatUsername"
+                           [(ngModel)]="niopdcBankAccount.mellatUsername" required/>
+                    <div
+                        [hidden]="!(editForm.controls.mellatUsername?.dirty && editForm.controls.mellatUsername?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.mellatUsername?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" *ngIf="niopdcBankAccount.bank === Bank[Bank.MELLAT]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.niopdcBankAccount.mellatPassword"
+                           for="field_mellatPassword">Account Number</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="mellatPassword"
+                           id="field_mellatPassword"
+                           [(ngModel)]="niopdcBankAccount.mellatPassword" required/>
+                    <div
+                        [hidden]="!(editForm.controls.mellatPassword?.dirty && editForm.controls.mellatPassword?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.mellatPassword?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" *ngIf="niopdcBankAccount.bank === Bank[Bank.MELLAT]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.niopdcBankAccount.mellatTerminalId"
+                           for="field_mellatTerminalId">Account Number</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="mellatTerminalId"
+                           id="field_mellatTerminalId"
+                           [(ngModel)]="niopdcBankAccount.mellatTerminalId" required/>
+                    <div
+                        [hidden]="!(editForm.controls.mellatTerminalId?.dirty && editForm.controls.mellatTerminalId?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.mellatTerminalId?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" *ngIf="niopdcBankAccount.bank === Bank[Bank.MELLAT]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.niopdcBankAccount.accountIdentifier"
+                           for="field_accountIdentifier">account Identifier</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="accountIdentifier"
+                           id="field_accountIdentifier"
+                           [(ngModel)]="niopdcBankAccount.accountIdentifier" required/>
+                    <div
+                        [hidden]="!(editForm.controls.accountIdentifier?.dirty && editForm.controls.accountIdentifier?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.accountIdentifier?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

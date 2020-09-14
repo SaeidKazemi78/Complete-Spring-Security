@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="jafari (generated)" id="1574861197942-1">
+        <addColumn tableName="vehicle_model">
+            <column name="product_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="jafari (generated)" id="1574861197942-2">
+        <addColumn tableName="vehicle_model_aud">
+            <column name="product_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="jafari (generated)" id="1574861197942-3">
+        <addForeignKeyConstraint baseColumnNames="product_id" baseTableName="vehicle_model"
+                                 constraintName="FK4fojjjr1f39y898v7dkdll9rc" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="product"/>
+    </changeSet>
+</databaseChangeLog>

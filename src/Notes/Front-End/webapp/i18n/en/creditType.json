@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "CreditType" : {
+            "null": "",
+            "QUOTA": "QUOTA",
+            "CREDIT": "CREDIT",
+            "PREBUY": "PREBUY",
+            "FINANCIAL_LICENSE": "FINANCIAL_LICENSE"
+        }
+    }
+}

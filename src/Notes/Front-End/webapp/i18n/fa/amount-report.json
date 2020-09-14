@@ -1,0 +1,21 @@
+{
+    "niopdcgatewayApp": {
+        "amountReport": {
+            "home": {
+                "title": "گزارش فروش شرکت های هواپیمایی"
+            },
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "personName": "‫نام شرکت‬",
+            "price": "مبلغ",
+            "amount": "مقدار",
+            "countFuelReceipt": "تعداد رسید سوخت",
+            "currency": "واحد پولی",
+            "currencyRateGroup": "نرخ واحد پولی",
+            "rateGroup": "گروه نرخ فراوده",
+            "product": "فرآورده",
+            "refuelCenter": "مرکز سوختگیری",
+            "totalSum": "مجموع کل"
+        }
+    }
+}

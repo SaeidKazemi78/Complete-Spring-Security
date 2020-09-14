@@ -1,0 +1,140 @@
+<form name="editForm" role="form" novalidate #editForm="ngForm">
+    <div class="modal-header">
+        <h4 class="modal-title" jhiTranslate="niopdcgatewayApp.depositIdentifier.title">Confirm delete operation</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row"
+             *jhiHasAnyAuthority="['ROLE_ADMIN',
+             'CREATE_DEPOSIT_IDENTIFIER_' + type,
+             'EDIT_DEPOSIT_IDENTIFIER_' + type,
+             'CREATE_DEPOSIT_IDENTIFIER_' + type + '_MELLAT',
+             'EDIT_DEPOSIT_IDENTIFIER_' + type + '_MELLAT']">
+            <div class="col-xs-12 col-md-2">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.depositIdentifier.priority"
+                           for="field_priority">priority</label>
+                    <input type="number" class="form-control" name="priority"
+                           id="field_priority"
+                           [numeric]="{min:1}"
+                           [(ngModel)]="depositIdentifier.priority"
+                           required/>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-5">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.depositIdentifier.bank"
+                           for="field_bank">bank</label>
+                    <select class="form-control" id="field_bank" name="bank"
+                            [(ngModel)]="depositIdentifier.bank" required>
+                        <option value="MELLAT">{{'niopdcgatewayApp.Bank.MELLAT' | translate}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-5">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.depositIdentifier.code"
+                           for="field_code">code</label>
+                    <input type="text" class="form-control" name="code"
+                           id="field_code"
+                           [(ngModel)]="depositIdentifier.code"
+                           required minlength="3" maxlength="42"/>
+                    <div
+                        [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 42 }">
+                            This field cannot be longer than 42 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center"
+             *jhiHasAnyAuthority="['ROLE_ADMIN',
+             'CREATE_DEPOSIT_IDENTIFIER_' + type,
+             'EDIT_DEPOSIT_IDENTIFIER_' + type,
+             'CREATE_DEPOSIT_IDENTIFIER_' + type + '_MELLAT',
+             'EDIT_DEPOSIT_IDENTIFIER_' + type + '_MELLAT']">
+            <button type="button" [disabled]="isSaving" class="btn btn-primary" data-dismiss="modal" (click)="save()">
+                <span class="fa fa-check"></span>&nbsp;
+                <span jhiTranslate="entity.action.save">save</span>
+            </button>
+            <button type="button" *ngIf="depositIdentifier.id" [disabled]="isSaving" class="btn btn-primary"
+                    data-dismiss="modal" (click)="create()">
+                <span class="fa fa-check"></span>&nbsp;<span jhiTranslate="entity.action.create">create</span>
+            </button>
+        </div>
+        <br>
+        <p-table *ngIf="depositIdentifiers" [value]="depositIdentifiers | sortBy : 'priority'"
+                 [responsive]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th jhiTranslate="niopdcgatewayApp.depositIdentifier.priority"
+                        style="width: 15%"></th>
+                    <th jhiTranslate="niopdcgatewayApp.depositIdentifier.bank"
+                        style="width: 25%"></th>
+                    <th jhiTranslate="niopdcgatewayApp.depositIdentifier.code" style="width: 35%"></th>
+                    <th style="width: 25%"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item style="color: black">
+                <tr>
+                    <td style="width: 15%">{{item.priority}}</td>
+                    <td style="width: 25%">{{'niopdcgatewayApp.Bank.' + item.bank | translate}}</td>
+                    <td style="width: 35%">{{item.code}}</td>
+                    <td class="col-button" style="width: 25%">
+                        <button type="button" class="btn btn-primary"
+                                *jhiHasAnyAuthority="{auth:['ROLE_ADMIN',
+                                'EDIT_DEPOSIT_IDENTIFIER_' + type,
+                                'EDIT_DEPOSIT_IDENTIFIER_' + type + '_' + item.bank], andIf:!depositIdentifier.id}"
+                                [disabled]="isSaving"
+                                (click)="edit(item)">
+                            <span class="fa fa-edit"></span>
+                            <span jhiTranslate="entity.action.edit">edit</span>
+                        </button>
+                        <button type="button" class="btn btn-danger"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN',
+                                'DELETE_DEPOSIT_IDENTIFIER_' + type,
+                                'DELETE_DEPOSIT_IDENTIFIER_' + type + '_' + item.bank]"
+                                [disabled]="isSaving"
+                                (click)="confirmDelete(item.id)">
+                            <span class="fa fa-delete"></span>
+                            <span jhiTranslate="entity.action.delete">edit</span>
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <div class="alert alert-danger"
+             *ngIf="depositIdentifiers && !depositIdentifiers?.length">
+            <div jhiTranslate="niopdcgatewayApp.depositIdentifier.empty">
+                This field is required.
+            </div>
+        </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+    </div>
+</form>

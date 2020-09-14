@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "TransferFuelType" : {
+            "null": "",
+            "TANKER": "نفت کش",
+            "PIPE": "خط لوله"
+        }
+    }
+}

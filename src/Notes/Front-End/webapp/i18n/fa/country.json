@@ -1,0 +1,36 @@
+{
+    "niopdcgatewayApp": {
+        "country": {
+            "home": {
+                "title": "کشور",
+                "createLabel": "ایجاد کشور",
+                "createOrEditLabel": "ایجاد یا ویرایش کشور",
+                "view":"نمایش کشور",
+                "CreateCountry": "ايجاد كشور "
+            },
+            "delete": {
+                "question": "آیا برای حذف کشور  {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "کشور"
+            },
+            "neighbor":"کشور همسایه",
+            "name": "نام",
+            "enName": "نام انگلیسی",
+            "isoCode": "کد اختصاری",
+            "isoCode2": "کد اختصاری طولانی",
+            "code": "کد",
+            "rmtoCode": "کد راهداری",
+            "checkNationalCode": "ایرانی",
+            "checkNationalCodeTrue": "ایرانی",
+            "checkNationalCodeFalse": "غیر ایرانی"
+        }
+    },
+    "niopdcbaseApp": {
+        "country": {
+            "created": "کشور با موفقیت ایجاد شد.",
+            "updated": "کشور با موفقیت ویرایش شد.",
+            "deleted": "کشور با موفقیت حذف شد."
+        }
+    }
+}

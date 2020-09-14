@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="sajad" id="sell_contract_view5">
+        <createView replaceIfExists="true"
+                    viewName="sell_contract_view">
+            SELECT DISTINCT
+            sc.id id,
+            u.username
+            FROM contract_type_view u
+            INNER JOIN person_view person ON u.username = person.username
+            INNER JOIN sell_contract_person sp ON person.id = sp.person_id
+            INNER JOIN sell_contract sc ON sp.sell_contract_id = sc.id
+            inner join sell_contract_customer scc on sc.id = scc.sell_contract_id
+            AND sc.contract_type = u.id
+        </createView>
+    </changeSet>
+    <changeSet author="sajad" id="sell_contract_view6">
+        <createView replaceIfExists="true"
+                    viewName="sell_contract_view">
+            SELECT DISTINCT
+            sc.id id,
+            u.username
+            FROM contract_type_view u
+            INNER JOIN person_view person ON u.username = person.username
+            INNER JOIN sell_contract_person sp ON person.id = sp.person_id
+            INNER JOIN sell_contract sc ON sp.sell_contract_id = sc.id
+            INNER join sell_contract_customer scc on sc.contract_type = 'EXPORT' OR sc.id = scc.sell_contract_id
+            AND sc.contract_type = u.id
+        </createView>
+    </changeSet>
+    <changeSet author="sajad" id="sell_contract_view7">
+        <createView replaceIfExists="true"
+                    viewName="sell_contract_view">
+            SELECT DISTINCT
+            sc.id id,
+            u.username
+            FROM contract_type_view u
+            INNER JOIN person_view person ON u.username = person.username
+            INNER JOIN sell_contract_person sp ON person.id = sp.person_id
+            INNER JOIN sell_contract sc ON sp.sell_contract_id = sc.id
+            INNER join sell_contract_customer scc on sc.contract_type = 'EXPORT' OR sc.contract_type = 'EXCHANGE' OR sc.id = scc.sell_contract_id
+            AND sc.contract_type = u.id
+        </createView>
+    </changeSet>
+    <changeSet author="sajad" id="sell_contract_view8">
+        <createView replaceIfExists="true"
+                    viewName="sell_contract_view">
+            SELECT DISTINCT
+            sc.id id,
+            u.username
+            FROM contract_type_view u
+            INNER JOIN customer_view customer ON u.username = customer.username
+            INNER JOIN sell_contract_customer scc ON customer.id = scc.customer_id
+            INNER JOIN sell_contract sc ON scc.sell_contract_id = sc.id
+        </createView>
+    </changeSet>
+    <changeSet author="sajad" id="sell_contract_view9" >
+        <createView replaceIfExists="true"
+                    viewName="sell_contract_view">
+            SELECT DISTINCT
+            sc.id id,
+            u.username
+            FROM contract_type_access u
+            INNER JOIN customer_access customer ON u.username = customer.username
+            INNER JOIN sell_contract_customer scc ON customer.id = scc.customer_id
+            INNER JOIN sell_contract sc ON scc.sell_contract_id = sc.id
+        </createView>
+    </changeSet>
+
+    <changeSet author="taghavi" id="sell_contract_view10" runAlways="true">
+        <createView replaceIfExists="true"
+                    viewName="sell_contract_view">
+            SELECT DISTINCT
+            sc.id id,
+            u.username
+            FROM contract_type_access u
+            INNER JOIN person_access person ON u.username = person.username
+            INNER JOIN sell_contract_person scp ON person.id = scp.person_id
+            INNER JOIN sell_contract sc ON scp.sell_contract_id = sc.id
+        </createView>
+    </changeSet>
+</databaseChangeLog>

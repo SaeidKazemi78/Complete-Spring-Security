@@ -1,0 +1,16 @@
+{
+    "niopdcgatewayApp": {
+        "brandSell": {
+            "home": {
+                "title": "گزارش فروش جایگاه های تحت برند"
+            },
+            "customerName": "جایگاه",
+            "productTitle": "فرآورده",
+            "amount": "مقدار",
+            "productRatePrice": "نرخ فرآورده",
+            "productPrice": "بهای فرآورده",
+            "costPrice": "هزینه",
+            "totalPrice": "مبلغ کل"
+        }
+    }
+}

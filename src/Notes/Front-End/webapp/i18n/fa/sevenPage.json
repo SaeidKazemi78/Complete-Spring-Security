@@ -1,0 +1,14 @@
+{
+    "niopdcgatewayApp": {
+        "sevenPage": {
+            "home": {
+                "title": "هفت صفحه ای"
+            },
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "location": "ناحیه",
+            "depot":"انبار",
+            "productRateDifference":"نمایش اطلاعات فرآورده آزاد و موجودی مخازن"
+        }
+    }
+}

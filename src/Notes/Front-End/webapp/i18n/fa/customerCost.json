@@ -1,0 +1,31 @@
+{
+    "niopdcgatewayApp": {
+        "customerCost": {
+            "home": {
+                "title": "هزینه های مشتری",
+                "customerTitle": "مشتری",
+                "createLabel":"ایجاد هزینه مشتری",
+                "createOrEditLabel":"ویرایش هزینه مشتری",
+                "view":"نمایش هزینه مشتری"
+            },
+            "delete": {
+                "question": "آیا برای حذف این هزینه مشتری مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "هزینه مشتری"
+            },
+            "hasValueAddedTax": "Has Value Added Tax",
+            "cost": "Cost",
+            "product": "فرآورده",
+            "customer": "مشتری",
+            "location": "منظقه / ناحیه"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerCost": {
+            "created": "هزینه مشتری با موفقیت ایجاد شد.",
+            "updated": "هزینه مشتری با موفقیت ویرایش شد.",
+            "deleted": "هزینه مشتری با موفقیت حذف شد."
+        }
+    }
+}

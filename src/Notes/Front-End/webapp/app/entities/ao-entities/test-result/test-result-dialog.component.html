@@ -1,0 +1,174 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="testResult.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="testResult.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <!--<div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.testResult.result"
+                           for="field_result">Result</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="result" id="field_result"
+                           [(ngModel)]="testResult.result" required/>
+                    <div [hidden]="!(editForm.controls.result?.dirty && editForm.controls.result?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.result?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.testResult.requestStatus"
+                           for="field_requestStatus">Request Status</label>
+                    <select [disabled]="isView" class="form-control" name="requestStatus"
+                            [(ngModel)]="testResult.requestStatus" id="field_requestStatus" required>
+                        <option value="DRAFT">{{'niopdcgatewayApp.RequestStatus.DRAFT' | translate}}</option>
+                        <option value="CONFIRM">{{'niopdcgatewayApp.RequestStatus.CONFIRM' | translate}}</option>
+                        <option value="SEND">{{'niopdcgatewayApp.RequestStatus.SEND' | translate}}</option>
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.requestStatus?.dirty && editForm.controls.requestStatus?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.requestStatus?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.testResult.draftUser"
+                           for="field_draftUser">Draft User</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="draftUser" id="field_draftUser"
+                           [(ngModel)]="testResult.draftUser" required/>
+                    <div [hidden]="!(editForm.controls.draftUser?.dirty && editForm.controls.draftUser?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.draftUser?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.testResult.confirmUser"
+                           for="field_confirmUser">Confirm User</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="confirmUser"
+                           id="field_confirmUser"
+                           [(ngModel)]="testResult.confirmUser"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.testResult.sendUser"
+                           for="field_sendUser">Send User</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="sendUser" id="field_sendUser"
+                           [(ngModel)]="testResult.sendUser"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.testResult.requestTestResult"
+                           for="field_requestTestResult">Request Test Result</label>
+                    <select class="form-control" id="field_requestTestResult" name="requestTestResult"
+                            [(ngModel)]="testResult.requestTestResultId" required>
+                        <option *ngIf="!editForm.value.requestTestResult" [ngValue]="null" selected></option>
+                        <option [ngValue]="requestTestResultOption.id"
+                                *ngFor="let requestTestResultOption of requesttestresults; trackBy: trackRequestTestResultById">
+                            {{requestTestResultOption.id}}
+                        </option>
+                    </select>
+                </div>
+                <div
+                    [hidden]="!(editForm.controls.requestTestResult?.dirty && editForm.controls.requestTestResult?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.requestTestResult?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.testResult.parentBaseTestResult"
+                           for="field_parentBaseTestResult">Parent Base Test Result</label>
+                    <select class="form-control" id="field_parentBaseTestResult" name="parentBaseTestResult"
+                            [(ngModel)]="testResult.parentBaseTestResultId" required>
+                        <option *ngIf="!editForm.value.parentBaseTestResult" [ngValue]="null" selected></option>
+                        <option [ngValue]="parentBaseTestResultOption.id"
+                                *ngFor="let parentBaseTestResultOption of parentbasetestresults; trackBy: trackParentBaseTestResultById">
+                            {{parentBaseTestResultOption.id}}
+                        </option>
+                    </select>
+                </div>
+                <div
+                    [hidden]="!(editForm.controls.parentBaseTestResult?.dirty && editForm.controls.parentBaseTestResult?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.parentBaseTestResult?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+        </div>-->
+        <div class="row">
+            <p-dataTable [sortField]="predicate" [sortOrder]="reverse ? -1 : 1" #dt
+                         [value]="testResult.testResultMappings"
+                         [lazy]="false"
+                         [responsive]="true"
+                         [stacked]="false"
+                         [editable]="true"
+                         [immutable]="false"
+                         [emptyMessage]="'global.messages.info.emptyRecords' | translate">
+                <p-column field="result" [editable]="true"
+                          [header]="'niopdcgatewayApp.testResultMapping.result' | translate"></p-column>
+                <p-column field="specification"
+                          [header]="'niopdcgatewayApp.baseTestResult.specification' | translate"></p-column>
+                <p-column [hidden]="baseTestResultType=='WATER_TYPE'" field="astm"
+                          [header]="'niopdcgatewayApp.baseTestResult.astm' | translate"></p-column>
+                <p-column [hidden]="baseTestResultType=='WATER_TYPE'" field="ip"
+                          [header]="'niopdcgatewayApp.baseTestResult.ip' | translate"></p-column>
+                <p-column field="property" [header]="'niopdcgatewayApp.baseTestResult.property' | translate"></p-column>
+            </p-dataTable>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView && mode=='response-draft'" type="submit" [disabled]="editForm.form.invalid || isSaving"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+        <button *ngIf="mode=='response-confirm'" type="button" (click)="confirm()" [disabled]="editForm.form.invalid || isSaving"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.confirm">Save</span>
+        </button>
+        <button *ngIf="mode=='response-send'" type="button" (click)="send()" [disabled]="editForm.form.invalid || isSaving"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.send">Save</span>
+        </button>
+    </div>
+</form>

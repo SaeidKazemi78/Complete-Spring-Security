@@ -1,0 +1,35 @@
+
+{
+    "niopdcgatewayApp": {
+        "loan" : {
+            "home": {
+                "title": "Loans",
+                "createLabel": "Create a new Loan",
+                "createOrEditLabel": "Create or edit a Loan"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Loan {{ id }}?"
+            },
+            "detail": {
+                "title": "Loan"
+            },
+            "customerId": "Customer Id",
+            "amount": "Amount",
+            "reason": "Reason",
+            "description": "Description",
+            "installmentCount": "Installment Count",
+            "firstPaymentDate": "First Payment Date",
+            "completed": "Completed",
+            "payByBill": "Pay By Bill",
+            "penaltyDay": "Penalty Day",
+            "loanType": "Loan Type"
+        }
+    },
+    "niopdcaccountingApp": {
+        "loan" : {
+            "created": "A new Loan is created with identifier {{ param }}",
+            "updated": "A Loan is updated with identifier {{ param }}",
+            "deleted": "A Loan is deleted with identifier {{ param }}"
+        }
+    }
+}

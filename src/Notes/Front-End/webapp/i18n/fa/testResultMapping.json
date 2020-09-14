@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "testResultMapping" : {
+            "home": {
+                "title": "Test Result Mappings",
+                "createLabel": "Create a new Test Result Mapping",
+                "createOrEditLabel": "Create or edit a Test Result Mapping"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Test Result Mapping {{ id }}?"
+            },
+            "detail": {
+                "title": "Test Result Mapping"
+            },
+            "result": "Result",
+            "testResult": "Test Result",
+            "baseTestResult": "Base Test Result"
+        }
+    },
+    "niopdcaoApp": {
+        "testResultMapping" : {
+            "created": "A new Test Result Mapping is created with identifier {{ param }}",
+            "updated": "A Test Result Mapping is updated with identifier {{ param }}",
+            "deleted": "A Test Result Mapping is deleted with identifier {{ param }}"
+        }
+    }
+}

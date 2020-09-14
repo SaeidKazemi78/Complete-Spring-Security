@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "accountNumberItems" : {
+            "home": {
+                "title": "اجزاء شماره حساب",
+                "createLabel": "ایجاد جزء شماره حساب",
+                "createOrEditLabel": "ویرایش جزء شماره حساب"
+            },
+            "delete": {
+                "question": "آیا مطمعن به حذف جزء شماره حساب هستید؟"
+            },
+            "detail": {
+                "title": "اجزاء شماره حساب"
+            },
+            "part": "جزء",
+            "content": "محتوا",
+            "title": "عنوان"
+        }
+    },
+    "niopdcbaseApp": {
+        "accountNumberItems" : {
+            "created": "جزء شماره حساب با موفقیت ایجاد شد",
+            "updated": "جزء شماره حساب با موفقیت ویرایش شد",
+            "deleted": "جزء شماره حساب با موفقیت حذف شد "
+        }
+    }
+}

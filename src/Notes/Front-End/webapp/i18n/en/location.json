@@ -1,0 +1,43 @@
+
+{
+    "niopdcgatewayApp": {
+        "location" : {
+            "home": {
+                "title": "Locations",
+                "createLabel": "Create a new Location",
+                "createOrEditLabel": "Create or edit a Location"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Location {{ id }}?"
+            },
+            "detail": {
+                "title": "Location"
+            },
+            "name": "Name",
+            "code": "Code",
+            "financialCode": "Financial Code",
+            "costAccount": "Cost Account",
+            "startOrderNumber": "Start Order Number",
+            "endOrderNumber": "End Order Number",
+            "currentOrderNumber": "Current Order Number",
+            "level": "Level",
+            "location": "Location",
+            "depot": "Depot",
+            "region": "Region",
+            "depot": "Depot",
+            "sellContractCustomer": "Sell Contract Customer",
+            "person": "Person",
+            "customer": "Customer",
+            "news": "News",
+            "sellContract": "Sell Contract",
+            "customerDeactiveRule": "Customer Deactive Rule"
+        }
+    },
+    "niopdcbaseApp": {
+        "location" : {
+            "created": "A new Location is created with identifier {{ param }}",
+            "updated": "A Location is updated with identifier {{ param }}",
+            "deleted": "A Location is deleted with identifier {{ param }}"
+        }
+    }
+}

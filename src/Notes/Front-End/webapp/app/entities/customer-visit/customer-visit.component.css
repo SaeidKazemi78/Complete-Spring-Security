@@ -1,0 +1,3 @@
+jhi-customer-visit-dialog.ng-invalid:not(form) {
+    border-right: 0px solid red !important;
+}

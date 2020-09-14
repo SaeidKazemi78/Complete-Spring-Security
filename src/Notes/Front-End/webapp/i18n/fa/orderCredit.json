@@ -1,0 +1,21 @@
+{
+    "niopdcgatewayApp": {
+        "orderCredit" : {
+
+            "customerCreditId": "Customer Credit Id",
+            "decreasedCredit": "اعتبار مبلغی",
+            "priceUsed": "مبلغ استفاده شده",
+            "decreasedAmount": "اعتبار مقداری",
+            "amountUsed": "مقدار استفاده شده",
+            "buyGroupType": "نوع خرید",
+            "decreasedCost": "Decreased Cost",
+            "creditNumber": "شماره اعتبار",
+            "quotaNumber": "شماره سهمیه",
+            "buyTypeUsage": "Buy Type Usage",
+            "settled": "Settled",
+            "buyGroup": "Buy Group",
+            "order": "Order",
+            "orderProduct": "Order Product"
+        }
+    }
+}

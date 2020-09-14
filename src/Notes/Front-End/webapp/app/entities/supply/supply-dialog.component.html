@@ -1,0 +1,151 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="supply.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="supply.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.supply.product"
+                           for="field_product">Product</label>
+                    <p-dropdown [options]="customProducts"
+                                [(ngModel)]="supply.productId"
+                                [filter]="true"
+                                [disabled]="isView"
+                                class="form-control"
+                                filterBy="label"
+                                id="field_product"
+                                name="field_product" required
+                                ngDefaultControl>
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.supply.amount" for="field_amount">Amount</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="amount" id="field_amount"
+                           [(ngModel)]="supply.amount"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.supply.minimumAmount"
+                           for="field_minimumAmount">Minimum Amount</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="minimumAmount"
+                           id="field_minimumAmount"
+                           [(ngModel)]="supply.minimumAmount"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.supply.depot"
+                           for="field_depot">Depot</label>
+                    <p-dropdown [options]="customDepot"
+                                [(ngModel)]="supply.depotId"
+                                [filter]="true"
+                                [disabled]="isView"
+                                class="form-control"
+                                filterBy="label"
+                                id="field_depot"
+                                name="field_depot" required
+                                ngDefaultControl>
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.supply.country"
+                           for="field_country">Country</label>
+                    <p-dropdown [options]="customCountry"
+                                [(ngModel)]="supply.countryId"
+                                [filter]="true"
+                                [disabled]="isView"
+                                class="form-control"
+                                filterBy="label"
+                                id="field_country"
+                                name="field_country" required
+                                ngDefaultControl>
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.supply.basePrice"
+                           for="field_basePrice">Base Price</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="basePrice" id="field_basePrice"
+                           [(ngModel)]="supply.basePrice"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.supply.broker" for="field_broker">Broker</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="broker" id="field_broker"
+                           [(ngModel)]="supply.broker"/>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.supply.telephone"
+                           for="field_telephone">Telephone</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="telephone" id="field_telephone"
+                           [(ngModel)]="supply.telephone"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.supply.supplyDate"
+                           for="field_supplyDate">Supply Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                            id="field_supplyDate" class="form-control"
+                                            name="supplyDate" [(ngModel)]="supply.supplyDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.supply.description"
+                           for="field_description">Description</label>
+                    <textarea [disabled]="isView" type="text" class="form-control" name="description"
+                           id="field_description" name="keyMap" type="text"
+                           [(ngModel)]="supply.description">
+                    </textarea>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

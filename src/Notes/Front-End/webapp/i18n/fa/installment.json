@@ -1,0 +1,41 @@
+
+{
+    "niopdcgatewayApp": {
+        "installment" : {
+            "home": {
+                "loanTitle":"وام",
+                "title": "اقساط",
+                "titlePayment": "پرداخت اقساط"
+            },
+            "detail": {
+                "title": "Installment"
+            },
+            "paymentId": "Payment Id",
+            "price": "مبلغ قسط",
+            "penaltyPrice": "مبلغ جریمه",
+            "remainingPrice": "مبلغ مانده",
+            "payPrice": "مبلغ پرداخت شده",
+            "date": "پرداختی ها",
+            "dueDate": "تاریخ سررسید",
+            "loan": "Loan",
+            "billItem": "Bill Item",
+            "status":"وضعیت",
+            "payment":"پرداخت اقساط",
+            "allIsPay":"تمام اقساط پرداخت شده است.",
+            "dueDate.allIsPay":"تمام اقساط سررسید شده پرداخت شده است."
+        },
+        "installmentStatus":{
+            "PAY" : "پرداخت شده",
+            "DUE_DATE" : "سررسید",
+            "NOT_PAY":"پرداخت نشده"
+
+        }
+    },
+    "niopdcaccountingApp": {
+        "installment" : {
+            "created": "A new Installment is created with identifier {{ param }}",
+            "updated": "A Installment is updated with identifier {{ param }}",
+            "deleted": "A Installment is deleted with identifier {{ param }}"
+        }
+    }
+}

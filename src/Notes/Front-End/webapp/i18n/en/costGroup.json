@@ -1,0 +1,33 @@
+
+{
+    "niopdcgatewayApp": {
+        "costGroup" : {
+            "home": {
+                "title": "Cost Groups",
+                "createLabel": "Create a new Cost Group",
+                "createOrEditLabel": "Create or edit a Cost Group"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Cost Group {{ id }}?"
+            },
+            "detail": {
+                "title": "Cost Group"
+            },
+            "title": "Title",
+            "code": "Code",
+            "costGroupType": "Cost Group Type",
+            "costMethod": "Cost Method",
+            "forced": "Forced",
+            "paymentPeriod": "Payment Period",
+            "costGroupAccessType": "Cost Group Access Type",
+            "costType": "Cost Type"
+        }
+    },
+    "niopdcrateApp": {
+        "costGroup" : {
+            "created": "A new Cost Group is created with identifier {{ param }}",
+            "updated": "A Cost Group is updated with identifier {{ param }}",
+            "deleted": "A Cost Group is deleted with identifier {{ param }}"
+        }
+    }
+}

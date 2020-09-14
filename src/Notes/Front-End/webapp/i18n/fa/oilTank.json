@@ -1,0 +1,40 @@
+{
+    "niopdcgatewayApp": {
+        "oilTank": {
+            "home": {
+                "title": "مخزن",
+                "createLabel": "ایجاد مخزن",
+                "createOrEditLabel": "ویرایش مخزن",
+                "view": "نمایش مخزن",
+                "search": "جستجو"
+            },
+            "delete": {
+                "question": "آیا برای حذف مخزن  {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "مخزن"
+            },
+            "title": "عنوان",
+            "code": "کد مخزن",
+            "virtualCapacity": "ظرفیت اسمی",
+            "capacity": "ظرفیت مجاز",
+            "contaminate": "مقدار تهکشی",
+            "fullCapacity": "ظرفیت کل",
+            "productId": "فرآورده",
+            "oilTankType": "نوع مخزن",
+            "refuelCenter": "مرکز سوخت گیری",
+            "oilTankStatus": "وضعیت مخزن",
+            "metre": "ميتر فعال",
+            "metres": "ميتر",
+            "measureType": "روش اندازه گیری",
+            "unit": "واحد"
+        }
+    },
+    "niopdcaoApp": {
+        "oilTank": {
+            "created": "مخزن با موفقیت  ایجاد شد.",
+            "updated": "مخزن با موفقیت  ویرایش شد.",
+            "deleted": "مخزن با موفقیت  حذف شد."
+        }
+    }
+}

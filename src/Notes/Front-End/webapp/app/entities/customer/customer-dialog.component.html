@@ -1,0 +1,483 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+    <div class="modal-header">
+        <h4 *ngIf="customer.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.customer.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="customer.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.customer.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.customer.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customer.name"
+                           for="field_name">Name</label>
+                    <input [disabled]="isView || (isCustomerTypeEdit && customer.id && !isAdmin)" type="text"
+                           class="form-control" name="name"
+                           id="field_name"
+                           [(ngModel)]="customer.name"
+                           required minlength="3" maxlength="255"/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.name?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.name?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.name?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 42 }">
+                            This field cannot be longer than 42 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.customerType.customerGroup"
+                           for="field_customerGroup">Customer Group</label>
+                    <select [disabled]="isView || (isCustomerTypeEdit && customer.id && !isAdmin)" class="form-control"
+                            name="customerGroup"
+                            [(ngModel)]="customerGroup" (ngModelChange)="onChangeCustomerGroup()"
+                            id="field_customerGroup" required>
+                        <option value="STATION"
+                                jhiTranslate="niopdcgatewayApp.CustomerGroup.STATION">
+                            SUPPLIER
+                        </option>
+                        <option value="SELLER" jhiTranslate="niopdcgatewayApp.CustomerGroup.SELLER">
+                            CONSUMER
+                        </option>
+                        <option value="MAJOR_CONSUMER"
+                                jhiTranslate="niopdcgatewayApp.CustomerGroup.MAJOR_CONSUMER">
+                            SUPPLIER
+                        </option>
+                        <option value="AIRPLANE"
+                                jhiTranslate="niopdcgatewayApp.CustomerGroup.AIRPLANE">
+                            AIRLINE
+                        </option>
+                        <option value="LIQUID_GAS">{{'niopdcgatewayApp.CustomerGroup.LIQUID_GAS' |
+                            translate}}
+                        </option>
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.customerGroup?.dirty && editForm.controls.customerGroup?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.customerGroup?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.customer.type"
+                           for="field_type">Type</label>
+                    <select [disabled]="isView || (!isCustomerTypeEdit && customer.id && !isAdmin)" class="form-control"
+                            id="field_type" name="type"
+                            (ngModelChange)="onChangeCustomerType($event)"
+                            [(ngModel)]="customer.typeId" required>
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="customerTypeOption.id"
+                                *ngFor="let customerTypeOption of customertypes | sortBy:'title'; trackBy: trackCustomerTypeById">
+                            {{customerTypeOption.title}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.type?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4" *ngIf="customerType">
+                <div class="form-group">
+                    <label
+                        *ngIf="customerType?.locationType === LocationType[LocationType.FIXED]"
+                        class="form-control-label"
+                        jhiTranslate="niopdcgatewayApp.customer.postalCode"
+                        for="field_postalCode">postalCode</label>
+
+                    <label
+                        *ngIf="customerGroup === CustomerGroup[CustomerGroup.AIRPLANE] && customerType?.locationType === LocationType[LocationType.MOVABLE]"
+                        class="form-control-label"
+                        jhiTranslate="niopdcgatewayApp.customer.registerCode"
+                        for="field_registerCode">Code</label>
+
+                    <label
+                        *ngIf="customerGroup !== CustomerGroup[CustomerGroup.AIRPLANE] && customerType?.locationType === LocationType[LocationType.MOVABLE]"
+                        class="form-control-label"
+                        for="field_movableCode">{{customerType.customerCodeTitle ? customerType.customerCodeTitle : 'کد'}}</label>
+
+                    <input
+                        *ngIf="customerType?.locationType === LocationType[LocationType.FIXED]"
+                        type="text"
+                        class="form-control"
+                        name="postalCode"
+                        id="field_postalCode"
+                        [(ngModel)]="customer.postalCode"
+                        [disabled]="isView || (isCustomerTypeEdit && customer.id && !isAdmin)"
+                        [numeric]
+                        [pattern]="regexCode"
+                        search-after-typed (onSearch)="onChangePostalCode()"
+                        maxlength="10"
+                        minlength="0"
+                        required
+                    />
+                    <input
+                        *ngIf="customerGroup === CustomerGroup[CustomerGroup.AIRPLANE] && customerType?.locationType === LocationType[LocationType.MOVABLE]"
+                        type="text"
+                        class="form-control"
+                        name="registerCode"
+                        id="field_registerCode"
+                        [(ngModel)]="customer.registerCode"
+                        [disabled]="isView  || (isCustomerTypeEdit && customer.id && !isAdmin)"
+                        required
+                    />
+                    <input
+                        *ngIf="customerGroup !== CustomerGroup[CustomerGroup.AIRPLANE] && customerType?.locationType === LocationType[LocationType.MOVABLE]"
+                        type="text"
+                        class="form-control"
+                        name="movableCode"
+                        id="field_movableCode"
+                        [(ngModel)]="customer.movableCode"
+                        [disabled]="isView  || (isCustomerTypeEdit && customer.id && !isAdmin)"
+                        required
+                    />
+                    <div
+                        *ngIf="customerType?.locationType === LocationType[LocationType.FIXED]"
+                        [hidden]="!(editForm.controls.code?.dirty && editForm.controls.postalCode?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.postalCode?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength"
+                               [translateValues]="{ min: 10 }">
+                            This field is required to be at least 5 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.postalCode?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength"
+                               [translateValues]="{ max: 10 }">
+                            This field cannot be longer than 5 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4"
+                 *ngIf="customerType && customerType.hasGsId && customerGroup === CustomerGroup[CustomerGroup.STATION] || customerGroup === CustomerGroup[CustomerGroup.AIRPLANE]">
+                <div *ngIf="customerGroup === CustomerGroup[CustomerGroup.STATION]" class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customer.gsId"
+                           for="field_gsId">gsId</label>
+                    <input [disabled]="isView  || (isCustomerTypeEdit && customer.id && !isAdmin)" type="text"
+                           class="form-control"
+                           name="gsId"
+                           id="field_gsId"
+                           maxlength="4"
+                           [(ngModel)]="customer.gsId"/>
+                </div>
+                <div
+                    *ngIf="customerGroup === CustomerGroup[CustomerGroup.AIRPLANE] && vehicleModelOptions && vehicleModelOptions.length >0"
+                    class="form-group">
+                    <label class="form-control-label"
+                           *ngIf="customerType?.locationType !== LocationType[LocationType.FIXED]"
+                           jhiTranslate="niopdcgatewayApp.customer.vehicleModel"
+                           for="field_vehicleModel1">Vehicle Model</label>
+                    <label class="form-control-label"
+                           *ngIf="customerType?.locationType === LocationType[LocationType.FIXED]"
+                           jhiTranslate="niopdcgatewayApp.customer.capacity"
+                           for="field_vehicleModel1">Vehicle Model</label>
+                    <p-dropdown [disabled]="isView  || (isCustomerTypeEdit && customer.id && !isAdmin)"
+                                class="form-control" name="vehicleModelTypes"
+                                [options]="vehicleModelOptions"
+                                [filter]="true"
+                                [(ngModel)]="customer.vehicleModelId"
+                                id="field_vehicleModel1" required>
+                    </p-dropdown>
+
+                </div>
+                <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.type?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customer.registerDate"
+                           for="field_registerDate">Register Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disableTime]="true" [disabled]="true" [rtlActive]="true"
+                                            time="00:00:00"
+                                            id="field_registerDate" class="form-control"
+                                            name="registerDate" [(ngModel)]="customer.registerDate"
+                        ></ng2-datetimepicker>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customer.creditAccount"
+                           for="field_creditAccount1">creditAccount</label>
+                    <input [disabled]="isView  || (isCustomerTypeEdit && customer.id && !isAdmin)" type="text"
+                           class="form-control" name="creditAccount"
+                           id="field_creditAccount1"
+                           [(ngModel)]="customer.creditAccount" minlength="1" maxlength="5"/>
+                    <div
+                        [hidden]="!(editForm.controls.creditAccount?.dirty && editForm.controls.creditAccount?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.creditAccount?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 1 }">
+                            This field is required to be at least 10 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.creditAccount?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 5 }">
+                            This field cannot be longer than 10 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="customerGroup !== CustomerGroup[CustomerGroup.AIRPLANE]"
+                 style="text-align: center;margin-top: auto">
+                <div class="form-group">
+                    <input
+                        [disabled]="isView || (customer.id && customer.identifyCode)  || (isCustomerTypeEdit && customer.id && !isAdmin)"
+                        type="checkbox" class="form-control"
+                        name="selectiveContractTypes" id="field_createCodeBySystem"
+                        [(ngModel)]="enterCode"/>
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.customer.createCodeBySystem"
+                           for="field_createCodeBySystem">Identify Code</label>
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="customerGroup !== CustomerGroup[CustomerGroup.AIRPLANE]">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.customer.identifyCode"
+                           for="field_identifyCode">Identify Code</label>
+                    <input
+                        [disabled]="isView || enterCode || (customer.id && customer.identifyCode)  || (isCustomerTypeEdit && customer.id && !isAdmin)"
+                        type="text"
+                        class="form-control"
+                        name="identifyCode"
+                        id="field_identifyCode"
+                        [(ngModel)]="customer.identifyCode"
+                        maxlength="9"
+                        required
+                    />
+                </div>
+            </div>
+
+
+            <ng-container *ngIf="customerType?.locationType === LocationType[LocationType.FIXED]">
+                <div class="col-xs-12 col-md-4">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customer.telephone"
+                               for="field_telephone">Telephone</label>
+                        <input [disabled]="isView  || (isCustomerTypeEdit && customer.id && !isAdmin)" type="text"
+                               class="form-control" name="telephone"
+                               id="field_telephone"
+                               [(ngModel)]="customer.telephone"
+                               numeric
+                               required
+                               minlength="3" maxlength="12"/>
+                        <div
+                            [hidden]="!(editForm.controls.telephone?.dirty && editForm.controls.telephone?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.telephone?.errors?.minlength"
+                                   jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                                This field is required to be at least 3 characters.
+                            </small>
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.telephone?.errors?.maxlength"
+                                   jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 12 }">
+                                This field cannot be longer than 12 characters.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customer.cellphone"
+                               for="field_cellphone">cellphone</label>
+                        <input [disabled]="isView  || (isCustomerTypeEdit && customer.id && !isAdmin)" type="text"
+                               class="form-control" name="cellphone"
+                               id="field_cellphone"
+                               [(ngModel)]="customer.cellphone"
+                               numeric
+                               required
+                               minlength="11" maxlength="11"/>
+                        <div
+                            [hidden]="!(editForm.controls.cellphone?.dirty && editForm.controls.cellphone?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.cellphone?.errors?.minlength"
+                                   jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 11 }">
+                                This field is required to be at least 3 characters.
+                            </small>
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.cellphone?.errors?.maxlength"
+                                   jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 11 }">
+                                This field cannot be longer than 12 characters.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customer.address"
+                               for="field_address">Address</label>
+                        <textarea
+                            [disabled]="isView || (customerGroup !== CustomerGroup[CustomerGroup.AIRPLANE] && customerType?.locationType !== LocationType[LocationType.MOVABLE])  || (isCustomerTypeEdit && customer.id && !isAdmin)"
+                            type="text" class="form-control" name="address"
+                            id="field_address"
+                            [(ngModel)]="customer.address"
+                            minlength="3" maxlength="255"></textarea>
+                        <div
+                            [hidden]="!(editForm.controls.address?.dirty && editForm.controls.address?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.address?.errors?.minlength"
+                                   jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                                This field is required to be at least 3 characters.
+                            </small>
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.address?.errors?.maxlength"
+                                   jhiTranslate="entity.validation.maxlength"
+                                   [translateValues]="{ max: 255 }">
+                                This field cannot be longer than 255 characters.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <div class="col-md-6"
+                 *ngIf="customerType?.locationType === LocationType[LocationType.FIXED]">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.customer.region"
+                           for="field_region">Region</label>
+
+                    <input-region-selector [disabled]="isView  || (isCustomerTypeEdit && customer.id && !isAdmin)"
+                                           class="form-control" [idSelector]="true"
+                                           [oneSelection]="true"
+                                           id="field_region" name="region"
+                                           [selectOfLevel]="[1,2,3,4]"
+                                           [(ngModel)]="customer.regionId"
+                                           required
+                    ></input-region-selector>
+                </div>
+                <div [hidden]="!(editForm.controls.region?.dirty && editForm.controls.region?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.region?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-6"
+                 *ngIf="customerType?.locationType === LocationType[LocationType.FIXED]">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.customer.location"
+                           for="field_location">Location</label>
+
+                    <input-location-selector
+                        [disabled]="isView  || (isCustomerTypeEdit && customer.id && !isAdmin)"
+                        class="form-control" required
+                        [oneSelection]="true"
+                        [idSelector]="false"
+                        [(ngModel)]="location"
+                        (ngModelChange)="onChangeLocation()"
+                        id="field_location" name="location"
+                        [selectOfLevel]="[2]">
+                    </input-location-selector>
+                    <div
+                        [hidden]="!(editForm.controls.location?.dirty && editForm.controls.location?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.location?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6"
+                 *ngIf="customerGroup === CustomerGroup[CustomerGroup.AIRPLANE] && customerType?.locationType === LocationType[LocationType.FIXED]">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.customer.refuelCenterIds"
+                           for="field_refuelCenterIds">refuelCenter</label>
+                    <p-multiSelect [disabled]="isView  || (isCustomerTypeEdit && customer.id && !isAdmin)"
+                                   class="form-control" id="field_refuelCenterIds"
+                                   [options]="refuelCenters"
+                                   name="refuelCenterIds"
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                   [(ngModel)]="customer.refuelCenterIds"
+                                   [ngModelOptions]="{standalone: true}"
+                    ></p-multiSelect>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row" *ngIf="customer.persons">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <span><h5 jhiTranslate="niopdcgatewayApp.customer.person.info">
+                        </h5></span>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p-table [value]="customer.persons" [responsive]="true">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th jhiTranslate="niopdcgatewayApp.customer.person.name"></th>
+                                <th jhiTranslate="niopdcgatewayApp.customer.person.code"></th>
+                                <th jhiTranslate="niopdcgatewayApp.customer.contract.code"></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item style="color: black">
+                            <tr>
+                                <td>{{item.personName}}</td>
+                                <td>{{item.personCode}}</td>
+                                <td>{{item.sellContractCode}}</td>
+
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit"
+                [disabled]="editForm.form.invalid || isSaving"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

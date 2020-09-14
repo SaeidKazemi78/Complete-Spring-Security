@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "Personality" : {
+            "null": "",
+            "LEGAL": "حقوقی",
+            "NATURAL": "حقیقی"
+        }
+    }
+}

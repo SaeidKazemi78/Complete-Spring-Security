@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "installment" : {
+            "home": {
+                "title": "Installments",
+                "createLabel": "Create a new Installment",
+                "createOrEditLabel": "Create or edit a Installment"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Installment {{ id }}?"
+            },
+            "detail": {
+                "title": "Installment"
+            },
+            "paymentId": "Payment Id",
+            "price": "Price",
+            "date": "Date",
+            "loan": "Loan",
+            "billItem": "Bill Item"
+        }
+    },
+    "niopdcaccountingApp": {
+        "installment" : {
+            "created": "A new Installment is created with identifier {{ param }}",
+            "updated": "A Installment is updated with identifier {{ param }}",
+            "deleted": "A Installment is deleted with identifier {{ param }}"
+        }
+    }
+}

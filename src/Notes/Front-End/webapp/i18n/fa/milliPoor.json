@@ -1,0 +1,33 @@
+
+{
+    "niopdcgatewayApp": {
+        "milliPoor" : {
+            "home": {
+                "title": "میلی پور",
+                "createLabel":"ایجاد میلی پور",
+                "createOrEditLabel":"ویرایش میلی پور",
+                "view":"نمایش میلی پور"
+            },
+            "delete": {
+                "question": "آیا برای حذف این میلی پور مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "میلی پور"
+            },
+            "wet": "تر",
+            "dry": "خشک",
+            "gravimetric": "آزمایش وزنی",
+            "date": "تاریخ",
+            "isSend": "ارسال",
+            "isSendTrue":"فعال",
+            "isSendFalse":"غیر فعال"
+        }
+    },
+    "niopdcaoApp": {
+        "milliPoor" : {
+            "created": "میلی پور با موفقیت ایجاد شد.",
+            "updated": "میلی پور با موفقیت ویرایش شد.",
+            "deleted": "میلی پور با موفقیت حذف شد."
+        }
+    }
+}

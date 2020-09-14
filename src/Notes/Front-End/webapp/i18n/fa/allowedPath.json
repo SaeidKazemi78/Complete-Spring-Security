@@ -1,0 +1,27 @@
+
+{
+    "niopdcgatewayApp": {
+        "allowedPath" : {
+            "home": {
+                "title": "Allowed Paths",
+                "createLabel": "Create a new Allowed Path",
+                "createOrEditLabel": "Create or edit a Allowed Path"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Allowed Path {{ id }}?"
+            },
+            "detail": {
+                "title": "Allowed Path"
+            },
+            "targetRefuelCenters": "Target RefuelCenters",
+            "refuelCenter": "RefuelCenter"
+        }
+    },
+    "niopdcaoApp": {
+        "allowedPath" : {
+            "created": "A new Allowed Path is created with identifier {{ param }}",
+            "updated": "A Allowed Path is updated with identifier {{ param }}",
+            "deleted": "A Allowed Path is deleted with identifier {{ param }}"
+        }
+    }
+}

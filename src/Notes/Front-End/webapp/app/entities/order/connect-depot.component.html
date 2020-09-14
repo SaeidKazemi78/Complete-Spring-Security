@@ -1,0 +1,362 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <ngb-tabset [justify]="'justified'">
+        <ngb-tab title="ایجاد فایل برای ارسال به انبار" *jhiHasAnyAuthority="['ROLE_ADMIN', 'CONNECT_DEPOT_DOWNLOAD']">
+            <ng-template ngbTabContent>
+                <form name="editForm" role="form" novalidate #editForm="ngForm">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.connectDepot.location"
+                                               for="field_locationId">Location Id</label>
+                                        <app-location-level-selector
+                                            [multiSelect]="false"
+                                            [(ngModel)]="req.locationId"
+                                            class="form-control"
+                                            id="field_locationId"
+                                            widthGrid="500px"
+                                            (selectedItem)="locationChanged()"
+                                            [ngModelOptions]="{standalone: true}"
+                                            ngDefaultControl
+                                            name="locationId"
+                                        >
+                                        </app-location-level-selector>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.connectDepot.depot"
+                                               for="field_depotId">Depot Id</label>
+                                        <p-dropdown [options]="depots"
+                                                    [(ngModel)]="req.depotId"
+                                                    [filter]="true"
+                                                    class="form-control"
+                                                    (onChange)="depotChanged($event.value)"
+                                                    filterBy="label"
+                                                    id="field_depotId"
+                                                    name="depotId"
+                                                    ngDefaultControl required
+                                        >
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.connectDepot.product"
+                                               for="field_product">Product</label>
+                                        <select class="form-control" id="field_product"
+                                                name="product"
+                                                [(ngModel)]="req.productId">
+                                            <option *ngIf="!editForm.value.product" [ngValue]="null" selected></option>
+                                            <option [ngValue]="productOption.id"
+                                                    *ngFor="let productOption of products; trackBy: trackProductById">
+                                                {{productOption.title}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.connectDepot.startOrderNumber"
+                                               for="field_startOrderNumber">Start Order Number</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               name="startOrderNumber" id="field_startOrderNumber" maxlength="8"
+                                               [(ngModel)]="req.startOrderNo"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.connectDepot.endOrderNumber"
+                                               for="field_endOrderNumber">Start Order Number</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               name="endOrderNumber" id="field_endOrderNumber" maxlength="8"
+                                               [(ngModel)]="req.endOrderNo"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.connectDepot.startDate"
+                                               for="field_startDate">Start Date</label>
+                                        <div class="d-flex">
+                                            <ng2-datetimepicker [rtlActive]="true" time="00:00:00"
+                                                                id="field_startDate"
+                                                                class="form-control"
+                                                                name="startDate" [(ngModel)]="req.startDate"
+                                                                ></ng2-datetimepicker>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.connectDepot.endDate"
+                                               for="field_endDate">Start Date</label>
+                                        <div class="d-flex">
+                                            <ng2-datetimepicker  [rtlActive]="true" time="23:59:59"
+                                                                id="field_endDate"
+                                                                class="form-control"
+                                                                name="endDate" [(ngModel)]="req.endDate"
+                                                                ></ng2-datetimepicker>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <div ngbDropdown placement="bottom-right" class="d-inline-block">
+                                    <button type="button" class="btn btn-outline-primary" id="dropdownBasic1"
+                                            ngbDropdownToggle
+                                            [disabled]="editForm.form.invalid ">
+                                        <span class="fa fa-download"></span>&nbsp;<span
+                                        jhiTranslate="entity.action.downloadOrSend">download</span>
+                                    </button>
+                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                        <button class="dropdown-item" (click)="connect('SEND_TO_NEW')"
+                                                jhiTranslate="niopdcgatewayApp.connectDepot.sendToNew">New Depot
+                                        </button>
+                                        <button class="dropdown-item" (click)="connect('DOWNLOAD_FOR_NEW')"
+                                                jhiTranslate="niopdcgatewayApp.connectDepot.downloadForNew">New Depot
+                                        </button>
+                                        <button class="dropdown-item" (click)="connect('DOWNLOAD_FOR_OLD')"
+                                                jhiTranslate="niopdcgatewayApp.connectDepot.downloadForOld">Old Depot
+                                        </button>
+                                    </div>
+                                </div>
+                                    <button type="button" class="btn btn-outline-primary"
+                                            id="dropdownBasic2"
+                                            (click)="search()"
+                                            [disabled]="editForm.form.invalid ">
+                                        <span class="fa fa-search"></span>&nbsp;<span
+                                        jhiTranslate="entity.action.search">search</span>
+                                    </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <p-dataTable *ngIf="depotFiles" [value]="depotFiles" [responsive]="true" [stacked]="false"
+                             [immutable]="false"
+                             [emptyMessage]="'global.messages.info.emptyRecords' | translate">
+                    <p-headerColumnGroup>
+                        <p-row>
+                            <p-column field="depotSendCode">
+                                <ng-template pTemplate="header">
+                                    <span jhiTranslate="niopdcgatewayApp.connectDepot.depotSendCode">depotSendCode</span>
+                                </ng-template>
+                            </p-column>
+                            <p-column field="depotSendDate">
+                                <ng-template pTemplate="header">
+                                    <span jhiTranslate="niopdcgatewayApp.connectDepot.depotSendDate">depotSendDate</span>
+                                </ng-template>
+                            </p-column>
+                            <p-column field="productId">
+                                <ng-template pTemplate="header">
+                                    <span jhiTranslate="niopdcgatewayApp.connectDepot.product">depotSendCode</span>
+                                </ng-template>
+                            </p-column>
+                            <p-column field="startOrderNo">
+                                <ng-template pTemplate="header">
+                                    <span jhiTranslate="niopdcgatewayApp.connectDepot.startOrderNumber">depotSendCode</span>
+                                </ng-template>
+                            </p-column>
+                            <p-column field="endOrderNo">
+                                <ng-template pTemplate="header">
+                                    <span jhiTranslate="niopdcgatewayApp.connectDepot.endOrderNumber">endOrderNo</span>
+                                </ng-template>
+                            </p-column>
+                            <p-column field="startDate">
+                                <ng-template pTemplate="header">
+                                    <span jhiTranslate="niopdcgatewayApp.connectDepot.startDate">endDate</span>
+                                </ng-template>
+                            </p-column> <p-column field="endDate">
+                                <ng-template pTemplate="header">
+                                    <span jhiTranslate="niopdcgatewayApp.connectDepot.endDate">endDate</span>
+                                </ng-template>
+                            </p-column>
+
+
+                            <p-column styleClass="col-button250"></p-column>
+                        </p-row>
+                    </p-headerColumnGroup>
+                    <p-column field="depotSendCode"
+                              [header]="'niopdcgatewayApp.connectDepot.depotSendCode' | translate">
+                        <ng-template let-item="rowData" pTemplate="body">
+                            <span>{{item.depotSendCode}}</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="sendToDepotDate"
+                              [header]="'niopdcgatewayApp.order.depotSendDate' | translate">
+                        <ng-template let-item="rowData" pTemplate="body">
+                            <span>{{item.depotSendDate | dateJalali}}</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="productId"
+                              [header]="'niopdcgatewayApp.connectDepot.product' | translate">
+                        <ng-template let-item="rowData" pTemplate="body">
+                            <span>{{item.productId}}</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="startOrderNo"
+                              [header]="'niopdcgatewayApp.connectDepot.startOrderNo' | translate">
+                        <ng-template let-item="rowData" pTemplate="body">
+                            <span>{{item.startOrderNo}}</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="endOrderNo"
+                              [header]="'niopdcgatewayApp.connectDepot.endOrderNo' | translate">
+                        <ng-template let-item="rowData" pTemplate="body">
+                            <span>{{item.endOrderNo}}</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="startDate"
+                              [header]="'niopdcgatewayApp.connectDepot.startDate' | translate">
+                        <ng-template let-item="rowData" pTemplate="body">
+                            <span>{{item.startDate | dateJalali}}</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="endDate"
+                              [header]="'niopdcgatewayApp.connectDepot.endDate' | translate">
+                        <ng-template let-item="rowData" pTemplate="body">
+                            <span>{{item.endDate | dateJalali}}</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column class="component">
+                        <ng-template let-item="rowData" pTemplate="body">
+
+                            <div ngbDropdown class="d-inline-block">
+                                <button type="button" class="btn btn-outline-primary" ngbDropdownToggle
+                                        [disabled]="editForm.form.invalid ">
+                                    <span class="fa fa-download"></span>&nbsp;<span
+                                    jhiTranslate="entity.action.downloadOrSend">download</span>
+                                </button>
+                                <div ngbDropdownMenu>
+                                    <button class="dropdown-item" (click)="connect('SEND_TO_NEW', item)"
+                                            jhiTranslate="niopdcgatewayApp.connectDepot.sendToNew">New Depot
+                                    </button>
+                                    <button class="dropdown-item" (click)="connect('DOWNLOAD_FOR_NEW', item)"
+                                            jhiTranslate="niopdcgatewayApp.connectDepot.downloadForNew">New Depot
+                                    </button>
+                                    <button class="dropdown-item" (click)="connect('DOWNLOAD_FOR_OLD', item)"
+                                            jhiTranslate="niopdcgatewayApp.connectDepot.downloadForOld">Old Depot
+                                    </button>
+                                </div>
+                            </div>
+
+                        </ng-template>
+                    </p-column>
+                </p-dataTable>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="بارگذاری فایل برای خروج از انبار" *jhiHasAnyAuthority="['ROLE_ADMIN', 'CONNECT_DEPOT_UPLOAD']">
+            <ng-template ngbTabContent>
+                <form name="editForm" role="form" novalidate (ngSubmit)="upload('EXIT_FROM_DEPOT')" #editForm2="ngForm">
+                    <div class="card">
+                        <div class="card-block container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.order.depotSendCode"
+                                               for="field_locationId">Location Id</label>
+                                        <input type="text"
+                                               [(ngModel)]="req.depotSendCode"
+                                               class="form-control"
+                                               id="field_depotSendCode"
+                                               name="depotSendCode"
+                                               required
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <button type="submit" class="btn btn-primary "
+                                    [disabled]="editForm2.form.invalid ">
+                                <span class="fa fa-upload"></span>&nbsp;<span
+                                jhiTranslate="entity.action.upload">upload</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="بارگذاری فایل برگشت از انبار" *jhiHasAnyAuthority="['ROLE_ADMIN', 'CONNECT_DEPOT_UPLOAD']">
+            <ng-template ngbTabContent>
+                <form name="editForm" role="form" novalidate (ngSubmit)="upload('BACK_FROM_DEPOT')" #editForm2="ngForm">
+                    <div class="card">
+                        <div class="card-block container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.order.depotSendCode"
+                                               for="field_locationId">Location Id</label>
+                                        <input type="text"
+                                               [(ngModel)]="req.depotSendCode"
+                                               class="form-control"
+                                               id="field_depotSendCode"
+                                               name="depotSendCode"
+                                               required
+                                        >
+                                        </input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <button type="submit" class="btn btn-primary "
+                                    [disabled]="editForm2.form.invalid ">
+                                <span class="fa fa-upload"></span>&nbsp;<span
+                                jhiTranslate="entity.action.upload">upload</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab title="بارگذاری فایل برگشت  از فروش" *jhiHasAnyAuthority="['ROLE_ADMIN', 'CONNECT_DEPOT_UPLOAD']">
+            <ng-template ngbTabContent>
+                <form name="editForm" role="form" novalidate (ngSubmit)="upload('BACK_FROM_SALE')" #editForm2="ngForm">
+                    <div class="card">
+                        <div class="card-block container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.order.depotSendCode"
+                                               for="field_locationId">Location Id</label>
+                                        <input type="text"
+                                               [(ngModel)]="req.depotSendCode"
+                                               class="form-control"
+                                               id="field_depotSendCode"
+                                               name="depotSendCode"
+                                               required
+                                        >
+                                        </input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <button type="submit" class="btn btn-primary "
+                                    [disabled]="editForm2.form.invalid ">
+                                <span class="fa fa-upload"></span>&nbsp;<span
+                                jhiTranslate="entity.action.upload">upload</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
+</div>

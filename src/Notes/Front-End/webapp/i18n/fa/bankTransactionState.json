@@ -1,0 +1,13 @@
+{
+    "niopdcgatewayApp": {
+        "BankTransactionState" : {
+            "null": "",
+            "BEGIN": "BEGIN",
+            "PENDING": "PENDING",
+            "SYS_ERROR": "SYS_ERROR",
+            "CANCEL": "CANCEL",
+            "BANK_ERROR": "BANK_ERROR",
+            "COMPLETE": "COMPLETE"
+        }
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "niopdcgatewayApp": {
+        "currencyRateGroup" : {
+            "home": {
+                "title": "گروه نرخ واحد پولی",
+                "createLabel": "ایجاد گروه واحد پولی",
+                "createOrEditLabel": "ویرایش گروه واحد پولی",
+                "view": "نمایش گروه واحد پولی"
+            },
+            "delete": {
+                "question": "آیا برای حذف گروه واحد پولی  {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "گروه واحد پولی"
+            },
+            "all":"همه",
+            "title": "عنوان"
+        }
+    },
+    "niopdcrateApp": {
+        "currencyRateGroup" : {
+            "created": "گروه واحد پولی با موفقیت ایجاد شد.",
+            "updated": "گروه واحد پولی با موفقیت ویرایش شد.",
+            "deleted": "گروه واحد پولی با موفقیت حذف شد."
+        }
+    }
+}

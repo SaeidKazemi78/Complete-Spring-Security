@@ -1,0 +1,20 @@
+{
+    "niopdcgatewayApp": {
+        "actionLogMapping": {
+            "home": {
+                "title": "معادل سازی"
+            },
+            "delete": {
+                "question": "آیا برای حذف معادل سازی مطمئن هستید ؟"
+            },
+            "viewListActionLogMapping": " مشاهده لیست معادل سازی ها",
+            "persianName": "نام فارسی",
+            "templateUrl": "الگوی آدرس",
+            "url": "آدرس",
+            "method": "نوع",
+            "updated": "معادل سازی با موفقیت ویرایش شد.",
+            "created": "معادل سازی با موفقیت ایجاد شد.",
+            "deleted": "معادل سازی با موفقیت حذف شد."
+        }
+    }
+}

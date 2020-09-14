@@ -1,0 +1,27 @@
+
+{
+    "niopdcgatewayApp": {
+        "productGroup" : {
+            "home": {
+                "title": "Product Groups",
+                "createLabel": "Create a new Product Group",
+                "createOrEditLabel": "Create or edit a Product Group"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Product Group {{ id }}?"
+            },
+            "detail": {
+                "title": "Product Group"
+            },
+            "title": "Title",
+            "code": "Code"
+        }
+    },
+    "niopdcbaseApp": {
+        "productGroup" : {
+            "created": "A new Product Group is created with identifier {{ param }}",
+            "updated": "A Product Group is updated with identifier {{ param }}",
+            "deleted": "A Product Group is deleted with identifier {{ param }}"
+        }
+    }
+}

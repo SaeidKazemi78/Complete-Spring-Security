@@ -1,0 +1,48 @@
+{
+    "niopdcgatewayApp": {
+        "receivedProduct" : {
+            "home": {
+                "title": "دریافت فرآورده ها",
+                "createLabel":"ایجاد دریافت فرآورده",
+                "createOrEditLabel":"ویرایش دریافت فرآورده",
+                "view":"نمایش دریافت فرآورده"
+            },
+            "delete": {
+                "question": "آیا برای حذف این دریافت فرآورده مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "دریافت فرآورده"
+            },
+            "registerDate": "تاریخ ثبت",
+            "receivedProductType": "نوع فرآورده دریافتی",
+            "startDate": "تاریخ شروع",
+            "finishDate": "تاریخ پایان",
+            "productId": "فرآورده",
+            "inventoryId": "انبار",
+            "vehicleId": "شناسه خودرو",
+            "waybillNumber": "شماره بارنامه",
+            "driverName": "نام راننده",
+            "contractorNumber": "شماره قرارداد",
+            "description": "توضیحات",
+            "dayDepot": "روز انبار",
+            "receivedNatureAmount": "مقدار طبیعی دریافتی",
+            "receivedSixtyAmount": "مقدار 60 درجه دریافتی",
+            "receivedSpecialWeight": "وزن مخصوص دریافتی",
+            "receivedEnvironmentTemperature": "دمای محیط دریافتی",
+            "receivedProductTemperature": "دمای فرآورده دریافتی",
+            "sendNatureAmount": "مقدار ارسالی طبیعی",
+            "sendSixtyAmount": "مقدار ارسالی 60 درجه",
+            "sendSpecialWeight": "وزن مخصوص ارسالی",
+            "sendEnvironmentTemperature": "دمای محیط ارسالی",
+            "sendProductTemperature": "دمای فرآورده ارسالی"
+
+        }
+    },
+    "niopdcaoApp": {
+        "receivedProduct" : {
+            "created": "فرآورده دریافتی با موفقیت ایجاد شد.",
+            "updated": "فرآورده دریافتی با موفقیت ویرایش شد.",
+            "deleted": "فرآورده دریافتی با موفقیت حذف شد."
+        }
+    }
+}

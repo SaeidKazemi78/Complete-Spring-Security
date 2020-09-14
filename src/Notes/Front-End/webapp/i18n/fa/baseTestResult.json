@@ -1,0 +1,31 @@
+
+{
+    "niopdcgatewayApp": {
+        "baseTestResult" : {
+            "home": {
+                "title": "آیتم های درخواست سوخت",
+                "parentBaseTestResultTitle": "قالب جواب درخواست سوخت",
+                "createLabel": "Create a new Base Test Result",
+                "createOrEditLabel": "Create or edit a Base Test Result"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Base Test Result {{ id }}?"
+            },
+            "detail": {
+                "title": "Base Test Result"
+            },
+            "property": "Property",
+            "astm": "Astm",
+            "ip": "Ip",
+            "specification": "Specification",
+            "parentBaseTestResult": "Parent Base Test Result"
+        }
+    },
+    "niopdcaoApp": {
+        "baseTestResult" : {
+            "created": "آیتم های درخواست سوخت با موفقیت  ایجاد شد.",
+            "updated": "آیتم های درخواست سوخت با موفقیت  ویرایش شد.",
+            "deleted": "آیتم های درخواست سوخت با موفقیت  حذف شد."
+        }
+    }
+}

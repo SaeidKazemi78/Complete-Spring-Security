@@ -1,0 +1,32 @@
+{
+    "niopdcgatewayApp": {
+        "sellGroundFuel" : {
+            "home": {
+                "title": "فروش های سوخت زمینی",
+                "createLabel":"ایجاد فروش سوخت زمینی",
+                "createOrEditLabel":"ویرایش فروش سوخت زمینی",
+                "view":"نمایش فروش سوخت زمینی"
+            },
+            "delete": {
+                "question": "آیا برای حذف این فروش سوخت زمینی مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "فروش سوخت زمینی"
+            },
+            "amount": "مقدار",
+            "sellToDifferent": "فروش به دیگران",
+            "sellToDifferentTrue": "فعال",
+            "sellToDifferentFalse": "غیر فعال",
+            "rate": "نرخ",
+            "totalPrice": "قیمت کل",
+            "dayDepot": "روز انبار"
+        }
+    },
+    "niopdcaoApp": {
+        "sellGroundFuel" : {
+            "created": "فروش سوخت زمینی با موفقیت ایجاد شد.",
+            "updated": "فروش سوخت زمینی با موفقیت ویرایش شد.",
+            "deleted": "فروش سوخت زمینی با موفقیت حذف شد."
+        }
+    }
+}

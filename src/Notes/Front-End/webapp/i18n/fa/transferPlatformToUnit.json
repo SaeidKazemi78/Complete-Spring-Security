@@ -1,0 +1,40 @@
+{
+    "niopdcgatewayApp": {
+        "transferPlatformToUnit": {
+            "home": {
+                "title": "انتقال سکو به واحد ها",
+                "createLabel": "ایجاد انتقال سکو به واحد",
+                "createOrEditLabel": "ویرایش انتقال سکو به واحد",
+                "view": "نمایش انتقال سکو به واحد",
+                "dayDepotTitle": "روز انبار"
+            },
+            "delete": {
+                "question": "آیا برای حذف این انتقال سکو به واحد مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "انتقال سکو به واحد"
+            },
+            "registerDate": "تاریخ ثبت",
+            "unitMetreNumber": "شماره  میتر واحد",
+            "metreLog": "گزارش میتر",
+            "metre": "میتر",
+            "startMetre": "میتر شروع",
+            "endMetre": "میتر پایان",
+            "platform": "سکو",
+            "unit": "واحد",
+            "dayDepot": "روز انبار",
+            "natureAmount": "مقدار طبیعی",
+            "sixtyAmount": "مقدار 60 درجه",
+            "specialWeight": "وزن مخصوص",
+            "environmentTemperature": "دمای محیط",
+            "productTemperature": "دمای فرآورده"
+        }
+    },
+    "niopdcaoApp": {
+        "transferPlatformToUnit": {
+            "created": "انتقال سکو به واحد با موفقیت ایجاد شد.",
+            "updated": "انتقال سکو به واحد با موفقیت ویرایش شد.",
+            "deleted": "انتقال سکو به واحد با موفقیت حذف شد."
+        }
+    }
+}

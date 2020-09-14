@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "pos" : {
+            "home": {
+                "title": "Pc-Pos",
+                "createLabel": "ایجاد Pc-Pos",
+                "createOrEditLabel": "ویرایش Pc-Pos",
+                "view":"نمایش Pc-Pos",
+                "airportTitle":"فرودگاه"
+            },
+            "delete": {
+                "question": "آیا برای حذف Pc-Posمطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "پز"
+            },
+            "serial": "شماره سریال",
+            "airport": "فرودگاه"
+        }
+    },
+    "niopdcaoApp": {
+        "pos" : {
+            "created": "Pc-Pos با موفقیت ایجاد شد.",
+            "updated": "Pc-Pos با موفقیت ویرایش شد.",
+            "deleted": "Pc-Pos با موفقیت حذف شد."
+        }
+    }
+}

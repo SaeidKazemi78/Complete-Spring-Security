@@ -1,0 +1,57 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="mySealUseLabel" jhiTranslate="niopdcgatewayApp.sealUse.home.createOrEditLabel">Create or edit a Seal Use</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!sealUse.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="sealUse.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.sealUse.sealNumber" for="field_sealNumber">Seal Number</label>
+            <input type="number" class="form-control" name="sealNumber" id="field_sealNumber"
+                [(ngModel)]="sealUse.sealNumber" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.sealUse.sealPrefix" for="field_sealPrefix">Seal Prefix</label>
+            <input type="text" class="form-control" name="sealPrefix" id="field_sealPrefix"
+                [(ngModel)]="sealUse.sealPrefix" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.sealUse.sealUseReason" for="field_sealUseReason">Seal Use Reason</label>
+            <select class="form-control" name="sealUseReason" [(ngModel)]="sealUse.sealUseReason" id="field_sealUseReason" >
+                <option value="WAYBILL">{{'niopdcgatewayApp.SealUseReason.WAYBILL' | translate}}</option>
+                <option value="ESCAPE">{{'niopdcgatewayApp.SealUseReason.ESCAPE' | translate}}</option>
+                <option value="OTHER">{{'niopdcgatewayApp.SealUseReason.OTHER' | translate}}</option>
+            </select>
+        </div>
+
+       <!-- <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.sealUse.seal" for="field_seal">Seal</label>
+            <select class="form-control" id="field_seal" name="seal" [(ngModel)]="sealUse.sealId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="sealOption.id" *ngFor="let sealOption of seals; trackBy: trackSealById">{{sealOption.id}}</option>
+            </select>
+        </div>-->
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.sealUse.wayBill" for="field_wayBill">Way Bill</label>
+            <select class="form-control" id="field_wayBill" name="wayBill" [(ngModel)]="sealUse.wayBillId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="wayBillOption.id" *ngFor="let wayBillOption of waybills; trackBy: trackWayBillById">{{wayBillOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

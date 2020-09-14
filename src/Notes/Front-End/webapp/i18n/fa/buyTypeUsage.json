@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "BuyTypeUsage" : {
+            "null": "",
+            "COST": "هزینه",
+            "PRODUCT": "فرآورده",
+            "BOTH": "هردو"
+        }
+    }
+}

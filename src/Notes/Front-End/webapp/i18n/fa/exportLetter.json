@@ -1,0 +1,66 @@
+
+{
+    "niopdcgatewayApp": {
+        "exportLetter" : {
+            "home": {
+                "title": "اعلامیه بورس/تفاهم نامه",
+                "createLabel": "Create a new Export Letter",
+                "createOrEditLabel": "Create or edit a Export Letter"
+            },
+            "delete": {
+                "question": "آیا برای حذف این اعلامیه بورس/تفاهم نامه مطمئن هستید؟"
+            },
+            "active": {
+                "question": "آیا برای فعال این اعلامیه بورس/تفاهم نامه مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "Export Letter"
+            },
+            "type": "نوع",
+            "status": "وضعیت",
+            "deliveryTerm": "نوع تحویل",
+            "declarationNumber": "شماره اعلامیه",
+            "registerDate": "تاریخ",
+            "dueDate": "تاریخ سررسید",
+            "expiryDate": "تاریخ انفساخ",
+            "payDate": "تاریخ پرداخت",
+            "deliveryLocation": "محل تحویل",
+            "amount": "تعداد",
+            "amountNormal": "مقدار(تن/بشکه)",
+            "baseRate": "نرخ",
+            "baseRateNormal": "قیمت",
+            "baseRateNormalCurrency": "قیمت({{currency}}بر تن/{{currency}} بر بشکه)",
+            "price": "مبلغ",
+            "rialPrice": "جمع کل (ریال)",
+            "currencyPrice": "جمع کل (با نرخ ارزی)",
+            "settlementPrice": "مبلغ تسویه نهایی",
+            "currencyId": "واحد پولی",
+            "sanaRate": "نرخ تسعیر",
+            "exclusiveConditions": "شرایط اختصاصی",
+            "generalConditions": "شرایط عمومی",
+            "longTerm": "چند pi",
+            "agentBroker": "کارگزار عامل",
+            "buyerAgentBroker": "کارگزار عامل خرید",
+            "buyer": "خریدار",
+            "buyerAgent": "نماینده",
+            "buyerCEO": "مدیرعامل",
+            "destination": "مقصد",
+            "product": "فرآورده",
+            "exportPis": "Export Pis",
+            "agentBrokerWage": "کارمزد کارگزاری",
+            "exchangeWage": "کارمزد سازمان بورس",
+            "exchangeRelevantWage": "کارمزد بورس مربوطه",
+            "itWage": "کارگزاری مدیریت فناوری بورس",
+            "rayanCenterWage": "کارمزد سپرده گذاری مرکزی",
+            "sumWage": "جمع کارمزد(ریال)",
+            "paymentPeriod": "دوره تحویل(روز)"
+        }
+    },
+    "niopdcbaseApp": {
+        "exportLetter" : {
+            "created": "اعلامیه بورس/تفاهم نامه با موفقیت ایجاد شد.",
+            "updated": "اعلامیه بورس/تفاهم نامه با موفقیت ویرایش شد.",
+            "deleted": "اعلامیه بورس/تفاهم نامه با موفقیت حذف شد."
+        }
+    }
+}

@@ -1,0 +1,74 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+  <!--      <h4 *ngIf="carRfId.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="carRfId.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>-->
+        <h4 jhiTranslate="niopdcgatewayApp.carRfId.allocate"></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.carRfId.code"
+                           for="field_id">Code</label>
+                    <p-dropdown required [options]="carRfIdOptions | sortBy: 'label'"
+                                [(ngModel)]="carRfId.id"
+                                [filter]="true"
+                                [disabled]="isView "
+                                class="form-control"
+                                filterBy="label"
+                                id="field_id"
+                                name="field_id"
+                                ngDefaultControl>
+                    </p-dropdown>
+
+                    <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <label jhiTranslate="niopdcgatewayApp.carRfId.reason"  for="field_allocateTagReason"> </label>
+                <select class="form-control" name="transferFrom"
+                        [(ngModel)]="carRfId.allocateTagReason" id="field_allocateTagReason" required="">
+                    <option></option>
+                    <option value="NEW">{{'niopdcgatewayApp.AllocateTagReason.NEW' | translate}}</option>
+                    <option value="MISSING">{{'niopdcgatewayApp.AllocateTagReason.MISSING' | translate}}</option>
+                    <option value="DEFECTIVE">{{'niopdcgatewayApp.AllocateTagReason.DEFECTIVE' | translate}}</option>
+                    <!--<option value="ACTIVE">{{'niopdcgatewayApp.AllocateTagReason.ACTIVE' | translate}}</option>-->
+                </select>
+
+            </div>
+            <div class="col-md-12">
+                <label jhiTranslate="niopdcgatewayApp.carRfId.description"  for="field_description"> </label>
+                <textarea [disabled]="isView"  type="text"  [(ngModel)]="carRfId.description" class="form-control" name="description" id="field_description"  >
+                </textarea>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

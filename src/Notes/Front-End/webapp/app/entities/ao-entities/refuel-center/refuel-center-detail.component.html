@@ -1,0 +1,80 @@
+<div *ngIf="refuelCenter">
+    <h2><span jhiTranslate="niopdcgatewayApp.refuelCenter.detail.title">RefuelCenter</span> {{refuelCenter.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="niopdcgatewayApp.refuelCenter.persianTitle">Persian Title</span></dt>
+        <dd>
+            <span>{{refuelCenter.persianTitle}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.refuelCenter.englishTitle">English Title</span></dt>
+        <dd>
+            <span>{{refuelCenter.englishTitle}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.refuelCenter.code">Code</span></dt>
+        <dd>
+            <span>{{refuelCenter.code}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.refuelCenter.locationId">Location Id</span></dt>
+        <dd>
+            <span>{{refuelCenter.locationId}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.refuelCenter.fuelReceiptStartNumber">Fuel Receipt Start Number</span>
+        </dt>
+        <dd>
+            <span>{{refuelCenter.fuelReceiptStartNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.refuelCenter.fuelReceiptEndNumber">Fuel Receipt End Number</span></dt>
+        <dd>
+            <span>{{refuelCenter.fuelReceiptEndNumber}}</span>
+        </dd>
+        <dt><span
+            jhiTranslate="niopdcgatewayApp.refuelCenter.fuelReceiptCurrentNumber">Fuel Receipt Current Number</span>
+        </dt>
+        <dd>
+            <span>{{refuelCenter.fuelReceiptCurrentNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.refuelCenter.wayBillStartNumber">Way Bill Start Number</span></dt>
+        <dd>
+            <span>{{refuelCenter.wayBillStartNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.refuelCenter.wayBillEndNumber">Way Bill End Number</span></dt>
+        <dd>
+            <span>{{refuelCenter.wayBillEndNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.refuelCenter.wayBillCurrentNumber">Way Bill Current Number</span></dt>
+        <dd>
+            <span>{{refuelCenter.wayBillCurrentNumber}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.refuelCenter.regionId">Region Id</span></dt>
+        <dd>
+            <span>{{refuelCenter.regionId}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.refuelCenter.transferType">Transfer Type</span></dt>
+        <dd>
+            <span *ngFor="let transferType of refuelCenter.transferTypes; let last = last">
+                <a [routerLink]="[ transferType?.id ]">{{transferType.title}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.refuelCenter.targetRefuelCenters">Target RefuelCenters</span></dt>
+        <dd>
+            <span *ngFor="let targetRefuelCenters of refuelCenter.targetRefuelCenters; let last = last">
+                <a [routerLink]="[ targetRefuelCenters?.id ]">{{targetRefuelCenters.persianTitle}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'refuel-center/'+ refuelCenter.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,48 @@
+
+{
+    "niopdcgatewayApp": {
+        "cleaningReportOilTank" : {
+            "home": {
+                "title": "Cleaning Report Oil Tanks",
+                "createLabel": "Create a new Cleaning Report Oil Tank",
+                "createOrEditLabel": "Create or edit a Cleaning Report Oil Tank"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Cleaning Report Oil Tank {{ id }}?"
+            },
+            "detail": {
+                "title": "Cleaning Report Oil Tank"
+            },
+            "typeOfAlloy": "Type Of Alloy",
+            "periodicTankInspection": "Periodic Tank Inspection",
+            "cleaningType": "Cleaning Type",
+            "cleaningReportNumber": "Cleaning Report Number",
+            "registerDate": "Register Date",
+            "exporterName": "Exporter Name",
+            "highLevelSensor": "High Level Sensor",
+            "pAndVValue": "P And V Value",
+            "manhole": "Manhole",
+            "dipStick": "Dip Stick",
+            "flameTrap": "Flame Trap",
+            "contentGauge": "Content Gauge",
+            "footValue": "Foot Value",
+            "drainSump": "Drain Sump",
+            "sampleDrainValue": "Sample Drain Value",
+            "description": "Description",
+            "confirm": "Confirm",
+            "requestStatus": "Request Status",
+            "draftUser": "Draft User",
+            "confirmUser": "Confirm User",
+            "sendUser": "Send User",
+            "oilTank": "Oil Tank",
+            "refuelCenter": "RefuelCenter"
+        }
+    },
+    "niopdcaoApp": {
+        "cleaningReportOilTank" : {
+            "created": "A new Cleaning Report Oil Tank is created with identifier {{ param }}",
+            "updated": "A Cleaning Report Oil Tank is updated with identifier {{ param }}",
+            "deleted": "A Cleaning Report Oil Tank is deleted with identifier {{ param }}"
+        }
+    }
+}

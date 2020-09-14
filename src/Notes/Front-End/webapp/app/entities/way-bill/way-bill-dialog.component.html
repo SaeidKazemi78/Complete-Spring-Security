@@ -1,0 +1,394 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="wayBill.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="wayBill.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="card">
+            <div class="card-header">
+                <h4>اطلاعات مبدا</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.sourceDepotId"
+                                   for="field_sourceDepotId">Source Depot Id</label>
+                            <p-dropdown [options]="customDepots" [(ngModel)]="wayBill.sourceDepotId"
+                                        [filter]="true"
+                                        [disabled]="true"
+                                        class="form-control"
+                                        filterBy="label"
+                                        id="field_sourceDepotId"
+                                        name="sourceDepotId"
+                                        ngDefaultControl
+                            >
+                            </p-dropdown>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.transferFuelType"
+                                   for="field_transferFuelType">Transfer Fuel Type</label>
+                            <select [disabled]="wayBill.wayBillType===WayBillType[WayBillType.SEND] || isView"
+                                    class="form-control" name="transferFuelType"
+                                    (ngModelChange)="onChangeTransferType($event)"
+                                    [(ngModel)]="wayBill.transferFuelType" id="field_transferFuelType">
+                                <option value="TANKER">{{'niopdcgatewayApp.TransferFuelType.TANKER' | translate}}</option>
+                                <option value="PIPE">{{'niopdcgatewayApp.TransferFuelType.PIPE' | translate}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.wayBillType"
+                                   for="field_wayBillType">Transfer Fuel Type</label>
+                            <select [disabled]="true"
+                                    class="form-control" name="wayBillType"
+                                    [(ngModel)]="wayBill.wayBillType" id="field_wayBillType">
+                                <option value="SEND">{{'niopdcgatewayApp.WayBillType.SEND' | translate}}</option>
+                                <option value="RECEIVE">{{'niopdcgatewayApp.WayBillType.RECEIVE' | translate}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.wayBillNumber"
+                                   for="field_wayBillNumber">Way Bill Number</label>
+                            <input [disabled]="true" type="text" class="form-control" name="wayBillNumber"
+                                   id="field_wayBillNumber"
+                                   [(ngModel)]="wayBill.wayBillNumber"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="wayBill.transferFuelType === TransferFuelType[TransferFuelType.TANKER]">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.personId"
+                                   for="field_personId">Person
+                                Id</label>
+                            <app-person-selector widthGrid="600px"
+                                                 id="field_personId"
+                                                 [selectObject]="false"
+                                                 (selectedItem)="onChangePerson($event.id)"
+                                                 [personGroup]="PersonGroup[PersonGroup.CONTRACTOR]"
+                                                 [(ngModel)]="wayBill.personId" required
+                                                 [disabled]="isView"
+
+                                                 class="form-control" id="field_person" name="person">
+                            </app-person-selector>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.carId" for="field_carId">Car
+                                Id</label>
+                            <jhi-car-selector
+                                [disabled]="isView"
+                                ngDefaultControl
+                                id="field_carId"
+                                [cars]="cars"
+                                [personId]="wayBill.personId"
+                                [selectObject]="false"
+                                (selectedItem)="onChangeCar($event.id)"
+                                [(ngModel)]="wayBill.carId"
+                                [ngModelOptions]="{standalone: true}"
+                            >
+
+                            </jhi-car-selector>
+                        </div>
+                    </div>
+                    <div class="col-md-4" *ngIf="wayBill.carId">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.driverId"
+                                   for="field_driverId">Driver
+                                Id</label>
+                            <jhi-driver-selector
+                                [disabled]="isView"
+                                ngDefaultControl
+                                id="field_driverId"
+                                [carId]="wayBill.carId"
+                                [(ngModel)]="wayBill.driverId"
+                                [ngModelOptions]="{standalone: true}"
+                            >
+
+                            </jhi-driver-selector>
+                            <!-- <p-dropdown [options]="customDrivers" [(ngModel)]="wayBill.driverId"
+                                         [filter]="true"
+                                         [disabled]="isView"
+                                         class="form-control"
+                                         filterBy="label"
+                                         id="field_driverId"
+                                         name="driverId"
+                                         ngDefaultControl
+                             >
+                             </p-dropdown>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.specialWeight"
+                                   for="field_specialWeight">Special Weight</label>
+                            <input [disabled]="isView" type="number"
+                                   class="form-control" name="specialWeight"
+                                   id="field_specialWeight"
+                                   required
+                                   [(ngModel)]="wayBill.specialWeight"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.environmentTemperature"
+                                   for="field_environmentTemperature">Environment Temperature</label>
+                            <input [disabled]="isView" type="number"
+                                   class="form-control" name="environmentTemperature"
+                                   id="field_environmentTemperature"
+                                   required
+                                   [(ngModel)]="wayBill.environmentTemperature"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.productTemperature"
+                                   for="field_productTemperature">Product Temperature</label>
+                            <input [disabled]="isView" type="number"
+                                   class="form-control" name="productTemperature"
+                                   id="field_productTemperature"
+                                   required
+                                   [(ngModel)]="wayBill.productTemperature"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.natureAmount"
+                                   for="field_natureAmount">Nature Amount</label>
+                            <input [disabled]="isView" type="number"
+                                   class="form-control" name="natureAmount"
+                                   id="field_natureAmount" required
+                                   (ngModelChange)="changeAmount()"
+                                   [(ngModel)]="wayBill.natureAmount"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.sixtyAmount"
+                                   for="field_sixtyAmount">Sixty Amount</label>
+                            <div style="display: flex">
+                                <button
+                                    [disabled]="!wayBill.natureAmount || !wayBill.specialWeight || !wayBill.environmentTemperature || !wayBill.productTemperature"
+                                    class="btn btn-success" type="button" (click)="calculateSixty('send')">
+                                    <span class="fa fa-refresh"></span>
+                                </button>
+                                <input [disabled]="true" type="number" class="form-control" name="sixtyAmount"
+                                       id="field_sixtyAmount"
+                                       [(ngModel)]="wayBill.sixtyAmount"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" *ngIf="wayBill.wayBillType===WayBillType[WayBillType.RECEIVE]">
+            <div class="card-header">
+                <h4>اطلاعات مقصد</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.receivedSpecialWeight"
+                                   for="field_receivedSpecialWeight">Special Weight</label>
+                            <input [disabled]="isView" type="number" class="form-control" name="receivedSpecialWeight"
+                                   id="field_receivedSpecialWeight"
+                                   required
+                                   [(ngModel)]="wayBill.receivedSpecialWeight"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.wayBill.receivedEnvironmentTemperature"
+                                   for="field_receivedEnvironmentTemperature">Environment Temperature</label>
+                            <input [disabled]="isView" type="number" class="form-control"
+                                   name="receivedEnvironmentTemperature"
+                                   id="field_receivedEnvironmentTemperature"
+                                   required
+                                   [(ngModel)]="wayBill.receivedEnvironmentTemperature"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.wayBill.receivedProductTemperature"
+                                   for="field_receivedProductTemperature">Product Temperature</label>
+                            <input [disabled]="isView" type="number" class="form-control" name="receivedProductTemperature"
+                                   id="field_receivedProductTemperature"
+                                   required
+                                   [(ngModel)]="wayBill.receivedProductTemperature"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.receivedNatureAmount"
+                                   for="field_receivedNatureAmount">Nature Amount</label>
+                            <input [disabled]="isView" type="number" class="form-control" name="receivedNatureAmount"
+                                   id="field_receivedNatureAmount"
+                                   required
+                                   (ngModelChange)="changeAmount()"
+                                   [(ngModel)]="wayBill.receivedNatureAmount"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.receivedSixtyAmount"
+                                   for="field_receivedSixtyAmount">Sixty Amount</label>
+                            <div style="display: flex">
+                                <button
+                                    [disabled]="!wayBill.natureAmount || !wayBill.specialWeight || !wayBill.environmentTemperature || !wayBill.productTemperature"
+                                    class="btn btn-success" type="button" (click)="calculateSixty('receive')">
+                                    <span class="fa fa-refresh"></span>
+                                </button>
+                                <input [disabled]="true" type="number" class="form-control" name="receivedSixtyAmount"
+                                       id="field_receivedSixtyAmount"
+                                       [(ngModel)]="wayBill.receivedSixtyAmount"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.targetDepotId"
+                                   for="field_targetDepotId">Target Depot Id</label>
+                            <p-dropdown [options]="customDepots" [(ngModel)]="wayBill.targetDepotId"
+                                        [filter]="true"
+                                        [disabled]="isView"
+                                        class="form-control"
+                                        (onChange)="onChangeDepot(null,$event.value)"
+                                        filterBy="label"
+                                        id="field_targetDepotId"
+                                        name="targetDepotId"
+                                        ngDefaultControl
+                            >
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.routeId"
+                                   for="field_routeId">Route
+                                Id</label>
+                            <input [disabled]="true" type="text" class="form-control" name="routeId" id="field_routeId"
+                                   [(ngModel)]="route.rate"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" *ngIf="wayBill.wayBillType===WayBillType[WayBillType.RECEIVE]">
+            <div class="card-header">
+                <h4>محاسبه ما به تفاوت</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.differenceAmount"
+                                   for="field_differenceAmount">Route
+                                Id</label>
+                            <input [disabled]="true" type="text" class="form-control" name="differenceAmount" id="field_differenceAmount"
+                                   [(ngModel)]="wayBill.differenceAmount"/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.differenceSixtyAmount"
+                                   for="field_differenceSixtyAmount">Route
+                                Id</label>
+                            <input [disabled]="true" type="text" class="form-control" name="differenceSixtyAmount" id="field_differenceSixtyAmount"
+                                   [(ngModel)]="wayBill.differenceSixtyAmount"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-center justify-content-center" *ngIf="showMaxDifferenceAmount">
+                    <span class="alert-danger text-center">مقدار تفاوت بیش از حد مجاز است.</span>
+                </div>
+            </div>
+        </div>
+        <div class="card" *ngIf="wayBill.wayBillType===WayBillType[WayBillType.SEND]">
+            <div class="card-header">
+                <h5>پلمپ ها</h5>
+            </div>
+            <div class="card-body">
+                <p-dataTable [value]="sealUses"
+                             [immutable]="false"
+                             [paginator]="false" [responsive]="true" [stacked]="false"
+                >
+                    <p-headerColumnGroup>
+                        <p-row>
+                            <p-column field="sealNumber">
+                                <ng-template pTemplate="header">
+                                    شماره پلمپ
+                                </ng-template>
+                            </p-column>
+                            <p-column field="sealPrefix">
+                                <ng-template pTemplate="header">
+                                    پیشوند
+                                </ng-template>
+                            </p-column>
+                            <p-column field="boxNo">
+                                <ng-template pTemplate="header">
+                                    شماره جعبه
+                                </ng-template>
+                            </p-column>
+                        </p-row>
+                    </p-headerColumnGroup>
+                    <p-column field="sealNumber"></p-column>
+                    <p-column field="sealPrefix"></p-column>
+                    <p-column field="boxNo"></p-column>
+                </p-dataTable>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.description"
+                           for="field_description">Description</label>
+                    <textarea [disabled]="isView" type="text"
+                              class="form-control" name="description"
+                              id="field_description"
+                              [(ngModel)]="wayBill.description"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

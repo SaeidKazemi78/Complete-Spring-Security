@@ -1,0 +1,172 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="element.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="element.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.element.title" for="field_title">Title</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="title" id="field_title"
+                           [(ngModel)]="element.title" required/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.element.originalModel"
+                           for="field_originalModel">Original Model</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="originalModel"
+                           id="field_originalModel"
+                           [(ngModel)]="element.originalModel" required/>
+                    <div
+                        [hidden]="!(editForm.controls.originalModel?.dirty && editForm.controls.originalModel?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.originalModel?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.element.currentModel"
+                           for="field_currentModel">Current Model</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="currentModel"
+                           id="field_currentModel"
+                           [(ngModel)]="element.currentModel" required/>
+                    <div [hidden]="!(editForm.controls.currentModel?.dirty && editForm.controls.currentModel?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.currentModel?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.element.count"
+                           for="field_count">Current Model</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="count"
+                           id="field_count"
+                           [(ngModel)]="element.count" required/>
+                    <div [hidden]="!(editForm.controls.count?.dirty && editForm.controls.count?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.count?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.element.elementType"
+                           for="field_elementType">Element Type</label>
+                    <select class="form-control" name="elementType" [(ngModel)]="element.elementType"
+                            id="field_elementType"
+                            required
+                    >
+                        <option value="COALESCER">{{'niopdcgatewayApp.ElementType.COALESCER' | translate}}</option>
+                        <option value="MICROFILTER">{{'niopdcgatewayApp.ElementType.MICROFILTER' | translate}}</option>
+                        <option value="SEPARATOR">{{'niopdcgatewayApp.ElementType.SEPARATOR' | translate}}</option>
+                        <option value="MONITOR">{{'niopdcgatewayApp.ElementType.MONITOR' | translate}}</option>
+                        <option value="CLAY">{{'niopdcgatewayApp.ElementType.CLAY' | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.element.elementRequestReason"
+                           for="field_elementRequestReason">Element Request Reason</label>
+                    <select class="form-control" name="elementRequestReason" [(ngModel)]="element.elementRequestReason"
+                            id="field_elementRequestReason" required>
+                        <option value="MAX_DIFF">{{'niopdcgatewayApp.ElementRequestReason.MAX_DIFF' | translate}}
+                        </option>
+                        <option value="MAX_TIME_ELAPSED">{{'niopdcgatewayApp.ElementRequestReason.MAX_TIME_ELAPSED' |
+                            translate}}
+                        </option>
+                        <option value="UNACCEPTABLE_DROP">{{'niopdcgatewayApp.ElementRequestReason.UNACCEPTABLE_DROP' |
+                            translate}}
+                        </option>
+                        <option value="UNACCEPTABLE_RESULT">
+                            {{'niopdcgatewayApp.ElementRequestReason.UNACCEPTABLE_RESULT' | translate}}
+                        </option>
+                        <option value="ABNORMAL_RESULT">{{'niopdcgatewayApp.ElementRequestReason.ABNORMAL_RESULT' |
+                            translate}}
+                        </option>
+                        <option value="TEARING_ELEMENT">{{'niopdcgatewayApp.ElementRequestReason.TEARING_ELEMENT' |
+                            translate}}
+                        </option>
+                        <option value="SUDDEN_DROP">{{'niopdcgatewayApp.ElementRequestReason.SUDDEN_DROP' |
+                            translate}}
+                        </option>
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.elementRequestReason?.dirty && editForm.controls.elementRequestReason?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.elementRequestReason?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.element.lastChangeDate"
+                           for="field_lastChangeDate">Last Change Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                            id="field_lastChangeDate" class="form-control"
+                                            name="lastChangeDate" [(ngModel)]="element.lastChangeDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.lastChangeDate?.dirty && editForm.controls.lastChangeDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.lastChangeDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.lastChangeDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

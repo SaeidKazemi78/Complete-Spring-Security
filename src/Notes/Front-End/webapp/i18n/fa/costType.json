@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "CostType" : {
+            "null": "",
+            "WITH_ORDER": "با حواله",
+            "BILL": "صورتحساب"
+        }
+    }
+}

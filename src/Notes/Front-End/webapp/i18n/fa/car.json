@@ -1,0 +1,47 @@
+
+{
+    "niopdcgatewayApp": {
+        "car" : {
+            "home": {
+                "title": "نفت کش ها",
+                "createLabel": "ایجاد نفت کش",
+                "createOrEditLabel": "ویرایش نفت کش"
+            },
+            "delete": {
+                "question": "آیا برای حذف نفت کش مطمئن هستید ؟ "
+            },
+            "detail": {
+                "title": "نفت کش"
+            },
+            "title": "عنوان",
+            "plaqueNumber": "شماره پلاک",
+            "serial": "سری پلاک",
+            "serialNumber": "شماره سری پلاک",
+            "bakNumber": "شماره مخزن",
+            "ownerNationalId": "کد ملی صاحب نفت کش",
+            "cardNo": "شماره کارت اندازه گیری",
+            "cardDate": "تاریخ اعتبار کارت اندازه گیری",
+            "valveDate": "تاریخ اعتبار شیر اطمینان",
+            "isBlock": "لیست سیاه",
+            "blockReason": "دلیل قرار گرفتن در لیست سیاه",
+            "startBlockDate": "تاریخ شروع",
+            "finishBlockDate": "تاریخ پایان",
+            "description": "توضیحات",
+            "permitDate": "تاریخ اعتبار پروانه",
+            "registerDate": "تاریخ ثبت",
+            "chassisNumber": "شماره شاسی",
+            "buildDate": "تاریخ تولید",
+            "confirmDate": "تاریخ تایید",
+            "confirmBy": "Confirm By",
+            "deleted": "پاک شده",
+            "deleteDate": "تاریخ پاک شدن"
+        }
+    },
+    "niopdcbaseApp": {
+        "car" : {
+            "created": "نفت کش با موفقیت ایجاد شد.",
+            "updated": "نفت کش با موفقیت ویرایش شد.",
+            "deleted": "نفت کش با موفقیت حذف شدن."
+        }
+    }
+}

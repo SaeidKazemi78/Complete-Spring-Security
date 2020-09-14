@@ -1,0 +1,13 @@
+{
+    "niopdcgatewayApp": {
+        "Education" : {
+            "null": "",
+            "UNDER_DIPLOMA": "زیر دیپلم",
+            "DIPLOMA": "دیپلم",
+            "ASSOCIATE": "فوق دیپلم",
+            "BACHELOR": "کارشناسی",
+            "MASTER": "کارشناسی ارشد",
+            "PHD": "دکترا"
+        }
+    }
+}

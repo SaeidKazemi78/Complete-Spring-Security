@@ -1,0 +1,157 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="dayDepotContainer.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.dayDepotContainer.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="dayDepotContainer.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.dayDepotContainer.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel"
+            jhiTranslate="niopdcgatewayApp.dayDepotContainer.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.dayDepotContainer.deductible"
+                           for="field_deductible">Deductible</label>
+                    <input [disabled]="true" type="number" class="form-control" name="deductible"
+                           id="field_deductible"
+                           [(ngModel)]="dayDepotContainer.deductible" required/>
+                    <div [hidden]="!(editForm.controls.deductible?.dirty && editForm.controls.deductible?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.deductible?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.deductible?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.dayDepotContainer.addition"
+                           for="field_addition">Addition</label>
+                    <input [disabled]="true" type="number" class="form-control" name="addition" id="field_addition"
+                           [(ngModel)]="dayDepotContainer.addition" required/>
+                    <div [hidden]="!(editForm.controls.addition?.dirty && editForm.controls.addition?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.addition?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.addition?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.dayDepotContainer.systemAmount"
+                           for="field_systemAmount">System Amount</label>
+                    <input [disabled]="true" type="number" class="form-control" name="systemAmount"
+                           id="field_systemAmount"
+                           [(ngModel)]="dayDepotContainer.systemAmount" required/>
+                    <div [hidden]="!(editForm.controls.systemAmount?.dirty && editForm.controls.systemAmount?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.systemAmount?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.systemAmount?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.dayDepotContainer.startCount"
+                           for="field_startCount">Start Count</label>
+                    <input [disabled]="true" type="number" class="form-control" name="startCount"
+                           id="field_startCount"
+                           [(ngModel)]="dayDepotContainer.startCount"/>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.dayDepotContainer.endCount"
+                           for="field_endCount">End Count</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="endCount" id="field_endCount"
+                           [(ngModel)]="dayDepotContainer.endCount"/>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.dayDepotContainer.oilTankContainer"
+                           for="field_oilTankContainer">Oil Tank Container</label>
+                    <select [disabled]="true" class="form-control" id="field_oilTankContainer" name="oilTankContainer"
+                            [(ngModel)]="dayDepotContainer.oilTankContainerId" required>
+                        <option *ngIf="!editForm.value.oilTankContainer" [ngValue]="null" selected></option>
+                        <option [ngValue]="oilTankContainerOption.id"
+                                *ngFor="let oilTankContainerOption of oiltankcontainers; trackBy: trackOilTankContainerById">
+                            {{(oilTankContainerOption.productUnitId)?oilTankContainerOption.productUnitTitle:oilTankContainerOption.productTitle}}
+                        </option>
+                    </select>
+                </div>
+                <div
+                    [hidden]="!(editForm.controls.oilTankContainer?.dirty && editForm.controls.oilTankContainer?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.oilTankContainer?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.dayDepotContainer.description"
+                           for="field_description">Description</label>
+                    <textarea [disabled]="isView" type="text" class="form-control" name="description"
+                              id="field_description"
+                              [(ngModel)]="dayDepotContainer.description" minlength="3" maxlength="200"></textarea>
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.description?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.description?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                            This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancelShort">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.saveShort">Save</span>
+        </button>
+    </div>
+</form>

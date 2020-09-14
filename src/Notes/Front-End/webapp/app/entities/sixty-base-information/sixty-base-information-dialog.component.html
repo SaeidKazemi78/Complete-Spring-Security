@@ -1,0 +1,91 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="sixtyBaseInformation.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="sixtyBaseInformation.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.sixtyBaseInformation.environmentTemperature"
+                           for="field_environmentTemperature">Environment Temperature</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="environmentTemperature"
+                           id="field_environmentTemperature"
+                           [(ngModel)]="sixtyBaseInformation.environmentTemperature"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.sixtyBaseInformation.productTemperature"
+                           for="field_productTemperature">Product Temperature</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="productTemperature"
+                           id="field_productTemperature"
+                           [(ngModel)]="sixtyBaseInformation.productTemperature"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.sixtyBaseInformation.specialWeight"
+                           for="field_specialWeight">Special Weight</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="specialWeight"
+                           id="field_specialWeight"
+                           [(ngModel)]="sixtyBaseInformation.specialWeight"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.sixtyBaseInformation.refuelCenter"
+                           for="field_refuelCenter">Refuel Center</label>
+                    <select class="form-control" id="field_refuelCenter" name="refuelCenter"
+                            [(ngModel)]="sixtyBaseInformation.refuelCenterId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="refuelCenterOption.id"
+                                *ngFor="let refuelCenterOption of refuelcenters; trackBy: trackRefuelCenterById">
+                            {{refuelCenterOption.persianTitle}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTank.productId"
+                           for="field_product">Product</label>
+                    <p-dropdown [options]="customProducts" [(ngModel)]="sixtyBaseInformation.productId"
+                                [filter]="true"
+                                [disabled]="isView"
+                                class="form-control"
+                                filterBy="label"
+                                id="field_product"
+                                name="productId"
+                                ngDefaultControl
+                    >
+                    </p-dropdown>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

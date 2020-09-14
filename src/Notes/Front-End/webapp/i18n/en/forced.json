@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "Forced" : {
+            "null": "",
+            "FORCE": "FORCE",
+            "OPTIONAL": "OPTIONAL"
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "niopdcgatewayApp": {
+        "costGroup": {
+            "home": {
+                "title": "گروه هزینه ها",
+                "percent": "درصد",
+                "createLabel": "ایجاد گروه هزینه",
+                "createOrEditLabel": "ویرایش گروه هزینه",
+                "view": "نمایش گروه هزینه"
+            },
+            "singleCost":"آیا این گروه هزینه شامل هزینه های متعدد می باشد",
+            "productRateEffect": "تاثیر بر بهای فرآورده",
+            "delete": {
+                "question": "آیا برای حذف گروه هزینه {{param}} مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "گروه هزینه"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "costGroupType": "نوع گروه هزینه",
+            "costMethod": "کاربرد هزینه",
+            "costGroupAccessType": "فرآورده/حواله/رسید سوخت",
+            "product": "فرآورده",
+            "customerType": "نوع مشتری",
+            "forced": "اختیاری",
+            "paymentPeriod": "دوره",
+            "costGroup": "گروه هزینه",
+            "finalTitle": "عنوان نهایی",
+            "contractTypeId": "نوع قرارداد",
+            "rateGroupType": "گروه نرخی فرآورده",
+            "authority": "قابل دسترسی برای",
+            "bankAccountId": "حساب بانکی",
+            "costCategory": "انواع",
+            "constant": "ثابت",
+            "step": "آیا نرخ هزینه براساس پلکان نرخ فرآورده تعیین می شود",
+            "costMaterialType": "هزینه مربوط به"
+        }
+    },
+    "niopdcrateApp": {
+        "costGroup": {
+            "created": "گروه هزینه با موفقیت ایجاد شد.",
+            "updated": "گروه هزینه با موفقیت ویرایش شد.",
+            "deleted": "گروه هزینه با موفقیت حذف شد."
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "RateType" : {
+            "null": "",
+            "PERCENT": "درصدی",
+            "CONST": "ثابت",
+            "PER_LITRE": "برحسب لیتر",
+            "PER_LITRE_SCORE": "برحسب لیتر و امتیاز"
+        }
+    }
+}

@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="sajad" id="person_view4">
+       <createView replaceIfExists="true"
+                   viewName="person_view">
+           select
+           person.*,
+           u.username
+           from person
+           inner join person_location pl on person.id = pl.people_id
+           inner join user_location u on u.location_id = pl.locations_id
+           union
+           select
+           person.*,
+           u.username
+           from person
+           inner join person_location pl on person.id = pl.people_id
+           inner join user_location_region u on u.location_id = pl.locations_id
+           union
+           select
+           person.*,
+           u.username
+           from person
+           inner join person_location pl on person.id = pl.people_id
+           inner join user_location_person u on person.id = u.person_id and
+           u.location_id = pl.locations_id
+           union
+           select
+           person.*,
+           u.username
+           from person
+           inner join person_location pl on person.id = pl.people_id
+           inner join user_location_region_person u on person.id = u.person_id and
+           u.location_id = pl.locations_id
+           union
+           select
+           person.*,
+           u.username
+           from person
+           inner join person_location pl on person.id = pl.people_id
+           inner join user_location_person_customer u on person.id = u.person_id and
+           u.location_id = pl.locations_id
+           union
+           select
+           person.*,
+           u.username
+           from person
+           inner join person_location pl on person.id = pl.people_id
+           inner join user_location_region_person_customer u on person.id = u.person_id and
+           u.location_id = pl.locations_id
+           union
+
+           select
+           person.*,
+           u.username
+           from person, user_contract_type u
+           union
+           select
+           person.*,
+           u.username
+           from person, user_customer_type u
+           union
+           select
+           person.*,
+           u.username
+           from person
+           inner join person_location pl on person.id = pl.people_id
+           inner join user_location_contract_type u on pl.locations_id = u.location_id
+           union
+           select
+           person.*,
+           u.username
+           from person
+           inner join person_location pl on person.id = pl.people_id
+           inner join user_location_region_contract_type u on pl.locations_id = u.location_id
+           union
+           select
+           person.*,
+           u.username
+           from person
+           inner join person_location pl on person.id = pl.people_id
+           inner join user_location_customer_type u on pl.locations_id = u.location_id
+           union
+           select
+           person.*,
+           u.username
+           from person
+           inner join person_location pl on person.id = pl.people_id
+           inner join user_location_region_customer_type u on pl.locations_id = u.location_id
+           union
+           select
+           person.*,
+           u.username
+           from person
+           inner join person_location pl on person.id = pl.people_id
+           inner join user_location_region_contract_type_customer_type u on pl.locations_id = u.location_id
+           union
+           select
+           person.*,
+           u.username
+           from person, user_contract_type_customer_type u
+       </createView>
+   </changeSet>
+    <changeSet author="sajad" id="person_view5">
+       <createView replaceIfExists="true"
+                   viewName="person_view">
+           select
+           person.id id,
+           u.username
+           from person
+           inner join person_location pl on person.id = pl.people_id
+           inner join user_location u on u.location_id = pl.locations_id
+           union
+           select
+           person.id id,
+           u.username
+           from person
+           inner join person_location pl on person.id = pl.people_id
+           inner join user_location_region u on u.location_id = pl.locations_id
+           union
+           select
+           u.person_id id,
+           u.username
+           from user_location_person u
+           inner join person_location pl on u.person_id = pl.people_id and
+           u.location_id = pl.locations_id
+           union
+           select
+           u.person_id id,
+           u.username
+           from user_location_region_person u
+           inner join person_location pl on u.person_id = pl.people_id and
+           u.location_id = pl.locations_id
+           union
+           select
+           u.person_id id,
+           u.username
+           from user_location_person_customer u
+           inner join person_location pl on u.person_id = pl.people_id and
+           u.location_id = pl.locations_id
+           union
+           select
+           u.person_id id,
+           u.username
+           from user_location_region_person_customer u
+           inner join person_location pl on u.person_id = pl.people_id and
+           u.location_id = pl.locations_id
+           union
+           select
+           person.id id,
+           u.username
+           from person, user_contract_type u
+           union
+           select
+           person.id id,
+           u.username
+           from person, user_customer_type u
+           union
+           select
+           pl.people_id id,
+           u.username
+           from user_location_contract_type u
+           inner join person_location pl on u.location_id = pl.locations_id
+           union
+           select
+           pl.people_id id,
+           u.username
+           from user_location_region_contract_type u
+           inner join person_location pl on u.location_id = pl.locations_id
+           union
+           select
+           pl.people_id id,
+           u.username
+           from user_location_customer_type u
+           inner join person_location pl on u.location_id = pl.locations_id
+           union
+           select
+           pl.people_id id,
+           u.username
+           from user_location_region_customer_type u
+           inner join person_location pl on pl.locations_id = u.location_id
+           union
+           select
+           pl.people_id id,
+           u.username
+           from user_location_region_contract_type_customer_type u
+           inner join person_location pl on u.location_id = pl.locations_id
+           union
+           select
+           person.id id,
+           u.username
+           from person, user_contract_type_customer_type u
+       </createView>
+   </changeSet>
+    <changeSet author="sajad" id="person_view6" >
+       <createView replaceIfExists="true"
+                   viewName="person_view">
+           select
+           person.id id,
+           u.username
+           from person
+           inner join person_location pl on person.id = pl.people_id
+           inner join user_location u on u.location_id = pl.locations_id
+           union
+           select
+           person.id id,
+           u.username
+           from person
+           inner join person_location pl on person.id = pl.people_id
+           inner join user_location_region u on u.location_id = pl.locations_id
+           union
+           select
+           u.person_id id,
+           u.username
+           from user_location_person u
+           inner join person_location pl on u.person_id = pl.people_id and
+           u.location_id = pl.locations_id
+           union
+           select
+           u.person_id id,
+           u.username
+           from user_location_region_person u
+           inner join person_location pl on u.person_id = pl.people_id and
+           u.location_id = pl.locations_id
+           union
+           select
+           u.person_id id,
+           u.username
+           from user_location_person_customer u
+           inner join person_location pl on u.person_id = pl.people_id and
+           u.location_id = pl.locations_id
+           union
+           select
+           u.person_id id,
+           u.username
+           from user_location_region_person_customer u
+           inner join person_location pl on u.person_id = pl.people_id and
+           u.location_id = pl.locations_id
+           union
+           select
+           person.id id,
+           u.username
+           from person, user_contract_type u
+           union
+           select
+           person.id id,
+           u.username
+           from person, user_customer_type u
+           union
+           select
+           pl.people_id id,
+           u.username
+           from user_location_contract_type u
+           inner join person_location pl on u.location_id = pl.locations_id
+           union
+           select
+           pl.people_id id,
+           u.username
+           from user_location_region_contract_type u
+           inner join person_location pl on u.location_id = pl.locations_id
+           union
+           select
+           pl.people_id id,
+           u.username
+           from user_location_customer_type u
+           inner join person_location pl on u.location_id = pl.locations_id
+           union
+           select
+           pl.people_id id,
+           u.username
+           from user_location_region_customer_type u
+           inner join person_location pl on pl.locations_id = u.location_id
+           union
+           select
+           pl.people_id id,
+           u.username
+           from user_location_region_contract_type_customer_type u
+           inner join person_location pl on u.location_id = pl.locations_id
+           union
+           select
+           person.id id,
+           u.username
+           from person, user_contract_type_customer_type u
+           union
+           select
+           pl.people_id id,
+           u.username
+           from user_location_contract_type_customer_type u
+           inner join person_location pl on u.location_id = pl.locations_id
+       </createView>
+   </changeSet>
+    <changeSet author="sajad" id="person_view7" >
+        <createView replaceIfExists="true"
+                    viewName="person_view">
+            select
+            person.id id,
+            u.username
+            from person
+            inner join person_location pl on person.id = pl.people_id
+            inner join user_location u on u.location_id = pl.locations_id
+            union
+            select
+            person.id id,
+            u.username
+            from person
+            inner join person_location pl on person.id = pl.people_id
+            inner join user_location_region u on u.location_id = pl.locations_id
+            union
+            select
+            u.person_id id,
+            u.username
+            from user_location_person u
+            inner join person_location pl on u.person_id = pl.people_id and
+            u.location_id = pl.locations_id
+            union
+            select
+            u.person_id id,
+            u.username
+            from user_location_region_person u
+            inner join person_location pl on u.person_id = pl.people_id and
+            u.location_id = pl.locations_id
+            union
+            select
+            u.person_id id,
+            u.username
+            from user_location_person_customer u
+            inner join person_location pl on u.person_id = pl.people_id and
+            u.location_id = pl.locations_id
+            union
+            select
+            u.person_id id,
+            u.username
+            from user_location_region_person_customer u
+            inner join person_location pl on u.person_id = pl.people_id and
+            u.location_id = pl.locations_id
+            union
+            select
+            person.id id,
+            u.username
+            from person, user_contract_type u
+            union
+            select
+            person.id id,
+            u.username
+            from person, user_customer_type u
+            union
+            select
+            pl.people_id id,
+            u.username
+            from user_location_contract_type u
+            inner join person_location pl on u.location_id = pl.locations_id
+            union
+            select
+            pl.people_id id,
+            u.username
+            from user_location_region_contract_type u
+            inner join person_location pl on u.location_id = pl.locations_id
+            union
+            select
+            pl.people_id id,
+            u.username
+            from user_location_customer_type u
+            inner join person_location pl on u.location_id = pl.locations_id
+            union
+            select
+            pl.people_id id,
+            u.username
+            from user_location_region_customer_type u
+            inner join person_location pl on pl.locations_id = u.location_id
+            union
+            select
+            pl.people_id id,
+            u.username
+            from user_location_region_contract_type_customer_type u
+            inner join person_location pl on u.location_id = pl.locations_id
+            union
+            select
+            person.id id,
+            u.username
+            from person, user_contract_type_customer_type u
+            union
+            select
+            pl.people_id id,
+            u.username
+            from user_location_contract_type_customer_type u
+            inner join person_location pl on u.location_id = pl.locations_id
+            union
+            select
+            p.id id,
+            u.username
+            from person p
+            cross apply user_data_access u
+            left join person_location pl on p.id = pl.people_id
+            where pl.people_id is null
+        </createView>
+    </changeSet>
+    <changeSet author="sajad" id="person_view8" runAlways="true">
+        <createView replaceIfExists="true"
+                    viewName="person_view">
+            select
+            person.id id,
+            u.username
+            from person
+            inner join person_location pl on person.id = pl.people_id
+            inner join user_location u on u.location_id = pl.locations_id
+            union
+            select
+            person.id id,
+            u.username
+            from person
+            inner join person_location pl on person.id = pl.people_id
+            inner join user_location_region u on u.location_id = pl.locations_id
+            union
+            select
+            u.person_id id,
+            u.username
+            from user_location_person u
+            inner join person_location pl on u.person_id = pl.people_id and
+            u.location_id = pl.locations_id
+            union
+            select
+            u.person_id id,
+            u.username
+            from user_location_region_person u
+            inner join person_location pl on u.person_id = pl.people_id and
+            u.location_id = pl.locations_id
+            union
+            select
+            u.person_id id,
+            u.username
+            from user_location_person_customer u
+            inner join person_location pl on u.person_id = pl.people_id and
+            u.location_id = pl.locations_id
+            union
+            select
+            u.person_id id,
+            u.username
+            from user_location_region_person_customer u
+            inner join person_location pl on u.person_id = pl.people_id and
+            u.location_id = pl.locations_id
+            union
+            select
+            person.id id,
+            u.username
+            from person, user_contract_type u
+            union
+            select
+            person.id id,
+            u.username
+            from person, user_customer_type u
+            union
+            select
+            pl.people_id id,
+            u.username
+            from user_location_contract_type u
+            inner join person_location pl on u.location_id = pl.locations_id
+            union
+            select
+            pl.people_id id,
+            u.username
+            from user_location_region_contract_type u
+            inner join person_location pl on u.location_id = pl.locations_id
+            union
+            select
+            pl.people_id id,
+            u.username
+            from user_location_customer_type u
+            inner join person_location pl on u.location_id = pl.locations_id
+            union
+            select
+            pl.people_id id,
+            u.username
+            from user_location_region_customer_type u
+            inner join person_location pl on pl.locations_id = u.location_id
+            union
+            select
+            pl.people_id id,
+            u.username
+            from user_location_region_contract_type_customer_type u
+            inner join person_location pl on u.location_id = pl.locations_id
+            union
+            select
+            person.id id,
+            u.username
+            from person, user_contract_type_customer_type u
+            union
+            select
+            pl.people_id id,
+            u.username
+            from user_location_contract_type_customer_type u
+            inner join person_location pl on u.location_id = pl.locations_id
+
+        </createView>
+    </changeSet>
+</databaseChangeLog>

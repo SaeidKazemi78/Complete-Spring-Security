@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "ChangeContainerType" : {
+            "null": "",
+            "WITH_CONTAINER": "WITH_CONTAINER",
+            "WITHOUT_CONTAINER": "WITHOUT_CONTAINER"
+        }
+    }
+}

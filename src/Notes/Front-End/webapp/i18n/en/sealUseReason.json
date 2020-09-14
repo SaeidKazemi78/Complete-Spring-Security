@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "SealUseReason" : {
+            "null": "",
+            "WAYBILL": "WAYBILL",
+            "ESCAPE": "ESCAPE",
+            "OTHER": "OTHER"
+        }
+    }
+}

@@ -1,0 +1,928 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="Service1" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tempuri.org/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://tempuri.org/Imports">
+            <xsd:import schemaLocation="Service1.0.xml" namespace="http://tempuri.org/"/>
+            <xsd:import schemaLocation="Service1.1.xml" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+            <xsd:import schemaLocation="http://172.17.75.2:8082/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/AnbarService"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="IService1_GetData_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetData"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetData_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetDataResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetDriverWithNationalCode_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetDriverWithNationalCode"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetDriverWithNationalCode_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetDriverWithNationalCodeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetStatusCarNiroogah_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetStatusCarNiroogah"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetStatusCarNiroogah_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetStatusCarNiroogahResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetFromMonitoringSended_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetFromMonitoringSended"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetFromMonitoringSended_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetFromMonitoringSendedResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_AcceptSended_InputMessage">
+        <wsdl:part name="parameters" element="tns:AcceptSended"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_AcceptSended_OutputMessage">
+        <wsdl:part name="parameters" element="tns:AcceptSendedResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetFromMonitoringRecieve_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetFromMonitoringRecieve"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetFromMonitoringRecieve_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetFromMonitoringRecieveResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetFromMonitoringSendedWithWaybill_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetFromMonitoringSendedWithWaybill"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetFromMonitoringSendedWithWaybill_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetFromMonitoringSendedWithWaybillResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetWaybillFromMonitoring_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetWaybillFromMonitoring"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetWaybillFromMonitoring_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetWaybillFromMonitoringResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_InsertDumping_InputMessage">
+        <wsdl:part name="parameters" element="tns:InsertDumping"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_InsertDumping_OutputMessage">
+        <wsdl:part name="parameters" element="tns:InsertDumpingResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_IsDumped_InputMessage">
+        <wsdl:part name="parameters" element="tns:IsDumped"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_IsDumped_OutputMessage">
+        <wsdl:part name="parameters" element="tns:IsDumpedResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendMojoodiFaravardeh_InputMessage">
+        <wsdl:part name="parameters" element="tns:SendMojoodiFaravardeh"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendMojoodiFaravardeh_OutputMessage">
+        <wsdl:part name="parameters" element="tns:SendMojoodiFaravardehResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetCarExtraInfoWithPelakNo_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetCarExtraInfoWithPelakNo"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetCarExtraInfoWithPelakNo_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetCarExtraInfoWithPelakNoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendMojoodiFaravardehTada_InputMessage">
+        <wsdl:part name="parameters" element="tns:SendMojoodiFaravardehTada"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendMojoodiFaravardehTada_OutputMessage">
+        <wsdl:part name="parameters" element="tns:SendMojoodiFaravardehTadaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetBarnamehCount_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetBarnamehCount"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetBarnamehCount_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetBarnamehCountResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendUntrustTada_InputMessage">
+        <wsdl:part name="parameters" element="tns:SendUntrustTada"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendUntrustTada_OutputMessage">
+        <wsdl:part name="parameters" element="tns:SendUntrustTadaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendMojoodiFaravardehTadaMonthly_InputMessage">
+        <wsdl:part name="parameters" element="tns:SendMojoodiFaravardehTadaMonthly"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendMojoodiFaravardehTadaMonthly_OutputMessage">
+        <wsdl:part name="parameters" element="tns:SendMojoodiFaravardehTadaMonthlyResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetWaybillRangeAnbar_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetWaybillRangeAnbar"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetWaybillRangeAnbar_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetWaybillRangeAnbarResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetWaybillRangeSell_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetWaybillRangeSell"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetWaybillRangeSell_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetWaybillRangeSellResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetLastWaybillId_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetLastWaybillId"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetLastWaybillId_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetLastWaybillIdResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_InsertSealDataToTada_InputMessage">
+        <wsdl:part name="parameters" element="tns:InsertSealDataToTada"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_InsertSealDataToTada_OutputMessage">
+        <wsdl:part name="parameters" element="tns:InsertSealDataToTadaResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetRange_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetRange"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetRange_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetRangeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetKholaseAnbar_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetKholaseAnbar"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetKholaseAnbar_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetKholaseAnbarResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetDataFromNavgan_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetDataFromNavgan"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetDataFromNavgan_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetDataFromNavganResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetActivitiTypeCode_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetActivitiTypeCode"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetActivitiTypeCode_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetActivitiTypeCodeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetCountOfCar_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetCountOfCar"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetCountOfCar_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetCountOfCarResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_CheckNavganIsOk_InputMessage">
+        <wsdl:part name="parameters" element="tns:CheckNavganIsOk"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_CheckNavganIsOk_OutputMessage">
+        <wsdl:part name="parameters" element="tns:CheckNavganIsOkResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetProductDestination_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetProductDestination"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetProductDestination_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetProductDestinationResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetProductDestinationCount_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetProductDestinationCount"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetProductDestinationCount_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetProductDestinationCountResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_InsertNavganStatusProdDest_InputMessage">
+        <wsdl:part name="parameters" element="tns:InsertNavganStatusProdDest"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_InsertNavganStatusProdDest_OutputMessage">
+        <wsdl:part name="parameters" element="tns:InsertNavganStatusProdDestResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetDataFromNavganWithType_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetDataFromNavganWithType"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetDataFromNavganWithType_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetDataFromNavganWithTypeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetPymanListFromNavgan_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetPymanListFromNavgan"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetPymanListFromNavgan_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetPymanListFromNavganResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetOneDataFromNavgan_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetOneDataFromNavgan"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetOneDataFromNavgan_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetOneDataFromNavganResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendMojoodiMakhazenData_InputMessage">
+        <wsdl:part name="parameters" element="tns:SendMojoodiMakhazenData"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendMojoodiMakhazenData_OutputMessage">
+        <wsdl:part name="parameters" element="tns:SendMojoodiMakhazenDataResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendSevenPageSellData_InputMessage">
+        <wsdl:part name="parameters" element="tns:SendSevenPageSellData"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendSevenPageSellData_OutputMessage">
+        <wsdl:part name="parameters" element="tns:SendSevenPageSellDataResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_sendHavalehToAnbar_InputMessage">
+        <wsdl:part name="parameters" element="tns:sendHavalehToAnbar"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_sendHavalehToAnbar_OutputMessage">
+        <wsdl:part name="parameters" element="tns:sendHavalehToAnbarResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_sendTankCapacity_InputMessage">
+        <wsdl:part name="parameters" element="tns:sendTankCapacity"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_sendTankCapacity_OutputMessage">
+        <wsdl:part name="parameters" element="tns:sendTankCapacityResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetHamlPomps_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetHamlPomps"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetHamlPomps_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetHamlPompsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendBarnameh_OS_InputMessage">
+        <wsdl:part name="parameters" element="tns:SendBarnameh_OS"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendBarnameh_OS_OutputMessage">
+        <wsdl:part name="parameters" element="tns:SendBarnameh_OSResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendDaryafti_OS_InputMessage">
+        <wsdl:part name="parameters" element="tns:SendDaryafti_OS"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendDaryafti_OS_OutputMessage">
+        <wsdl:part name="parameters" element="tns:SendDaryafti_OSResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendMojoodi_OS_InputMessage">
+        <wsdl:part name="parameters" element="tns:SendMojoodi_OS"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendMojoodi_OS_OutputMessage">
+        <wsdl:part name="parameters" element="tns:SendMojoodi_OSResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendSevenPage_OS_InputMessage">
+        <wsdl:part name="parameters" element="tns:SendSevenPage_OS"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendSevenPage_OS_OutputMessage">
+        <wsdl:part name="parameters" element="tns:SendSevenPage_OSResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendTicket_OS_InputMessage">
+        <wsdl:part name="parameters" element="tns:SendTicket_OS"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_SendTicket_OS_OutputMessage">
+        <wsdl:part name="parameters" element="tns:SendTicket_OSResponse"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetInquiryFromNavgan_InputMessage">
+        <wsdl:part name="parameters" element="tns:GetInquiryFromNavgan"/>
+    </wsdl:message>
+    <wsdl:message name="IService1_GetInquiryFromNavgan_OutputMessage">
+        <wsdl:part name="parameters" element="tns:GetInquiryFromNavganResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="IService1">
+        <wsdl:operation name="GetData">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetData"
+                        message="tns:IService1_GetData_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetDataResponse"
+                         message="tns:IService1_GetData_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetDriverWithNationalCode">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetDriverWithNationalCode"
+                        message="tns:IService1_GetDriverWithNationalCode_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetDriverWithNationalCodeResponse"
+                         message="tns:IService1_GetDriverWithNationalCode_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetStatusCarNiroogah">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetStatusCarNiroogah"
+                        message="tns:IService1_GetStatusCarNiroogah_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetStatusCarNiroogahResponse"
+                         message="tns:IService1_GetStatusCarNiroogah_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetFromMonitoringSended">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetFromMonitoringSended"
+                        message="tns:IService1_GetFromMonitoringSended_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetFromMonitoringSendedResponse"
+                         message="tns:IService1_GetFromMonitoringSended_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="AcceptSended">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/AcceptSended"
+                        message="tns:IService1_AcceptSended_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/AcceptSendedResponse"
+                         message="tns:IService1_AcceptSended_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetFromMonitoringRecieve">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetFromMonitoringRecieve"
+                        message="tns:IService1_GetFromMonitoringRecieve_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetFromMonitoringRecieveResponse"
+                         message="tns:IService1_GetFromMonitoringRecieve_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetFromMonitoringSendedWithWaybill">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetFromMonitoringSendedWithWaybill"
+                        message="tns:IService1_GetFromMonitoringSendedWithWaybill_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetFromMonitoringSendedWithWaybillResponse"
+                         message="tns:IService1_GetFromMonitoringSendedWithWaybill_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetWaybillFromMonitoring">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetWaybillFromMonitoring"
+                        message="tns:IService1_GetWaybillFromMonitoring_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetWaybillFromMonitoringResponse"
+                         message="tns:IService1_GetWaybillFromMonitoring_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="InsertDumping">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/InsertDumping"
+                        message="tns:IService1_InsertDumping_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/InsertDumpingResponse"
+                         message="tns:IService1_InsertDumping_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="IsDumped">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/IsDumped"
+                        message="tns:IService1_IsDumped_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/IsDumpedResponse"
+                         message="tns:IService1_IsDumped_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="SendMojoodiFaravardeh">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/SendMojoodiFaravardeh"
+                        message="tns:IService1_SendMojoodiFaravardeh_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/SendMojoodiFaravardehResponse"
+                         message="tns:IService1_SendMojoodiFaravardeh_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetCarExtraInfoWithPelakNo">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetCarExtraInfoWithPelakNo"
+                        message="tns:IService1_GetCarExtraInfoWithPelakNo_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetCarExtraInfoWithPelakNoResponse"
+                         message="tns:IService1_GetCarExtraInfoWithPelakNo_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="SendMojoodiFaravardehTada">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/SendMojoodiFaravardehTada"
+                        message="tns:IService1_SendMojoodiFaravardehTada_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/SendMojoodiFaravardehTadaResponse"
+                         message="tns:IService1_SendMojoodiFaravardehTada_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetBarnamehCount">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetBarnamehCount"
+                        message="tns:IService1_GetBarnamehCount_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetBarnamehCountResponse"
+                         message="tns:IService1_GetBarnamehCount_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="SendUntrustTada">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/SendUntrustTada"
+                        message="tns:IService1_SendUntrustTada_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/SendUntrustTadaResponse"
+                         message="tns:IService1_SendUntrustTada_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="SendMojoodiFaravardehTadaMonthly">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/SendMojoodiFaravardehTadaMonthly"
+                        message="tns:IService1_SendMojoodiFaravardehTadaMonthly_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/SendMojoodiFaravardehTadaMonthlyResponse"
+                         message="tns:IService1_SendMojoodiFaravardehTadaMonthly_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetWaybillRangeAnbar">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetWaybillRangeAnbar"
+                        message="tns:IService1_GetWaybillRangeAnbar_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetWaybillRangeAnbarResponse"
+                         message="tns:IService1_GetWaybillRangeAnbar_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetWaybillRangeSell">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetWaybillRangeSell"
+                        message="tns:IService1_GetWaybillRangeSell_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetWaybillRangeSellResponse"
+                         message="tns:IService1_GetWaybillRangeSell_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetLastWaybillId">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetLastWaybillId"
+                        message="tns:IService1_GetLastWaybillId_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetLastWaybillIdResponse"
+                         message="tns:IService1_GetLastWaybillId_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="InsertSealDataToTada">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/InsertSealDataToTada"
+                        message="tns:IService1_InsertSealDataToTada_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/InsertSealDataToTadaResponse"
+                         message="tns:IService1_InsertSealDataToTada_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetRange">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetRange"
+                        message="tns:IService1_GetRange_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetRangeResponse"
+                         message="tns:IService1_GetRange_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetKholaseAnbar">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetKholaseAnbar"
+                        message="tns:IService1_GetKholaseAnbar_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetKholaseAnbarResponse"
+                         message="tns:IService1_GetKholaseAnbar_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetDataFromNavgan">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetDataFromNavgan"
+                        message="tns:IService1_GetDataFromNavgan_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetDataFromNavganResponse"
+                         message="tns:IService1_GetDataFromNavgan_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetActivitiTypeCode">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetActivitiTypeCode"
+                        message="tns:IService1_GetActivitiTypeCode_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetActivitiTypeCodeResponse"
+                         message="tns:IService1_GetActivitiTypeCode_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetCountOfCar">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetCountOfCar"
+                        message="tns:IService1_GetCountOfCar_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetCountOfCarResponse"
+                         message="tns:IService1_GetCountOfCar_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="CheckNavganIsOk">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/CheckNavganIsOk"
+                        message="tns:IService1_CheckNavganIsOk_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/CheckNavganIsOkResponse"
+                         message="tns:IService1_CheckNavganIsOk_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetProductDestination">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetProductDestination"
+                        message="tns:IService1_GetProductDestination_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetProductDestinationResponse"
+                         message="tns:IService1_GetProductDestination_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetProductDestinationCount">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetProductDestinationCount"
+                        message="tns:IService1_GetProductDestinationCount_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetProductDestinationCountResponse"
+                         message="tns:IService1_GetProductDestinationCount_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="InsertNavganStatusProdDest">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/InsertNavganStatusProdDest"
+                        message="tns:IService1_InsertNavganStatusProdDest_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/InsertNavganStatusProdDestResponse"
+                         message="tns:IService1_InsertNavganStatusProdDest_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetDataFromNavganWithType">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetDataFromNavganWithType"
+                        message="tns:IService1_GetDataFromNavganWithType_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetDataFromNavganWithTypeResponse"
+                         message="tns:IService1_GetDataFromNavganWithType_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetPymanListFromNavgan">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetPymanListFromNavgan"
+                        message="tns:IService1_GetPymanListFromNavgan_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetPymanListFromNavganResponse"
+                         message="tns:IService1_GetPymanListFromNavgan_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetOneDataFromNavgan">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOneDataFromNavgan"
+                        message="tns:IService1_GetOneDataFromNavgan_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetOneDataFromNavganResponse"
+                         message="tns:IService1_GetOneDataFromNavgan_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="SendMojoodiMakhazenData">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/SendMojoodiMakhazenData"
+                        message="tns:IService1_SendMojoodiMakhazenData_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/SendMojoodiMakhazenDataResponse"
+                         message="tns:IService1_SendMojoodiMakhazenData_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="SendSevenPageSellData">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/SendSevenPageSellData"
+                        message="tns:IService1_SendSevenPageSellData_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/SendSevenPageSellDataResponse"
+                         message="tns:IService1_SendSevenPageSellData_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="sendHavalehToAnbar">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/sendHavalehToAnbar"
+                        message="tns:IService1_sendHavalehToAnbar_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/sendHavalehToAnbarResponse"
+                         message="tns:IService1_sendHavalehToAnbar_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="sendTankCapacity">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/sendTankCapacity"
+                        message="tns:IService1_sendTankCapacity_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/sendTankCapacityResponse"
+                         message="tns:IService1_sendTankCapacity_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetHamlPomps">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetHamlPomps"
+                        message="tns:IService1_GetHamlPomps_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetHamlPompsResponse"
+                         message="tns:IService1_GetHamlPomps_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="SendBarnameh_OS">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/SendBarnameh_OS"
+                        message="tns:IService1_SendBarnameh_OS_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/SendBarnameh_OSResponse"
+                         message="tns:IService1_SendBarnameh_OS_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="SendDaryafti_OS">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/SendDaryafti_OS"
+                        message="tns:IService1_SendDaryafti_OS_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/SendDaryafti_OSResponse"
+                         message="tns:IService1_SendDaryafti_OS_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="SendMojoodi_OS">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/SendMojoodi_OS"
+                        message="tns:IService1_SendMojoodi_OS_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/SendMojoodi_OSResponse"
+                         message="tns:IService1_SendMojoodi_OS_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="SendSevenPage_OS">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/SendSevenPage_OS"
+                        message="tns:IService1_SendSevenPage_OS_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/SendSevenPage_OSResponse"
+                         message="tns:IService1_SendSevenPage_OS_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="SendTicket_OS">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/SendTicket_OS"
+                        message="tns:IService1_SendTicket_OS_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/SendTicket_OSResponse"
+                         message="tns:IService1_SendTicket_OS_OutputMessage"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetInquiryFromNavgan">
+            <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetInquiryFromNavgan"
+                        message="tns:IService1_GetInquiryFromNavgan_InputMessage"/>
+            <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetInquiryFromNavganResponse"
+                         message="tns:IService1_GetInquiryFromNavgan_OutputMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="GetData">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetData" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetDriverWithNationalCode">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetDriverWithNationalCode" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetStatusCarNiroogah">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetStatusCarNiroogah" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetFromMonitoringSended">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetFromMonitoringSended" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="AcceptSended">
+            <soap:operation soapAction="http://tempuri.org/IService1/AcceptSended" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetFromMonitoringRecieve">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetFromMonitoringRecieve" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetFromMonitoringSendedWithWaybill">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetFromMonitoringSendedWithWaybill"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetWaybillFromMonitoring">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetWaybillFromMonitoring" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="InsertDumping">
+            <soap:operation soapAction="http://tempuri.org/IService1/InsertDumping" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="IsDumped">
+            <soap:operation soapAction="http://tempuri.org/IService1/IsDumped" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SendMojoodiFaravardeh">
+            <soap:operation soapAction="http://tempuri.org/IService1/SendMojoodiFaravardeh" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetCarExtraInfoWithPelakNo">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetCarExtraInfoWithPelakNo" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SendMojoodiFaravardehTada">
+            <soap:operation soapAction="http://tempuri.org/IService1/SendMojoodiFaravardehTada" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetBarnamehCount">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetBarnamehCount" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SendUntrustTada">
+            <soap:operation soapAction="http://tempuri.org/IService1/SendUntrustTada" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SendMojoodiFaravardehTadaMonthly">
+            <soap:operation soapAction="http://tempuri.org/IService1/SendMojoodiFaravardehTadaMonthly"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetWaybillRangeAnbar">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetWaybillRangeAnbar" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetWaybillRangeSell">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetWaybillRangeSell" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetLastWaybillId">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetLastWaybillId" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="InsertSealDataToTada">
+            <soap:operation soapAction="http://tempuri.org/IService1/InsertSealDataToTada" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetRange">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetRange" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetKholaseAnbar">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetKholaseAnbar" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetDataFromNavgan">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetDataFromNavgan" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetActivitiTypeCode">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetActivitiTypeCode" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetCountOfCar">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetCountOfCar" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CheckNavganIsOk">
+            <soap:operation soapAction="http://tempuri.org/IService1/CheckNavganIsOk" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetProductDestination">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetProductDestination" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetProductDestinationCount">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetProductDestinationCount" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="InsertNavganStatusProdDest">
+            <soap:operation soapAction="http://tempuri.org/IService1/InsertNavganStatusProdDest" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetDataFromNavganWithType">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetDataFromNavganWithType" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetPymanListFromNavgan">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetPymanListFromNavgan" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetOneDataFromNavgan">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetOneDataFromNavgan" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SendMojoodiMakhazenData">
+            <soap:operation soapAction="http://tempuri.org/IService1/SendMojoodiMakhazenData" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SendSevenPageSellData">
+            <soap:operation soapAction="http://tempuri.org/IService1/SendSevenPageSellData" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="sendHavalehToAnbar">
+            <soap:operation soapAction="http://tempuri.org/IService1/sendHavalehToAnbar" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="sendTankCapacity">
+            <soap:operation soapAction="http://tempuri.org/IService1/sendTankCapacity" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetHamlPomps">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetHamlPomps" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SendBarnameh_OS">
+            <soap:operation soapAction="http://tempuri.org/IService1/SendBarnameh_OS" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SendDaryafti_OS">
+            <soap:operation soapAction="http://tempuri.org/IService1/SendDaryafti_OS" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SendMojoodi_OS">
+            <soap:operation soapAction="http://tempuri.org/IService1/SendMojoodi_OS" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SendSevenPage_OS">
+            <soap:operation soapAction="http://tempuri.org/IService1/SendSevenPage_OS" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="SendTicket_OS">
+            <soap:operation soapAction="http://tempuri.org/IService1/SendTicket_OS" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetInquiryFromNavgan">
+            <soap:operation soapAction="http://tempuri.org/IService1/GetInquiryFromNavgan" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="Service1">
+        <wsdl:port name="BasicHttpBinding_IService1" binding="tns:BasicHttpBinding_IService1">
+            <soap:address location="http://172.17.75.2:8082/Service1.svc"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

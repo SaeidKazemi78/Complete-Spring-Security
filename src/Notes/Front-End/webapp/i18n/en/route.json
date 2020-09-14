@@ -1,0 +1,48 @@
+
+{
+    "niopdcgatewayApp": {
+        "route" : {
+            "home": {
+                "title": "Routes",
+                "createLabel": "Create a new Route",
+                "createOrEditLabel": "Create or edit a Route"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Route {{ id }}?"
+            },
+            "detail": {
+                "title": "Route"
+            },
+            "sourceCode": "Source Code",
+            "sourceTadaCode": "Source Tada Code",
+            "sourceName": "Source Name",
+            "customerCode": "Customer Code",
+            "destCode": "Dest Code",
+            "destOpCode": "Dest Op Code",
+            "destName": "Dest Name",
+            "oldCode": "Old Code",
+            "isActive": "Is Active",
+            "customerStatus": "Customer Status",
+            "hamlType": "Haml Type",
+            "customerType": "Customer Type",
+            "rate": "Rate",
+            "distanceKm": "Distance Km",
+            "description": "Description",
+            "executeDate": "Execute Date",
+            "taCode": "Ta Code",
+            "code": "Code",
+            "customerName": "Customer Name",
+            "address": "Address",
+            "via": "Via",
+            "caption": "Caption",
+            "routeType": "Route Type"
+        }
+    },
+    "niopdcbaseApp": {
+        "route" : {
+            "created": "A new Route is created with identifier {{ param }}",
+            "updated": "A Route is updated with identifier {{ param }}",
+            "deleted": "A Route is deleted with identifier {{ param }}"
+        }
+    }
+}

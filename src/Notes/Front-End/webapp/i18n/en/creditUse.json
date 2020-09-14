@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "CreditUse" : {
+            "null": "",
+            "COST": "COST",
+            "PRODUCT": "PRODUCT"
+        }
+    }
+}

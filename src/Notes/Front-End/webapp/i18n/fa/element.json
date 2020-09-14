@@ -1,0 +1,34 @@
+
+{
+    "niopdcgatewayApp": {
+        "element" : {
+            "home": {
+                "title": "المنت",
+                "filterTitle": "فیلتر",
+                "createLabel": "Create a new Element",
+                "createOrEditLabel": "Create or edit a Element"
+            },
+            "delete": {
+                "question": "آیا از حذف المنت اطمینان دارید؟"
+            },
+            "detail": {
+                "title": "المنت"
+            },
+            "title": "عنوان",
+            "originalModel": "مدل اصلی",
+            "count": "تعداد",
+            "currentModel": "مدل فعلی",
+            "elementRequestReason": "دلیل تعویض",
+            "lastChangeDate": "تاریخ آخرین تعویض",
+            "elementType":"نوع المنت",
+            "filter": "Filter"
+        }
+    },
+    "niopdcaoApp": {
+        "element" : {
+            "created": "المنت با موفقیت ایجاد شد.",
+            "updated": "المنت با موفقیت ویرایش شد.",
+            "deleted": "المنت با موفقیت حذف شد."
+        }
+    }
+}

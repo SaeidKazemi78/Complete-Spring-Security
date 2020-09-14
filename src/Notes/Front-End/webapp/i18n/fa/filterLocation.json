@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "FilterLocation" : {
+            "null": "",
+            "DRAIN_TANKER": "تخلیه نفتکش",
+            "BETWEEN_MAIN_AND_SERVICE": "بین مخزن اصلی و سرویس",
+            "LADING_UNIT": "بارگیری واحد",
+            "OIL_DEPOT": "انبار نفت"
+        }
+    }
+}

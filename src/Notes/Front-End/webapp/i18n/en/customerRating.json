@@ -1,0 +1,32 @@
+
+{
+    "niopdcgatewayApp": {
+        "customerRating" : {
+            "home": {
+                "title": "Customer Ratings",
+                "createLabel": "Create a new Customer Rating",
+                "createOrEditLabel": "Create or edit a Customer Rating"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Customer Rating {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer Rating"
+            },
+            "title": "Title",
+            "level": "Level",
+            "fromDate": "From Date",
+            "toDate": "To Date",
+            "fromScore": "From Score",
+            "toScore": "To Score",
+            "location": "Location"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerRating" : {
+            "created": "A new Customer Rating is created with identifier {{ param }}",
+            "updated": "A Customer Rating is updated with identifier {{ param }}",
+            "deleted": "A Customer Rating is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,0 +1,141 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <div *ngIf="parentBaseTestResult!=null">
+        <p-dataTable [sortField]="predicate" [sortOrder]="reverse ? -1 : 1" #dt [value]="baseTestResults"
+                     [lazy]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20,totalItems]"
+                     [paginator]="true" [responsive]="true" [stacked]="false"
+                     [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)"
+                     [emptyMessage]="'global.messages.info.emptyRecords' | translate">
+            <p-header>
+                <div class="ui-helper-clearfix">
+                    <button class="btn btn-primary float-right create-entity"
+                            *jhiHasAnyAuthority="['ROLE_ADMIN', 'CREATE_BASE_TEST_RESULT']"
+                            [routerLink]="['/parent-base-test-result/'+parentBaseTestResultId,'base-test-result', { outlets: { popup: ['new' , parentBaseTestResultId] } }]">
+                        <span class="fa fa-plus"></span>
+                        <span jhiTranslate="entity.action.create">Create</span>
+                    </button>
+                </div>
+            </p-header>
+
+            <p-headerColumnGroup>
+                <p-row>
+                    <p-column field="property" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.baseTestResult.property">Property</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column [hidden]="parentBaseTestResult.baseTestResultType!='OIL_TYPE'" field="astm"
+                              [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.baseTestResult.astm">Astm</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column [hidden]="parentBaseTestResult.baseTestResultType!='OIL_TYPE'" field="ip"
+                              [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.baseTestResult.ip">Ip</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="specification" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.baseTestResult.specification">Specification</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column styleClass="col-button"></p-column>
+                </p-row>
+                <p-row>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="property" id="field_property"
+                                   [(ngModel)]="baseTestResult.property"
+                                   search-after-typed (onSearch)="search()"
+                            />
+                        </ng-template>
+                    </p-column>
+                    <p-column [hidden]="parentBaseTestResult.baseTestResultType!='OIL_TYPE'">
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="astm" id="field_astm"
+                                   [(ngModel)]="baseTestResult.astm"
+                                   search-after-typed (onSearch)="search()"
+                            />
+                        </ng-template>
+                    </p-column>
+                    <p-column [hidden]="parentBaseTestResult.baseTestResultType!='OIL_TYPE'">
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="ip" id="field_ip"
+                                   [(ngModel)]="baseTestResult.ip"
+                                   search-after-typed (onSearch)="search()"
+                            />
+                        </ng-template>
+                    </p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="specification" id="field_specification"
+                                   [(ngModel)]="baseTestResult.specification"
+                                   search-after-typed (onSearch)="search()"
+                            />
+                        </ng-template>
+                    </p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <button class="btn btn-info" (click)="search()">
+                                <span class="fa fa-search"></span>
+                            </button>
+                            <button class=" btn btn-danger" (click)="clear()">
+                                <span class="fa fa-remove"></span>
+                            </button>
+                        </ng-template>
+                    </p-column>
+                </p-row>
+            </p-headerColumnGroup>
+
+            <p-column field="property" [header]="'niopdcgatewayApp.baseTestResult.property' | translate"></p-column>
+            <p-column field="astm" [hidden]="parentBaseTestResult.baseTestResultType!='OIL_TYPE'"
+                      [header]="'niopdcgatewayApp.baseTestResult.astm' | translate"></p-column>
+            <p-column field="ip" [hidden]="parentBaseTestResult.baseTestResultType!='OIL_TYPE'"
+                      [header]="'niopdcgatewayApp.baseTestResult.ip' | translate"></p-column>
+            <p-column field="specification"
+                      [header]="'niopdcgatewayApp.baseTestResult.specification' | translate"></p-column>
+            <p-column class="component">
+                <ng-template let-item="rowData" pTemplate="body">
+                    <div class="btn-group" ngbDropdown placement="right">
+                        <button type="button" class="btn btn-primary"
+                                *jhiHasAnyAuthorityDisabled="['ROLE_ADMIN', 'EDIT_BASE_TEST_RESULT']"
+                                replaceUrl="true"
+                                [routerLink]="['/parent-base-test-result/'+parentBaseTestResultId,'base-test-result', { outlets: { popup:  item.id + '/edit'} }]">
+                            <span class="fa fa-edit"></span>
+                            <span jhiTranslate="entity.action.edit">ویرایش</span>
+                        </button>
+
+                        <button class="btn btn-primary"
+                                *jhiHasAnyAuthorityDisabled="['ROLE_ADMIN', 'VIEW_BASE_TEST_RESULT', 'DELETE_BASE_TEST_RESULT']"
+                                ngbDropdownToggle></button>
+                        <div class="dropdown-menu" ngbDropdownMenu>
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'VIEW_BASE_TEST_RESULT']"
+                                    replaceUrl="true"
+                                    [routerLink]="['/parent-base-test-result/'+parentBaseTestResultId,'base-test-result', { outlets: { popup:  item.id + '/view'} }]">
+                                <span class="fa fa-eye"></span>
+                                <span jhiTranslate="entity.action.view">نمایش</span>
+                            </button>
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'DELETE_BASE_TEST_RESULT']"
+                                    replaceUrl="true"
+                                    [routerLink]="['/parent-base-test-result/'+parentBaseTestResultId,'base-test-result', { outlets: { popup: item.id + '/delete'} }]">
+                                <span class="fa fa-remove"></span>
+                                <span jhiTranslate="entity.action.delete">delete</span>
+                            </button>
+
+                        </div>
+                    </div>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+    </div>
+</div>

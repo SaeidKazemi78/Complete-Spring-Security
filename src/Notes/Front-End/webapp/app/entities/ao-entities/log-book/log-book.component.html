@@ -1,0 +1,133 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <p-dataTable #dt [value]="logBooks" [lazy]="true" [rows]="itemsPerPage" [rowsPerPageOptions]="[5,10,20,totalItems]"
+                 [paginator]="true" [responsive]="true" [stacked]="false"
+                 [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)"
+                 [emptyMessage]="'global.messages.info.emptyRecords' | translate">
+
+        <p-headerColumnGroup>
+            <p-row>
+                <p-column field="orderId" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.logBook.customer">Order Id</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="orderId" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.logBook.person">Order Id</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="orderId" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.logBook.fuelReceipt">Order Id</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="amount" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.logBook.amount">Amount</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="fuelType" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.logBook.fuelType">Fuel Type</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="status" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.logBook.status">Status</span>
+                    </ng-template>
+                </p-column>
+                <p-column styleClass="col-button"></p-column>
+            </p-row>
+            <p-row>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" id="field_orderCustomerTitle" name="order"
+                               [(ngModel)]="logBook.customerTitle"
+                               search-after-typed (onSearch)="search()"/>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" id="field_orderPersonTitle" name="order"
+                               [(ngModel)]="logBook.personTitle"
+                               search-after-typed (onSearch)="search()"/>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" id="field_orderFuelReceipt" name="order"
+                               [(ngModel)]="logBook.orderNo"
+                               search-after-typed (onSearch)="search()"/>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control"
+                               name="amount" id="field_amount"
+                               [(ngModel)]="logBook.amount"
+                               [numeric]
+                               search-after-typed (onSearch)="search()"/>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <select class="form-control" name="fuelType" (change)="search()"
+                                [(ngModel)]="logBook.fuelType" id="field_fuelType">
+                            <option></option>
+                            <option value="RE_FUEL">{{'niopdcgatewayApp.FuelType.RE_FUEL' | translate}}</option>
+                            <option value="DE_FUEL">{{'niopdcgatewayApp.FuelType.DE_FUEL' | translate}}</option>
+                        </select>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <select class="form-control" name="status" (change)="search()"
+                                [(ngModel)]="logBook.status">
+                            <option></option>
+                            <option value="true" jhiTranslate="niopdcgatewayApp.logBook.statusTrue">
+                                true
+                            </option>
+                            <option value="false" jhiTranslate="niopdcgatewayApp.logBook.statusFalse">
+                                false
+                            </option>
+                        </select>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <button class="btn btn-info" (click)="search()">
+                            <span class="fa fa-search"></span>
+                        </button>
+                        <button class=" btn btn-danger" (click)="clear()">
+                            <span class="fa fa-remove"></span>
+                        </button>
+                    </ng-template>
+                </p-column>
+            </p-row>
+        </p-headerColumnGroup>
+
+        <p-column field="customerTitle" [header]="'niopdcgatewayApp.logBook.orderId' | translate"></p-column>
+        <p-column field="personTitle" [header]="'niopdcgatewayApp.logBook.orderId' | translate"></p-column>
+        <p-column field="fuelReceipt" [header]="'niopdcgatewayApp.logBook.orderId' | translate"></p-column>
+        <p-column field="amount" [header]="'niopdcgatewayApp.logBook.amount' | translate"></p-column>
+        <p-column field="fuelType" [header]="'niopdcgatewayApp.logBook.fuelType' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span jhiTranslate="{{'niopdcgatewayApp.FuelType.' + item.fuelType}}">{{item.fuelType}}</span>
+            </ng-template>
+        </p-column>
+        <p-column field="status" [header]="'niopdcgatewayApp.logBook.status' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span class="fa" [ngClass]="{'fa-check':item.status,'fa-close':!item.status}"></span>
+            </ng-template>
+        </p-column>
+        <p-column class="component">
+            <ng-template let-item="rowData" pTemplate="body">
+
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+
+</div>

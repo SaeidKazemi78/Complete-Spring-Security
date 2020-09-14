@@ -1,0 +1,30 @@
+{
+    "niopdcgatewayApp": {
+        "waterMethanolMixer": {
+            "home": {
+                "title": "مخلوط های متانول و آب",
+                "createLabel": "ایجاد مخلوط متانول و آب",
+                "createOrEditLabel": "ویرایش مخلوط متانول و آب",
+                "view": "نمایش مخلوط متانول و آب"
+            },
+            "delete": {
+                "question": "آیا برای حذف این مخلوط متانول و آب مطمئن هستید?"
+            },
+            "detail": {
+                "title": "مخلوط متانول و آب"
+            },
+            "waterAmount": "مقدار آب",
+            "methanolAmount": "مقدار متانول",
+            "water": "آب",
+            "methanol": "متانول",
+            "methanolMixer": "مخلوط متانول"
+        }
+    },
+    "niopdcaoApp": {
+        "waterMethanolMixer": {
+            "created": "مخلوط متانول و آب با موفقیت ایجاد شد.",
+            "updated": "مخلوط متانول و آب با موفقیت ویرایش شد.",
+            "deleted": "مخلوط متانول و آب با موفقیت حذف شد."
+        }
+    }
+}

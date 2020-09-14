@@ -1,0 +1,88 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="parentBaseTestResult.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="parentBaseTestResult.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.parentBaseTestResult.productId"
+                           for="field_product">Product Id</label>
+                    <p-dropdown [options]="customProducts" [(ngModel)]="selectedProduct"
+                                [filter]="true"
+                                [disabled]="isView"
+                                class="form-control"
+                                (onChange)="onChangeProduct($event.value)"
+                                filterBy="label"
+                                id="field_product"
+                                name="productId"
+                                ngDefaultControl
+                    >
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.parentBaseTestResult.baseTestResultType"
+                           for="field_baseTestResultType">Base Test Result Type</label>
+                    <select [disabled]="isView" class="form-control" name="baseTestResultType"
+                            [(ngModel)]="parentBaseTestResult.baseTestResultType" id="field_baseTestResultType"
+                            >
+                        <option value="WATER_TYPE">{{'niopdcgatewayApp.BaseTestResultType.WATER_TYPE' | translate}}
+                        </option>
+                        <option value="OIL_TYPE">{{'niopdcgatewayApp.BaseTestResultType.OIL_TYPE' | translate}}</option>
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.baseTestResultType?.dirty && editForm.controls.baseTestResultType?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.baseTestResultType?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.parentBaseTestResult.testResultType"
+                           for="field_testResultType">Test Result Type</label>
+                    <select class="form-control" [disabled]="isView" name="testResultType" [(ngModel)]="parentBaseTestResult.testResultType"
+                            id="field_testResultType" required>
+                        <option value="PLUNGING">{{'niopdcgatewayApp.TestResultType.PLUNGING' | translate}}</option>
+                        <option value="BASE">{{'niopdcgatewayApp.TestResultType.BASE' | translate}}</option>
+                        <option value="MICROB">MICROB</option>
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.testResultType?.dirty && editForm.controls.testResultType?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.testResultType?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,56 @@
+{
+  "generator-jhipster": {
+    "jhipsterVersion": "4.14.5",
+    "baseName": "niopdcbase",
+    "packageName": "ir.donyapardaz.niopdc.base",
+    "packageFolder": "ir/donyapardaz/niopdc/base",
+    "serverPort": "8081",
+    "authenticationType": "uaa",
+    "uaaBaseName": "niopdcuaa",
+    "hibernateCache": "hazelcast",
+    "clusteredHttpSession": false,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mssql",
+    "prodDatabaseType": "mssql",
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSocialSignIn": false,
+    "jwtSecretKey": "56bde78459e00565b2caee44c0015fb09a9a5f90",
+    "enableTranslation": true,
+    "applicationType": "microservice",
+    "testFrameworks": [
+      "gatling"
+    ],
+    "jhiPrefix": "jhi",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-mssql",
+        "version": "2.1.2"
+      },
+      {
+        "name": "generator-jhipster-debian-packager",
+        "version": "1.0.1"
+      },
+      {
+        "name": "generator-jhipster-docker",
+        "version": "2.4.0"
+      }
+    ],
+    "skipClient": true,
+    "skipUserManagement": true,
+    "nativeLanguage": "en",
+    "languages": [
+      "en"
+    ],
+    "clientPackageManager": "yarn",
+    "clientFramework": "angularX",
+    "searchEngine": false,
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true
+  },
+  "generator-jhipster-entity-audit": {
+    "auditFramework": "custom"
+  }
+}

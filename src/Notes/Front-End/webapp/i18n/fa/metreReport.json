@@ -1,0 +1,20 @@
+{
+    "niopdcgatewayApp": {
+        "metreReport": {
+            "home": {
+                "title": "واحد"
+            },
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "unitName": "واحد",
+            "metreName": "میتر",
+            "day": "روز",
+            "productCode": "کد فرآورده",
+            "productName": "نام فرآورده",
+            "amount": "مقدار",
+            "startMetre": "میتر شروع",
+            "endMetre": "میتر پایان",
+            "count": "تعداد"
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "OrganizationType" : {
+            "null": "",
+            "GOVERNMENTAL": "دولتی",
+            "NONGOVERNMENTAL": "غیر دولتی"
+        }
+    }
+}

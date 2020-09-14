@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="sajad" id="1546078430977-1" runAlways="true">
+        <sql>
+            IF EXISTS (
+            SELECT type_desc, type
+            FROM sys.procedures WITH(NOLOCK)
+            WHERE NAME = 'sell_contract_access_procedures'
+            AND type = 'P'
+            )
+            DROP PROCEDURE dbo.sell_contract_access_procedures
+        </sql>
+    </changeSet>
+    <changeSet author="sajad" id="1546078430977-2" runAlways="true">
+        <sql>
+            CREATE PROCEDURE dbo.sell_contract_access_procedures AS
+            -- sell_contract
+            insert into sell_contract_access
+            select distinct v.id, v.username
+            from sell_contract_view v
+            left join sell_contract_access a on (
+            v.id = a.id and
+            v.username = a.username
+            )
+            where a.id is null
+
+            delete a from sell_contract_view v
+            right join sell_contract_access a on (
+            v.id = a.id and
+            v.username = a.username
+            )
+            where v.id is null
+        </sql>
+    </changeSet>
+    <changeSet author="sajad" id="1546078430977-200" runAlways="true">
+        <sql>
+            exec sell_contract_access_procedures
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

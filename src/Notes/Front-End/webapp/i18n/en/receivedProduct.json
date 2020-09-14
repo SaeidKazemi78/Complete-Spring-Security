@@ -1,0 +1,47 @@
+
+{
+    "niopdcgatewayApp": {
+        "receivedProduct" : {
+            "home": {
+                "title": "Received Products",
+                "createLabel": "Create a new Received Product",
+                "createOrEditLabel": "Create or edit a Received Product"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Received Product {{ id }}?"
+            },
+            "detail": {
+                "title": "Received Product"
+            },
+            "registerDate": "Register Date",
+            "receivedProductType": "Received Product Type",
+            "startDate": "Start Date",
+            "finishDate": "Finish Date",
+            "productId": "Product Id",
+            "inventoryId": "Inventory Id",
+            "vehicleId": "Vehicle Id",
+            "waybillNumber": "Waybill Number",
+            "driverName": "Driver Name",
+            "contractorNumber": "Contractor Number",
+            "receivedNatureAmount": "Received Nature Amount",
+            "receivedSixtyAmount": "Received Sixty Amount",
+            "receivedSpecialWeight": "Received Special Weight",
+            "receivedEnvironmentTemperature": "Received Environment Temperature",
+            "receivedProductTemperature": "Received Product Temperature",
+            "sendNatureAmount": "Send Nature Amount",
+            "sendSixtyAmount": "Send Sixty Amount",
+            "sendSpecialWeight": "Send Special Weight",
+            "sendEnvironmentTemperature": "Send Environment Temperature",
+            "sendProductTemperature": "Send Product Temperature",
+            "description": "Description",
+            "dayDepot": "Day Depot"
+        }
+    },
+    "niopdcaoApp": {
+        "receivedProduct" : {
+            "created": "A new Received Product is created with identifier {{ param }}",
+            "updated": "A Received Product is updated with identifier {{ param }}",
+            "deleted": "A Received Product is deleted with identifier {{ param }}"
+        }
+    }
+}

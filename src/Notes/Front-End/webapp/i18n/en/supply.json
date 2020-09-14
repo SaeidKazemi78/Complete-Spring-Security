@@ -1,0 +1,35 @@
+
+{
+    "niopdcgatewayApp": {
+        "supply" : {
+            "home": {
+                "title": "Supplies",
+                "createLabel": "Create a new Supply",
+                "createOrEditLabel": "Create or edit a Supply"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Supply {{ id }}?"
+            },
+            "detail": {
+                "title": "Supply"
+            },
+            "amount": "Amount",
+            "minimumAmount": "Minimum Amount",
+            "basePrice": "Base Price",
+            "broker": "Broker",
+            "telephone": "Telephone",
+            "supplyDate": "Supply Date",
+            "description": "Description",
+            "product": "Product",
+            "depot": "Depot",
+            "country": "Country"
+        }
+    },
+    "niopdcbaseApp": {
+        "supply" : {
+            "created": "A new Supply is created with identifier {{ param }}",
+            "updated": "A Supply is updated with identifier {{ param }}",
+            "deleted": "A Supply is deleted with identifier {{ param }}"
+        }
+    }
+}

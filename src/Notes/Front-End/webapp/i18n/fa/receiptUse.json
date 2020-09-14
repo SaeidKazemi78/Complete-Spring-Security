@@ -1,0 +1,12 @@
+{
+    "niopdcgatewayApp": {
+        "ReceiptUse" : {
+            "null": "",
+            "PUBLICPRODUCT": "فرآورده آزاد",
+            "PRODUCTPRICE": "بهاي فرآورده",
+            "PREPAYMENT": "پيش پرداخت",
+            "TANKBALANCE": "موجودي مخازن",
+            "DEPT": "بدهی"
+        }
+    }
+}

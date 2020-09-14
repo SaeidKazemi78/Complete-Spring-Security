@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "orderPayment" : {
+            "home": {
+                "title": "Order Payments",
+                "createLabel": "Create a new Order Payment",
+                "createOrEditLabel": "Create or edit a Order Payment"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Order Payment {{ id }}?"
+            },
+            "detail": {
+                "title": "Order Payment"
+            },
+            "paymentId": "Payment Id",
+            "decreasedPrice": "Decreased Price",
+            "order": "Order"
+        }
+    },
+    "niopdcorderApp": {
+        "orderPayment" : {
+            "created": "A new Order Payment is created with identifier {{ param }}",
+            "updated": "A Order Payment is updated with identifier {{ param }}",
+            "deleted": "A Order Payment is deleted with identifier {{ param }}"
+        }
+    }
+}

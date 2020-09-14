@@ -1,0 +1,34 @@
+
+{
+    "niopdcgatewayApp": {
+        "customerStationInfo" : {
+            "home": {
+                "title": "Customer Station Infos",
+                "createLabel": "Create a new Customer Station Info",
+                "createOrEditLabel": "Create or edit a Customer Station Info"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Customer Station Info {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer Station Info"
+            },
+            "stationType": "Station Type",
+            "hasDispatching": "Has Dispatching",
+            "hasKahab": "Has Kahab",
+            "hasCanopy": "Has Canopy",
+            "hasBodyPump": "Has Body Pump",
+            "hasWorkClothes": "Has Work Clothes",
+            "hasColumns": "Has Columns",
+            "customer": "Customer",
+            "nozzleProductCounts": "Nozzle Product Counts"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerStationInfo" : {
+            "created": "A new Customer Station Info is created with identifier {{ param }}",
+            "updated": "A Customer Station Info is updated with identifier {{ param }}",
+            "deleted": "A Customer Station Info is deleted with identifier {{ param }}"
+        }
+    }
+}

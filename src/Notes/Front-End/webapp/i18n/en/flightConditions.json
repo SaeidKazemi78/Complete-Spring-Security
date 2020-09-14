@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "FlightConditions" : {
+            "null": "",
+            "VIP": "VIP",
+            "EMERGENCY": "EMERGENCY",
+            "NORMAL": "NORMAL"
+        }
+    }
+}

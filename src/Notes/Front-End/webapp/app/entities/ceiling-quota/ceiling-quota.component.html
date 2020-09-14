@@ -1,0 +1,118 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <p-dataTable #dt [value]="ceilingQuotas" [lazy]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20,totalItems]"
+                 [paginator]="true" [responsive]="true" [stacked]="false"
+                 [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)">
+        <p-header>
+            <div class="ui-helper-clearfix">
+                <button class="btn btn-primary float-right create-entity"
+                        [routerLink]="['/customer/'+customerId+'/customer-credit',customerCreditId,'ceiling-quota', { outlets: { popup: ['new' , customerCreditId] } }]">
+                    <span class="fa fa-plus"></span>
+                    <span jhiTranslate="entity.action.create">Create</span>
+                </button>
+            </div>
+        </p-header>
+
+        <p-headerColumnGroup>
+            <p-row>
+                <p-column field="startDate" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.ceilingQuota.startDate">Start Date</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="finishDate" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.ceilingQuota.finishDate">Finish Date</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="amount" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.ceilingQuota.amount">Amount</span>
+                    </ng-template>
+                </p-column>
+                <p-column styleClass="col-button"></p-column>
+            </p-row>
+            <p-row>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <ng2-datetimepicker class="form-control" name="startDate"
+                                            [rtlActive]="true" time="08:00"
+                                            [disableTime]="true"
+                                            [(ngModel)]="ceilingQuota.startDate">
+                        </ng2-datetimepicker>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <ng2-datetimepicker class="form-control" name="finishDate"
+                                            [rtlActive]="true" time="08:00"
+                                            [disableTime]="true"
+                                            [(ngModel)]="ceilingQuota.finishDate">
+                        </ng2-datetimepicker>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control"
+                               name="amount" id="field_amount"
+                               [(ngModel)]="ceilingQuota.amount"
+                               [numeric]
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <button class="btn btn-info" (click)="search()">
+                            <span class="fa fa-search"></span>
+                        </button>
+                        <button class=" btn btn-danger" (click)="clear()">
+                            <span class="fa fa-remove"></span>
+                        </button>
+                    </ng-template>
+                </p-column>
+            </p-row>
+        </p-headerColumnGroup>
+
+        <p-column field="startDate" [header]="'niopdcgatewayApp.ceilingQuota.startDate' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span>{{item.startDate | dateJalali}}</span>
+            </ng-template></p-column>
+        <p-column field="finishDate" [header]="'niopdcgatewayApp.ceilingQuota.finishDate' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span>{{item.finishDate | dateJalali}}</span>
+            </ng-template></p-column>
+        <p-column field="amount" [header]="'niopdcgatewayApp.ceilingQuota.amount' | translate"></p-column>
+        <p-column class="component">
+            <ng-template let-item="rowData" pTemplate="body">
+                <div class="btn-group" ngbDropdown placement="right">
+                    <button type="button" class="btn btn-primary"
+                            replaceUrl="true"
+                            [routerLink]="['/customer/'+customerId+'/customer-credit',customerCreditId,'ceiling-quota', { outlets: { popup: item.id + '/edit'} }]">
+                        <span class="fa fa-edit"></span>
+                        <span jhiTranslate="entity.action.edit">ویرایش</span>
+                    </button>
+
+                    <button class="btn btn-primary" ngbDropdownToggle></button>
+                    <div class="dropdown-menu" ngbDropdownMenu>
+                        <button class="dropdown-item"
+                                replaceUrl="true"
+                                [routerLink]="['/customer/'+customerId+'/customer-credit',customerCreditId,'ceiling-quota', { outlets: { popup:  item.id + '/view'} }]">
+                            <span class="fa fa-eye"></span>
+                            <span jhiTranslate="entity.action.view">نمایش</span>
+                        </button>
+                        <button class="dropdown-item"
+                                replaceUrl="true"
+                                [routerLink]="['/customer/'+customerId+'/customer-credit',customerCreditId,'ceiling-quota', { outlets: { popup:  item.id + '/delete'} }]">
+                            <span class="fa fa-remove"></span>
+                            <span jhiTranslate="entity.action.delete">delete</span>
+                        </button>
+
+                    </div>
+                </div>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+
+</div>

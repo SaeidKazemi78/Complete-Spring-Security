@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "TypeOfAlloy" : {
+            "null": "",
+            "AL": "AL",
+            "SS": "SS",
+            "CS": "CS"
+        }
+    }
+}

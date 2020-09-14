@@ -1,0 +1,36 @@
+
+{
+    "niopdcgatewayApp": {
+        "serviceOilTank": {
+            "home": {
+                "title": "مخازن سرویس تانک",
+                "createLabel": "ایجاد مخزن سرویس تانک",
+                "createOrEditLabel": "ویرایش مخزن سرویس تانک",
+                "view": "نمایش  مخزن سرویس تانک",
+                "oilTankTitle": "مخزن",
+                "dayDepotTitle": "حساب روز انبار"
+            },
+            "delete": {
+                "question": "آیا برای حذف مخزن سرویس تانک {{param}} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "مخزن سرویس تانک"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "virtualCapacity": "ظرفیت اسمی",
+            "capacity": "ظرفیت",
+            "oilTankStatus": "وضعیت مخزن",
+            "oilTank": "مخزن",
+            "measureType": "روش اندازه گیری"
+
+        }
+    },
+    "niopdcaoApp": {
+        "serviceOilTank": {
+            "created": "مخزن سرویس تانک با موفقیت ایجاد شد.",
+            "updated": "مخزن سرویس تانک با موفقیت ویرایش شد.",
+            "deleted": "مخزن سرویس تانک با موفقیت حذف شد."
+        }
+    }
+}

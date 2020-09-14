@@ -1,0 +1,310 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <jhi-alert-success></jhi-alert-success>
+
+    <br/>
+
+    <div class="card ">
+        <div class="card-body" *jhiHasAnyAuthority="['ROLE_ADMIN','CREATE_VOUCHER_MASTER']">
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherMaster.voucherTemplate"
+                           for="field_voucherTemplate">Confirm Date</label>
+                    <select class="form-control"  id="field_voucherTemplate"
+                            name="voucherTemplate"
+                            (change)="changeVoucherType($event)"
+                            [(ngModel)]="voucherTemplate">
+                        <option [ngValue]="null"></option>
+                        <option
+                            *ngFor="let voucherTemplateOption of voucherTemplates; trackBy: trackVoucherTypeById"
+                            [ngValue]="voucherTemplateOption">
+                            {{voucherTemplateOption.voucherTypeTitle + ' - ' + voucherTemplateOption.voucherTypeGroupTitle}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6" *ngIf="parameterCustomer">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.baseQuery.customer"
+                           for="field_customer">customer</label>
+                    <jhi-customer-selector
+                        [multiSelect]="false"
+                        [selectObject]="false"
+                        [(ngModel)]="customerId"
+                        class="form-control"
+                        id="field_customer"
+                        name="field_customer"
+                    >
+                    </jhi-customer-selector>
+                </div>
+                <div class="col-md-6" *ngIf="parameterDate">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.baseQuery.date"
+                           for="field_date">Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disableTime]="true" [rtlActive]="true"
+                                            id="field_date"
+                                            class="form-control"
+                                            name="date"
+                                            [(ngModel)]="date"
+                        >
+                        </ng2-datetimepicker>
+                    </div>
+                </div>
+                <div class="col-md-6" *ngIf="parameterLocation && queryCategory !== 'AIRPLANE'">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.baseQuery.location"
+                               for="field_location">Location</label>
+                        <input-location-selector
+                            [idSelector]="true"
+                            [oneSelection]="true"
+                            [selectByPriority]="true"
+                            class="form-control" id="field_location" name="location"
+                            [(ngModel)]="locationId"
+                        >
+                        </input-location-selector>
+                    </div>
+                </div>
+                <div class="col-md-6" *ngIf="parameterLocation && queryCategory === 'AIRPLANE'">
+                    <div class="form-group">
+                        <label  class="form-control-label"
+                                jhiTranslate="niopdcgatewayApp.baseQuery.locationAirplane"
+                                for="field_depotId">Depot
+                            Id</label>
+                        <select class="form-control"
+                                name="depotId"
+                                [(ngModel)]="locationId"
+                                id="field_depotId"
+                        >
+                            <option [ngValue]="refuelCenter.id" *ngFor="let refuelCenter of refuelCenters">
+                                {{refuelCenter.persianTitle}}
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="col-md-6" *ngIf="parameterStartDate">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.baseQuery.startDate"
+                           for="field_startDate">Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disableTime]="true" [rtlActive]="true"
+                                            id="field_startDate"
+                                            class="form-control"
+                                            name="startDate"
+                                            [(ngModel)]="startDate"
+                        >
+                        </ng2-datetimepicker>
+                    </div>
+                </div>
+                <div class="col-md-6" *ngIf="parameterFinishDate">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.baseQuery.finishDate"
+                           for="field_finishDate">Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disableTime]="true" [rtlActive]="true"
+                                            id="field_finishDate"
+                                            class="form-control"
+                                            name="finishDate"
+                                            [(ngModel)]="finishDate"
+                        >
+                        </ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary float-right create-entity"
+                    [disabled]="!voucherTemplate" (click)="exec()" *jhiHasAnyAuthorityDisabled="['ROLE_ADMIN', 'EXECUTE_QUERY_VOUCHER_TEMPLATE']">
+                <span class="fa fa-check"></span>
+                <span jhiTranslate="entity.action.executeQuery">execute Query</span>
+            </button>
+        </div>
+    </div>
+
+    <p-dataTable #dt [value]="voucherMasters" [lazy]="true" [rows]="itemsPerPage" *jhiHasAnyAuthority="['ROLE_ADMIN', 'LIST_VOUCHER_MASTER']"
+                 [rowsPerPageOptions]="[5,10,20,totalItems]"
+                 [paginator]="true" [responsive]="true" [stacked]="false"
+                 [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)"
+                 [emptyMessage]="'global.messages.info.emptyRecords' | translate">
+        <p-header>
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherMaster.voucherType"
+                   for="field_voucherType">voucherType</label>
+            <select class="custom-select col-md" (change)="search()" id="field_voucherType" name="voucherType"
+                    [(ngModel)]="voucherMaster.voucherTypeId">
+                <option [ngValue]="null"></option>
+                <option *ngFor="let voucherTypeOption of vouchertypes; trackBy: trackVoucherTypeById"
+                        [ngValue]="voucherTypeOption.id">
+                    {{voucherTypeOption.voucherTypeGroupTitle + '/' + voucherTypeOption.title}}
+                </option>
+            </select>
+
+        </p-header>
+
+        <p-headerColumnGroup>
+            <p-row>
+                <p-column field="locationTitle" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.voucherMaster.locationTitle">locationTitle</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="locationId" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.voucherMaster.voucherTitle">voucherTitle</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="docDate" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.voucherMaster.docDate">docDate</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="userConfirm" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.voucherMaster.userConfirm">User Confirm</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="docNumber" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.voucherMaster.docNumber">Doc Number</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="status" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.voucherMaster.status">Voucher Type</span>
+                    </ng-template>
+                </p-column>
+                <p-column styleClass="col-button"></p-column>
+            </p-row>
+            <p-row>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control"
+                               search-after-typed (onSearch)="search()"
+                               name="locationTitle" id="field_locationTitle"
+                               [(ngModel)]="voucherMaster.locationTitle"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control"
+                               search-after-typed (onSearch)="search()"
+                               name="locationId" id="field_locationId"
+                               [(ngModel)]="voucherMaster.voucherTypeTitle"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <ng2-datetimepicker class="form-control" name="docDate" [disableTime]="true"
+                                            [rtlActive]="true" time="00:00:00"
+                                            [(ngModel)]="voucherMaster.docDate">
+                        </ng2-datetimepicker>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               search-after-typed (onSearch)="search()"
+                               name="userConfirm" id="field_userConfirm"
+                               [(ngModel)]="voucherMaster.userConfirm"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               search-after-typed (onSearch)="search()"
+                               name="docNumber" id="field_docNumber"
+                               [(ngModel)]="voucherMaster.docNumber"
+                               maxlength="30"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <select class="form-control" name="status" (change)="search()"
+                                [(ngModel)]="voucherMaster.status" id="field_status">
+                            <option value="CONFIRM">{{'niopdcgatewayApp.VoucherMasterStatus.CONFIRM' | translate}}
+                            </option>
+                            <option value="PENDING">{{'niopdcgatewayApp.VoucherMasterStatus.PENDING' | translate}}
+                            </option>
+                        </select>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <button class="btn btn-info" (click)="search()">
+                            <span class="fa fa-search"></span>
+                        </button>
+                        <button class=" btn btn-danger" (click)="clear()">
+                            <span class="fa fa-remove"></span>
+                        </button>
+                    </ng-template>
+                </p-column>
+            </p-row>
+        </p-headerColumnGroup>
+
+        <p-column field="title" [header]="'niopdcgatewayApp.location.home.title' | translate"></p-column>
+        <p-column field="voucherTypeTitle" [header]="'niopdcgatewayApp.location.home.title' | translate"></p-column>
+        <p-column field="confirmDate" [header]="'niopdcgatewayApp.voucherMaster.docDate' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span>{{item.docDate | dateJalali}}</span>
+            </ng-template>
+        </p-column>
+        <p-column field="userConfirm" [header]="'niopdcgatewayApp.voucherMaster.userConfirm' | translate"></p-column>
+        <p-column field="docNumber" [header]="'niopdcgatewayApp.voucherMaster.docNumber' | translate"></p-column>
+        <p-column field="status" [header]="'niopdcgatewayApp.voucherMaster.status' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span *ngIf="item.status===VoucherMasterStatus[VoucherMasterStatus.CONFIRM]" class="fa fa-check"></span>
+                <span *ngIf="item.status!==VoucherMasterStatus[VoucherMasterStatus.CONFIRM]" class="fa fa-close"></span>
+            </ng-template>
+        </p-column>
+        <p-column class="component">
+            <ng-template let-item="rowData" pTemplate="body">
+                <div class="btn-group" ngbDropdown placement="right">
+
+                    <button class="btn btn-primary" *jhiHasAnyAuthority="['ROLE_ADMIN','PRINT_VOUCHER_MASTER']"
+                            [routerLink]="[ item.id, 'report']">
+                        <span class="fa fa-external-link"></span>
+                        <span jhiTranslate="report.print">Factor Item</span>
+                    </button>
+                    <button class="btn btn-primary" ngbDropdownToggle></button>
+                    <div class="dropdown-menu" ngbDropdownMenu>
+                        <button type="button" class="dropdown-item"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN', 'DOWNLOAD_VOUCHER_MASTER']"
+                                (click)="downloacAccFile(item.id)">
+                            <span class="glyphicon-download"></span>
+                            <span jhiTranslate="niopdcgatewayApp.voucherMaster.downloadAccFile">revertConfirm</span>
+                        </button>
+                        <button type="button" class="dropdown-item"
+                                *jhiHasAnyAuthority="{auth:['ROLE_ADMIN', 'CONFIRM_VOUCHER_MASTER'], andIf:item.status!==VoucherMasterStatus[VoucherMasterStatus.CONFIRM]}"
+                                replaceUrl="true"
+                                [routerLink]="['/','voucher-master' ,{ outlets: { popup:  item.id+'/confirm'}}]">
+                            <span class="fa fa-check"></span>
+                            <span jhiTranslate="entity.action.confirm">confirm</span>
+                        </button>
+                        <button type="button" class="dropdown-item"
+                                *jhiHasAnyAuthority="{auth:['ROLE_ADMIN', 'REVERT_CONFIRM_VOUCHER_MASTER'], andIf:item.status===VoucherMasterStatus[VoucherMasterStatus.CONFIRM]}"
+                                replaceUrl="true"
+                                [routerLink]="['/','voucher-master' ,{ outlets: { popup:  item.id+'/revert-confirm'}}]">
+                            <span class="fa fa-remove"></span>
+                            <span jhiTranslate="entity.action.revertConfirm">revertConfirm</span>
+                        </button>
+                        <button class="dropdown-item" *jhiHasAnyAuthority="{auth:['ROLE_ADMIN','VIEW_VOUCHER_ITEMS']}"
+                                [routerLink]="[ item.id, 'voucher-item']">
+                            <span class="fa fa-external-link"></span>
+                            <span jhiTranslate="niopdcgatewayApp.voucherItem.home.title">Factor Item</span>
+                        </button>
+                        <button class="dropdown-item"
+                                replaceUrl="true"
+                                *jhiHasAnyAuthority="{auth:['ROLE_ADMIN','DELETE_VOUCHER_MASTER'], andIf:item.status!==VoucherMasterStatus[VoucherMasterStatus.CONFIRM]}"
+                                [routerLink]="['/','voucher-master', { outlets: { popup:  item.id + '/delete'} }]">
+                            <span class="fa fa-remove"></span>
+                            <span jhiTranslate="entity.action.delete">delete</span>
+                        </button>
+                    </div>
+                </div>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+
+</div>

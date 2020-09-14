@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "sealUse" : {
+            "home": {
+                "title": "Seal Uses",
+                "createLabel": "Create a new Seal Use",
+                "createOrEditLabel": "Create or edit a Seal Use"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Seal Use {{ id }}?"
+            },
+            "detail": {
+                "title": "Seal Use"
+            },
+            "sealNumber": "Seal Number",
+            "sealPrefix": "Seal Prefix",
+            "sealUseReason": "Seal Use Reason",
+            "seal": "Seal",
+            "wayBill": "Way Bill"
+        }
+    },
+    "niopdcaoApp": {
+        "sealUse" : {
+            "created": "A new Seal Use is created with identifier {{ param }}",
+            "updated": "A Seal Use is updated with identifier {{ param }}",
+            "deleted": "A Seal Use is deleted with identifier {{ param }}"
+        }
+    }
+}

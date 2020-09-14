@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "consumption" : {
+            "home": {
+                "title": "Consumptions",
+                "createLabel": "Create a new Consumption",
+                "createOrEditLabel": "Create or edit a Consumption"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Consumption {{ id }}?"
+            },
+            "detail": {
+                "title": "Consumption"
+            },
+            "title": "Title",
+            "code": "Code",
+            "sellContractProduct": "Sell Contract Product"
+        }
+    },
+    "niopdcbaseApp": {
+        "consumption" : {
+            "created": "A new Consumption is created with identifier {{ param }}",
+            "updated": "A Consumption is updated with identifier {{ param }}",
+            "deleted": "A Consumption is deleted with identifier {{ param }}"
+        }
+    }
+}

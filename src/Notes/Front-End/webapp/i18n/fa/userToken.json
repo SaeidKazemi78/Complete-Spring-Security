@@ -1,0 +1,27 @@
+
+{
+    "niopdcgatewayApp": {
+        "userToken": {
+            "home": {
+                "title": "نشست های کاربر",
+                "view": "نمایش نشست"
+            },
+            "delete": {
+                "question": "آیا شما می خواهید این نشست حذف شود؟"
+            },
+            "detail": {
+                "title": "نشست کاربر"
+            },
+            "username": "نام کاربری",
+            "lastLoginDate": "آخرین ورود",
+            "clientId": "نرم افزار",
+            "ip": "ای ‌پی "
+
+        }
+    },
+    "niopdcbaseApp": {
+        "UserToken": {
+            "deleted": "نشست کاربر با موفقیت حذف شد."
+        }
+    }
+}

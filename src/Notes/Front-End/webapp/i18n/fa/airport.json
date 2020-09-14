@@ -1,0 +1,36 @@
+
+{
+    "niopdcgatewayApp": {
+        "airport" : {
+            "home": {
+                "title": "فرودگاه ها",
+                "createLabel": "ایجاد فرودگاه",
+                "createOrEditLabel": "ویرایش فرودگاه",
+                "view":"نمایش فرودگاه"
+            },
+            "delete": {
+                "question": "آیا برای حذف فرودگاه {{param}} اطمینان دارید؟"
+            },
+            "detail": {
+                "title": "فرودگاه"
+            },
+            "persianTitle": "عنوان فارسی",
+            "englishTitle": "عنوان انگلیسی",
+            "globalCode": "YATA Code",
+            "code": "کد فرودگاه",
+            "regionId": "شهر",
+            "regionName": "شهر",
+            "countryId": "کشور",
+            "countryName": "کشور",
+            "checkNational": "ایرانی",
+            "targetAirports": "فرودگاه های مجاز"
+        }
+    },
+    "niopdcaoApp": {
+        "airport" : {
+            "created": "فرودگاه با موفقیت ایجاد شد.",
+            "updated": "فرودگاه با موفقیت ویرایش شد.",
+            "deleted": "فرودگاه با موفقیت حذف شد."
+        }
+    }
+}

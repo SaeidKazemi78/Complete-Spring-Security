@@ -1,0 +1,36 @@
+{
+    "niopdcgatewayApp": {
+        "carInfo": {
+            "home": {
+                "title": "اطلاعات نفت کش",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ویرایش",
+                "carTitle": "نفت کش"
+            },
+            "delete": {
+                "question": "آیا برای حذف مطمئن هستید ؟ "
+            },
+            "detail": {
+                "title": "اطلاعات نفت کش"
+            },
+            "physicalInsuranceNo": "شماره بیمه بدنه",
+            "physicalInsuranceExpireDate": "تاریخ اعتبار بیمه بدنه",
+            "thirdPartyInsuranceNo": "شماره بیمه شخص ثالث",
+            "thirdPartyInsuranceExpireDate": "تاریخ اعتبار بیمه شخص ثالث",
+            "registerDate": "تاریخ ثبت",
+            "wayBillCardSerial": "شماره سریال کارت بارنامه",
+            "fromDate": "از تاریخ",
+            "toDate": "تا تاریخ",
+            "car": "نفت کش",
+            "capacity": "ظرفیت",
+            "sealNumber": "تعداد پملپ"
+        }
+    },
+    "niopdcbaseApp": {
+        "carInto": {
+            "created": "اطلاعات نفت کش با موفقیت ایجاد شد.",
+            "updated": "اطلاعات نفت کش با موفقیت ویرایش شد.",
+            "deleted": "اطلاعات نفت کش با موفقیت حذف شد."
+        }
+    }
+}

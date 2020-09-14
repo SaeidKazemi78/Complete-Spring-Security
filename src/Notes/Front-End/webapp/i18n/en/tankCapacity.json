@@ -1,0 +1,36 @@
+
+{
+    "niopdcgatewayApp": {
+        "tankCapacity" : {
+            "home": {
+                "title": "Tank Capacities",
+                "createLabel": "Create a new Tank Capacity",
+                "createOrEditLabel": "Create or edit a Tank Capacity"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Tank Capacity {{ id }}?"
+            },
+            "detail": {
+                "title": "Tank Capacity"
+            },
+            "inventory": "Inventory",
+            "measureDate": "Measure Date",
+            "tankNo": "Tank No",
+            "fromProductRateId": "From Product Rate Id",
+            "fromSrc": "From Src",
+            "fromProductRate": "From Product Rate",
+            "toProductRateId": "To Product Rate Id",
+            "toSrc": "To Src",
+            "toProductRate": "To Product Rate",
+            "customer": "Customer",
+            "product": "Product"
+        }
+    },
+    "niopdcbaseApp": {
+        "tankCapacity" : {
+            "created": "A new Tank Capacity is created with identifier {{ param }}",
+            "updated": "A Tank Capacity is updated with identifier {{ param }}",
+            "deleted": "A Tank Capacity is deleted with identifier {{ param }}"
+        }
+    }
+}

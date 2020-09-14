@@ -1,0 +1,15 @@
+{
+    "niopdcgatewayApp": {
+        "OrderStatus" : {
+            "null": "",
+            "DRAFT": "DRAFT",
+            "PENDING": "PENDING",
+            "PAID": "PAID",
+            "CONFIRM": "CONFIRM",
+            "SEND_TO_DEPOT": "SEND_TO_DEPOT",
+            "EXIT_FROM_DEPOT": "EXIT_FROM_DEPOT",
+            "BACK_FROM_SALE": "BACK_FROM_SALE",
+            "BACK_FROM_DEPOT": "BACK_FROM_DEPOT"
+        }
+    }
+}

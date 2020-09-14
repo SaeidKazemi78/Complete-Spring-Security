@@ -1,0 +1,44 @@
+{
+    "niopdcgatewayApp": {
+        "closedSales": {
+            "grouping": {
+                "product": "لیست حواله ها به تفکیک فرآورده"
+            },
+            "home": {
+                "title": "گزارش فروش های بسته شده.",
+                "createLabel": "ایجاد هزینه",
+                "createOrEditLabel": "ویرایش هزینه",
+                "view": "نمایش هزینه",
+                "costGroupTitle": "گروه هزینه"
+            },
+            "delete": {
+                "question": "آیا برای حذف این هزینه مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "هزینه"
+            },
+            "orderCount": "تعداد حواله",
+            "locationName": "ناحیه",
+            "productName": "فرآورده",
+            "orderDate": "تاریخ حواله",
+            "closeDate": "تاریخ بسته شدن",
+            "totalBaseProductPrice": "جمع بهای فرآورده",
+            "totalProductPrice": "جمع مبلغ خالص",
+            "totalPrice": "جمع مبلغ",
+            "totalPrePay": "جمع پیش پرداخت",
+            "totalAmount": "جمع مقدار",
+            "totalCost": "جمع هزینه",
+            "totalCredit": "جمع اعتبار",
+            "totalPreBuy": "جمع کیف پول",
+            "totalBillAmount": "جمع فیش",
+            "totalFinancialLicense":"جمع مجوز مالی"
+        }
+    },
+    "niopdcrateApp": {
+        "cost": {
+            "created": "هزینه با موفقیت ایجاد شد.",
+            "updated": "هزینه با موفقیت ویرایش شد.",
+            "deleted": "هزینه با موفقیت حذف شد."
+        }
+    }
+}

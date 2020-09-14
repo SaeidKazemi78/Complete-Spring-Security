@@ -1,0 +1,230 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <form name="editForm" role="form" novalidate (ngSubmit)="loadAll()" #editForm="ngForm">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <h5 class="col-md-3"
+                        jhiTranslate="report.search">Search
+                    </h5>
+                </div>
+            </div>
+            <div class="card-block container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label jhiTranslate="niopdcgatewayApp.monthlyReport.year"
+                                           for="field_year">Type</label>
+                                    <select class="form-control" id="field_year" name="year"
+                                            [(ngModel)]="req.year" required>
+                                        <option *ngFor="let y of years" [ngValue]="y">{{y}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label jhiTranslate="niopdcgatewayApp.monthlyReport.month"
+                                           for="field_month">Type</label>
+                                    <select class="form-control" id="field_month" name="month"
+                                            [(ngModel)]="req.month" required>
+                                        <option [ngValue]="1">فروردین</option>
+                                        <option [ngValue]="2">اردیبهشت</option>
+                                        <option [ngValue]="3">خرداد</option>
+                                        <option [ngValue]="4">تیر</option>
+                                        <option [ngValue]="5">مرداد</option>
+                                        <option [ngValue]="6">شهریور</option>
+                                        <option [ngValue]="7">مهر</option>
+                                        <option [ngValue]="8">آبان</option>
+                                        <option [ngValue]="9">آذر</option>
+                                        <option [ngValue]="10">دی</option>
+                                        <option [ngValue]="11">بهمن</option>
+                                        <option [ngValue]="12">اسفند</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="checkbox" class="form-control"
+                                           name="allProducts" id="field_product"
+                                           [(ngModel)]="allProducts"/>
+                                    <label jhiTranslate="niopdcgatewayApp.consumptionReport.product"
+                                           for="field_product">product</label>
+                                    <p-multiSelect *ngIf="!allProducts" class="form-control"
+                                                   [options]="products"
+                                                   name="products"
+                                                   required
+                                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                                   [(ngModel)]="req.products"
+                                                   [ngModelOptions]="{standalone: true}"
+                                    ></p-multiSelect>
+                                    <input *ngIf="allProducts" disabled type="text"
+                                           class="form-control"
+                                           name="products"
+                                           [ngModel]="'همه'"/>
+                                    <div
+                                        [hidden]="!(editForm.controls.products?.dirty && editForm.controls.products?.invalid)">
+                                        <small class="form-text text-danger"
+                                               [hidden]="!editForm.controls.products?.errors?.required"
+                                               jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="checkbox" class="form-control"
+                                           name="allLocations" id="field_location"
+                                           [(ngModel)]="allLocations"/>
+                                    <label jhiTranslate="niopdcgatewayApp.consumptionReport.location"
+                                           for="field_location">Location</label>
+
+                                    <input-location-selector *ngIf="!allLocations"
+                                                             class="form-control" required
+                                                             [oneSelection]="false"
+                                                             [idSelector]="true"
+                                                             [(ngModel)]="req.locations"
+                                                             name="locations"
+                                                             [selectOfLevel]="[2]">
+                                    </input-location-selector>
+                                    <input *ngIf="allLocations" disabled type="text"
+                                           class="form-control"
+                                           name="locations"
+                                           [ngModel]="'همه'"/>
+                                    <div
+                                        [hidden]="!(editForm.controls.location?.dirty && editForm.controls.location?.invalid)">
+                                        <small class="form-text text-danger"
+                                               [hidden]="!editForm.controls.location?.errors?.required"
+                                               jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="checkbox" class="form-control"
+                                           name="regions" id="field_regions"
+                                           [(ngModel)]="allRegions"/>
+                                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.location.region"
+                                           for="field_region">region</label>
+                                    <input-region-selector *ngIf="!allRegions"
+                                                           [oneSelection]="false"
+                                                           [idSelector]="true"
+                                                           [selectOfLevel]="[2,3,4]"
+                                                           class="form-control" id="field_region" name="region"
+                                                           [(ngModel)]="req.regions">
+                                    </input-region-selector>
+                                    <input *ngIf="allRegions" disabled type="text"
+                                           class="form-control"
+                                           name="region"
+                                           [ngModel]="'همه'"/>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="checkbox" class="form-control"
+                                           name="allCustomerTypes" id="field_customerTypes"
+                                           [(ngModel)]="allCustomerTypes"/>
+                                    <label jhiTranslate="niopdcgatewayApp.consumptionReport.customerTypes"
+                                           for="field_customerTypes">Customer Types</label>
+                                    <p-multiSelect class="form-control" *ngIf="!allCustomerTypes"
+                                                   [options]="customerTypes"
+                                                   name="customerTypes"
+                                                   required
+                                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                                   [(ngModel)]="req.customerTypes"
+                                                   [ngModelOptions]="{standalone: true}"
+                                    ></p-multiSelect>
+                                    <input *ngIf="allCustomerTypes" disabled type="text"
+                                           class="form-control"
+                                           name="customerTypes"
+                                           [ngModel]="'همه'"/>
+                                    <div
+                                        [hidden]="!(editForm.controls.customerTypes?.dirty && editForm.controls.customerTypes?.invalid)">
+                                        <small class="form-text text-danger"
+                                               [hidden]="!editForm.controls.customerTypes?.errors?.required"
+                                               jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="checkbox" class="form-control"
+                                           name="allCustomerTypes" id="field_consumptions"
+                                           [(ngModel)]="allConsumptions"/>
+                                    <label jhiTranslate="niopdcgatewayApp.consumptionReport.consumptions"
+                                           for="field_customerTypes">Customer Types</label>
+                                    <p-multiSelect class="form-control" *ngIf="!allConsumptions"
+                                                   [options]="consumptions"
+                                                   name="customerTypes"
+                                                   required
+                                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                                   [(ngModel)]="req.consumptions"
+                                                   [ngModelOptions]="{standalone: true}"
+                                    ></p-multiSelect>
+                                    <input *ngIf="allConsumptions" disabled type="text"
+                                           class="form-control"
+                                           name="consumptions"
+                                           [ngModel]="'همه'"/>
+                                    <div
+                                        [hidden]="!(editForm.controls.consumptions?.dirty && editForm.controls.consumptions?.invalid)">
+                                        <small class="form-text text-danger"
+                                               [hidden]="!editForm.controls.consumptions?.errors?.required"
+                                               jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <button type="submit" class="btn btn-primary "
+                            [disabled]="!editForm.valid || loading "
+                    >
+                        <span class="fa fa-search"></span>&nbsp;<span
+                        jhiTranslate="report.search" *ngIf="!loading">Save</span>
+                        <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+                    </button>
+                </div>
+            </div>
+    </form>
+    <br/>
+    <dx-data-grid id="comparisions"
+                  [dataSource]="comparisions"
+                  [showBorders]="true">
+        <dxo-export [enabled]="true" fileName="comparisions"></dxo-export>
+        <dxi-column dataField="customerName" [width]="130"
+                    caption=" {{'niopdcgatewayApp.comparisonProductSellReport.customerName' | translate}}"></dxi-column>
+        <dxi-column dataField="productTitle" [width]="130"
+                    caption=" {{'niopdcgatewayApp.comparisonProductSellReport.productTitle' | translate}}"></dxi-column>
+        <dxi-column dataField="currentMonth" [width]="130"
+                    caption=" {{'niopdcgatewayApp.comparisonProductSellReport.currentMonth' | translate}}"></dxi-column>
+        <dxi-column dataField="previousMonth" [width]="130"
+                    caption=" {{'niopdcgatewayApp.comparisonProductSellReport.previousMonth' | translate}}"></dxi-column>
+        <dxi-column dataField="lastYearMonth" [width]="130"
+                    caption=" {{'niopdcgatewayApp.comparisonProductSellReport.previousYear' | translate}}"></dxi-column>
+        <dxi-column dataField="previousMonthPercent" [width]="150"
+                    caption=" {{'niopdcgatewayApp.comparisonProductSellReport.previousMonthPercent' | translate}}"></dxi-column>
+        <dxi-column dataField="lastYearPercent" [width]="250"
+                    caption=" {{'niopdcgatewayApp.comparisonProductSellReport.previousYearPercent' | translate}}"></dxi-column>
+
+    </dx-data-grid>
+
+    <br/>
+</div>

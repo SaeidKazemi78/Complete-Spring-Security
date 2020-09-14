@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "RateType" : {
+            "null": "",
+            "PERCENT": "PERCENT",
+            "CONST": "CONST",
+            "PER_LITRE": "PER_LITRE",
+            "PER_LITRE_SCORE": "PER_LITRE_SCORE"
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "ReceivedProductType" : {
+            "null": "",
+            "TANKER": "تانکر",
+            "PIPE": "خط لوله"
+        }
+    }
+}

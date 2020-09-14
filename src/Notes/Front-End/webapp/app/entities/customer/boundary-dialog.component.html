@@ -1,0 +1,180 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+    <div class="modal-header">
+        <h4 *ngIf="customer.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.customer.home.createLabelBoundary">
+            Create</h4>
+        <h4 *ngIf="customer.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.customer.home.createOrEditLabelBoundary">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel"
+            jhiTranslate="niopdcgatewayApp.customer.home.viewBoundary">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.customer.type"
+                           for="field_type">Type</label>
+                    <select class="form-control" id="field_type" name="type"
+                            [disabled]="isView || (customer.valid && !isUserAdmin && customer.id)"
+                            (ngModelChange)="onChangeCustomerType($event)"
+                            [(ngModel)]="customer.typeId" required>
+                        <option [ngValue]="customerTypeOption.id"
+                                *ngFor="let customerTypeOption of customerTypes| sortBy:'title'; trackBy: trackCustomerTypeById">
+                            {{customerTypeOption.title}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.vehicleModel.home.title"
+                           for="field_vehicleModel">Vehicle Model</label>
+                    <p-dropdown [options]="customVehicleModels"
+                                [(ngModel)]="customer.vehicleModelId"
+                                [filter]="true"
+                                [disabled]="isView || (customer.valid && !isUserAdmin && customer.id)"
+                                (ngModelChange)="onChangeVehicleModel($event)"
+                                class="form-control"
+                                filterBy="label"
+                                id="field_vehicleModel"
+                                name="vm1" required
+                                ngDefaultControl>
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.country.home.title"
+                           for="field_country">Country</label>
+                    <p-dropdown [options]="customCountries"
+                                [(ngModel)]="customer.countryId"
+                                [filter]="true"
+                                [disabled]="isView || (customer.valid && !isUserAdmin && customer.id) || customer.iranian"
+                                class="form-control"
+                                filterBy="label"
+                                id="field_country"
+                                name="countryId"
+                                ngDefaultControl required>
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="form-control-label" *ngIf="!customer.iranian"
+                       jhiTranslate="niopdcgatewayApp.customer.plaqueOne"
+                       for="field_plaque1">Name</label>
+                <label class="form-control-label" *ngIf="customer.iranian"
+                       jhiTranslate="niopdcgatewayApp.customer.nationalPlaque"
+                       for="field_plaque2">Name</label>
+                <jhi-ir-plaque required *ngIf="!customer.iranian"
+                               id="field_plaque1"
+                               name="plaque"
+                               class="form-control"
+                               [disabled]="isView || (customer.valid && !isUserAdmin && customer.id)"
+                               defaultTemplateCode="TR"
+
+                               [(ngModel)]="customer.customPlaque"></jhi-ir-plaque>
+                <jhi-ir-plaque required *ngIf="customer.iranian"
+                               id="field_plaque2"
+                               name="plaque"
+                               class="form-control"
+                               [disabled]="isView || (customer.valid && !isUserAdmin)"
+                               defaultTemplateCode="IR"
+
+                               [(ngModel)]="customer.customPlaque"></jhi-ir-plaque>
+                <div
+                    [hidden]="!(editForm.controls.plaque?.dirty && editForm.controls.plaque?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.plaque?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.plaque?.errors?.wrong">
+                        فرمت پلاک نامعتبر است
+                    </small>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <label class="form-control-label" *ngIf="!customer.iranian"
+                       jhiTranslate="niopdcgatewayApp.customer.plaqueTwo"
+                       for="field_plaqueTwo1">Name</label>
+                <label class="form-control-label" *ngIf="customer.iranian"
+                       jhiTranslate="niopdcgatewayApp.customer.iranianTransitPlaque"
+                       for="field_plaqueTwo2">Name</label>
+                <jhi-ir-plaque class="form-control" *ngIf="!customer.iranian"
+                               id="field_plaqueTwo1"
+                               name="plaqueTwo"
+                               [disabled]="isView || (customer.valid && !isUserAdmin && customer.id) "
+                               defaultTemplateCode="IR"
+                               [(ngModel)]="customer.customPlaqueTwo"></jhi-ir-plaque>
+                <jhi-ir-plaque class="form-control" *ngIf="customer.iranian"
+                               id="field_plaqueTwo2"
+                               name="plaqueTwo"
+                               [disabled]="isView || (customer.valid && !isUserAdmin) "
+                               defaultTemplateCode="TR"
+                               [(ngModel)]="customer.customPlaqueTwo"></jhi-ir-plaque>
+                <div
+                    [hidden]="!(editForm.controls.plaqueTwo?.dirty && editForm.controls.plaqueTwo?.invalid)">
+
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.plaqueTwo?.errors?.wrong">
+                        فرمت پلاک نامعتبر است
+                    </small>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+
+<!--                Here its is -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.carRfId.code"
+                           for="field_id">Code</label>
+                    <p-dropdown [options]="carRfIdOptions | sortBy: 'label'"
+                                [(ngModel)]="customer.carRfId"
+                                [filter]="true"
+                                [disabled]="isView || customer.id"
+                                class="form-control"
+                                filterBy="label"
+                                id="field_id"
+                                name="field_id"
+                                ngDefaultControl>
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="col-md-6" *ngIf="!(customer.valid  && customer.id) || isView">
+                <div class="form-group" style="padding-top:30px ">
+                    <label jhiTranslate="niopdcgatewayApp.customer.home.ok.information"></label>
+                    <input [disabled]="editForm.form.invalid" name="valid" id="field_valid" class="form-control"
+                           type="checkbox" [(ngModel)]="isCustomerValid">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button *ngIf="!isView" type="submit"
+                [disabled]="editForm.form.invalid || isSaving || (!isCustomerValid && !isUserAdmin)|| (customer.id &&  customer.valid && !isUserAdmin)"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+
+
+    </div>
+</form>

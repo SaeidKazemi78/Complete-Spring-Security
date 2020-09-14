@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+   <changeSet author="alireza (generated)" id="1574776258636-2">
+      <dropDefaultValue tableName="customer" columnName="valid"/>
+      <addDefaultValue columnDataType="boolean"
+                       columnName="valid"
+                       defaultValueBoolean="false"
+                       tableName="customer"/>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574776258636-3">
+       <dropDefaultValue tableName="customer_aud" columnName="valid"/>
+      <addDefaultValue columnDataType="boolean"
+                       columnName="valid"
+                       defaultValueBoolean="false"
+                       tableName="customer_aud"/>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574776258636-4">
+      <dropPrimaryKey tableName="user_location"/>
+      <addPrimaryKey columnNames="location_id, username"
+                     constraintName="user_locationPK"
+                     tableName="user_location"/>
+   </changeSet>
+    <changeSet id="1574776258636-6" author="alireza (generated)">
+        <modifyDataType tableName="boundary_tag" columnName="last_modified_date" newDataType="datetime"/>
+    </changeSet>
+    <changeSet id="1574776258636-7" author="alireza (generated)">
+        <modifyDataType tableName="ceiling_quota" columnName="last_modified_date" newDataType="datetime"/>
+    </changeSet>
+    <changeSet id="1574776258636-8" author="alireza (generated)">
+        <modifyDataType tableName="niopdc_config" columnName="last_modified_date" newDataType="datetime"/>
+    </changeSet>
+    <changeSet id="1574776258636-9" author="alireza (generated)">
+        <modifyDataType tableName="plaque" columnName="last_modified_date" newDataType="datetime"/>
+    </changeSet>
+    <changeSet id="1574776258636-10" author="alireza (generated)">
+        <modifyDataType tableName="plaque_rule" columnName="last_modified_date" newDataType="datetime"/>
+    </changeSet>
+    <changeSet id="1574776258636-11" author="alireza (generated)">
+        <modifyDataType tableName="reservoir_capacity" columnName="last_modified_date" newDataType="datetime"/>
+    </changeSet>
+    <changeSet id="1574776258636-12" author="alireza (generated)">
+        <modifyDataType tableName="ceiling_quota" columnName="created_date" newDataType="datetime"/>
+    </changeSet>
+    <changeSet id="1574776258636-13" author="alireza (generated)">
+        <modifyDataType tableName="niopdc_config" columnName="created_date" newDataType="datetime"/>
+    </changeSet>
+    <changeSet id="1574776258636-14" author="alireza (generated)">
+        <modifyDataType tableName="plaque" columnName="created_date" newDataType="datetime"/>
+    </changeSet>
+    <changeSet id="1574776258636-15" author="alireza (generated)">
+        <modifyDataType tableName="plaque_rule" columnName="created_date" newDataType="datetime"/>
+    </changeSet>
+    <changeSet id="1574776258636-16" author="alireza (generated)">
+        <modifyDataType tableName="reservoir_capacity" columnName="created_date" newDataType="datetime"/>
+    </changeSet>
+</databaseChangeLog>

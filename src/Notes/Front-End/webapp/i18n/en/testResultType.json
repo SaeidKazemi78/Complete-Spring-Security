@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "TestResultType" : {
+            "null": "",
+            "PLUNGING": "PLUNGING",
+            "BASE": "BASE"
+        }
+    }
+}

@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "safetyCard" : {
+            "home": {
+                "title": "Safety Cards",
+                "createLabel": "Create a new Safety Card",
+                "createOrEditLabel": "Create or edit a Safety Card"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Safety Card {{ id }}?"
+            },
+            "detail": {
+                "title": "Safety Card"
+            },
+            "fromDate": "From Date",
+            "toDate": "To Date",
+            "serial": "Serial",
+            "driver": "Driver",
+            "depot": "Depot"
+        }
+    },
+    "niopdcbaseApp": {
+        "safetyCard" : {
+            "created": "A new Safety Card is created with identifier {{ param }}",
+            "updated": "A Safety Card is updated with identifier {{ param }}",
+            "deleted": "A Safety Card is deleted with identifier {{ param }}"
+        }
+    }
+}

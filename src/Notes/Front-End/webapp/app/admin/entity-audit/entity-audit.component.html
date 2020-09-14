@@ -1,0 +1,387 @@
+<div class="component">
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <p-dataTable #dt [value]="audits" [lazy]="true" [rows]="selectedLimit"
+                 [responsive]="true" [stacked]="false"
+                 [emptyMessage]="'global.messages.info.emptyRecords' | translate">
+
+        <p-header>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="entityAudit.home.microService"
+                               for="field_microService">Persian Title</label>
+                        <select class="form-control"
+                                (ngModelChange)="onChangeMicroService($event)"
+                                name="buyGroup" [(ngModel)]="microServiceName" id="field_microService">
+                            <option></option>
+                            <option value="niopdcao">{{'entityAudit.microServices.ao' | translate}}</option>
+                            <option value="niopdcbase">{{'entityAudit.microServices.base' | translate}}</option>
+                            <option value="niopdcrate">{{'entityAudit.microServices.rate' | translate}}</option>
+                            <option value="niopdcorder">{{'entityAudit.microServices.order' | translate}}</option>
+                            <option
+                                value="niopdcaccounting">{{'entityAudit.microServices.accounting' | translate}}</option>
+                            <option value="niopdcpayment">{{'entityAudit.microServices.payment' | translate}}</option>
+                            <option value="niopdcuaa">{{'entityAudit.microServices.uaa' | translate}}</option>
+                            <option value="">{{'entityAudit.microServices.gateway' | translate}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-control-label" jhiTranslate="entityAudit.home.entityOrTable"
+                           for="entityName">Persian Title</label>
+                    <select class="form-control mb-2 mr-sm-2 mb-sm-0" id="entityName"
+                            name="entityName" required [(ngModel)]="selectedEntity"
+                            #entityName="ngModel">
+                        <option [value]="conOption.packageName" *ngFor="let conOption of convertedArr">
+                            {{'global.menu.entities.' + conOption.name | translate}}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-control-label" jhiTranslate="entityAudit.home.ip"
+                           for="ip">Persian Title</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2 " id="ip"
+                           name="ip" [(ngModel)]="ip"
+                    />
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-control-label" for="limit"
+                           jhiTranslate="entityAudit.home.limitTo">
+                        Limit to
+                    </label>
+                    <select class="form-control mb-2 mr-sm-2 mb-sm-0" id="limit"
+                            name="limit" required [(ngModel)]="selectedLimit">
+                        <option [value]="limitOption" *ngFor="let limitOption of limits">
+                            {{ limitOption }}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-control-label" jhiTranslate="entityAudit.home.username"
+                           for="username">Persian Title</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="username"
+                           name="username" [(ngModel)]="username"
+                    />
+                </div>
+                <div class="col-md-2">
+                    <label class="form-control-label" jhiTranslate="entityAudit.home.id"
+                           for="username">Persian Title</label>
+                    <input type="number" class="form-control mb-2 mr-sm-2 mb-sm-0" id="id"
+                           name="id" [(ngModel)]="id"
+                    />
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="entityAudit.result.tableHeader.action"
+                               for="field_action">Oil Tank Type</label>
+                        <p-dropdown [options]="eventOptions" class="form-control"
+                                    id="field_action"
+                                    name="actions"
+                                    [defaultLabel]="'global.messages.info.choose' | translate"
+                                    [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                    [(ngModel)]="actions"></p-dropdown>
+                        <!--<select  class="form-control" name="action"
+                                [(ngModel)]="action" id="field_action" multiple>
+                            <option [ngValue]="null"></option>
+                            <option value="INITIAL">{{'niopdcgatewayApp.Audit.INITIAL' | translate}}</option>
+                            <option value="UPDATE">{{'niopdcgatewayApp.Audit.UPDATE' | translate}}</option>
+                            <option value="TERMINAL">{{'niopdcgatewayApp.Audit.TERMINAL' | translate}}</option>
+                        </select>-->
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.momentSheet.startTime"
+                               for="field_startTime">Register Date</label>
+                        <div class="d-flex">
+                            <ng2-datetimepicker [rtlActive]="true" time="00:00:00"
+
+                                                id="field_startTime"
+                                                class="form-control"
+                                                name="startTime" [(ngModel)]="startTime"
+                                                required></ng2-datetimepicker>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.momentSheet.endTime"
+                               for="field_endTime">Register Date</label>
+                        <div class="d-flex">
+                            <ng2-datetimepicker [rtlActive]="true" time="00:00:00"
+                                                id="field_endTime"
+                                                class="form-control"
+                                                name="endTime" [(ngModel)]="endTime"
+                                                required></ng2-datetimepicker>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row" style="direction: ltr">
+                <div class="col-md-3" style="float: left">
+                    <div class="ui-helper-clearfix">
+                        <label class="form-control-label" for="btn_loadChange"
+                               jhiTranslate="entity.action.upload">
+                            Limit to
+                        </label>
+                        <button class="btn btn-primary form-control"
+                                [disabled]="!selectedLimit || !selectedEntity || !startTime ||!endTime"
+                                (click)="loadChanges()" id="btn_loadChange">
+                            <i class="fa fa-refresh"></i>&nbsp;
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </p-header>
+        <p-headerColumnGroup>
+            <p-row>
+                <p-column field="action" [header]="'entityAudit.result.tableHeader.action' | translate">
+                    <ng-template let-item="rowData" pTemplate="body">
+                        <span jhiTranslate="{{'niopdcgatewayApp.Audit.' + item.action}}">{{item.action}}</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="commitVersion">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="entityAudit.result.tableHeader.commitVersion">Persian Title</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="modifiedDate">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="entityAudit.result.tableHeader.modifiedDate">Persian Title</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="modifiedBy">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="entityAudit.result.tableHeader.modifiedBy">Persian Title</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="ip">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="entityAudit.result.ip"> ip</span>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <th><i class="fa fa-eye"></i></th>
+                    </ng-template>
+                </p-column>
+            </p-row>
+
+            <!--<p-row>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="persianTitle" id="field_entityId"
+                               [(ngModel)]="airport.persianTitle"
+                               maxlength="42"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="persianTitle" id="field_action"
+                               [(ngModel)]="airport.persianTitle"
+                               maxlength="42"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="persianTitle" id="field_commitVersion"
+                               [(ngModel)]="airport.persianTitle"
+                               maxlength="42"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="persianTitle" id="field_value"
+                               [(ngModel)]="airport.persianTitle"
+                               maxlength="42"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="persianTitle" id="field_modifiedDate"
+                               [(ngModel)]="airport.persianTitle"
+                               maxlength="42"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="persianTitle" id="field_modifiedBy"
+                               [(ngModel)]="airport.persianTitle"
+                               maxlength="42"
+                        />
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <button type="button" class="btn btn-info btn-xs"
+                                ngbTooltip="{{ 'entityAudit.result.tableBody.viewDetails' | translate }}"
+                                (click)=openChange(audit)>
+                            <i class="fa fa-eye"></i>
+                        </button>
+                    </ng-template>
+                </p-column>
+            </p-row>-->
+        </p-headerColumnGroup>
+        <p-column field="action" [header]="'niopdcgatewayApp.airport.persianTitle' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                {{'niopdcgatewayApp.Audit.' + item.action | translate}}
+            </ng-template>
+        </p-column>
+        <p-column field="commitVersion" [header]="'niopdcgatewayApp.airport.persianTitle' | translate"></p-column>
+        <!--<p-column field="entityValue" [header]="'niopdcgatewayApp.airport.persianTitle' | translate"></p-column>-->
+        <p-column class="component">
+            <ng-template let-item="rowData" pTemplate="body">
+                {{ item.modifiedDate | dateTimeJalali }}
+            </ng-template>
+        </p-column>
+        <p-column field="modifiedBy" [header]="'niopdcgatewayApp.airport.persianTitle' | translate"></p-column>
+        <!--<p-column field="modifiedDate" [header]="'niopdcgatewayApp.airport.persianTitle' | translate"></p-column>-->
+        <p-column field="ip" [header]="'entityAudit.result.ip' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                {{item.ip}}
+            </ng-template>
+        </p-column>
+
+        <p-column class="component">
+            <ng-template let-item="rowData" pTemplate="body">
+                <button type="button" class="btn btn-info btn-xs"
+                        [disabled]="item.action !== 'UPDATE'"
+                        ngbTooltip="{{ 'entityAudit.result.tableBody.viewDetails' | translate }}"
+                        (click)=openChange(item)>
+                    <i class="fa fa-eye"></i>
+                </button>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+</div>
+
+<!--<div>
+    <h2 jhiTranslate="entityAudit.home.title">Entity Audit</h2>
+
+    <jhi-alert-success></jhi-alert-success>
+
+    <div class="row">
+        <div class="col-md-5">
+            <h4 jhiTranslate="entityAudit.home.filter">Filter</h4>
+            <form name="auditEventForm" class="form-inline" #auditEventForm="ngForm">
+                <div class="d-flex">
+                    <select class="form-control"
+                            (ngModelChange)="onChangeMicroService($event)"
+                            name="buyGroup" [(ngModel)]="microServiceName" id="field_buyGroup">
+                        <option></option>
+                        <option value="niopdcao">AO</option>
+                        <option value="niopdcbase">BASE</option>
+                        <option value="niopdcorder">ORDER</option>
+                        <option value="niopdcrate">RATE</option>
+                        <option value="niopdcaccounting">ACCOUNTING</option>
+                    </select>
+                    <label class="form-control-label mr-sm-2 col-2" for="entityName"
+                           jhiTranslate="entityAudit.home.entityOrTable">
+                        Entity/Table
+                    </label>
+
+
+
+
+
+                    <button class="btn btn-primary float-right" (click)="loadChanges()"
+                            [disabled]="!auditEventForm.form.valid">
+                        <i class="fa fa-refresh"></i>&nbsp;
+                        <span jhiTranslate="entityAudit.home.loadChangeList">Load Change List</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div [hidden]="loading">
+        <div class="table-responsive" *ngIf="audits">
+            <p *ngIf="selectedEntity" jhiTranslate="entityAudit.result.showInfo"
+               [translateValues]="{limit: selectedLimit, entity: selectedEntity}">
+                Last <strong>{{ selectedLimit }}</strong>
+                Changes for <strong>{{ selectedEntity }}</strong>
+            </p>
+
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="searchFieldEntityId"
+                           jhiTranslate="entityAudit.result.searchFieldLabel">
+                        Filter:
+                    </label>
+                    <input type="text" class="form-control" id="searchFieldEntityId"
+                           name="searchFieldEntityId"
+                           placeholder="{{ 'entityAudit.result.entityIdFilter' | translate }}"
+                           [(ngModel)]="filterEntityId"/>
+                </div>
+            </form>
+
+            <table class="table table-condensed table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th (click)="orderProp = 'entityId'; reverse = !reverse"
+                        jhiTranslate="entityAudit.result.tableHeader.entityId">
+                        Entity Id
+                    </th>
+                    <th (click)="orderProp = 'action'; reverse = !reverse"
+                        jhiTranslate="entityAudit.result.tableHeader.action">
+                        Action
+                    </th>
+                    <th (click)="orderProp = 'commitVersion'; reverse = !reverse"
+                        jhiTranslate="entityAudit.result.tableHeader.version">
+                        Version
+                    </th>
+                    <th jhiTranslate="entityAudit.result.tableHeader.value">
+                        Value
+                    </th>
+                    <th (click)="orderProp = 'modifiedDate'; reverse = !reverse"
+                        jhiTranslate="entityAudit.result.tableHeader.modifiedDate">
+                        Modified Date
+                    </th>
+                    <th (click)="orderProp = 'modifiedBy'; reverse = !reverse"
+                        jhiTranslate="entityAudit.result.tableHeader.modifiedBy">
+                        Modified By
+                    </th>
+                    <th><i class="fa fa-eye"></i></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let audit of (audits | pureFilter:filterEntityId:'entityId' | orderBy:orderProp:reverse); trackBy: trackId">
+                    <td>{{ audit.entityId }}</td>
+                    <td>{{ audit.action }}</td>
+                    <td>{{ audit.commitVersion }}</td>
+                    <td>
+                        <pre style="direction: ltr;text-align: left" class="code">{{ audit.entityValue | json }}</pre>
+                    </td>
+                    <td>{{ audit.modifiedDate | dateTimeJalali }}</td>
+                    <td>{{ audit.modifiedBy }}</td>
+                    <td>
+                        <button type="button" class="btn btn-info btn-xs"
+                                ngbTooltip="{{ 'entityAudit.result.tableBody.viewDetails' | translate }}"
+                                (click)=openChange(audit)>
+                            <i class="fa fa-eye"></i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p *ngIf="!audits" jhiTranslate="entityAudit.result.noDataFound">
+            No Data found for the filters
+        </p>
+    </div>
+</div>-->

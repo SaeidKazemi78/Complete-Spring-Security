@@ -1,0 +1,33 @@
+
+{
+    "niopdcgatewayApp": {
+        "billItem" : {
+            "home": {
+                "title": "Bill Items",
+                "createLabel": "Create a new Bill Item",
+                "createOrEditLabel": "Create or edit a Bill Item"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Bill Item {{ id }}?"
+            },
+            "detail": {
+                "title": "Bill Item"
+            },
+            "title": "Title",
+            "productId": "Product Id",
+            "litre": "Litre",
+            "costId": "Cost Id",
+            "price": "Price",
+            "costRatePrice": "Cost Rate Price",
+            "costElementId": "Cost Element Id",
+            "bill": "Bill"
+        }
+    },
+    "niopdcaccountingApp": {
+        "billItem" : {
+            "created": "A new Bill Item is created with identifier {{ param }}",
+            "updated": "A Bill Item is updated with identifier {{ param }}",
+            "deleted": "A Bill Item is deleted with identifier {{ param }}"
+        }
+    }
+}

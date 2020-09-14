@@ -1,0 +1,13 @@
+{
+    "niopdcgatewayApp": {
+        "DepotStatus": {
+            "null": "",
+            "SEND_TO_DEPOT": "ارسال به انبار",
+            "EXIT_FROM_DEPOT": "خروج از انبار",
+            "BACK_FROM_DEPOT": "برگشت از انبار",
+            "BACK_FROM_SALE": "برگشت از فروش",
+            "OVER_TURN": "واژگونی",
+            "DEPARTURE": "انحراف"
+        }
+    }
+}

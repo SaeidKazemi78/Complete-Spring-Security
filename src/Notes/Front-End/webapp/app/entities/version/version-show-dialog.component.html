@@ -1,0 +1,24 @@
+<div class="modal-body">
+    <jhi-alert-error></jhi-alert-error>
+    <div class="row">
+        <div *ngFor="let Version of versions" class="col-md-12">
+            <div>
+                <p-accordion>
+                    <p-accordionTab [selected] = "versions.indexOf(Version) == 0"
+                        header="شماره نسخه :{{Version.versionNo }} -  تاریخ نسخه :  {{Version.versionDate | dateJalali}}">
+                        <div class="row">
+                            <div style="white-space: pre-wrap;">{{Version.description}}      </div>
+                        </div>
+                    </p-accordionTab>
+                </p-accordion>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">
+        <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+    </button>
+
+</div>

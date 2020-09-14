@@ -1,0 +1,27 @@
+{
+    "niopdcgatewayApp": {
+        "voucherType": {
+            "home": {
+                "title": "انواع سند",
+                "createLabel": "ایجاد نوع سند",
+                "createOrEditLabel": "ویرایش نوع سند",
+                "view":"نمایش نوع سند"
+            },
+            "delete": {
+                "question": "آیا برای حذف نوع سند مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "نوع سند"
+            },
+            "title": "عنوان",
+            "voucherTypeGroup": "گروه سند"
+        }
+    },
+    "niopdcaccountingApp": {
+        "voucherType": {
+            "created": "نوع سند با موفقیت ایجاد شد.",
+            "updated": "نوع سند با موفقیت ویرایش شد.",
+            "deleted": "نوع سند با موفقیت حذف شد."
+        }
+    }
+}

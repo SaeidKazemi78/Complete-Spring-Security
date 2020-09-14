@@ -1,0 +1,36 @@
+
+{
+    "niopdcgatewayApp": {
+        "voucherMapping" : {
+            "home": {
+                "title": "Voucher Mappings",
+                "createLabel": "Create a new Voucher Mapping",
+                "createOrEditLabel": "Create or edit a Voucher Mapping"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Voucher Mapping {{ id }}?"
+            },
+            "detail": {
+                "title": "Voucher Mapping"
+            },
+            "rowNoMap": "Row No Map",
+            "extraMap": "Extra Map",
+            "specialMap": "Special Map",
+            "creditMap": "Credit Map",
+            "debitMap": "Debit Map",
+            "descriptionMap": "Description Map",
+            "accountNoMap": "Account No Map",
+            "suffixMap": "Suffix Map",
+            "keyMap": "Key Map",
+            "baseQuery": "Base Query",
+            "voucherTemplate": "Voucher Template"
+        }
+    },
+    "niopdcaccountingApp": {
+        "voucherMapping" : {
+            "created": "A new Voucher Mapping is created with identifier {{ param }}",
+            "updated": "A Voucher Mapping is updated with identifier {{ param }}",
+            "deleted": "A Voucher Mapping is deleted with identifier {{ param }}"
+        }
+    }
+}

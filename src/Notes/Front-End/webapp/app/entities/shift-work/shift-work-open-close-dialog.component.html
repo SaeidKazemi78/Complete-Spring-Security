@@ -1,0 +1,52 @@
+<form name="deleteForm" (ngSubmit)="confirm()">
+    <div class="modal-header">
+
+        <h4 class="modal-title" *ngIf="mode==='open'" jhiTranslate="entity.action.openShift">Confirm delete
+            operation</h4>
+        <h4 class="modal-title" *ngIf="mode==='close'" jhiTranslate="entity.action.closeShift">Confirm delete
+            operation</h4>
+
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <p *ngIf="mode==='open'" jhiTranslate="niopdcgatewayApp.shiftWork.openShift.question">Are
+            you
+            sure you want to open this Shift Work?</p>
+
+        <p *ngIf="mode==='close'" jhiTranslate="niopdcgatewayApp.shiftWork.closeShift.question">Are
+            you
+            sure you want to close this Shift Work?</p>
+
+        <div class="row" *ngIf="locationId && mode === 'open' && showTomorrow">
+            <div class="col-xs-12 col-md-4 vertical-center-group">
+                <div class="form-group">
+                    <input type="checkbox" class="form-control"
+                           name="tomorrow"
+                           id="field_tomorrow"
+                           [(ngModel)]="tomorrow"
+                    />
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.shiftWork.tomorrow"
+                           for="field_tomorrow">tomorrow</label>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" class="btn btn-primary">
+            <span class="fa fa-remove"></span>&nbsp;
+            <span *ngIf="mode === 'open'" jhiTranslate="entity.action.open">Delete</span>
+            <span *ngIf="mode === 'close'" jhiTranslate="entity.action.close">Delete</span>
+        </button>
+        <button *ngIf="showButton"  type="button" class="btn btn-success" data-dismiss="modal" (click)="gotoOrder()">
+            <span class="fa fa-edit"></span>&nbsp;<span jhiTranslate="entity.action.gotoOrder">gotoOrder</span>
+        </button>
+    </div>
+</form>

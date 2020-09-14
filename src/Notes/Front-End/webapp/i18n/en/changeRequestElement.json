@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "changeRequestElement" : {
+            "home": {
+                "title": "Change Request Elements",
+                "createLabel": "Create a new Change Request Element",
+                "createOrEditLabel": "Create or edit a Change Request Element"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Change Request Element {{ id }}?"
+            },
+            "detail": {
+                "title": "Change Request Element"
+            },
+            "model": "Model",
+            "walked": "Walked",
+            "changeFilterElement": "Change Filter Element",
+            "requestElement": "Request Element"
+        }
+    },
+    "niopdcaoApp": {
+        "changeRequestElement" : {
+            "created": "A new Change Request Element is created with identifier {{ param }}",
+            "updated": "A Change Request Element is updated with identifier {{ param }}",
+            "deleted": "A Change Request Element is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,0 +1,32 @@
+
+{
+    "niopdcgatewayApp": {
+        "element" : {
+            "home": {
+                "title": "Elements",
+                "createLabel": "Create a new Element",
+                "createOrEditLabel": "Create or edit a Element"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Element {{ id }}?"
+            },
+            "detail": {
+                "title": "Element"
+            },
+            "title": "Title",
+            "originalModel": "Original Model",
+            "currentModel": "Current Model",
+            "elementRequestReason": "Element Request Reason",
+            "lastChangeDate": "Last Change Date",
+            "elementType": "Element Type",
+            "filter": "Filter"
+        }
+    },
+    "niopdcaoApp": {
+        "element" : {
+            "created": "A new Element is created with identifier {{ param }}",
+            "updated": "A Element is updated with identifier {{ param }}",
+            "deleted": "A Element is deleted with identifier {{ param }}"
+        }
+    }
+}

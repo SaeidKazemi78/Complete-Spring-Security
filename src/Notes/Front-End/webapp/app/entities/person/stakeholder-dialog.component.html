@@ -1,0 +1,52 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myStakeholderLabel" jhiTranslate="niopdcgatewayApp.stakeholder.home.createOrEditLabel">Create or edit a Stakeholder</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!stakeholder.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="stakeholder.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.stakeholder.sharePercent" for="field_sharePercent">Share Percent</label>
+            <input type="number" class="form-control" name="sharePercent" id="field_sharePercent"
+                [(ngModel)]="stakeholder.sharePercent" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.stakeholder.stakeholderType" for="field_stakeholderType">Stakeholder Type</label>
+            <select class="form-control" name="stakeholderType" [(ngModel)]="stakeholder.stakeholderType" id="field_stakeholderType" >
+                <option value="CEO">{{'niopdcgatewayApp.StakeholderType.CEO' | translate}}</option>
+                <option value="OTHER">{{'niopdcgatewayApp.StakeholderType.OTHER' | translate}}</option>
+                <option value="AGENT">{{'niopdcgatewayApp.StakeholderType.AGENT' | translate}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.stakeholder.company" for="field_company">Company</label>
+            <select class="form-control" id="field_company" name="company" [(ngModel)]="stakeholder.companyId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="personOption.id" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.stakeholder.person" for="field_person">Person</label>
+            <select class="form-control" id="field_person" name="person" [(ngModel)]="stakeholder.personId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="personOption.id" *ngFor="let personOption of people; trackBy: trackPersonById">{{personOption.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "accountNumberItems" : {
+            "home": {
+                "title": "Account Number Items",
+                "createLabel": "Create a new Account Number Items",
+                "createOrEditLabel": "Create or edit a Account Number Items"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Account Number Items {{ id }}?"
+            },
+            "detail": {
+                "title": "Account Number Items"
+            },
+            "part": "Part",
+            "content": "Content",
+            "title": "Title"
+        }
+    },
+    "niopdcbaseApp": {
+        "accountNumberItems" : {
+            "created": "A new Account Number Items is created with identifier {{ param }}",
+            "updated": "A Account Number Items is updated with identifier {{ param }}",
+            "deleted": "A Account Number Items is deleted with identifier {{ param }}"
+        }
+    }
+}

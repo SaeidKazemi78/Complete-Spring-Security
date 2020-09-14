@@ -1,0 +1,294 @@
+# ===================================================================
+# Spring Boot configuration.
+#
+# This configuration will be overridden by the Spring profile you use,
+# for example application-dev.yml if you use the "dev" profile.
+#
+# More information on profiles: http://www.jhipster.tech/profiles/
+# More information on configuration properties: http://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+eureka:
+    client:
+        enabled: true
+        healthcheck:
+            enabled: true
+        fetch-registry: true
+        register-with-eureka: true
+        instance-info-replication-interval-seconds: 10
+        registry-fetch-interval-seconds: 10
+    instance:
+        appname: niopdcbase
+        instanceId: niopdcbase:${spring.application.instance-id:${random.value}}
+        lease-renewal-interval-in-seconds: 5
+        lease-expiration-duration-in-seconds: 10
+        status-page-url-path: ${management.context-path}/info
+        health-check-url-path: ${management.context-path}/health
+        metadata-map:
+            zone: primary # This is needed for the load balancer
+            profile: ${spring.profiles.active}
+            version: ${info.project.version}
+ribbon:
+    eureka:
+        enabled: true
+# See https://github.com/Netflix/Hystrix/wiki/Configuration
+#hystrix:
+#    command:
+#        default:
+#            execution:
+#                isolation:
+#                    thread:
+#                        timeoutInMilliseconds: 10000
+# See https://github.com/spring-cloud/spring-cloud-netflix/issues/1330
+feign:
+    hystrix:
+        enabled: true
+
+hystrix:
+    share-security-context: true
+    command:
+        default:
+            execution:
+                isolation:
+                    thread:
+                        timeoutInMilliseconds: 60000
+
+management:
+    security:
+        roles: ADMIN
+    context-path: /management
+    info:
+        git:
+            mode: full
+    health:
+        mail:
+            enabled: false # When using the MailService, configure an SMTP server and set this to true
+spring:
+    application:
+        name: niopdcbase
+    jackson:
+        serialization.write_dates_as_timestamps: false
+    jpa:
+        open-in-view: false
+        hibernate:
+            ddl-auto: none
+            naming:
+                physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+                implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    messages:
+        basename: i18n/messages
+    mvc:
+        favicon:
+            enabled: false
+    thymeleaf:
+        mode: XHTML
+    mail:
+      default-encoding: UTF-8
+      host: 172.17.33.1
+      port: 25
+      username: Tejaratasan@niopdc.ir
+      password: 123456aA
+      properties:
+             mail:
+               smtp:
+                 auth: true
+                 starttls:
+                     enable: false
+      protocol: smtp
+      test-connection: false
+    data:
+        mongodb:
+            host: 172.17.66.12
+            port: 9191
+            database: niopdc_javers
+            authentication-database: niopdc_javers
+            username: niopdc_user
+            password: dpj@niopdc
+
+security:
+    basic:
+        enabled: false
+    oauth2:
+        resource:
+            filter-order: 3
+
+server:
+    session:
+        cookie:
+            http-only: true
+
+info:
+    project:
+        version: #project.version#
+javers:
+    commitIdGenerator: random
+    documentDbCompatibilityEnabled: true
+    objectAccessHook: org.javers.spring.mongodb.DBRefUnproxyObjectAccessHook
+    mongodb:
+        host: 172.17.66.12
+        port: 9191
+        database: niopdc_javers
+        authentication-database: niopdc_javers
+        username: niopdc_user
+        password: dpj@niopdc
+
+# ===================================================================
+# JHipster specific properties
+#
+# Full reference is available at: http://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+jhipster:
+    async:
+        core-pool-size: 2
+        max-pool-size: 50
+        queue-capacity: 10000
+    # By default CORS is disabled. Uncomment to enable.
+    #cors:
+        #allowed-origins: "*"
+        #allowed-methods: "*"
+        #allowed-headers: "*"
+        #exposed-headers: "Authorization,Link,X-Total-Count"
+        #allow-credentials: true
+        #max-age: 1800
+    mail:
+        from: niopdcbase@localhost
+    swagger:
+        default-include-pattern: /api/.*
+        title: niopdcbase API
+        description: niopdcbase API documentation
+        version: 0.0.1
+        terms-of-service-url:
+        contact-name:
+        contact-url:
+        contact-email:
+        license:
+        license-url:
+    ribbon:
+        display-on-active-profiles: dev
+
+# ===================================================================
+# Application specific properties
+# Add your own application properties here, see the ApplicationProperties class
+# to have type-safe configuration, like in the JHipsterProperties above
+#
+# More documentation is available at:
+# http://www.jhipster.tech/common-application-properties/
+# ===================================================================
+remote:
+    sabteahval:
+         offlineinquiry:
+                 url: http://10.0.233.254:80/sabteahval/proxy/FileTransferPS
+                 username_base: niopdc_gsb
+                 password_base: n!opD3@#$!g3b!1395
+                 username: sherekat-faravardeh-naft
+                 password: sh-ra960529
+                 timeout: 3000
+         gsb:
+            url: https://gsbservices.iran.gov.ir/sabteahval/proxy/SabteAhvalPS
+            username_base: niopdc_gsb
+            password_base: n!opD3@#$!g3b!1395
+            username: sherekat-faravardeh-naft
+            password: sh-ra960529
+            timeout: 3000
+
+    postcode:
+        url: http://10.0.233.254:80/post/proxy/PostcodeV3
+        username-base: niopdc_gsb
+        password-base: n!opD3@#$!g3b!1395
+        username: niopcd
+        password: g3EW6xSsQwX0U5yqVh63
+        timeout: 3000
+        action-url: http://tempuri.org/IPostCode/GetAddressByPostcode
+    person-info:
+        url: http://172.17.50.49:8888/NIOPDC_SellInquiry.svc
+        username: N
+        password: 123
+        timeout: 5000
+        action-legal-url: http://tempuri.org/INIOPDC_SellInquiry/PersonInfoLegal
+        action-natural-url: http://tempuri.org/INIOPDC_SellInquiry/PersonInfoNatural
+    movable:
+        url: http://217.218.15.156/VesselOil/ShenavarTemplateService.asmx
+        username: N
+        password: 123
+        timeout: 5000
+    legal-person-info:
+        url: https://sr-cix.ntsw.ir/services/GetLegalPersonInfoDB
+        action-url: http://tempuri.org/ICiiService/InquiryByNationalCode
+        timeout: 10000
+        username-base: niopdcuser
+        password-base: dsa#987%
+    natural-person-info:
+        url: https://sr-cix.ntsw.ir/services/GetPersonInfo-NIOPDC.GetPersonInfo-NIOPDCHttpsSoap12Endpoint
+        action-url: http://tempuri.org/ISabtAhvalSAHA/getPersonInfoSAHA96M
+        timeout: 10000
+        username-base: niopdcuser
+        password-base: dsa#987%
+        trust-store: classpath:jks/ntsw.ir.jks
+        trust-store-password: changeit
+    supply-channel:
+#        url: http://wstejaratasan.niopdc.ir/NiopdcSellService.svc
+        url: http://172.17.75.2:8084/NiopdcSellService.svc
+        action-url: http://tempuri.org/INiopdcSellService/RegisterCustomerMajari
+        username: NIOPDC_PA
+        password: 145c0da75f4c5f04be641e13e682e072
+        timeout: 5000
+    specify-rate:
+        url: http://172.17.75.2:9090/TA_WS/CustomerWS
+        password: RaTe_SeLl_CuStOmEr_Niopdc_WS
+        timeout: 5000
+        action: http://customer.ta/CustomerWS/addCustomerRequest
+        is-customer-payable-action: http://customer.ta/CustomerWS/isCustomerPayable
+    transportation:
+        url: http://172.17.75.2:8082/Service1.svc
+        timeout: 5000
+        get-pyman-list-from-navgan-action: http://tempuri.org/IService1/GetPymanListFromNavgan
+        get-data-from-navgan-action-with-type: http://tempuri.org/IService1/GetDataFromNavganWithType
+
+    sms:
+        url: http://172.17.50.49/Service.svc
+        action-url: http://tempuri.org/IService/InsertMessage
+        username: test
+        password: 123
+        app-code: 2
+        timeout: 5000
+
+
+    shahkar:
+        base-url: https://gsbservices.iran.gov.ir/sazmantanzim/rest/shahkar/serviceID-matching
+        dns: 10.0.255.131
+        service-type: 2
+        identification-type: 0
+        username-basic: pakhsh_nafti_gsb
+        password-basic: "bw5@LSXQKVC:"
+        username: niopdc_gsb
+        password: n%21opD3%40%23%24%21g3b%211395  #n!opD3@#$!g3b!1395
+        timeout: 10000
+        trust-store: classpath:jks/gov.ir.jks
+        trust-store-password: changeit
+
+
+
+# ==================================================================
+# scheduler  setting
+# ==================================================================
+
+scheduler:
+    inquiry:
+        response:
+            configurationInitialDelay: 1800000
+            configurationLoadRate: 1800000
+
+        request:
+            configurationInitialDelay: 10000
+            configurationLoadRate: 1800000
+
+        retry:
+            configurationInitialDelay: 10000
+            configurationLoadRate: 1800000

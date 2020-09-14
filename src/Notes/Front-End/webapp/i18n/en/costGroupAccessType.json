@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "CostGroupAccessType" : {
+            "null": "",
+            "PRODUCT": "PRODUCT",
+            "CUSTOMER": "CUSTOMER"
+        }
+    }
+}

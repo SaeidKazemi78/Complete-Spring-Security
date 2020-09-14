@@ -1,0 +1,197 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <form name="editForm" role="form" novalidate (ngSubmit)="report()" #editForm="ngForm">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.order.startDate"
+                           for="field_startDate">startDate</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [rtlActive]="true" time="00:00:00"
+                                            id="field_startDate"
+                                            class="form-control"
+                                            name="startDate" [(ngModel)]="req.startDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.order.finishDate"
+                           for="field_finishDate">finish Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [rtlActive]="true" time="00:00:00"
+                                            id="field_finishDate"
+                                            class="form-control"
+                                            name="finishDate" [(ngModel)]="req.finishDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label jhiTranslate="niopdcgatewayApp.order.locationId1"
+                       for="field_region">region</label>
+                <p-multiSelect
+                    [(ngModel)]="req.regionIds"
+                    [options]="customRegion | sortBy: 'label'"
+                    class="form-control"
+                    id="field_region"
+                    widthGrid="300px"
+                    [ngModelOptions]="{standalone: true}"
+                    [defaultLabel]="'global.messages.info.choose' | translate"
+                    [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                    ngDefaultControl
+                    name="region"
+                >
+                </p-multiSelect>
+            </div>
+            <div class="col-md-3">
+                <label jhiTranslate="niopdcgatewayApp.order.locationId"
+                       for="field_area">Location</label>
+                <p-multiSelect
+                    [(ngModel)]="req.areaIds"
+                    [options]="customArea | sortBy: 'label'"
+                    class="form-control"
+                    id="field_area"
+                    widthGrid="300px"
+                    [ngModelOptions]="{standalone: true}"
+                    [defaultLabel]="'global.messages.info.choose' | translate"
+                    [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                    ngDefaultControl
+                    name="area"
+                >
+                </p-multiSelect>
+            </div>
+            <div class="col-md-3">
+                <label jhiTranslate="niopdcgatewayApp.order.locationId2"
+                       for="field_locations">Location</label>
+                <p-multiSelect
+                    [(ngModel)]="req.locationIds"
+                    [options]="customLocation | sortBy: 'label'"
+                    class="form-control"
+                    id="field_locations"
+                    widthGrid="300px"
+                    [ngModelOptions]="{standalone: true}"
+                    [defaultLabel]="'global.messages.info.choose' | translate"
+                    [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                    ngDefaultControl
+                    name="location"
+                >
+                </p-multiSelect>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.order.orderType"
+                           for="field_orderType">have Boundary Sell</label>
+                    <select class="form-control" name="orderType" [(ngModel)]="req.orderType"
+                            id="field_orderType">
+                        <option *ngIf="orderTypeOptions && orderTypeOptions.length > 1" [ngValue]="null" selected>همه</option>
+                        <option [ngValue]="orderTypeOption.value"
+                                *ngFor="let orderTypeOption of orderTypeOptions">
+                            {{orderTypeOption.label}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.customer.type"
+                           for="field_customerTypeId">Type</label>
+                    <p-multiSelect
+                        [(ngModel)]="req.customerTypeIds"
+                        [options]="customerType | sortBy: 'label'"
+                        class="form-control"
+                        id="field_customerTypeId"
+                        widthGrid="300px"
+                        [defaultLabel]="'global.messages.info.choose' | translate"
+                        [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                        [ngModelOptions]="{standalone: true}"
+                        ngDefaultControl
+                        lable="customerType"
+                    ></p-multiSelect>
+                    <!--                    <select class="form-control" id="field_type" name="type"-->
+                    <!--                            [(ngModel)]="req.customerTypeId">-->
+                    <!--                        <option [ngValue]="null"></option>-->
+                    <!--                        <option [ngValue]="customerTypeOption.id"-->
+                    <!--                                *ngFor="let customerTypeOption of customerTypes| sortBy:'title'">-->
+                    <!--                            {{customerTypeOption.title}}-->
+                    <!--                        </option>-->
+                    <!--                    </select>-->
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                    <label jhiTranslate="niopdcgatewayApp.boundaryPublicSell.home.totalDiscountType"
+                           for="field_boundaryDiscount">boundaryDiscount</label>
+                    <p-multiSelect class="form-control"
+                                   id="field_boundaryDiscount"
+                                   [options]="customDiscount | sortBy: 'label'"
+                                   name="DiscountType"
+                                   widthGrid="300px"
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                   [(ngModel)]="req.discountTypeIds"
+                                   [ngModelOptions]="{standalone: true}"
+                                   ngDefaultControl
+                    ></p-multiSelect>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.boundarySell.productTitle"
+                           for="field_product">product</label>
+                    <p-multiSelect class="form-control"
+                                   id="field_product"
+                                   [options]="customProducts"
+                                   name="products"
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [(ngModel)]="req.productIds"
+                                   [ngModelOptions]="{standalone: true}"
+                    ></p-multiSelect>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <button type="submit" class="btn btn-primary "
+                    [disabled]="editForm.form.invalid ">
+                <span class="fa fa-search"></span>&nbsp;<span
+                jhiTranslate="report.search">Save</span>
+            </button>
+        </div>
+    </form>
+    <br/>
+    <div id="viewer" dir="ltr">
+
+    </div>
+</div>

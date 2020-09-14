@@ -1,0 +1,36 @@
+{
+    "niopdcgatewayApp": {
+        "sellContractPerson": {
+            "home": {
+                "title": "صاحب امتیازان قرارداد",
+                "sellContractTitle": "قرارداد",
+                "cardTitle": "مشخصات صاحب امتیازان",
+                "createLabel": "ایجاد صاحب امتیاز قرارداد",
+                "createOrEditLabel": "ویرایش صاحب امتیاز قرارداد",
+                "view": "نمایش صاحب امتیاز قرارداد"
+            },
+            "delete": {
+                "question": "آیا برای حذف این صاحب امتیاز از قرارداد مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "صاحب امتیازان قرارداد"
+            },
+            "sharePercent": "درصد مشارکت",
+            "sellContract": "قرارداد",
+            "person": "صاحب امتیاز",
+            "creditAccount": "حساب اعتباری",
+            "costAccount": "حساب هزینه",
+            "personExists": "صاحب امتیاز از قبل وجود دارد",
+            "sharePercentMax": "مجموع درصد مشارکت از حد مجاز بیشتر است",
+            "contractNo": "شماره قرارداد",
+            "main": "صاحب امتیاز اصلی"
+        }
+    },
+    "niopdcbaseApp": {
+        "sellContractPerson": {
+            "created": "قرارداد فروش با موفقیت ایجاد شد.",
+            "updated": "قرارداد فروش با موفقیت ویرایش شد.",
+            "deleted": "قرارداد فروش با موفقیت حذف شد."
+        }
+    }
+}

@@ -1,0 +1,189 @@
+<div>
+    <div>
+
+        <p-dataTable [value]="orders"
+                     [selectionMode]="multiSelect ? 'multiple' : 'single'"
+                     [(selection)]="selects"
+                     (onRowUnselect)="onSelect($event, false)"
+                     (onRowSelect)="onSelect($event, true)"
+                     [lazy]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20,totalItems]"
+                     [paginator]="true" [responsive]="true" [stacked]="false"
+                     [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)">
+            <p-header>
+                <p-header>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.customerType.customerGroup"
+                                       for="field_customerGroup">Customer Group</label>
+                                <select class="form-control" name="customerGroup"
+                                        [(ngModel)]="order.customerGroupTitle"
+                                        (ngModelChange)="onChangeCustomerGroup()" id="field_customerGroup">
+
+                                    <option [ngValue]="null" jhiTranslate="niopdcgatewayApp.CustomerGroup.null">
+                                    </option>
+                                    <option value="STATION" jhiTranslate="niopdcgatewayApp.CustomerGroup.STATION">
+                                        SUPPLIER
+                                    </option>
+                                    <option value="SELLER" jhiTranslate="niopdcgatewayApp.CustomerGroup.SELLER">
+                                        CONSUMER
+                                    </option>
+                                    <option value="MAJOR_CONSUMER"
+                                            jhiTranslate="niopdcgatewayApp.CustomerGroup.MAJOR_CONSUMER">
+                                        SUPPLIER
+                                    </option>
+                                    <option value="AIRPLANE" jhiTranslate="niopdcgatewayApp.CustomerGroup.AIRPLANE">
+                                        AIRLINE
+                                    </option>
+                                    <option value="LIQUID_GAS">{{'niopdcgatewayApp.CustomerGroup.LIQUID_GAS' | translate}}
+                                    </option>
+                                    <option value="BOUNDARY">{{'niopdcgatewayApp.CustomerGroup.BOUNDARY' | translate}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customer.type"
+                                       for="field_type">Name</label>
+                                <select class="form-control" id="field_type" name="type"
+                                        [(ngModel)]="order.customerTypeId">
+                                    <option [ngValue]="null"></option>
+                                    <option
+                                        *ngFor="let customerTypeOption of customerTypes | sortBy:'title'; trackBy: trackCustomerTypeById"
+                                        [ngValue]="customerTypeOption.id">{{customerTypeOption.title}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customer.name"
+                                       for="field_name">Name</label>
+                                <input type="text" class="form-control" name="name"
+                                       id="field_name"
+                                       [(ngModel)]="order.customerName"
+                                       minlength="3" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.order.personId"
+                                       for="field_name">Name</label>
+                                <input type="text" class="form-control" name="personName"
+                                       id="field_personName"
+                                       [(ngModel)]="order.personName"
+                                       minlength="3" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.order.orderNo"
+                                       for="field_name">Name</label>
+                                <input type="text" class="form-control" name="orderNo"
+                                       id="field_orderNo"
+                                       [(ngModel)]="order.orderNo"
+                                       minlength="3" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.sellContract.contractNo"
+                                       for="field_name">Name</label>
+                                <input type="text" class="form-control" name="contractNo"
+                                       id="contractNo"
+                                       [(ngModel)]="order.sellContractNumber"
+                                       minlength="3" maxlength="255"/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.detailsBuy.startDate"
+                                       for="field_startDate">startDate</label>
+                                <div class="d-flex">
+                                    <ng2-datetimepicker [disableTime]="true" [rtlActive]="true" time="00:00:00"
+                                                        id="field_startDate"
+                                                        class="form-control"
+                                                        name="startDate" [(ngModel)]="startDate"
+                                    ></ng2-datetimepicker>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.detailsBuy.finishDate"
+                                       for="field_finishDate">finishDate</label>
+                                <div class="d-flex">
+                                    <ng2-datetimepicker [disableTime]="true" [rtlActive]="true" time="23:59:59"
+                                                        id="field_finishDate"
+                                                        class="form-control"
+                                                        name="finishDate"
+                                                        [(ngModel)]="finishDate"
+                                    ></ng2-datetimepicker>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-info" (click)="search()">
+                        <span class="fa fa-search"></span>
+                        <span>جستجو</span>
+                    </button>
+                </p-header>
+            </p-header>
+
+            <p-headerColumnGroup>
+                <p-row>
+                    <p-column [style]="{'width':'38px'}"></p-column>
+                    <p-column field="customerId" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.order.customerId">Customer Id</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="personId" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.order.personId">Person Id</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="orderNo" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.order.orderNo">Order No</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="sellContractNumber">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.sellContract.contractNo">Order No</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="customerTypeTitle">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.customer.type">Order No</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="registerDate" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.order.registerDate">Order No</span>
+                        </ng-template>
+                    </p-column>
+                </p-row>
+            </p-headerColumnGroup>
+
+            <p-column [selectionMode]="multiSelect ? 'multiple' : 'single'"></p-column>
+            <p-column field="customerName" [header]="'niopdcgatewayApp.order.customerId' | translate"></p-column>
+            <p-column field="personName" [header]="'niopdcgatewayApp.order.personId' | translate"></p-column>
+            <p-column field="orderNo" [header]="'niopdcgatewayApp.order.orderNo' | translate"></p-column>
+            <p-column field="sellContractNumber" [header]="'niopdcgatewayApp.order.orderNo' | translate"></p-column>
+            <p-column field="customerTypeTitle" [header]="'niopdcgatewayApp.order.orderNo' | translate"></p-column>
+            <p-column field="registerDate" [header]="'niopdcgatewayApp.order.registerDate' | translate">
+                <ng-template let-item="rowData" pTemplate="body">
+                    <span>{{item.registerDate | dateJalali}}</span>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+    </div>
+</div>
+
+

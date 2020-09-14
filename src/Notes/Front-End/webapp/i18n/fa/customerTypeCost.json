@@ -1,0 +1,32 @@
+{
+    "niopdcgatewayApp": {
+        "customerTypeCost" : {
+            "home": {
+                "customerTypeTitle": "نوع مشتری",
+                "title": "هزينه ها نوع مشتري",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ویرایش"
+            },
+            "delete": {
+                "question": "آیا برای حذف این هزينه نوع مشتري مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "هزينه ها نوع مشتري"
+            },
+            "rateType": "نوع نرخ",
+            "hasValueAddedTax": "مالیات برارزش افزوده",
+            "has": "دارد",
+            "noHas": "ندارد",
+            "customerType": "نوع مشتری",
+            "cost": "هزینه",
+            "product": "فرآورده"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerTypeCost" : {
+            "created": "هزينه نوع مشتريی با موفقیت  ایجاد شد.",
+            "updated": "هزينه نوع مشتريی با موفقیت  ویرایش شد.",
+            "deleted": "هزينه نوع مشتريی با موفقیت  حذف شد."
+        }
+    }
+}

@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "userRefuelCenter" : {
+            "home": {
+                "title": "مرکز سوخت گیری های کاربر",
+                "createLabel":"ایجاد مرکز سوخت گیری کاربر",
+                "createOrEditLabel":"ویرایش مرکز سوخت گیری کاربر",
+                "view":"نمایش مرکز سوخت گیری کاربر"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete User RefuelCenter {{ id }}?"
+            },
+            "detail": {
+                "title": "مرکز سوخت گیری کاربر"
+            },
+            "username": "نام کاربری",
+            "accessType": "نوع دسترسی",
+            "refuelCenter": "مرکز سوخت گیری"
+        }
+    },
+    "niopdcaoApp": {
+        "userRefuelCenter" : {
+            "created": "مرکز سوخت گیری کاربر با موفقیت ایجاد شد.",
+            "updated": "مرکز سوخت گیری کاربر با موفقیت ویرایش شد.",
+            "deleted": "مرکز سوخت گیری کاربر با موفقیت حذف شد."
+        }
+    }
+}

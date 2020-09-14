@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "Parts" : {
+            "null": "",
+            "PART1": "PART1",
+            "PART2": "PART2",
+            "PART3": "PART3",
+            "PART4": "PART4"
+        }
+    }
+}

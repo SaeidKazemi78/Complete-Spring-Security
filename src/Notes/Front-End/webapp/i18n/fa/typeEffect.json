@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "TypeEffect" : {
+            "null": "",
+            "CREDIT": "مبلغی",
+            "AMOUNT": "اعتبار مقداری",
+            "BOTH": "مبلغی / مقداری"
+        }
+    }
+}

@@ -1,0 +1,157 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+
+    <div class="row justify-content-center">
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary" (click)="loadAll()">
+                <span class="fa fa-refresh"></span>
+                <span jhiTranslate="entity.action.update">update</span>
+            </button>
+
+            <button type="button" class="btn btn-success" (click)="loadCapacity()"
+                    *jhiHasAnyAuthorityDisabled="['ROLE_ADMIN', 'UPDATE_CUSTOMER_ORDER_CAPACITY']">
+                <span class="fa fa-refresh"></span>
+                <span jhiTranslate="niopdcgatewayApp.customerOrderCapacity.updateCapacity">updateCapacity</span>
+            </button>
+        </div>
+    </div>
+    <br/>
+
+    <p-dataTable [sortField]="predicate" [sortOrder]="reverse ? -1 : 1" #dt [value]="customerOrderCapacitys"
+                 [lazy]="true" [rows]="10" (onLazyLoad)="loadLazy($event)"
+                 [rowsPerPageOptions]="[5,10,20,totalItems]"
+                 [paginator]="true" [responsive]="true" [stacked]="false"
+                 [totalRecords]="totalItems"
+                 [emptyMessage]="'global.messages.info.emptyRecords' | translate">
+
+
+        <p-headerColumnGroup>
+            <p-row>
+                <p-column field="capacity" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.customerOrderCapacity.capacity">capacity</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="productGroupTitle" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span
+                            jhiTranslate="niopdcgatewayApp.customerOrderCapacity.productGroupTitle">productGroupTitle</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="productGroupTitle" >
+                    <ng-template pTemplate="header">
+                        <span
+                            jhiTranslate="niopdcgatewayApp.customerOrderCapacity.resource">resource</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="active" [sortable]="true">
+                    <ng-template pTemplate="header">
+                    <span
+                        jhiTranslate="niopdcgatewayApp.customerOrderCapacity.status">status</span>
+                    </ng-template>
+                </p-column>
+                <p-column styleClass="col-button"></p-column>
+            </p-row>
+            <p-row>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="number"
+                               name="title" id="field_title"
+                               [(ngModel)]="customerOrderCapacity.capacity"
+                               maxlength="42"
+                               search-after-typed (onSearch)="search()"/>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control" type="text"
+                               name="sadasd" id="fieldwqwe_title"
+                               [(ngModel)]="customerOrderCapacity.productGroupTitle"
+                               maxlength="42"
+                               search-after-typed (onSearch)="search()"/>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <select class="form-control" name="registerType" (change)="search()"
+                                [(ngModel)]="customerOrderCapacity.registerType">
+                            <option [value]="null">همه</option>
+                            <option value="DEPOT" jhiTranslate="niopdcgatewayApp.customerOrderCapacity.DEPOT"></option>
+                            <option value="PERSON_TRANSPOR" jhiTranslate="niopdcgatewayApp.customerOrderCapacity.PERSON_TRANSPOR"></option>
+                            <option value="DEFAULT" jhiTranslate="niopdcgatewayApp.customerOrderCapacity.DEFAULT"></option>
+                        </select>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <select class="form-control" name="acsadtive" (change)="search()"
+                                [(ngModel)]="customerOrderCapacity.active">
+                            <option></option>
+                            <option value="true" jhiTranslate="niopdcgatewayApp.customerOrderCapacity.active">
+                                true
+                            </option>
+                            <option value="false" jhiTranslate="niopdcgatewayApp.customerOrderCapacity.deActive">
+                                false
+                            </option>
+                        </select>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <button class="btn btn-info" (click)="search()">
+                            <span class="fa fa-search"></span>
+                        </button>
+                        <button class=" btn btn-danger" (click)="clear()">
+                            <span class="fa fa-remove"></span>
+                        </button>
+                    </ng-template>
+                </p-column>
+            </p-row>
+        </p-headerColumnGroup>
+
+        <p-column field="capacity" [header]="'niopdcgatewayApp.customerOrderCapacity.capacity' | translate">
+        </p-column>
+        <p-column field="productGroupTitle"
+                  [header]="'niopdcgatewayApp.customerOrderCapacity.productGroupTitle' | translate">
+        </p-column>
+        <p-column field="productGroupTitle"
+                  [header]="'niopdcgatewayApp.customerOrderCapacity.resource' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span
+                    jhiTranslate="niopdcgatewayApp.customerOrderCapacity.{{item.registerType?item.registerType:'NULL'}}"> </span>
+            </ng-template>
+        </p-column>
+        <p-column field="active"
+                  [header]="'niopdcgatewayApp.customerOrderCapacity.status' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span jhiTranslate="niopdcgatewayApp.customerOrderCapacity.{{item.active?'active':'deActive'}}"> </span>
+            </ng-template>
+        </p-column>
+
+        <p-column class="component">
+            <ng-template let-item="rowData" pTemplate="body">
+                <ng-container *ngIf="!item.active">
+                    <button type="button" class="btn btn-success"
+                            *jhiHasAnyAuthorityDisabled="['ROLE_ADMIN', 'ACTIVE_CUSTOMER_ORDER_CAPACITY']"
+                            replaceUrl="true"
+                            [routerLink]="[ { outlets: { popup:  item.id+ '/active'} }]">
+                        <span class="fa fa-check"></span>
+                        <span jhiTranslate="entity.action.active"></span>
+                    </button>
+                </ng-container>
+                <ng-container *ngIf="item.active">
+                    <button type="button" class="btn btn-danger"
+                            *jhiHasAnyAuthorityDisabled="['ROLE_ADMIN', 'ACTIVE_CUSTOMER_ORDER_CAPACITY']"
+                            replaceUrl="true"
+                            [routerLink]="[ { outlets: { popup:  item.id + '/de-active'} }]">
+                        <span class="fa fa-close"></span>
+                        <span jhiTranslate="entity.action.deActive"></span>
+                    </button>
+                </ng-container>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+
+</div>

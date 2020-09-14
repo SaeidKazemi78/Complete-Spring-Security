@@ -1,0 +1,17 @@
+{
+    "niopdcgatewayApp": {
+        "sellReportByProduct": {
+            "home": {
+                "title": "گزارش فروش بر اساس فرآورده"
+            },
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "product": "فرآورده",
+            "fuelType": "نوع عملیات",
+            "sellType": "محل فروش",
+            "countFuelReceipt": "تعداد رسید سوخت",
+            "sumSell": "مقدار",
+            "maxSell": "حداکثر تحویلی در یک مرحله"
+        }
+    }
+}

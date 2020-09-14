@@ -1,0 +1,493 @@
+@import url(fontiran.css);
+
+.k-grid-norecords {
+    display: unset;
+}
+
+body, h1, h2, h3, h4, input, button, pre, textarea, select, .ui-toast .ui-toast-message-content pre, .ui-widget, ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+    font-weight: 300;
+    font-family: "IRANSans", IRANSans, Helvetica, Arial, sans-serif;
+}
+
+p-dropdown.form-control {
+    padding: 0;
+}
+
+p-dropdown.form-control .ui-dropdown {
+    width: 100% !important;
+    border: 0;
+}
+
+.ui-dropdown {
+    min-width: unset !important;
+}
+
+.ui-datatable-thead .btn {
+    margin: 2px !important;
+}
+
+.q-button {
+    float: left;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    text-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.ui-toast-top-center {
+    top: unset !important;
+    right: unset !important;
+    left: unset !important;
+    margin-left: unset !important;
+    margin-right: unset !important;
+}
+
+.margin-left-auto {
+    margin-right: auto !important;
+}
+
+.ui-toast {
+    width: unset !important;
+}
+
+.tree-selector {
+    height: auto;
+    max-height: 200px;
+    min-width: 200px !important;
+    overflow: auto;
+    position: absolute;
+    background-color: aliceblue !important;
+    z-index: 1001;
+    box-shadow: 1px 5px 10px 1px #888888;
+
+}
+
+.ui-corner-all {
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.dataGrid {
+    padding: 0;
+    position: absolute;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    margin: .125rem 0 0;
+    font-size: 1rem;
+    color: #292b2c;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: .25rem;
+    max-width: none;
+}
+
+@media screen and (max-width: 560px) {
+    .dataGrid {
+        max-width: fit-content;
+    }
+}
+
+.rtl-btn {
+    margin-right: 0;
+    border-color: #ced4da;
+    border-width: 0 1px 0 0;
+    border-radius: .25rem 0 0 .25rem;
+}
+
+.mid-btn {
+    margin-left: 0;
+    border-color: #ced4da;
+    border-width: 0 0 0 1px;
+    border-radius: 0;
+}
+
+.modal-header {
+    border: 1px solid #aed0ea;
+    background: #deedf7;
+    border-radius: .3rem .3rem 0 0;
+}
+
+.modal-footer {
+    border: 1px solid #aed0ea;
+    background: #deedf7;
+    border-radius: 0 0 .3rem .3rem;
+}
+
+ngb-datepicker-navigation {
+    direction: ltr !important;
+}
+
+.right .ngb-dp-navigation-chevron {
+    transform: rotate(135deg) !important;
+    -webkit-transform: rotate(135deg) !important;
+    -ms-transform: rotate(135deg) !important;
+    /*margin: 0 0 0 0.5rem !important;*/
+}
+
+.ngb-dp-navigation-chevron {
+    -webkit-transform: rotate(315deg) !important;
+    -ms-transform: rotate(315deg) !important;
+    transform: rotate(315deg) !important;
+    /*margin: 0 0.5rem 0 0 !important;*/
+}
+
+.dataGrid .ui-datatable-reflow {
+    box-shadow: 1px 5px 10px 1px #888888;
+}
+
+.vertical-center-group {
+    top:10px;
+    margin: auto;
+}
+
+.dropdown-menu {
+    left: unset !important;
+}
+
+.ui-tree.ui-widget.ui-widget-content.ui-corner-all.ui-tree-selectable,
+.ui-multiselect.ui-widget.ui-state-default.ui-corner-all,
+.ui-tree.ui-widget.ui-widget-content.ui-corner-all {
+    border: none;
+    background: none;
+    color: #080808;
+
+}
+
+.ui-multiselect-trigger.ui-state-default.ui-corner-right {
+    border: none;
+    background: none;
+    color: #080808;
+}
+
+.ui-overlaypanel-content {
+    padding: 0
+}
+
+.create-entity {
+    width: 150px;
+}
+
+/*.car-tag-code {*/
+/*    width: 150px;*/
+/*    alignment: right;*/
+/*}*/
+
+.ui-datatable-thead {
+    text-align: center;
+}
+
+body .ui-table .ui-table-thead > tr > th, body .ui-table .ui-table-tbody > tr > td {
+    text-align: center;
+}
+
+app-authority-selector.form-control {
+    margin: 0;
+    padding: 0
+}
+
+p-breadcrumb a.ui-state-active {
+    border-color: #000;
+    background: none;
+}
+
+.component {
+    margin: 15px;
+}
+
+.col-button {
+    width: 170px;
+}
+
+.col-button2 {
+    width: 190px;
+}
+
+.col-button250 {
+    width: 250px;
+}
+
+.ui-megamenu-panel {
+    left: inherit !important;
+}
+
+.pi-chevron-right:before {
+    content: "\E900";
+}
+
+.pi-caret-left:before {
+    content: "\E905";
+}
+
+.pi-caret-right:before {
+    content: "\E904";
+}
+
+.pi-step-backward:before {
+    content: "\E917";
+}
+
+.pi-step-forward:before {
+    content: "\E916";
+}
+
+.fa-chevron-right:before {
+    content: "\F053";
+}
+
+.fa-backward:before {
+    content: "\F04E";
+}
+
+.fa-forward:before {
+    content: "\F04A";
+}
+
+.fa-step-backward:before {
+    content: "\F051";
+}
+
+.fa-step-forward:before {
+    content: "\F048";
+}
+
+select.form-control {
+    padding: .0rem .0rem;
+}
+
+.customer-component.form-control {
+    padding: .0rem .0rem;
+}
+
+.ui-datatable-data tr {
+    text-align: center;
+}
+
+.fa-chevron-right:before {
+    content: "\f053";
+}
+
+.fa-chevron-left:before {
+    content: "\F054";
+}
+
+.ui-multiselect:not(.ui-state-disabled):hover {
+    background: transparent;
+}
+
+p-multiSelect.form-control {
+    padding: .0rem .0rem;
+    height: unset;
+}
+
+p-multiSelect.form-control div {
+
+    display: inherit;
+}
+
+input[type="checkbox"].form-control {
+    width: auto;
+    display: inline;
+    height: unset;
+    margin: 10px;
+}
+
+.form-control[readonly] {
+    background-color: #ffffffff !important;
+}
+
+.ui-tree {
+    width: unset;
+}
+
+.div-link {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+
+.div-link:hover {
+    text-decoration: none;
+    text-shadow: 1px 1px 1px #555;
+}
+
+body .ui-toast .ui-toast-message {
+    -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    margin: 0 0 1em 0;
+}
+
+body .ui-toast .ui-toast-message.ui-toast-message-info {
+    background-color: #7fbcec;
+    border: 0 none;
+    color: #212121;
+}
+
+body .ui-toast .ui-toast-message.ui-toast-message-info .ui-toast-close-icon {
+    color: #212121;
+}
+
+body .ui-toast .ui-toast-message.ui-toast-message-success {
+    background-color: #b7d8b7;
+    border: 0 none;
+    color: #212121;
+}
+
+body .ui-toast .ui-toast-message.ui-toast-message-success .ui-toast-close-icon {
+    color: #212121;
+}
+
+body .ui-toast .ui-toast-message.ui-toast-message-warn {
+    background-color: #ffe399;
+    border: 0 none;
+    color: #212121;
+}
+
+body .ui-toast .ui-toast-message.ui-toast-message-warn .ui-toast-close-icon {
+    color: #212121;
+}
+
+body .ui-toast .ui-toast-message.ui-toast-message-error {
+    background-color: #f8b7bd;
+    border: 0 none;
+    color: #212121;
+}
+
+body .ui-toast .ui-toast-message.ui-toast-message-error .ui-toast-close-icon {
+    color: #212121;
+}
+
+body .ui-button.ui-state-default.ui-button-secondary, body .ui-buttonset.ui-button-secondary > .ui-button.ui-state-default {
+    color: #333333;
+    background-color: #f4f4f4;
+    border: 1px solid #f4f4f4;
+}
+
+body .ui-button.ui-state-default.ui-button-secondary:enabled:hover, body .ui-buttonset.ui-button-secondary > .ui-button.ui-state-default:enabled:hover {
+    background-color: #c8c8c8;
+    color: #333333;
+    border-color: #c8c8c8;
+}
+
+body .ui-button.ui-state-default.ui-button-secondary:enabled:focus, body .ui-buttonset.ui-button-secondary > .ui-button.ui-state-default:enabled:focus {
+    background-color: white;
+}
+
+body .ui-button.ui-state-default.ui-button-secondary:enabled:active, body .ui-buttonset.ui-button-secondary > .ui-button.ui-state-default:enabled:active {
+    background-color: #a0a0a0;
+    color: #333333;
+    border-color: #a0a0a0;
+}
+
+body .ui-button.ui-state-default.ui-button-info, body .ui-buttonset.ui-button-info > .ui-button.ui-state-default {
+    color: #ffffff;
+    background-color: #007ad9;
+    border: 1px solid #007ad9;
+}
+
+body .ui-button.ui-state-default.ui-button-info:enabled:hover, body .ui-buttonset.ui-button-info > .ui-button.ui-state-default:enabled:hover {
+    background-color: #116fbf;
+    color: #ffffff;
+    border-color: #116fbf;
+}
+
+body .ui-button.ui-state-default.ui-button-info:enabled:focus, body .ui-buttonset.ui-button-info > .ui-button.ui-state-default:enabled:focus {
+    background-color: #0088f3;
+}
+
+body .ui-button.ui-state-default.ui-button-info:enabled:active, body .ui-buttonset.ui-button-info > .ui-button.ui-state-default:enabled:active {
+    background-color: #005b9f;
+    color: #ffffff;
+    border-color: #005b9f;
+}
+
+body .ui-button.ui-state-default.ui-button-success, body .ui-buttonset.ui-button-success > .ui-button.ui-state-default {
+    color: #ffffff;
+    background-color: #34A835;
+    border: 1px solid #34A835;
+}
+
+body .ui-button.ui-state-default.ui-button-success:enabled:hover, body .ui-buttonset.ui-button-success > .ui-button.ui-state-default:enabled:hover {
+    background-color: #107D11;
+    color: #ffffff;
+    border-color: #107D11;
+}
+
+body .ui-button.ui-state-default.ui-button-success:enabled:focus, body .ui-buttonset.ui-button-success > .ui-button.ui-state-default:enabled:focus {
+    background-color: #3abb3b;
+}
+
+body .ui-button.ui-state-default.ui-button-success:enabled:active, body .ui-buttonset.ui-button-success > .ui-button.ui-state-default:enabled:active {
+    background-color: #0C6B0D;
+    color: #ffffff;
+    border-color: #0C6B0D;
+}
+
+body .ui-button.ui-state-default.ui-button-warning, body .ui-buttonset.ui-button-warning > .ui-button.ui-state-default {
+    color: #333333;
+    background-color: #ffba01;
+    border: 1px solid #ffba01;
+}
+
+body .ui-button.ui-state-default.ui-button-warning:enabled:hover, body .ui-buttonset.ui-button-warning > .ui-button.ui-state-default:enabled:hover {
+    background-color: #ED990B;
+    color: #333333;
+    border-color: #ED990B;
+}
+
+body .ui-button.ui-state-default.ui-button-warning:enabled:focus, body .ui-buttonset.ui-button-warning > .ui-button.ui-state-default:enabled:focus {
+    background-color: #ffc834;
+}
+
+body .ui-button.ui-state-default.ui-button-warning:enabled:active, body .ui-buttonset.ui-button-warning > .ui-button.ui-state-default:enabled:active {
+    background-color: #D38B10;
+    color: #333333;
+    border-color: #D38B10;
+}
+
+body .ui-button.ui-state-default.ui-button-danger, body .ui-buttonset.ui-button-danger > .ui-button.ui-state-default {
+    color: #ffffff;
+    background-color: #e91224;
+    border: 1px solid #e91224;
+}
+
+body .ui-button.ui-state-default.ui-button-danger:enabled:hover, body .ui-buttonset.ui-button-danger > .ui-button.ui-state-default:enabled:hover {
+    background-color: #c01120;
+    color: #ffffff;
+    border-color: #c01120;
+}
+
+body .ui-button.ui-state-default.ui-button-danger:enabled:focus, body .ui-buttonset.ui-button-danger > .ui-button.ui-state-default:enabled:focus {
+    background-color: #f25663;
+}
+
+body .ui-button.ui-state-default.ui-button-danger:enabled:active, body .ui-buttonset.ui-button-danger > .ui-button.ui-state-default:enabled:active {
+    background-color: #a90000;
+    color: #ffffff;
+    border-color: #a90000;
+}
+
+/*********************/
+
+.user-inquiry-btn {
+    margin-top: 31px
+}
+
+.user-manager-inquiry-btn {
+    margin-bottom: 10px;
+}
+
+.user-manager-inquiry-parent {
+    text-align: center !important;
+}
+
+

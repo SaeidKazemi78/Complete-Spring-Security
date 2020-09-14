@@ -1,0 +1,29 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <jhi-e-payment #ePayment [requestIdentifier]="identifier"
+                   [showButton]="false" (canPay)="payEnable = $event"
+                   (status)="onPayStatus($event)"></jhi-e-payment>
+
+    <div class="modal-footer">
+
+        <!-- pay (2 and draft) -->
+        <button type="button"
+                class="btn btn-success"
+                [disabled]="!payEnable"
+                (click)="ePaymentComponent.pay()"
+                *ngIf="payStatus === 'BEGIN'">
+            <span class="fa fa-paypal"></span>&nbsp;<span jhiTranslate="entity.action.pay">payment</span>
+        </button>
+
+        <!-- restart bank transaction (2 and draft) -->
+        <button type="button"
+                class="btn btn-success"
+                (click)="restartBankTransaction()"
+                *ngIf="!(payStatus === 'BEGIN' || payStatus === 'COMPLETE')">
+            <span class="fa fa-refresh"></span>&nbsp;<span jhiTranslate="entity.action.tryAgain">payment Again</span>
+        </button>
+
+    </div>
+</div>

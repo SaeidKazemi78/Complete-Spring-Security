@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "TankType" : {
+            "null": "",
+            "CUBE": "CUBE",
+            "CONE": "CONE"
+        }
+    }
+}

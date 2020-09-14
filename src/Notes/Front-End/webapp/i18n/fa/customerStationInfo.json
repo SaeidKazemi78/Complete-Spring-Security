@@ -1,0 +1,37 @@
+
+{
+    "niopdcgatewayApp": {
+        "customerStationInfo" : {
+            "home": {
+                "title": "اطلاعات جایگاه مشتریان",
+                "createLabel": "Create a new Customer Station Info",
+                "createOrEditLabel": "Create or edit a Customer Station Info",
+                "report": "چا‍‍پ"
+            },
+            "delete": {
+                "question": "آیا برای حذف مطمعن هستید"
+            },
+            "detail": {
+                "title": "اطلاعات جایگاه مشتری"
+            },
+            "stationType": "نوع جایگاه",
+            "hasDispatching": "دیسپچینگ دارد",
+            "hasKahab": "کهاب دارد",
+            "hasCanopy": "سایبان دارد",
+            "hasBodyPump": "بدنه تلمبه دارد",
+            "hasWorkClothes": "لباس کار دارد",
+            "hasColumns": "ستون دارد",
+            "customer": "Customer",
+            "nozzleProductCounts": "تعداد نازل ها به تفکیک فرآورده",
+            "has":"دارد",
+            "notHas":"ندارد"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerStationInfo" : {
+            "created": "اطلاعات با موفقیت ثبت شد",
+            "updated": "اطلاعات با موفقیت بروز رسانی شد",
+            "deleted": "اطلاعات با موفقیت حذف شد"
+        }
+    }
+}

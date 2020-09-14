@@ -1,0 +1,12 @@
+{
+    "niopdcgatewayApp": {
+        "Religion" : {
+            "null": "",
+            "JEWISH": "JEWISH",
+            "CHRISTIAN": "CHRISTIAN",
+            "SHIA": "SHIA",
+            "SUNNI": "SUNNI",
+            "ZOROASTRIANISM": "ZOROASTRIANISM"
+        }
+    }
+}

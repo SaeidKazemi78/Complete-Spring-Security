@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "niopdcConfig" : {
+            "home": {
+                "title": "Niopdc Configs",
+                "createLabel": "Create a new Niopdc Config",
+                "createOrEditLabel": "Create or edit a Niopdc Config"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Niopdc Config {{ id }}?"
+            },
+            "detail": {
+                "title": "Niopdc Config"
+            },
+            "startDate": "Start Date",
+            "finishDate": "Finish Date",
+            "boundaryCurrencyRateGroupId": "Boundary Currency Rate Group Id"
+        }
+    },
+    "niopdcbaseApp": {
+        "niopdcConfig" : {
+            "created": "A new Niopdc Config is created with identifier {{ param }}",
+            "updated": "A Niopdc Config is updated with identifier {{ param }}",
+            "deleted": "A Niopdc Config is deleted with identifier {{ param }}"
+        }
+    }
+}

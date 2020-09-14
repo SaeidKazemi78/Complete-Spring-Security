@@ -1,0 +1,31 @@
+
+{
+    "niopdcgatewayApp": {
+        "seal" : {
+            "home": {
+                "title": "Seals",
+                "createLabel": "Create a new Seal",
+                "createOrEditLabel": "Create or edit a Seal"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Seal {{ id }}?"
+            },
+            "detail": {
+                "title": "Seal"
+            },
+            "boxNo": "Box No",
+            "prefix": "Prefix",
+            "startSealNumber": "Start Seal Number",
+            "endSealNumber": "End Seal Number",
+            "currentSealNumber": "Current Seal Number",
+            "refuelCenter": "Refuel Center"
+        }
+    },
+    "niopdcaoApp": {
+        "seal" : {
+            "created": "A new Seal is created with identifier {{ param }}",
+            "updated": "A Seal is updated with identifier {{ param }}",
+            "deleted": "A Seal is deleted with identifier {{ param }}"
+        }
+    }
+}

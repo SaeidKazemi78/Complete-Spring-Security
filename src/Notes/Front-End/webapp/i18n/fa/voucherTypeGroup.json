@@ -1,0 +1,27 @@
+
+{
+    "niopdcgatewayApp": {
+        "voucherTypeGroup" : {
+            "home": {
+                "title": "گروه های سند",
+                "createLabel": "ایجاد گروه سند",
+                "createOrEditLabel": "ویرایش گروه سند",
+                "view":"نمایش گروه سند"
+            },
+            "delete": {
+                "question": "آیا برای حذف گروه سند مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "گروه سند"
+            },
+            "title": "عنوان"
+        }
+    },
+    "niopdcaccountingApp": {
+        "voucherTypeGroup" : {
+            "created": "گروه سند با موفقیت ایجاد شد.",
+            "updated": "گروه سند با موفقیت ویرایش شد.",
+            "deleted": "گروه سند با موفقیت حذف شد."
+        }
+    }
+}

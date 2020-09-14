@@ -1,0 +1,43 @@
+
+{
+    "niopdcgatewayApp": {
+        "vehicleModel" : {
+            "home": {
+                "title": "مدل وسیله نقلیه",
+                "createLabel": "ایجاد مدل وسیله نقلیه",
+                "createOrEditLabel": "ویرایش مدل وسیله نقلیه"
+            },
+            "delete": {
+                "question": "آیا برای حذف مدل وسیله نقلیه مطمئن هستید ؟"
+            },
+            "confirm": {
+                "question": "آیا برای تایید مدل وسیله نقلیه مطمئن هستید ؟"
+            },
+            "revertConfirm": {
+                "question": "آیا برای برگشت ازتایید مدل وسیله نقلیه مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "مدل وسیله نقلیه"
+            },
+            "title": "عنوان",
+            "customerGroup": "نوع",
+            "vehicleModelType": "نوع  وسیله نقلیه",
+            "havePrimitiveMeasureTrue": "فعال",
+            "havePrimitiveMeasureFalse": "غیر فعال",
+            "vehicleCapacity": "اندازه گیری",
+            "productTitle":"فرآورده",
+            "capacity":"ظرفیت",
+            "capacityInfo":"لیتراژ",
+            "confirmTrue": "تایید شده",
+            "confirmAll": "همه",
+            "confirmFalse": "تایید نشده"
+        }
+    },
+    "niopdcbaseApp": {
+        "vehicleModel" : {
+            "created": "مدل وسیله نقلیه با موفقیت ایجاد شد.",
+            "updated": "مدل وسیله نقلیه با موفقیت ویرایش شد.",
+            "deleted": "مدل وسیله نقلیه با موفقیت حذف شد."
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "CostType" : {
+            "null": "",
+            "WITH_ORDER": "WITH_ORDER",
+            "BILL": "BILL"
+        }
+    }
+}

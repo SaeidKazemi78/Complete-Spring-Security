@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2-hudson-740-. --><xs:schema xmlns:tns="http://customer.ta/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://customer.ta/">
+
+<xs:element name="addCustomer" type="tns:addCustomer" />
+
+<xs:element name="addCustomerResponse" type="tns:addCustomerResponse" />
+
+<xs:element name="addCustomerWorkBonus" type="tns:addCustomerWorkBonus" />
+
+<xs:element name="addCustomerWorkBonusResponse" type="tns:addCustomerWorkBonusResponse" />
+
+<xs:element name="getCustomerRate" type="tns:getCustomerRate" />
+
+<xs:element name="getCustomerRateResponse" type="tns:getCustomerRateResponse" />
+
+<xs:element name="hello" type="tns:hello" />
+
+<xs:element name="helloResponse" type="tns:helloResponse" />
+
+<xs:complexType name="getCustomerRate">
+<xs:sequence>
+<xs:element name="customerCode" type="xs:string" minOccurs="0" />
+<xs:element name="productCode" type="xs:string" minOccurs="0" />
+<xs:element name="Pass" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getCustomerRateResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="hello">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="helloResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addCustomerWorkBonus">
+<xs:sequence>
+<xs:element name="customerCode" type="xs:string" minOccurs="0" />
+<xs:element name="oldCustomerCode" type="xs:string" minOccurs="0" />
+<xs:element name="customerType" type="xs:int" />
+<xs:element name="masrafType" type="xs:int" />
+<xs:element name="statusType" type="xs:int" />
+<xs:element name="MType" type="xs:int" />
+<xs:element name="oldCode" type="xs:int" />
+<xs:element name="customerName" type="xs:string" minOccurs="0" />
+<xs:element name="address" type="xs:string" minOccurs="0" />
+<xs:element name="economicCode" type="xs:string" minOccurs="0" />
+<xs:element name="Pass" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addCustomerWorkBonusResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addCustomer">
+<xs:sequence>
+<xs:element name="customerCode" type="xs:string" minOccurs="0" />
+<xs:element name="customerType" type="xs:int" />
+<xs:element name="masrafType" type="xs:int" />
+<xs:element name="statusType" type="xs:int" />
+<xs:element name="MType" type="xs:int" />
+<xs:element name="oldCode" type="xs:int" />
+<xs:element name="customerName" type="xs:string" minOccurs="0" />
+<xs:element name="address" type="xs:string" minOccurs="0" />
+<xs:element name="economicCode" type="xs:string" minOccurs="0" />
+<xs:element name="Pass" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addCustomerResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

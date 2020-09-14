@@ -1,0 +1,213 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <p-dataTable [sortField]="predicate" [sortOrder]="reverse ? -1 : 1" #dt [value]="sellContractProducts" [lazy]="true" [rows]="itemsPerPage"
+                 [rowsPerPageOptions]="[5,10,20,totalItems]"
+                 [paginator]="true" [responsive]="true" [stacked]="false"
+                 [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)"
+                 [emptyMessage]="'global.messages.info.emptyRecords' | translate">
+        <p-header *ngIf="!sellContract?.archive && !sellContract?.active">
+            <div class="ui-helper-clearfix">
+                <button class="btn btn-primary float-right create-entity"
+                        *jhiHasAnyAuthority="['ROLE_ADMIN', 'CREATE_SELL_CONTRACT_PRODUCT']"
+                        [routerLink]="['/sell-contract/'+sellContractId,'sell-contract-product', { outlets: { popup: ['new' , sellContractId] } }]">
+                    <span class="fa fa-plus"></span>
+                    <span jhiTranslate="entity.action.create">Create</span>
+                </button>
+            </div>
+        </p-header>
+
+        <p-headerColumnGroup>
+            <p-row>
+                <p-column field="rateGroupTitle" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.sellContractProduct.rateGroupId">Rate Group Id</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="currencyRateGroupTitle" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.sellContractProduct.currencyRateGroupId">Currency Rate Group Id</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="consumptionTitle" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.sellContractProduct.consumption">Consumption</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="productTitle" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.sellContractProduct.product">Product</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="customerName" [sortable]="true" *ngIf="sellContract?.contractType !== ContractType[ContractType.EXPORT] &&
+         sellContract?.contractType !== ContractType[ContractType.BRAND]">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.sellContractProduct.sellContractCustomer">Sell Contract Customer</span>
+                    </ng-template>
+                </p-column>
+                <p-column styleClass="col-button"></p-column>
+            </p-row>
+            <p-row>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <select class="form-control" name="rateGroupId" (change)="search()"
+                                [(ngModel)]="sellContractProduct.rateGroupId"
+                                id="field_rateGroupId">
+                            <option [ngValue]="null"></option>
+                            <option [ngValue]="rateGroupOption.id"
+                                    *ngFor="let rateGroupOption of rateGroups; trackBy: trackRateGroupById">
+                                {{rateGroupOption.title}}
+                            </option>
+                        </select>
+                        <!--<input class="form-control"
+                               name="rateGroupId" id="field_rateGroupId"
+                               [(ngModel)]="sellContractProduct.rateGroupId"
+                               [numeric]
+                        />-->
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <select class="form-control" name="currencyRateGroupId" (change)="search()"
+                                [(ngModel)]="sellContractProduct.currencyRateGroupId"
+                                id="field_currencyRateGroupId">
+                            <option [ngValue]="null"></option>
+                            <option [ngValue]="currencyRateGroupOption.id"
+                                    *ngFor="let currencyRateGroupOption of currencyRateGroups; trackBy: trackCurrencyRateGroupById">
+                                {{currencyRateGroupOption.title}}
+                            </option>
+                        </select><!--
+                        <input class="form-control"
+                               name="currencyRateGroupId" id="field_currencyRateGroupId"
+                               [(ngModel)]="sellContractProduct.currencyRateGroupId"
+                               [numeric]
+                        />-->
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <select class="form-control" id="field_consumption" name="consumption" (change)="search()"
+                                [(ngModel)]="sellContractProduct.consumptionId">
+                            <option [ngValue]="null"></option>
+                            <option *ngFor="let consumptionOption of consumptions; trackBy: trackConsumptionById"
+                                    [ngValue]="consumptionOption.id">{{consumptionOption.title}}
+                            </option>
+                        </select>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <select class="form-control" id="field_product" name="product" (change)="search()"
+                                [(ngModel)]="sellContractProduct.productId">
+                            <option [ngValue]="null"></option>
+                            <option *ngFor="let productOption of products; trackBy: trackProductById"
+                                    [ngValue]="productOption.id">{{productOption.title}}
+                            </option>
+                        </select>
+                    </ng-template>
+                </p-column>
+                <p-column *ngIf="sellContract?.contractType !== ContractType[ContractType.EXPORT] &&
+         sellContract?.contractType !== ContractType[ContractType.BRAND]">
+                    <ng-template pTemplate="header">
+                        <select class="form-control" id="field_sellContractCustomer" name="sellContractCustomer" (change)="search()"
+                                [(ngModel)]="sellContractProduct.sellContractCustomerId">
+                            <option [ngValue]="null"></option>
+                            <option
+                                *ngFor="let sellContractCustomerOption of sellcontractcustomers; trackBy: trackSellContractCustomerById"
+                                [ngValue]="sellContractCustomerOption.id">{{sellContractCustomerOption.customerName}}
+                            </option>
+                        </select>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <button class="btn btn-info" (click)="search()">
+                            <span class="fa fa-search"></span>
+                        </button>
+                        <button class=" btn btn-danger" (click)="clear()">
+                            <span class="fa fa-remove"></span>
+                        </button>
+                    </ng-template>
+                </p-column>
+            </p-row>
+        </p-headerColumnGroup>
+
+        <p-column field="rateGroupTitle"
+                  [header]="'niopdcgatewayApp.sellContractProduct.rateGroupId' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span data-toggle="tooltip" title="{{item.rateGroupTitle}}"
+                      class="glyphicon">{{item.rateGroupTitle |  truncate:','}}</span>
+            </ng-template>
+        </p-column>
+        <p-column field="currencyRateGroupTitle"
+                  [header]="'niopdcgatewayApp.sellContractProduct.currencyRateGroupId' | translate"></p-column>
+        <p-column field="consumptionTitle"
+                  [header]="'niopdcgatewayApp.sellContractProduct.consumption' | translate"></p-column>
+        <p-column field="productTitle" [header]="'niopdcgatewayApp.sellContractProduct.product' | translate"></p-column>
+        <p-column field="customerName" *ngIf="sellContract?.contractType !== ContractType[ContractType.EXPORT] &&
+         sellContract?.contractType !== ContractType[ContractType.BRAND]"
+                  [header]="'niopdcgatewayApp.sellContractProduct.sellContractCustomer' | translate"></p-column>
+        <p-column class="component">
+            <ng-template let-item="rowData" pTemplate="body">
+                <div class="btn-group" ngbDropdown placement="right">
+                    <button type="button" class="btn btn-primary"
+                            *jhiHasAnyAuthorityDisabled="{auth:['ROLE_ADMIN', 'EDIT_SELL_CONTRACT_PRODUCT'],
+                                                        andIf:!sellContract?.archive && !sellContract?.active}"
+                            replaceUrl="true"
+                            [routerLink]="['/sell-contract/'+sellContractId,'sell-contract-product',  { outlets: { popup:  item.id + '/edit'} }]">
+                        <span class="fa fa-edit"></span>
+                        <span jhiTranslate="entity.action.edit">ویرایش</span>
+                    </button>
+
+                    <button class="btn btn-primary"
+                            *jhiHasAnyAuthorityDisabled="['ROLE_ADMIN', 'VIEW_SELL_CONTRACT_PRODUCT', 'DELETE_SELL_CONTRACT_PRODUCT', 'LIST_SELL_CONTRACT_PRODUCT_CREDIT']"
+                            ngbDropdownToggle></button>
+                    <div class="dropdown-menu" ngbDropdownMenu>
+                        <button class="dropdown-item"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN', 'VIEW_SELL_CONTRACT_PRODUCT']"
+                                replaceUrl="true"
+                                [routerLink]="['/sell-contract/'+sellContractId,'sell-contract-product',  { outlets: { popup:  item.id + '/view'} }]">
+                            <span class="fa fa-eye"></span>
+                            <span jhiTranslate="entity.action.view">نمایش</span>
+                        </button>
+                        <ng-container *ngIf="sellContract.contractType == 'EXPORT'">
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'ADJUSTMENT_SELL_CONTRACT_PRODUCT']"
+                                    replaceUrl="true"
+                                    [routerLink]="['/sell-contract/'+sellContractId,'sell-contract-product',  { outlets: { popup:  item.id + '/adjustment'} }]">
+                                <span class="fa fa-edit"></span>
+                                <span jhiTranslate="entity.action.adjustment">adjustment</span>
+                            </button>
+                        </ng-container>
+
+                        <button class="dropdown-item"
+                                *jhiHasAnyAuthority="{auth:['ROLE_ADMIN', 'DELETE_SELL_CONTRACT_PRODUCT'],
+                                andIf: !sellContract?.archive && !sellContract?.active}"
+                                replaceUrl="true"
+                                [routerLink]="['/sell-contract/'+sellContractId,'sell-contract-product',  { outlets: { popup:  item.id + '/delete'} }]">
+                            <span class="fa fa-remove"></span>
+                            <span jhiTranslate="entity.action.delete">delete</span>
+                        </button>
+
+                           <!-- <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'LIST_CUSTOMER_CREDIT','LIST_PERSON_CREDIT']"
+                                    [routerLink]="['/sell-contract', item.sellContractId, 'sell-contract-product',item.id,'sell-contract-product-credit']" [queryParams]="{isCredit:true}">
+                                <span class="fa fa-external-link"></span>
+                                <span jhiTranslate="niopdcgatewayApp.customerCredit.home.credit">Customer Credit</span>
+                            </button>
+
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'LIST_CUSTOMER_QUOTA','LIST_PERSON_QUOTA']"
+                                    [routerLink]="['/sell-contract', item.sellContractId, 'sell-contract-product',item.id,'sell-contract-product-credit']" [queryParams]="{isCredit:false}">
+                                <span class="fa fa-external-link"></span>
+                                <span jhiTranslate="niopdcgatewayApp.customerCredit.home.quota">Customer quota</span>
+                            </button>-->
+
+                    </div>
+                </div>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+
+</div>

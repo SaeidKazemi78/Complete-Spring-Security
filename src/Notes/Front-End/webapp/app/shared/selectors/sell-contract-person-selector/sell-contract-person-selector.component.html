@@ -1,0 +1,87 @@
+<div>
+    <div class="input-group">
+        <input #inp class="textInput form-control" style="border:0; height: unset;"
+               [readonly]="!disabled" [disabled]="disabled"
+               [ngModel]="(multiSelect) ? ((selects && selects.length && selects.length > 0) ? selects.length + ' مورد انتخاب شد' : 'موردی انتخاب نشده است') : (selects ? selects.personFullName: '')"
+            (focus)="showTable()">
+        <a *ngIf="!disabled" class="input-group-append btn btn-outline-secondary" [ngClass]="{'mid-btn': creator, 'rtl-btn': !creator}" (click)="showTable()">
+            <span class="fa fa-search"></span>
+        </a>
+        <button *ngIf="!disabled && creator" type="button" class="input-group-append btn btn-outline-secondary" [ngClass]="{'rtl-btn': creator}"
+           [routerLink]="['/', { outlets: { popup: ['person-new'] } }]">
+            <span class="fa fa-plus"></span>
+        </button>
+    </div>
+    <div [style.visibility]="!overlayVisible ? 'collapse' : 'visible'"
+         [style.height]="!overlayVisible ? '0' : 'none'"
+         [style.overflow]="!overlayVisible ? 'hidden' : 'visible'"
+         [style.width]="widthGrid" style="padding: 0;"
+         class="d-inline-block rounded dataGrid">
+        <p-dataTable [value]="sellContractPersons"
+                     [selectionMode]="multiSelect ? 'multiple' : 'single'"
+                     [(selection)]="selects"
+                     (onRowUnselect)="onSelect($event, false)"
+                     (onRowSelect)="onSelect($event, true)"
+                     [rows]="5"
+                     [rowsPerPageOptions]="[5,10,20]"
+                     [paginator]="true"
+                     [responsive]="true"
+                     [stacked]="false"
+                     #dt
+                    >
+           <!-- <p-header>
+                <button class="btn btn-info" type="button" (click)="search()">
+                    <span class="fa fa-search"></span>
+                </button>
+                <button class=" btn btn-danger" type="button" (click)="clear()">
+                    <span class="fa fa-remove"></span>
+                </button>
+                <button class=" btn btn-danger" type="button" (click)="empty()">
+                    <span class="fa fa-times"></span>
+                </button>
+            </p-header>-->
+
+            <p-headerColumnGroup>
+                <p-row>
+                    <p-column [style]="{'width':'38px'}"></p-column>
+                    <p-column field="personFullName" [filter]="true" filterMatchMode="contains" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.sellContractPerson.person">Full Name</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="contractNo" [filter]="true" filterMatchMode="contains" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.sellContractPerson.contractNo">Code</span>
+                        </ng-template>
+                    </p-column>
+                </p-row>
+                <!--<p-row>
+                    <p-column></p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="name" id="field_name"
+                                   [(ngModel)]="sellContractPerson.personId"
+                                   maxlength="42"
+                            />
+                        </ng-template>
+                    </p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="code" id="field_code"
+                                   [(ngModel)]="sellContractPerson.sellContractContractNo"
+                                   maxlength="10"
+                            />
+                        </ng-template>
+                    </p-column>
+                </p-row>-->
+            </p-headerColumnGroup>
+            <p-column [selectionMode]="multiSelect ? 'multiple' : 'single'"></p-column>
+            <p-column field="personFullName" [header]="'niopdcgatewayApp.sellContractNo.person' | translate"></p-column>
+            <p-column field="sellContractContractNo" [header]="'niopdcgatewayApp.sellContractNo.contractNo' | translate"></p-column>
+        </p-dataTable>
+    </div>
+</div>
+
+

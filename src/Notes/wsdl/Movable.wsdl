@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="GetShenvarTemplate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ShenvarNameFa" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ShenavarNameEN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IMONo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ShomareSabt" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BandarMahalSabtText" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="EditDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="BandarMahalSabt" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShenvarTemplateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetShenvarTemplateResult" type="tns:Response" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Response">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="isLastEditDate" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExceptionMessage" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShenavarTemplateList" type="tns:ArrayOfSookhtShenavarTemplate" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSookhtShenavarTemplate">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SookhtShenavarTemplate" nillable="true" type="tns:SookhtShenavarTemplate" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SookhtShenavarTemplate">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ShenavarType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ZarfiatNakhalesGT" nillable="true" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShomareSabtShenavar" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShenavarNameFa" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShenavarNameEN" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SumPowerEngieAsli" nillable="true" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="CountOfEngineAsli" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="SumPowerEngineFaree" nillable="true" type="s:float" />
+          <s:element minOccurs="1" maxOccurs="1" name="CountOfEngineFaree" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaxSpeed" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="BandarMahaleSabt" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BandarMahaleSabtText" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PersonType" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="MalekName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NationalCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="isActive" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Vaziat" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IDShenavar" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="EditDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="SaleSakht" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AbAd" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="fueltype" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="type" nillable="true" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetShenvarTemplateWithoutEditDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ShenvarNameFa" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ShenavarNameEN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IMONo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ShomareSabt" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BandarMahalSabtText" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="BandarMahalSabt" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetShenvarTemplateWithoutEditDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetShenvarTemplateWithoutEditDateResult" type="tns:Response" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetShenvarTemplateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetShenvarTemplate" />
+  </wsdl:message>
+  <wsdl:message name="GetShenvarTemplateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetShenvarTemplateResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetShenvarTemplateWithoutEditDateSoapIn">
+    <wsdl:part name="parameters" element="tns:GetShenvarTemplateWithoutEditDate" />
+  </wsdl:message>
+  <wsdl:message name="GetShenvarTemplateWithoutEditDateSoapOut">
+    <wsdl:part name="parameters" element="tns:GetShenvarTemplateWithoutEditDateResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ShenavarTemplateServiceSoap">
+    <wsdl:operation name="GetShenvarTemplate">
+      <wsdl:input message="tns:GetShenvarTemplateSoapIn" />
+      <wsdl:output message="tns:GetShenvarTemplateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetShenvarTemplateWithoutEditDate">
+      <wsdl:input message="tns:GetShenvarTemplateWithoutEditDateSoapIn" />
+      <wsdl:output message="tns:GetShenvarTemplateWithoutEditDateSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ShenavarTemplateServiceSoap" type="tns:ShenavarTemplateServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetShenvarTemplate">
+      <soap:operation soapAction="http://tempuri.org/GetShenvarTemplate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShenvarTemplateWithoutEditDate">
+      <soap:operation soapAction="http://tempuri.org/GetShenvarTemplateWithoutEditDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ShenavarTemplateServiceSoap12" type="tns:ShenavarTemplateServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetShenvarTemplate">
+      <soap12:operation soapAction="http://tempuri.org/GetShenvarTemplate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShenvarTemplateWithoutEditDate">
+      <soap12:operation soapAction="http://tempuri.org/GetShenvarTemplateWithoutEditDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ShenavarTemplateService">
+    <wsdl:port name="ShenavarTemplateServiceSoap" binding="tns:ShenavarTemplateServiceSoap">
+      <soap:address location="http://217.218.15.156/VesselOil/ShenavarTemplateService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ShenavarTemplateServiceSoap12" binding="tns:ShenavarTemplateServiceSoap12">
+      <soap12:address location="http://217.218.15.156/VesselOil/ShenavarTemplateService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

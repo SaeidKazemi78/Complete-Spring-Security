@@ -1,0 +1,58 @@
+{
+    "niopdcgatewayApp": {
+        "orderNumber": {
+            "home": {
+                "title": "بازه شماره حواله",
+                "createLabel": "ایجاد بازه شماره حواله",
+                "createOrEditLabel": "ویرایش بازه شماره حواله",
+                "view": "نمایش بازه شماره حواله",
+                "locationTitle": "ناحیه"
+            },
+            "disable": {
+                "question": "آیا برای غیرفعال کردن بازه شماره حواله مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "بازه شماره حواله"
+            },
+            "startOrderNumber": "شماره شروع حواله",
+            "endOrderNumber": "شماره پایان حواله",
+            "currentOrderNumber": "شماره جاری حواله",
+            "active": "فعال",
+            "activeTrue": "فعال",
+            "activeFalse": "غیر فعال"
+        },
+        "fuelReceiptNumber": {
+            "home": {
+                "title": "بازه شماره رسید سوخت",
+                "createLabel": "ایجاد بازه شماره رسید سوخت",
+                "createOrEditLabel": "ویرایش بازه شماره رسید سوخت",
+                "view": "نمایش بازه شماره رسید سوخت",
+                "refuelCenterTitle": "مرکز سوخت گیری"
+            },
+            "disable": {
+                "question": "آیا برای غیرفعال کردن بازه شماره رسید سوخت مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "بازه شماره رسید سوخت"
+            },
+            "startOrderNumber": "شماره شروع رسید سوخت",
+            "endOrderNumber": "شماره پایان رسید سوخت",
+            "currentOrderNumber": "شماره جاری رسید سوخت",
+            "active": "فعال",
+            "activeTrue": "فعال",
+            "activeFalse": "غیر فعال"
+        }
+    },
+    "niopdcorderApp": {
+        "orderNumber": {
+            "created": "بازه شماره حواله با موفقیت ایجاد و فعال شد.",
+            "updated": "بازه شماره حواله با موفقیت ویرایش شد.",
+            "disabled": "بازه شماره حواله با موفقیت غیرفعال شد."
+        },
+        "fuelReceipt": {
+            "created": "بازه شماره رسید سوخت با موفقیت ایجاد و فعال شد.",
+            "updated": "بازه شماره رسید سوخت با موفقیت ویرایش شد.",
+            "disabled": "بازه شماره رسید سوخت با موفقیت غیرفعال شد."
+        }
+    }
+}

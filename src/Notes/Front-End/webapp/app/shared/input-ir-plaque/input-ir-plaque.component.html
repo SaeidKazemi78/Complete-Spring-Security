@@ -1,0 +1,94 @@
+<div class="input-group">
+    <select class="textInput form-control" style="width: 25%"
+            [disabled]="disabled"
+            [(ngModel)]="plaqueCode"
+            #s (change)="onChangePlaqueSelect(s.value)">
+        <option *ngFor="let option of customPlaques"
+                value="{{option.value}}">{{option.label}}
+        </option>
+    </select>
+
+    <div class="input-group-append" style="width: 75%; max-width: 230px">
+        <input type="text" class="textInput form-control"
+               *ngIf="plaqueCode!=='IR' && plaqueCode!=='TR' && plaqueCode!=='AFGH'"
+               [disabled]="disabled"
+               [pattern]="pattern"
+               [name]="plaque"
+               [(ngModel)]="plaque"
+               (blur)="onBlur('plaque')"
+               (input)="onChangeMainInput($event.target.value)">
+
+        <div class="plaque-custom" *ngIf="plaqueCode=='IR'|| plaqueCode=='TR'|| plaqueCode=='AFGH'">
+            <ng-container *ngIf="plaqueCode=='IR'|| plaqueCode=='TR'">
+                <input [disabled]="disabled"
+                       [numeric]
+                       (input)="onChangeText($event.target.value,'part1')"
+                       type="text" class="plaque-p-1 plaque-p" maxlength="2"
+                       [(ngModel)]="_plaque.part1"
+                       (blur)="onBlur('part1')">
+                <select #part2
+                        [disabled]="disabled" (blur)="onBlur('part2')"
+                        class="plaque-p-2 plaque-p" [(ngModel)]="_plaque.part2"
+                        (change)="onselectAlphabet()">
+                    <option value=''></option>
+                    <option *ngFor="let option of alphabetOptions"
+                            value="{{option}}">{{option}}
+                    </option>
+                </select>
+                <select #part5
+                        *ngIf="plaqueCode === 'TR'"
+                        [disabled]="disabled" (blur)="onBlur('part5')"
+                        class="plaque-p-5 plaque-p" [(ngModel)]="_plaque.part5"
+                        (change)="onselectAlphabet()">
+                    <option value=''></option>
+                    <option *ngFor="let option of alphabetOptions"
+                            value="{{option}}">{{option}}
+                    </option>
+                </select>
+                <input type="text" #part3
+                       (input)="onChangeText($event.target.value, 'part3')"
+                       [disabled]="disabled"
+                       [numeric]
+                       class="plaque-p-3 plaque-p" maxlength="3" [(ngModel)]="_plaque.part3"
+                       (blur)="onBlur('part3')">
+                <input type="text" #part4
+                       [numeric]
+                       [disabled]="disabled"
+                       (input)="onChangeText($event.target.value, 'part4')"
+                       class="plaque-p-4 plaque-p" maxlength="2" [(ngModel)]="_plaque.part4"
+                       (blur)="onBlur('part4')">
+            </ng-container>
+            <ng-container *ngIf="plaqueCode === 'AFGH'">
+                <select #part6
+                        (blur)="onBlur('part6')"
+                        class="plaque-p-6 plaque-p" [(ngModel)]="_plaque.part6"
+                        (change)="onselectAfghAlphabet()">
+                    <option value=''></option>
+                    <option *ngFor="let option of alphabet"
+                            value="{{option}}">{{option}}
+                    </option>
+                </select>
+                <input type="text" #part7
+                       [numeric]
+                       (input)="onChangeText($event.target.value, 'part7')"
+                       class="plaque-p-7 plaque-p" maxlength="8" minlength="5" [(ngModel)]="_plaque.part7"
+                       (blur)="onBlur('part7')">
+                <select #part8
+                        (blur)="onBlur('part6')"
+                        class="plaque-p-8 plaque-p" [(ngModel)]="_plaque.part8">
+                    <option value=''></option>
+                    <option *ngFor="let option of _afghCities"
+                            value="{{option}}">{{option}}
+                    </option>
+                </select>
+            </ng-container>
+            <ng-container *ngIf="plaqueCode === 'TURK'">
+
+                <input type="text" #part9
+                       [numeric] style="direction: ltr"
+                       class="plaque-p" maxlength="10" minlength="9" [(ngModel)]="_plaque.part9"
+                       (blur)="onBlur('part9')">
+            </ng-container>
+        </div>
+    </div>
+</div>

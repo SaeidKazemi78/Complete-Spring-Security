@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "LocationType" : {
+            "null": "",
+            "FIXED": "FIXED",
+            "MOVABLE": "MOVABLE"
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "niopdcgatewayApp": {
+        "oilTankType" : {
+            "null": "",
+            "MAIN": "اصلی",
+            "CONTAMINATED": "الوده",
+            "SERVICE_TANK": "سرویس تانک",
+            "UNIT": "واحد",
+            "PLATFORM": "سکو",
+            "WATER_METHANOL": "واترمتانول",
+            "BASE_PRODUCT": "آب/الکل",
+            "EARTH": "سوخت جایگاه",
+            "RECYCLE": "بازیافت",
+            "PIPE":"خط لوله"
+        }
+    }
+}

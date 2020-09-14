@@ -1,0 +1,60 @@
+<div>
+    <div class="input-group">
+        <input #inp class="textInput form-control" style="border:0; height: unset;"
+               [readonly]="!disabled" [disabled]="disabled"
+               [ngModel]="(multiSelect) ? ((selects && selects.length && selects.length > 0) ? selects.length + ' مورد انتخاب شد' : 'موردی انتخاب نشده است') : (selects ? selects.productTitle: '')"
+               (focus)="showTable()">
+        <a *ngIf="!disabled" class="input-group-append btn btn-outline-secondary rtl-btn" (click)="showTable()">
+            <span class="fa fa-search"></span>
+        </a>
+    </div>
+    <div [style.visibility]="!overlayVisible ? 'collapse' : 'visible'"
+         [style.height]="!overlayVisible ? '0' : 'none'"
+         [style.overflow]="!overlayVisible ? 'hidden' : 'visible'"
+         [style.width]="widthGrid" style="padding: 0;"
+         class="d-inline-block rounded dataGrid">
+        <p-dataTable [value]="sellContractProducts"
+                     [selectionMode]="multiSelect ? 'multiple' : 'single'"
+                     [(selection)]="selects"
+                     (onRowUnselect)="onSelect($event, false)"
+                     (onRowSelect)="onSelect($event, true)"
+                     [rows]="5"
+                     [rowsPerPageOptions]="[5,10,20,totalItems]"
+                     [paginator]="true"
+                     [responsive]="true"
+                     [stacked]="false"
+
+        >
+            <p-column [selectionMode]="multiSelect ? 'multiple' : 'single'" [style]="{'width':'38px'}"></p-column>
+            <p-column *ngIf="showFields.productTitle" field="productTitle" [filter]="true" [sortable]="true"
+                      [header]="'niopdcgatewayApp.product.home.title' | translate"></p-column>
+            <p-column *ngIf="showFields.rateGroupTitle" field="rateGroupTitle" [filter]="true" [sortable]="true"
+                      [header]="'niopdcgatewayApp.rateGroup.home.title' | translate">
+                <ng-template let-item="rowData" pTemplate="body">
+                    <span data-toggle="tooltip" title="{{item.rateGroupTitle}}">{{item.rateGroupTitle | truncate}}</span>
+                </ng-template>
+            </p-column>
+            <p-column *ngIf="showFields.currencyRateGroupTitle" field="currencyRateGroupTitle" [filter]="true"
+                      [sortable]="true"
+                      [header]="'niopdcgatewayApp.currencyRateGroup.home.title' | translate"></p-column>
+            <p-column *ngIf="showFields.sellContractNumber" field="sellContractNumber" [filter]="true"
+                      [sortable]="true"
+                      [header]="'niopdcgatewayApp.sellContract.contractNo' | translate"></p-column>
+            <p-column *ngIf="showFields.buyTypes" field="buyTypes" [filter]="true" [sortable]="true"
+                      [header]="'niopdcgatewayApp.sellContractProduct.buyType' | translate">
+                <ng-template let-col let-buyTypes="rowData" pTemplate="body">
+                    <table>
+                        <tbody>
+                        <tr *ngFor="let buyType of buyTypes[col.field]">
+                            <td>{{'niopdcgatewayApp.BuyType.'+buyType | translate}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </ng-template>
+
+            </p-column>
+        </p-dataTable>
+    </div>
+</div>
+
+

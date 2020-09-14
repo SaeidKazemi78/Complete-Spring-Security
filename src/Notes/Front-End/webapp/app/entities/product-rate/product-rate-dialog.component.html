@@ -1,0 +1,318 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <div *ngIf="type==='product'  || type==='confirm'  ">
+            <h4 *ngIf="productRate.id==null" class="modal-title" id="createLabel"
+                jhiTranslate="niopdcgatewayApp.productRate.home.createLabel">
+                Create</h4>
+            <h4 *ngIf="productRate.id!=null && !isView && !productRate.adjustment" class="modal-title" id="editLabel"
+                jhiTranslate="niopdcgatewayApp.productRate.home.createOrEditLabel">
+                Edit</h4>
+            <h4 *ngIf="productRate.id!=null && productRate.adjustment" class="modal-title"
+                jhiTranslate="niopdcgatewayApp.productRate.home.adjustmentLabel">
+                Edit</h4>
+            <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.productRate.home.view">
+                View</h4>
+        </div>
+        <div *ngIf="type==='container'">
+            <h4 *ngIf="!productRate.id" class="modal-title" id="containerCreateLabel"
+                jhiTranslate="niopdcgatewayApp.containerRate.home.createLabel">
+                Create</h4>
+            <h4 *ngIf="productRate.id!=null && !isView" class="modal-title" id="containerEditLabel"
+                jhiTranslate="niopdcgatewayApp.containerRate.home.createOrEditLabel">
+                Edit</h4>
+            <h4 *ngIf="isView" class="modal-title" id="containerViewLabel"
+                jhiTranslate="niopdcgatewayApp.containerRate.home.view">
+                View</h4>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <jhi-alert-success></jhi-alert-success>
+        <div class="row" *ngIf="type==='container' && rateGroup.customerGroup!==CustomerGroup[CustomerGroup.BOUNDARY]">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.containerRate.src" for="field_src">Src</label>
+                    <input
+                        [disabled]="isView || disableFields || productRate.adjustment || (!isAdmin && !isEditSrc && productRate.id)"
+                        type="text"
+                        class="form-control" name="src"
+                        id="field_src"
+                        [(ngModel)]="productRate.src"
+                        required
+                        [numeric]
+                        maxlength="5"
+                        minlength="3"
+                    />
+                    <div [hidden]="!(editForm.controls.src?.dirty && editForm.controls.src?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.src?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.src?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 5 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.src?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.containerRate.price"
+                           for="field_price">Price</label>
+                    <input [disabled]="isView || (disableFields && !productRate.adjustment) ||  (isEditSrc && productRate.id && !isAdmin) " type="number"
+                           class="form-control" name="price"
+                           id="field_price"
+                           [(ngModel)]="productRate.price" required/>
+                    <div [hidden]="!(editForm.controls.price?.dirty && editForm.controls.price?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.price?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.price?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.container.home.title"
+                           for="field_product">Product</label>
+                    <p-dropdown [options]="customContainers" [(ngModel)]="selectedContainer"
+                                [filter]="true"
+                                [disabled]="isView || (isEditSrc && productRate.id && !isAdmin)"
+                                class="form-control"
+                                (onChange)="onChangeContainer($event.value)"
+                                filterBy="label"
+                                id="field_container"
+                                name="field_container"
+                                ngDefaultControl
+                                required
+                    >
+                    </p-dropdown>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="type==='product'  || type==='confirm'">
+
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTank.productId"
+                           for="field_product">Product</label>
+                    <p-dropdown [options]="customProducts" [(ngModel)]="selectedProduct"
+                                [filter]="true"
+                                [disabled]="isView || disableFields || productRate.adjustment || (isEditSrc && productRate.id && !isAdmin)"
+                                class="form-control"
+                                (onChange)="onChangeProduct($event.value)"
+                                filterBy="label"
+                                id="field_product"
+                                name="productId"
+                                ngDefaultControl
+                                required
+                    >
+                    </p-dropdown>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-3" *ngIf="rateGroup.customerGroup !== CustomerGroup[CustomerGroup.BOUNDARY]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productRate.productSrc"
+                           for="field_src">ProductSrc</label>
+                    <p-dropdown [options]="customProductSrcs" [(ngModel)]="productRate.src"
+                                [filter]="true"
+                                [disabled]="isView || (disableFields && !productRate.adjustment) || (!isAdmin && !isEditSrc && productRate.id)"
+                                class="form-control"
+                                filterBy="label"
+                                id="field_src"
+                                name="src"
+                                ngDefaultControl
+                                required>
+                    </p-dropdown>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label *ngIf="!productRate.containerId" class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.productRate.price"
+                           for="field_price">Price</label>
+                    <label *ngIf="productRate.containerId" class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.containerRate.price"
+                           for="field_price">Price</label>
+                    <input [disabled]="isView || (disableFields && !productRate.adjustment) || galon ||(isEditSrc && productRate.id && !isAdmin)" type="number"
+                           class="form-control"
+                           name="price"
+                           id="field_price1"
+                           (ngModelChange)="changePrice($event,true)"
+                           [(ngModel)]="productRate.price" required/>
+                    <div [hidden]="!(editForm.controls.price?.dirty && editForm.controls.price?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.price?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.price?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3" *ngIf="rateGroup.step">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productRate.productStep"
+                           for="field_productStepId">productStep</label>
+                    <select [disabled]="isView || disableFields " class="form-control" id="field_productStepId"
+                            name="currency"
+                            [(ngModel)]="productRate.productStepId">
+                        <option *ngIf="!editForm.value.productStepId" [ngValue]="null"></option>
+                        <option [ngValue]="productStepOption.id"
+                                *ngFor="let productStepOption of productSteps; trackBy: trackCurrencyById">
+                            {{productStepOption.stepNo + ' - (از لیتراژ ' + productStepOption.startStep + (productStepOption.finishStep ? (' تا ' + productStepOption.finishStep) : ' به بالا') + ')' }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3" *ngIf="rateGroup?.customerGroup === CustomerGroup[CustomerGroup.AIRPLANE] ">
+                <div class="form-group">
+                    <div class="row">
+                        <label class="form-control-label col-md-2"
+                               jhiTranslate="niopdcgatewayApp.productRate.galon"
+                               for="field_price">Price</label>
+                        <input type="checkbox" [(ngModel)]="galon" class="col-md-1 form-control" name="galon-check"
+                               style="text-align: center;margin-top: 7px"/>
+                    </div>
+                    <input [disabled]="isView || disableFields || !galon || (isEditSrc && productRate.id && !isAdmin)" type="number" class="form-control"
+                           name="galonAmount"
+                           id="field_galon_price"
+                           (ngModelChange)="changePrice($event,false)"
+                           [(ngModel)]="galonAmount" required/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productRate.currency"
+                           for="field_currency">Currency</label>
+                    <input [disabled]="true" type="text" class="form-control" *ngIf="!rateGroup?.foreignExchange"
+                           name="moneyType"
+                           id="field_moneyType" [ngModel]="'niopdcgatewayApp.productRate.rial' | translate"/>
+
+                    <select [disabled]="isView || disableFields || (isEditSrc && productRate.id && !isAdmin)" class="form-control" id="field_currency"
+                            name="currency" *ngIf="rateGroup?.foreignExchange"
+                            [(ngModel)]="productRate.currencyId" required>
+                        <option *ngIf="!editForm.value.currency" [ngValue]="null" selected></option>
+                        <option [ngValue]="currencyOption.id"
+                                *ngFor="let currencyOption of currencies; trackBy: trackCurrencyById">
+                            {{currencyOption.title}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.currency?.dirty && editForm.controls.currency?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.currency?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productRate.startDate"
+                           for="field_startDate">Start Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView || productRate.adjustment || (isEditSrc && productRate.id && !isAdmin)" [rtlActive]="true"
+                                            id="field_startDate" [maxDateTime]="productRate.finishDate"
+                                            class="form-control" [disableTime]="false"
+                                            name="startDate" [(ngModel)]="productRate.startDate"
+
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productRate.finishDate"
+                           for="field_finishDate">Finish Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker
+                            [disabled]="isView || productRate.adjustment || (isEditSrc && productRate.id && !isAdmin)" [rtlActive]="true" time="23:59"
+                            id="field_finishDate"
+                            class="form-control" [disableTime]="false"
+                            [minDateTime]="productRate.startDate"
+                            name="finishDate" [(ngModel)]="productRate.finishDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="alert alert-warning" *ngIf="productRate.adjustment">
+            <span jhiTranslate="niopdcgatewayApp.productRate.adjustmentAlert"></span>
+        </div>
+
+        <div class="row" *ngIf="productRate.adjustment && productRate.id">
+            <div class="col-md-12">
+                <jhi-order-selector
+                    [productRateId]="productRate.id"
+                    [multiSelect]="true"
+                    [(ngModel)]="productRate.orderIds"
+                    [ngModelOptions]="{standalone: true}"
+                >
+
+                </jhi-order-selector>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.customerCredit.description"
+                           for="description">Start Time</label>
+                    <textarea type="text" [disabled]="isView"  maxlength="500" class="form-control" name="description" id="description"
+                              [(ngModel)]="productRate.description"></textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

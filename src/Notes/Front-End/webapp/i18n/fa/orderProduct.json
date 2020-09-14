@@ -1,0 +1,53 @@
+
+{
+    "niopdcgatewayApp": {
+        "orderProduct" : {
+            "home": {
+                "title": "Order Products",
+                "createLabel": "Create a new Order Product",
+                "createOrEditLabel": "Create or edit a Order Product"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Order Product {{ id }}?"
+            },
+            "detail": {
+                "title": "Order Product"
+            },
+            "sellContractProductId": "Sell Contract Product Id",
+            "productId": "فرآورده",
+            "rateGroupId": "گروه نرخی",
+            "totalPrice": "مبلغ کل",
+            "basePrice": "Base Price",
+            "productRatePrice": "نرخ فرآورده",
+            "productRateId": "نرخ",
+            "containerRatePrice": "Container Rate Price",
+            "costPrice": "Cost Price",
+            "costGroupId": "Cost Group Id",
+            "boundaryAmount": "لیتر(محاسبه شده)",
+            "amount": "لیتراژ",
+            "realAmount" : "لیتر(واقعی)",
+            "productPrice": "مبلغ فرآورده",
+            "productCost": "هزینه فرآورده",
+            "creditList": "لیست اعتبارات",
+            "order": "Order",
+            "measureHeight":"میزان اندازه گیری",
+            "pumpNozzleAmount":"مقدار سوخت از تلمبه",
+            "calculate":"محاسبه",
+            "primitiveAmount":"مقدار اولیه",
+            "secondaryAmount":"مقدار نهایی",
+            "amountType": "نوع باک",
+            "price":"هزینه",
+            "count": "تعداد ظرف",
+            "endMetre": "آخرین میتر",
+            "alreadyAdded": "فرآورده انتخاب شده در لیست فرآورده های حواله وجود دارد.",
+            "isEmptyError": "لطفا فرآورده ها حواله را به لیست اضافه کنید."
+        }
+    },
+    "niopdcorderApp": {
+        "orderProduct" : {
+            "created": "A new Order Product is created with identifier {{ param }}",
+            "updated": "A Order Product is updated with identifier {{ param }}",
+            "deleted": "A Order Product is deleted with identifier {{ param }}"
+        }
+    }
+}

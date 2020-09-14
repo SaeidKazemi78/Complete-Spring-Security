@@ -1,0 +1,26 @@
+
+{
+    "niopdcgatewayApp": {
+        "manufacture" : {
+            "home": {
+                "title": "Manufactures",
+                "createLabel": "Create a new Manufacture",
+                "createOrEditLabel": "Create or edit a Manufacture"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Manufacture {{ id }}?"
+            },
+            "detail": {
+                "title": "Manufacture"
+            },
+            "name": "Name"
+        }
+    },
+    "niopdcaoApp": {
+        "manufacture" : {
+            "created": "A new Manufacture is created with identifier {{ param }}",
+            "updated": "A Manufacture is updated with identifier {{ param }}",
+            "deleted": "A Manufacture is deleted with identifier {{ param }}"
+        }
+    }
+}

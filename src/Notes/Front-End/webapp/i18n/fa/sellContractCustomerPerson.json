@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "customerPerson" : {
+            "personName": "صاحب امتیاز",
+            "personCode": "کد صاحب امتیاز",
+            "customerName": "مشتری",
+            "customerCode": "کد مشتری",
+            "contractNo": "شماره قرارداد"
+        }
+    }
+}

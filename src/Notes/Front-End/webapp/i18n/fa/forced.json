@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "Forced" : {
+            "null": "",
+            "FORCE": "اجباری",
+            "OPTIONAL": "اختیاری"
+        }
+    }
+}

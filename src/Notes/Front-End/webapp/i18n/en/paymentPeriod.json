@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "PaymentPeriod" : {
+            "null": "",
+            "DAY": "DAY",
+            "MONTH": "MONTH",
+            "SEASON": "SEASON",
+            "YEAR": "YEAR"
+        }
+    }
+}

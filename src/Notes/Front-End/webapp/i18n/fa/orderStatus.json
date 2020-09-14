@@ -1,0 +1,23 @@
+{
+    "niopdcgatewayApp": {
+        "OrderStatus" : {
+            "null": "",
+            "DRAFT": "پیش نویس",
+            "DE_ACTIVE": "غیرفعال",
+            "PENDING": "در انتظار",
+            "CREDIT_PAID": "پرداخت اعتباری",
+            "PAID": "پرداخت شده",
+            "PAID_PUMP": "پرداخت عرضه",
+            "CONFIRM": "تایید شده",
+            "SEND_TO_DEPOT": "ارسال به انبار",
+            "EXIT_FROM_DEPOT": "خروج از انبار",
+            "BACK_FROM_SALE": "برگشت از فروش",
+            "BACK_FROM_DEPOT": "برگشت از انبار",
+            "REVOCATION": "ابطال",
+            "CUSTOMS_CONFIRM":"تایید شده توسط گمرک",
+            "BORDER_CONFIRM":"تایید شده توسط هنگ مرزی",
+            "TICKET":"صدور تیکت",
+            "WAY_BILL":"بارگیری"
+        }
+    }
+}

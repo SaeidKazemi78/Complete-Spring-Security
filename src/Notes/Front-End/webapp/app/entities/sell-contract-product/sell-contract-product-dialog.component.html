@@ -1,0 +1,478 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="sellContractProduct.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.sellContractProduct.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="sellContractProduct.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.sellContractProduct.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel"
+            jhiTranslate="niopdcgatewayApp.sellContractProduct.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-4" *ngIf="haveCustomer">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.sellContractProduct.sellContractCustomer"
+                           for="field_sellContractCustomer">Sell Contract Customer</label>
+                    <p-multiSelect
+                        *ngIf="!sellContractProduct.id && sellContract?.contractType === ContractType[ContractType.AIRPLANE]"
+                        [options]="customSellcontractcustomers"
+                        [(ngModel)]="sellContractProduct.sellContractCustomerIds"
+                        [filter]="true"
+                        [disabled]="isView"
+                        class="form-control"
+                        filterBy="label"
+                        id="field_sellContractCustomer"
+                        name="sellContractCustomer"
+                        [defaultLabel]="'global.messages.info.choose' | translate"
+                        [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                        ngDefaultControl
+                    >
+                    </p-multiSelect>
+                    <p-dropdown
+                        *ngIf="sellContractProduct.id && sellContract?.contractType === ContractType[ContractType.AIRPLANE]"
+                        [options]="customSellcontractcustomers"
+                        [(ngModel)]="sellContractProduct.sellContractCustomerId"
+                        [filter]="true"
+                        [disabled]="isView || sellContract?.active"
+                        class="form-control"
+                        filterBy="label"
+                        id="field_sellContractCustomer"
+                        name="sellContractCustomer"
+                        ngDefaultControl
+                    >
+                    </p-dropdown>
+                    <select *ngIf="sellContract?.contractType !== ContractType[ContractType.AIRPLANE]"
+                            [disabled]="isView || sellContract?.active" class="form-control"
+                            id="field_sellContractCustomer"
+                            name="sellContractCustomer"
+                            (ngModelChange)="sellContractCustomerChanged($event)"
+                            [(ngModel)]="sellContractProduct.sellContractCustomerId"
+                            [required]="this.sellContract?.contractType !== ContractType[ContractType.BRAND]">
+                        <option
+                            *ngIf="sellContract?.contractType === ContractType[ContractType.BRAND] || !editForm.value.sellContractCustomer"
+                            [ngValue]="null" selected></option>
+                        <option [ngValue]="sellContractCustomerOption.id"
+                                *ngFor="let sellContractCustomerOption of sellContract?.sellContractCustomers; trackBy: trackSellContractCustomerById">
+                            {{sellContractCustomerOption.customerName}}
+                        </option>
+                    </select>
+                </div>
+                <div
+                    [hidden]="!(editForm.controls.sellContractCustomer?.dirty && editForm.controls.sellContractCustomer?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.sellContractCustomer?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="!haveCustomer">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.sellContractProduct.exportPiId"
+                           for="field_exportPiId">export Pi Id</label>
+                    <select [disabled]="isView || sellContract?.active" class="form-control" name="exportPiId"
+                            [(ngModel)]="sellContractProduct.exportPiId" required
+                            (ngModelChange)="exportPiChange($event)"
+                            id="field_exportPiId">
+                        <option [ngValue]="exportPiOption.id"
+                                *ngFor="let exportPiOption of exportPis; trackBy: trackexportPiById">
+                            {{exportPiOption.piNumber}}
+                        </option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.exportPiId?.dirty && editForm.controls.exportPiId?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.exportPiId?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.sellContractProduct.product"
+                           for="field_product">Product</label>
+                    <input disabled type="text" class="form-control"
+                           name="productId"
+                           *ngIf="sellContract?.contractType === ContractType[ContractType.EXPORT]"
+                           [ngModel]="exportPi?.productTitle"/>
+                    <jhi-product-selector
+                        *ngIf="sellContract?.contractType !== ContractType[ContractType.EXPORT]"
+                        class="form-control" id="field_product"
+                        widthGrid="500px" required
+                        [disabled]="isView || sellContract?.active"
+                        [haveCustomerGroup]="haveCustomer"
+                        [customerGroup]="customerGroup"
+                        (ngModelChange)="productChanged($event)"
+                        [(ngModel)]="sellContractProduct.productId"
+                        name="productId">
+                    </jhi-product-selector>
+                </div>
+                <div [hidden]="!(editForm.controls.product?.dirty && editForm.controls.product?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.product?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div *ngIf="sellContract?.contractType" class="col-md-4">
+                <div class="form-group">
+                    <input [disabled]="isView" type="checkbox" class="form-control"
+                           name="selectiveAllDepot" id="field_check_depot"
+                           *ngIf="sellContract?.contractType === ContractType[ContractType.AIRPLANE]"
+                           [(ngModel)]="allDepotCheck"/>
+                    <label jhiTranslate="niopdcgatewayApp.sellContractProduct.depot" for="field_depot">Depot</label>
+                    <p-multiSelect [disabled]="isView || sellContract?.active" class="form-control" id="field_depot"
+                                   *ngIf="allDepotCheck||sellContract && sellContract.contractType!==ContractType[ContractType.AIRPLANE]"
+                                   required
+                                   [options]="depots"
+                                   name="depot"
+                                   [(ngModel)]="selectedDepots"
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                    ></p-multiSelect>
+                    <input
+                        *ngIf="!allDepotCheck && (sellContract && sellContract.contractType===ContractType[ContractType.AIRPLANE])"
+                        disabled type="text"
+                        class="form-control"
+                        name="customerTypes"
+                        [ngModel]="'همه'"/>
+                </div>
+                <div [hidden]="!(editForm.controls.depot?.dirty && editForm.controls.depot?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.depot?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4" *ngIf="haveCustomer">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.sellContractProduct.rateGroupId"
+                           for="field_rateGroupId">Rate Group Id</label>
+                    <select [disabled]="isView || sellContract?.active" class="form-control" name="rateGroupId"
+                            [(ngModel)]="sellContractProduct.rateGroupId" required
+                            id="field_rateGroupId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="rateGroupOption.id"
+                                *ngFor="let rateGroupOption of rateGroups; trackBy: trackrateGroupById">
+                            {{rateGroupOption.title}}
+                        </option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.rateGroupId?.dirty && editForm.controls.rateGroupId?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.rateGroupId?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.sellContractProduct.currencyRateGroupId"
+                           for="field_currencyRateGroupId">Currency Rate Group Id</label>
+
+                    <select [disabled]="isView || sellContract?.active" class="form-control" name="currencyRateGroupId"
+                            [(ngModel)]="sellContractProduct.currencyRateGroupId" required
+                            id="field_currencyRateGroupId">
+                        <option [ngValue]="currencyRateGroupOption.id"
+                                *ngFor="let currencyRateGroupOption of currencyRateGroups">
+                            {{currencyRateGroupOption.title}}
+                        </option>
+                    </select>
+
+                    <div
+                        [hidden]="!(editForm.controls.currencyRateGroupId?.dirty && editForm.controls.currencyRateGroupId?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.currencyRateGroupId?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.sellContractProduct.consumption"
+                           for="field_consumption">Consumption</label>
+                    <select [disabled]="isView || sellContract?.active" class="form-control" id="field_consumption"
+                            name="consumption"
+                            [(ngModel)]="sellContractProduct.consumptionId" required>
+                        <option *ngIf="!editForm.value.consumption" [ngValue]="null" selected></option>
+                        <option [ngValue]="consumptionOption.id"
+                                *ngFor="let consumptionOption of consumptions; trackBy: trackConsumptionById">
+                            {{consumptionOption.title}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.consumption?.dirty && editForm.controls.consumption?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.consumption?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.sellContractProduct.costGroup" for="field_costGroup">Cost
+                        Groups</label>
+                    <p-multiSelect [disabled]="isView || (sellContract?.active && !sellContractProduct.adjustment)"
+                                   class="form-control" id="field_costGroup"
+                                   [options]="costGroups"
+                                   name="costGroup"
+                                   (onChange)="changeCostGroup($event)"
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                   [(ngModel)]="selectedCostGroups"
+                    ></p-multiSelect>
+                </div>
+                <div [hidden]="!(editForm.controls.costGroup?.dirty && editForm.controls.costGroup?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.costGroup?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group" *ngIf="!haveCustomer">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.sellContractProduct.currency"
+                           for="field_currency">moneyType</label>
+                    <select [disabled]="isView || sellContract?.active" class="form-control" name="currencyIds0"
+                            [(ngModel)]="sellContractProduct.currencyIds[0]" required
+                            id="field_currency">
+                        <option [ngValue]="currencyOption.value"
+                                *ngFor="let currencyOption of customCurrencies">
+                            {{currencyOption.label}}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group" *ngIf="haveCustomer">
+                    <label jhiTranslate="niopdcgatewayApp.sellContractProduct.currency"
+                           for="field_currency">currency</label>
+                    <p-multiSelect [disabled]="isView || sellContract?.active" class="form-control" id="field_currency"
+                                   [options]="customCurrencies"
+                                   name="currency" required
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                   [(ngModel)]="sellContractProduct.currencyIds"
+                    ></p-multiSelect>
+                </div>
+                <div [hidden]="!(editForm.controls.currency?.dirty && editForm.controls.currency?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.currency?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.sellContractProduct.buyType"
+                           for="field_buyType">buyType</label>
+                    <p-multiSelect [disabled]="isView || sellContract?.active" class="form-control" id="field_buyType"
+                                   [options]="buyTypes"
+                                   name="buyType"
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                   [(ngModel)]="selectedBuyTypes"
+                                   required
+                    ></p-multiSelect>
+                </div>
+                <div [hidden]="!(editForm.controls.buyTypes?.dirty && editForm.controls.buyTypes?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.buyTypes?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="customerGroup && customerGroup === CustomerGroup[CustomerGroup.AIRPLANE]">
+                <label jhiTranslate="niopdcgatewayApp.sellContractProduct.typeOfFuelReceipts"
+                       for="field_typeOfReceipt">buyType</label>
+                <p-multiSelect [disabled]="isView || sellContract?.active" class="form-control" id="field_typeOfReceipt"
+                               [options]="typeOfFuelReceipts"
+                               (onChange)="onChangeTypeOfFuelReceipt($event)"
+                               name="typeOfReceipt"
+                               [defaultLabel]="'global.messages.info.choose' | translate"
+                               [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                               [(ngModel)]="sellContractProduct.typeOfFuelReceipts"
+                ></p-multiSelect>
+            </div>
+        </div>
+
+        <div class="card" *ngIf="!haveCustomer">
+            <div class="card-header">
+                <h5 class="card-title">نرخ فرآورده</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productRate.productSrc"
+                                   for="field_src">ProductSrc</label>
+                            <p-dropdown [options]="customProductSrcs"
+                                        [(ngModel)]="sellContractProduct.productRateSrc"
+                                        [filter]="true"
+                                        [disabled]="isView"
+                                        class="form-control"
+                                        filterBy="label"
+                                        id="field_src"
+                                        name="src"
+                                        ngDefaultControl
+                                        required>
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.productRate.price2"
+                                   for="field_productRatePrice">Price</label>
+                            <input [disabled]="isView" type="number"
+                                   class="form-control"
+                                   name="price"
+                                   id="field_productRatePrice"
+                                   [(ngModel)]="sellContractProduct.productRatePrice" required/>
+                            <div [hidden]="!(editForm.controls.price?.dirty && editForm.controls.price?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.price?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.price?.errors?.number"
+                                       jhiTranslate="entity.validation.number">
+                                    This field should be a number.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.productRate.currency2"
+                                   for="field_productRateContainerId">moneyType</label>
+                            <select [disabled]="isView" class="form-control" name="productRateContainerId"
+                                    [(ngModel)]="sellContractProduct.productRateCurrencyId" required
+                                    id="field_productRateContainerId">
+                                <option [ngValue]="currencyOption.id"
+                                        *ngFor="let currencyOption of currencies">
+                                    {{currencyOption.title}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.rateGroup.niopdcBankAccountType"
+                                   for="field_niopdcBankAccountTypeId">Bank Account Type</label>
+                            <select [disabled]="isView || sellContract?.active"
+                                    class="form-control" required
+                                    id="field_niopdcBankAccountTypeId" name="niopdcBankAccountTypeId"
+                                    [(ngModel)]="sellContractProduct.niopdcBankAccountTypeId">
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="niopdcBankAccountTypeOption.id"
+                                        *ngFor="let niopdcBankAccountTypeOption of niopdcBankAccountTypes">
+                                    {{niopdcBankAccountTypeOption.title}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.sellContractProduct.startDate"
+                           for="field_startDate">Start Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disableTime]="true" [disabled]="isView" id="field_startDate"
+                                            type="datetime-local"
+                                            class="form-control"
+                                            name="startDate"
+                                            [rtlActive]="true"
+                                            time="00:00:00"
+                                            [(ngModel)]="sellContractProduct.startDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.sellContractProduct.finishDate"
+                           for="field_finishDate">Finish Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disableTime]="true" [disabled]="isView" id="field_finishDate"
+                                            type="datetime-local"
+                                            class="form-control"
+                                            name="finishDate"
+                                            [rtlActive]="true"
+                                            time="23:59:59"
+                                            [(ngModel)]="sellContractProduct.finishDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.finishDate?.dirty && editForm.controls.finishDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.finishDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.finishDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

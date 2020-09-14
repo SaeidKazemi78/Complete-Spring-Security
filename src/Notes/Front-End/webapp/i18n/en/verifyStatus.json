@@ -1,0 +1,12 @@
+{
+    "niopdcgatewayApp": {
+        "VerifyStatus" : {
+            "null": "",
+            "ACTIVE": "ACTIVE",
+            "FAILED": "FAILED",
+            "PENDING": "PENDING",
+            "REJECT": "REJECT",
+            "CONFIRM": "CONFIRM"
+        }
+    }
+}

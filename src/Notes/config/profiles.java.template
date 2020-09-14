@@ -1,0 +1,7 @@
+package ir.donyapardaz.niopdc.base.config;
+
+public final class Profiles {
+
+    public static final String activeProfile="@profile@";
+
+}

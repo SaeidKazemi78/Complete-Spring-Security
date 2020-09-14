@@ -1,0 +1,46 @@
+
+{
+    "niopdcgatewayApp": {
+        "exportLetter" : {
+            "home": {
+                "title": "Export Letters",
+                "createLabel": "Create a new Export Letter",
+                "createOrEditLabel": "Create or edit a Export Letter"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Export Letter {{ id }}?"
+            },
+            "detail": {
+                "title": "Export Letter"
+            },
+            "type": "Type",
+            "status": "Status",
+            "deliveryTerm": "Delivery Term",
+            "declarationNumber": "Declaration Number",
+            "registerDate": "Register Date",
+            "dueDate": "Due Date",
+            "expiryDate": "Expiry Date",
+            "amount": "Amount",
+            "baseRate": "Base Rate",
+            "price": "Price",
+            "currencyId": "Currency Id",
+            "sanaRate": "Sana Rate",
+            "exclusiveConditions": "Exclusive Conditions",
+            "generalConditions": "General Conditions",
+            "longTerm": "Long Term",
+            "agentBroker": "Agent Broker",
+            "buyerAgentBroker": "Buyer Agent Broker",
+            "buyer": "Buyer",
+            "destination": "Destination",
+            "product": "Product",
+            "exportPis": "Export Pis"
+        }
+    },
+    "niopdcbaseApp": {
+        "exportLetter" : {
+            "created": "A new Export Letter is created with identifier {{ param }}",
+            "updated": "A Export Letter is updated with identifier {{ param }}",
+            "deleted": "A Export Letter is deleted with identifier {{ param }}"
+        }
+    }
+}

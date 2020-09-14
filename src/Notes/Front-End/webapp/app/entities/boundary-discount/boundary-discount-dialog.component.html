@@ -1,0 +1,147 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="boundaryDiscount.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="boundaryDiscount.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.boundaryDiscount.liter"
+                           for="field_liter">Liter</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="liter" id="field_liter"
+                           [(ngModel)]="boundaryDiscount.liter" required/>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.boundaryDiscount.customerType"
+                           for="field_vehicleModelType">customer Type</label>
+                    <select [disabled]="isView" class="form-control" name="vehicleModelType"
+                            (ngModelChange)="onChangeVehicleModelType($event)"
+                            [(ngModel)]="boundaryDiscount.vehicleModelType" id="field_vehicleModelType" required>
+                        <option value="TRUCK">{{'niopdcgatewayApp.VehicleModelType.IRANIAN_TRUCK' | translate}}</option>
+                        <option value="BUS">{{'niopdcgatewayApp.VehicleModelType.IRANIAN_BUS' | translate}}</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="checkbox" class="form-control" [disabled]="boundaryDiscount.vehicleModelType && boundaryDiscount.vehicleModelType === VehicleModelType[VehicleModelType.BUS]"
+                           name="allLocations" id="field_location"
+                           [(ngModel)]="selectingLocation"/>
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.boundaryDiscount.selectLocation"
+                           for="field_location">Location</label>
+                    <p-dropdown *ngIf="selectingLocation" required [disabled]="isView" class="form-control"
+                                [options]="customLocation"
+                                [filter]="true"
+                                (onChange)="onChangeLocation()"
+                                name="locations"
+                                [(ngModel)]="selectedLocation"
+                    ></p-dropdown>
+                    <input *ngIf="!selectingLocation " disabled type="text"
+                           class="form-control"
+                           name="locations"
+                           [ngModel]="'niopdcgatewayApp.boundaryDiscount.anyLocation' | translate"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.location.country"
+                           for="field_counry">country</label>
+                    <p-dropdown *ngIf="!farCountry" [disabled]="isView || boundaryDiscount.vehicleModelType && boundaryDiscount.vehicleModelType === VehicleModelType[VehicleModelType.BUS]" class="form-control" id="field_counry"
+                                [options]="customerCountries"
+                                name="country"
+                                [filter]="true"
+                                required
+                                [(ngModel)]="selectedCountry"
+                                [ngModelOptions]="{standalone: true}"
+                    ></p-dropdown>
+                    <input [disabled]="true" *ngIf="farCountry" disabled type="text"
+                           class="form-control"
+                           name="canSetCountry"
+                           [ngModel]="'niopdcgatewayApp.location.farCountry' | translate"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.currencyRate.activeStartDate"
+                           for="field_activeStartDate">Active Start Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disableTime]="true" [disabled]="isView" [rtlActive]="true" time="00:00:00"
+                                            id="field_activeStartDate" class="form-control"
+                                            name="activeStartDate" [(ngModel)]="boundaryDiscount.startDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.activeStartDate?.dirty && editForm.controls.activeStartDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.activeStartDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.activeStartDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.currencyRate.activeFinishDate"
+                           for="field_activeFinishDate">Active Finish Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="23:59:59"
+                                            id="field_activeFinishDate" class="form-control" [disableTime]="true"
+                                            name="activeFinishDate" [(ngModel)]="boundaryDiscount.finishDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="form-group"  *ngIf="!boundaryDiscount.vehicleModelType || boundaryDiscount.vehicleModelType !== VehicleModelType[VehicleModelType.BUS]">
+                    <input type="checkbox" class="form-control" (change)="onFarCountryChange($event)"
+                           [disabled]="isView"
+                           name="farCountry" id="field_farCountry"
+                           [(ngModel)]="farCountry"/>
+
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.location.farCountry"
+                           for="field_farCountry">Country</label>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]=" editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

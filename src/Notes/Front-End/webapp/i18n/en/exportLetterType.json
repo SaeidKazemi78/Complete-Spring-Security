@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "ExportLetterType" : {
+            "null": "",
+            "EXCHANGE": "EXCHANGE",
+            "NORMAL": "NORMAL"
+        }
+    }
+}

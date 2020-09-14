@@ -1,0 +1,287 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="driveSecurity.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="driveSecurity.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.birthDate"
+                           for="field_birthDate">Birth Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                            id="field_birthDate" class="form-control"
+                                            name="birthDate" [(ngModel)]="driveSecurity.birthDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.height"
+                           for="field_height">Height</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="height" id="field_height"
+                           [(ngModel)]="driveSecurity.height"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.weight"
+                           for="field_weight">Weight</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="weight" id="field_weight"
+                           [(ngModel)]="driveSecurity.weight"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.eyeColor"
+                           for="field_eyeColor">Eye Color</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="eyeColor" id="field_eyeColor"
+                           [(ngModel)]="driveSecurity.eyeColor"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.hairColor"
+                           for="field_hairColor">Hair Color</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="hairColor" id="field_hairColor"
+                           [(ngModel)]="driveSecurity.hairColor"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.nationalId"
+                           for="field_nationalId">National Id</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="nationalId" id="field_nationalId"
+                           [(ngModel)]="driveSecurity.nationalId"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.fatherName"
+                           for="field_fatherName">Father Name</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="fatherName" id="field_fatherName"
+                           [(ngModel)]="driveSecurity.fatherName"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.religion"
+                           for="field_religion">Religion</label>
+                    <select [disabled]="isView" class="form-control" name="religion"
+                            [(ngModel)]="driveSecurity.religion"
+                            id="field_religion">
+                        <option value="SHIA">{{'niopdcgatewayApp.Religion.SHIA' | translate}}</option>
+                        <option value="SUNNI">{{'niopdcgatewayApp.Religion.SUNNI' | translate}}</option>
+                        <option value="ZOROASTRIANISM">{{'niopdcgatewayApp.Religion.ZOROASTRIANISM' | translate}}
+                        </option>
+                        <option value="JEWISH">{{'niopdcgatewayApp.Religion.JEWISH' | translate}}</option>
+                        <option value="CHRISTIAN">{{'niopdcgatewayApp.Religion.CHRISTIAN' | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.education"
+                           for="field_education">Education</label>
+                    <select [disabled]="isView" class="form-control" name="education"
+                            [(ngModel)]="driveSecurity.education"
+                            id="field_education">
+                        <option value="UNDER_DIPLOMA">{{'niopdcgatewayApp.Education.UNDER_DIPLOMA' | translate}}
+                        </option>
+                        <option value="DIPLOMA">{{'niopdcgatewayApp.Education.DIPLOMA' | translate}}</option>
+                        <option value="ASSOCIATE">{{'niopdcgatewayApp.Education.ASSOCIATE' | translate}}</option>
+                        <option value="BACHELOR">{{'niopdcgatewayApp.Education.BACHELOR' | translate}}</option>
+                        <option value="MASTER">{{'niopdcgatewayApp.Education.MASTER' | translate}}</option>
+                        <option value="PHD">{{'niopdcgatewayApp.Education.PHD' | translate}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.maritalStatus"
+                           for="field_maritalStatus">Marital Status</label>
+                    <select [disabled]="isView" class="form-control" name="maritalStatus"
+                            [(ngModel)]="driveSecurity.maritalStatus" id="field_maritalStatus">
+                        <option value="SINGLE">{{'niopdcgatewayApp.MaritalStatus.SINGLE' | translate}}</option>
+                        <option value="MARRIED">{{'niopdcgatewayApp.MaritalStatus.MARRIED' | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.militaryStatus"
+                           for="field_militaryStatus">Military Status</label>
+                    <select [disabled]="isView" class="form-control" name="militaryStatus"
+                            [(ngModel)]="driveSecurity.militaryStatus" id="field_militaryStatus">
+                        <option value="COMPLETE">{{'niopdcgatewayApp.MilitaryStatus.COMPLETE' | translate}}</option>
+                        <option value="EXEMPT">{{'niopdcgatewayApp.MilitaryStatus.EXEMPT' | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.exemptMilitaryReason"
+                           for="field_exemptMilitaryReason">Exempt Military Reason</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="exemptMilitaryReason"
+                           id="field_exemptMilitaryReason"
+                           [(ngModel)]="driveSecurity.exemptMilitaryReason"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.haveCriminal"
+                           for="field_haveCriminal">Have Criminal</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="haveCriminal"
+                           id="field_haveCriminal"
+                           [(ngModel)]="driveSecurity.haveCriminal"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.criminalReason"
+                           for="field_criminalReason">Criminal Reason</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="criminalReason"
+                           id="field_criminalReason"
+                           [(ngModel)]="driveSecurity.criminalReason"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.address"
+                           for="field_address">Address</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="address" id="field_address"
+                           [(ngModel)]="driveSecurity.address"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.postalCode"
+                           for="field_postalCode">Postal Code</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="postalCode" id="field_postalCode"
+                           [(ngModel)]="driveSecurity.postalCode" minlength="10" maxlength="10"/>
+                    <div [hidden]="!(editForm.controls.postalCode?.dirty && editForm.controls.postalCode?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.postalCode?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 10 }">
+                            This field is required to be at least 10 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.postalCode?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 10 }">
+                            This field cannot be longer than 10 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.mobileNumber"
+                           for="field_mobileNumber">Mobile Number</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="mobileNumber"
+                           id="field_mobileNumber"
+                           [(ngModel)]="driveSecurity.mobileNumber"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.phoneNumber"
+                           for="field_phoneNumber">Phone Number</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="phoneNumber"
+                           id="field_phoneNumber"
+                           [(ngModel)]="driveSecurity.phoneNumber"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.fileName"
+                           for="field_fileName">File Name</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="fileName" id="field_fileName"
+                           [(ngModel)]="driveSecurity.fileName"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.description"
+                           for="field_description">Description</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="description"
+                           id="field_description"
+                           [(ngModel)]="driveSecurity.description"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.inCompleteDocument"
+                           for="field_inCompleteDocument">In Complete Document</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="inCompleteDocument"
+                           id="field_inCompleteDocument"
+                           [(ngModel)]="driveSecurity.inCompleteDocument"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.serial"
+                           for="field_serial">Serial</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="serial" id="field_serial"
+                           [(ngModel)]="driveSecurity.serial"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.isGuest"
+                           for="field_isGuest">Is Guest</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="isGuest" id="field_isGuest"
+                           [(ngModel)]="driveSecurity.isGuest"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.driveSecurity.nationality"
+                           for="field_nationality">Nationality</label>
+                    <select class="form-control" id="field_nationality" name="nationality"
+                            [(ngModel)]="driveSecurity.nationalityId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="countryOption.id"
+                                *ngFor="let countryOption of nationality; trackBy: trackCountryById">{{countryOption.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

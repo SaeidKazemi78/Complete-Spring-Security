@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"
+        xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO">
+    <import schemaLocation="NiopdcSellService_xsd3.xml"
+            namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+    <complexType name="NiopdcConnectionString">
+        <sequence>
+            <element minOccurs="0" name="Password" nillable="true" type="string"/>
+            <element minOccurs="0" name="UserId" nillable="true" type="string"/>
+        </sequence>
+    </complexType>
+    <element name="NiopdcConnectionString" nillable="true" type="tns:NiopdcConnectionString"/>
+    <complexType name="NiopdcCustomerMajari">
+        <sequence>
+            <element minOccurs="0" name="Address" nillable="true" type="string"/>
+            <element minOccurs="0" name="BakhshCode" nillable="true" type="string"/>
+            <element minOccurs="0" name="DehestanCode" nillable="true" type="string"/>
+            <element minOccurs="0" name="EtebarAccountNO" nillable="true" type="string"/>
+            <element minOccurs="0" name="ExpireDate" nillable="true" type="string"/>
+            <element minOccurs="0" name="F_BuyTypeID" nillable="true" type="string"/>
+            <element minOccurs="0" name="F_CountryDivisionID" nillable="true" type="string"/>
+            <element minOccurs="0" name="F_CustomerMasrafTypeID" nillable="true" type="string"/>
+            <element minOccurs="0" name="F_CustomerStatusID" nillable="true" type="string"/>
+            <element minOccurs="0" name="F_CustomerTypeID" nillable="true" type="string"/>
+            <element minOccurs="0" name="F_LocationID" nillable="true" type="string"/>
+            <element minOccurs="0" name="F_LocationID_Nahieh" nillable="true" type="string"/>
+            <element minOccurs="0" name="F_PersonID" nillable="true" type="string"/>
+            <element minOccurs="0" name="F_UserID" nillable="true" type="string"/>
+            <element minOccurs="0" name="GsID" nillable="true" type="string"/>
+            <element minOccurs="0" name="HamlCode" nillable="true" type="string"/>
+            <element minOccurs="0" name="HasAggrement" nillable="true" type="string"/>
+            <element minOccurs="0" name="HasTransport" nillable="true" type="string"/>
+            <element minOccurs="0" name="IsChangeablitybuytype" nillable="true" type="string"/>
+            <element minOccurs="0" name="IsHard" nillable="true" type="string"/>
+            <element minOccurs="0" name="IsOutCity" nillable="true" type="string"/>
+            <element minOccurs="0" name="IsOutCityName" nillable="true" type="string"/>
+            <element minOccurs="0" name="IsSamaneSokht" nillable="true" type="string"/>
+            <element minOccurs="0" name="Jaygah" nillable="true" type="string"/>
+            <element minOccurs="0" name="LocationCaption" nillable="true" type="string"/>
+            <element minOccurs="0" name="Mantaghe" nillable="true" type="string"/>
+            <element minOccurs="0" name="MellatPayaerID" nillable="true" type="string"/>
+            <element minOccurs="0" name="Nahiye" nillable="true" type="string"/>
+            <element minOccurs="0" name="OldCode" nillable="true" type="string"/>
+            <element minOccurs="0" name="Ostan" nillable="true" type="string"/>
+            <element minOccurs="0" name="OstanCode" nillable="true" type="string"/>
+            <element minOccurs="0" name="Password" nillable="true" type="string"/>
+            <element minOccurs="0" name="Phone" nillable="true" type="string"/>
+            <element minOccurs="0" name="PostCode" nillable="true" type="string"/>
+            <element minOccurs="0" name="Products" nillable="true" type="string"/>
+            <element minOccurs="0" name="RegisterNo" nillable="true" type="string"/>
+            <element minOccurs="0" name="Retail" nillable="true" type="string"/>
+            <element minOccurs="0" name="SafOrderNo" nillable="true" type="string"/>
+            <element minOccurs="0" name="SafPassword" nillable="true" type="string"/>
+            <element minOccurs="0" name="ShahrestanCode" nillable="true" type="string"/>
+            <element minOccurs="0" name="UserId" nillable="true" type="string"/>
+            <element minOccurs="0" name="ZarfiatBenzin" nillable="true" type="string"/>
+            <element minOccurs="0" name="ZarfiatNafKure" nillable="true" type="string"/>
+            <element minOccurs="0" name="ZarfiatNaftGaz" nillable="true" type="string"/>
+            <element minOccurs="0" name="ZarfiatNaftSefid" nillable="true" type="string"/>
+            <element minOccurs="0" name="active" nillable="true" type="string"/>
+            <element minOccurs="0" name="code" nillable="true" type="string"/>
+            <element minOccurs="0" name="customerTypeCaption" nillable="true" type="string"/>
+            <element minOccurs="0" name="customername" nillable="true" type="string"/>
+            <element minOccurs="0" name="idOld" nillable="true" type="string"/>
+            <element minOccurs="0" name="parvanehno" nillable="true" type="string"/>
+            <element minOccurs="0" name="sabtDate" nillable="true" type="string"/>
+            <element minOccurs="0" name="sabtno" nillable="true" type="string"/>
+        </sequence>
+    </complexType>
+    <element name="NiopdcCustomerMajari" nillable="true" type="tns:NiopdcCustomerMajari"/>
+    <complexType name="Output">
+        <sequence>
+            <element minOccurs="0" name="Id" type="long"/>
+            <element minOccurs="0" name="Message" type="int"/>
+            <element minOccurs="0" name="Password" nillable="true" type="string"/>
+            <element minOccurs="0" name="UserId" nillable="true" type="string"/>
+        </sequence>
+    </complexType>
+    <element name="Output" nillable="true" type="tns:Output"/>
+    <complexType name="NiopdcProductCustomer">
+        <sequence>
+            <element minOccurs="0" name="CodeCustomer" nillable="true" type="string"/>
+            <element minOccurs="0" name="CodeProduct" nillable="true" type="q1:ArrayOfstring"
+                     xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+        </sequence>
+    </complexType>
+    <element name="NiopdcProductCustomer" nillable="true" type="tns:NiopdcProductCustomer"/>
+    <complexType name="NiopdcExpireCustomer">
+        <sequence>
+            <element minOccurs="0" name="CodeCustomer" nillable="true" type="string"/>
+            <element minOccurs="0" name="ExpireDate" type="dateTime"/>
+        </sequence>
+    </complexType>
+    <element name="NiopdcExpireCustomer" nillable="true" type="tns:NiopdcExpireCustomer"/>
+</schema>

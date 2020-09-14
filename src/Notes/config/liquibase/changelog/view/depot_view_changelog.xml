@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="sajad" id="depot_view5">
+        <createView replaceIfExists="true"
+                    viewName="depot_view">
+            SELECT
+            depot.id,
+            username
+            FROM niopdcbase.dbo.location_view l
+            INNER JOIN location_depot ON location_depot.locations_id = l.id
+            INNER JOIN depot ON location_depot.depots_id = depot.id
+        </createView>
+    </changeSet>
+    <changeSet author="sajad" id="depot_view6">
+        <createView replaceIfExists="true"
+                    viewName="depot_view">
+            SELECT
+            depot.id,
+            username
+            FROM location_view l
+            INNER JOIN location_depot ON location_depot.locations_id = l.id
+            INNER JOIN depot ON location_depot.depots_id = depot.id
+        </createView>
+    </changeSet>
+    <changeSet author="sajad" id="depot_view7">
+        <createView replaceIfExists="true"
+                    viewName="depot_view">
+            SELECT
+            depot.id,
+            username
+            FROM location_view l
+            cross join depot
+            left JOIN location_depot ON (location_depot.locations_id = l.id and location_depot.depots_id = depot.id)
+            where (location_depot.depots_id is not null or l.id = depot.location_id)
+        </createView>
+    </changeSet>
+    <changeSet author="sajad" id="depot_view8" runAlways="true">
+        <createView replaceIfExists="true"
+                    viewName="depot_view">
+            SELECT
+            depot.id,
+            username
+            FROM location_access l
+            cross join depot
+            left JOIN location_depot ON (location_depot.locations_id = l.id and location_depot.depots_id = depot.id)
+            where (location_depot.depots_id is not null or l.id = depot.location_id)
+        </createView>
+    </changeSet>
+
+</databaseChangeLog>

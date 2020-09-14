@@ -1,0 +1,26 @@
+{
+    "niopdcgatewayApp": {
+        "roleLevel": {
+            "home": {
+                "title": "سطوح نقش ها",
+                "createLabel": "ایجاد سطوح نقش",
+                "createOrEditLabel": "ویرایش سطوح نقش",
+                "view": "نمایش سطوح نقش"
+            },
+            "delete": {
+                "question": "آیا برای حذف سطح نقش  {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "سطح نقش"
+            },
+            "name": "نام"
+        }
+    },
+    "niopdcuaaApp": {
+        "RoleLevel": {
+            "created": "سطح نقش با موفقیت ایجاد شد.",
+            "updated": "سطح نقش با موفقیت ویرایش شد.",
+            "deleted": "سطح نقش با موفقیت حذف شد."
+        }
+    }
+}

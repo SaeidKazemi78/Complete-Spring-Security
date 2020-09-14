@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "sellGroundFuel" : {
+            "home": {
+                "title": "Sell Ground Fuels",
+                "createLabel": "Create a new Sell Ground Fuel",
+                "createOrEditLabel": "Create or edit a Sell Ground Fuel"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Sell Ground Fuel {{ id }}?"
+            },
+            "detail": {
+                "title": "Sell Ground Fuel"
+            },
+            "amount": "Amount",
+            "sellToDifferent": "Sell To Different",
+            "rate": "Rate",
+            "totalPrice": "Total Price",
+            "dayDepot": "Day Depot"
+        }
+    },
+    "niopdcaoApp": {
+        "sellGroundFuel" : {
+            "created": "A new Sell Ground Fuel is created with identifier {{ param }}",
+            "updated": "A Sell Ground Fuel is updated with identifier {{ param }}",
+            "deleted": "A Sell Ground Fuel is deleted with identifier {{ param }}"
+        }
+    }
+}

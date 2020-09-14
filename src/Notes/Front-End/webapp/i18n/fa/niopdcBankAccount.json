@@ -1,0 +1,34 @@
+
+{
+    "niopdcgatewayApp": {
+        "niopdcBankAccount" : {
+            "home": {
+                "title": "شماره حساب",
+                "createLabel": "Create a new Niopdc Bank Account",
+                "createOrEditLabel": "Create or edit a Niopdc Bank Account"
+            },
+            "delete": {
+                "question": "آیا برای حذف این شماره حساب اطمینان دارید؟"
+            },
+            "detail": {
+                "title": "Niopdc Bank Account"
+            },
+            "title": "عنوان",
+            "accountNumber": "شماره حساب",
+            "bankAccountType": "نوع شماره حساب",
+            "bank": "بانک",
+            "mellatExtCustomerId": "کد مشتری",
+            "mellatUsername": "نام کاربری",
+            "mellatPassword": "کلمه عبور",
+            "mellatTerminalId": "شماره ترمینال",
+            "accountIdentifier": "شناسه حساب"
+        }
+    },
+    "niopdcpaymentApp": {
+        "niopdcBankAccount" : {
+            "created": "شماره حساب با موفقیت ایجاد شد.",
+            "updated": "شماره حساب با موفقیت ویرایش شد.",
+            "deleted": "شماره حساب با موفقیت حذف شد."
+        }
+    }
+}

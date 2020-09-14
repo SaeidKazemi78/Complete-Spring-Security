@@ -1,0 +1,1317 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save(false)" #editForm="ngForm">
+    <div style="margin: 15px">
+        <p-breadcrumb [model]="breadCrumbs"></p-breadcrumb>
+    </div>
+    <div class="modal-body step4">
+        <jhi-alert-error></jhi-alert-error>
+        <jhi-alert-success></jhi-alert-success>
+        <p-steps [(activeIndex)]="activeIndex" [model]="items"
+                 styleClass="steps-custom {{order.orderType === OrderType[OrderType.REFUEL_CENTER] && mustPaid ? 'steps-custom5':
+                                            (order.orderType === OrderType[OrderType.REFUEL_CENTER] && !mustPaid) ||
+                                            (order.orderType !== OrderType[OrderType.REFUEL_CENTER] && mustPaid) ? 'steps-custom4' : 'steps-custom3' }}"></p-steps>
+
+        <div class="alert alert-danger"
+             *ngIf="shiftWork?.type === 'OPEN_TIMEOUT' || shiftWork?.type === 'CLOSE' || (shiftWork && !shiftWork?.orderNumber) || isDeactiveCustomer">
+            <div *ngIf="shiftWork?.type === 'OPEN_TIMEOUT'">
+                 <span
+                     *ngIf="order.orderType !== OrderType[OrderType.AIRPLANE] && order.orderType !== OrderType[OrderType.REFUEL_CENTER]"
+                     jhiTranslate="niopdcgatewayApp.order.shiftWork.isTimeout">
+                     This field is required.</span>
+                <span *ngIf="order.orderType !== OrderType[OrderType.REFUEL_CENTER]"
+                      jhiTranslate="niopdcgatewayApp.fuelReceipt.shiftWork.isTimeoutMainDayDepot">
+                     This field is required.</span>
+                <span *ngIf="order.orderType === OrderType[OrderType.AIRPLANE]"
+                      jhiTranslate="niopdcgatewayApp.fuelReceipt.shiftWork.isTimeoutMainDayOperation">
+                     This field is required.</span>
+            </div>
+
+            <div *ngIf="shiftWork?.type === 'CLOSE'">
+                <ng-container *ngIf="order.orderType === OrderType[OrderType.AIRPLANE]">
+                    <!--PIPE_LINE_SALES & TANKER_SALES ==> main-day-depot-->
+                    <span *ngIf="order.typeOfFuelReceipt === TypeOfFuelReceipt[TypeOfFuelReceipt.PIPE_LINE_SALES] ||
+                             order.typeOfFuelReceipt === TypeOfFuelReceipt[TypeOfFuelReceipt.TANKER_SALES]"
+                          jhiTranslate="niopdcgatewayApp.fuelReceipt.shiftWork.notFindMainDayDepot">
+                    This field is required.
+                    </span>
+                    <span *ngIf="order.typeOfFuelReceipt === TypeOfFuelReceipt[TypeOfFuelReceipt.UNIT_TO_AIRPLANE] ||
+                             order.typeOfFuelReceipt === TypeOfFuelReceipt[TypeOfFuelReceipt.UNIT_TO_CUSTOMERS]"
+                          jhiTranslate="niopdcgatewayApp.fuelReceipt.shiftWork.notFindMainDayOperation">
+                    This field is required.
+                    </span>
+                </ng-container>
+                <span *ngIf="order.orderType !== OrderType[OrderType.AIRPLANE]"
+                      jhiTranslate="niopdcgatewayApp.order.shiftWork.notFind">
+                    This field is required.
+                </span>
+                <span *ngIf="order.orderType !== OrderType[OrderType.AIRPLANE]">
+                    <button class="btn btn-primary" type="button"
+                            *jhiHasAnyAuthority="['ROLE_ADMIN', 'OPEN_SHIFT_WORK']"
+                            [routerLink]="[ { outlets: { popup: 'location/' + order.locationId + '/shift/open' } }]"
+                            [queryParams]="route.snapshot.queryParams">
+                    <span class="fa fa-check"></span>
+                    <span jhiTranslate="entity.action.open">Create</span>
+                </button>
+                </span>
+            </div>
+            <div *ngIf="(shiftWork && !shiftWork?.orderNumber)">
+                <span *ngIf="order.orderType !== OrderType[OrderType.AIRPLANE]"
+                      jhiTranslate="niopdcgatewayApp.order.shiftWork.orderNumber">
+                                    This field is required.></span>
+                <span *ngIf="order.orderType === OrderType[OrderType.AIRPLANE]"
+                      jhiTranslate="niopdcgatewayApp.fuelReceipt.shiftWork.orderNumber">
+                                    This field is required.></span>
+            </div>
+            <div *ngIf="isDeactiveCustomer">
+                <span jhiTranslate="niopdcgatewayApp.customer.sell.deActive"></span>
+            </div>
+        </div>
+        <div class="alert alert-warning" *ngIf="mustBeRecreate()">
+            <div jhiTranslate="niopdcgatewayApp.order.recreate">
+                This field is required.
+            </div>
+        </div>
+        <div class="alert-danger" *ngIf="!hasAccessForRegisterOrder">
+            <span class="fa fa-times"></span>
+            <span jhiTranslate="niopdcgatewayApp.order.noAccessForRegisterOrder"></span>
+        </div>
+
+        <!-- activeIndex === 0 -->
+        <div *ngIf="activeIndex === 0">
+            <div class="row">
+                <div class="col-md-3"
+                     *ngIf="order.orderType !== OrderType[OrderType.AIRPLANE] && order.orderType !== OrderType[OrderType.REFUEL_CENTER]">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               jhiTranslate="niopdcgatewayApp.order.locationId"
+                               for="field_locationId">Location Id</label>
+                        <app-location-level-selector
+                            [disabled]="isView"
+                            [multiSelect]="false"
+                            [(ngModel)]="order.locationId"
+                            class="form-control"
+                            id="field_locationId"
+                            widthGrid="300px"
+                            (selectedItem)="locationChanged(false)"
+                            [ngModelOptions]="{standalone: true}"
+                            ngDefaultControl
+                            name="locationId">
+                        </app-location-level-selector>
+                    </div>
+                </div>
+                <div
+                    [ngClass]="{'col-md-3':order.orderType !== OrderType[OrderType.AIRPLANE],'col-md-4':order.orderType === OrderType[OrderType.AIRPLANE] || order.orderType === OrderType[OrderType.REFUEL_CENTER]}">
+                    <div class="form-group">
+                        <label *ngIf="order.orderType === OrderType[OrderType.AIRPLANE]" class="form-control-label"
+                               jhiTranslate="niopdcgatewayApp.fuelReceipt.customer"
+                               for="field_customerPersons">field_customerPersons</label>
+                        <label *ngIf="order.orderType !== OrderType[OrderType.AIRPLANE]" class="form-control-label"
+                               jhiTranslate="niopdcgatewayApp.order.customerId"
+                               for="field_customerPersons">field_customerPersons</label>
+                        <sell-contract-customer-person-selector
+                            [disabled]="isView"
+                            [selectObject]="true"
+                            [type]="mode"
+                            (selectedItem)="changeCustomerPerson($event)"
+                            [(ngModel)]="customerPerson"
+                            class="form-control"
+                            id="field_customerPersons"
+                            widthGrid="600px"
+                            [ngModelOptions]="{standalone: true}"
+                            ngDefaultControl
+                            [locationId]="order.locationId"
+                            required
+                            name="customerPersons"
+                        >
+                        </sell-contract-customer-person-selector>
+                    </div>
+                </div>
+                <div
+                    [ngClass]="{'col-md-3':order.orderType !== OrderType[OrderType.AIRPLANE],'col-md-4':order.orderType === OrderType[OrderType.AIRPLANE] || order.orderType === OrderType[OrderType.REFUEL_CENTER]}">
+                    <div class="form-group">
+                        <label
+                            *ngIf="order.orderType === OrderType[OrderType.AIRPLANE] || order.orderType === OrderType[OrderType.REFUEL_CENTER]"
+                            class="form-control-label"
+                            jhiTranslate="niopdcgatewayApp.refuelCenter.home.title"
+                            for="field_depotId">Depot
+                            Id</label>
+                        <label *ngIf="order.orderType !== OrderType[OrderType.AIRPLANE]" class="form-control-label"
+                               jhiTranslate="niopdcgatewayApp.order.depotId"
+                               for="field_depotId">Depot
+                            Id</label>
+                        <select class="form-control"
+                                name="depotId"
+                                [disabled]="isView"
+                                [(ngModel)]="order.depotId"
+                                id="field_depotId"
+                                (ngModelChange)="changeDepot($event)"
+                                required>
+                            <option [ngValue]="depotsListOption.id" *ngFor="let depotsListOption of depots">
+                                {{depotsListOption.title}}
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+                <div
+                    [ngClass]="{'col-md-3': order.orderType !== OrderType[OrderType.AIRPLANE],'col-md-4': order.orderType === OrderType[OrderType.AIRPLANE] || order.orderType === OrderType[OrderType.REFUEL_CENTER]}">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.order.registerDate"
+                               for="field_registerDate">Register Date</label>
+                        <div class="d-flex">
+                            <ng2-datetimepicker [disableTime]="false" [disabled]="true" [rtlActive]="true" time="00:00"
+                                                id="field_registerDate"
+                                                class="form-control"
+                                                name="registerDate" [(ngModel)]="order.registerDate"
+                            ></ng2-datetimepicker>
+                        </div>
+                        <div *ngIf="shiftWork?.type === 'OPEN_TOMORROW'">
+                            <small class="form-text text-info"
+                                   jhiTranslate="niopdcgatewayApp.order.shiftWork.isTomorrow"
+                                   [translateValues]="{day:shiftWork.fromDate | dateJalali}">
+                                This field is required.
+                            </small>
+                        </div>
+                        <div *ngIf="shiftWork?.type === 'OPEN_EXTRA'">
+                            <small class="form-text text-info"
+                                   jhiTranslate="niopdcgatewayApp.order.shiftWork.isExtra"
+                                   [translateValues]="{day:shiftWork.fromDate | dateJalali}">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label *ngIf="order.orderType === 'AIRPLANE'" class="form-control-label"
+                               jhiTranslate="niopdcgatewayApp.fuelReceipt.orderNo"
+                               for="field_orderNo">Order
+                            No</label>
+                        <label *ngIf="order.orderType !== 'AIRPLANE'" class="form-control-label"
+                               jhiTranslate="niopdcgatewayApp.order.orderNo"
+                               for="field_orderNo">Order
+                            No</label>
+                        <input type="text" class="form-control" name="orderNo" id="field_orderNo"
+                               [numeric]="{min: shiftWork?.orderNumber?.startOrderNumber,
+                                           max: shiftWork?.orderNumber?.endOrderNumber}"
+                               [disabled]="order.orderType === OrderType[OrderType.ORDER] || isView"
+                               [(ngModel)]="order.orderNo" required/>
+                        <div [hidden]="!(editForm.controls.orderNo?.dirty && editForm.controls.orderNo?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.orderNo?.errors?.required"
+                                   jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.order.currencyId"
+                               for="field_currencyId">Currency Id</label>
+
+                        <select class="form-control"
+                                name="currencyId"
+                                [disabled]="isView"
+                                [(ngModel)]="order.currencyId"
+                                id="field_currencyId"
+                                (ngModelChange)="changeCurrency($event)"
+                                required>
+                            <option [ngValue]="currencyListOption.id"
+                                    *ngFor="let currencyListOption of currencies">
+                                {{currencyListOption.title}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.order.buyType"
+                               for="field_buyType">Pay
+                            Type</label>
+                        <select class="form-control"
+                                name="buyType"
+                                [disabled]="isView"
+                                (ngModelChange)="changeBuyGroup($event)"
+                                [(ngModel)]="order.buyGroup"
+                                id="field_buyType"
+                                required>
+                            <option [ngValue]="buyTypeListOption"
+                                    *ngFor="let buyTypeListOption of buyGroups">
+                                {{'niopdcgatewayApp.BuyGroup.' + buyTypeListOption | translate}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3" *ngIf="order.orderType === 'ORDER'">
+                    <!--<div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.order.countCopy"
+                               for="field_countCopy">count Copy</label>
+                        <select class="form-control"
+                                name="countCopy"
+                                [disabled]="isView"
+                                [(ngModel)]="order.countCopy"
+                                id="field_countCopy"
+                                required>
+                            <option [ngValue]="countOption"
+                                    *ngFor="let countOption of [1,2,3,4,5,6]">
+                                {{countOption}}
+                            </option>
+                        </select>
+                    </div>-->
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.order.countCopy"
+                               for="field_countCopy">count Copy</label>
+                        <input class="form-control"
+                               type="number"
+                               name="countCopy"
+                               [disabled]="isView"
+                               [(ngModel)]="order.countCopy"
+                               id="field_countCopy"
+                               required/>
+                    </div>
+                </div>
+            </div>
+            <div class="row"
+                 *ngIf="order.orderType === OrderType[OrderType.AIRPLANE] || order.orderType === OrderType[OrderType.REFUEL_CENTER]">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.order.typeOfFuelReceipt"
+                               for="field_typeOfFuelReceipt">Type Of Fuel Receipt</label>
+
+                        <select class="form-control"
+                                name="typeOfFuelReceipt"
+                                [disabled]="isView"
+                                (ngModelChange)="changeTypeOfFuelReceipt($event)"
+                                [(ngModel)]="order.typeOfFuelReceipt"
+                                id="field_typeOfFuelReceipt"
+                                required
+                        >
+                            <option [ngValue]="typeOfFuelReceiptListOption"
+                                    *ngFor="let typeOfFuelReceiptListOption of typeOfFuelReceipts">
+                                {{'niopdcgatewayApp.TypeOfFuelReceipt.' + typeOfFuelReceiptListOption | translate}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.order.flightNumber"
+                               for="field_flightNumber">Source RefuelCenter</label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="field_flightNumber" name="flightNumber"
+                                   [disabled]="isView"
+                                   [(ngModel)]="order.flightNumber"/>
+                        </div>
+                    </div>
+
+                    <div
+                        [hidden]="!(editForm.controls.refuelCenter?.dirty && editForm.controls.refuelCenter?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.refuelCenter?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="col-md-2">
+
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.order.sourceAirport"
+                               for="field_sourceAirport">Source RefuelCenter</label>
+                        <div class="form-group">
+                            <select class="form-control" id="field_sourceAirport" name="sourceAirport"
+                                    [disabled]="isView"
+                                    [(ngModel)]="order.sourceAirport"
+                                    (ngModelChange)="changeSourceAirport($event)"
+                                    required>
+                                <option *ngIf="!editForm.value.refuelCenter" [ngValue]="null" selected></option>
+                                <option [ngValue]="refuelCenterOption.id"
+                                        *ngFor="let refuelCenterOption of sourceAirports; trackBy: trackRefuelCenterById">
+                                    {{refuelCenterOption.persianTitle}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div
+                        [hidden]="!(editForm.controls.refuelCenter?.dirty && editForm.controls.refuelCenter?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.refuelCenter?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="col-md-3"
+                     *ngIf="order.typeOfFuelReceipt===TypeOfFuelReceipt[TypeOfFuelReceipt.UNIT_TO_AIRPLANE]">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.order.targetAirport"
+                               for="field_targetAirports">Target RefuelCenter</label>
+
+                        <app-airport-order-selector
+                            [disabled]="isView"
+                            [multiSelect]="false"
+                            [(ngModel)]="order.targetAirport"
+                            id="field_targetAirports"
+                            class="form-control"
+                            widthGrid="300px"
+                            [ngModelOptions]="{standalone: true}"
+                            ngDefaultControl
+                            [inputAirports]="targetAirports"
+                            name="targetAirports"
+                            required
+                        >
+                        </app-airport-order-selector>
+
+                    </div>
+                </div>
+                <div class="col-md-3"
+                     *ngIf="order.typeOfFuelReceipt!==TypeOfFuelReceipt[TypeOfFuelReceipt.PIPE_LINE_SALES]">
+                    <div class="row">
+                        <div [ngClass]="{'col-md-12':order.typeOfFuelReceipt===TypeOfFuelReceipt[TypeOfFuelReceipt.PIPE_LINE_SALES],
+                                        'col-md-6':order.typeOfFuelReceipt!==TypeOfFuelReceipt[TypeOfFuelReceipt.PIPE_LINE_SALES]}"
+                             *ngIf="order.typeOfFuelReceipt===TypeOfFuelReceipt[TypeOfFuelReceipt.UNIT_TO_AIRPLANE]">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.order.flightConditions"
+                                       for="field_flightConditions">Flight Conditions</label>
+                                <select class="form-control" name="flightConditions"
+                                        [disabled]="isView"
+                                        [(ngModel)]="order.flightConditions"
+                                        id="field_flightConditions">
+                                    <option value="VIP">{{'niopdcgatewayApp.FlightConditions.VIP' | translate}}
+                                    </option>
+                                    <option value="EMERGENCY">{{'niopdcgatewayApp.FlightConditions.EMERGENCY' |
+                                        translate}}
+                                    </option>
+                                    <option value="NORMAL">{{'niopdcgatewayApp.FlightConditions.NORMAL' |
+                                        translate}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div [ngClass]="{'col-md-12':order.typeOfFuelReceipt!==TypeOfFuelReceipt[TypeOfFuelReceipt.UNIT_TO_AIRPLANE],
+                                        'col-md-6':order.typeOfFuelReceipt===TypeOfFuelReceipt[TypeOfFuelReceipt.UNIT_TO_AIRPLANE]}"
+
+                             *ngIf="order.typeOfFuelReceipt!==TypeOfFuelReceipt[TypeOfFuelReceipt.PIPE_LINE_SALES]">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.logBook.fuelType" for="field_fuelType">Fuel
+                                    Type</label>
+                                <select class="form-control" name="fuelType" [(ngModel)]="order.fuelType"
+                                        [disabled]="isView || order.typeOfFuelReceipt===TypeOfFuelReceipt[TypeOfFuelReceipt.TANKER_SALES]"
+                                        id="field_fuelType" required>
+                                    <option value="RE_FUEL">{{'niopdcgatewayApp.FuelType.RE_FUEL' | translate}}
+                                    </option>
+                                    <option value="DE_FUEL">{{'niopdcgatewayApp.FuelType.DE_FUEL' |
+                                        translate}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.order.description"
+                               for="field_description">Description</label>
+                        <textarea type="text" class="form-control" name="description"
+                                  id="field_description"
+                                  [disabled]="isView"
+                                  [(ngModel)]="order.description"></textarea>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="order.customerId">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                        <span><h5 jhiTranslate="niopdcgatewayApp.order.home.credit.quota.info">
+                        </h5></span>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p-table [value]="creditBuyTypeRemainedList" [responsive]="true">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th jhiTranslate="niopdcgatewayApp.product.home.title"></th>
+                                    <th jhiTranslate="niopdcgatewayApp.product.code"></th>
+                                    <th jhiTranslate="niopdcgatewayApp.buyType.home.credit.quota"></th>
+                                    <th jhiTranslate="niopdcgatewayApp.buyType.home.remained.credit"></th>
+                                    <th jhiTranslate="niopdcgatewayApp.buyType.home.remained.amount"></th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-item style="color: black">
+                                <tr>
+                                    <td>{{item.productTitle}}</td>
+                                    <td>{{item.productCode}}</td>
+                                    <td>{{'niopdcgatewayApp.BuyGroup.' + item.buyGroup | translate }}</td>
+                                    <td *ngIf="item.remainedCredit">{{(item.remainedCredit) | separator}}</td>
+                                    <td *ngIf="!item.remainedCredit">----</td>
+
+                                    <td *ngIf="item.remainedAmount">{{(item.remainedAmount) | separator}}</td>
+                                    <td *ngIf="!item.remainedAmount">----</td>
+
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- activeIndex === 1 -->
+        <div *ngIf="activeIndex===1">
+            <div class="card-body" style="text-align: center" *ngIf="!orderProduct">
+                <p *ngIf="isLoading" jhiTranslate="niopdcgatewayApp.order.loading"></p>
+                <p *ngIf="errorLoad" jhiTranslate="niopdcgatewayApp.order.errorLoad"
+                   [translateValues]="{id: id}"></p>
+                <ng-container *ngIf="errorLoad">
+                    <button type="button" class="btn btn-info" (click)="loadActiveIndex()">
+                        <span class="fa fa-refresh"></span>&nbsp;<span
+                        jhiTranslate="entity.action.tryAgain">tryAgain</span>
+                    </button>
+                </ng-container>
+            </div>
+
+            <div class="card" *ngIf="orderProduct">
+                <div class="card-header">
+                    <div class="row">
+                        <h5 *ngIf="order.orderType === OrderType[OrderType.ORDER]"
+                            jhiTranslate="niopdcgatewayApp.order.home.titleInfo">
+                            Create or edit
+                        </h5>
+                        <h5 *ngIf="order.orderType === OrderType[OrderType.AIRPLANE]"
+                            jhiTranslate="niopdcgatewayApp.fuelReceipt.home.titleInfo">
+                            Create or edit
+                        </h5>
+                        <div class="col-md-8"></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row" style="text-align: center">
+                        <div class="col-md-3">
+                            <label class="col-md-12" jhiTranslate="niopdcgatewayApp.customer.home.title"></label>
+                            <div class="col-md-12">
+                                {{order.customerName != null ?
+                                order.customerName + " (" + order.customerCode + ")" :
+                                order.personName}}
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="col-md-12">
+                                <label *ngIf="order.orderType === OrderType[OrderType.ORDER]"
+                                       jhiTranslate="niopdcgatewayApp.order.orderNo"></label>
+                                <label
+                                    *ngIf="order.orderType === OrderType[OrderType.AIRPLANE] || order.orderType === OrderType[OrderType.REFUEL_CENTER]"
+                                    jhiTranslate="niopdcgatewayApp.fuelReceipt.orderNo"></label>
+                            </div>
+                            <div class="col-md-12">
+                                {{order.orderNo}}
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="col-md-12">
+                                <label jhiTranslate="niopdcgatewayApp.order.depotId"></label>
+                            </div>
+                            <div class="col-md-12">
+                                {{order.depotTitle}}
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="col-md-12">
+                                <label jhiTranslate="niopdcgatewayApp.order.buyType"></label>
+                            </div>
+                            <div class="col-md-12">
+                                {{'niopdcgatewayApp.BuyGroup.' + order.buyGroup | translate}}
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="col-md-12">
+                                <label jhiTranslate="niopdcgatewayApp.order.registerDate"></label>
+                            </div>
+                            <div class="col-md-12">
+                                {{order.registerDate | dateTimeJalali}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="card" *ngIf="orderProduct && isOrderProductEditing">
+                <div class="card-header">
+                    <div class="row">
+                        <h5 class="col-md-3" *ngIf="!tempOrderProduct"
+                            jhiTranslate="entity.action.create">
+                            Create or edit
+                        </h5><h5 class="col-md-3" *ngIf="tempOrderProduct"
+                                 jhiTranslate="entity.action.edit">
+                        Create or edit
+                    </h5>
+                    </div>
+                </div>
+
+                <div
+                    class="card-body" [style.background-color]="sellContractProduct?.productColor">
+                    <form name="editForm1" role="form" novalidate #editForm1="ngForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label jhiTranslate="niopdcgatewayApp.sellContractProduct.product"
+                                           [style.color]="invertColor(sellContractProduct?.productColor)"
+                                           for="field_product">Product</label>
+
+                                    <sell-contract-product-selector
+                                        [selectObject]="true"
+                                        [multiSelect]="false"
+                                        (selectedItem)="onChangeSellContractProduct($event)"
+                                        [(ngModel)]="sellContractProduct" class="form-control"
+                                        id="field_product"
+                                        widthGrid="500px"
+                                        [ngModelOptions]="{standalone: true}"
+                                        ngDefaultControl
+                                        [showFields]="{sellContractNumber:true,
+                                         productTitle:true,
+                                          currencyRateGroupTitle:true,
+                                           rateGroupTitle:true}"
+                                        [sellContractProducts]="sellContractProducts"
+                                        required
+                                        name="product"
+                                    >
+                                    </sell-contract-product-selector>
+                                </div>
+                                <div
+                                    [hidden]="!sellContractProductAlreadyAdded">
+                                    <small class="form-text"
+                                           [style.color]="invertColor(sellContractProduct?.productColor)"
+                                           jhiTranslate="niopdcgatewayApp.orderProduct.alreadyAdded">
+                                        This field is required.
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6" *ngIf="order.orderType === OrderType[OrderType.AIRPLANE]">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           *ngIf="order.orderType === OrderType[OrderType.AIRPLANE]"
+                                           jhiTranslate="niopdcgatewayApp.changeContainer.unit"
+                                           for="field_dayDepots">Day Depot</label>
+                                    <select class="form-control" id="field_dayDepots"
+                                            name="dayDepots"
+                                            (change)="onChangeDayDepot($event.target.value)"
+                                            [(ngModel)]="orderProduct.dayDepotId" required>
+                                        <option *ngIf="!editForm.value.dayDepot" [ngValue]="null"
+                                                selected></option>
+                                        <option
+                                            *ngFor="let dayDepotOption of sellContractProduct?.dayDepots; trackBy: trackDayDepotById"
+                                            [ngValue]="dayDepotOption.id">
+                                            {{dayDepotOption.oilTankTitle}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div
+                                    [hidden]="!(editForm1.controls.dayDepot?.dirty && editForm1.controls.dayDepot?.invalid)">
+                                    <small class="form-text text-danger"
+                                           [hidden]="!editForm1.controls.dayDepot?.errors?.required"
+                                           jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div
+                                *ngIf="!sellContractProduct?.hasContainer &&  order.orderType !== OrderType[OrderType.AIRPLANE]"
+                                [ngClass]="{'col-md-6': order.orderType !== OrderType[OrderType.AIRPLANE],
+                                            'col-md-4': order.orderType === OrderType[OrderType.AIRPLANE]}">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           [style.color]="invertColor(sellContractProduct?.productColor)"
+                                           jhiTranslate="niopdcgatewayApp.orderProduct.amount"
+                                           for="field_amount">Amount</label>
+                                    <label class="form-control-label" *ngIf="sellContractProduct?.hasContainer"
+                                           [style.color]="invertColor(sellContractProduct?.productColor)"
+                                           jhiTranslate="niopdcgatewayApp.orderProduct.count"
+                                           for="field_amount">Amount</label>
+                                    <input
+                                        *ngIf="(!order.customerId || order.orderType === OrderType[OrderType.AIRPLANE] || order.orderType === OrderType[OrderType.REFUEL_CENTER])"
+                                        type="number"
+                                        class="form-control"
+                                        [numeric]="{max:dayDepot && dayDepot.oilTankVirtualCapacity? dayDepot.oilTankVirtualCapacity : undefined, min:0}"
+                                        name="amount" id="field_amount"
+                                        [(ngModel)]="orderProduct.amount" required
+                                        (ngModelChange)="applyEndMetre()"
+                                    />
+
+                                    <select *ngIf="order.customerId && order.orderType===OrderType[OrderType.ORDER]"
+                                            class="form-control"
+                                            [disabled]="order.depotStatus === DepotStatus[DepotStatus.BACK_FROM_DEPOT]"
+                                            name="amount"
+                                            id="field_amount1" [(ngModel)]="orderProduct.amount" required>
+                                        <option [value]="null"></option>
+                                        <option *ngFor="let op of customerOrderCapacities" [value]="op.capacity">
+                                            {{op.capacity}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div *ngIf="sellContractProduct?.hasContainer"
+                                 [ngClass]="{'col-md-6': order.orderType !== OrderType[OrderType.AIRPLANE]
+                                            ,'col-md-4': order.orderType === OrderType[OrderType.AIRPLANE]}">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           [style.color]="invertColor(sellContractProduct?.productColor)"
+                                           jhiTranslate="niopdcgatewayApp.orderProduct.count"
+                                           for="field_amount">Container Count</label>
+                                    <input type="number" class="form-control"
+                                           name="count" id="field_count"
+                                           [numeric]="{max: (order.orderType == OrderType[OrderType.AIRPLANE] ? sellContractProduct?.capacity / sellContractProduct?.containerCapacity: undefined), min: 0}"
+                                           [(ngModel)]="orderProduct.containerCount"
+                                           required
+                                    />
+                                </div>
+                            </div>
+                            <!--<div class="col-xs-12 col-md-3"
+                                 *ngIf="order.typeOfFuelReceipt!==TypeOfFuelReceipt[TypeOfFuelReceipt.PIPE_LINE_SALES]">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           jhiTranslate="niopdcgatewayApp.transfer.metre"
+                                           for="field_metre">Metre</label>
+                                    <select class="form-control" id="field_metre" name="metre"
+                                            (change)="getStartMetre()"
+                                            [(ngModel)]="orderProduct.metreId" required>
+                                        <option [ngValue]="null"></option>
+                                        <option [ngValue]="metreOption.id"
+                                                *ngFor="let metreOption of metres; trackBy: trackMetreById">
+                                            {{metreOption.title}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>-->
+                        </div>
+                        <div class="row" *ngIf="order.orderType === OrderType[OrderType.AIRPLANE]">
+                            <div class="col-xs-12 col-md-3">
+                                <div class="form-group"
+                                     *ngIf="order.typeOfFuelReceipt!==TypeOfFuelReceipt[TypeOfFuelReceipt.PIPE_LINE_SALES]">
+                                    <label class="form-control-label"
+                                           jhiTranslate="niopdcgatewayApp.fuelReceipt.metreTime"
+                                           for="field_metreLogRegisterDate">Register Date</label>
+                                    <div class="d-flex">
+                                        <ng2-datetimepicker
+                                            [rtlActive]="true"
+                                            id="field_metreLogRegisterDate"
+                                            class="form-control"
+                                            name="metreLogRegisterDate"
+                                            [(ngModel)]="orderProduct.metreDate"
+                                            [maxDateTime]="dateNow"
+                                            [liveEmit]="true"
+                                            [disableDate]="true"
+                                            [date]="order.registerDate"
+                                            (blur)="getStartMetre()"
+                                            (ngModelChange)="getStartMetre()"
+                                            (onChangeDateTime)="getStartMetre()"
+                                            required
+                                        ></ng2-datetimepicker>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-3">
+                                <div class="form-group"
+                                     *ngIf="order.typeOfFuelReceipt!==TypeOfFuelReceipt[TypeOfFuelReceipt.PIPE_LINE_SALES]">
+                                    <label class="form-control-label"
+                                           jhiTranslate="niopdcgatewayApp.fuelReceipt.metreEndTime"
+                                           for="field_metreLogRegisterDate">Register Date</label>
+                                    <div class="d-flex">
+                                        <ng2-datetimepicker
+                                            [rtlActive]="true"
+                                            id="field_metreLogRegisterDateEnd"
+                                            class="form-control"
+                                            name="metreLogRegisterDateEnd"
+                                            [(ngModel)]="orderProduct.metreEndDate"
+                                            [maxDateTime]="dateNow"
+                                            [liveEmit]="true"
+                                            [disableDate]="true"
+                                            [date]="order.registerDate"
+                                            required
+                                        ></ng2-datetimepicker>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-2"
+                                 *ngIf="order.typeOfFuelReceipt!==TypeOfFuelReceipt[TypeOfFuelReceipt.PIPE_LINE_SALES]">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           jhiTranslate="niopdcgatewayApp.metreLog.startMeter"
+                                           for="field_startMeter">Start Meter</label>
+                                    <dx-number-box
+                                        class="form-control"
+                                        name="startMeter"
+                                        id="field_startMeter"
+                                        format="#,##0"
+                                        (ngModelChange)="applyStartMetre()"
+                                        [(ngModel)]="orderProduct.startMetre"
+                                        [ngModelOptions]="{standalone: true}"
+                                        required
+                                    ></dx-number-box>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           [style.color]="invertColor(sellContractProduct?.productColor)"
+                                           jhiTranslate="niopdcgatewayApp.orderProduct.amount"
+                                           for="field_amount">Amount</label>
+                                    <label class="form-control-label" *ngIf="sellContractProduct?.hasContainer"
+                                           [style.color]="invertColor(sellContractProduct?.productColor)"
+                                           jhiTranslate="niopdcgatewayApp.orderProduct.count"
+                                           for="field_amount">Amount</label>
+                                    <input
+                                        *ngIf="(!order.customerId || order.orderType === OrderType[OrderType.AIRPLANE] || order.orderType === OrderType[OrderType.REFUEL_CENTER])"
+                                        type="number"
+                                        class="form-control"
+                                        [numeric]="{max:dayDepot && dayDepot.oilTankVirtualCapacity? dayDepot.oilTankVirtualCapacity : undefined, min:0}"
+                                        name="amountRefuelCenter" id="field_amountRefuelCenter"
+                                        [(ngModel)]="orderProduct.amount" required
+                                        (ngModelChange)="applyEndMetre()"
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-2"
+                                 *ngIf="order.typeOfFuelReceipt!==TypeOfFuelReceipt[TypeOfFuelReceipt.PIPE_LINE_SALES]">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           jhiTranslate="niopdcgatewayApp.metreLog.endMeter"
+                                           for="field_endMeter">Start Meter</label>
+                                    <input [disabled]="true" type="number" class="form-control" name="endMeter"
+                                           id="field_endMeter"
+                                           [ngModel]="orderProduct.endMetre" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="conflictMetreNumber">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                                <span class="alert-danger">اختلاف با آخرین متیر بیش از حد معمول است ، بررسی کنید میتر واحد دیگری را وارد نکرده باشید.</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer pull-right text-right">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            (click)="cancelOrderProduct()">
+                        <span class="fa fa-ban"></span>&nbsp;<span
+                        jhiTranslate="entity.action.cancelProduct">Cancel</span>
+                    </button>
+                    <button type="button" class="btn btn-primary"
+                            [disabled]="editForm1.form.invalid || isSaving || orderProduct.sellContractProductId==null"
+                            (click)="addOrderProduct()">
+                        <span class="fa fa-save"></span>&nbsp;<span
+                        jhiTranslate="entity.action.saveProduct">Save</span>
+                    </button>
+                </div>
+            </div>
+            <br/>
+            <div class="card" *ngIf="orderProduct">
+                <div class="card-header">
+                    <div class="row">
+                        <h5 class="col-md-3"
+                            jhiTranslate="niopdcgatewayApp.sellContractProduct.home.cardTitle">
+                            Create or edit
+                        </h5>
+                    </div>
+                </div>
+                <div>
+                    <p-table [value]="order.orderProducts" [responsive]="true">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th *ngIf="order.orderType === OrderType[OrderType.AIRPLANE]"
+                                    jhiTranslate="niopdcgatewayApp.order.unit"></th>
+                                <th jhiTranslate="niopdcgatewayApp.orderProduct.productId"></th>
+                                <th jhiTranslate="niopdcgatewayApp.orderProduct.rateGroupId"></th>
+                                <th jhiTranslate="niopdcgatewayApp.orderProduct.amount"></th>
+                                <th *ngIf="order.orderType === OrderType[OrderType.AIRPLANE] &&
+                                           (order.typeOfFuelReceipt === TypeOfFuelReceipt[TypeOfFuelReceipt.UNIT_TO_AIRPLANE] ||
+                                            order.typeOfFuelReceipt === TypeOfFuelReceipt[TypeOfFuelReceipt.UNIT_TO_CUSTOMERS])"
+                                    jhiTranslate="niopdcgatewayApp.orderProduct.endMetre"></th>
+                                <th jhiTranslate="niopdcgatewayApp.orderProduct.productCost"></th>
+                                <th jhiTranslate="niopdcgatewayApp.orderProduct.productRateId"></th>
+                                <th jhiTranslate="niopdcgatewayApp.orderProduct.productPrice"></th>
+                                <th class="col-button" *ngIf="isOrderProductEditing && (!order.depotStatus || order.depotStatus !== DepotStatus[DepotStatus.BACK_FROM_DEPOT])"></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item style="color: black">
+                            <tr>
+                                <td *ngIf="order.orderType === OrderType[OrderType.AIRPLANE]">
+                                    {{item.dayDepotTitle}}
+                                </td>
+                                <td [style.color]="invertColor(item.productColor)"
+                                    [style.background-color]="item.productColor">{{item.productTitle}}
+                                </td>
+                                <td data-toggle="tooltip"
+                                    title="{{item.rateGroupTitle}}">{{item.rateGroupTitle | truncate}}
+                                </td>
+                                <td>{{item.amount | separator}}</td>
+                                <td *ngIf="order.orderType === OrderType[OrderType.AIRPLANE] &&
+                                           (order.typeOfFuelReceipt === TypeOfFuelReceipt[TypeOfFuelReceipt.UNIT_TO_AIRPLANE] ||
+                                            order.typeOfFuelReceipt === TypeOfFuelReceipt[TypeOfFuelReceipt.UNIT_TO_CUSTOMERS])">
+                                    {{item.endMetre}}
+                                </td>
+                                <td>
+                                    <app-order-cost-table
+                                        [costResponses]="item.costResponses"
+                                        [productColor]="item.productColor"
+                                        widthGrid="500px"
+                                        ngDefaultControl
+                                        name="productCost"
+                                    >
+                                    </app-order-cost-table>
+                                </td>
+                                <td>{{item.realProductRatePrice | separator}}</td>
+                                <td>{{(item.price) | separator}}</td>
+                                <td class="col-button" *ngIf="isOrderProductEditing && (!order.depotStatus || order.depotStatus !== DepotStatus[DepotStatus.BACK_FROM_DEPOT])">
+                                    <div class="btn-group" ngbDropdown placement="right">
+                                        <button *ngIf="order.orderType!=='AIRPLANE'" type="button"
+                                                class="btn btn-danger btn-sm"
+                                                (click)="removeProduct(item.sellContractProductId)">
+                                            <span class="fa fa-remove"></span>
+                                            <span jhiTranslate="entity.action.delete">delete</span>
+                                        </button>
+                                        <button *ngIf="order.orderType==='AIRPLANE'" type="button"
+                                                class="btn btn-danger btn-sm"
+                                                (click)="removeProductByDayDepotId(item.dayDepotId)">
+                                            <span class="fa fa-remove"></span>
+                                            <span jhiTranslate="entity.action.delete">delete</span>
+                                        </button>
+                                        <button type="button" class="btn btn-primary btn-sm"
+                                                (click)="editProduct(item)">
+                                            <span class="fa fa-edit"></span>
+                                            <span jhiTranslate="entity.action.edit">edit</span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                    <div class="alert alert-warning" *ngIf="!order.orderProducts || !order.orderProducts.length">
+                        <div jhiTranslate="niopdcgatewayApp.orderProduct.isEmptyError">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row" style="text-align: center" *ngIf="orderProduct">
+                        <div class="col-md-2">
+                            <label jhiTranslate="niopdcgatewayApp.order.productPrice">product Price</label>
+                            <br>
+                            <label>{{(order.productPrice ? order.productPrice : 0) | separator}}</label>
+                        </div>
+                        <div class="col-md-2">
+                            <label jhiTranslate="niopdcgatewayApp.order.containerPrice">container Price</label>
+                            <br>
+                            <label>{{(order.containerPrice ? order.containerPrice : 0) | separator}}</label>
+                        </div>
+                        <div class="col-md-2">
+                            <label jhiTranslate="niopdcgatewayApp.order.costPrice">Cost Price</label>
+                            <br>
+                            <label>{{(order.costPrice ? order.costPrice : 0) | separator}}</label>
+                        </div>
+                        <div class="col-md-3">
+                            <label jhiTranslate="niopdcgatewayApp.order.priceOrder">مبلغ کل</label>
+                            <br>
+                            <label>{{(order.price ? order.price : 0) | separator}}</label>
+                        </div>
+                        <div class="col-md-3">
+                            <label jhiTranslate="niopdcgatewayApp.order.amount">مقدار کل</label>
+                            <br>
+                            <label>{{(order.amount ? order.amount : 0) | separator}}</label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- activeIndex === 2 -->
+        <div *ngIf="activeIndex === 2">
+            <div class="card-block container" *ngIf="!order">
+                <p *ngIf="isLoading" jhiTranslate="niopdcgatewayApp.order.loading"></p>
+                <p *ngIf="errorLoad" jhiTranslate="niopdcgatewayApp.order.errorLoad"
+                   [translateValues]="{id: id}"></p>
+            </div>
+
+            <div class="card" *ngIf="order">
+                <div class="card-header">
+                    <div class="row">
+                        <h5 *ngIf="order.orderType === OrderType[OrderType.ORDER]"
+                            jhiTranslate="niopdcgatewayApp.order.home.titleInfo">
+                            Create or edit
+                        </h5>
+                        <h5 *ngIf="order.orderType === OrderType[OrderType.AIRPLANE]"
+                            jhiTranslate="niopdcgatewayApp.fuelReceipt.home.titleInfo">
+                            Create or edit
+                        </h5>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <div class="row" style="text-align: center">
+                        <div class="col-md-3">
+                            <label class="col-md-12" jhiTranslate="niopdcgatewayApp.customer.home.title"></label>
+                            <div class="col-md-12">
+                                {{order.customerName != null ? order.customerName + " (" + order.customerCode + ")" :
+                                order.personName}}
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="col-md-12">
+                                <label *ngIf="order.orderType === OrderType[OrderType.ORDER]"
+                                       jhiTranslate="niopdcgatewayApp.order.orderNo"></label>
+                                <label *ngIf="order.orderType === OrderType[OrderType.AIRPLANE]"
+                                       jhiTranslate="niopdcgatewayApp.fuelReceipt.orderNo"></label>
+                            </div>
+                            <div class="col-md-12">
+                                {{order.orderNo}}
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="col-md-12">
+                                <label jhiTranslate="niopdcgatewayApp.order.depotId"></label>
+                            </div>
+                            <div class="col-md-12">
+                                {{order.depotTitle}}
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="col-md-12">
+                                <label jhiTranslate="niopdcgatewayApp.order.buyType"></label>
+                            </div>
+                            <div class="col-md-12" *ngIf="order.buyGroup">
+                                {{'niopdcgatewayApp.BuyGroup.' + order.buyGroup | translate}}
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="col-md-12">
+                                <label jhiTranslate="niopdcgatewayApp.order.registerDate"></label>
+                            </div>
+                            <div class="col-md-12">
+                                {{order.registerDate | dateTimeJalali}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="card" *ngIf="order">
+                <div class="card-header">
+                    <div class="row">
+                        <span><h5 jhiTranslate="niopdcgatewayApp.order.home.titlePrePay">
+                            Pre Pay
+                        </h5></span>
+                        <span>&nbsp;-&nbsp;</span>
+                        <span [jhiTranslate]="'niopdcgatewayApp.BuyGroup.' + order.buyGroup"></span>
+                    </div>
+                </div>
+                <div class="card-body" *ngIf="order.buyGroup === 'CASH'">
+                    <p-table [value]="order.orderPrePays" [responsive]="true">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th jhiTranslate="niopdcgatewayApp.orderPrePay.niopdcBankAccountTypeTitle"></th>
+                                <th jhiTranslate="niopdcgatewayApp.orderPrePay.price"></th>
+                                <th jhiTranslate="niopdcgatewayApp.orderPrePay.remainPrice"></th>
+                                <th jhiTranslate="niopdcgatewayApp.orderPrePay.status"></th>
+                                <th jhiTranslate="niopdcgatewayApp.orderPrePay.receiptNumber"></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item style="color: black">
+                            <tr>
+                                <td>{{item.niopdcBankAccountTypeTitle}}</td>
+                                <td>{{(item.price) | separator}}</td>
+                                <td>{{item.remainPrice | separator}}</td>
+                                <td>
+                                    {{'niopdcgatewayApp.OrderPrePayStatus.' + item.status | translate }}
+                                </td>
+                                <td class="col-button">
+                                    <div *ngIf="item.status === OrderStatus[OrderStatus.DRAFT]" class="btn-group"
+                                         ngbDropdown placement="right">
+                                        <button type="button" class="btn btn-primary"
+                                                (click)="startBankTransactionByPrePay(item)">
+                                            <span class="fa fa-paypal"></span>
+                                            <span jhiTranslate="entity.action.pay">pay</span>
+                                        </button>
+                                    </div>
+                                    <ul class="list-group" *ngIf="item.status !== OrderStatus[OrderStatus.DRAFT]">
+                                        <li class="list-group-item"
+                                            *ngFor="let receipt of item.receiptNos">{{receipt}}
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                    <div *ngIf="order.status === OrderStatus[OrderStatus.REVOCATION]" class="alert alert-warning">
+                        <span *ngIf="order.orderType === OrderType[OrderType.ORDER]"
+                              jhiTranslate="niopdcgatewayApp.order.revokedReverePayment"></span>
+                        <span *ngIf="order.orderType === OrderType[OrderType.AIRPLANE]"
+                              jhiTranslate="niopdcgatewayApp.fuelReceipt.revokedReverePayment"></span>
+                    </div>
+                </div>
+                <div class="card-body"
+                     *ngIf="order.buyGroup === BuyGroup[BuyGroup.CREDIT] || order.buyGroup === BuyGroup[BuyGroup.FINANCIAL_LICENSE]">
+                    <p-table [value]="orderCredit" [responsive]="true">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th jhiTranslate="niopdcgatewayApp.orderCredit.creditNumber"></th>
+                                <th jhiTranslate="niopdcgatewayApp.orderCredit.buyGroupType"></th>
+                                <th jhiTranslate="niopdcgatewayApp.orderCredit.priceUsed"></th>
+                                <th jhiTranslate="niopdcgatewayApp.orderCredit.amountUsed"></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item style="color: black">
+                            <tr>
+                                <td>{{item.creditNumber}}</td>
+                                <td>{{'niopdcgatewayApp.BuyGroup.' + item.buyGroup | translate }}</td>
+                                <td>{{(item.decreasedCredit ? item.decreasedCredit : 0) | separator}}</td>
+                                <td>{{(item.decreasedAmount ? item.decreasedAmount : 0) | separator}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                    <div *ngIf="order.status === OrderStatus[OrderStatus.REVOCATION]" class="alert alert-warning">
+                        <span *ngIf="order.orderType === OrderType[OrderType.ORDER]"
+                              jhiTranslate="niopdcgatewayApp.order.revokedRevereCredit"></span>
+                        <span *ngIf="order.orderType === OrderType[OrderType.AIRPLANE]"
+                              jhiTranslate="niopdcgatewayApp.fuelReceipt.revokedRevereCredit"></span>
+                    </div>
+                </div>
+                <div class="card-body" *ngIf="order.customerGroup === CustomerGroup[CustomerGroup.STATION] ||
+                                              order.customerGroup === CustomerGroup[CustomerGroup.SELLER] ||
+                                              order.customerGroup === CustomerGroup[CustomerGroup.MAJOR_CONSUMER]">
+                    <p-table [value]="orderQuota" [responsive]="true">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th jhiTranslate="niopdcgatewayApp.orderCredit.quotaNumber"></th>
+                                <th jhiTranslate="niopdcgatewayApp.orderCredit.decreasedAmount"></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item style="color: black">
+                            <tr>
+                                <td>{{item.creditNumber}}</td>
+                                <td>{{(item.decreasedAmount ? item.decreasedAmount : 0) | separator}}</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                    <div *ngIf="order.status === OrderStatus[OrderStatus.REVOCATION]" class="alert alert-warning">
+                        <span *ngIf="order.orderType === OrderType[OrderType.ORDER]"
+                              jhiTranslate="niopdcgatewayApp.order.revokedRevereCredit"></span>
+                        <span *ngIf="order.orderType === OrderType[OrderType.AIRPLANE]"
+                              jhiTranslate="niopdcgatewayApp.fuelReceipt.revokedRevereCredit"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- activeIndex === 3 -->
+        <div *ngIf="activeIndex === 3">
+            <!-- buyGroup === CASH -->
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <h5 class="col-md-3"
+                                jhiTranslate="niopdcgatewayApp.order.home.titleInfo">
+                                Create or edit
+                            </h5>
+                            <div class="col-md-8"></div>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="col-md-12">
+                                    <label *ngIf="mode == 'order'"
+                                           jhiTranslate="niopdcgatewayApp.order.orderNo"></label>
+                                    <label *ngIf="mode == 'airplane'"
+                                           jhiTranslate="niopdcgatewayApp.fuelReceipt.orderNo"></label>
+                                </div>
+                                <div class="col-md-12">
+                                    {{order.orderNo}}
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="col-md-12">
+                                    <label jhiTranslate="niopdcgatewayApp.buyType.home.title"></label>
+                                </div>
+                                <div class="col-md-12">
+                                    {{'niopdcgatewayApp.BuyGroup.' + order.buyGroup | translate}}
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="col-md-12">
+                                    <label jhiTranslate="niopdcgatewayApp.order.registerDate"></label>
+                                </div>
+                                <div class="col-md-12">
+                                    {{order.registerDate | dateJalali}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <jhi-e-payment #ePayment [requestIdentifier]="payId" [personId]="order.personId"
+                               [customerId]="order.customerId"
+                               [showButton]="false"
+                               (canPay)="payEnable = $event"
+                               (status)="onPayStatus($event)"></jhi-e-payment>
+            </div>
+        </div>
+
+        <div *ngIf="activeIndex === 4">
+            <jhi-ticket-step *ngIf="order.typeOfFuelReceipt===TypeOfFuelReceipt[TypeOfFuelReceipt.PIPE_LINE_SALES]"
+                             [order]="order"></jhi-ticket-step>
+            <jhi-way-bill-step *ngIf="order.typeOfFuelReceipt===TypeOfFuelReceipt[TypeOfFuelReceipt.TANKER_SALES]"
+                               [order]="order"></jhi-way-bill-step>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <!-- حذف حواله -->
+        <ng-container
+            *jhiHasAnyAuthority="['ROLE_ADMIN', order.orderType === OrderType[OrderType.ORDER] ? 'DELETE_ORDER' : 'DELETE_FUEL_RECEIPT']">
+            <button *ngIf="order?.status === OrderStatus[OrderStatus.DRAFT]" type="button"
+                    class="btn btn-danger margin-left-auto" data-dismiss="modal"
+                    [routerLink]="[ { outlets: { popup: id + '/delete'} }]"
+                    [queryParams]="route.snapshot.queryParams">
+                <span class="fa fa-recycle"></span>&nbsp;<span jhiTranslate="entity.action.delete">Delete</span>
+            </button>
+        </ng-container>
+
+        <!-- انصراف -->
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancelShort">Cancel</span>
+        </button>
+
+        <!-- بازگشت -->
+        <ng-container *ngIf="activeIndex === 1 || activeIndex === 2 || activeIndex === 3 || activeIndex === 4">
+            <button type="button" class="btn btn-info" (click)="previousStep()">
+                <span class="fa fa-arrow-right"></span>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+        </ng-container>
+
+        <!-- ذخیره حواله -->
+        <ng-container *ngIf="activeIndex === 0 || activeIndex === 1">
+            <button *ngIf="!isView"
+                    type="submit" class="btn btn-primary" (click)="save(false)"
+                    [disabled]="isDeactiveCustomer || editForm.form.invalid || isSaving || errorLoad || isLoading ||
+                     shiftWork?.type === 'OPEN_TIMEOUT' || shiftWork?.type === 'CLOSE' || (shiftWork && !shiftWork?.orderNumber) ||
+                    (activeIndex >= 1 && (this.order.orderProducts === null || this.order.orderProducts.length < 1)) || !hasAccessForRegisterOrder">
+                <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+            </button>
+            <button *ngIf="activeIndex === 0 || (activeIndex === 1)"
+                    type="button"
+                    [disabled]="isDeactiveCustomer || editForm.form.invalid || isSaving || errorLoad || isLoading ||
+                     shiftWork?.type === 'OPEN_TIMEOUT' || shiftWork?.type === 'CLOSE' || (shiftWork && !shiftWork?.orderNumber) ||
+                    (activeIndex >= 1 && (this.order.orderProducts === null || this.order.orderProducts.length < 1)) || !hasAccessForRegisterOrder"
+                    class="btn btn-success" (click)="save(true)">
+               <span *ngIf="!order.id || !isView"
+                     class="fa fa-save"></span>&nbsp;
+                <span class="fa fa-arrow-left"></span>&nbsp;
+
+                <span
+                    *ngIf="(!order.id || !isView) && ((order.buyGroup !== BuyGroup[BuyGroup.CREDIT] && order.buyGroup !== BuyGroup[BuyGroup.FINANCIAL_LICENSE]) || activeIndex === 0)"
+                    jhiTranslate="entity.action.saveAndNextStep">save And Next Step</span>
+                <span
+                    *ngIf="(!order.id || !isView) && ((order.buyGroup === BuyGroup[BuyGroup.FINANCIAL_LICENSE] || order.buyGroup === BuyGroup[BuyGroup.CREDIT]) && activeIndex === 1)"
+                    jhiTranslate="entity.action.saveAndPayByCredit">save And Pay By Credit</span>
+                <span *ngIf="order.id && isView"
+                      jhiTranslate="entity.action.nextStep">save And Next Step</span>
+            </button>
+        </ng-container>
+
+        <!-- start bank transaction (2 and draft) -->
+
+        <button type="button"
+                *ngIf="(activeIndex === 2) && order && order.status === OrderStatus[OrderStatus.DRAFT] && order.buyGroup === BuyGroup[BuyGroup.CASH]"
+                class="btn btn-primary" data-dismiss="modal"
+                (click)="startBankTransaction()">
+            <span class="fa fa-paypal"></span>&nbsp;
+            <span jhiTranslate="entity.action.multiPay">save And Next Step</span>
+        </button>
+
+        <!-- pay (3 and draft) -->
+        <button type="button"
+                class="btn btn-success"
+                [disabled]="!payEnable"
+                (click)="ePaymentComponent.pay()"
+                *ngIf="(activeIndex === 3 && order && order.status !== OrderStatus[OrderStatus.PAID]  && payStatus === 'BEGIN')">
+            <span class="fa fa-paypal"></span>&nbsp;<span jhiTranslate="entity.action.pay">payment</span>
+        </button>
+        <ng-container *jhiHasAnyAuthority="['ROLE_ADMIN','WALLET_PAY']">
+            <button type="button"
+                    class="btn btn-success"
+                    [disabled]="!payEnable"
+                    (click)="ePaymentComponent.walletPay()"
+                    *ngIf="(activeIndex === 3 && order && order.status !== OrderStatus[OrderStatus.PAID]  && payStatus === 'BEGIN')">
+                <span class="fa fa-paypal"></span>&nbsp;<span jhiTranslate="entity.action.pay.wallet">payment</span>
+            </button>
+        </ng-container>
+
+
+        <!-- restart bank transaction (3 and draft) -->
+        <button type="button"
+                class="btn btn-success"
+                (click)="restartBankTransaction()"
+                *ngIf="(activeIndex === 3 && order && order.status !== OrderStatus[OrderStatus.PAID] && payStatus === 'PENDING')">
+            <span class="fa fa-refresh"></span>&nbsp;<span jhiTranslate="entity.action.tryAgain">payment Again</span>
+        </button>
+
+        <!-- create new airplane order -->
+        <button class="btn btn-primary float-right"
+                *ngIf="order.orderType === OrderType[OrderType.AIRPLANE] && (order.status === OrderStatus[OrderStatus.PAID] ||
+                                                                             order.status === OrderStatus[OrderStatus.CREDIT_PAID])"
+                [routerLink]="['/order/new']" [queryParams]="route.snapshot.queryParams">
+            <span class="fa fa-plus"></span>
+            <span jhiTranslate="entity.action.create">Create</span>
+        </button>
+
+        <!-- print button (paid) -->
+        <ng-container
+            *ngIf="order && (order.status === OrderStatus[OrderStatus.PAID] || order.status === OrderStatus[OrderStatus.CREDIT_PAID] )">
+            <button class="btn btn-success"
+                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'PRINT_ORDER','PRINT_AIRPLANE']"
+                    replaceUrl="true"
+                    [routerLink]="['/' ,'order',order.id ,'print']" [queryParams]="route.snapshot.queryParams">
+                <span class="fa fa-print"></span>
+                <span jhiTranslate="entity.action.print">چاپ</span>
+            </button>
+            <ng-container
+                *ngIf="mode==='refuel-center' && order.typeOfFuelReceipt===TypeOfFuelReceipt[TypeOfFuelReceipt.TANKER_SALES]">
+                <button class="btn btn-success"
+                        type="button"
+                        [disabled]="activeIndex===4"
+                        *jhiHasAnyAuthority="['ROLE_ADMIN', 'CREATE_WAY_BILL']"
+                        (click)="exportWayBill()">
+                    <span class="fa fa-print"></span>
+                    <span jhiTranslate="entity.action.exportWaybill"></span>
+                </button>
+            </ng-container>
+            <ng-container
+                *ngIf="mode==='refuel-center' && order.typeOfFuelReceipt===TypeOfFuelReceipt[TypeOfFuelReceipt.PIPE_LINE_SALES] && (order.status===OrderStatus[OrderStatus.PAID] || order.status === OrderStatus[OrderStatus.CREDIT_PAID])">
+                <button class="btn btn-success"
+                        [disabled]="activeIndex===4"
+                        *jhiHasAnyAuthority="['ROLE_ADMIN', 'CREATE_WAY_BILL']"
+                        type="button"
+                        (click)="exportTicket()">
+                    <span class="fa fa-print"></span>
+                    <span jhiTranslate="entity.action.exportTicket">صدور تیکت</span>
+                </button>
+            </ng-container>
+        </ng-container>
+    </div>
+</form>
+<router-outlet name="popup"></router-outlet>
+

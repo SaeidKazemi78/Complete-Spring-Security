@@ -1,0 +1,52 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.datacontract.org/2004/07/PDN.OTS.Data.ViewModels" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/PDN.OTS.Data.ViewModels">
+<xs:complexType name="ArrayOfVM_Factor_Batch_Service">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="VM_Factor_Batch_Service" nillable="true" type="tns:VM_Factor_Batch_Service"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="ArrayOfVM_Factor_Batch_Service" nillable="true" type="tns:ArrayOfVM_Factor_Batch_Service"/>
+<xs:complexType name="VM_Factor_Batch_Service">
+<xs:sequence>
+<xs:element minOccurs="0" name="BourseContractDate" nillable="true" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="BourseContractDateS" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="BourseContractNumber" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="BranchOfficeNumber" nillable="true" type="xs:int"/>
+<xs:element minOccurs="0" name="BuyerAddress" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="BuyerBranchStatusTypeId" type="xs:int"/>
+<xs:element minOccurs="0" name="BuyerClauseEligibiliTypeId" type="xs:int"/>
+<xs:element minOccurs="0" name="BuyerEconomicCode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="BuyerName" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="BuyerNationalCode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="BuyerPostalCode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="CommodityCode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="CommodityName" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="DeliveryNumber" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="Discount" type="xs:decimal"/>
+<xs:element minOccurs="0" name="DocumentNumber" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="EquivalentToKilogram" type="xs:float"/>
+<xs:element minOccurs="0" name="EquivalentToRial" type="xs:decimal"/>
+<xs:element minOccurs="0" name="FactorCommodityType" type="xs:int"/>
+<xs:element minOccurs="0" name="FactorDate" nillable="true" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="FactorDateS" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="FactorDescription" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="FactorNumber" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="FinalPrice" type="xs:decimal"/>
+<xs:element minOccurs="0" name="InsertTypeId" type="xs:int"/>
+<xs:element minOccurs="0" name="IsCommodity" nillable="true" type="xs:boolean"/>
+<xs:element minOccurs="0" name="MoneyTypeId" type="xs:int"/>
+<xs:element minOccurs="0" name="OtherCostsComputeTypeId" type="xs:int"/>
+<xs:element minOccurs="0" name="SaleTypeId" nillable="true" type="xs:int"/>
+<xs:element minOccurs="0" name="SellerNationalCode" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="SuplyrRingId" type="xs:int"/>
+<xs:element minOccurs="0" name="TotalPrice" type="xs:decimal"/>
+<xs:element minOccurs="0" name="UnitCount" type="xs:decimal"/>
+<xs:element minOccurs="0" name="UnitPrice" type="xs:decimal"/>
+<xs:element minOccurs="0" name="UnitTypeId" type="xs:int"/>
+<xs:element minOccurs="0" name="ValueAddedEffectsPercent" type="xs:decimal"/>
+<xs:element minOccurs="0" name="ValueAddedEffectsPrice" type="xs:decimal"/>
+<xs:element minOccurs="0" name="ValueAddedTaxPercent" type="xs:decimal"/>
+<xs:element minOccurs="0" name="ValueAddedTaxPrice" type="xs:decimal"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="VM_Factor_Batch_Service" nillable="true" type="tns:VM_Factor_Batch_Service"/>
+</xs:schema>

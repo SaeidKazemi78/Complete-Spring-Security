@@ -1,0 +1,44 @@
+{
+    "niopdcgatewayApp": {
+        "depotInventory": {
+            "home": {
+                "title": "گزارش وضعیت موجودی و نقل و انتقال فرآورده های عمده بی ظرف"
+            },
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "metre": "میتر",
+            "receiptNo": "شماره رسید",
+            "date": "تاریخ",
+            "dayDate": "ساعت ",
+            "time": "ساعت",
+            "personName": "گیرنده",
+            "productCode": "کد فرآورده",
+            "productTitle": "نام فرآورده",
+            "productGroupTitle": "نوع فرآوده",
+            "type": "نوع انتقال",
+            "amount": "مقدار",
+            "agoMetre": "میتر بعد",
+            "agoMetre.min": "میتر پایان",
+            "nextMetre": "میتر قبل",
+            "nextMetre.max": "میتر شروع",
+            "diffMetre": "تفاوت",
+            "createUser": "کاربر",
+            "airplaneName": "گیرنده",
+            "airplaneModel": "مدل هواپیما",
+            "reportType": " نوع گزارش ",
+            "meterSheet": "گزارش میتر شیت",
+            "hourToHour": "ساعت به ساعت",
+            "oilTank": "مخزن",
+            "unit": "واحد",
+            "username": "کاربر صادر کننده",
+            "amountGreaterThan": "مقدارهای بزرگتر از ",
+            "amountSmallerThan": "مقدارهای کوچکتر از ",
+            "differenceEndMetre": "اختلاف",
+            "buyGroup": "اعتباری/نقدی",
+            "currencyType": "ریالی/ارزی",
+            "fromReceiptNumber": "از شماره حواله",
+            "toReceiptNumber": "تا شماره حواله",
+            "reportType": "نوع گزارش"
+        }
+    }
+}

@@ -1,0 +1,462 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <div *ngIf="!showReport">
+        <form name="editForm" role="form" novalidate (ngSubmit)="loadAll()" #editForm="ngForm">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <h5 class="col-md-3"
+                            jhiTranslate="report.search">Search
+                        </h5>
+                    </div>
+                </div>
+                <div class="card-block container">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTank.refuelCenter"
+                                       for="field_refuelCenter">RefuelCenter</label>
+                                <select class="form-control" id="field_refuelCenter"
+                                        name="refuelCenter"
+                                        [(ngModel)]="req.refuelCenterId"
+                                        (ngModelChange)="onChangeRefuelCenter($event)"
+                                        required
+                                >
+                                    <option [ngValue]="null" selected></option>
+                                    <option [ngValue]="refuelCenterOption.id"
+                                            *ngFor="let refuelCenterOption of refuelCenters">
+                                        {{refuelCenterOption.persianTitle}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.dayDepot.oilTank"
+                                       for="field_oilTank">Oil
+                                    Tank</label>
+                                <select
+                                    class="form-control"
+                                    id="field_oilTank"
+                                    name="oilTank"
+                                    [(ngModel)]="req.oilTankId"
+                                >
+                                    <option [ngValue]="null" selected></option>
+                                    <option [ngValue]="oilTankOption.id"
+                                            *ngFor="let oilTankOption of oiltanks">
+                                        {{oilTankOption.title}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.product.home.title"
+                                       for="field_products">Metre</label>
+                                <select class="form-control"
+                                        id="field_products"
+                                        name="product"
+                                        [(ngModel)]="req.productId"
+
+                                >
+                                    <option [ngValue]="productOption.id" *ngFor="let productOption of products">
+                                        {{productOption.title}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.metreSheet.amountGreaterThan"
+                                       for="field_amountGreaterThan">receiptNo</label>
+                                <input
+                                    [(ngModel)]="req.amountGreaterThan"
+                                    class="form-control"
+                                    id="field_amountGreaterThan"
+                                    name="amountGreaterThan"
+                                />
+
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.metreSheet.amountSmallerThan"
+                                       for="field_amountSmallerThan">receiptNo</label>
+                                <input
+                                    [(ngModel)]="req.amountSmallerThan"
+                                    class="form-control"
+                                    id="field_amountSmallerThan"
+                                    name="amountSmallerThan"
+                                />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.metreSheet.username"
+                                       for="field_username">receiptNo</label>
+                                <input
+                                    [(ngModel)]="req.username"
+                                    class="form-control"
+                                    id="field_username"
+                                    name="username"
+                                />
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.metreSheet.receiptNo"
+                                       for="field_receiptNo">receiptNo</label>
+                                <input
+                                    [(ngModel)]="req.receiptNo"
+                                    class="form-control"
+                                    id="field_receiptNo"
+                                    name="receiptNo"
+                                />
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.metreSheet.type"
+                                       for="field_fuelType">receiptNo</label>
+                                <input
+                                    [(ngModel)]="req.fuelType"
+                                    class="form-control"
+                                    id="field_fuelType"
+                                    name="fuelType"
+                                />
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.metreSheet.airplaneName"
+                                       for="field_customerTitle">receiptNo</label>
+                                <input
+                                    [(ngModel)]="req.customerTitle"
+                                    class="form-control"
+                                    id="field_customerTitle"
+                                    name="customerTitle"
+                                />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.metreSheet.startDate"
+                                       for="field_startDate">startDate</label>
+                                <div class="d-flex">
+                                    <ng2-datetimepicker  [rtlActive]="true" time="00:00:00"
+                                                        id="field_startDate"
+                                                        class="form-control"
+                                                        name="startDate" [(ngModel)]="req.startDate"
+                                                        required></ng2-datetimepicker>
+                                </div>
+                                <div
+                                    [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                                    <small class="form-text text-danger"
+                                           [hidden]="!editForm.controls.startDate?.errors?.required"
+                                           jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                    <small class="form-text text-danger"
+                                           [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                                           jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                        This field should be a date and time.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.metreSheet.finishDate"
+                                       for="field_finishDate">finishDate</label>
+                                <div class="d-flex">
+                                    <ng2-datetimepicker  [rtlActive]="true" time="23:59:59"
+                                                        id="field_finishDate"
+                                                        class="form-control"
+                                                        name="finishDate"
+                                                        [(ngModel)]="req.finishDate"
+                                                        required></ng2-datetimepicker>
+                                </div>
+                                <div
+                                    [hidden]="!(editForm.controls.finishDate?.dirty && editForm.controls.finishDate?.invalid)">
+                                    <small class="form-text text-danger"
+                                           [hidden]="!editForm.controls.finishDate?.errors?.required"
+                                           jhiTranslate="entity.validation.required">
+                                        This field is required.
+                                    </small>
+                                    <small class="form-text text-danger"
+                                           [hidden]="!editForm.controls.finishDate?.errors?.ZonedDateTimelocal"
+                                           jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                        This field should be a date and time.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metreSheet.buyGroup"
+                                       for="field_buyGroup">RefuelCenter</label>
+                                <select class="form-control" id="field_buyGroup"
+                                        name="buyGroup"
+                                        [(ngModel)]="req.buyGroup"
+                                >
+                                    <option [ngValue]="null" selected></option>
+                                    <option value="CREDIT">{{'niopdcgatewayApp.BuyGroup.CREDIT' | translate}}</option>
+                                    <option value="CASH">{{'niopdcgatewayApp.BuyGroup.CASH' | translate}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metreSheet.currencyType"
+                                       for="field_currencyType">Oil
+                                    Tank</label>
+                                <select
+                                    class="form-control"
+                                    id="field_currencyType"
+                                    name="currencyType"
+                                    [(ngModel)]="req.currencyType"
+                                >
+                                    <option [ngValue]="null" selected></option>
+                                    <option value="NATIONAL">ریالی</option>
+                                    <option value="FOREIGN">ارزی</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metreSheet.fromReceiptNumber"
+                                       for="field_fromReceiptNumber">Metre</label>
+                                <input type="text" class="form-control"
+                                        id="field_fromReceiptNumber"
+                                        name="fromReceiptNumber"
+                                        [(ngModel)]="req.fromReceiptNumber"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metreSheet.toReceiptNumber"
+                                       for="field_toReceiptNumber">Metre</label>
+                                <input type="text" class="form-control"
+                                       id="field_toReceiptNumber"
+                                       name="toReceiptNumber"
+                                       [(ngModel)]="req.toReceiptNumber"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer text-center">
+                    <button type="submit" class="btn btn-primary "
+                            [disabled]="editForm.form.invalid ">
+                        <span class="fa fa-search"></span>&nbsp;<span
+                        jhiTranslate="report.search">Save</span>
+                    </button>
+
+                    <!--<button type="button" (click)="showPrint()" class="btn btn-primary"
+                            [disabled]="!metreSheet || metreSheet.length<1">
+                        <span class="fa fa-print"></span>&nbsp;<span
+                        jhiTranslate="report.print">Save</span>
+                    </button>-->
+                </div>
+            </div>
+        </form>
+        <br/>
+
+        <kendo-grid
+            [disabled]="editForm.form.invalid "
+            [data]="gridData"
+            [pageSize]="state.take"
+            [skip]="state.skip"
+            [sort]="state.sort"
+            [group]="state.group"
+            [resizable]="true"
+            [sortable]="{ mode: 'multiple' }"
+            [pageable]="{ pageSizes: [ 10,25,50,100,metreSheet?.length] }"
+            [groupable]="{ showFooter: true}"
+            scrollable="scrollable"
+            (dataStateChange)="dataStateChange($event)"
+            [style.maxHeight.px]="600"
+        >
+            <ng-template kendoGridToolbarTemplate>
+
+                <button type="button" kendoGridExcelCommand icon="file-excel" jhiTranslate="report.exportToExcel">Export
+                    to
+                    Excel
+                </button>
+            </ng-template>
+
+            <kendo-grid-column [locked]="true" field="rowNumber"
+                               [title]="''"
+                               [width]="50">
+                <ng-template kendoGridCellTemplate let-rowIndex="rowIndex">
+                    <span >{{rowIndex+1}}</span>
+                </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column [locked]="true" field="unitTitle"
+                               [title]="'niopdcgatewayApp.metreSheet.unit' | translate"
+                               [width]="55">
+                <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column-group
+                [title]="('niopdcgatewayApp.metreSheet.startDate' | translate)+' :  '+(req.startDate | dateTimeJalali) +('niopdcgatewayApp.metreSheet.finishDate' | translate)+' :  '+(req.finishDate | dateTimeJalali) +'  '+ ('userManagement.detail.title' | translate) +' : '+ (fullName)"
+                [locked]="false" [width]="200">
+                <kendo-grid-column field="orderNumber"
+                                   [title]="'niopdcgatewayApp.metreSheet.receiptNo' | translate" [width]="90">
+                    <ng-template
+                        kendoGridGroupFooterTemplate
+                        let-group="group"
+                        let-aggregates>
+                        {{('report.count' | translate) + ':' + aggregates['orderNumber']?.count }}
+                    </ng-template>
+                    <ng-template
+                        kendoGridFooterTemplate
+                        let-column="column">
+                        {{('report.count' | translate) + ':' + (metreSheet && metreSheet.length > 0 ?
+                        total['orderNumber']?.count : 0)}}
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="createTime"
+                                   [title]="'niopdcgatewayApp.metreSheet.dayDate' | translate" [width]="60">
+                    <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="customerName"
+                                   [title]="'niopdcgatewayApp.metreSheet.airplaneName' | translate"
+                                   [width]="75">
+                    <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="productCode"
+                                   [title]="'niopdcgatewayApp.metreSheet.productCode' | translate"
+                                   [width]="90">
+                    <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="fuelType"
+                                   [title]="'niopdcgatewayApp.metreSheet.type' | translate"
+                                   [width]="75">
+                    <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="amount"
+                                   [title]="'niopdcgatewayApp.metreSheet.amount' | translate"
+                                   [width]="80">
+                    <ng-template
+                        kendoGridGroupFooterTemplate
+                        let-group="group"
+                        let-aggregates>
+                        {{aggregates['amount']?.sum }}
+                    </ng-template>
+                    <ng-template
+                        kendoGridFooterTemplate
+                        let-column="column">
+                        {{(metreSheet && metreSheet.length > 0 ? total['amount']?.sum
+                        : 0)}}
+                    </ng-template>
+
+                </kendo-grid-column>
+                <kendo-grid-column field="startMetre"
+                                   [title]="'niopdcgatewayApp.metreSheet.nextMetre' | translate" [width]="100">
+
+                    <ng-template
+                        kendoGridGroupFooterTemplate
+                        let-group="group"
+                        let-aggregates>
+                        {{ aggregates['startMetre']?.min
+                        }}
+                    </ng-template>
+                    <ng-template
+                        kendoGridFooterTemplate
+                        let-column="column">
+                        {{(metreSheet &&
+                    metreSheet.length > 0 ? total['startMetre']?.min : 0)}}
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="endMetre"
+                                   [title]="'niopdcgatewayApp.metreSheet.agoMetre' | translate" [width]="100">
+
+                    <ng-template
+                        kendoGridGroupFooterTemplate
+                        let-group="group"
+                        let-aggregates>
+                        {{ aggregates['endMetre']?.max
+                        }}
+                    </ng-template>
+                    <ng-template
+                        kendoGridFooterTemplate
+                        let-column="column">
+                        {{ (metreSheet &&
+                    metreSheet.length > 0 ? total['endMetre']?.max : 0)}}
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="differenceEndMetre"
+                                   [title]="'niopdcgatewayApp.metreSheet.differenceEndMetre' | translate"
+                                   [width]="65">
+                    <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+                    <ng-template
+                        kendoGridGroupFooterTemplate
+                        let-group="group"
+                        let-aggregates>
+                        {{ aggregates['differenceEndMetre']?.sum}}
+                    </ng-template>
+                    <ng-template
+                        kendoGridFooterTemplate
+                        let-column="column">
+                        {{(metreSheet && metreSheet.length > 0 ? total['differenceEndMetre']?.sum
+                        : 0)}}
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="username"
+                                   [title]="'niopdcgatewayApp.metreSheet.username' | translate"
+                                   [width]="75">
+                    <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+                </kendo-grid-column>
+                <kendo-grid-column field="createDay"
+                                   [title]="'niopdcgatewayApp.metreSheet.date' | translate" [width]="80">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                        <span>{{dataItem.createDay | dateJalali}}</span>
+                    </ng-template>
+                    <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+                </kendo-grid-column>
+            </kendo-grid-column-group>
+
+            <kendo-grid-messages
+                [pagerOf]="'report.pagerOf' | translate"
+                [pagerItems]="'report.pagerItems' | translate"
+                [groupPanelEmpty]="'report.headerMessage' | translate"
+                [noRecords]="'global.messages.info.emptyRecords' | translate"
+                [pagerItemsPerPage]="'report.pagerItemsPerPage' | translate">
+            </kendo-grid-messages>
+
+            <kendo-grid-excel fileName="metreSheet.xlsx"></kendo-grid-excel>
+        </kendo-grid>
+    </div>
+    <div *ngIf="showReport">
+        <jhi-metre-sheet-report
+            [metreSheet]="metreSheet"
+            [mode]="mode"
+            [refuelCenterTitle]="refuelCenterTitle"
+            (onClose)="showPrint()"
+        ></jhi-metre-sheet-report>
+    </div>
+    <br/>
+</div>

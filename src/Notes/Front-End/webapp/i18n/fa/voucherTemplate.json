@@ -1,0 +1,56 @@
+
+{
+    "niopdcgatewayApp": {
+        "voucherTemplate" : {
+            "home": {
+                "title": "الگوهای سند",
+                "createLabel": "ایجاد الگوی سند",
+                "createOrEditLabel": "ویرایش الگوی سند",
+                "view":"نمایش الگوی سند"
+            },
+            "delete": {
+                "question": "آیا برای حذف الگوی سند مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "الگوی سند"
+            },
+            "voucherMapping": "نگاشت سند",
+            "referrer": "ساخت سند",
+            "date": "تاریخ",
+            "voucherType": "نوع سند",
+            "voucherDateType": "نوع تاریخ سند",
+            "voucherTypeGroup": "گروه سند",
+            "roleType":"قابل دسترسی برای",
+            "docBuildAfterOperations":"عملیات های بعد از ایجاد سند",
+            "docBuildBeforeOperations":"عملیات های قبل از ایجاد سند",
+            "docBuildAgent":"عامل ایجاد سند",
+            "chooseVoucherTemplate":"الگوی سند انتخابی",
+            "chooseVoucherTemplateReverse":"معکوس کردن الگوی سند انتخابی",
+            "voucherDateTypes": {
+                "null": "",
+                "createDate": "تاریخ ایجاد",
+                "afterMonthDayFirstDate": "تاریخ اولین روز ماه بعد",
+                "lastDateOfMonth": "آخرین روز ماه",
+                "finishDate": "آخرین روز بازه"
+            },
+            "docBuildAfterOperationsTypes": {
+                "null": "",
+                "walletCharge": "شارژ کیف پول",
+                "creditCharge": "شارژ اعتبار",
+                "docBuild": "ساخت سند"
+            },
+            "docBuildAgentTypes": {
+                "null": "",
+                "dayClose": "بستن روز"
+            }
+        }
+    },
+    "niopdcaccountingApp": {
+        "voucherTemplate" : {
+            "created": "الگوی سند با موفقیت ایجاد شد.",
+            "updated": "الگوی سند با موفقیت ویرایش شد.",
+            "deleted": "الگوی سند با موفقیت حذف شد."
+        }
+    }
+
+}

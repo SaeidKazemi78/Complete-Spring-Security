@@ -1,0 +1,60 @@
+
+{
+    "niopdcgatewayApp": {
+        "cleaningReportOilTank" : {
+            "home": {
+                "title": "بازدید / لایروبی مخزن واحد سوختگیری",
+                "createLabel": "Create a new Cleaning Report Oil Tank",
+                "createOrEditLabel": "Create or edit a Cleaning Report Oil Tank"
+            },
+            "delete": {
+                "question": "آیا از حذف این در خواست اطمینان دارید؟"
+            },
+            "confirm": {
+                "question": "آیا از تایید این در خواست اطمینان دارید؟"
+            },
+            "send": {
+                "question": "آیا از ارسال این در خواست اطمینان دارید؟"
+            },
+            "detail": {
+                "title": "Cleaning Report Oil Tank"
+            },
+            "typeOfAlloy": "جنس مخزن",
+            "cleaningType": "دلیل بازدید",
+            "cleaningReportNumber": "شماره مجوز ورود به مخزن",
+            "registerDate": "تاریخ ورود به مخزن",
+            "exporterName": "نام صادر کننده مجوز ورود به مخزن",
+            "highLevelSensor": "کنترل کننده پر شدن مخزن",
+            "pAndVValue": "شیر ورود خروج هوا",
+            "manhole": "دریچه ادم رو",
+            "dipStick": "میله عمق سنج",
+            "flameTrap": "جرقه گیر",
+            "contentGauge": "نشانگر موجود",
+            "footValue": "شیر تحتانی",
+            "drainSump": "حوضچه درین",
+            "sampleDrainValue": "اتصالات نمونه گیری",
+            "description": "شرح جزئیات بازدید از مخزن",
+            "confirmDialog": "ملحقات مخزن سالم مخزن تمیز و جهت ذخیره سازی سوخت های هوایی مناسب می باشد",
+            "confirmTrue": "تایید",
+            "confirmFalse": "عدم تایید",
+            "confirmList": "تایید",
+            "requestStatus": "وضعیت درخواست",
+            "draftUser": "Draft User",
+            "confirmUser": "Confirm User",
+            "sendUser": "Send User",
+            "oilTank": "واحد",
+            "refuelCenter": "مرکذ سوختگیری",
+            "cleaning":"انجام لایروبی",
+            "modificationOrRepairing":"اصلاح یا تعمیرات"
+        }
+    },
+    "niopdcaoApp": {
+        "cleaningReportOilTank" : {
+            "created": "بازدید / لایروبی مخزن با موفقیت ایجاد شد.",
+            "updated": "بازدید / لایروبی مخزن با موفقیت ویرایش شد.",
+            "deleted": "بازدید / لایروبی مخزن با موفقیت حذف شد.",
+            "confirm": "بازدید / لایروبی مخزن با موفقیت تایید شد.",
+            "send": "بازدید / لایروبی مخزن با موفقیت ارسال شد."
+        }
+    }
+}

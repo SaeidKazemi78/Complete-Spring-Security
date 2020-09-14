@@ -1,0 +1,47 @@
+{
+    "niopdcgatewayApp": {
+        "transportContract": {
+            "home": {
+                "title": "قرارداد حمل و نقل",
+                "createLabel": "ایجاد قرارداد حمل و نقل",
+                "createOrEditLabel": "ویرایش قرارداد حمل و نقل",
+                "view": "نمایش قرارداد حمل و نقل",
+                "customerTitle": "مشتری",
+                "customerHasNotTransportFare": "این مشتری کرایه دار نمی باشد و امکان ایجاد قرارد داد حمل وجود ندارد",
+                "carTitle": "نفت کش"
+            },
+            "delete": {
+                "question": "آیا برای حذف این قرارداد حمل و نقل مطمئن هستید ؟"
+            },
+            "confirm": {
+                "question": "آیا برای تایید این قرارداد حمل و نقل مطمئن هستید ؟"
+            },
+            "revertConfirm": {
+                "question": "آیا برای برگشت از تایید این قرارداد حمل و نقل مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "قرارداد حمل و نقل"
+            },
+            "contractCode": "کد قرارداد",
+            "startDate": "تاریخ شروع",
+            "status": "وضعیت",
+            "finishDate": "تاریخ پایان",
+            "customer": "مشتری",
+            "person": "پیمانکار حمل",
+            "description": "توضیحات",
+            "car": "نفت کش"
+        },
+        "TransportContractStatus" : {
+            "null": "",
+            "CONFIRM": "تایید",
+            "PENDING": "در انتظار"
+        }
+    },
+    "niopdcbaseApp": {
+        "transportContract": {
+            "created": "قرارداد حمل و نقل با موفقیت ایجاد شد.",
+            "updated": "قرارداد حمل و نقل با موفقیت ویرایش شد.",
+            "deleted": "قرارداد حمل و نقل با موفقیت حذف شد."
+        }
+    }
+}

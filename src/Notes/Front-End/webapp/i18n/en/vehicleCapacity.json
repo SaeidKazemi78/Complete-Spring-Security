@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "vehicleCapacity" : {
+            "home": {
+                "title": "Vehicle Capacities",
+                "createLabel": "Create a new Vehicle Capacity",
+                "createOrEditLabel": "Create or edit a Vehicle Capacity"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Vehicle Capacity {{ id }}?"
+            },
+            "detail": {
+                "title": "Vehicle Capacity"
+            },
+            "capacity": "Capacity",
+            "vehicleModel": "Vehicle Model",
+            "product": "Product"
+        }
+    },
+    "niopdcbaseApp": {
+        "vehicleCapacity" : {
+            "created": "A new Vehicle Capacity is created with identifier {{ param }}",
+            "updated": "A Vehicle Capacity is updated with identifier {{ param }}",
+            "deleted": "A Vehicle Capacity is deleted with identifier {{ param }}"
+        }
+    }
+}

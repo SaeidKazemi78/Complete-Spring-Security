@@ -1,0 +1,38 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="uploadLabel" jhiTranslate="niopdcgatewayApp.region.home.uploadLabel">
+            uploadLabel</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <p-fileUpload #fu name="file" [multiple]="false" [showUploadButton]="true" [showCancelButton]="false"
+                              invalidFileTypeMessageSummary="نوع فایل {0} نامعتبر است, "
+                              invalidFileTypeMessageDetail="نوع های مجاز : {0}."
+                              chooseLabel="انتخاب"
+                              uploadLabel="بارگذاری"
+                              (onBeforeSend)="onBeforeSend($event)"
+                              [withCredentials]="true"
+                              [url]="uploadUrl"
+                              (onBeforeUpload)="myUploader($event,1)"
+                              (onUpload)="myUploader($event,2)"
+
+                              accept=".xlsx" [maxFileSize]="20000000"></p-fileUpload>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+<!--        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>-->
+    </div>
+</form>
+

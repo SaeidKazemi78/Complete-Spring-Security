@@ -1,0 +1,173 @@
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="voucherItem.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="voucherItem.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherItem.rowNo" for="field_rowNo">Row No</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="rowNo" id="field_rowNo"
+                        [(ngModel)]="voucherItem.rowNo" required />
+                    <div [hidden]="!(editForm.controls.rowNo?.dirty && editForm.controls.rowNo?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.rowNo?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.rowNo?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherItem.extra" for="field_extra">Extra</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="extra" id="field_extra"
+                        [(ngModel)]="voucherItem.extra" required maxlength="20" />
+                    <div [hidden]="!(editForm.controls.extra?.dirty && editForm.controls.extra?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.extra?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.extra?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 20 }">
+                           This field cannot be longer than 20 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherItem.special" for="field_special">Special</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="special" id="field_special"
+                        [(ngModel)]="voucherItem.special" required maxlength="20" />
+                    <div [hidden]="!(editForm.controls.special?.dirty && editForm.controls.special?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.special?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.special?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 20 }">
+                           This field cannot be longer than 20 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherItem.credit" for="field_credit">Credit</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="credit" id="field_credit"
+                        [(ngModel)]="voucherItem.credit" required />
+                    <div [hidden]="!(editForm.controls.credit?.dirty && editForm.controls.credit?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.credit?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.credit?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherItem.debit" for="field_debit">Debit</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="debit" id="field_debit"
+                        [(ngModel)]="voucherItem.debit" required />
+                    <div [hidden]="!(editForm.controls.debit?.dirty && editForm.controls.debit?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.debit?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.debit?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherItem.description" for="field_description">Description</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="description" id="field_description"
+                        [(ngModel)]="voucherItem.description" minlength="3" maxlength="200" />
+                    <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.description?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                           This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
+                           This field cannot be longer than 200 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherItem.accountNo" for="field_accountNo">Account No</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="accountNo" id="field_accountNo"
+                        [(ngModel)]="voucherItem.accountNo" required maxlength="23" />
+                    <div [hidden]="!(editForm.controls.accountNo?.dirty && editForm.controls.accountNo?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.accountNo?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.accountNo?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 23 }">
+                           This field cannot be longer than 23 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherItem.suffix" for="field_suffix">Suffix</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="suffix" id="field_suffix"
+                        [(ngModel)]="voucherItem.suffix" required maxlength="8" />
+                    <div [hidden]="!(editForm.controls.suffix?.dirty && editForm.controls.suffix?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.suffix?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.suffix?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 8 }">
+                           This field cannot be longer than 8 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherItem.key" for="field_key">Key</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="key" id="field_key"
+                        [(ngModel)]="voucherItem.key"  />
+                </div>
+                <div [hidden]="!(editForm.controls.voucherMaster?.dirty && editForm.controls.voucherMaster?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.voucherMaster?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

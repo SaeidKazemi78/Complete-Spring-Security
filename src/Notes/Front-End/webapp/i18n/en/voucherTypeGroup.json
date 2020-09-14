@@ -1,0 +1,26 @@
+
+{
+    "niopdcgatewayApp": {
+        "voucherTypeGroup" : {
+            "home": {
+                "title": "Voucher Type Groups",
+                "createLabel": "Create a new Voucher Type Group",
+                "createOrEditLabel": "Create or edit a Voucher Type Group"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Voucher Type Group {{ id }}?"
+            },
+            "detail": {
+                "title": "Voucher Type Group"
+            },
+            "title": "Title"
+        }
+    },
+    "niopdcaccountingApp": {
+        "voucherTypeGroup" : {
+            "created": "A new Voucher Type Group is created with identifier {{ param }}",
+            "updated": "A Voucher Type Group is updated with identifier {{ param }}",
+            "deleted": "A Voucher Type Group is deleted with identifier {{ param }}"
+        }
+    }
+}

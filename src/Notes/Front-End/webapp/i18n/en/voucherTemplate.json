@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "voucherTemplate" : {
+            "home": {
+                "title": "Voucher Templates",
+                "createLabel": "Create a new Voucher Template",
+                "createOrEditLabel": "Create or edit a Voucher Template"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Voucher Template {{ id }}?"
+            },
+            "detail": {
+                "title": "Voucher Template"
+            },
+            "referrer": "Referrer",
+            "voucherMapping": "Voucher Mapping",
+            "voucherType": "Voucher Type"
+        }
+    },
+    "niopdcaccountingApp": {
+        "voucherTemplate" : {
+            "created": "A new Voucher Template is created with identifier {{ param }}",
+            "updated": "A Voucher Template is updated with identifier {{ param }}",
+            "deleted": "A Voucher Template is deleted with identifier {{ param }}"
+        }
+    }
+}

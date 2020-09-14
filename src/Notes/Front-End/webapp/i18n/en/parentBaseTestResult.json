@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "parentBaseTestResult" : {
+            "home": {
+                "title": "Parent Base Test Results",
+                "createLabel": "Create a new Parent Base Test Result",
+                "createOrEditLabel": "Create or edit a Parent Base Test Result"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Parent Base Test Result {{ id }}?"
+            },
+            "detail": {
+                "title": "Parent Base Test Result"
+            },
+            "productId": "Product Id",
+            "baseTestResultType": "Base Test Result Type",
+            "testResultType": "Test Result Type"
+        }
+    },
+    "niopdcaoApp": {
+        "parentBaseTestResult" : {
+            "created": "A new Parent Base Test Result is created with identifier {{ param }}",
+            "updated": "A Parent Base Test Result is updated with identifier {{ param }}",
+            "deleted": "A Parent Base Test Result is deleted with identifier {{ param }}"
+        }
+    }
+}

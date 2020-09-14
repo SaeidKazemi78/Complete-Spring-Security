@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "costRate" : {
+            "home": {
+                "title": "Cost Rates",
+                "createLabel": "Create a new Cost Rate",
+                "createOrEditLabel": "Create or edit a Cost Rate"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Cost Rate {{ id }}?"
+            },
+            "detail": {
+                "title": "Cost Rate"
+            },
+            "startDate": "Start Date",
+            "finishDate": "Finish Date",
+            "rate": "Rate",
+            "currency": "Currency",
+            "cost": "Cost"
+        }
+    },
+    "niopdcrateApp": {
+        "costRate" : {
+            "created": "A new Cost Rate is created with identifier {{ param }}",
+            "updated": "A Cost Rate is updated with identifier {{ param }}",
+            "deleted": "A Cost Rate is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "infringementType" : {
+            "null": "",
+            "EMBEDDED": "جاساز",
+            "UNAUTHORIZED_BUCK": "باک غیرمجاز",
+            "CARRYING_STUFF": "حمل مظروف",
+            "OTHER": "سایر"
+        }
+    }
+}

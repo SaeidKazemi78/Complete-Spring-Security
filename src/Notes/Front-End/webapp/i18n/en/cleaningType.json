@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "CleaningType" : {
+            "null": "",
+            "PERIODIC_TANK_INSPECTION": "PERIODIC_TANK_INSPECTION",
+            "CLEANING": "CLEANING",
+            "MODIFICATION_OR_REPAIRING": "MODIFICATION_OR_REPAIRING"
+        }
+    }
+}

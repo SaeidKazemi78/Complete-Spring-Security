@@ -1,0 +1,12 @@
+{
+    "niopdcgatewayApp": {
+        "reportType": {
+            "PAYMENT_DATE": "تاریخ پرداخت",
+            "ORDER_DATE": "تاریخ حواله",
+            "SHIFT_DATE": "تاریخ شیفت",
+            "CONFIRM_DATE": "تاریخ تایید",
+            "EXIT_FROM_DEPOT": "تاریخ خروج از انبار",
+            "EXPORT_DATE": "تاریخ صدور"
+        }
+    }
+}

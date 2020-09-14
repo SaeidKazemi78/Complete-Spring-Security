@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "StationType" : {
+            "null": "",
+            "LIQUID_PRODUCT": "فرآورده مایع",
+            "CNG_PRODUCT": "فرآورده CNG",
+            "BOTH": "فرآورده مایع و CNG"
+        }
+    }
+}

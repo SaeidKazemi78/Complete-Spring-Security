@@ -1,0 +1,12 @@
+{
+    "niopdcgatewayApp": {
+        "airline": {
+            "home": {
+                "title": "شرکت های هواپیمایی"
+            },
+            "name": "نام",
+            "code": "کد",
+            "creditAccount": "شماره حساب"
+        }
+    }
+}

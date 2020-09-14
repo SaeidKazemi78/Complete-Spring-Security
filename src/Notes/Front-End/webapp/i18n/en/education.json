@@ -1,0 +1,13 @@
+{
+    "niopdcgatewayApp": {
+        "Education" : {
+            "null": "",
+            "UNDER_DIPLOMA": "UNDER_DIPLOMA",
+            "DIPLOMA": "DIPLOMA",
+            "ASSOCIATE": "ASSOCIATE",
+            "BACHELOR": "BACHELOR",
+            "MASTER": "MASTER",
+            "PHD": "PHD"
+        }
+    }
+}

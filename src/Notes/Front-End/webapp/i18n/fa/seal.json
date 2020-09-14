@@ -1,0 +1,31 @@
+{
+    "niopdcgatewayApp": {
+        "seal": {
+            "home": {
+                "title": "پلمپ ها",
+                "createLabel": "ایجاد پلمپ",
+                "createOrEditLabel": "ویرایش پلمپ",
+                "refuelCenterTitle": "مرکز سوختگیری"
+            },
+            "delete": {
+                "question": "آیا برای حذف پلمپ مطمئن هستید ؟ "
+            },
+            "detail": {
+                "title": "پلمپ"
+            },
+            "boxNo": "شماره جعبه",
+            "prefix": "پیشوند",
+            "startSealNumber": "شماره شروع",
+            "endSealNumber": "شماره پایان",
+            "currentSealNumber": "شماره جاری",
+            "refuelCenter": "مرکز سوختگیری"
+        }
+    },
+    "niopdcaoApp": {
+        "seal": {
+            "created": "پلمپ با موفقیت ایجاد شد.",
+            "updated": "پلمپ با موفقیت ویرایش شد.",
+            "deleted": "پلمپ با موفقیت حذف شد."
+        }
+    }
+}

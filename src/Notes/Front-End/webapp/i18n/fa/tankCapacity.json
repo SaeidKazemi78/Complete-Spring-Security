@@ -1,0 +1,36 @@
+{
+    "niopdcgatewayApp": {
+        "tankCapacity": {
+            "home": {
+                "title": "موجودی مخازن",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ویرایش",
+                "customerTitle": "مشتری"
+            },
+            "delete": {
+                "question": "ایا برای حذف موجودی مخزن مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "موجودی مخزن"
+            },
+            "inventory": "موجودی",
+            "measureDate": "تاریخ اندازه گیری",
+            "tankNo": "شماره مخزن",
+            "fromProductRateId": "نرخ مبدا",
+            "fromSrc": "From Src",
+            "fromProductRate": "From Product Rate",
+            "toProductRateId": "نرخ مقصد",
+            "toSrc": "To Src",
+            "toProductRate": "To Product Rate",
+            "customer": "مشتری",
+            "product": "فرآورده"
+        }
+    },
+    "niopdcbaseApp": {
+        "tankCapacity": {
+            "created": "موجودی مخزن با موفقیت ایجاد شد.",
+            "updated": "موجودی مخزن با موفقیت ویرایش شد.",
+            "deleted": "موجودی مخزن با موفقیت حذف شد."
+        }
+    }
+}

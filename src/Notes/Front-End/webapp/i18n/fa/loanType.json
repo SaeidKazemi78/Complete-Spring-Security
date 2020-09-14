@@ -1,0 +1,36 @@
+
+{
+    "niopdcgatewayApp": {
+        "loanType" : {
+            "home": {
+                "title": "انواع تسهیلات",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ویرایش"
+            },
+            "delete": {
+                "question": "آیا شما می خواهید این نوع وام حذف شود؟"
+            },
+            "detail": {
+                "title": "نوع تسهیلات"
+            },
+            "penalty": "جریمه",
+            "title": "عنوان",
+            "description": "توضیحات",
+            "maxAmount": "حداکثر مبلغ",
+            "startDate": "تاریخ شروع طرح",
+            "finishDate": "تاریخ پایان طرح",
+            "maxInstallmentCount": "حداکثر تعداد اقساط",
+            "interest": "سود",
+            "calcPenaltyAfterDay": "تعداد روز های مجاز برای تاخیر",
+            "niopdcBankAccountType":"نوع شماره حساب بازپرداخت",
+            "actionFlowType":"نوع"
+        }
+    },
+    "niopdcaccountingApp": {
+        "loanType" : {
+            "created": "نوع وام با موفقیت ایجاد شد.",
+            "updated": "نوع وام با موفقیت ویرایش شد.",
+            "deleted": "نوع وام با موفقیت حذف شد."
+        }
+    }
+}

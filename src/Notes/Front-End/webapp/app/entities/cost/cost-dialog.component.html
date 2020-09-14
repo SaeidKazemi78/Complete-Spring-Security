@@ -1,0 +1,301 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="cost.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.cost.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="cost.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.cost.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.cost.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-4" *ngIf="!costGroup || costGroup?.costCategory !== CostCategory[CostCategory.WAGE]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.cost.costAction"
+                           for="field_costAction">Cost Action</label>
+                    <select
+                        [disabled]="isView  || disabledCostAction"
+                        class="form-control" name="costAction" [(ngModel)]="cost.costAction"
+                        (change)="changeCostAction()"
+                        id="field_costAction" required>
+                        <option value="REDUCER">{{'niopdcgatewayApp.CostAction.REDUCER' | translate}}</option>
+                        <option value="MULTIPLIER">{{'niopdcgatewayApp.CostAction.MULTIPLIER' | translate}}</option>
+                        <option value="EFFECTLESS">{{'niopdcgatewayApp.CostAction.EFFECTLESS' | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4" >
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.cost.rateType"
+                           for="field_rateType">Rate Type</label>
+                    <select [disabled]="isView || disabledRateType" class="form-control" name="rateType"
+                            [(ngModel)]="cost.rateType"
+                            id="field_rateType" required>
+                        <option value="PERCENT">
+                            {{'niopdcgatewayApp.RateType.PERCENT' | translate}}
+                        </option>
+
+                        <option
+                            *ngIf="cost && !cost.parentId && costGroup &&  costGroup?.costGroupType!==CostGroupType[CostGroupType.ENCOURAGEMENT] "
+                            value="PER_LITRE">{{'niopdcgatewayApp.costGroup.constant'
+                            | translate}}
+                        </option>
+                        <option value="PER_LITRE_SCORE"
+                                *ngIf="costGroup && (costGroup?.customerGroup===CustomerGroup[CustomerGroup.SELLER] || costGroup?.customerGroup===CustomerGroup[CustomerGroup.STATION])
+                                && costGroup?.costGroupType!==CostGroupType[CostGroupType.CASH] && costGroup?.costGroupType!==CostGroupType[CostGroupType.ENCOURAGEMENT] && cost && !cost.parentId">
+                            {{'niopdcgatewayApp.RateType.PER_LITRE_SCORE' | translate}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4"
+                 *ngIf="!cost.parentId">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.cost.effect" for="field_effect">Effect</label>
+                    <select [disabled]="isView || disabledEffect" class="form-control" name="effect"
+                            [(ngModel)]="cost.effect"
+                            id="field_effect" required>
+                        <option value="BASE">{{'niopdcgatewayApp.Effect.BASE' | translate}}</option>
+                        <option
+                            *ngIf="cost.rateType==RateType[RateType.PERCENT]||(costGroup?.costGroupType===CostGroupType[CostGroupType.LADDER])"
+                            value="TOTAL">{{'niopdcgatewayApp.Effect.TOTAL' |
+                            translate}}
+                        </option>
+                        <option *ngIf="cost.parentId" [ngValue]="Effect.PARENT_COST">
+                            {{'niopdcgatewayApp.Effect.PARENT_COST' | translate}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.cost.costRelated"
+                           for="field_costRelated">cost Related</label>
+                    <select [disabled]="isView" class="form-control" name="costRelated" [(ngModel)]="cost.costRelated"
+                            id="field_costRelated">
+                        <option value=""></option>
+                        <option value="TAX">{{'niopdcgatewayApp.CostRelated.TAX' | translate}}
+                        </option>
+                        <option value="COMPLICATION">{{'niopdcgatewayApp.CostRelated.COMPLICATION' | translate}}
+                        </option>
+                        <option value="RENOVATION">{{'niopdcgatewayApp.CostRelated.RENOVATION' | translate}}
+                        </option>
+                        <option value="POLLUTION">{{'niopdcgatewayApp.CostRelated.POLLUTION' | translate}}
+                        </option>
+                        <ng-container *ngIf="!cost.parentId">
+                            <option value="OVERHEAD">{{'niopdcgatewayApp.CostRelated.OVERHEAD' | translate}}
+                            </option>
+                            <option value="OTHER">{{'niopdcgatewayApp.CostRelated.OTHER' | translate}}
+                            </option>
+                        </ng-container>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-4" *ngIf="cost.costAction !== CostAction[CostAction.REDUCER]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.niopdcBankAccountType.home.title"
+                           for="field_bankAccount">Bank Account</label>
+                    <select class="form-control" id="field_bankAccount" name="bankAccount" [disabled]="isView"
+                            [(ngModel)]="cost.niopdcBankAccountTypeId" required>
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="niopdcBankAccountOption.id"
+                                *ngFor="let niopdcBankAccountOption of niopdcbankaccountTypes; trackBy: trackNiopdcBankAccountTypeById">
+                            {{niopdcBankAccountOption.title}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <input type="checkbox" class="form-control"
+                           (change)="changeCanSetLocation()"
+                           name="canSetLocationIds" id="field_location"
+                           [(ngModel)]="cost.canSetLocationIds"/>
+                    <label jhiTranslate="niopdcgatewayApp.location.home.title"
+                           *ngIf="costGroup?.customerGroup!==CustomerGroup[CustomerGroup.BOUNDARY]"
+                           for="field_location">Location</label>
+                    <label jhiTranslate="niopdcgatewayApp.location.home.title3"
+                           *ngIf="costGroup?.customerGroup===CustomerGroup[CustomerGroup.BOUNDARY]"
+                           for="field_location">Location</label>
+
+                    <input-location-selector [disabled]="isView"
+                                             class="form-control" required
+                                             *ngIf="(!costGroup?.customerGroup || (costGroup?.customerGroup  && costGroup?.customerGroup!==CustomerGroup[CustomerGroup.BOUNDARY])) && cost.canSetLocationIds"
+                                             [(ngModel)]="cost.locationIds"
+                                             [firstSelect]="true"
+                                             [ShowItems]="parentCost === null? costGroup?.locationIds : parentCost.locationIds"
+                                             name="location"
+                                             [idSelector]="true"
+                                             [selectOfLevel]="[0,1,2]"
+                                             [selectByPriority]="true">
+
+                    </input-location-selector>
+                    <p-multiSelect
+                        *ngIf="costGroup?.customerGroup===CustomerGroup[CustomerGroup.BOUNDARY] && cost.canSetLocationIds"
+                        [disabled]="isView" class="form-control"
+                        [options]="customLocation | sortBy : 'label'"
+                        multiple="true"
+                        name="locations"
+                        [defaultLabel]="'global.messages.info.choose' | translate"
+                        [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                        [(ngModel)]="cost.locationIds"
+
+                        required
+                    ></p-multiSelect>
+                    <input [disabled]="isView" *ngIf="!cost.canSetLocationIds" disabled type="text"
+                           class="form-control"
+                           [ngModelOptions]="{standalone: true}"
+                           [ngModel]="'همه'"/>
+                    <div
+                        [hidden]="!(editForm.controls.locations?.dirty && editForm.controls.locations?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.locations?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="col-xs-12 col-md-4"  >
+
+                <div class="form-group">
+                    <input [disabled]="isView" type="checkbox" class="form-control"
+                           name="canSetCustomerTypeIds" id="field_productIds"
+                           (change)="changeCanSetProduct()"
+                           [(ngModel)]="cost.canSetProductIds"/>
+                    <label jhiTranslate="niopdcgatewayApp.costGroup.product"
+                           for="field_productIds">product</label>
+                    <p-multiSelect [disabled]="isView " class="form-control"
+                                   *ngIf="cost.canSetProductIds "
+                                   [options]="products"
+                                   name="productIds"
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                   [(ngModel)]="cost.productIds"
+                                   required>
+                    </p-multiSelect>
+
+                    <input [disabled]="isView" *ngIf="!cost.canSetProductIds" disabled type="text"
+                           class="form-control"
+                           [ngModelOptions]="{standalone: true}"
+                           [ngModel]="'همه'"/>
+
+                </div>
+            </div>
+
+
+            <div class="col-xs-12 col-md-4" *ngIf="costGroup?.customerGroup === CustomerGroup[CustomerGroup.BOUNDARY]">
+                <div class="form-group">
+                    <input type="checkbox" class="form-control"
+                           name="canSetVehicleModelTypes" id="field_vehicleModelTypes"
+                           (change)="changeVehicleModelType()"
+                           [(ngModel)]="cost.canSetVehicleModelTypes"/>
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.vehicleModel.vehicleModelType"
+                           for="field_vehicleModelTypes">Oil Tank Type</label>
+                    <p-multiSelect [disabled]="isView" class="form-control" name="vehicleModelTypes"
+                                   *ngIf="cost.canSetVehicleModelTypes"
+                                   [options]="vehicleModelTypeOptions"
+                                   (onChange)="changeVehicleModelType()"
+                                   [(ngModel)]="cost.vehicleModelTypes"
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                   required>
+                    </p-multiSelect>
+                    <input [disabled]="isView" *ngIf="!cost.canSetVehicleModelTypes" disabled type="text"
+                           class="form-control"
+                           [ngModelOptions]="{standalone: true}"
+                           [ngModel]="'همه'"/>
+                    <div
+                        [hidden]="!(editForm.controls.vehicleModelTypes?.dirty && editForm.controls.vehicleModelTypes?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.vehicleModelTypes?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <input [disabled]="isView" type="checkbox" class="form-control"
+                           name="canSetCustomerTypeIds" id="canSetCustomerTypeIds"
+                           [(ngModel)]="cost.canSetCustomerTypeIds"/>
+                    <label jhiTranslate="niopdcgatewayApp.costGroup.customerType" for="canSetCustomerTypeIds">customerType</label>
+                    <p-multiSelect *ngIf="cost.canSetCustomerTypeIds" [disabled]="isView"
+                                   class="form-control"
+                                   id="field_customerType"
+                                   [options]="customerTypes"
+                                   name="customerTypeIds"
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                   [(ngModel)]="cost.customerTypeIds"
+                                   required
+                    ></p-multiSelect>
+                    <input [disabled]="isView" *ngIf="!cost.canSetCustomerTypeIds" disabled type="text"
+                           class="form-control"
+                           name="customerTypes"
+                           [ngModel]="'همه'"/>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <ng-container *ngIf="costGroup">
+                <div class="col-xs-12 col-md-6"
+                     *ngIf="(costGroup && costGroup?.costGroupType===CostGroupType[CostGroupType.LADDER] && !cost.parentId)||costGroup?.costMethod===CostMethod[CostMethod.DEFUEL]">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.cost.startLitre"
+                               for="field_startLitre">Start Litre</label>
+                        <input [disabled]="isView" type="number" class="form-control" name="startLitre"
+                               id="field_startLitre"
+                               [(ngModel)]="cost.startLitre" required/>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-md-6"
+                     *ngIf="(costGroup && costGroup?.costGroupType===CostGroupType[CostGroupType.LADDER] && !cost.parentId)||costGroup?.costMethod===CostMethod[CostMethod.DEFUEL]">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.cost.endLitre"
+                               for="field_endLitre">End Litre</label>
+                        <input [disabled]="isView" type="number" class="form-control" name="endLitre"
+                               id="field_endLitre"
+                               [(ngModel)]="cost.endLitre"
+                               [required]="costGroup && costGroup?.costGroupType!==CostGroupType[CostGroupType.LADDER]"/>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+        <button *ngIf="!isView && !cost.id" type="button" (click)="save(true)"
+                [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.saveAndNextStep">Save</span>
+        </button>
+        <button *ngIf="!isView && !cost.id" type="button" (click)="save(null,true)"
+                [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.saveAndNext">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "BaseQueryParameter" : {
+            "DATE": "تاریخ روز",
+            "START_DATE": "تاریخ شروع",
+            "FINISH_DATE": "تاریخ پایان",
+            "LOCATION": "ناحیه",
+            "CUSTOMER" : "مشتری"
+        }
+    }
+}

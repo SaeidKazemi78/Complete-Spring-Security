@@ -1,0 +1,48 @@
+
+{
+    "niopdcgatewayApp": {
+        "transfer": {
+            "home": {
+                "title": "انتقالات",
+                "transferFromTitle": "انتقال (دریافت شده)",
+                "transferToTitle": "انتقال (به مخزن دیگر)",
+                "createLabel": "ایجاد انتقال",
+                "createOrEditLabel": "ویرایش انتقال",
+                "view": "نمایش انتقال",
+                "mainDayDepotTitle": "حساب روز انبار",
+                "mainDayOperationTitle": "عملیات های روزانه",
+                "dayDepotTitle": "روز انبار"
+            },
+            "delete": {
+                "question": "آیا برای حذف این انتقال مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "انتقال"
+            },
+            "registerDate": "تاریخ ثبت",
+            "transferByMetre": "انتقال توسط میتر",
+            "description": "توضیحات",
+            "metreLog": "گزارش میتر",
+            "transferType": "نوع انتقال",
+            "metre": "میتر",
+            "dayDepot": "روز انبار",
+            "toOilTank": "به مخزن",
+            "fromOilTank": "از مخزن",
+            "transferByMetreTrue": "فعال",
+            "transferByMetreFalse": "غیر فعال",
+            "natureAmount": "مقدار طبیعی",
+            "sixtyAmount": "مقدار 60 درجه",
+            "specialWeight": "وزن مخصوص",
+            "environmentTemperature": "دمای محیط",
+            "productTemperature": "دمای فرآورده"
+
+        }
+    },
+    "niopdcaoApp": {
+        "transfer": {
+            "created": "انتقال جدید با موفقیت ایجاد شد.",
+            "updated": "انتقال با موفقیت ویرایش شد.",
+            "deleted": "انتقال با موفقیت حذف شد."
+        }
+    }
+}

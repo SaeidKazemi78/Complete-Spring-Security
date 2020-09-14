@@ -1,0 +1,37 @@
+{
+    "niopdcgatewayApp": {
+        "depot": {
+            "home": {
+                "title": "انبار ها",
+                "createLabel": "ایجاد انبار",
+                "createOrEditLabel": "ویرایش انبار",
+                "view": "نمایش انبار"
+            },
+            "delete": {
+                "question": "آیا برای حذف انبار  {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "انبار"
+            },
+            "title": "عنوان",
+            "code": "کد",
+            "costAccount": "حساب هزینه",
+            "accCode": "کد عملیاتی انبار",
+            "location": "ستاد / منطقه",
+            "product": "فرآورده",
+            "locationId": "ناحیه اصلی",
+            "depotType": "نوع انبار",
+            "refuelCenterId": "مرکز سوخت گیری",
+            "motherFinancialCode":"کد مالی مادر",
+            "counterPath":"مسیر فایل باجه",
+            "webServiceUrl": "آدرس وب سرویس انبار"
+        }
+    },
+    "niopdcbaseApp": {
+        "depot": {
+            "created": "انبار با موفقیت  ایجاد شد.",
+            "updated": "انبار با موفقیت  ویرایش شد.",
+            "deleted": "انبار با موفقیت  حذف شد."
+        }
+    }
+}

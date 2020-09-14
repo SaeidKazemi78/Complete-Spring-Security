@@ -1,0 +1,13 @@
+{
+    "niopdcgatewayApp": {
+        "degreeOfEducation" : {
+            "null": "",
+            "MIDDLE_SCHOOL": "سیکل",
+            "DIPLOMA": "دیپلم",
+            "ASSOCIATE": "کاردانی",
+            "BACHELORS": "کارشناسی",
+            "MA": "کارشناسی ارشد",
+            "PHD": "دکترا"
+        }
+    }
+}

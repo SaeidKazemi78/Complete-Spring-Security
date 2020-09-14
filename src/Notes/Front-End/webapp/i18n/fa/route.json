@@ -1,0 +1,48 @@
+
+{
+    "niopdcgatewayApp": {
+        "route" : {
+            "home": {
+                "title": "مسیرها",
+                "createLabel": "ایجاد مسیر",
+                "createOrEditLabel": "ویرایش مسیر"
+            },
+            "delete": {
+                "question": "آیا برای حذف مسیر مطمئن هستید‌؟"
+            },
+            "detail": {
+                "title": "مسیر"
+            },
+            "sourceCode": "کد مبدا",
+            "sourceTadaCode": "کد تدا مبدا",
+            "sourceName": "نام مبدا",
+            "customerCode": "کد مشتری",
+            "destCode": "کد مقصد",
+            "destOpCode": "کد عملیاتی مقصد",
+            "destName": "نام مقصد",
+            "oldCode": "کد قدیمی",
+            "isActive": "فعال",
+            "customerStatus": "وضعیت مشتری",
+            "hamlType": "نوع حمل",
+            "customerType": "نوع مشتری",
+            "rate": "امتیاز",
+            "distanceKm": "فاصله به کیلومتر",
+            "description": "توضیحات",
+            "executeDate": "تاریخ اجرا",
+            "taCode": "کد تدا",
+            "code": "کد",
+            "customerName": "نام مشتری",
+            "address": "آدرس",
+            "via": "Via",
+            "caption": "عنوان",
+            "routeType": "نوع مسیر"
+        }
+    },
+    "niopdcbaseApp": {
+        "route" : {
+            "created": "مسیر با موفقیت ایجاد شد.",
+            "updated": "مسیر با موفقیت ویرایش شد.",
+            "deleted": "مسیر با موفقیت حذف شد."
+        }
+    }
+}

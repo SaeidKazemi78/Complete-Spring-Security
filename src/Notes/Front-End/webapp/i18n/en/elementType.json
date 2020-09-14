@@ -1,0 +1,12 @@
+{
+    "niopdcgatewayApp": {
+        "ElementType" : {
+            "null": "",
+            "COALESCER": "COALESCER",
+            "MICROFILTER": "MICROFILTER",
+            "SEPARATOR": "SEPARATOR",
+            "MONITOR": "MONITOR",
+            "CLAY": "CLAY"
+        }
+    }
+}

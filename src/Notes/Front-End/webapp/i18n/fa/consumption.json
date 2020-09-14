@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "consumption" : {
+            "home": {
+                "title": "انواع مصرف",
+                "createLabel": "ایجاد نوع مصرف",
+                "createOrEditLabel": "ویرایش نوع مصرف",
+                "view": "نمایش نوع مصرف"
+            },
+            "delete": {
+                "question": "آیا برای حذف نوع مصرف  {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "نوع مصرف"
+            },
+            "title": "عنوان مصرف",
+            "code": "كد",
+            "manualQuota":"ثبت سهمیه به صورت دستی"
+        }
+    },
+    "niopdcbaseApp": {
+        "consumption" : {
+            "created": "انواع مصرف با موفقیت  ایجاد شد.",
+            "updated": "انواع مصرف با موفقیت  ویرایش شد.",
+            "deleted": "انواع مصرف با موفقیت  حذف شد."
+        }
+    }
+}

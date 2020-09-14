@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "RequestStatus" : {
+            "null": "",
+            "DRAFT": "DRAFT",
+            "CONFIRM": "CONFIRM",
+            "SEND": "SEND"
+        }
+    }
+}

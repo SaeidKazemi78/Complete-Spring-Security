@@ -1,0 +1,50 @@
+
+{
+    "niopdcgatewayApp": {
+        "infringement" : {
+            "home": {
+                "title": "تخلفات",
+                "createLabel": "ایجاد تخلف",
+                "report": "چاپ تخلف",
+                "createOrEditLabel": "ویرایش تخلف"
+            },
+            "detail": {
+                "title": "تخلف"
+            },
+            "report": {
+                "title": "گزارش تخلفات"
+            },
+            "delete": {
+                "question": "آیا برای حذف تخلف مطمئن هستید؟"
+            },
+            "infringementType": "نوع تخلف",
+            "driverNationalCode": "کد ملی/گذرنامه راننده",
+            "driverLastName": "نام خانوادگی راننده",
+            "driverFirstName": "نام راننده",
+            "ownerNationalCode": "کد ملی/گذرنامه مالک",
+            "ownerLastName": "نام خانوادگی مالک",
+            "ownerFirstName": "نام مالک",
+            "driverFullName": "نام و نام خانوادگی راننده",
+            "ownerFullName": "نام و نام خانوادگی مالک",
+            "handlingReference": "مرجع رسیدگی",
+            "active": "فعال",
+            "productTitle": "فرآورده",
+            "description": "توضیحات",
+            "amount": "مقدار (لیتر)",
+            "file":"فایل پیوست ",
+            "locationId": "ناحیه",
+            "location": "ناحیه",
+            "activeTrue": "فعال",
+            "activeAll": "همه",
+            "activeFalse": "غیرفعال"
+        }
+    },
+    "niopdcbaseApp": {
+        "infringement" : {
+            "created": "تخلف با موفقیت ایجاد شد.",
+            "updated": "تخلف با موفقیت ویرایش شد.",
+            "deActive": "تخلف با موفقیت غیرفعال شد.",
+            "deleted": "تخلف با موفقیت حذف شد."
+        }
+    }
+}

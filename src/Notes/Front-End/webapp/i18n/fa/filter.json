@@ -1,0 +1,34 @@
+
+{
+    "niopdcgatewayApp": {
+        "filter" : {
+            "home": {
+                "title": "فیلتر",
+                "createLabel": "Create a new Filter",
+                "createOrEditLabel": "Create or edit a Filter"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Filter {{ id }}?"
+            },
+            "detail": {
+                "title": "فیلتر"
+            },
+            "capacity": "ظرفیت",
+            "title": "عنوان",
+            "detail": "Detail",
+            "lastVisitDate": "تاریخ آخرین بازدید",
+            "debiOperation": "دبی عملیات",
+            "isActive": "فعال",
+            "refuelCenter": "مرکز سوختگیری",
+            "manufacture": "شرکت سازنده",
+            "detail": "Detail"
+        }
+    },
+    "niopdcaoApp": {
+        "filter" : {
+            "created": "فیلتر با موفقیت ایجاد شد.",
+            "updated": "فیلتر با موفقیت ویرایش شد.",
+            "deleted": "فیلتر با موفقیت حذف شد."
+        }
+    }
+}

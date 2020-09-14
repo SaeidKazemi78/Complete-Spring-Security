@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "Effect" : {
+            "null": "",
+            "BASE": "بهای فرآورده",
+            "TOTAL": "بهای فرآورده + سایر هزینه ها",
+            "PARENT_COST": "پدر"
+        }
+    }
+}

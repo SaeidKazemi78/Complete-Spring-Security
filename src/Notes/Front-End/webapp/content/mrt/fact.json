@@ -1,0 +1,73 @@
+{
+    "sellerPerson": {
+        "name": "شرکت ملی پخش فرآورده های نفتی ایران",
+        "economicCode": "12457511",
+        "registerNo": "2112548",
+        "codeLegal": "11524522",
+        "region": "تهران",
+        "state":"تهران",
+        "city": "تهران",
+        "postalCode": "122445878",
+        "address": "تهران - نظام اباد",
+        "telephone": "0212222222",
+        "faxNumber": "0213333333"
+    },
+    "buyerPerson": {
+        "name": "شرکت ملی پخش فرآورده های نفتی ایران",
+        "economicCode": "12457511",
+        "registerNo": "2112548",
+        "codeLegal": "11524522",
+        "region": "تهران",
+        "state":"تهران",
+        "city": "تهران",
+        "postalCode": "122445878",
+        "address": "تهران - نظام اباد",
+        "telephone": "0212222222",
+        "faxNumber": "0213333333"
+    },
+    "orderProducts":[
+        {
+            "description":"توضیحات کالا مالا",
+            "amount":12,
+            "productUnit":"لیتر",
+            "productRatePrice":1000,
+            "basePrice":10000000,
+            "totalPrice":12000000,
+            "costPrice":100000
+        },
+        {
+            "description":"توضیحات کالا مالا",
+            "amount":12,
+            "productUnit":"لیتر",
+            "product_rate_price":1000,
+            "base_price":10000000,
+            "total_price":12000000,
+            "cost_price":100000
+        },
+        {
+            "description":"توضیحات کالا مالا",
+            "amount":12,
+            "productUnit":"لیتر",
+            "product_rate_price":1000,
+            "base_price":10000000,
+            "total_price":12000000,
+            "cost_price":100000
+        },
+        {
+            "description":"توضیحات کالا مالا",
+            "amount":12,
+            "productUnit":"لیتر",
+            "product_rate_price":1000,
+            "base_price":10000000,
+            "total_price":12000000,
+            "cost_price":100000
+        }
+    ],
+    "information":{
+        "printDate":"۱۳۹۷/۰۳/۱۴",
+        "serialNumber":"۱۲۳۴۳۵۵۴",
+        "registerDate":"۱۳۹۷/۰۳/۱۴",
+        "fromDate":"۱۳۹۷/۰۳/۱۴",
+        "toDate":"۱۳۹۷/۰۳/۱۴"
+    }
+}

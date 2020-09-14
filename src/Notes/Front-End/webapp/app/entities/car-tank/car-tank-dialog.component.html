@@ -1,0 +1,114 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="carTank.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="carTank.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.carTank.tankType"
+                           for="field_tankType">Tank
+                        Type</label>
+                    <select [disabled]="isView" class="form-control" name="tankType" [(ngModel)]="carTank.tankType"
+                            id="field_tankType" required>
+                        <option value="CUBE">{{'niopdcgatewayApp.TankType.CUBE' | translate}}
+                        </option>
+                        <option value="CYLINDER">{{'niopdcgatewayApp.TankType.CYLINDER' |
+                            translate}}
+                        </option>
+                        <option value="D_SHAPE">{{'niopdcgatewayApp.TankType.D_SHAPE' | translate}}
+                        </option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.tankType?.dirty && editForm.controls.tankType?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.tankType?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.carTank.tankNo"
+                           for="field_tankNo">Tank
+                        Type</label>
+                    <select [disabled]="isView" class="form-control" name="code" [(ngModel)]="carTank.tankNo" id="field_tankNo" required>
+                        <option [value]="null"></option>
+                        <option [value]="1">1</option>
+                        <option [value]="2">2</option>
+                        <option [value]="3">3</option>
+                        <option [value]="4">4</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.tankNo?.dirty && editForm.controls.tankNo?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.tankNo?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.carTank.longitude"
+                           for="field_longitude">Longitude</label>
+                    <input [disabled]="isView" [numeric]="{min:0}" type="number" class="form-control" name="longitude"
+                           id="field_longitude" required
+                           [(ngModel)]="carTank.longitude"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.carTank.latitude"
+                           for="field_latitude">Latitude</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="latitude"
+                           id="field_latitude" required [numeric]="{min:0}"
+                           [(ngModel)]="carTank.latitude"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.carTank.height"
+                           for="field_height">Type</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="height" id="field_height"
+                           [(ngModel)]="carTank.height" required [numeric]="{min:0}"/>
+                    <div [hidden]="!(editForm.controls.height?.dirty && editForm.controls.height?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.height?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.height?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

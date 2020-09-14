@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "ExportPiType" : {
+            "null": "",
+            "undefined": "نامشخص",
+            "CREDIT": "اعتباری",
+            "CASH": "نقدی"
+        }
+    }
+}

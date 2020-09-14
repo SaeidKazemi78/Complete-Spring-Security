@@ -1,0 +1,31 @@
+
+{
+    "niopdcgatewayApp": {
+        "niopdcConfig" : {
+            "invoiceCounterOffset":" شمارنده سیاهه فروش",
+            "home": {
+                "title": "تنظیمات",
+                "createLabel": "ایجاد تنظیمات",
+                "createOrEditLabel": "ویرایش تنظیمات"
+            },
+            "delete": {
+                "question": "آیا برای حذف این تنظیمات مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "تنظیمات"
+            },
+            "startDate": "تاریخ شروع",
+            "finishDate": "تاریخ پایان",
+            "boundaryCurrencyRateGroupId": "گروه نرخ واحد پولی",
+            "boundaryCurrencies":"ارزها",
+            "configType":"اعمال برای"
+        }
+    },
+    "niopdcbaseApp": {
+        "niopdcConfig" : {
+            "created": "تنظیمات با موفقیت ایجاد شد.",
+            "updated": "تنظیمات با موفقیت ویرایش شد.",
+            "deleted": "تنظیمات با موفقیت حذف شد."
+        }
+    }
+}

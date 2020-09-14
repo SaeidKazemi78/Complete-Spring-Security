@@ -1,0 +1,130 @@
+<div>
+    <div class="input-group">
+        <input #inp class="textInput form-control" style="border:0; height: unset;"
+               [readonly]="!disabled" [disabled]="disabled"
+               [ngModel]="(multiSelect) ? ((selects && selects.length && selects.length > 0) ? selects.length + ' مورد انتخاب شد' : 'موردی انتخاب نشده است') : (selects ? selects.fullName: '')"
+            (focus)="showTable()">
+        <a *ngIf="!disabled" class="input-group-append btn btn-outline-secondary" [ngClass]="{'mid-btn': creator, 'rtl-btn': !creator}" (click)="showTable()">
+            <span class="fa fa-search"></span>
+        </a>
+        <button *ngIf="!disabled && creator" type="button" class="input-group-append btn btn-outline-secondary" [ngClass]="{'rtl-btn': creator}"
+           [routerLink]="['/', { outlets: { popup: ['person-new'] } }]">
+            <span class="fa fa-plus"></span>
+        </button>
+    </div>
+    <div [style.visibility]="!overlayVisible ? 'collapse' : 'visible'"
+         [style.height]="!overlayVisible ? '0' : 'none'"
+         [style.overflow]="!overlayVisible ? 'hidden' : 'visible'"
+         [style.width]="widthGrid" style="padding: 0;"
+         class="d-inline-block rounded dataGrid">
+        <p-dataTable [value]="people"
+                     [selectionMode]="multiSelect ? 'multiple' : 'single'"
+                     [(selection)]="selects"
+                     (onRowUnselect)="onSelect($event, false)"
+                     (onRowSelect)="onSelect($event, true)"
+                     [lazy]="true" [rows]="itemsPerPage" [rowsPerPageOptions]="[5,10,20,totalItems]"
+                     [paginator]="true" [responsive]="true" [stacked]="false"
+                     [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)">
+            <p-header>
+                <button class="btn btn-info" type="button" (click)="search()">
+                    <span class="fa fa-search"></span>
+                </button>
+                <button class=" btn btn-danger" type="button" (click)="clear()">
+                    <span class="fa fa-remove"></span>
+                </button>
+                <button class=" btn btn-danger" type="button" (click)="empty()">
+                    <span class="fa fa-trash"></span>
+                </button>
+            </p-header>
+
+            <p-headerColumnGroup>
+                <p-row>
+                    <p-column [style]="{'width':'38px'}"></p-column>
+                    <p-column field="fullName" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.person.fullName">Full Name</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="code" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.person.code">Code</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="personality" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.person.personality">Personality</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column *ngIf="personGroup === PersonGroup[PersonGroup.CONTRACTOR]" field="personality" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.person.registerContractorNo">Personality</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column *ngIf="companyId" field="sharePercent" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span>Share Percent</span>
+                        </ng-template>
+                    </p-column>
+                </p-row>
+                <p-row>
+                    <p-column></p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="name" id="field_name"
+                                   [(ngModel)]="person.fullName"
+                                   maxlength="42"
+                                   search-after-typed (onSearch)="search()"/>
+                        </ng-template>
+                    </p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="code" id="field_code"
+                                   [(ngModel)]="person.code"
+                                   maxlength="11"
+                                   search-after-typed (onSearch)="search()"/>
+                        </ng-template>
+                    </p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <select class="form-control" name="personality" (change)="search()"
+                                    [(ngModel)]="person.personality" id="field_personality">
+                                <option></option>
+                                <option value="LEGAL">{{'niopdcgatewayApp.Personality.LEGAL' | translate}}</option>
+                                <option value="NATURAL">{{'niopdcgatewayApp.Personality.NATURAL' | translate}}</option>
+                            </select>
+                        </ng-template>
+                    </p-column>
+                    <p-column *ngIf="personGroup === PersonGroup[PersonGroup.CONTRACTOR]">
+                        <ng-template pTemplate="header">
+                            <input class="form-control" name="transportCode" (change)="search()"
+                                    [(ngModel)]="person.personTransportCode" id="field_contractorCode"/>
+                        </ng-template>
+                    </p-column>
+                    <p-column *ngIf="companyId">
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="number"
+                                   name="sharePercent" id="field_sharePercent"
+                                   [(ngModel)]="person.sharePercent"
+                                   max="100"
+                            />
+                        </ng-template>
+                    </p-column>
+                </p-row>
+            </p-headerColumnGroup>
+            <p-column [selectionMode]="multiSelect ? 'multiple' : 'single'"></p-column>
+            <p-column field="fullName" [header]="'niopdcgatewayApp.person.fullName' | translate"></p-column>
+            <p-column field="code" [header]="'niopdcgatewayApp.person.code' | translate"></p-column>
+            <p-column field="personality" [header]="'niopdcgatewayApp.person.personality' | translate">
+                <ng-template let-item="rowData" pTemplate="body">
+                    <span jhiTranslate="{{'niopdcgatewayApp.Personality.' + item.personality}}">{{item.personality}}</span>
+                </ng-template></p-column>
+            <p-column *ngIf="personGroup === PersonGroup[PersonGroup.CONTRACTOR]" field="personTransportCode" [header]="'niopdcgatewayApp.person.code' | translate"></p-column>
+
+            <p-column *ngIf="companyId" field="sharePercent"></p-column>
+        </p-dataTable>
+    </div>
+</div>
+
+

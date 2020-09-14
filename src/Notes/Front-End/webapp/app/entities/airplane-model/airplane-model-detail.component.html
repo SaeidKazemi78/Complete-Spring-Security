@@ -1,0 +1,36 @@
+
+<div *ngIf="airplaneModel">
+    <h2><span jhiTranslate="niopdcgatewayApp.airplaneModel.detail.title">Airplane Model</span> {{airplaneModel.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="niopdcgatewayApp.airplaneModel.title">Title</span></dt>
+        <dd>
+            <span>{{airplaneModel.title}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.airplaneModel.capacity">Capacity</span></dt>
+        <dd>
+            <span>{{airplaneModel.capacity}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.airplaneModel.product">Product</span></dt>
+        <dd>
+            <div *ngIf="airplaneModel.productId">
+                <a [routerLink]="['/product', airplaneModel.productId]">{{airplaneModel.productTitle}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'airplane-model/'+ airplaneModel.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

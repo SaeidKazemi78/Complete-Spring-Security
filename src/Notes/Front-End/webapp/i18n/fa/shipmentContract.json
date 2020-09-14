@@ -1,0 +1,39 @@
+{
+    "niopdcgatewayApp": {
+        "shipmentContract": {
+            "home": {
+                "homeTitle": "خانه",
+                "customerTitle":"مشتری",
+                "title": "قرارداد حمل",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ایجاد یا ویرایش",
+                "search": "جستجو"
+            },
+            "delete": {
+                "question": "آیا برای حذف قرارداد حمل با شماره قرارداد {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "قرارداد حمل"
+            },
+            "startDate": "تاريخ شروع قرارداد",
+            "finishDate": "تاريخ پايان قرارداد",
+            "exportationDate": "تاريخ صدور",
+            "contractNo": "شماره قرارداد",
+            "description": "توضيحات",
+            "active": "فعال",
+            "inactive": "غیر فعال",
+            "address": "آدرس",
+            "telephone": "تلفن",
+            "postalCode": "كد پستي",
+            "contractor": "پیمانکارحمل",
+            "customer": "مشتری"
+        }
+    },
+    "niopdcbaseApp": {
+        "shipmentContract": {
+            "created": "قرارداد حمل با موفقیت  ایجاد شد.",
+            "updated": "قرارداد حمل با موفقیت  ویرایش شد.",
+            "deleted": "قرارداد حمل با موفقیت  حذف شد."
+        }
+    }
+}

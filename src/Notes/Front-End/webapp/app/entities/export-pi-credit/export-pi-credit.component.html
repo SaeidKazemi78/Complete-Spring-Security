@@ -1,0 +1,120 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <p-dataTable #dt [value]="customerCredits"
+                 [lazy]="false"
+                 [paginator]="false" [responsive]="true" [stacked]="false"
+                 [totalRecords]="totalItems"
+                 [emptyMessage]="'global.messages.info.emptyRecords' | translate">
+        <p-header>
+            <div class="ui-helper-clearfix">
+                <button class="btn btn-primary float-right create-entity"
+                        *jhiHasAnyAuthority="{auth:['ROLE_ADMIN', 'CREATE_EXPORT_PI_CREDIT'],
+                                andIf:exportLetter?.status !== 'ACTIVE'}"
+                        [routerLink]="[{ outlets: { popup: ['new' , exportPiId] } }]">
+                    <span class="fa fa-plus"></span>
+                    <span jhiTranslate="entity.action.create">Create</span>
+                </button>
+            </div>
+        </p-header>
+
+        <p-headerColumnGroup>
+            <p-row>
+                <p-column field="startDate" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.customerCredit.startDate">startDate</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="finishDate" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.customerCredit.finishDate">Finish Date</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="creditNumber" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.customerCredit.creditNumber">Credit Number</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="currentCredit" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.customerCredit.currentCredit">Current Credit</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="currentAmount" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.customerCredit.currentAmount">Current Amount</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="parentBuyTypeTitle" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.customerCredit.parentBuyType">Parent Buy Type</span>
+                    </ng-template>
+                </p-column>
+                <p-column styleClass="col-button">
+                    <ng-template pTemplate="header">
+                        <button class="btn btn-info" (click)="search()">
+                            <span class="fa fa-refresh"></span>
+                        </button>
+                    </ng-template>
+                </p-column>
+            </p-row>
+        </p-headerColumnGroup>
+
+        <p-column field="startDate" [header]="'niopdcgatewayApp.customerCredit.startDate' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span>{{item.startDate | dateJalali}}</span>
+            </ng-template>
+        </p-column>
+        <p-column field="finishDate" [header]="'niopdcgatewayApp.customerCredit.finishDate' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span>{{item.finishDate | dateJalali}}</span>
+            </ng-template>
+        </p-column>
+        <p-column field="creditNumber" [header]="'niopdcgatewayApp.customerCredit.creditNumber' | translate"></p-column>
+        <p-column field="currentCredit"
+                  [header]="'niopdcgatewayApp.customerCredit.currentCredit' | translate"></p-column>
+        <p-column field="currentAmount"
+                  [header]="'niopdcgatewayApp.customerCredit.currentAmount' | translate"></p-column>
+        <p-column field="parentBuyTypeId" [header]="'niopdcgatewayApp.customerCredit.parentBuyType' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span *ngIf="item.parentBuyTypeTitle">{{item.parentBuyTypeTitle + '(' + ('niopdcgatewayApp.BuyGroup.' + item.parentBuyGroup | translate) + ')'}}</span>
+            </ng-template>
+        </p-column>
+        <p-column class="component">
+            <ng-template let-item="rowData" pTemplate="body">
+                <div class="btn-group" ngbDropdown placement="right">
+                    <ng-container>
+                        <button type="button" class="btn btn-primary"
+                                *jhiHasAnyAuthorityDisabled="['ROLE_ADMIN', 'EDIT_EXPORT_PI_CREDIT']"
+                                replaceUrl="true"
+                                [routerLink]="[{ outlets: { popup:  item.id+ '/edit'} }]">
+                            <span class="fa fa-edit"></span>
+                            <span jhiTranslate="entity.action.edit">ویرایش</span>
+                        </button>
+                        <button class="btn btn-primary"
+                                *jhiHasAnyAuthorityDisabled="['ROLE_ADMIN', 'VIEW_EXPORT_PI_CREDIT', 'DELETE_EXPORT_PI_CREDIT']"
+                                ngbDropdownToggle></button>
+                        <div class="dropdown-menu" ngbDropdownMenu>
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'VIEW_EXPORT_PI_CREDIT']"
+                                    replaceUrl="true"
+                                    [routerLink]="[{ outlets: { popup:  item.id +'/view'} }]">
+                                <span class="fa fa-eye"></span>
+                                <span jhiTranslate="entity.action.view">نمایش</span>
+                            </button>
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'DELETE_EXPORT_PI_CREDIT']"
+                                    replaceUrl="true"
+                                    [routerLink]="[{ outlets: { popup:  item.id + '/delete'} }]">
+                                <span class="fa fa-remove"></span>
+                                <span jhiTranslate="entity.action.delete">delete</span>
+                            </button>
+                        </div>
+                    </ng-container>
+
+                </div>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+</div>

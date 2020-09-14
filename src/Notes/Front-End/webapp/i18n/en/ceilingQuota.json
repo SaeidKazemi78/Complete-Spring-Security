@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "ceilingQuota" : {
+            "home": {
+                "title": "Ceiling Quotas",
+                "createLabel": "Create a new Ceiling Quota",
+                "createOrEditLabel": "Create or edit a Ceiling Quota"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Ceiling Quota {{ id }}?"
+            },
+            "detail": {
+                "title": "Ceiling Quota"
+            },
+            "startDate": "Start Date",
+            "finishDate": "Finish Date",
+            "amount": "Amount",
+            "customerCredit": "Customer Credit"
+        }
+    },
+    "niopdcbaseApp": {
+        "ceilingQuota" : {
+            "created": "A new Ceiling Quota is created with identifier {{ param }}",
+            "updated": "A Ceiling Quota is updated with identifier {{ param }}",
+            "deleted": "A Ceiling Quota is deleted with identifier {{ param }}"
+        }
+    }
+}

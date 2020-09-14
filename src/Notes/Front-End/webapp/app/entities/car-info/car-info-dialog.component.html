@@ -1,0 +1,98 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="carInfo.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="carInfo.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.carInfo.physicalInsuranceNo"
+                           for="field_physicalInsuranceNo">Physical Insurance No</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="physicalInsuranceNo"
+                           id="field_physicalInsuranceNo"
+                           [(ngModel)]="carInfo.physicalInsuranceNo"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.carInfo.physicalInsuranceExpireDate"
+                           for="field_physicalInsuranceExpireDate">Physical Insurance Expire Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                            id="field_physicalInsuranceExpireDate" class="form-control"
+                                            name="physicalInsuranceExpireDate"
+                                            [(ngModel)]="carInfo.physicalInsuranceExpireDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.carInfo.thirdPartyInsuranceNo"
+                           for="field_thirdPartyInsuranceNo">Third Party Insurance No</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="thirdPartyInsuranceNo"
+                           id="field_thirdPartyInsuranceNo"
+                           [(ngModel)]="carInfo.thirdPartyInsuranceNo"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.carInfo.thirdPartyInsuranceExpireDate"
+                           for="field_thirdPartyInsuranceExpireDate">Third Party Insurance Expire Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                            id="field_thirdPartyInsuranceExpireDate" class="form-control"
+                                            name="thirdPartyInsuranceExpireDate"
+                                            [(ngModel)]="carInfo.thirdPartyInsuranceExpireDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.carInfo.sealNumber"
+                           for="field_sealNumber">Third Party Insurance No</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="sealNumber"
+                           id="field_sealNumber"
+                           [(ngModel)]="carInfo.sealNumber"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.carInfo.capacity"
+                           for="field_capacity">Third Party Insurance No</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="capacity"
+                           id="field_capacity"
+                           [(ngModel)]="carInfo.capacity"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

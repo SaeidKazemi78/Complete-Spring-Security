@@ -1,0 +1,305 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <div *ngIf="!showReport">
+        <form name="editForm" role="form" novalidate (ngSubmit)="loadAll()" #editForm="ngForm">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <h5 class="col-md-3"
+                            jhiTranslate="report.search">Search
+                        </h5>
+                    </div>
+                </div>
+                <div class="card-block container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.momentSheet.refuelCenter"
+                                       for="field_refuelCenter">RefuelCenter</label>
+                                <select class="form-control" id="field_refuelCenter"
+                                        name="refuelCenter"
+                                        (ngModelChange)="onChangeRefuelCenter($event)"
+                                        [(ngModel)]="req.refuelCenterId"
+                                        required
+                                >
+                                    <option [ngValue]="null" selected></option>
+                                    <option [ngValue]="refuelCenterOption.id"
+                                            *ngFor="let refuelCenterOption of refuelCenters">
+                                        {{refuelCenterOption.persianTitle}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.momentSheet.startTime"
+                                       for="field_startTime">Register Date</label>
+                                <div class="d-flex">
+                                    <ng2-datetimepicker  [rtlActive]="true" time="00:00:00"
+                                                        id="field_startTime"
+                                                        class="form-control"
+                                                        name="startTime" [(ngModel)]="req.startTime"
+                                                        required></ng2-datetimepicker>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.momentSheet.endTime"
+                                       for="field_endTime">Register Date</label>
+                                <div class="d-flex">
+                                    <ng2-datetimepicker  [rtlActive]="true" time="23:59:59"
+                                                        id="field_endTime"
+                                                        class="form-control"
+                                                        name="endTime" [(ngModel)]="req.endTime"
+                                                        required></ng2-datetimepicker>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-center">
+                    <button type="submit" class="btn btn-primary "
+                            [disabled]="editForm.form.invalid">
+                        <span class="fa fa-search"></span>&nbsp;<span
+                        jhiTranslate="report.search">Save</span>
+                    </button>
+                    <button type="button" (click)="showPrint()" class="btn btn-primary"
+                            [disabled]="!momentSheets || momentSheets.length<1">
+                        <span class="fa fa-print"></span>&nbsp;<span
+                        jhiTranslate="report.print">Save</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <br/>
+        <div *ngIf="!showReport">
+            <dx-data-grid
+                id="report"
+                [rtlEnabled]="true"
+                [dataSource]="momentSheets"
+                [columnAutoWidth]="true"
+                [showBorders]="true"
+                [allowColumnReordering]="true"
+            >
+                <dxo-export [enabled]="true" fileName="momentsheet"></dxo-export>
+                <dxi-column
+                    caption="واحد"
+                    dataField="oilTankCode"></dxi-column>
+                <dxi-column
+                    caption="تاریخ آخرین بارگیری"
+                    dataField="day"></dxi-column>
+                <dxi-column
+                    caption="فرآورده"
+                    dataField="productTitle"></dxi-column>
+                <dxi-column
+                    caption="موجودی اولیه"
+                    dataField="startMeasurementOilTankAmount"></dxi-column>
+                <dxi-column caption="رسیده ها">
+                    <dxi-column
+                        caption="انبار"
+                        dataField="receivedFromOilTanks"></dxi-column>
+                    <dxi-column
+                        caption="هواپیما"
+                        dataField="receivedFromLogBooks"></dxi-column>
+                    <dxi-column
+                        caption="واحد"
+                        dataField="receivedFromUnitOilTanks"></dxi-column>
+                </dxi-column>
+                <dxi-column
+                    caption="جمع موجودی اولیه و رسیده ها"
+                    [width]="80"
+                    dataField="sumOfReceive"></dxi-column>
+                <dxi-column caption="انتقال ها">
+                    <dxi-column
+                        caption="به واحد"
+                        dataField="sendToUnitOilTanks"></dxi-column>
+                    <dxi-column
+                        caption="به مخزن سرویس"
+                        dataField="sendToServiceOilTanks"></dxi-column>
+                    <dxi-column
+                        caption="به مخزن آلوده"
+                        dataField="sendToContaminatedOilTanks"></dxi-column>
+                </dxi-column>
+                <dxi-column
+                    caption="جمع انتقال ها"
+                    dataField="sumOfSends"></dxi-column>
+                <dxi-column
+                    caption="جمع تحویلی به هواپیما"
+                    dataField="sendToLogBooks"></dxi-column>
+                <dxi-column
+                    caption="سرک"
+                    dataField="addition"></dxi-column>
+                <dxi-column
+                    caption="کمبود"
+                    dataField="deductible"></dxi-column>
+                <dxi-column
+                    caption="موجودی انتهایی"
+                    dataField="endMeasurementOilTankAmount"></dxi-column>
+                <dxo-group-panel [visible]="true"></dxo-group-panel>
+                <dxo-summary>
+                    <dxi-total-item
+                        column="startMeasurementOilTankAmount"
+                        summaryType="sum">
+                    </dxi-total-item>
+
+                    <dxi-total-item
+                        column="receivedFromOilTanks"
+                        summaryType="sum">
+                    </dxi-total-item>
+
+                    <dxi-total-item
+                        column="receivedFromLogBooks"
+                        summaryType="sum">
+                    </dxi-total-item>
+
+                    <dxi-total-item
+                        column="receivedFromUnitOilTanks"
+                        summaryType="sum">
+                    </dxi-total-item>
+
+                    <dxi-total-item
+                        column="sumOfReceive"
+                        summaryType="sum">
+                    </dxi-total-item>
+
+                    <dxi-total-item
+                        column="sendToUnitOilTanks"
+                        summaryType="sum">
+                    </dxi-total-item>
+
+                    <dxi-total-item
+                        column="sendToServiceOilTanks"
+                        summaryType="sum">
+                    </dxi-total-item>
+
+                    <dxi-total-item
+                        column="sendToContaminatedOilTanks"
+                        summaryType="sum">
+                    </dxi-total-item>
+
+                    <dxi-total-item
+                        column="sumOfSends"
+                        summaryType="sum">
+                    </dxi-total-item>
+
+                    <dxi-total-item
+                        column="sendToLogBooks"
+                        summaryType="sum">
+                    </dxi-total-item>
+
+                    <dxi-total-item
+                        column="addition"
+                        summaryType="sum">
+                    </dxi-total-item>
+
+                    <dxi-total-item
+                        column="deductible"
+                        summaryType="sum">
+                    </dxi-total-item>
+
+                    <dxi-total-item
+                        column="endMeasurementOilTankAmount"
+                        summaryType="sum">
+                    </dxi-total-item>
+
+
+
+                    <dxi-group-item
+                        column="startMeasurementOilTankAmount"
+                        [alignByColumn]="true"
+                        summaryType="sum">
+                    </dxi-group-item>
+
+                    <dxi-group-item
+                        column="receivedFromOilTanks"
+                        [alignByColumn]="true"
+                        summaryType="sum">
+                    </dxi-group-item>
+
+                    <dxi-group-item
+                        column="receivedFromLogBooks"
+                        [alignByColumn]="true"
+                        summaryType="sum">
+                    </dxi-group-item>
+
+                    <dxi-group-item
+                        column="receivedFromUnitOilTanks"
+                        [alignByColumn]="true"
+                        summaryType="sum">
+                    </dxi-group-item>
+
+                    <dxi-group-item
+                        column="sumOfReceive"
+                        [alignByColumn]="true"
+                        summaryType="sum">
+                    </dxi-group-item>
+
+                    <dxi-group-item
+                        column="sendToUnitOilTanks"
+                        [alignByColumn]="true"
+                        summaryType="sum">
+                    </dxi-group-item>
+
+                    <dxi-group-item
+                        column="sendToServiceOilTanks"
+                        [alignByColumn]="true"
+                        summaryType="sum">
+                    </dxi-group-item>
+
+                    <dxi-group-item
+                        column="sendToContaminatedOilTanks"
+                        [alignByColumn]="true"
+                        summaryType="sum">
+                    </dxi-group-item>
+
+                    <dxi-group-item
+                        column="sumOfSends"
+                        [alignByColumn]="true"
+                        summaryType="sum">
+                    </dxi-group-item>
+
+                    <dxi-group-item
+                        column="sendToLogBooks"
+                        [alignByColumn]="true"
+                        summaryType="sum">
+                    </dxi-group-item>
+
+                    <dxi-group-item
+                        column="addition"
+                        [alignByColumn]="true"
+                        summaryType="sum">
+                    </dxi-group-item>
+
+                    <dxi-group-item
+                        column="deductible"
+                        [alignByColumn]="true"
+                        summaryType="sum">
+                    </dxi-group-item>
+
+                    <dxi-group-item
+                        column="endMeasurementOilTankAmount"
+                        [alignByColumn]="true"
+                        summaryType="sum">
+                    </dxi-group-item>
+
+
+
+                </dxo-summary>
+            </dx-data-grid>
+        </div>
+        <div *ngIf="showReport">
+            <jhi-moment-sheet-report
+                [momentSheet]="momentSheets"
+                [fromDate]="req.startTime"
+                [toDate]="req.endTime"
+                [refuelCenterTitle]="refuelCenterTitle"
+                (onClose)="showPrint()"
+            ></jhi-moment-sheet-report>
+        </div>
+        <br/>
+    </div>
+</div>

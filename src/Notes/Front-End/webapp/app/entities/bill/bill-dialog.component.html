@@ -1,0 +1,196 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="bill.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="bill.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.order.locationId"
+                           for="field_locationId">Location Id</label>
+                    <app-location-level-selector
+                        [disabled]="isView || bill.id"
+                        [multiSelect]="false"
+                        [(ngModel)]="bill.locationId"
+                        class="form-control"
+                        id="field_locationId"
+                        widthGrid="300px"
+                        ngDefaultControl
+                        name="locationId">
+                    </app-location-level-selector>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.order.customerId"
+                           for="field_customerPersons">field_customerPersons</label>
+                    <sell-contract-customer-person-selector
+                        [disabled]="isView || bill.id"
+                        [selectObject]="true"
+                        [type]="'order'"
+                        [customerGroup] = "'STATION'"
+                        (selectedItem)="changeCustomerPerson($event)"
+                        [(ngModel)]="customerPerson"
+                        class="form-control"
+                        id="field_customerPersons"
+                        widthGrid="600px"
+                        ngDefaultControl
+                        [customerId]="bill.customerId"
+                        [locationId]="bill.locationId"
+                        required
+                        name="customerPersons">
+                    </sell-contract-customer-person-selector>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.bill.paymentPeriod"
+                           for="field_paymentPeriod">Payment Period</label>
+                    <select
+                        [disabled]="true"
+                        class="form-control"
+                        name="paymentPeriod"
+                        [(ngModel)]="bill.paymentPeriod"
+                        (ngModelChange)="paymentPeriodChanged()"
+                        id="field_paymentPeriod"
+                        required>
+                        <option   value="DAY">{{'niopdcgatewayApp.PaymentPeriod.DAY' | translate}}</option>
+                        <option [selected]="true" value="MONTH">{{'niopdcgatewayApp.PaymentPeriod.MONTH' | translate}}</option>
+                        <option  value="SEASON">{{'niopdcgatewayApp.PaymentPeriod.SEASON' | translate}}</option>
+                        <option   value="YEAR">{{'niopdcgatewayApp.PaymentPeriod.YEAR' | translate}}</option>
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.paymentPeriod?.dirty && editForm.controls.paymentPeriod?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.paymentPeriod?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3" *ngIf="bill.paymentPeriod">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.bill.year"
+                           for="field_year">year</label>
+                    <select class="form-control" name="year"
+                            id="field_year"
+                            [disabled]="isView || bill.id"
+                            [(ngModel)]="bill.year"
+                            (ngModelChange)="yearChanged()"
+                            required>
+                        <option *ngFor="let yearOptions of years" [ngValue]="yearOptions">
+                            {{yearOptions}}
+                        </option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.year?.dirty && editForm.controls.year?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.year?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3" *ngIf="bill.paymentPeriod === PaymentPeriod[PaymentPeriod.MONTH] ||
+                                         bill.paymentPeriod === PaymentPeriod[PaymentPeriod.DAY]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.bill.month"
+                           for="field_month">month</label>
+                    <select class="form-control"
+                            [disabled]="isView || bill.id"
+                            name="month"
+                            id="field_month"
+                            [(ngModel)]="bill.month"
+                            (ngModelChange)="monthChanged()"
+                            required>
+                        <option *ngFor="let monthOptions of months" [ngValue]="monthOptions">
+                            {{ ('niopdcgatewayApp.bill.months.' + monthOptions) | translate}}
+                        </option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.month?.dirty && editForm.controls.month?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.month?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3" *ngIf="bill.paymentPeriod === PaymentPeriod[PaymentPeriod.SEASON]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.bill.season"
+                           for="field_season">season</label>
+                    <select class="form-control"
+                            [disabled]="isView || bill.id"
+                            name="season"
+                            id="field_season"
+                            [(ngModel)]="bill.season"
+                            required>
+                        <option *ngFor="let seasonOptions of seasons" [ngValue]="seasonOptions">
+                           {{ ('niopdcgatewayApp.bill.seasons.' + seasonOptions) | translate}}
+                        </option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.season?.dirty && editForm.controls.season?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.season?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3" *ngIf="bill.paymentPeriod === PaymentPeriod[PaymentPeriod.DAY]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.bill.day"
+                           for="field_day">day</label>
+                    <select class="form-control"
+                            name="day"
+                            [disabled]="isView || bill.id"
+                            id="field_day"
+                            [(ngModel)]="bill.day"
+                            required>
+                        <option *ngFor="let dayOptions of days" [ngValue]="dayOptions">
+                            {{dayOptions}}
+                        </option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.day?.dirty && editForm.controls.day?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.day?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

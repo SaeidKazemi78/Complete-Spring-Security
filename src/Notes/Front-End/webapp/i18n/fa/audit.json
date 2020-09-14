@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "Audit" : {
+            "null": "",
+            "INITIAL": "ایجاد",
+            "UPDATE": "ویرایش",
+            "TERMINAL": "حذف"
+        }
+    }
+}

@@ -1,0 +1,37 @@
+<form name="plaqueChangeForm" (ngSubmit)="save()" #plaqueChangeForm="ngForm">
+    <div class="modal-header">
+        <h4 class="modal-title" jhiTranslate="entity.infringement.title">plaqueChange</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="file" jhiTranslate="niopdcgatewayApp.infringement.file">Choose File</label>
+                    <input type="file"
+                           id="file"
+                           (change)="handleFileInput($event.target.files)">
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label class="form-control-label"><span
+                    jhiTranslate="niopdcgatewayApp.infringement.description"></span> </label>
+                <textarea placeholder="{{'niopdcgatewayApp.infringement.description' | translate}}"
+                          minlength="3" class="form-control ng-untouched ng-pristine ng-invalid" id="field_keyMap_value"
+                          name="keyMap" type="text" [(ngModel)]="infringement.deActiveDescription">
+
+            </textarea>
+            </div >
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.deActive">Save</span>
+        </button>
+    </div>
+</form>

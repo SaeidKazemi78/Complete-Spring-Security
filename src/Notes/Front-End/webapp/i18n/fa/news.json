@@ -1,0 +1,39 @@
+
+{
+    "niopdcgatewayApp": {
+        "news" : {
+            "home": {
+                "title": "خبرها",
+                "createLabel": "ایجاد خبر",
+                "createOrEditLabel": "ویرایش خبر"
+            },
+            "delete": {
+                "question": "آیا برای حذف خبر مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "خبر"
+            },
+            "title": "عنوان",
+            "summary": "خلاصه",
+            "startDate": "تاریخ شروع",
+            "finishDate": "تاریخ پایان",
+            "date": "تاریخ",
+            "picture": "تصویر",
+            "picture1": "تصویر اول",
+            "picture2": "تصویر دوم",
+            "file":"فایل پیوست ",
+            "showNews": "نمایش به صورت پیشفرض",
+            "content": "محتوا",
+            "newsType": "نوع خبر",
+            "newsAccessType": "نوع دسترسی",
+            "location": "ناحیه"
+        }
+    },
+    "niopdcbaseApp": {
+        "news" : {
+            "created": "خبر با موفقیت ایجاد شد.",
+            "updated": "خبر با موفقیت ویرایش شد.",
+            "deleted": "خبر با موفقیت حذف شد."
+        }
+    }
+}

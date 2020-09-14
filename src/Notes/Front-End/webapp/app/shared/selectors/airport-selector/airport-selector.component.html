@@ -1,0 +1,98 @@
+<div>
+    <div class="input-group">
+        <input #inp class="textInput form-control" style="border:0; height: unset;"
+               [readonly]="!disabled" [disabled]="disabled"
+               [ngModel]="(multiSelect) ? ((selects && selects.length && selects.length > 0) ? selects.length + ' مورد انتخاب شد' : 'موردی انتخاب نشده است') : (selects ? selects.receiptNo: '')"
+               (focus)="showTable()">
+        <a *ngIf="!disabled" class="input-group-append btn btn-outline-secondary rtl-btn" (click)="showTable()">
+            <span class="fa fa-search"></span>
+        </a>
+    </div>
+    <div [style.visibility]="!overlayVisible ? 'collapse' : 'visible'"
+         [style.height]="!overlayVisible ? '0' : 'none'"
+         [style.overflow]="!overlayVisible ? 'hidden' : 'visible'"
+         [style.width]="widthGrid" style="padding: 0;"
+         class="d-inline-block rounded dataGrid">
+
+        <p-dataTable [value]="airports"
+                     [selectionMode]="multiSelect ? 'multiple' : 'single'"
+                     [(selection)]="selects"
+                     (onRowUnselect)="onSelect($event, false)"
+                     (onRowSelect)="onSelect($event, true)"
+                     [lazy]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20,totalItems]"
+                     [paginator]="true" [responsive]="true" [stacked]="false"
+                     [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)">
+            <p-header>
+                <p-header>
+                    <button type="button" class="btn btn-info" (click)="search()">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button type="button" class=" btn btn-danger" (click)="clear()">
+                        <span class="fa fa-remove"></span>
+                    </button>
+                    <button type="button" class=" btn btn-danger" (click)="empty()">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </p-header>
+            </p-header>
+
+            <p-headerColumnGroup>
+                <p-row>
+                    <p-column [style]="{'width':'38px'}"></p-column>
+                    <p-column field="persianTitle" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.airport.persianTitle">Persian Title</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="englishTitle" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.airport.englishTitle">English Title</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="globalCode" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.airport.globalCode">Code</span>
+                        </ng-template>
+                    </p-column>
+                </p-row>
+                <p-row>
+                    <p-column></p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="persianTitle" id="field_persianTitle"
+                                   [(ngModel)]="airport.persianTitle"
+                                   maxlength="42"
+                                   search-after-typed (onSearch)="search()"/>
+                        </ng-template>
+                    </p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="englishTitle" id="field_englishTitle"
+                                   [(ngModel)]="airport.englishTitle"
+                                   maxlength="42"
+                                   search-after-typed (onSearch)="search()"/>
+                        </ng-template>
+                    </p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="code" id="field_code"
+                                   [(ngModel)]="airport.globalCode"
+                                   maxlength="4"
+                                   search-after-typed (onSearch)="search()"/>
+                        </ng-template>
+                    </p-column>
+                </p-row>
+            </p-headerColumnGroup>
+
+            <p-column [selectionMode]="multiSelect ? 'multiple' : 'single'"></p-column>
+            <p-column field="persianTitle" [header]="'niopdcgatewayApp.airport.persianTitle' | translate"></p-column>
+            <p-column field="englishTitle" [header]="'niopdcgatewayApp.airport.englishTitle' | translate"></p-column>
+            <p-column field="globalCode" [header]="'niopdcgatewayApp.airport.code' | translate"></p-column>
+        </p-dataTable>
+    </div>
+</div>
+
+

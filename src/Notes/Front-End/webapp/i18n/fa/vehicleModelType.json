@@ -1,0 +1,13 @@
+{
+    "niopdcgatewayApp": {
+        "VehicleModelType": {
+            "ALL": "همه",
+            "TRUCK": "کامیون",
+            "IRANIAN_TRUCK": "کامیون ایرانی",
+            "CAR": "سواری",
+            "BUS": "اتوبوس",
+            "IRANIAN_BUS": "اتوبوس ایرانی",
+            "AIRPLANE": "هواپیما"
+        }
+    }
+}

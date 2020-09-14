@@ -1,0 +1,46 @@
+
+{
+    "niopdcgatewayApp": {
+        "order" : {
+            "home": {
+                "title": "Orders",
+                "createLabel": "Create a new Order",
+                "createOrEditLabel": "Create or edit a Order"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Order {{ id }}?"
+            },
+            "detail": {
+                "title": "Order"
+            },
+            "customerId": "Customer Id",
+            "personId": "Person Id",
+            "locationId": "Location Id",
+            "orderNo": "Order No",
+            "registerDate": "Register Date",
+            "depotExitDate": "Depot Exit Date",
+            "price": "Price",
+            "productPrice": "Product Price",
+            "containerPrice": "Container Price",
+            "costPrice": "Cost Price",
+            "expires": "Expires",
+            "status": "Status",
+            "currencyId": "Currency Id",
+            "modifyStatusDate": "Modify Status Date",
+            "depotId": "Depot Id",
+            "currencyRateGroupId": "Currency Rate Group Id",
+            "flightConditions": "Flight Conditions",
+            "sourceRefuelCenter": "Source RefuelCenter",
+            "targetRefuelCenter": "Target RefuelCenter",
+            "typeOfFuelReceipt": "Type Of Fuel Receipt",
+            "orderCredits": "Order Credits"
+        }
+    },
+    "niopdcorderApp": {
+        "order" : {
+            "created": "A new Order is created with identifier {{ param }}",
+            "updated": "A Order is updated with identifier {{ param }}",
+            "deleted": "A Order is deleted with identifier {{ param }}"
+        }
+    }
+}

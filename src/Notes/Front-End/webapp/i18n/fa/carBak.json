@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "carBak" : {
+            "home": {
+                "title": "تانکرهای نفت کش",
+                "createLabel": "ایجاد تانکر",
+                "createOrEditLabel": "ویرایش تانکر",
+                "carTitle": "نفت کش"
+            },
+            "delete": {
+                "question": "آیا برای حذف تانکر مطمئن هستید ؟ "
+            },
+            "detail": {
+                "title": "تانکر"
+            },
+            "capacity": "ظرفیت",
+            "car": "نفت کش",
+            "product": "فرآورده"
+        }
+    },
+    "niopdcbaseApp": {
+        "carBak" : {
+            "created": "تانکر با موفقیت ایجاد شد.",
+            "updated": "تانکر با موفقیت ویرایش شد.",
+            "deleted": "تانکر با موفقیت حذف شد."
+        }
+    }
+}

@@ -1,0 +1,31 @@
+
+{
+    "niopdcgatewayApp": {
+        "carTank" : {
+            "home": {
+                "title": "Car Tanks",
+                "createLabel": "Create a new Car Tank",
+                "createOrEditLabel": "Create or edit a Car Tank"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Car Tank {{ id }}?"
+            },
+            "detail": {
+                "title": "Car Tank"
+            },
+            "longitude": "Longitude",
+            "latitude": "Latitude",
+            "height": "Height",
+            "radius": "Radius",
+            "tankType": "Tank Type",
+            "customer": "Customer"
+        }
+    },
+    "niopdcbaseApp": {
+        "carTank" : {
+            "created": "A new Car Tank is created with identifier {{ param }}",
+            "updated": "A Car Tank is updated with identifier {{ param }}",
+            "deleted": "A Car Tank is deleted with identifier {{ param }}"
+        }
+    }
+}

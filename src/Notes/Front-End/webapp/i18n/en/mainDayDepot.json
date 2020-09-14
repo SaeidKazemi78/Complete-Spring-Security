@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "mainDayDepot" : {
+            "home": {
+                "title": "Main Day Depots",
+                "createLabel": "Create a new Main Day Depot",
+                "createOrEditLabel": "Create or edit a Main Day Depot"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Main Day Depot {{ id }}?"
+            },
+            "detail": {
+                "title": "Main Day Depot"
+            },
+            "day": "Day",
+            "close": "Close",
+            "description": "Description",
+            "refuelCenter": "RefuelCenter"
+        }
+    },
+    "niopdcaoApp": {
+        "mainDayDepot" : {
+            "created": "A new Main Day Depot is created with identifier {{ param }}",
+            "updated": "A Main Day Depot is updated with identifier {{ param }}",
+            "deleted": "A Main Day Depot is deleted with identifier {{ param }}"
+        }
+    }
+}

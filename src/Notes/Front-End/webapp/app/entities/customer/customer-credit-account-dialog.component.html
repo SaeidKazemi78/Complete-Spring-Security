@@ -1,0 +1,145 @@
+<form name="editForm" (ngSubmit)="confirmDelete(customer.id)" #editForm="ngForm">
+    <div class="modal-header">
+        <h4 class="modal-title" jhiTranslate="entity.confirm.editCredit">Confirm delete operation</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customer.name"
+                           for="field_name">Name</label>
+                    <input [disabled]="true" type="text" class="form-control" name="name" id="field_name"
+                           [(ngModel)]="customer.name"
+                           required minlength="3" maxlength="42"/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.name?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.name?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.name?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 42 }">
+                            This field cannot be longer than 42 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label
+                        *ngIf="customerType?.locationType === LocationType[LocationType.FIXED]"
+                        class="form-control-label"
+                        jhiTranslate="niopdcgatewayApp.customer.postalCode"
+                        for="field_postalCode">postalCode</label>
+
+                    <label
+                        *ngIf="customer.customerGroupTitle === CustomerGroup[CustomerGroup.AIRPLANE] && customerType?.locationType === LocationType[LocationType.MOVABLE]"
+                        class="form-control-label"
+                        jhiTranslate="niopdcgatewayApp.customer.registerCode"
+                        for="field_registerCode">Code</label>
+
+                    <label
+                        *ngIf="customer.customerGroupTitle !== CustomerGroup[CustomerGroup.AIRPLANE] && customerType?.locationType === LocationType[LocationType.MOVABLE]"
+                        class="form-control-label"
+                        for="field_movableCode">{{customerType.customerCodeTitle? customerType.customerCodeTitle:
+                        'کد'}}</label>
+
+                    <input
+                        *ngIf="customerType?.locationType === LocationType[LocationType.FIXED]"
+                        type="text"
+                        class="form-control"
+                        name="postalCode"
+                        id="field_postalCode"
+                        [(ngModel)]="customer.postalCode"
+                        [disabled]="true"
+                        [numeric]
+                        search-after-typed
+                        maxlength="10"
+                        minlength="0"
+                        required
+                    />
+                    <input
+                        *ngIf="customer.customerGroupTitle === CustomerGroup[CustomerGroup.AIRPLANE] && customerType?.locationType === LocationType[LocationType.MOVABLE]"
+                        type="text"
+                        class="form-control"
+                        name="registerCode"
+                        id="field_registerCode"
+                        [(ngModel)]="customer.registerCode"
+                        [disabled]="true"
+                        required
+                    />
+                    <input
+                        *ngIf="customer.customerGroupTitle !== CustomerGroup[CustomerGroup.AIRPLANE] && customerType?.locationType === LocationType[LocationType.MOVABLE]"
+                        type="text"
+                        class="form-control"
+                        name="movableCode"
+                        id="field_movableCode"
+                        [(ngModel)]="customer.movableCode"
+                        [disabled]="true"
+                        required
+                    />
+                    <div
+                        *ngIf="customerType?.locationType === LocationType[LocationType.FIXED]"
+                        [hidden]="!(editForm.controls.code?.dirty && editForm.controls.postalCode?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.postalCode?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength"
+                               [translateValues]="{ min: 10 }">
+                            This field is required to be at least 5 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.postalCode?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength"
+                               [translateValues]="{ max: 10 }">
+                            This field cannot be longer than 5 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customer.creditAccount"
+                           for="field_creditAccount1">creditAccount</label>
+                    <input type="text" class="form-control" name="creditAccount"
+                           id="field_creditAccount1"
+                           [(ngModel)]="customer.creditAccount" minlength="1" maxlength="5"/>
+                    <div
+                        [hidden]="!(editForm.controls.creditAccount?.dirty && editForm.controls.creditAccount?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.creditAccount?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 1 }">
+                            This field is required to be at least 10 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.creditAccount?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 5 }">
+                            This field cannot be longer than 10 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Delete</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,33 @@
+{
+    "niopdcgatewayApp": {
+        "dayOilTank" : {
+            "home": {
+                "title": "Day Repositories",
+                "createLabel": "Create a new Day Repository",
+                "createOrEditLabel": "Create or edit a Day Repository"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Day Repository {{ id }}?"
+            },
+            "detail": {
+                "title": "Day Repository"
+            },
+            "deductible": "Deductible",
+            "addition": "Addition",
+            "systemAmount": "System Amount",
+            "description": "Description",
+            "startMeasurementRepository": "Start Measurement Repository",
+            "endMeasurementRepository": "End Measurement Repository",
+            "oilTank": "Oil Tank",
+            "mainDayOilTank": "Main Day Repository",
+            "mainDayOperation": "Main Day Operation"
+        }
+    },
+    "niopdcaoApp": {
+        "dayOilTank" : {
+            "created": "A new Day Repository is created with identifier {{ param }}",
+            "updated": "A Day Repository is updated with identifier {{ param }}",
+            "deleted": "A Day Repository is deleted with identifier {{ param }}"
+        }
+    }
+}

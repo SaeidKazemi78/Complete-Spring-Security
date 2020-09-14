@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="sajad" id="customer_view3">
+        <createView replaceIfExists="true"
+                    viewName="customer_view">
+            select
+            c.*,
+            u.username
+            from user_location u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id
+            union
+            select
+            c.*,
+            u.username
+            from user_location_region u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id
+            union
+            select
+            c.*,
+            u.username
+            from user_location_person u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id
+            union
+            select
+            c.*,
+            u.username
+            from user_location_region_person u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id
+            union
+            select
+            c.*,
+            u.username
+            from user_location_person_customer u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and c.id = u.customer_id
+            union
+            select
+            c.*,
+            u.username
+            from user_location_region_person_customer u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and c.id = u.customer_id
+            union
+            select
+            c.*,
+            u.username
+            from user_contract_type u, customer c
+            union
+            select
+            c.*,
+            u.username
+            from user_customer_type u
+            inner join customer c on u.customer_type_id = c.type_id
+            union
+            select
+            c.*,
+            u.username
+            from user_location_contract_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id
+            union
+            select
+            c.*,
+            u.username
+            from user_location_region_contract_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id
+            union
+            select
+            c.*,
+            u.username
+            from user_location_customer_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and u.customer_type_id = c.type_id
+            union
+            select
+            c.*,
+            u.username
+            from user_location_region_customer_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and u.customer_type_id = c.type_id
+            union
+            select
+            c.*,
+            u.username
+            from user_location_region_contract_type_customer_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and u.customer_type_id = c.type_id
+            union
+            select
+            c.*,
+            u.username
+            from user_contract_type_customer_type u
+            inner join customer c on u.customer_type_id = c.type_id
+        </createView>
+    </changeSet>
+    <changeSet author="sajad" id="customer_view4">
+        <createView replaceIfExists="true"
+                    viewName="customer_view">
+            select
+            l.customers_id id,
+            u.username
+            from user_location u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_region u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_person u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_region_person u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_person_customer u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_region_person_customer u
+            inner join customer_location l on u.location_id = l.locations_id and
+            u.customer_id = l.customers_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_contract_type u, customer c
+            union
+            select
+            c.id id,
+            u.username
+            from user_customer_type u
+            inner join customer c on u.customer_type_id = c.type_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_contract_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_region_contract_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_location_customer_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and u.customer_type_id = c.type_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_location_region_customer_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and u.customer_type_id = c.type_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_location_region_contract_type_customer_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and u.customer_type_id = c.type_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_contract_type_customer_type u
+            inner join customer c on u.customer_type_id = c.type_id
+        </createView>
+    </changeSet>
+    <changeSet author="sajad" id="customer_view5">
+        <createView replaceIfExists="true"
+                    viewName="customer_view">
+            select
+            l.customers_id id,
+            u.username
+            from user_location u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_region u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_person u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_region_person u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_person_customer u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_region_person_customer u
+            inner join customer_location l on u.location_id = l.locations_id and
+            u.customer_id = l.customers_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_contract_type u, customer c
+            union
+            select
+            c.id id,
+            u.username
+            from user_customer_type u
+            inner join customer c on u.customer_type_id = c.type_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_contract_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_region_contract_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_location_customer_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and u.customer_type_id = c.type_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_location_region_customer_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and u.customer_type_id = c.type_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_location_region_contract_type_customer_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and u.customer_type_id = c.type_id
+            union
+            select
+            c.id,
+            u.username
+            from user_contract_type_customer_type u
+            inner join customer c on u.customer_type_id = c.type_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_location_contract_type_customer_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and u.customer_type_id = c.type_id
+        </createView>
+    </changeSet>
+    <changeSet author="sajad" id="customer_view6">
+        <createView replaceIfExists="true"
+                    viewName="customer_view">
+            select
+            l.customers_id id,
+            u.username
+            from user_location u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_region u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_person u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_region_person u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_person_customer u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_region_person_customer u
+            inner join customer_location l on u.location_id = l.locations_id and
+            u.customer_id = l.customers_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_contract_type u, customer c
+            union
+            select
+            c.id id,
+            u.username
+            from user_customer_type u
+            inner join customer c on u.customer_type_id = c.type_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_contract_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_region_contract_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_location_customer_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and u.customer_type_id = c.type_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_location_region_customer_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and u.customer_type_id = c.type_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_location_region_contract_type_customer_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and u.customer_type_id = c.type_id
+            union
+            select
+            c.id,
+            u.username
+            from user_contract_type_customer_type u
+            inner join customer c on u.customer_type_id = c.type_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_location_contract_type_customer_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and u.customer_type_id = c.type_id
+            union
+            select c.id id,
+            u.username
+            from customer c
+            cross apply user_data_access u
+            left join customer_location cl on c.id = cl.customers_id
+            where cl.customers_id is null
+        </createView>
+    </changeSet>
+    <changeSet author="sajad" id="customer_view7" runAlways="true">
+        <createView replaceIfExists="true"
+                    viewName="customer_view">
+            select
+            l.customers_id id,
+            u.username
+            from user_location u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_region u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_person u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join sell_contract_customer scc on l.customers_id = scc.customer_id
+            inner join sell_contract_person scp on scp.sell_contract_id=scc.sell_contract_id and scp.person_id= u.person_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_region_person u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_person_customer u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_region_person_customer u
+            inner join customer_location l on u.location_id = l.locations_id and
+            u.customer_id = l.customers_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_contract_type u, customer c
+            union
+            select
+            c.id id,
+            u.username
+            from user_customer_type u
+            inner join customer c on u.customer_type_id = c.type_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_contract_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            l.customers_id id,
+            u.username
+            from user_location_region_contract_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_location_customer_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and u.customer_type_id = c.type_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_location_region_customer_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and u.customer_type_id = c.type_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_location_region_contract_type_customer_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and u.customer_type_id = c.type_id
+            union
+            select
+            c.id,
+            u.username
+            from user_contract_type_customer_type u
+            inner join customer c on u.customer_type_id = c.type_id
+            union
+            select
+            c.id id,
+            u.username
+            from user_location_contract_type_customer_type u
+            inner join customer_location l on u.location_id = l.locations_id
+            inner join customer c on l.customers_id = c.id and u.customer_type_id = c.type_id
+        </createView>
+    </changeSet>
+</databaseChangeLog>

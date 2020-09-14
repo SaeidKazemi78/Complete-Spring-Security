@@ -1,0 +1,29 @@
+{
+    "niopdcgatewayApp": {
+        "parentAuthority" : {
+            "authority":"دسترسی",
+            "home": {
+                "title": "گروه های دسترسی",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "Create or edit a parent Authority",
+                "search": "جستجو"
+            },
+            "delete": {
+                "question": "آیا برای حذف گروه دسترسی  {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "گروه های دسترسی"
+            },
+            "name": "لاتین",
+            "persianName": "عنوان"
+
+        }
+    },
+    "niopdcuaaApp": {
+        "parentAuthority" : {
+            "created": "گروه دسترسی با موفقیت  ایجاد شد.",
+            "updated": "گروه دسترسی با موفقیت  ویرایش شد.",
+            "deleted": "گروه دسترسی با موفقیت  حذف شد."
+        }
+    }
+}

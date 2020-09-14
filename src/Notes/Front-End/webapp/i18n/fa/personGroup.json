@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "PersonGroup" : {
+            "null": "",
+            "CONTRACTOR": "پیمانکار",
+            "NORMAL": "عادی"
+        }
+    }
+}

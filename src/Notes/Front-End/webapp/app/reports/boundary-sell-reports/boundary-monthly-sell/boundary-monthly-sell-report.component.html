@@ -1,0 +1,310 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <form name="editForm" role="form" novalidate (ngSubmit)="loadAll()" #editForm="ngForm">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.order.startDate"
+                           for="field_startDate">startDate</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [rtlActive]="true" time="00:00:00"
+                                            id="field_startDate"
+                                            class="form-control"
+                                            name="startDate" [(ngModel)]="req.startDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.order.finishDate"
+                           for="field_finishDate">finish Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [rtlActive]="true" time="00:00:00"
+                                            id="field_finishDate"
+                                            class="form-control"
+                                            name="finishDate" [(ngModel)]="req.finishDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label jhiTranslate="niopdcgatewayApp.order.locationId"
+                       for="field_locationId">Location</label>
+                <p-dropdown
+                    [(ngModel)]="req.locationId"
+                    [options]="customLocation | sortBy: 'label'"
+                    class="form-control"
+                    id="field_locationId"
+                    widthGrid="300px"
+                    [ngModelOptions]="{standalone: true}"
+                    [defaultLabel]="'global.messages.info.choose' | translate"
+                    [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                    ngDefaultControl
+                    name="location"
+                    required
+                >
+                </p-dropdown>
+                <!--                <p-dropdown  [options]="customLocation" [(ngModel)]="req.locationId"-->
+                <!--                            [filter]="true"-->
+                <!--                            class="form-control"-->
+                <!--                            filterBy="label"-->
+                <!--                            id="field_locations"-->
+                <!--                            name="location"-->
+                <!--                            ngDefaultControl-->
+                <!--                ></p-dropdown>-->
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.order.orderType"
+                           for="field_orderType">have Boundary Sell</label>
+                    <select class="form-control" name="orderType" [(ngModel)]="req.orderType"
+                            id="field_orderType">
+                        <option [ngValue]="null"></option>
+                        <option value="BOUNDARY_TRANSIT">{{'niopdcgatewayApp.OrderType.BOUNDARY_TRANSIT' |
+                            translate}}
+                        </option>
+                        <option value="BOUNDARY_TRANSHIP">{{'niopdcgatewayApp.OrderType.BOUNDARY_TRANSHIP' |
+                            translate}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.customer.type"
+                           for="field_customerTypeId">Type</label>
+                    <p-dropdown
+                        [(ngModel)]="req.customerTypeId"
+                        [options]="customerType | sortBy: 'label'"
+                        class="form-control"
+                        id="field_customerTypeId"
+                        widthGrid="300px"
+                        [defaultLabel]="'global.messages.info.choose' | translate"
+                        [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                        [ngModelOptions]="{standalone: true}"
+                        ngDefaultControl
+                        lable="customerType"
+                    ></p-dropdown>
+                    <!--                    <select class="form-control" id="field_type" name="type"-->
+                    <!--                            [(ngModel)]="req.customerTypeId">-->
+                    <!--                        <option [ngValue]="null"></option>-->
+                    <!--                        <option [ngValue]="customerTypeOption.id"-->
+                    <!--                                *ngFor="let customerTypeOption of customerTypes| sortBy:'title'">-->
+                    <!--                            {{customerTypeOption.title}}-->
+                    <!--                        </option>-->
+                    <!--                    </select>-->
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.boundarySell.dateType"
+                           for="field_reportType">Type</label>
+                    <select class="form-control" id="field_reportType" name="reportType"
+                            [(ngModel)]="req.reportType" required>
+                        <option
+                            [ngValue]="'PAYMENT_DATE'">{{"niopdcgatewayApp.reportType.PAYMENT_DATE" | translate}}</option>
+                        <option
+                            [ngValue]="'SHIFT_DATE'">{{"niopdcgatewayApp.reportType.SHIFT_DATE" | translate}}</option>
+                        <option
+                            [ngValue]="'ORDER_DATE'">{{"niopdcgatewayApp.reportType.ORDER_DATE" | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.boundarySell.productTitle"
+                           for="field_product">product</label>
+                    <p-dropdown class="form-control"
+                                id="field_product"
+                                [options]="customProducts"
+                                name="products"
+                                [defaultLabel]="'global.messages.info.choose' | translate"
+                                [(ngModel)]="req.productId"
+                                [ngModelOptions]="{standalone: true}"
+                    ></p-dropdown>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.boundarySell.hasPayment"
+                           for="field_product">product</label>
+                    <input type="checkbox" [(ngModel)]="req.hasPayment" class="col-md-1 form-control" name="hasPayment"
+                           style="text-align: center;margin-top: 38px"/>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <button type="submit" class="btn btn-primary "
+                    [disabled]="editForm.form.invalid ">
+                <span class="fa fa-search"></span>&nbsp;<span
+                jhiTranslate="report.search">Save</span>
+            </button>
+        </div>
+    </form>
+    <br/>
+    <dx-data-grid
+        *ngIf="showReport"
+        id="reportsadsad"
+        [rtlEnabled]="true"
+        [dataSource]="boundaryMonthlySellReportResponses"
+        [columnAutoWidth]="true"
+        [showBorders]="true"
+        [allowColumnReordering]="true"
+    >
+        <dxo-export [enabled]="true" fileName="boundaryMonthlySell"></dxo-export>
+        <dxi-column
+            caption="ماه"
+            dataField="registerDate"></dxi-column>
+        <dxi-column
+            caption="فرآورده"
+            dataField="productTitle"></dxi-column>
+        <dxi-column
+            caption="ناحیه مرزی"
+            dataField="locationName"></dxi-column>
+        <dxi-column
+            caption="نوع حواله"
+            dataField="orderType"></dxi-column>
+        <dxi-column
+            caption="نوع مشتری"
+            dataField="customerTypeTitle"></dxi-column>
+        <dxi-column
+            caption="تعداد کل"
+            dataField="totalCount"></dxi-column>
+        <dxi-column
+            caption="مقدار کل"
+            dataField="totalAmount"></dxi-column>
+        <dxi-column
+            caption="بهای کل"
+            dataField="totalPrice"></dxi-column>
+        <dxi-column
+            caption="بهای معافیت"
+            dataField="totalDiscountPrice"></dxi-column>
+        <dxi-column
+            caption="مقدار معافیت"
+            dataField="totalDiscountAmount"></dxi-column>
+        <dxi-column
+            caption="بهای سوخت همراه"
+            dataField="alongFuelPrice"></dxi-column>
+        <dxi-column
+            caption="مقدار سوخت همراه"
+            dataField="alongFuelAmount"></dxi-column>
+        <dxi-column
+            caption="بهای سوخت عرضه"
+            dataField="pumpNozzlePrice"></dxi-column>
+        <dxi-column
+            caption="مقدار سوخت عرضه"
+            dataField="pumpNozzleAmount"></dxi-column>
+        <dxo-group-panel [visible]="true"></dxo-group-panel>
+        <dxo-summary>
+            <dxi-total-item
+                column="totalCount"
+                summaryType="sum">
+            </dxi-total-item>
+            <dxi-total-item
+                column="totalAmount"
+                summaryType="sum">
+            </dxi-total-item>
+            <dxi-total-item
+                column="totalPrice"
+                summaryType="sum">
+            </dxi-total-item>
+            <dxi-total-item
+                column="totalDiscountPrice"
+                summaryType="sum">
+            </dxi-total-item>
+            <dxi-total-item
+                column="totalDiscountAmount"
+                summaryType="sum">
+            </dxi-total-item>
+            <dxi-total-item
+                column="alongFuelPrice"
+                summaryType="sum">
+            </dxi-total-item>
+            <dxi-total-item
+                column="alongFuelAmount"
+                summaryType="sum">
+            </dxi-total-item>
+            <dxi-total-item
+                column="pumpNozzlePrice"
+                summaryType="sum">
+            </dxi-total-item>
+            <dxi-total-item
+                column="pumpNozzleAmount"
+                summaryType="sum">
+            </dxi-total-item>
+
+
+            <dxi-group-item
+                column="totalCount"
+                summaryType="sum">
+            </dxi-group-item>
+            <dxi-group-item
+                column="totalAmount"
+                summaryType="sum">
+            </dxi-group-item>
+            <dxi-group-item
+                column="totalPrice"
+                summaryType="sum">
+            </dxi-group-item>
+            <dxi-group-item
+                column="totalDiscountPrice"
+                summaryType="sum">
+            </dxi-group-item>
+            <dxi-group-item
+                column="totalDiscountAmount"
+                summaryType="sum">
+            </dxi-group-item>
+            <dxi-group-item
+                column="alongFuelPrice"
+                summaryType="sum">
+            </dxi-group-item>
+            <dxi-group-item
+                column="alongFuelAmount"
+                summaryType="sum">
+            </dxi-group-item>
+            <dxi-group-item
+                column="pumpNozzlePrice"
+                summaryType="sum">
+            </dxi-group-item>
+            <dxi-group-item
+                column="pumpNozzleAmount"
+                summaryType="sum">
+            </dxi-group-item>
+
+
+        </dxo-summary>
+    </dx-data-grid>
+</div>

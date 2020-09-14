@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="sajad" id="1546078430971-1">
+        <sql>
+            IF EXISTS (
+            SELECT type_desc, type
+            FROM sys.procedures WITH(NOLOCK)
+            WHERE NAME = 'region_access_procedures'
+            AND type = 'P'
+            )
+            DROP PROCEDURE dbo.region_access_procedures
+        </sql>
+    </changeSet>
+    <changeSet author="sajad" id="1546078430971-2">
+        <sql>
+            CREATE PROCEDURE dbo.region_access_procedures AS
+            -- region
+            insert into region_access
+            select distinct v.id, v.username
+            from region_view v
+            left join region_access a on (
+            v.id = a.id and
+            v.username = a.username
+            )
+            where a.id is null
+
+            delete a from region_view v
+            right join region_access a on (
+            v.id = a.id and
+            v.username = a.username
+            )
+            where v.id is null
+        </sql>
+    </changeSet>
+    <changeSet author="sajad" id="1546078430971-200">
+        <sql>
+            exec region_access_procedures
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

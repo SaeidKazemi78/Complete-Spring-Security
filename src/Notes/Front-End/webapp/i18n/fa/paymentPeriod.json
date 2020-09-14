@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "PaymentPeriod" : {
+            "null": "",
+            "DAY": "روز",
+            "MONTH": "ماه",
+            "SEASON": "فصل",
+            "YEAR": "سال"
+        }
+    }
+}

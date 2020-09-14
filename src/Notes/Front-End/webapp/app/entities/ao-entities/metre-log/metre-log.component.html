@@ -1,0 +1,185 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <div class="row">
+        <div class="col-xs-12 col-md-2">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTank.refuelCenter"
+                       for="field_refuelCenter">RefuelCenter</label>
+                <select class="form-control" id="field_refuelCenter"
+                        name="refuelCenter"
+                        [(ngModel)]="refuelCenterId"
+                        (ngModelChange)="onChangeRefuelCenter($event)"
+                        required
+                >
+                    <option [ngValue]="null" selected></option>
+                    <option [ngValue]="refuelCenterOption.id"
+                            *ngFor="let refuelCenterOption of refuelCenters; trackBy: trackRefuelCenterById">
+                        {{refuelCenterOption.persianTitle}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-2">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.dayDepot.oilTank"
+                       for="field_oilTank">Oil
+                    Tank</label>
+                <select
+                    class="form-control"
+                    id="field_oilTank"
+                    name="oilTank"
+                    [(ngModel)]="oilTankId"
+                    (ngModelChange)="onChangeOilTank($event)"
+                    required>
+                    <option [ngValue]="null" selected></option>
+                    <option [ngValue]="oilTankOption.id"
+                            *ngFor="let oilTankOption of oiltanks; trackBy: trackOilTankById">
+                        {{oilTankOption.title}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-2">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.transfer.metre" for="field_metres">Metre</label>
+                <select class="form-control"
+                        id="field_metres"
+                        name="metre"
+                        [(ngModel)]="metreId"
+                        required
+                        (ngModelChange)="onMetreChange($event)"
+                >
+                    <option [ngValue]="null"></option>
+                    <option [ngValue]="metreOption.id" *ngFor="let metreOption of metres; trackBy: trackMetreById">
+                        {{metreOption.title}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metreLog.registerDate"
+                       for="field_startTime">Register Date</label>
+                <div class="d-flex">
+                    <ng2-datetimepicker [disableTime]="true" [rtlActive]="true" time="00:00:00"
+                                        id="field_startTime"
+                                        class="form-control"
+                                        (ngModelChange)="changeStartTime($event)"
+                                        name="startTime" [(ngModel)]="startTime"
+                                        required></ng2-datetimepicker>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <div class="form-group">
+                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metreLog.registerDate"
+                       for="field_endTime">Register Date</label>
+                <div class="d-flex">
+                    <ng2-datetimepicker [disableTime]="true" [rtlActive]="true" time="00:00:00"
+                                        id="field_endTime"
+                                        class="form-control"
+                                        (ngModelChange)="changeEndTime($event)"
+                                        name="endTime" [(ngModel)]="endTime"
+                                        required></ng2-datetimepicker>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p-dataTable [sortField]="predicate" [sortOrder]="reverse ? -1 : 1" #dt [value]="metreLogs" [lazy]="true"
+                 [rows]="itemsPerPage"
+                 [rowsPerPageOptions]="[5,10,20,totalItems]"
+                 [paginator]="true" [responsive]="true" [stacked]="false"
+                 [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)">
+        <p-headerColumnGroup>
+            <p-row>
+                <p-column field="startMeter" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.metreLog.startMeter">Start Meter</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="endMeter" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.metreLog.endMeter">End Meter</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="amount" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.metreLog.amount">Amount</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="registerDate" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.metreLog.registerDate">Register Date</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="fuelType" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.metreLog.fuelType">Fuel Type</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="useType" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.metreLog.useType">Metre</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="difference" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.metreLog.difference">Metre</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="productTitle" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.metreLog.productTitle">Metre</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="productGroupTitle" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.metreLog.productGroupTitle">Metre</span>
+                    </ng-template>
+                </p-column>
+
+            </p-row>
+
+        </p-headerColumnGroup>
+
+        <p-column field="startMeter" [header]="'niopdcgatewayApp.metreLog.startMeter' | translate"></p-column>
+        <p-column field="endMeter" [header]="'niopdcgatewayApp.metreLog.endMeter' | translate"></p-column>
+        <p-column field="amount" [header]="'niopdcgatewayApp.metreLog.amount' | translate"></p-column>
+        <p-column field="registerDate" [header]="'niopdcgatewayApp.metreLog.registerDate' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span>{{item.registerDate | dateJalali}}</span>
+            </ng-template>
+        </p-column>
+        <p-column field="fuelType" [header]="'niopdcgatewayApp.metreLog.fuelType' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span jhiTranslate="{{'niopdcgatewayApp.FuelType.' + item.fuelType}}">{{item.fuelType}}</span>
+            </ng-template>
+        </p-column>
+        <p-column class="component">
+            <ng-template let-item="rowData" pTemplate="body">
+                <div *ngIf="item && item.logBookId"
+                     [routerLink]="['/', { outlets: { popup: 'log-book/'+ item.logBookId + '/view'} }]">
+                    <span class="div-link">{{item.useType}}</span>
+                </div>
+
+                <div *ngIf="item && item.transferId"
+                     [routerLink]="['/', { outlets: { popup: 'transfer/'+ item.transferId+ '/view'} }]">
+                    <span class="div-link">{{item.useType}}</span>
+                </div>
+
+                <div *ngIf="item && item.transferPlatformToUnitId"
+                     [routerLink]="['/', { outlets: { popup: 'transfer-platform-to-unit/'+ item.transferPlatformToUnitId + '/view'} }]">
+                    <span class="div-link">{{item.useType}}</span>
+                </div>
+            </ng-template>
+        </p-column>
+        <p-column field="difference" [header]="'niopdcgatewayApp.metreLog.difference' | translate"></p-column>
+        <p-column field="productTitle" [header]="'niopdcgatewayApp.metreLog.difference' | translate"></p-column>
+        <p-column field="productGroupTitle" [header]="'niopdcgatewayApp.metreLog.difference' | translate"></p-column>
+
+
+    </p-dataTable>
+
+</div>

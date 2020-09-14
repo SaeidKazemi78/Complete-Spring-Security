@@ -1,0 +1,95 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myChangeRequestElementLabel"
+            jhiTranslate="niopdcgatewayApp.changeRequestElement.home.createOrEditLabel">Create or edit a Change Request
+            Element</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!changeRequestElement.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="changeRequestElement.id" readonly/>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.changeRequestElement.model"
+                   for="field_model">Model</label>
+            <input type="text" class="form-control" name="model" id="field_model"
+                   [(ngModel)]="changeRequestElement.model" required/>
+            <div [hidden]="!(editForm.controls.model?.dirty && editForm.controls.model?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.model?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.changeRequestElement.walked"
+                   for="field_walked">Walked</label>
+            <input type="number" class="form-control" name="walked" id="field_walked"
+                   [(ngModel)]="changeRequestElement.walked" required/>
+            <div [hidden]="!(editForm.controls.walked?.dirty && editForm.controls.walked?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.walked?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
+                </small>
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.walked?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.changeRequestElement.changeFilterElement"
+                   for="field_changeFilterElement">Change Filter Element</label>
+            <select class="form-control" id="field_changeFilterElement" name="changeFilterElement"
+                    [(ngModel)]="changeRequestElement.changeFilterElementId" required>
+                <option *ngIf="!editForm.value.changeFilterElement" [ngValue]="null" selected></option>
+                <option [ngValue]="changeFilterElementOption.id"
+                        *ngFor="let changeFilterElementOption of changefilterelements; trackBy: trackChangeFilterElementById">
+                    {{changeFilterElementOption.id}}
+                </option>
+            </select>
+        </div>
+        <div
+            [hidden]="!(editForm.controls.changeFilterElement?.dirty && editForm.controls.changeFilterElement?.invalid)">
+            <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.changeFilterElement?.errors?.required"
+                   jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.changeRequestElement.requestElement"
+                   for="field_requestElement">Request Element</label>
+            <select class="form-control" id="field_requestElement" name="requestElement"
+                    [(ngModel)]="changeRequestElement.requestElementId" required>
+                <option *ngIf="!editForm.value.requestElement" [ngValue]="null" selected></option>
+                <option [ngValue]="requestElementOption.id"
+                        *ngFor="let requestElementOption of requestelements; trackBy: trackRequestElementById">
+                    {{requestElementOption.id}}
+                </option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.requestElement?.dirty && editForm.controls.requestElement?.invalid)">
+            <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.requestElement?.errors?.required"
+                   jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

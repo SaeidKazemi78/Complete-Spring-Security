@@ -1,0 +1,99 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myLastChangeDateElementLabel"
+            jhiTranslate="niopdcgatewayApp.lastChangeDateElement.home.createOrEditLabel">Create or edit a Last Change
+            Date Element</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!lastChangeDateElement.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="lastChangeDateElement.id" readonly/>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.lastChangeDateElement.currentModel"
+                   for="field_currentModel">Current Model</label>
+            <input type="text" class="form-control" name="currentModel" id="field_currentModel"
+                   [(ngModel)]="lastChangeDateElement.currentModel" required/>
+            <div [hidden]="!(editForm.controls.currentModel?.dirty && editForm.controls.currentModel?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.currentModel?.errors?.required"
+                       jhiTranslate="entity.validation.required">
+                    This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.lastChangeDateElement.lastChangeDate"
+                   for="field_lastChangeDate">Last Change Date</label>
+            <div class="d-flex">
+                <input id="field_lastChangeDate" type="datetime-local" class="form-control" name="lastChangeDate"
+                       [(ngModel)]="lastChangeDateElement.lastChangeDate"
+                       required/>
+            </div>
+            <div [hidden]="!(editForm.controls.lastChangeDate?.dirty && editForm.controls.lastChangeDate?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.lastChangeDate?.errors?.required"
+                       jhiTranslate="entity.validation.required">
+                    This field is required.
+                </small>
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.lastChangeDate?.errors?.ZonedDateTimelocal"
+                       jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.lastChangeDateElement.requestFilterElement"
+                   for="field_requestFilterElement">Request Filter Element</label>
+            <select class="form-control" id="field_requestFilterElement" name="requestFilterElement"
+                    [(ngModel)]="lastChangeDateElement.requestFilterElementId" required>
+                <option *ngIf="!editForm.value.requestFilterElement" [ngValue]="null" selected></option>
+                <option [ngValue]="requestFilterElementOption.id"
+                        *ngFor="let requestFilterElementOption of requestfilterelements; trackBy: trackRequestFilterElementById">
+                    {{requestFilterElementOption.id}}
+                </option>
+            </select>
+        </div>
+        <div
+            [hidden]="!(editForm.controls.requestFilterElement?.dirty && editForm.controls.requestFilterElement?.invalid)">
+            <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.requestFilterElement?.errors?.required"
+                   jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.lastChangeDateElement.element"
+                   for="field_element">Element</label>
+            <select class="form-control" id="field_element" name="element" [(ngModel)]="lastChangeDateElement.elementId"
+                    required>
+                <option *ngIf="!editForm.value.element" [ngValue]="null" selected></option>
+                <option [ngValue]="elementOption.id" *ngFor="let elementOption of elements; trackBy: trackElementById">
+                    {{elementOption.id}}
+                </option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.element?.dirty && editForm.controls.element?.invalid)">
+            <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.element?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

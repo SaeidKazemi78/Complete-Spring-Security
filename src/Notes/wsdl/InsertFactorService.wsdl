@@ -1,0 +1,80 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://tempuri.org/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" name="Service1" targetNamespace="http://tempuri.org/">
+<wsp:Policy wsu:Id="BasicHttpsBinding_IInsertFactorService_policy">
+<wsp:ExactlyOne>
+<wsp:All>
+<sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+<wsp:Policy>
+<sp:TransportToken>
+<wsp:Policy>
+<sp:HttpsToken RequireClientCertificate="false"/>
+</wsp:Policy>
+</sp:TransportToken>
+<sp:AlgorithmSuite>
+<wsp:Policy>
+<sp:Basic256/>
+</wsp:Policy>
+</sp:AlgorithmSuite>
+<sp:Layout>
+<wsp:Policy>
+<sp:Strict/>
+</wsp:Policy>
+</sp:Layout>
+</wsp:Policy>
+</sp:TransportBinding>
+</wsp:All>
+</wsp:ExactlyOne>
+</wsp:Policy>
+<wsdl:types>
+<xsd:schema targetNamespace="http://tempuri.org/Imports">
+<xsd:import schemaLocation="xsd0.wsdl" namespace="http://tempuri.org/"/>
+<xsd:import schemaLocation="xsd1.wsdl" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+<xsd:import schemaLocation="xsd2.wsdl" namespace="http://schemas.datacontract.org/2004/07/PDN.OTS.Data.ViewModels"/>
+<xsd:import schemaLocation="xsd3.wsdl" namespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic"/>
+</xsd:schema>
+</wsdl:types>
+<wsdl:message name="IInsertFactorService_Insert_InputMessage">
+<wsdl:part name="parameters" element="tns:Insert"/>
+</wsdl:message>
+<wsdl:message name="IInsertFactorService_Insert_OutputMessage">
+<wsdl:part name="parameters" element="tns:InsertResponse"/>
+</wsdl:message>
+<wsdl:portType name="IInsertFactorService">
+<wsdl:operation name="Insert">
+<wsdl:input wsaw:Action="http://tempuri.org/IInsertFactorService/Insert" message="tns:IInsertFactorService_Insert_InputMessage"/>
+<wsdl:output wsaw:Action="http://tempuri.org/IInsertFactorService/InsertResponse" message="tns:IInsertFactorService_Insert_OutputMessage"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="BasicHttpBinding_IInsertFactorService" type="tns:IInsertFactorService">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="Insert">
+<soap:operation soapAction="http://tempuri.org/IInsertFactorService/Insert" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="BasicHttpsBinding_IInsertFactorService" type="tns:IInsertFactorService">
+<wsp:PolicyReference URI="#BasicHttpsBinding_IInsertFactorService_policy"/>
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="Insert">
+<soap:operation soapAction="http://tempuri.org/IInsertFactorService/Insert" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="Service1">
+<wsdl:port name="BasicHttpBinding_IInsertFactorService" binding="tns:BasicHttpBinding_IInsertFactorService">
+<soap:address location="http://insertfactor.oil169.ir/InsertFactorService.svc"/>
+</wsdl:port>
+<wsdl:port name="BasicHttpsBinding_IInsertFactorService" binding="tns:BasicHttpsBinding_IInsertFactorService">
+<soap:address location="https://insertfactor.oil169.ir/InsertFactorService.svc"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>

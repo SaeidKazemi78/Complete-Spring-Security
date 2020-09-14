@@ -1,0 +1,800 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="person.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.person.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="person.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.person.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.person.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <p-blockUI [blocked]="blocked">
+            <div class="row">
+                <div [ngClass]="{'col-md-6':!person.companyId || !person.personality, 'col-md-3':person.companyId}">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.personality"
+                               for="field_personality">Personality</label>
+                        <select [disabled]="isView || person.id" class="form-control" name="personality"
+                                [(ngModel)]="person.personality"
+                                id="field_personality" required>
+                            <option *ngIf="!companyId"
+                                    value="LEGAL">{{'niopdcgatewayApp.Personality.LEGAL' | translate}}</option>
+                            <option value="NATURAL">{{'niopdcgatewayApp.Personality.NATURAL' | translate}}</option>
+                        </select>
+                        <div
+                            [hidden]="!(editForm.controls.personality?.dirty && editForm.controls.personality?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.personality?.errors?.required"
+                                   jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div [ngClass]="{'col-md-6':!person.companyId || !person.personality, 'col-md-3':person.companyId}"
+                     *ngIf="person.personality && person.personality === Personality[Personality.LEGAL]">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.country"
+                               for="field_country">Country</label>
+                        <select class="custom-select" id="field_country" name="country" [disabled]="person.id"
+                                [(ngModel)]="person.countryId"
+                                required (ngModelChange)="changeCountry()">
+                            <option *ngIf="!editForm.value.country" [ngValue]="null" selected></option>
+                            <option *ngFor="let countryOption of countries; trackBy: trackCountryById"
+                                    [ngValue]="countryOption.id"
+                            >
+                                {{countryOption.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.country?.dirty && editForm.controls.country?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.country?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div [ngClass]="{'col-md-6':!person.companyId || !person.personality, 'col-md-3':person.companyId}"
+                     *ngIf="person.personality && person.personality === Personality[Personality.NATURAL]">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.nationality"
+                               for="field_nationality">Country</label>
+                        <select [disabled]="isView" class="form-control" id="field_nationality" name="nationality"
+                                [(ngModel)]="person.nationalityId" numeric
+                                required (change)="changeNationality()">
+                            <option *ngIf="!editForm.value.nationality" selected></option>
+                            <option *ngFor="let countryOption of countries; trackBy: trackNationalityById"
+                                    [ngValue]="countryOption.id">
+                                {{countryOption.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div [hidden]="!(editForm.controls.country?.dirty && editForm.controls.country?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.country?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="col-md-3" *ngIf="person.companyId && person.personality && person.personality === 'LEGAL'">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.stakeholder.sharePercent"
+                               for="field_sharePercent">Share Percent</label>
+                        <input class="form-control" type="number"
+                               name="sharePercent" id="field_sharePercent"
+                               [(ngModel)]="person.sharePercent"
+                               max="100"
+                        />
+                    </div>
+                </div>
+                <div class="col-md-3" *ngIf="person.companyId && person.personality">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.stakeholder.stakeholderType"
+                               for="field_stakeholderType">Stakeholder Type</label>
+                        <select [disabled]="isView" class="form-control" name="stakeholderType"
+                                [(ngModel)]="person.stakeholderType"
+                                id="field_stakeholderType">
+                            <option value="CEO"
+                                    *ngIf="person.personality !== 'LEGAL'">{{'niopdcgatewayApp.StakeholderType.CEO' | translate}}</option>
+                            <option value="OTHER"
+                                    *ngIf="person.personality !== 'NATURAL'">{{'niopdcgatewayApp.StakeholderType.OTHER' | translate}}</option>
+                            <option value="AGENT"
+                                    *ngIf="person.personality !== 'LEGAL'">{{'niopdcgatewayApp.StakeholderType.AGENT' | translate}}</option>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="!person.personality">
+                <div class="col-md-12">
+                    <div class="alert alert-info" role="alert" style="text-align: center">
+                        <strong>لطفا ابتدا نوع مالکیت را انتخاب کنید</strong>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="person.personality ">
+
+                <div class="row"> <!-- find person -->
+                    <div class="col-md-3">
+                        <div class="form-group" *ngIf="person.personality">
+                            <label
+                                *ngIf="person.personality === Personality[Personality.LEGAL] && country && country.checkNationalCode"
+                                class="form-control-label"
+                                jhiTranslate="niopdcgatewayApp.person.codeLegal"
+                                for="field_code">National Code</label>
+                            <label
+                                *ngIf="person.personality === Personality[Personality.NATURAL] && nationality && nationality.checkNationalCode"
+                                class="form-control-label"
+                                jhiTranslate="niopdcgatewayApp.person.nationalCode"
+                                for="field_code">National Code</label>
+                            <label
+                                *ngIf="(person.personality === Personality[Personality.NATURAL] && nationality && !nationality.checkNationalCode)||(person.personality === Personality[Personality.LEGAL] && country && !country.checkNationalCode)"
+                                class="form-control-label"
+                                jhiTranslate="niopdcgatewayApp.person.codeOther"
+                                for="field_code">National Code</label>
+                            <input [disabled]="isView || (person.id && !canEditCode)" type="text" class="form-control"
+                                   name="code"
+                                   required national-code
+                                   [isLegal]="person.personality === Personality[Personality.LEGAL]"
+                                   [checkNationalCode]="(person.personality === Personality[Personality.NATURAL] && nationality && nationality.checkNationalCode)||(person.personality === Personality[Personality.LEGAL] && country && country.checkNationalCode)"
+                                   id="field_code"
+                                   (blur)="onChangeNationalCode(editForm.controls.code?.invalid || editForm.controls.personality?.invalid || isSaving)"
+                                   [(ngModel)]="person.code"
+                                   [minlength]="((person.personality === Personality[Personality.NATURAL] && nationality && nationality.checkNationalCode)||(person.personality === Personality[Personality.LEGAL] && country && country.checkNationalCode)) ? (person.personality === Personality[Personality.LEGAL] ? '11' : '10') : '0'"
+                                   [maxlength]="((person.personality === Personality[Personality.NATURAL] && nationality && nationality.checkNationalCode)||(person.personality === Personality[Personality.LEGAL] && country && country.checkNationalCode)) ? (person.personality === Personality[Personality.LEGAL] ? '11' : '10') : '20'"/>
+                            <div
+                                [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.code?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength"
+                                       [translateValues]="{ min: ((person.personality === Personality[Personality.NATURAL] && nationality && nationality.checkNationalCode)||(person.personality === Personality[Personality.LEGAL] && country && country.checkNationalCode)) ? (person.personality === Personality[Personality.LEGAL]?11:10) : 0 }">
+                                    This field is required to be at least 10 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.code?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength"
+                                       [translateValues]="{ max: ((person.personality === Personality[Personality.NATURAL] && nationality && nationality.checkNationalCode)||(person.personality === Personality[Personality.LEGAL] && country && country.checkNationalCode)) ? (person.personality === Personality[Personality.LEGAL]?11:10) : 20 }">
+                                    This field cannot be longer than 10 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   *ngIf="person.personality && person.personality === Personality[Personality.NATURAL]"
+                                   jhiTranslate="niopdcgatewayApp.person.birthday"
+                                   for="field_birthday">Birthday</label>
+                            <label class="form-control-label"
+                                   *ngIf="person.personality && person.personality === Personality[Personality.LEGAL]"
+                                   jhiTranslate="niopdcgatewayApp.person.registerDate"
+                                   for="field_birthday">Birthday</label>
+                            <div class="d-flex">
+                                <ng2-datetimepicker [rtlActive]="true"
+                                                    id="field_birthday" [disableTime]="true"
+                                                    [disabled]="birthDateDisabled"
+                                                    [minDateTime]="minDateTime" [maxDateTime]="maxDateTime"
+                                                    class="form-control" required
+                                                    name="birthday" [(ngModel)]="person.birthday"
+                                ></ng2-datetimepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3" *ngIf="person.personality === Personality[Personality.NATURAL]">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.idCode"
+                                   for="field_idCode">Id
+                                Code</label>
+                            <input type="text" class="form-control"
+                                   name="idCode" required [disabled]="idCodeDisabled"
+                                   id="field_idCode" search-after-typed (onSearch)="onChangeBaseInfo()"
+                                   [(ngModel)]="person.idCode" minlength="1" maxlength="42"/>
+                            <div
+                                [hidden]="!(editForm.controls.idCode?.dirty && editForm.controls.idCode?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.idCode?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 1 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.idCode?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 42 }">
+                                    This field cannot be longer than 42 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3" *ngIf="person.personality === Personality[Personality.LEGAL]">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.registerNo"
+                                   for="field_registerNo">Register No</label>
+                            <input type="text" class="form-control" name="registerNo"
+                                   id="field_registerNo" required numeric
+                                   [disabled]="isView || (person.id && !canEditCode)"
+                                   search-after-typed (onSearch)="onChangeBaseInfo()"
+                                   [(ngModel)]="person.registerNo" minlength="1" maxlength="42"/>
+                            <div
+                                [hidden]="!(editForm.controls.registerNo?.dirty && editForm.controls.registerNo?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.registerNo?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 1 }">
+                                    This field is required to be at least 1 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.registerNo?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 42 }">
+                                    This field cannot be longer than 42 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3" *ngIf="(person.personality === Personality[Personality.NATURAL] && nationality && nationality.checkNationalCode)||(person.personality === Personality[Personality.LEGAL] && country && country.checkNationalCode)">
+                        <div class="form-group">
+                            <button id="inquiry" type="button" [disabled]="isView || inquiryDisable"
+                                    style="margin: 34px; height: 37px;"
+                                    (click)="inquiry()"
+                                    class="btn btn-primary float-right create-entity"
+                                    jhiTranslate="settings.form.inquiry">inquiry
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" *ngIf="person.personality === Personality[Personality.LEGAL]">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.name"
+                                   for="field_name">Name</label>
+                            <input [disabled]="isView || (person.id && !canEditCode)" type="text" class="form-control"
+                                   name="name" id="field_name" required
+                                   [(ngModel)]="person.name" minlength="3" maxlength="42"/>
+                            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.name?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.name?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 42 }">
+                                    This field cannot be longer than 42 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.postalCode"
+                                   for="field_postalCode">Postal Code</label>
+                            <input [disabled]="isView || (person.id && !canEditCode)" type="text" class="form-control" name="postalCode"
+                                   id="field_postalCode"
+                                   numeric
+                                   (blur)="onBlurPostalCode()"
+                                   [(ngModel)]="person.postalCode" minlength="10" maxlength="10"/>
+                            <div
+                                [hidden]="!(editForm.controls.postalCode?.dirty && editForm.controls.postalCode?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.postalCode?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 10 }">
+                                    This field is required to be at least 10 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.postalCode?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 10 }">
+                                    This field cannot be longer than 10 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.person.economicCode"
+                                   for="field_economicCode">Economic Code</label>
+                            <input type="text" class="form-control" name="economicCode"
+                                   required id="field_economicCode" numeric [disabled]="isView"
+                                   [(ngModel)]="person.economicCode" minlength="12" maxlength="12"/>
+                            <div
+                                [hidden]="!(editForm.controls.economicCode?.dirty && editForm.controls.economicCode?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.economicCode?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 12 }">
+                                    This field is required to be at least 12 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.economicCode?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 12 }">
+                                    This field cannot be longer than 12 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row" *ngIf="person.personality === Personality[Personality.LEGAL]">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.telephone"
+                                   for="field_telephone">Telephone</label>
+                            <input [disabled]="isView" type="text" class="form-control" name="telephone"
+                                   id="field_telephone" required numeric
+                                   [(ngModel)]="person.telephone" minlength="8" maxlength="11"/>
+                            <div
+                                [hidden]="!(editForm.controls.telephone?.dirty && editForm.controls.telephone?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.telephone?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 8 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.telephone?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 11 }">
+                                    This field cannot be longer than 12 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.cellphone"
+                                   for="field_cellphone">Cellphone</label>
+                            <input [disabled]="isView" numeric type="text" class="form-control" name="cellphone"
+                                   id="field_cellphone" required
+                                   [(ngModel)]="person.cellphone" minlength="11" maxlength="11"/>
+                            <div
+                                [hidden]="!(editForm.controls.cellphone?.dirty && editForm.controls.cellphone?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.cellphone?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 11 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.cellphone?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 11 }">
+                                    This field cannot be longer than 12 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.email"
+                                   for="field_email">email</label>
+                            <input [disabled]="isView" type="email" class="form-control" name="email"
+                                   id="field_email"
+                                   (blur)="checkUserExistByEmail()"
+                                   pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+                                   [(ngModel)]="person.email" minlength="5" maxlength="42"/>
+                            <div
+                                [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.email?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 10 }">
+                                    This field is required to be at least 10 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.email?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 10 }">
+                                    This field cannot be longer than 10 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.fax"
+                                   for="field_fax">fax</label>
+                            <input [disabled]="isView" type="text" class="form-control" name="fax"
+                                   id="field_fax"  numeric
+                                   [(ngModel)]="person.fax" minlength="3" maxlength="15"/>
+                            <div
+                                [hidden]="!(editForm.controls.fax?.dirty && editForm.controls.fax?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.fax?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.fax?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 15 }">
+                                    This field cannot be longer than 12 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row" *ngIf="person.personality === Personality[Personality.NATURAL]">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.firstName"
+                                   for="field_firstName">First Name</label>
+                            <input [disabled]="isView" type="text" class="form-control" name="firstName"
+                                   id="field_firstName" required
+                                   [(ngModel)]="person.firstName" minlength="3" maxlength="42"/>
+                            <div
+                                [hidden]="!(editForm.controls.firstName?.dirty && editForm.controls.firstName?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.firstName?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.firstName?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 42 }">
+                                    This field cannot be longer than 42 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.lastName"
+                                   for="field_lastName">Last
+                                Name</label>
+                            <input [disabled]="isView" type="text" class="form-control" name="lastName"
+                                   id="field_lastName" required
+                                   [(ngModel)]="person.lastName" minlength="3" maxlength="42"/>
+                            <div [hidden]="!(editForm.controls.lastName?.dirty && editForm.controls.lastName?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.lastName?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.lastName?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 42 }">
+                                    This field cannot be longer than 42 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.fatherName"
+                                   for="field_fatherName">Father Name</label>
+                            <input [disabled]="isView" type="text" class="form-control" name="fatherName"
+                                   id="field_fatherName" required
+                                   [(ngModel)]="person.fatherName" minlength="3" maxlength="42"/>
+                            <div
+                                [hidden]="!(editForm.controls.fatherName?.dirty && editForm.controls.fatherName?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.fatherName?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.fatherName?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 42 }">
+                                    This field cannot be longer than 42 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="person.personality === Personality[Personality.NATURAL]">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.birthRegion"
+                                   for="field_birthRegion">Birth Region</label>
+                            <select [disabled]="isView" class="form-control" id="field_birthRegion" name="birthRegion"
+                                    [(ngModel)]="person.birthRegionId">
+                                <option *ngIf="!editForm.value.birthRegion" [ngValue]="null" selected></option>
+                                <option *ngFor="let countryOption of regions; trackBy: trackBirthRegionById"
+                                        [ngValue]="countryOption.id"
+                                >
+                                    {{countryOption.name}}
+                                </option>
+                            </select>
+                        </div>
+                        <div [hidden]="!(editForm.controls.country?.dirty && editForm.controls.country?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.country?.errors?.required"
+                                   jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.telephone"
+                                   for="field_telephone1">Telephone</label>
+                            <input [disabled]="isView" type="text" class="form-control" name="telephone"
+                                   id="field_telephone1" required numeric
+                                   [(ngModel)]="person.telephone" minlength="8" maxlength="11"/>
+                            <div
+                                [hidden]="!(editForm.controls.telephone?.dirty && editForm.controls.telephone?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.telephone?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 8 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.telephone?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 11 }">
+                                    This field cannot be longer than 12 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.cellphone"
+                                   for="field_cellphone1">Cellphone</label>
+                            <input [disabled]="isView" type="text" class="form-control" name="cellphone"
+                                   id="field_cellphone1" required numeric
+                                   [(ngModel)]="person.cellphone" minlength="11" maxlength="11"/>
+                            <div
+                                [hidden]="!(editForm.controls.cellphone?.dirty && editForm.controls.cellphone?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.cellphone?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 11 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.cellphone?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 11 }">
+                                    This field cannot be longer than 12 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.fax"
+                                   for="field_fax">fax</label>
+                            <input [disabled]="isView" type="text" class="form-control" name="fax"
+                                   id="field_fax"  numeric
+                                   [(ngModel)]="person.fax" minlength="3" maxlength="15"/>
+                            <div
+                                [hidden]="!(editForm.controls.fax?.dirty && editForm.controls.fax?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.fax?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.fax?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 15 }">
+                                    This field cannot be longer than 12 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="person.personality === Personality[Personality.NATURAL]">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.email"
+                                   for="field_email1">email</label>
+                            <input [disabled]="isView" type="email" class="form-control" name="email"
+                                   id="field_email1"
+                                   pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+                                   [(ngModel)]="person.email" minlength="10" maxlength="42"/>
+                            <div
+                                [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.email?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 10 }">
+                                    This field is required to be at least 10 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.email?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 10 }">
+                                    This field cannot be longer than 10 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.country"
+                                   for="field_country1">Country</label>
+                            <select [disabled]="isView" class="form-control" id="field_country1" name="country"
+                                    [(ngModel)]="person.countryId"
+                                    required (ngModelChange)="changeCountry()">
+                                <option *ngIf="!editForm.value.country" [ngValue]="null" selected></option>
+                                <option *ngFor="let countryOption of countries; trackBy: trackCountryById"
+                                        [ngValue]="countryOption.id"
+                                >
+                                    {{countryOption.name}}
+                                </option>
+                            </select>
+                        </div>
+                        <div [hidden]="!(editForm.controls.country?.dirty && editForm.controls.country?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.country?.errors?.required"
+                                   jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.postalCode"
+                                   for="field_postalCode1">Postal Code</label>
+                            <input [disabled]="isView" type="text" numeric class="form-control" name="postalCode"
+                                   id="field_postalCode1" [required]="country && country.checkNationalCode"
+                                   [pattern]="regexCode"
+                                   [numeric]
+                                   (blur)="onBlurPostalCode()"
+                                   [(ngModel)]="person.postalCode" minlength="10" maxlength="10"/>
+                            <div
+                                [hidden]="!(editForm.controls.postalCode?.dirty && editForm.controls.postalCode?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.postalCode?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 10 }">
+                                    This field is required to be at least 10 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.postalCode?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 10 }">
+                                    This field cannot be longer than 10 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="person.personGroup && person.personGroup===PersonGroup[PersonGroup.NORMAL]">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.creditAccount"
+                                   for="field_creditAccount1">creditAccount</label>
+                            <input [disabled]="isView" type="text" class="form-control" name="creditAccount"
+                                   id="field_creditAccount1"
+                                   [(ngModel)]="person.creditAccount" minlength="5" maxlength="5"/>
+                            <div
+                                [hidden]="!(editForm.controls.creditAccount?.dirty && editForm.controls.creditAccount?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.creditAccount?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 5 }">
+                                    This field is required to be at least 10 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.creditAccount?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 5 }">
+                                    This field cannot be longer than 10 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.username"
+                                   for="field_username">Cost Account</label>
+                            <input type="text" class="form-control" name="username" id="field_username"
+                                   [disabled]="true"
+                                   [(ngModel)]="person.username" minlength="1" maxlength="20"/>
+                            <div
+                                [hidden]="!(editForm.controls.costAccount?.dirty && editForm.controls.costAccount?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.costAccount?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 1 }">
+                                    This field is required to be at least 1 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.costAccount?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 20 }">
+                                    This field cannot be longer than 20 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.address"
+                                   for="field_address">Address</label>
+                            <textarea [disabled]="isView" type="text" class="form-control"
+                                      name="address"
+                                      required
+                                      id="field_address"
+                                      [(ngModel)]="person.address" minlength="10" maxlength="255"></textarea>
+                            <div [hidden]="!(editForm.controls.address?.dirty && editForm.controls.address?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.address?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 10 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.address?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                                    This field cannot be longer than 255 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.exportHistory"
+                                   for="field_exportHistory">exportHistory</label>
+                            <textarea [disabled]="isView" type="text" class="form-control"
+                                      name="exportHistory"
+                                      id="field_exportHistory"
+                                      [(ngModel)]="person.exportHistory" minlength="10" maxlength="255"></textarea>
+                            <div [hidden]="!(editForm.controls.exportHistory?.dirty && editForm.controls.exportHistory?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.exportHistory?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 10 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.exportHistory?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 255 }">
+                                    This field cannot be longer than 255 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="person.personGroup && person.personGroup===PersonGroup[PersonGroup.NORMAL]">
+                    <div class="col-md-6" *ngIf="country && country.checkNationalCode">
+                        <div class="form-group">
+                            <label *ngIf="person.personality === Personality[Personality.LEGAL]"
+                                   class="form-control-label" jhiTranslate="niopdcgatewayApp.person.regionLegal"
+                                   for="field_region">Region</label>
+                            <label *ngIf="person.personality === Personality[Personality.NATURAL]"
+                                   class="form-control-label" jhiTranslate="niopdcgatewayApp.person.region"
+                                   for="field_region">Region</label>
+                            <input-region-selector [disabled]="isView" [idSelector]="true"
+                                                   [oneSelection]="true"
+                                                   [countryId]="person.countryId"
+                                                   [selectOfLevel]="[2,3,4]"
+                                                   class="form-control" id="field_region" name="region"
+                                                   [(ngModel)]="person.regionId">
+                            </input-region-selector>
+                        </div>
+                        <div [hidden]="!(editForm.controls.region?.dirty && editForm.controls.region?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.region?.errors?.required"
+                                   jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.person.location"
+                                   for="field_location">Location</label>
+                            <input-location-selector [disabled]="isView" [idSelector]="false"
+                                                     [selectByPriority]="true" required
+                                                     class="form-control" id="field_location" name="location"
+                                                     [(ngModel)]="person.locations">
+                            </input-location-selector>
+                        </div>
+                        <div [hidden]="!(editForm.controls.location?.dirty && editForm.controls.location?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.region?.errors?.required"
+                                   jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </p-blockUI>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

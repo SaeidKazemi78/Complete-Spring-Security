@@ -1,0 +1,364 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="label">{{title}}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.location.name"
+                           for="field_name">Name</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="name" id="field_name"
+                           [(ngModel)]="location.name"
+                           required minlength="3" maxlength="42"/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.name?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.name?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.name?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 42 }">
+                            This field cannot be longer than 42 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.location.code"
+                           for="field_code">Code</label>
+                    <div style="position:relative;">
+                        <input [disabled]="isView" type="text" class="form-control" name="code" id="field_code"
+                               [(ngModel)]="location.code"
+                               [numeric] [pattern]="regexCode"
+                               required minlength="2" [maxlength]="2"/>
+                        <label class="static-value" [style.margin-right]="(codeLen*18)+'px'">{{this.parentCode}}</label>
+                    </div>
+                    <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 2 }">
+                            This field is required to be at least 2 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 2 }">
+                            This field cannot be longer than 2 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.pattern"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 2 }">
+                            This field cannot be longer than 2 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.country.rmtoCode"
+                           for="field_rmtoCode">Name</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="rmtoCode" id="field_rmtoCode"
+                           [(ngModel)]="location.rmtoCode"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" *ngIf="!hiddenFinancialCode">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.location.financialCode"
+                           for="field_financialCode">Financial Code</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="financialCode"
+                           id="field_financialCode"
+                           [(ngModel)]="location.financialCode"
+                           numeric
+                           validateEqual
+                           minlength="4" maxlength="5"/>
+                    <div
+                        [hidden]="!(editForm.controls.financialCode?.dirty && editForm.controls.financialCode?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.financialCode?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.financialCode?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 4 }">
+                            This field is required to be at least 4 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.financialCode?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 4 }">
+                            This field cannot be longer than 4 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.location.costAccount"
+                           for="field_costAccount">Cost Account</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="costAccount"
+                           id="field_costAccount"
+                           [(ngModel)]="location.costAccount"
+                           numeric minlength="5" maxlength="20"/>
+                    <div
+                        [hidden]="!(editForm.controls.costAccount?.dirty && editForm.controls.costAccount?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.costAccount?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 5 }">
+                            This field is required to be at least 5 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.costAccount?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 20 }">
+                            This field cannot be longer than 20 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="location.level === 0|| location.level === 1">
+            <div class="col-md-6" *ngIf="location.level === 1">
+                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.location.checkbookAccountNumber"
+                       for="field_region">Current Order Number</label>
+                <input [disabled]="isView" type="text" class="form-control"
+                       name="checkbookAccountNumber"
+                       id="field_checkbookAccountNumber"
+                       [(ngModel)]="location.checkbookAccountNumber"
+                />
+            </div>
+            <div class="col-md-6" *ngIf="location.level === 0|| location.level === 1">
+                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.location.stateCode"
+                       for="field_stateCode">state Code</label>
+                <input [disabled]="isView" type="text" class="form-control"
+                       name="stateCode"
+                       id="field_stateCode"
+                       [(ngModel)]="location.stateCode"
+                />
+            </div>
+        </div>
+        <div class="row" *ngIf="location.level === 2">
+            <div class="col-md-4">
+                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.location.region"
+                       for="field_region">Current Order Number</label>
+                <input-region-selector [disabled]="isView" [idSelector]="false"
+                                       [oneSelection]="false"
+                                       [selectByPriority]="true"
+                                       [selectOfLevel]="[2,3,4]"
+                                       class="form-control" id="field_region" name="region"
+                                       [(ngModel)]="location.regions">
+                </input-region-selector>
+            </div>
+            <div class="col-md-4 vertical-center-group">
+                <div class="form-group">
+                    <input [disabled]="isView" type="checkbox" class="form-control"
+                           name="haveBoundarySell"
+                           id="field_haveBoundarySell"
+                           [(ngModel)]="location.haveBoundarySell"
+                    />
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.location.haveBoundarySell"
+                           for="field_haveBoundarySell">have Boundary Sell</label>
+                </div>
+            </div>
+            <div class="col-md-4 vertical-center-group">
+                <div class="form-group">
+                    <input [disabled]="isView" type="checkbox" class="form-control"
+                           name="hasDepot"
+                           id="field_hasDepot"
+                           [(ngModel)]="location.hasDepot"
+                    />
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.location.hasDepot"
+                           for="field_hasDepot">hasDepot</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input [disabled]="isView" type="checkbox" class="form-control"
+                           name="docForParentLocation"
+                           id="field_docForParentLocation"
+                           [(ngModel)]="location.docForParentLocation"
+                    />
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.location.docForParentLocation"
+                           for="field_docForParentLocation">docForParentLocation</label>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="location.level === 3">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.location.primitiveMeasure"
+                           for="field_transhipType">have Boundary Sell</label>
+                    <select [disabled]="isView" class="form-control" name="transhipType"
+                            [(ngModel)]="location.transhipType" id="field_transhipType">
+                        <option [ngValue]="null"></option>
+                        <option value="INSIDE_TO_OUT">{{'niopdcgatewayApp.TranshipType.INSIDE_TO_OUT' |
+                            translate}}
+                        </option>
+                        <option value="OUT_TO_INSIDE_WHIT_PRIMITIVE">
+                            {{'niopdcgatewayApp.TranshipType.OUT_TO_INSIDE_WHIT_PRIMITIVE' | translate}}
+                        </option>
+                        <option value="OUT_TO_INSIDE_WHIT_OUT_PRIMITIVE">
+                            {{'niopdcgatewayApp.TranshipType.OUT_TO_INSIDE_WHIT_OUT_PRIMITIVE' | translate}}
+                        </option>
+                        <option value="ONLY_PUMP_NOZZLE">{{'niopdcgatewayApp.TranshipType.ONLY_PUMP_NOZZLE' |
+                            translate}}
+                        </option>
+                        <option value="INSIDE_TO_INSIDE">{{'niopdcgatewayApp.TranshipType.INSIDE_TO_INSIDE' |
+                            translate}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.order.targetCountry"
+                           for="field_targetCountry">Country</label>
+                    <p-dropdown [options]="customCountries" [(ngModel)]="location.country.id"
+                                [filter]="true"
+                                [disabled]="isView"
+                                class="form-control"
+                                filterBy="label"
+                                (ngModelChange)="onChangeCountry($event)"
+                                id="field_targetCountry"
+                                name="tc1"
+                                ngDefaultControl
+                    >
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="col-md-4 vertical-center-group">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               jhiTranslate="niopdcgatewayApp.location.beforeControl"
+                               for="field_beforeControl">have Boundary Sell</label>
+                        <input [disabled]="isView " type="checkbox"
+                               class="form-control"
+                               name="beforeControl"
+                               id="field_beforeControl"
+                               [(ngModel)]="location.beforeControl"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.location.tolerance"
+                           for="field_tolerance">Country</label>
+                    <input [(ngModel)]="location.tolerance"
+                           [disabled]="isView"
+                           class="form-control"
+                           id="field_tolerance"
+                           name="tolerance"/>
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="location.transhipType===TranshipType[TranshipType.INSIDE_TO_INSIDE]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.location.boundaryExemption"
+                           for="field_tolerance">Country</label>
+                    <input [(ngModel)]="location.boundaryExemption"
+                           [disabled]="isView"
+                           class="form-control"
+                           id="field_boundaryExemption"
+                           name="boundaryExemption"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.location.draftHour"
+                           for="field_draftHour">draftHour</label>
+                    <input [(ngModel)]="location.draftHour"
+                           [disabled]="isView" type="number"
+                           class="form-control" [min]="0"
+                           [max]="72"
+                           id="field_draftHour"
+                           name="draftHour"/>
+                </div>
+            </div>
+            <div class="col-md-4 vertical-center-group">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               jhiTranslate="niopdcgatewayApp.location.beforeControlTranship"
+                               for="field_beforeControlTranship">before control tranship</label>
+                        <input [disabled]="isView ||
+                        location.transhipType===TranshipType[TranshipType.INSIDE_TO_INSIDE] ||
+                         location.transhipType===TranshipType[TranshipType.INSIDE_TO_OUT] " type="checkbox"
+                               class="form-control"
+                               name="beforeControlTranship"
+                               id="field_beforeControlTranship"
+                               [(ngModel)]="location.beforeControlTranship"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="location.level !== 0">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.niopdcBankAccount.bankAccountType"
+                           for="field_bankAccountType">Bank Account Type</label>
+                    <p-multiSelect
+                        [disabled]="isView" class="form-control"
+                        [options]="customBankAccountType"
+                        multiple="true"
+                        id="field_bankAccountType"
+                        name="bankAccountType"
+                        [defaultLabel]="'global.messages.info.choose' | translate"
+                        [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                        [(ngModel)]="location.bankAccountTypeIds"
+                        [ngModelOptions]="{standalone: true}"
+                        required
+                    ></p-multiSelect>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" *ngIf="location.level===3">
+
+            <div class="col-md-4 vertical-center-group">
+                <div class="form-group">
+                    <input type="checkbox"  class="form-check-input form-control"
+                           id="field_pumpBeforeControl"
+                           name="pumpBeforeControl"
+                           [(ngModel)]="location.pumpBeforeControl">
+
+                    <label jhiTranslate="niopdcgatewayApp.location.pumpBeforeControl"  class="form-check-label"
+                           for="field_pumpBeforeControl">
+
+                    </label>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

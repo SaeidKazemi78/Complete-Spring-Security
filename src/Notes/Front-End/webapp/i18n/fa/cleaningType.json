@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "CleaningType" : {
+            "null": "",
+            "PERIODIC_TANK_INSPECTION": "بازدید ادواری مخزن",
+            "CLEANING": "انجام لایروبی",
+            "MODIFICATION_OR_REPAIRING": "اصلاح یا تعمیرات"
+        }
+    }
+}

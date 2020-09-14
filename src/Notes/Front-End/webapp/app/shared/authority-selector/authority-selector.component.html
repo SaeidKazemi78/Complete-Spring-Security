@@ -1,0 +1,12 @@
+<input class="form-control" placeholder="جستجو"
+       [(ngModel)]="searchText"/>
+<p-tree [value]="getFilterData(_authGroup)" [style]="{'max-height': '300px','overflow': 'auto'}">
+    <ng-template let-node pTemplate="default">
+        <app-multi-state-checkbox [disabled]="node.data.disabled || disabled"
+                                  (onChangeModel)="onChangeCheckbox($event,node)"
+                                  [nullable]="node.data.nullable"
+                                  [(ngModel)]="node.data.state"
+                                  [user]="isUser"
+                                  [label]="node.label"></app-multi-state-checkbox>
+    </ng-template>
+</p-tree>

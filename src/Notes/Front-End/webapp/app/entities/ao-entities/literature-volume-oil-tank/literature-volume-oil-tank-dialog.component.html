@@ -1,0 +1,111 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="literatureVolumeOilTank.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.literatureVolumeOilTank.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="literatureVolumeOilTank.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.literatureVolumeOilTank.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel"
+            jhiTranslate="niopdcgatewayApp.literatureVolumeOilTank.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.literatureVolumeOilTank.millimeter"
+                           for="field_millimeter">Millimeter</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="millimeter"
+                           id="field_millimeter"
+                           [(ngModel)]="literatureVolumeOilTank.millimeter" required/>
+                    <div [hidden]="!(editForm.controls.millimeter?.dirty && editForm.controls.millimeter?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.millimeter?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.millimeter?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.literatureVolumeOilTank.centimetre"
+                           for="field_centimetre">Millimeter</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="centimetre"
+                           id="field_centimetre"
+                           [(ngModel)]="literatureVolumeOilTank.centimetre" required/>
+                    <div [hidden]="!(editForm.controls.centimetre?.dirty && editForm.controls.centimetre?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.centimetre?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.centimetre?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.literatureVolumeOilTank.liter"
+                           for="field_liter">Liter</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="liter" id="field_liter"
+                           [(ngModel)]="literatureVolumeOilTank.liter" required/>
+                    <div [hidden]="!(editForm.controls.liter?.dirty && editForm.controls.liter?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.liter?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.liter?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="parentMeasureType=='RATIO'" class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.literatureVolumeOilTank.measureType"
+                           for="field_measureType">Measure Type</label>
+                    <select [disabled]="isView" class="form-control" name="measureType"
+                            [(ngModel)]="literatureVolumeOilTank.measureType" id="field_measureType" required>
+                        <option value="NORMAL">{{'niopdcgatewayApp.MeasureType.NORMAL' | translate}}</option>
+                        <option value="RATIO">{{'niopdcgatewayApp.MeasureType.RATIO' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.measureType?.dirty && editForm.controls.measureType?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.measureType?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancelShort">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.saveShort">Save</span>
+        </button>
+    </div>
+</form>

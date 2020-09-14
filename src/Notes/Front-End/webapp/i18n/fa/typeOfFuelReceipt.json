@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "TypeOfFuelReceipt" : {
+            "null": "",
+            "TANKER_SALES": "فروش با تانکر",
+            "PIPE_LINE_SALES": "فروش با خط لوله",
+            "UNIT_TO_AIRPLANE": "فروش واحد به هواپیما",
+            "UNIT_TO_CUSTOMERS": "فروش واحد به مشتریان"
+        }
+    }
+}

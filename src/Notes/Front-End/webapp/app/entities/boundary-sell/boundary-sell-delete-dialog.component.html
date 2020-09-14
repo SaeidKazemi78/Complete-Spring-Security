@@ -1,0 +1,35 @@
+<form name="deleteForm" (ngSubmit)="confirmDelete(order.id, force)">
+    <div class="modal-header">
+        <h4 class="modal-title" jhiTranslate="entity.delete.title">Confirm delete operation</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <p *ngIf="order.orderType === OrderType[OrderType.ORDER]" jhiTranslate="niopdcgatewayApp.order.delete.question" [translateValues]="{id:order.orderNo}">Are you sure you want to delete this Order?</p>
+        <p *ngIf="order.orderType === OrderType[OrderType.AIRPLANE]" jhiTranslate="niopdcgatewayApp.fuelReceipt.delete.question" [translateValues]="{id: order.orderNo}">Are you sure you want to delete this Order?</p>
+        <p *ngIf="order.orderType === OrderType[OrderType.BOUNDARY_TRANSIT] ||
+                  order.orderType === OrderType[OrderType.BOUNDARY_TRANSHIP]" jhiTranslate="niopdcgatewayApp.boundarySell.delete.question" [translateValues]="{id: order.orderNo}">Are you sure you want to delete this Order?</p>
+    </div>
+
+    <div class="col-xs-12 col-md-12" *jhiHasAnyAuthority="['ROLE_ADMIN']">
+        <div class="form-group">
+
+            <input type="checkbox" class="form-control" name="force"
+                   id="field_force"
+                   [(ngModel)]="force"/>
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.order.delete.force"
+                   for="field_force">Force</label>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" class="btn btn-danger">
+            <span class="fa fa-remove"></span>&nbsp;<span jhiTranslate="entity.action.delete">Delete</span>
+        </button>
+    </div>
+</form>

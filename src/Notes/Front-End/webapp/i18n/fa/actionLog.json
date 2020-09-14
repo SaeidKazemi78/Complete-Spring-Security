@@ -1,0 +1,34 @@
+
+{
+    "niopdcgatewayApp": {
+        "actionLog" : {
+            "home": {
+                "title": "تاریخچه عملیات",
+                "viewRequest": "مشاهده درخواست",
+                "mapping": "ایجاد الگو",
+                "viewResponse": "مشاهده پاسخ"
+            },
+            "detail": {
+                "title": "تاریخچه عملیات"
+            },
+            "createdDate": "زمان",
+            "username": "نام کاربری",
+            "firstName": "نام",
+            "lastName": "نام خانوادگی",
+            "roles": "نقش ها",
+            "remoteAddress": "آدرس آی پی",
+            "status": "وضعیت پاسخ",
+            "method": "نوع",
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "location": "منطقه/ناحیه/مرز",
+            "requestHeader": "عنوان درخواست",
+            "requestBody": "محتوای درخواست",
+            "downloadResponseBody": "برای دانلود محتوای پاسخ روی دکمه زیر کلیک کنید",
+            "templateUrl": "الگوی آدرس درخواست",
+            "persianName": "نام فارسی",
+            "showAll": "نمایش همه",
+            "url": "شرح عملیات"
+        }
+    }
+}

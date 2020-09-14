@@ -1,0 +1,191 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <p-dataTable [sortField]="predicate" [sortOrder]="reverse ? -1 : 1" #dt [value]="literatureVolumeOilTanks"
+                 [lazy]="true"
+                 [rows]="itemsPerPage"
+                 [rowsPerPageOptions]="[5,10,20,totalItems]"
+                 [paginator]="true" [responsive]="true" [stacked]="false"
+                 [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)"
+                 [emptyMessage]="'global.messages.info.emptyRecords' | translate">
+        <p-header>
+            <div class="ui-helper-clearfix">
+                <ng-container *ngIf="!serviceOilTankId">
+                    <button class="btn btn-primary float-right create-entity"
+                            *jhiHasAnyAuthority="['ROLE_ADMIN', 'CREATE_LITERATURE_VOLUME_OIL_TANK']"
+                            [routerLink]="['/','oil-tank',oilTankId,'literature-volume-oil-tank', { outlets: { popup: ['new','oil-tank' , oilTankId] } }]">
+                        <span class="fa fa-plus"></span>
+                        <span jhiTranslate="entity.action.createShort">Create</span>
+                    </button>
+                </ng-container>
+                <ng-container *ngIf="serviceOilTankId">
+                    <button class="btn btn-primary float-right create-entity"
+                            *jhiHasAnyAuthority="['ROLE_ADMIN', 'CREATE_LITERATURE_VOLUME_OIL_TANK']"
+                            [routerLink]="['/','oil-tank',oilTankId,'service-oil-tank',serviceOilTankId,'literature-volume-oil-tank', { outlets: { popup: ['new','service-oil-tank' , serviceOilTankId] } }]">
+                        <span class="fa fa-plus"></span>
+                        <span jhiTranslate="entity.action.create">Create</span>
+                    </button>
+                </ng-container>
+                <form #myform>
+                    <input type="file" name="file" id="file" (change)="onChangeFile($event)"
+                           *jhiHasAnyAuthority="['ROLE_ADMIN', 'UPLOAD_LITERATURE_VOLUME_OIL_TANK']"
+                           style="visibility: hidden">
+                    <label for="file" class="btn btn-primary float-right create-entity"
+                           *jhiHasAnyAuthority="['ROLE_ADMIN', 'UPLOAD_CREATE_LITERATURE_VOLUME_OIL_TANK']"
+                           style="margin-left: 20px">بارگزاری</label>
+                </form>
+            </div>
+        </p-header>
+
+        <p-headerColumnGroup>
+            <p-row>
+                <p-column field="measureType" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.literatureVolumeOilTank.measureType">measureType</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="millimeter" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.literatureVolumeOilTank.millimeter">Millimeter</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="centimetre" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.literatureVolumeOilTank.centimetre">Millimeter</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="liter" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.literatureVolumeOilTank.liter">Liter</span>
+                    </ng-template>
+                </p-column>
+                <p-column styleClass="col-button"></p-column>
+            </p-row>
+            <p-row>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <select class="form-control" name="measureType" (change)="search()"
+                                [(ngModel)]="literatureVolumeOilTank.measureType" id="field_measureType">
+                            <option value="NORMAL">{{'niopdcgatewayApp.MeasureType.NORMAL' | translate}}</option>
+                            <option value="RATIO">{{'niopdcgatewayApp.MeasureType.RATIO' | translate}}</option>
+                        </select>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control"
+                               name="millimeter" id="field_millimeter"
+                               [(ngModel)]="literatureVolumeOilTank.millimeter"
+                               [numeric]
+                               search-after-typed (onSearch)="search()"/>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control"
+                               name="centimetre" id="field_centimetre"
+                               [(ngModel)]="literatureVolumeOilTank.centimetre"
+                               [numeric]
+                               search-after-typed (onSearch)="search()"/>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <input class="form-control"
+                               name="liter" id="field_liter"
+                               [(ngModel)]="literatureVolumeOilTank.liter"
+                               [numeric]
+                               search-after-typed (onSearch)="search()"/>
+                    </ng-template>
+                </p-column>
+                <p-column>
+                    <ng-template pTemplate="header">
+                        <button class="btn btn-info" (click)="search()">
+                            <span class="fa fa-search"></span>
+                        </button>
+                        <button class=" btn btn-danger" (click)="clear()">
+                            <span class="fa fa-remove"></span>
+                        </button>
+                    </ng-template>
+                </p-column>
+            </p-row>
+        </p-headerColumnGroup>
+
+        <p-column field="measureType"
+                  [header]="'niopdcgatewayApp.literatureVolumeOilTank.measureType' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span jhiTranslate="{{'niopdcgatewayApp.MeasureType.' + item.measureType}}">{{item.measureType}}</span>
+            </ng-template>
+        </p-column>
+        <p-column field="millimeter"
+                  [header]="'niopdcgatewayApp.literatureVolumeOilTank.millimeter' | translate"></p-column>
+        <p-column field="centimetre"
+                  [header]="'niopdcgatewayApp.literatureVolumeOilTank.centimetre' | translate"></p-column>
+        <p-column field="liter" [header]="'niopdcgatewayApp.literatureVolumeOilTank.liter' | translate"></p-column>
+        <p-column class="component">
+            <ng-template let-item="rowData" pTemplate="body">
+                <div class="btn-group" ngbDropdown placement="right">
+                    <ng-container *ngIf="serviceOilTankId">
+                        <button type="button" class="btn btn-primary"
+                                *jhiHasAnyAuthorityDisabled="['ROLE_ADMIN', 'EDIT_LITERATURE_VOLUME_OIL_TANK']"
+                                replaceUrl="true"
+                                [routerLink]="['/','oil-tank',oilTankId,'service-oil-tank',serviceOilTankId,'literature-volume-oil-tank', { outlets: { popup: item.id + '/service-oil-tank/'+serviceOilTankId+'/edit'} }]">
+                            <span class="fa fa-edit"></span>
+                            <span jhiTranslate="entity.action.edit">ویرایش</span>
+                        </button>
+                    </ng-container>
+                    <ng-container *ngIf="!serviceOilTankId">
+                        <button type="button" class="btn btn-primary"
+                                *jhiHasAnyAuthorityDisabled="['ROLE_ADMIN', 'EDIT_LITERATURE_VOLUME_OIL_TANK']"
+                                replaceUrl="true"
+                                [routerLink]="['/','oil-tank',oilTankId,'literature-volume-oil-tank', { outlets: { popup: item.id + '/oil-tank/'+oilTankId+'/edit'} }]">
+                            <span class="fa fa-edit"></span>
+                            <span jhiTranslate="entity.action.edit">ویرایش</span>
+                        </button>
+                    </ng-container>
+                    <button class="btn btn-primary"
+                            *jhiHasAnyAuthorityDisabled="['ROLE_ADMIN', 'VIEW_LITERATURE_VOLUME_OIL_TANK', 'DELETE_LITERATURE_VOLUME_OIL_TANK']"
+                            ngbDropdownToggle></button>
+                    <div class="dropdown-menu" ngbDropdownMenu>
+                        <ng-container *ngIf="serviceOilTankId">
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'VIEW_LITERATURE_VOLUME_OIL_TANK']"
+                                    replaceUrl="true"
+                                    [routerLink]="['/','oil-tank',oilTankId,'service-oil-tank',serviceOilTankId,'literature-volume-oil-tank', { outlets: { popup: item.id + '/service-oil-tank/'+serviceOilTankId+'/view'} }]">
+                                <span class="fa fa-eye"></span>
+                                <span jhiTranslate="entity.action.view">نمایش</span>
+                            </button>
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'DELETE_LITERATURE_VOLUME_OIL_TANK']"
+                                    replaceUrl="true"
+                                    [routerLink]="['/','oil-tank',oilTankId,'service-oil-tank',serviceOilTankId,'literature-volume-oil-tank', { outlets: { popup: item.id + '/delete'} }]">
+                                <span class="fa fa-remove"></span>
+                                <span jhiTranslate="entity.action.delete">delete</span>
+                            </button>
+                        </ng-container>
+                        <ng-container *ngIf="!serviceOilTankId">
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'VIEW_LITERATURE_VOLUME_OIL_TANK']"
+                                    replaceUrl="true"
+                                    [routerLink]="['/','oil-tank',oilTankId,'literature-volume-oil-tank', { outlets: { popup: item.id + '/oil-tank/'+oilTankId+'/view'} }]">
+                                <span class="fa fa-eye"></span>
+                                <span jhiTranslate="entity.action.view">نمایش</span>
+                            </button>
+                            <button class="dropdown-item"
+                                    *jhiHasAnyAuthority="['ROLE_ADMIN', 'DELETE_LITERATURE_VOLUME_OIL_TANK']"
+                                    replaceUrl="true"
+                                    [routerLink]="['/','oil-tank',oilTankId,'literature-volume-oil-tank', { outlets: { popup: item.id + '/delete'} }]">
+                                <span class="fa fa-remove"></span>
+                                <span jhiTranslate="entity.action.delete">delete</span>
+                            </button>
+                        </ng-container>
+
+
+                    </div>
+                </div>
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+
+</div>

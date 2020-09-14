@@ -1,0 +1,127 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="productStep.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="productStep.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productStep.productTitle"
+                           for="field_productId">Product Id</label>
+                    <p-dropdown [options]="productItems"
+                                [(ngModel)]="productStep.productId"
+                                [filter]="true"
+                                [disabled]="isView"
+                                class="form-control"
+                                filterBy="label"
+                                id="field_productId"
+                                name="productId"
+                                required>
+                    </p-dropdown>
+
+                    <div [hidden]="!(editForm.controls.productId?.dirty && editForm.controls.productId?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.productId?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.productId?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productStep.paymentPeriod"
+                           for="field_paymentPeriod">Payment Period</label>
+                    <select
+                        [disabled]="true"
+                        class="form-control"
+                        name="paymentPeriod"
+                        [(ngModel)]="productStep.paymentPeriod"
+                        id="field_paymentPeriod"
+                        required>
+                        <option  value="DAY">{{'niopdcgatewayApp.PaymentPeriod.DAY' | translate}}</option>
+                        <option [selected]="true" value="MONTH">{{'niopdcgatewayApp.PaymentPeriod.MONTH' | translate}}</option>
+                        <option  value="SEASON">{{'niopdcgatewayApp.PaymentPeriod.SEASON' | translate}}</option>
+                        <option   value="YEAR">{{'niopdcgatewayApp.PaymentPeriod.YEAR' | translate}}</option>
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.paymentPeriod?.dirty && editForm.controls.paymentPeriod?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.paymentPeriod?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productStep.stepNo"
+                           for="field_stepNo">Step</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="stepNo" id="field_stepNo"
+                           [numeric]
+                           [(ngModel)]="productStep.stepNo" required/>
+                    <div [hidden]="!(editForm.controls.stepNo?.dirty && editForm.controls.stepNo?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.stepNo?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productStep.startStep"
+                           for="field_startStep">start Step</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="startStep" id="field_startStep"
+                           [numeric]
+                           [(ngModel)]="productStep.startStep" required/>
+                    <div [hidden]="!(editForm.controls.startStep?.dirty && editForm.controls.startStep?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startStep?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productStep.finishStep"
+                           for="field_finishStep">finish Step</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="finishStep" id="field_finishStep"
+                           [numeric]
+                           [(ngModel)]="productStep.finishStep"/>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

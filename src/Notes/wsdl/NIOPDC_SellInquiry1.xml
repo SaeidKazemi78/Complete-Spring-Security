@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tempuri.org/">
+    <xs:import schemaLocation="NIOPDC_SellInquiry3.xml"
+               namespace="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+    <xs:element name="OnlinePersonInquiry">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="connectionString" nillable="true" type="q1:NiopdcConnectionString"
+                            xmlns:q1="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+                <xs:element minOccurs="0" name="National" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OnlinePersonInquiryResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="OnlinePersonInquiryResult" nillable="true" type="q2:OutputSellInquiry"
+                            xmlns:q2="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PersonInfoLegal">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="connectionString" nillable="true" type="q3:NiopdcConnectionString"
+                            xmlns:q3="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+                <xs:element minOccurs="0" name="National" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PersonInfoLegalResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="PersonInfoLegalResult" nillable="true" type="q4:OutputSellInquiry"
+                            xmlns:q4="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PersonInfoNatural">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="connectionString" nillable="true" type="q5:NiopdcConnectionString"
+                            xmlns:q5="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+                <xs:element minOccurs="0" name="Person" nillable="true" type="q6:NiopdcPersonInfoNew"
+                            xmlns:q6="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PersonInfoNaturalResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="PersonInfoNaturalResult" nillable="true" type="q7:OutputPersonInfo"
+                            xmlns:q7="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OfflineAnswer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="connectionString" nillable="true" type="q8:NiopdcConnectionString"
+                            xmlns:q8="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+                <xs:element minOccurs="0" name="Customer" nillable="true" type="q9:NiopdcSellInquiry"
+                            xmlns:q9="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OfflineAnswerResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="OfflineAnswerResult" nillable="true" type="q10:OutputSellInquiry"
+                            xmlns:q10="http://schemas.datacontract.org/2004/07/NIOPDC_TA.DTO"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

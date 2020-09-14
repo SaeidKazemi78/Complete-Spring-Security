@@ -1,0 +1,218 @@
+{
+    "niopdcgatewayApp": {
+        "order": {
+            "flightNumber": "شماره پرواز",
+            "locationName": "ناحیه",
+            "depotSendCode": "کد ارسال به انبار",
+            "print": {
+                "CUSTOMER": "چاپ نسخه راننده",
+                "CUSTOMHOUSE": "چاپ نسخه گمرک/هنگ مرزی",
+                "ARCHIVES": "چاپ نسخه بایگانی",
+                "ALL": "چاپ همه نسخه ها"
+            },
+            "discount": {
+                "value": "مقدار معافیت"
+            },
+            "customer": {
+                "name": " نام راننده",
+                "family": "نام خانوادگی راننده",
+                "carTanksIsEmpty":"وسیله نقلیه فاقد باک می باشد."
+            },
+            "home": {
+                "report": "پرینت حواله",
+                "title": "لیست حواله ها",
+                "boundarySell": "فروش سوخت مرزی",
+                "titleInfo": "اطلاعات حواله",
+                "titlePrePay": "اطلاعات پرداخت",
+                "credit.quota.info":"اطلاعات سهمیه / اعتبار"
+            },
+            "delete": {
+                "question": "آیا برای حذف حواله با شماره {{id}} مطمئن هستید؟",
+                "force": "در هر صورت حذف شود."
+            },
+            "confirm": {
+                "question": "آیا برای تایید حواله با شماره {{id}} مطمئن هستید؟"
+            },
+            "revertConfirm": {
+                "question": "آیا برای انصراف از تایید حواله با شماره {{id}} مطمئن هستید؟"
+            },
+            "revocation": {
+                "question": "ایا برای ابطال حواله با شماره {{id}} مطمئن هستید؟",
+                "force": "در هر صورت ابطال شود."
+            },
+            "detail": {
+                "title": "Order"
+            },
+            "increaseBoundaryPrint": {
+                "title": ""
+            },
+            "customer.carTanksIsEmpty": "هیچ باکی برای این کامیون ثبت نشده است.",
+            "customerId": "مشتری",
+            "personId": "صاحب امتیاز",
+            "locationId": "ناحیه",
+            "locationId1": "منطقه",
+            "locationId2": "مرز",
+            "locationCustomer": "حوزه فعالیت مشتری",
+            "orderNo": "شماره حواله",
+            "registerDate": "تاریخ",
+            "lastModifiedDate": "تاریخ",
+            "price": "مبلغ کل",
+            "priceOrder": "مبلغ کل حواله",
+            "priceAmount": "مبلغ",
+            "paymentCredit": "پرداخت",
+            "productPrice": "مبلغ فرآورده",
+            "containerPrice": "مبلغ ظرف",
+            "costPrice": "مبلغ هزینه",
+            "expires": "Expires",
+            "status": "وضعیت",
+            "currencyId": "واحد پولی",
+            "modifyStatusDate": "Modify Status Date",
+            "depotId": "انبار",
+            "currencyRateGroupId": "گروه نرخی واحد پولی",
+            "buyGroup": "نوع",
+            "buyType": "نوع خرید",
+            "reserve": "رزرو اعتبار",
+            "flightConditions": "شرایط پرواز",
+            "sourceAirport": "فرودگاه مبدا",
+            "targetAirport": "فرودگاه مقصد",
+            "typeOfFuelReceipt": "نحوه فروش",
+            "targetCountry": "کشور مقصد",
+            "currency": "واحد پولی",
+            "currencyRateGroup": "گروه نرخ واحد پولی",
+            "orderType": "نوع حواله",
+            "amount": "لیتراژ",
+            "customerCredits": "اعتبارات با شماره زیر در حال اتمام است",
+            "description": "توضیحات",
+            "date": "تاریخ و زمان",
+            "startDate": "تاریخ شروع",
+            "finishDate": "تاریخ پایان",
+            "unit": "شماره واحد",
+            "endMetre": "آخرین میتر",
+            "count": "تعداد",
+            "openedShiftWorkNotFind": "شیفت کاری باز وجود ندارد.",
+            "inquiryCmr": "استعلام معافیت",
+            "insertedByMeasuringDevice": "اطلاعات از طریق دستگاه ثبت شده است و قابل ویرایش نمی باشد",
+            "shiftWork.isTomorrow": "سیستم فروش برای امروز بسته شده است. لذا درخواست شما برای تاریخ {{ day }} ثبت خواهد شد.",
+            "shiftWork.notFind": "ساعت کاری باز وجود ندارد.",
+            "shiftWork.isTimeout": "تا 30 ساعت در شیفت کاری امکان ایجاد حواله وجود دارد. لطفا روز را بسته و روز جدید ایجاد کنید.",
+            "shiftWork.isExtra": "بعد از 24 ساعت از شروع روز در خواست ها برای آخر روز ثبت خواهد شد.",
+            "shiftWork.orderNumber": "بازه شماره حواله تعریف نشده است.",
+            "recreate": "اطلاعات اصلی حواله تغییر یافته است. در صورت ذخیره کردن حواله تمام فرآورده قبلی حذف خواهند شد.",
+            "noAccessForRegisterOrder": "به علت عدم وجود قرارداد حمل برای مشتری مورد نظر امکان ثبت حواله وجود ندارد.",
+            "loading": "درحال بارگذاری لطفا صبر کنید.",
+            "errorLoad": "خطا در بارگذاری حواله شماره کد DRE-{{id}} لطفا مجدد سعی کنید.",
+            "firstName": "نام",
+            "lastName": "نام خانوادگی",
+            "revokedReverePayment": "حواله ابطال شده است و تمام پرداختی های این حواله به فیش های مانده دار افزورده شده است.",
+            "revokedRevereCredit": "حواله ابطال شده است و تمام اعتبار های این حواله برگشت داده شده است .",
+            "exporter": "صادرکننده",
+            "countCopy": "تعداد حواله"
+        },
+        "fuelReceipt": {
+            "home": {
+                "title": "لیست رسید سوخت",
+                "titleInfo": "اطلاعات رسید سوخت",
+                "titlePrePay": "اطلاعات پیش پرداخت"
+            },
+            "delete": {
+                "question": "آیا برای حذف رسید سوخت با شماره {{id}} مطمئن هستید؟"
+            },
+            "confirm": {
+                "question": "آیا برای تایید رسید سوخت با شماره {{id}} مطمئن هستید؟"
+            },
+            "revocation": {
+                "question": "ایا برای ابطال رسید سوخت با شماره {{id}} مطمئن هستید؟"
+            },
+            "orderNo": "شماره رسیدسوخت",
+            "customer": "شماره ثبت",
+            "person": "شرکت هواپیمایی",
+            "metreTime": "ساعت شروع عملیات",
+            "metreEndTime": "ساعت پایان عملیات",
+            "shiftWork": {
+                "notFindMainDayDepot": "حساب روز انبار فعال وجود ندارد.",
+                "notFindMainDayOperation": "عملیات روزانه فعال وجود ندارد.",
+                "orderNumber": "بازه شماره رسید سوخت تعریف نشده است.",
+                "isTimeoutMainDayDepot": "تا 30 ساعت در روز کاری امکان ایجاد حواله وجود دارد. لطفا روز انبار را بسته و روز انبار جدید ایجاد کنید.",
+                "isTimeoutMainDayOperation": "تا 30 ساعت در روز کاری امکان ایجاد حواله وجود دارد. لطفا روز عملیات را بسته و روز عملیات جدید ایجاد کنید."
+            },
+            "revokedReverePayment": "رسید سوخت ابطال شده است و تمام پرداختی های این رسید سوخت به فیش های مانده دار افزورده شده است.",
+            "revokedRevereCredit": "رسید سوخت ابطال شده است و تمام اعتبار های این رسید سوخت برگشت داده شده است ."
+        },
+        "boundarySell": {
+            "home": {
+                "title": "لیست حواله مرزی",
+                "loading": "درحال بارگذاری",
+                "view": "نمایش",
+                "edit": "ویرایش",
+                "create": "ایجاد",
+                "carInfo": "اطلاعات وسیله نقلیه",
+                "carTankInfo": "اطلاعات باک",
+                "carHistory": "تاریخچه حواله های ثبت شده",
+                "orderInfo": "اطلاعات حواله مرزی",
+                "discount": "معافیت",
+                "prePayInfo": "اطلاعات پرداخت",
+                "titlePay": "پرداخت",
+                "supplementaryInformation": "اطلاعات تکمیلی",
+                "firstInformation": "اطلاعات اولیه"
+            },
+            "delete": {
+                "question": "آیا برای حذف حواله مرزی با شماره {{id}} مطمئن هستید؟"
+            },
+            "deActive": {
+                "question": "آیا برای غیرفعال کردن حواله مرزی با شماره {{id}} مطمئن هستید؟"
+            },
+            "confirm": {
+                "question": "آیا برای تایید حواله مرزی با شماره {{id}} مطمئن هستید؟"
+            },
+            "plaque": "پلاک",
+            "cmr": "کد رهگیری راهنامه",
+            "carnet": "کارنه",
+            "capote": "کاپوتاژ",
+            "pumpNozzleRegisterDate": "زمان ثبت عرضه",
+            "alongFuelRegisterDate": "زمان ثبت کنترل باک",
+            "discountPrice": "مبلغ معافیت",
+            "tolerance": "تلرانس (دامنه تغییرات)",
+            "alongFuelAmount": "مقدار سوخت همراه",
+            "alongFuelPrice": "مبلغ سوخت همراه",
+            "pumpNozzlePrice": "مبلغ سوخت عرضه",
+            "driverFirstName": "نام راننده",
+            "driverLastName": "نام خانوادگی راننده",
+            "invalid.customer": "اطلاعات این وسیله نقلیه معتبر نمی باشد  خواهشمند است اطلاعات را تصحیح نمایید."
+        },
+        "connectDepot": {
+            "sendToNew": "ارسال به انبار جدید",
+            "downloadForNew": "دریافت فایل برای انبار جدید",
+            "downloadForOld": "دریافت فایل برای انبار قدیم",
+            "sendDate": "تاریخ ارسال به انبار",
+            "sendCode": "کد فایل انبار"
+        }
+    },
+    "niopdcorderApp": {
+        "order": {
+            "created": "حواله با موفقیت ثبت شد.",
+            "updated": "حواله با موفقیت ثبت شد.",
+            "deleted": "حواله با موفقیت حذف شد.",
+            "confirmed": "حواله با موفقیت تایید شد.",
+            "deConfirmed": "حواله با موفقیت عدم تایید شد.",
+            "revoked": "حواله با موفقیت ابطال شد.",
+            "disabled": "عملیات با موفقیت انجام شد",
+            "updateDepotFileItem": "فایل انبار با موفقیت ارسال شد."
+        },
+
+        "fuelReceipt": {
+            "created": "رسید سوخت با موفقیت ایجاد شد.",
+            "updated": "رسید سوخت با موفقیت ویرایش شد.",
+            "deleted": "رسید سوخت با موفقیت حذف شد.",
+            "confirmed": "رسید سوخت با موفقیت تایید شد.",
+            "revoked": "حواله با موفقیت ابطال شد.",
+            "updateDepotFileItem": "فایل انبار با موفقیت ارسال شد."
+        },
+        "boundarySell": {
+            "created": "حواله مرزی با موفقیت ایجاد شد.",
+            "updated": "حواله مرزی با موفقیت ویرایش شد.",
+            "deleted": "حواله مرزی با موفقیت حذف شد.",
+            "confirmed": "حواله مرزی با موفقیت تایید شد.",
+            "revoked": "حواله با موفقیت ابطال گردید."
+        }
+    }
+}

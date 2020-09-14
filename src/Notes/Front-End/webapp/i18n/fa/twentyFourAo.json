@@ -1,0 +1,14 @@
+{
+    "niopdcgatewayApp": {
+        "twentyFourAo": {
+            "home": {
+                "title": "تعداد سوختگیری 24 ساعته"
+            },
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "hour": "ساعت",
+            "countFuelReceipt": "تعداد سوختگیری",
+            "day": "روز"
+        }
+    }
+}

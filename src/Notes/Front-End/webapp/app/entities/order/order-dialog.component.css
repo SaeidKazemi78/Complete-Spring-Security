@@ -1,0 +1,37 @@
+.ui-steps.steps-custom3 .ui-steps-item {
+    width: 33%;
+    /*width: 50%;*/
+}
+
+.ui-steps.steps-custom4 .ui-steps-item {
+    width: 25%;
+    /*width: 50%;*/
+}
+
+.ui-steps.steps-custom5 .ui-steps-item {
+    width: 20%;
+    /*width: 50%;*/
+}
+
+.ui-steps.steps-custom {
+    margin-bottom: 60px;
+}
+
+.ui-steps.steps-custom .ui-steps-item .ui-menuitem-link {
+    height: 10px;
+    padding: 0 1em;
+}
+
+.ui-steps.steps-custom .ui-steps-item .ui-steps-number {
+    background-color: #0081c2;
+    color: #FFFFFF;
+    display: inline-block;
+    width: 46px;
+    border-radius: 50%;
+    margin-top: -14px;
+    margin-bottom: 10px;
+}
+
+.ui-steps.steps-custom .ui-steps-item .ui-steps-title {
+    color: #555555;
+}

@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "VoucherMasterStatus" : {
+            "null": "",
+            "CONFIRM": "CONFIRM",
+            "PENDING": "PENDING"
+        }
+    }
+}

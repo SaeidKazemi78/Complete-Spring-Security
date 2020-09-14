@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+   <changeSet author="alireza (generated)" id="1574775248293-1">
+      <addColumn tableName="boundary_tag">
+         <column name="created_by" type="varchar(50)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-2">
+      <addColumn tableName="ceiling_quota">
+         <column name="created_by" type="varchar(50)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-3">
+      <addColumn tableName="niopdc_config">
+         <column name="created_by" type="varchar(50)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-4">
+      <addColumn tableName="plaque">
+         <column name="created_by" type="varchar(50)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-5">
+      <addColumn tableName="plaque_rule">
+         <column name="created_by" type="varchar(50)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-6">
+      <addColumn tableName="reservoir_capacity">
+         <column name="created_by" type="varchar(50)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-7">
+      <addColumn tableName="boundary_tag">
+         <column name="created_date" type="varbinary(255)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-8">
+      <addColumn tableName="ceiling_quota">
+         <column name="created_date" type="varbinary(255)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-9">
+      <addColumn tableName="niopdc_config">
+         <column name="created_date" type="varbinary(255)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-10">
+      <addColumn tableName="plaque">
+         <column name="created_date" type="varbinary(255)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-11">
+      <addColumn tableName="plaque_rule">
+         <column name="created_date" type="varbinary(255)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-12">
+      <addColumn tableName="reservoir_capacity">
+         <column name="created_date" type="varbinary(255)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-13">
+      <addColumn tableName="boundary_tag">
+         <column name="last_modified_by" type="varchar(50)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-14">
+      <addColumn tableName="ceiling_quota">
+         <column name="last_modified_by" type="varchar(50)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-15">
+      <addColumn tableName="niopdc_config">
+         <column name="last_modified_by" type="varchar(50)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-16">
+      <addColumn tableName="plaque">
+         <column name="last_modified_by" type="varchar(50)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-17">
+      <addColumn tableName="plaque_rule">
+         <column name="last_modified_by" type="varchar(50)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-18">
+      <addColumn tableName="reservoir_capacity">
+         <column name="last_modified_by" type="varchar(50)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-19">
+      <addColumn tableName="boundary_tag">
+         <column name="last_modified_date" type="varbinary(255)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-20">
+      <addColumn tableName="ceiling_quota">
+         <column name="last_modified_date" type="varbinary(255)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-21">
+      <addColumn tableName="niopdc_config">
+         <column name="last_modified_date" type="varbinary(255)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-22">
+      <addColumn tableName="plaque">
+         <column name="last_modified_date" type="varbinary(255)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-23">
+      <addColumn tableName="plaque_rule">
+         <column name="last_modified_date" type="varbinary(255)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-24">
+      <addColumn tableName="reservoir_capacity">
+         <column name="last_modified_date" type="varbinary(255)"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-25">
+      <dropForeignKeyConstraint baseTableName="aabt_ahval_saha_person_info_aud"
+                                constraintName="FK8wukchrwgv3ordkyjl8vjf6d2"/>
+   </changeSet>
+   <changeSet author="alireza (generated)" id="1574775248293-26">
+      <dropTable tableName="aabt_ahval_saha_person_info_aud"/>
+   </changeSet>
+</databaseChangeLog>

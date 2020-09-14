@@ -1,0 +1,32 @@
+
+{
+    "niopdcgatewayApp": {
+        "userDataAccess" : {
+            "home": {
+                "title": "User Data Accesses",
+                "createLabel": "Create a new User Data Access",
+                "createOrEditLabel": "Create or edit a User Data Access"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete User Data Access {{ id }}?"
+            },
+            "detail": {
+                "title": "User Data Access"
+            },
+            "username": "Username",
+            "contractType": "Contract Type",
+            "location": "Location",
+            "region": "Region",
+            "person": "Person",
+            "customer": "Customer",
+            "customerType": "Customer Type"
+        }
+    },
+    "niopdcbaseApp": {
+        "userDataAccess" : {
+            "created": "A new User Data Access is created with identifier {{ param }}",
+            "updated": "A User Data Access is updated with identifier {{ param }}",
+            "deleted": "A User Data Access is deleted with identifier {{ param }}"
+        }
+    }
+}

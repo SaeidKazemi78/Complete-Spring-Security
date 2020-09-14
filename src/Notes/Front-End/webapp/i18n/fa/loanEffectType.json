@@ -1,0 +1,8 @@
+{
+    "niopdcgatewayApp": {
+         "loanEffectType":{
+             "SURPLUSAGE":"اضافات",
+             "DEPRECIATORY":"کسورات"
+         }
+    }
+}

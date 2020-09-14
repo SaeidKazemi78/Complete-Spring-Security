@@ -1,0 +1,14 @@
+{
+    "niopdcgatewayApp": {
+        "monthlyReport": {
+            "home": {
+                "title": "گزارش ماهانه فروش"
+            },
+            "year": "سال",
+            "month": "ماه",
+            "customerGroup": "گروه مشتری",
+            "customerType": "نوع مشتری",
+            "region": "تقسیمات کشوری"
+        }
+    }
+}

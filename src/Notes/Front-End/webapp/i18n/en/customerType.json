@@ -1,0 +1,34 @@
+
+{
+    "niopdcgatewayApp": {
+        "customerType" : {
+            "home": {
+                "title": "Customer Types",
+                "createLabel": "Create a new Customer Type",
+                "createOrEditLabel": "Create or edit a Customer Type"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Customer Type {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer Type"
+            },
+            "title": "Title",
+            "code": "Code",
+            "locationType": "Location Type",
+            "customerGroup": "Customer Group",
+            "taxExempt": "Tax Exempt",
+            "hasGsId": "Has Gs Id",
+            "customerCodeTitle": "Customer Code Title",
+            "customerTypeIgnore": "Customer Type Ignore",
+            "customerDeactiveRule": "Customer Deactive Rule"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerType" : {
+            "created": "A new Customer Type is created with identifier {{ param }}",
+            "updated": "A Customer Type is updated with identifier {{ param }}",
+            "deleted": "A Customer Type is deleted with identifier {{ param }}"
+        }
+    }
+}

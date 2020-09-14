@@ -1,0 +1,33 @@
+{
+    "niopdcgatewayApp": {
+        "product": {
+            "home": {
+                "title": "فرآورده",
+                "createLabel": "ایجاد فرآورده",
+                "createOrEditLabel": "ویرایش فرآورده",
+                "view": "نمایش فرآورده"
+            },
+            "delete": {
+                "question": "آیا برای حذف فرآورده {{ id }} مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "فرآورده"
+            },
+            "code": "کد فرآورده",
+            "title": "عنوان",
+            "hasContainer": "مظروف",
+            "productGroup": "گروه فرآورده",
+            "productUnit": "واحد فرآورده",
+            "container": "ظرف فرآورده",
+            "calculateContainerPrice": "محاسبه نرخ ظرف",
+            "productShowStatus": "نوع نمایش"
+        }
+    },
+    "niopdcbaseApp": {
+        "product": {
+            "created": "فرآورده با موفقیت ایجاد شد.",
+            "updated": "فرآورده با موفقیت ویرایش شد.",
+            "deleted": "فرآورده با موفقیت حذف شد."
+        }
+    }
+}

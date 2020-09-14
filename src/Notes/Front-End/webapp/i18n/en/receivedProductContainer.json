@@ -1,0 +1,37 @@
+
+{
+    "niopdcgatewayApp": {
+        "receivedProductContainer" : {
+            "home": {
+                "title": "Received Product Containers",
+                "createLabel": "Create a new Received Product Container",
+                "createOrEditLabel": "Create or edit a Received Product Container"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Received Product Container {{ id }}?"
+            },
+            "detail": {
+                "title": "Received Product Container"
+            },
+            "registerDate": "Register Date",
+            "inventoryId": "Inventory Id",
+            "truckNumber": "Truck Number",
+            "truckSerial": "Truck Serial",
+            "waybillNumber": "Waybill Number",
+            "driverName": "Driver Name",
+            "contractorNumber": "Contractor Number",
+            "sendCount": "Send Count",
+            "receiveCount": "Receive Count",
+            "description": "Description",
+            "oilTankContainer": "Oil Tank Container",
+            "dayDepotContainer": "Day Depot Container"
+        }
+    },
+    "niopdcaoApp": {
+        "receivedProductContainer" : {
+            "created": "A new Received Product Container is created with identifier {{ param }}",
+            "updated": "A Received Product Container is updated with identifier {{ param }}",
+            "deleted": "A Received Product Container is deleted with identifier {{ param }}"
+        }
+    }
+}

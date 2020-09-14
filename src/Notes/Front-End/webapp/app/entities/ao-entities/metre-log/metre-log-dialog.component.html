@@ -1,0 +1,203 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="metreLog.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="metreLog.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metreLog.startMeter"
+                           for="field_startMeter">Start Meter</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="startMeter"
+                           id="field_startMeter"
+                           [(ngModel)]="metreLog.startMeter" required/>
+                    <div [hidden]="!(editForm.controls.startMeter?.dirty && editForm.controls.startMeter?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startMeter?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startMeter?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metreLog.endMeter"
+                           for="field_endMeter">End Meter</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="endMeter" id="field_endMeter"
+                           [(ngModel)]="metreLog.endMeter" required/>
+                    <div [hidden]="!(editForm.controls.endMeter?.dirty && editForm.controls.endMeter?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.endMeter?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.endMeter?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metreLog.amount"
+                           for="field_amount">Amount</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="amount" id="field_amount"
+                           [(ngModel)]="metreLog.amount" required/>
+                    <div [hidden]="!(editForm.controls.amount?.dirty && editForm.controls.amount?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.amount?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.amount?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metreLog.registerDate"
+                           for="field_registerDate">Register Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disableTime]="true" [disabled]="isView" [rtlActive]="true" time="00:00:00"
+                                            id="field_registerDate"
+                                            class="form-control"
+                                            name="registerDate" [(ngModel)]="metreLog.registerDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div [hidden]="!(editForm.controls.registerDate?.dirty && editForm.controls.registerDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.registerDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.registerDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metreLog.fuelType"
+                           for="field_fuelType">Fuel Type</label>
+                    <select [disabled]="isView" class="form-control" name="fuelType" [(ngModel)]="metreLog.fuelType"
+                            id="field_fuelType" required>
+                        <option value="RE_FUEL">{{'niopdcgatewayApp.FuelType.RE_FUEL' | translate}}</option>
+                        <option value="DE_FUEL">{{'niopdcgatewayApp.FuelType.DE_FUEL' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.fuelType?.dirty && editForm.controls.fuelType?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.fuelType?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metreLog.transfer"
+                           for="field_transfer">Transfer</label>
+                    <select class="form-control" id="field_transfer" name="transfer" [(ngModel)]="metreLog.transferId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="transferOption.id"
+                                *ngFor="let transferOption of transfers; trackBy: trackTransferById">
+                            {{transferOption.id}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.metreLog.transferPlatformToUnit"
+                           for="field_transferPlatformToUnit">Transfer Platform To Unit</label>
+                    <select class="form-control" id="field_transferPlatformToUnit" name="transferPlatformToUnit"
+                            [(ngModel)]="metreLog.transferPlatformToUnitId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="transferPlatformToUnitOption.id"
+                                *ngFor="let transferPlatformToUnitOption of transferplatformtounits; trackBy: trackTransferPlatformToUnitById">
+                            {{transferPlatformToUnitOption.id}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metreLog.logBook"
+                           for="field_logBook">Log
+                        Book</label>
+                    <select class="form-control" id="field_logBook" name="logBook"
+                            [(ngModel)]="metreLog.logBookId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="logBookOption.id"
+                                *ngFor="let logBookOption of logbooks; trackBy: trackLogBookById">
+                            {{logBookOption.id}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.metreLog.metre"
+                           for="field_metre">Metre</label>
+                    <select class="form-control" id="field_metre" name="metre" [(ngModel)]="metreLog.metreId"
+                            required>
+                        <option *ngIf="!editForm.value.metre" [ngValue]="null" selected></option>
+                        <option [ngValue]="metreOption.id"
+                                *ngFor="let metreOption of metres; trackBy: trackMetreById">
+                            {{metreOption.id}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.metre?.dirty && editForm.controls.metre?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.metre?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

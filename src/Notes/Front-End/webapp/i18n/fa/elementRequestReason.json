@@ -1,0 +1,14 @@
+{
+    "niopdcgatewayApp": {
+        "ElementRequestReason" : {
+            "null": "",
+            "MAX_DIFF": "حداکثر اختلاف فشار مجاز فیلتر",
+            "MAX_TIME_ELAPSED": "سپری شدن حداکثر زمان مجاز استفاده از المنت",
+            "UNACCEPTABLE_DROP": "افت غیر قابل قبول دبی",
+            "UNACCEPTABLE_RESULT": "غیر قابل قبول بودن نتیجه ازمایش المنت جدا کننده آب",
+            "ABNORMAL_RESULT": "غیر طبیعب بودن نتیجه آزمایش میلی پور",
+            "TEARING_ELEMENT": "پاره شدن المنت",
+            "SUDDEN_DROP": "افت ناگهانی اختلاف فشار فیلتر"
+        }
+    }
+}

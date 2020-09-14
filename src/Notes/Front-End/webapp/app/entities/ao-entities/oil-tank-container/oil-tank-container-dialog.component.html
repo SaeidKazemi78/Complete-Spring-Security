@@ -1,0 +1,113 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <ng-container *ngIf="createType===1">
+            <h4 *ngIf="!oilTankContainer.id" class="modal-title" id="createLabel"
+                jhiTranslate="niopdcgatewayApp.oilTankContainer.home.createLabel">
+                Create</h4>
+            <h4 *ngIf="oilTankContainer.id && !isView" class="modal-title" id="editLabel"
+                jhiTranslate="niopdcgatewayApp.oilTankContainer.home.createOrEditLabel">
+                Edit</h4>
+            <h4 *ngIf="isView" class="modal-title" id="viewLabel"
+                jhiTranslate="niopdcgatewayApp.oilTankContainer.home.view">
+                View</h4>
+        </ng-container>
+        <ng-container *ngIf="createType===0">
+            <h4 *ngIf="!oilTankContainer.id" class="modal-title" id="createLabelProductUnit"
+                jhiTranslate="niopdcgatewayApp.oilTankContainer.home.createProductUnitLabel">
+                Create</h4>
+            <h4 *ngIf="oilTankContainer.id && !isView" class="modal-title" id="editLabelProductUnit"
+                jhiTranslate="niopdcgatewayApp.oilTankContainer.home.createOrEditProductUnitLabel">
+                Edit</h4>
+            <h4 *ngIf="isView" class="modal-title" id="viewLabelProductUnit"
+                jhiTranslate="niopdcgatewayApp.oilTankContainer.home.viewProductUnit">
+                View</h4>
+        </ng-container>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-xs-12 col-md-4" *ngIf="createType===1">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTankContainer.productId"
+                           for="field_productId">RefuelCenter</label>
+                    <select class="form-control" id="field_productId" name="productId" [disabled]="isView"
+                            [(ngModel)]="oilTankContainer.productId" required>
+                        <option *ngIf="!editForm.value.productId" [ngValue]="null" selected></option>
+                        <option [ngValue]="productOption.id"
+                                *ngFor="let productOption of products; trackBy: trackProductById">
+                            {{productOption.title}}({{productOption.containerTitle}})
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4" *ngIf="createType==0">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTankContainer.productUnitId"
+                           for="field_productUnitId">Product Unit</label>
+                    <select class="form-control" id="field_productUnitId" name="productUnitId" [disabled]="isView"
+                            [(ngModel)]="oilTankContainer.productUnitId" required>
+                        <option *ngIf="!editForm.value.productUnitId" [ngValue]="null" selected></option>
+                        <option [ngValue]="containerOption.id"
+                                *ngFor="let containerOption of containers; trackBy: trackContainerById">
+                            {{containerOption.title}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTankContainer.amount"
+                           for="field_amount">Amount</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="amount" id="field_amount"
+                           [numeric]="{min:0}"
+                           [(ngModel)]="oilTankContainer.amount" required/>
+                    <div [hidden]="!(editForm.controls.amount?.dirty && editForm.controls.amount?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.amount?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.amount?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.oilTankContainer.refuelCenter"
+                           for="field_refuelCenter">RefuelCenter</label>
+                    <select class="form-control" id="field_refuelCenter" name="refuelCenter" [disabled]="isView"
+                            [(ngModel)]="oilTankContainer.refuelCenterId" required>
+                        <option *ngIf="!editForm.value.refuelCenter" [ngValue]="null" selected></option>
+                        <option [ngValue]="refuelCenterOption.id"
+                                *ngFor="let refuelCenterOption of refuelCenters; trackBy: trackRefuelCenterById">
+                            {{refuelCenterOption.persianTitle}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.refuelCenter?.dirty && editForm.controls.refuelCenter?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.refuelCenter?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancelShort">Cancel</span>
+        </button>
+        <button type="submit" *ngIf="!isView" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.saveShort">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "airport" : {
+            "home": {
+                "title": "Airports",
+                "createLabel": "Create a new Airport",
+                "createOrEditLabel": "Create or edit a Airport"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Airport {{ id }}?"
+            },
+            "detail": {
+                "title": "Airport"
+            },
+            "persianTitle": "Persian Title",
+            "englishTitle": "English Title",
+            "code": "Code",
+            "regionId": "Region Id",
+            "countryId": "Country Id"
+        }
+    },
+    "niopdcaoApp": {
+        "airport" : {
+            "created": "A new Airport is created with identifier {{ param }}",
+            "updated": "A Airport is updated with identifier {{ param }}",
+            "deleted": "A Airport is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,0 +1,141 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="transferType.id==null" class="modal-title" id="createLabel" jhiTranslate="niopdcgatewayApp.transferType.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="transferType.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.transferType.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.transferType.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.transferType.title"
+                           for="field_title">Title</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="title" id="field_title"
+                           [(ngModel)]="transferType.title" required minlength="3" maxlength="42"/>
+                    <div [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 42 }">
+                            This field cannot be longer than 42 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.transferType.transferFrom"
+                           for="field_transferFrom">Transfer From</label>
+                    <select [disabled]="isView" class="form-control" name="transferFrom"
+                            [(ngModel)]="transferType.transferFrom" id="field_transferFrom" (ngModelChange)="transferFromHandle($event)" required>
+                        <option value="MAIN">{{'niopdcgatewayApp.oilTankType.MAIN' | translate}}</option>
+                        <option value="CONTAMINATED">{{'niopdcgatewayApp.oilTankType.CONTAMINATED' |
+                            translate}}
+                        </option>
+                        <option value="SERVICE_TANK">{{'niopdcgatewayApp.oilTankType.SERVICE_TANK' |
+                            translate}}
+                        </option>
+                        <option value="UNIT">{{'niopdcgatewayApp.oilTankType.UNIT' | translate}}</option>
+                        <option value="PLATFORM">{{'niopdcgatewayApp.oilTankType.PLATFORM' | translate}}
+                        </option>
+                        <option value="WATER_METHANOL">{{'niopdcgatewayApp.oilTankType.WATER_METHANOL' |
+                            translate}}
+                        </option>
+                        <option value="EARTH">{{'niopdcgatewayApp.oilTankType.EARTH' | translate}}</option>
+                        <option value="BASE_PRODUCT">{{'niopdcgatewayApp.oilTankType.BASE_PRODUCT' | translate}}</option>
+                        <option value="RECYCLE">{{'niopdcgatewayApp.oilTankType.RECYCLE' | translate}}
+                        </option>
+                        <option value="PIPE">{{'niopdcgatewayApp.oilTankType.PIPE' | translate}}
+                        </option>
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.transferFrom?.dirty && editForm.controls.transferFrom?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.transferFrom?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.transferType.transferTo"
+                           for="field_transferTo">Transfer To</label>
+                    <select [disabled]="isView || disableTransferTo" class="form-control" name="transferTo"
+                            [(ngModel)]="transferType.transferTo" id="field_transferTo" (ngModelChange)="transferToHandle($event)" [required]="!transferType.transferToHimself" >
+                        <option value="MAIN">{{'niopdcgatewayApp.oilTankType.MAIN' | translate}}</option>
+                        <option value="CONTAMINATED">{{'niopdcgatewayApp.oilTankType.CONTAMINATED' |
+                            translate}}
+                        </option>
+                        <option value="SERVICE_TANK">{{'niopdcgatewayApp.oilTankType.SERVICE_TANK' |
+                            translate}}
+                        </option>
+                        <option value="UNIT">{{'niopdcgatewayApp.oilTankType.UNIT' | translate}}</option>
+                        <option value="PLATFORM">{{'niopdcgatewayApp.oilTankType.PLATFORM' | translate}}
+                        </option>
+                        <option value="WATER_METHANOL">{{'niopdcgatewayApp.oilTankType.WATER_METHANOL' |
+                            translate}}
+                        </option>
+                        <option value="EARTH">{{'niopdcgatewayApp.oilTankType.EARTH' | translate}}</option>
+                        <option value="BASE_PRODUCT">{{'niopdcgatewayApp.oilTankType.BASE_PRODUCT' | translate}}</option>
+                        <option value="RECYCLE">{{'niopdcgatewayApp.oilTankType.RECYCLE' | translate}}
+                        </option>
+                        <option value="PIPE">{{'niopdcgatewayApp.oilTankType.PIPE' | translate}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.transferType.activeMetre"
+                           for="field_activeMetre">Active Metre</label>
+                    <select [disabled]="isView" class="form-control" name="activeMetre"
+                            [(ngModel)]="transferType.activeMetre" id="field_activeMetre">
+                        <option value=""></option>
+                        <option *ngIf="showSource" value="SOURCE">{{'niopdcgatewayApp.ActiveMetre.SOURCE' | translate}}</option>
+                        <option *ngIf="showTarget" value="TARGET">{{'niopdcgatewayApp.ActiveMetre.TARGET' | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4" style="text-align: center;margin-top: auto">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.transferType.transferToHimself"
+                           for="field_transferToHimself">Transfer To Himself</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="transferToHimself"
+                           id="field_transferToHimself"
+                           [(ngModel)]="transferType.transferToHimself" (ngModelChange)="transferToSelfHandle($event)" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancelShort">Cancel</span>
+        </button>
+        <button type="submit" *ngIf="!isView" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.saveShort">Save</span>
+        </button>
+    </div>
+</form>

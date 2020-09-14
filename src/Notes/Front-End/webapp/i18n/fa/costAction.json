@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "CostAction": {
+            "null": "",
+            "REDUCER": "کاهنده",
+            "MULTIPLIER": "افزاینده",
+            "EFFECTLESS": "مستتر در نرخ"
+        }
+    }
+}

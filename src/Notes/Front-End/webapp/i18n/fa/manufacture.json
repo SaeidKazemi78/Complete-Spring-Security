@@ -1,0 +1,27 @@
+
+{
+    "niopdcgatewayApp": {
+        "manufacture" : {
+            "home": {
+                "title": "شرکت های سازنده",
+                "createLabel":"ایجاد شرکت سازنده",
+                "createOrEditLabel":"ویرایش شرکت سازنده",
+                "view":"نمایش شرکت سازنده"
+            },
+            "delete": {
+                "question": "آیا برای حذف شرکت سازنده {{param}} اطمینان دارید؟"
+            },
+            "detail": {
+                "title": "شرکت سازنده"
+            },
+            "name": "نام"
+        }
+    },
+    "niopdcaoApp": {
+        "manufacture" : {
+            "created": "شرکت سازنده با موفقیت ایجاد شد.",
+            "updated": "شرکت سازنده با موفقیت ویرایش شد.",
+            "deleted": "شرکت سازنده با موفقیت حذف شد."
+        }
+    }
+}

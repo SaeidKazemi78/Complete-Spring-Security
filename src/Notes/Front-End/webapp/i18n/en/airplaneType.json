@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "AirplaneType" : {
+            "null": "",
+            "PASSENGER": "PASSENGER",
+            "FREIGHT": "FREIGHT"
+        }
+    }
+}

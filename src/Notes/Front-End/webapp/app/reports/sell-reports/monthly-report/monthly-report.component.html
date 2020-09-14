@@ -1,0 +1,139 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <form name="editForm" role="form" novalidate (ngSubmit)="loadAll()" #editForm="ngForm">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <h5 class="col-md-3"
+                        jhiTranslate="report.search">Search
+                    </h5>
+                </div>
+            </div>
+            <div class="card-block container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label jhiTranslate="niopdcgatewayApp.monthlyReport.year"
+                                           for="field_year">Type</label>
+                                    <select class="form-control" id="field_year" name="year"
+                                            [(ngModel)]="req.year" required>
+                                        <option *ngFor="let y of years" [ngValue]="y">{{y}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label jhiTranslate="niopdcgatewayApp.monthlyReport.month"
+                                           for="field_reportType">Type</label>
+                                    <select class="form-control" id="field_month" name="month"
+                                            [(ngModel)]="req.month" >
+                                        <option [ngValue]="0">فروردین</option>
+                                        <option [ngValue]="1">اردیبهشت</option>
+                                        <option [ngValue]="2">خرداد</option>
+                                        <option [ngValue]="3">تیر</option>
+                                        <option [ngValue]="4">مرداد</option>
+                                        <option [ngValue]="5">شهریور</option>
+                                        <option [ngValue]="6">مهر</option>
+                                        <option [ngValue]="7">آبان</option>
+                                        <option [ngValue]="8">آذر</option>
+                                        <option [ngValue]="9">دی</option>
+                                        <option [ngValue]="10">بهمن</option>
+                                        <option [ngValue]="11">اسفند</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label jhiTranslate="niopdcgatewayApp.customerType.customerGroup">Type</label>
+                                    <p-multiSelect class="form-control"
+                                                   [options]="customerGroups"
+                                                   name="products"
+
+                                                   (ngModelChange)="changeCustomerGroup($event)"
+                                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                                   [(ngModel)]="req.customerGroups"
+                                                   [ngModelOptions]="{standalone: true}"
+                                    ></p-multiSelect>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4" *ngIf="req.customerGroups">
+                                <div class="form-group">
+                                    <label jhiTranslate="niopdcgatewayApp.customer.type">Type</label>
+                                    <p-multiSelect class="form-control"
+                                                   [options]="customerTypes"
+                                                   name="customerType"
+
+                                                   (ngModelChange)="changeCustomerType($event)"
+                                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                                   [(ngModel)]="req.customerTypeIds"
+                                                   [ngModelOptions]="{standalone: true}"
+                                    ></p-multiSelect>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4" *ngIf="req.customerTypeIds">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           jhiTranslate="niopdcgatewayApp.sellContractCustomer.customer"
+                                           for="field_customer">customer</label>
+                                    <jhi-customer-selector
+                                        [multiSelect]="true"
+                                        [selectObject]="false"
+                                        [creator]="true"
+                                        [mode]="'monthly-report'"
+                                        [customerTypeIds]="req.customerTypeIds"
+                                        [(ngModel)]="req.customerIds"
+                                        class="form-control"
+                                        id="field_customer"
+                                        [widthGrid]="'800px'"
+                                    >
+                                    </jhi-customer-selector>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.location.region"
+                                       for="field_region">region</label>
+                                <input-region-selector
+                                                       [oneSelection]="false"
+                                                       [idSelector]="true"
+                                                       [selectOfLevel]="[2,3,4]"
+                                                       class="form-control" id="field_region" name="region"
+                                                       [(ngModel)]="req.regionIds">
+                                </input-region-selector>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <button type="submit" class="btn btn-primary "
+                >
+                    <span class="fa fa-search"></span>&nbsp;<span
+                    jhiTranslate="report.search">Save</span>
+                </button>
+            </div>
+        </div>
+    </form>
+    <br/>
+    <br/>
+    <dx-pivot-grid id="sales"
+                   [rtlEnabled]="true"
+                   [allowSortingBySummary]="true"
+                   [allowSorting]="true"
+                   [allowFiltering]="true"
+                   [allowExpandAll]="true"
+                   [height]="440"
+                   [showBorders]="true"
+                   [dataSource]="dataSource">
+        <dxo-export [enabled]="true" fileName="Sales"></dxo-export>
+        <dxo-field-chooser [enabled]="false"></dxo-field-chooser>
+    </dx-pivot-grid>
+</div>

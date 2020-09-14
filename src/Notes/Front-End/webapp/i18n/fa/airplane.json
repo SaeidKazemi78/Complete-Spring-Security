@@ -1,0 +1,14 @@
+{
+    "niopdcgatewayApp": {
+        "airplane": {
+            "home": {
+                "title": "هواپيما"
+            },
+            "name": "نام",
+            "model": "مدل",
+            "code": "کد",
+            "capacity": "ظرفیت",
+            "productTitle": "فرآورده"
+        }
+    }
+}

@@ -1,0 +1,362 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <form name="editForm" role="form" novalidate (ngSubmit)="loadAll()" #editForm="ngForm">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <h5 class="col-md-3"
+                        jhiTranslate="report.search">Search
+                    </h5>
+                </div>
+            </div>
+            <div class="card-block container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.momentSheet.refuelCenter"
+                                   for="field_refuelCenter">RefuelCenter</label>
+                            <select class="form-control" id="field_refuelCenter"
+                                    name="refuelCenter"
+                                    [(ngModel)]="req.refuelCenterId"
+                                    required
+                            >
+                                <option [ngValue]="null" selected></option>
+                                <option [ngValue]="refuelCenterOption.id"
+                                        *ngFor="let refuelCenterOption of refuelCenters">
+                                    {{refuelCenterOption.persianTitle}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.momentSheet.startTime"
+                                   for="field_startTime">Register Date</label>
+                            <div class="d-flex">
+                                <ng2-datetimepicker  [rtlActive]="true" time="00:00:00"
+                                                    id="field_startTime"
+                                                    class="form-control"
+                                                    name="startTime" [(ngModel)]="req.startTime"
+                                                    required></ng2-datetimepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.momentSheet.endTime"
+                                   for="field_endTime">Register Date</label>
+                            <div class="d-flex">
+                                <ng2-datetimepicker  [rtlActive]="true" time="23:59:59"
+                                                    id="field_endTime"
+                                                    class="form-control"
+                                                    name="endTime" [(ngModel)]="req.endTime"
+                                                    required></ng2-datetimepicker>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <button type="submit" class="btn btn-primary "
+                        [disabled]="editForm.form.invalid">
+                    <span class="fa fa-search"></span>&nbsp;<span
+                    jhiTranslate="report.search">Save</span>
+                </button>
+            </div>
+        </div>
+    </form>
+    <br/>
+
+    <kendo-grid
+        [disabled]="editForm.form.invalid "
+        [data]="gridData"
+        [pageSize]="state.take"
+        [skip]="state.skip"
+        [sort]="state.sort"
+        [group]="state.group"
+        [resizable]="true"
+        [sortable]="{ mode: 'multiple' }"
+        [pageable]="{ pageSizes: [ 10,25,50,100,momentSheets?.length] }"
+        [groupable]="{ showFooter: true}"
+        scrollable="scrollable"
+        [style.maxHeight.px]="600"
+        (dataStateChange)="dataStateChange($event)">
+        <ng-template kendoGridToolbarTemplate>
+
+            <button type="button" kendoGridExcelCommand icon="file-excel" jhiTranslate="report.exportToExcel">Export to
+                Excel
+            </button>
+        </ng-template>
+        <kendo-grid-column field="oilTankCode"  [locked]="true" [title]="'niopdcgatewayApp.momentSheet.oilTankCode' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column-group [title]="('niopdcgatewayApp.metreSheet.dayDate' | translate)+' :  '+(date | dateTimeJalali) +'  '+ ('userManagement.detail.title' | translate) +' : '+ (fullName)" [locked]="false"  [width]="200" >
+
+        <kendo-grid-column field="day" [title]="'niopdcgatewayApp.metreSheet.date' | translate" width="130">
+            <ng-template kendoGridCellTemplate let-dataItem>
+                <span>{{dataItem.day | dateTimeJalali}}</span>
+            </ng-template>
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="startMeasurementOilTankAmount" [title]="'niopdcgatewayApp.momentSheet.startMeasurementOilTankAmount' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="receiveDepots" [title]="'niopdcgatewayApp.momentSheet.receiveDepots' | translate"
+                           width="130">
+            <ng-template
+                kendoGridGroupFooterTemplate
+                let-group="group"
+                let-aggregates>
+                {{('report.sum' | translate) + ':' + aggregates['receiveDepots']?.sum }}
+            </ng-template>
+            <ng-template
+                kendoGridFooterTemplate
+                let-column="column">
+                {{('report.sum' | translate) + ':' +  (momentSheets && momentSheets.length > 0 ? total['receiveDepots']?.sum :0)}}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="receiveTransferContaminants" [title]="'niopdcgatewayApp.momentSheet.receiveTransferContaminants' | translate"
+                           width="130">
+            <ng-template
+                kendoGridGroupFooterTemplate
+                let-group="group"
+                let-aggregates>
+                {{('report.sum' | translate) + ':' + aggregates['receiveTransferContaminants']?.sum }}
+            </ng-template>
+            <ng-template
+                kendoGridFooterTemplate
+                let-column="column">
+                {{('report.sum' | translate) + ':' +  (momentSheets && momentSheets.length > 0 ? total['receiveTransferContaminants']?.sum :0)}}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="receiveTransferRecycles" [title]="'niopdcgatewayApp.momentSheet.receiveTransferRecycles' | translate"
+                           width="130">
+            <ng-template
+                kendoGridGroupFooterTemplate
+                let-group="group"
+                let-aggregates>
+                {{('report.sum' | translate) + ':' + aggregates['receiveTransferRecycles']?.sum }}
+            </ng-template>
+            <ng-template
+                kendoGridFooterTemplate
+                let-column="column">
+                {{('report.sum' | translate) + ':' +  (momentSheets && momentSheets.length > 0 ? total['receiveTransferRecycles']?.sum :0)}}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="receiveTransferMains" [title]="'niopdcgatewayApp.momentSheet.receiveTransferMains' | translate"
+                           width="130">
+            <ng-template
+                kendoGridGroupFooterTemplate
+                let-group="group"
+                let-aggregates>
+                {{('report.sum' | translate) + ':' + aggregates['receiveTransferMains']?.sum }}
+            </ng-template>
+            <ng-template
+                kendoGridFooterTemplate
+                let-column="column">
+                {{('report.sum' | translate) + ':' +  (momentSheets && momentSheets.length > 0 ? total['receiveTransferMains']?.sum :0)}}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="receiveTransferUnits" [title]="'niopdcgatewayApp.momentSheet.receiveTransferUnits' | translate"
+                           width="130">
+            <ng-template
+                kendoGridGroupFooterTemplate
+                let-group="group"
+                let-aggregates>
+                {{('report.sum' | translate) + ':' + aggregates['receiveTransferUnits']?.sum }}
+            </ng-template>
+            <ng-template
+                kendoGridFooterTemplate
+                let-column="column">
+                {{('report.sum' | translate) + ':' +  (momentSheets && momentSheets.length > 0 ? total['receiveTransferUnits']?.sum :0)}}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="receiveTransferServiceTanks" [title]="'niopdcgatewayApp.momentSheet.receiveTransferServiceTanks' | translate"
+                           width="130">
+            <ng-template
+                kendoGridGroupFooterTemplate
+                let-group="group"
+                let-aggregates>
+                {{('report.sum' | translate) + ':' + aggregates['receiveTransferServiceTanks']?.sum }}
+            </ng-template>
+            <ng-template
+                kendoGridFooterTemplate
+                let-column="column">
+                {{('report.sum' | translate) + ':' +  (momentSheets && momentSheets.length > 0 ? total['receiveTransferServiceTanks']?.sum :0)}}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="addition" [title]="'niopdcgatewayApp.momentSheet.addition' | translate"
+                               width="130">
+                <ng-template
+                    kendoGridGroupFooterTemplate
+                    let-group="group"
+                    let-aggregates>
+                    {{('report.sum' | translate) + ':' + aggregates['addition']?.sum }}
+                </ng-template>
+                <ng-template
+                    kendoGridFooterTemplate
+                    let-column="column">
+                    {{('report.sum' | translate) + ':' +  (momentSheets && momentSheets.length > 0 ? total['addition']?.sum :0)}}
+                </ng-template>
+            </kendo-grid-column>
+        <kendo-grid-column field="receiveTransferTotals" [title]="'niopdcgatewayApp.momentSheet.receiveTransferTotals' | translate"
+                           width="130">
+            <ng-template
+                kendoGridGroupFooterTemplate
+                let-group="group"
+                let-aggregates>
+                {{('report.sum' | translate) + ':' + aggregates['receiveTransferTotals']?.sum }}
+            </ng-template>
+            <ng-template
+                kendoGridFooterTemplate
+                let-column="column">
+                {{('report.sum' | translate) + ':' +  (momentSheets && momentSheets.length > 0 ? total['receiveTransferTotals']?.sum :0)}}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="sendDepots" [title]="'niopdcgatewayApp.momentSheet.sendDepots' | translate"
+                           width="130">
+            <ng-template
+                kendoGridGroupFooterTemplate
+                let-group="group"
+                let-aggregates>
+                {{('report.sum' | translate) + ':' + aggregates['sendDepots']?.sum }}
+            </ng-template>
+            <ng-template
+                kendoGridFooterTemplate
+                let-column="column">
+                {{('report.sum' | translate) + ':' +  (momentSheets && momentSheets.length > 0 ? total['sendDepots']?.sum :0)}}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="sendToUnits" [title]="'niopdcgatewayApp.momentSheet.sendToUnits' | translate"
+                           width="130">
+            <ng-template
+                kendoGridGroupFooterTemplate
+                let-group="group"
+                let-aggregates>
+                {{('report.sum' | translate) + ':' + aggregates['sendToUnits']?.sum }}
+            </ng-template>
+            <ng-template
+                kendoGridFooterTemplate
+                let-column="column">
+                {{('report.sum' | translate) + ':' +  (momentSheets && momentSheets.length > 0 ? total['sendToUnits']?.sum :0)}}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="sendToContaminants" [title]="'niopdcgatewayApp.momentSheet.sendToContaminants' | translate"
+                           width="130">
+            <ng-template
+                kendoGridGroupFooterTemplate
+                let-group="group"
+                let-aggregates>
+                {{('report.sum' | translate) + ':' + aggregates['sendToContaminants']?.sum }}
+            </ng-template>
+            <ng-template
+                kendoGridFooterTemplate
+                let-column="column">
+                {{('report.sum' | translate) + ':' +  (momentSheets && momentSheets.length > 0 ? total['sendToContaminants']?.sum :0)}}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="sendToRecycles" [title]="'niopdcgatewayApp.momentSheet.sendToRecycles' | translate"
+                           width="130">
+            <ng-template
+                kendoGridGroupFooterTemplate
+                let-group="group"
+                let-aggregates>
+                {{('report.sum' | translate) + ':' + aggregates['sendToRecycles']?.sum }}
+            </ng-template>
+            <ng-template
+                kendoGridFooterTemplate
+                let-column="column">
+                {{('report.sum' | translate) + ':' +  (momentSheets && momentSheets.length > 0 ? total['sendToRecycles']?.sum :0)}}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="sendToServiceTanks" [title]="'niopdcgatewayApp.momentSheet.sendToServiceTanks' | translate"
+                           width="130">
+            <ng-template
+                kendoGridGroupFooterTemplate
+                let-group="group"
+                let-aggregates>
+                {{('report.sum' | translate) + ':' + aggregates['sendToServiceTanks']?.sum }}
+            </ng-template>
+            <ng-template
+                kendoGridFooterTemplate
+                let-column="column">
+                {{('report.sum' | translate) + ':' +  (momentSheets && momentSheets.length > 0 ? total['sendToServiceTanks']?.sum :0)}}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="sendSells" [title]="'niopdcgatewayApp.momentSheet.sendSells' | translate"
+                           width="130">
+            <ng-template
+                kendoGridGroupFooterTemplate
+                let-group="group"
+                let-aggregates>
+                {{('report.sum' | translate) + ':' + aggregates['sendSells']?.sum }}
+            </ng-template>
+            <ng-template
+                kendoGridFooterTemplate
+                let-column="column">
+                {{('report.sum' | translate) + ':' +  (momentSheets && momentSheets.length > 0 ? total['sendSells']?.sum :0)}}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="sendToPlatforms" [title]="'niopdcgatewayApp.momentSheet.sendToPlatforms' | translate"
+                           width="130">
+            <ng-template
+                kendoGridGroupFooterTemplate
+                let-group="group"
+                let-aggregates>
+                {{('report.sum' | translate) + ':' + aggregates['sendToPlatforms']?.sum }}
+            </ng-template>
+            <ng-template
+                kendoGridFooterTemplate
+                let-column="column">
+                {{('report.sum' | translate) + ':' +  (momentSheets && momentSheets.length > 0 ? total['sendToPlatforms']?.sum :0)}}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="endMeasurementOilTankAmount" [title]="'niopdcgatewayApp.momentSheet.endMeasurementOilTankAmount' | translate"
+                               width="130">
+                <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+            </kendo-grid-column>
+        <kendo-grid-column field="deductible" [title]="'niopdcgatewayApp.momentSheet.deductible' | translate"
+                               width="130">
+                <ng-template
+                    kendoGridGroupFooterTemplate
+                    let-group="group"
+                    let-aggregates>
+                    {{('report.sum' | translate) + ':' + aggregates['deductible']?.sum }}
+                </ng-template>
+                <ng-template
+                    kendoGridFooterTemplate
+                    let-column="column">
+                    {{('report.sum' | translate) + ':' +  (momentSheets && momentSheets.length > 0 ? total['deductible']?.sum :0)}}
+                </ng-template>
+            </kendo-grid-column>
+        <kendo-grid-column field="sendTotals" [title]="'niopdcgatewayApp.momentSheet.sendTotals' | translate"
+                           width="130">
+            <ng-template
+                kendoGridGroupFooterTemplate
+                let-group="group"
+                let-aggregates>
+                {{('report.sum' | translate) + ':' + aggregates['sendTotals']?.sum }}
+            </ng-template>
+            <ng-template
+                kendoGridFooterTemplate
+                let-column="column">
+                {{('report.sum' | translate) + ':' +  (momentSheets && momentSheets.length > 0 ? total['sendTotals']?.sum :0)}}
+            </ng-template>
+        </kendo-grid-column>
+        </kendo-grid-column-group>
+        <kendo-grid-messages
+            [pagerOf]="'report.pagerOf' | translate"
+            [pagerItems]="'report.pagerItems' | translate"
+            [groupPanelEmpty]="'report.headerMessage' | translate"
+            [noRecords]="'global.messages.info.emptyRecords' | translate"
+            [pagerItemsPerPage]="'report.pagerItemsPerPage' | translate">
+        </kendo-grid-messages>
+
+        <kendo-grid-excel fileName="momentSheet.xlsx"></kendo-grid-excel>
+    </kendo-grid>
+    <br/>
+</div>

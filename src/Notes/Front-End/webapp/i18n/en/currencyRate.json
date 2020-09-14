@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "currencyRate" : {
+            "home": {
+                "title": "Currency Rates",
+                "createLabel": "Create a new Currency Rate",
+                "createOrEditLabel": "Create or edit a Currency Rate"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Currency Rate {{ id }}?"
+            },
+            "detail": {
+                "title": "Currency Rate"
+            },
+            "rate": "Rate",
+            "activeStartDate": "Active Start Date",
+            "activeFinishDate": "Active Finish Date",
+            "currency": "Currency",
+            "currencyRateGroup": "Currency Rate Group"
+        }
+    },
+    "niopdcrateApp": {
+        "currencyRate" : {
+            "created": "A new Currency Rate is created with identifier {{ param }}",
+            "updated": "A Currency Rate is updated with identifier {{ param }}",
+            "deleted": "A Currency Rate is deleted with identifier {{ param }}"
+        }
+    }
+}

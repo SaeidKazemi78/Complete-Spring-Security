@@ -1,0 +1,32 @@
+
+{
+    "niopdcgatewayApp": {
+        "sixtyBaseInformation" : {
+            "home": {
+                "title": "مقادیر پیش فرض 60 درجه",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ویرایش"
+            },
+            "delete": {
+                "question": "آیا برای حذف مقدار پیش فرض 60 درجه مطمئن هستید ؟ "
+            },
+            "detail": {
+                "title": "Sixty Base Information"
+            },
+            "environmentTemperature": "دمای محیط",
+            "productTemperature": "دمای فرآورده",
+            "specialWeight": "وزن مخصوص",
+            "productId": "فرآورده",
+            "registerDate": "تاریخ ثبت",
+            "type": "مورد استفاده برای",
+            "refuelCenter": "مرکز سوختگیری"
+        }
+    },
+    "niopdcaoApp": {
+        "sixtyBaseInformation" : {
+            "created": "مقدار پیشفرض 60 درجه با موفقیت ایجاد شد.",
+            "updated": "مقدار پیشفرض 60 درجه با موفقیت ویرایش شد.",
+            "deleted": "مقدار پیشفرض 60 درجه با موفقیت حذف شد."
+        }
+    }
+}

@@ -1,0 +1,11 @@
+<div class="btn-group">
+    <a class="btn btn-box btn-sm btn-block" [ngClass]="{disabled: disabled}" style="height: 28px; min-width: 30px" (click)="changeState()">
+        <i class="fa {{state?state.icon:defaultIcon}}"></i>
+    </a>
+    <a class="btn btn-default btn-sm" [ngClass]="{disabled: disabled}" style="width: 100%" (click)="changeState()">
+        {{label}}
+    </a>
+</div>
+
+
+

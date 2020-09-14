@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "carBak" : {
+            "home": {
+                "title": "Car Baks",
+                "createLabel": "Create a new Car Bak",
+                "createOrEditLabel": "Create or edit a Car Bak"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Car Bak {{ id }}?"
+            },
+            "detail": {
+                "title": "Car Bak"
+            },
+            "capacity": "Capacity",
+            "car": "Car",
+            "product": "Product"
+        }
+    },
+    "niopdcbaseApp": {
+        "carBak" : {
+            "created": "A new Car Bak is created with identifier {{ param }}",
+            "updated": "A Car Bak is updated with identifier {{ param }}",
+            "deleted": "A Car Bak is deleted with identifier {{ param }}"
+        }
+    }
+}

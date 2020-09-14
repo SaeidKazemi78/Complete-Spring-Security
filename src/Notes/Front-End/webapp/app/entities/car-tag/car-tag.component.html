@@ -1,0 +1,77 @@
+<div>
+    <h2>
+        <span jhiTranslate="niopdcgatewayApp.carTag.home.title">Car Tags</span>
+        <button class="btn btn-primary float-right jh-create-entity create-car-tag" [routerLink]="['/', { outlets: { popup: ['car-tag-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="niopdcgatewayApp.carTag.home.createLabel">
+            Create new Car Tag
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="carTags">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="carRfId"><span jhiTranslate="niopdcgatewayApp.carTag.carRfId">Car Rf Id</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="active"><span jhiTranslate="niopdcgatewayApp.carTag.active">Active</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="activeDate"><span jhiTranslate="niopdcgatewayApp.carTag.activeDate">Active Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="locationName"><span jhiTranslate="niopdcgatewayApp.carTag.location">Location</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let carTag of carTags ;trackBy: trackId">
+                <td><a [routerLink]="['../car-tag', carTag.id ]">{{carTag.id}}</a></td>
+                <td>{{carTag.carRfId}}</td>
+                <td>{{carTag.active}}</td>
+                <td>{{carTag.activeDate | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="carTag.locationId">
+                        <a [routerLink]="['../location', carTag.locationId  ]" >{{carTag.locationName}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../car-tag', carTag.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'car-tag/'+ carTag.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'car-tag/'+ carTag.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pager is not implemented yet, so this is normal pagination instead -->
+    <div *ngIf="carTags && carTags.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

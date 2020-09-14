@@ -1,0 +1,45 @@
+
+{
+    "niopdcgatewayApp": {
+        "sendProduct": {
+            "home": {
+                "title": "ارسال فرآورده ها",
+                "createLabel": "ایجاد ارسال فرآورده",
+                "createOrEditLabel": "ویرایش ارسال فرآورده",
+                "view": "نمایش ارسال فرآورده"
+            },
+            "delete": {
+                "question": "آیا برای حذف این ارسال فرآورده مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "ارسال فرآورده"
+            },
+            "sendDate": "تاریخ ارسال",
+            "receivedDate": "تاریخ دریافت",
+            "waybillNumber": "شماره بارنامه",
+            "inventoryId": "انبار",
+            "driverName": "نام راننده",
+            "vehicleId": "شناسه خودرو",
+            "dayDepot": "روز انبار",
+            "oilTank": "مخزن",
+            "receivedNatureAmount": "مقدار طبیعی دریافتی",
+            "receivedSixtyAmount": "مقدار 60 درجه دریافتی",
+            "receivedSpecialWeight": "وزن مخصوص دریافتی",
+            "receivedEnvironmentTemperature": "دمای محیط دریافتی",
+            "receivedProductTemperature": "دمای فرآورده دریافتی",
+            "sendNatureAmount": "مقدار طبیعی ارسالی",
+            "sendSixtyAmount": "مقدار 60 درجه ارسالی",
+            "sendSpecialWeight": "وزن مخصوص ارسالی",
+            "sendEnvironmentTemperature": "دمای محیط ارسالی",
+            "sendProductTemperature": "دمای فرآورده ارسالی"
+
+        }
+    },
+    "niopdcaoApp": {
+        "sendProduct": {
+            "created": "ارسال فرآورده باموفقیت ایجاد شد.",
+            "updated": "ارسال فرآورده باموفقیت ویرایش شد.",
+            "deleted": "ارسال فرآورده باموفقیت حذف شد."
+        }
+    }
+}

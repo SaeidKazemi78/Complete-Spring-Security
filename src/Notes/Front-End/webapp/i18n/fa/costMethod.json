@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "CostMethod" : {
+            "null": "",
+            "NORMAL_SALES": "فروش عادی",
+            "DEFUEL": "DEFUEL",
+            "PUMP_NOZZLE":"عرضه",
+            "ALONG_FUEL":"سوخت همراه"
+        }
+    }
+}

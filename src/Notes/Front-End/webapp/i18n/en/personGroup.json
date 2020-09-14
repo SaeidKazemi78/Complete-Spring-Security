@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "PersonGroup" : {
+            "null": "",
+            "CONTRACTOR": "CONTRACTOR",
+            "NORMAL": "NORMAL"
+        }
+    }
+}

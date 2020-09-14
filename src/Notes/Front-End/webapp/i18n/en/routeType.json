@@ -1,0 +1,16 @@
+{
+    "niopdcgatewayApp": {
+        "RouteType" : {
+            "null": "",
+            "EMERGENCY_ROUTE": "EMERGENCY_ROUTE",
+            "URBAN_HARD": "URBAN_HARD",
+            "PROCUREMENT_LOCAL": "PROCUREMENT_LOCAL",
+            "NORMAL_CITY": "NORMAL_CITY",
+            "NORMAL_LOCAL_PROCUREMENT": "NORMAL_LOCAL_PROCUREMENT",
+            "BULK_URBAN_GAS": "BULK_URBAN_GAS",
+            "VOLUMETRIC_GAS_SUPPLY": "VOLUMETRIC_GAS_SUPPLY",
+            "FREE": "FREE",
+            "INSTANT": "INSTANT"
+        }
+    }
+}

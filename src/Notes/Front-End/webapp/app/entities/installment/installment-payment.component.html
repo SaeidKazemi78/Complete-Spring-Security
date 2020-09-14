@@ -1,0 +1,36 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <div class="modal-body">
+        <jhi-e-payment #ePayment [showButton]="false"
+                       (status)="onPayStatus($event)"
+                       (bankTransaction)="onBankTransaction($event)"
+                       [requestIdentifier]="payId"></jhi-e-payment>
+    </div>
+    <div class="modal-footer">
+        <button type="button"
+                class="btn btn-success"
+                data-dismiss="modal"
+                (click)="pay()"
+                *ngIf="payStatus === 'BEGIN'"
+        >
+            <span class="fa fa-credit-card"></span>&nbsp;<span jhiTranslate="niopdcgatewayApp.loan.payment">paymentFinal</span>
+        </button>
+        <button type="button"
+                class="btn btn-success"
+                data-dismiss="modal"
+                (click)="againPay()"
+                *ngIf="payStatus === 'PENDING' && bankTransaction && loan"
+        >
+            <span class="fa fa-refresh"></span>&nbsp;<span jhiTranslate="niopdcgatewayApp.loan.payment.again">again</span>
+        </button>
+        <button type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+                [routerLink]="['/loan', loan?.id, 'installment']"
+        >
+            <span class="fa fa-backward"></span>&nbsp;<span jhiTranslate="entity.action.back">back</span>
+        </button>
+    </div>
+</div>

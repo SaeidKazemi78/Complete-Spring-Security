@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "VehicleModelType" : {
+            "null": "",
+            "TRUCK": "TRUCK",
+            "BUS": "BUS",
+            "CAR": "CAR"
+        }
+    }
+}

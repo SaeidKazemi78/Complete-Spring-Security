@@ -1,0 +1,15 @@
+<div class="component">
+
+    <jhi-alert-success></jhi-alert-success>
+    <jhi-e-payment #ePayment [requestIdentifier]="identifier"
+                   [showButton]="showButton" (canPay)="true"
+                   (status)="onPayStatus($event)"></jhi-e-payment>
+    <div class="row"  *ngIf="showBack">
+        <div class="col-md-12" style="text-align: center">
+            <button type="button" class="btn btn-info" [routerLink]="['/','wallet']">
+                بازگشت
+            </button>
+        </div>
+    </div>
+
+</div>

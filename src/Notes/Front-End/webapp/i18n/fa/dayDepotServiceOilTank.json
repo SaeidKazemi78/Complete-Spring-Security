@@ -1,0 +1,34 @@
+{
+    "niopdcgatewayApp": {
+        "dayDepotServiceOilTank": {
+            "home": {
+                "title": "مخازن سرویس تانک روز انبار",
+                "createLabel": "ایجاد مخزن سرویس تانک روز انبار",
+                "createOrEditLabel": "ویرایش مخزن سرویس تانک روز انبار",
+                "view": "نمایش مخزن سرویس تانک روز انبار",
+                "dayDepotTitle": "روز انبار",
+                "mainDayDepotTitle": "حساب روز انبار",
+                "start": "شروع اندازه گیری",
+                "end": "پایان اندازه گیری"
+            },
+            "delete": {
+                "question": "آیا برای حذف این مخزن سرویس تانک روز انبار مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "مخزن سرویس تانک روز انبار"
+            },
+            "description": "توضیحات",
+            "startMeasurementOilTank": "شروع مخزن اندازه گیری",
+            "endMeasurementOilTank": "پایان محزن اندازه گیری",
+            "oilTankService": "مخزن سرویس تانک",
+            "dayDepot": "روز انبار"
+        }
+    },
+    "niopdcaoApp": {
+        "dayDepotServiceOilTank": {
+            "created": "مخزن سرویس تانک روز انبار با موفقیت ایجاد شد.",
+            "updated": "مخزن سرویس تانک روز انبار با موفقیت ویرایش شد.",
+            "deleted": "مخزن سرویس تانک روز انبار با موفقیت حذف شد."
+        }
+    }
+}

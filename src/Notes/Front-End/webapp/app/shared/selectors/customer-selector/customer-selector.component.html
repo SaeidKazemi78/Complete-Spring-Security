@@ -1,0 +1,90 @@
+<div>
+    <div class="input-group">
+        <input #inp class="textInput form-control" style="border:0; height: unset;"
+               [readonly]="!disabled" [disabled]="disabled"
+               [ngModel]="(multiSelect) ? ((selects && selects.length && selects.length > 0) ? selects.length + ' مورد انتخاب شد' : 'موردی انتخاب نشده است') : (selects ? selects.name : '')"
+               (focus)="showTable()">
+        <a *ngIf="!disabled" class="input-group-append btn btn-outline-secondary"
+           [ngClass]="{'mid-btn': creator, 'rtl-btn': !creator}" (click)="showTable()">
+            <span class="fa fa-search"></span>
+        </a>
+        <button *ngIf="!disabled && creator" type="button" class="input-group-append btn btn-outline-secondary"
+                [ngClass]="{'rtl-btn': creator}"
+                [routerLink]="['/', { outlet: { popup: ['customer-new'] } }]">
+            <span class="fa fa-plus"></span>
+        </button>
+    </div>
+    <div [style.visibility]="!overlayVisible ? 'collapse' : 'visible'"
+         [style.height]="!overlayVisible ? '0' : 'none'"
+         [style.overflow]="!overlayVisible ? 'hidden' : 'visible'"
+         [style.width]="widthGrid" style="padding: 0;"
+         class="d-inline-block rounded dataGrid">
+
+        <p-dataTable [sortField]="predicate" [sortOrder]="reverse ? -1 : 1"  [value]="customers"
+                     [selectionMode]="multiSelect ? 'multiple' : 'single'"
+                     [(selection)]="selects"
+                     (onRowUnselect)="onSelect($event, false)"
+                     (onRowSelect)="onSelect($event, true)"
+                     [lazy]="true" [rows]="itemsPerPage" [rowsPerPageOptions]="[5,10,20,totalItems]"
+                     [paginator]="true" [responsive]="true" [stacked]="false"
+                     [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)">
+            <p-header>
+                <p-header>
+                    <button type="button" class="btn btn-info" (click)="search()">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button type="button" class=" btn btn-danger" (click)="clear()">
+                        <span class="fa fa-remove"></span>
+                    </button>
+                    <button type="button" class=" btn btn-danger" (click)="empty()">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </p-header>
+            </p-header>
+
+            <p-headerColumnGroup>
+                <p-row>
+                    <p-column [style]="{'width':'38px'}"></p-column>
+                    <p-column field="name" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.customer.name">Name</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column *ngIf="!showNameColumn" field="identifyCode" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.customer.code">Code</span>
+                        </ng-template>
+                    </p-column>
+
+                </p-row>
+                <p-row>
+                    <p-column></p-column>
+                    <p-column>
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="name" id="field_name"
+                                   [(ngModel)]="customer.name"
+                                   maxlength="42"
+                                   search-after-typed (onSearch)="search()"/>
+                        </ng-template>
+                    </p-column>
+                    <p-column *ngIf="!showNameColumn">
+                        <ng-template pTemplate="header">
+                            <input class="form-control" type="text"
+                                   name="code" id="field_code"
+                                   [(ngModel)]="customer.identifyCode"
+                                   maxlength="10"
+                                   search-after-typed (onSearch)="search()"/>
+                        </ng-template>
+                    </p-column>
+                </p-row>
+            </p-headerColumnGroup>
+
+            <p-column [selectionMode]="multiSelect ? 'multiple' : 'single'"></p-column>
+            <p-column field="name" [header]="'niopdcgatewayApp.customer.name' | translate"></p-column>
+            <p-column *ngIf="!showNameColumn" field="identifyCode" [header]="'niopdcgatewayApp.customer.code' | translate"></p-column>
+        </p-dataTable>
+    </div>
+</div>
+
+

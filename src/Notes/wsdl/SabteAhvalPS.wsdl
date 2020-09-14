@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WL5G3N0:definitions name="Estelam" targetNamespace="http://est" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://est" xmlns:WL5G3N2="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:types>
+    <xsd:schema xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://est" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import namespace="http://est" schemaLocation="SabteAhvalPS_xsd.xml"/>
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="getEstelam11">
+    <WL5G3N0:part element="WL5G3N1:getEstelam11" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam11Response">
+    <WL5G3N0:part element="WL5G3N1:getEstelam11Response" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam8C">
+    <WL5G3N0:part element="WL5G3N1:getEstelam8C" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam8CResponse">
+    <WL5G3N0:part element="WL5G3N1:getEstelam8CResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="UnsupportedEncodingException">
+    <WL5G3N0:part element="WL5G3N1:UnsupportedEncodingException" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam8RI">
+    <WL5G3N0:part element="WL5G3N1:getEstelam8RI" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam8RIResponse">
+    <WL5G3N0:part element="WL5G3N1:getEstelam8RIResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="Exception3F">
+    <WL5G3N0:part element="WL5G3N1:Exception3F" name="fault"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam7">
+    <WL5G3N0:part element="WL5G3N1:getEstelam7" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam7Response">
+    <WL5G3N0:part element="WL5G3N1:getEstelam7Response" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam7C">
+    <WL5G3N0:part element="WL5G3N1:getEstelam7C" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam7CResponse">
+    <WL5G3N0:part element="WL5G3N1:getEstelam7CResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam9C">
+    <WL5G3N0:part element="WL5G3N1:getEstelam9C" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam9CResponse">
+    <WL5G3N0:part element="WL5G3N1:getEstelam9CResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam10">
+    <WL5G3N0:part element="WL5G3N1:getEstelam10" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam10Response">
+    <WL5G3N0:part element="WL5G3N1:getEstelam10Response" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelamRI">
+    <WL5G3N0:part element="WL5G3N1:getEstelamRI" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelamRIResponse">
+    <WL5G3N0:part element="WL5G3N1:getEstelamRIResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam2SC">
+    <WL5G3N0:part element="WL5G3N1:getEstelam2SC" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam2SCResponse">
+    <WL5G3N0:part element="WL5G3N1:getEstelam2SCResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getImage">
+    <WL5G3N0:part element="WL5G3N1:getImage" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getImageResponse">
+    <WL5G3N0:part element="WL5G3N1:getImageResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getImage2">
+    <WL5G3N0:part element="WL5G3N1:getImage2" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getImage2Response">
+    <WL5G3N0:part element="WL5G3N1:getImage2Response" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getImage3">
+    <WL5G3N0:part element="WL5G3N1:getImage3" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getImage3Response">
+    <WL5G3N0:part element="WL5G3N1:getImage3Response" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getImageSmart">
+    <WL5G3N0:part element="WL5G3N1:getImageSmart" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getImageSmartResponse">
+    <WL5G3N0:part element="WL5G3N1:getImageSmartResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getImage4">
+    <WL5G3N0:part element="WL5G3N1:getImage4" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getImage4Response">
+    <WL5G3N0:part element="WL5G3N1:getImage4Response" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam3">
+    <WL5G3N0:part element="WL5G3N1:getEstelam3" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam3Response">
+    <WL5G3N0:part element="WL5G3N1:getEstelam3Response" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam4">
+    <WL5G3N0:part element="WL5G3N1:getEstelam4" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam4Response">
+    <WL5G3N0:part element="WL5G3N1:getEstelam4Response" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam3SC">
+    <WL5G3N0:part element="WL5G3N1:getEstelam3SC" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam3SCResponse">
+    <WL5G3N0:part element="WL5G3N1:getEstelam3SCResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam3C">
+    <WL5G3N0:part element="WL5G3N1:getEstelam3C" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam3CResponse">
+    <WL5G3N0:part element="WL5G3N1:getEstelam3CResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getImage5">
+    <WL5G3N0:part element="WL5G3N1:getImage5" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getImage5Response">
+    <WL5G3N0:part element="WL5G3N1:getImage5Response" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam5">
+    <WL5G3N0:part element="WL5G3N1:getEstelam5" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam5Response">
+    <WL5G3N0:part element="WL5G3N1:getEstelam5Response" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam6C">
+    <WL5G3N0:part element="WL5G3N1:getEstelam6C" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam6CResponse">
+    <WL5G3N0:part element="WL5G3N1:getEstelam6CResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam">
+    <WL5G3N0:part element="WL5G3N1:getEstelam" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelamResponse">
+    <WL5G3N0:part element="WL5G3N1:getEstelamResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam2">
+    <WL5G3N0:part element="WL5G3N1:getEstelam2" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getEstelam2Response">
+    <WL5G3N0:part element="WL5G3N1:getEstelam2Response" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getVersion">
+    <WL5G3N0:part element="WL5G3N1:getVersion" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getVersionResponse">
+    <WL5G3N0:part element="WL5G3N1:getVersionResponse" name="parameters"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="EstelamPort">
+    <WL5G3N0:operation name="getEstelam11">
+      <WL5G3N0:input message="WL5G3N1:getEstelam11"/>
+      <WL5G3N0:output message="WL5G3N1:getEstelam11Response"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam8C">
+      <WL5G3N0:input message="WL5G3N1:getEstelam8C"/>
+      <WL5G3N0:output message="WL5G3N1:getEstelam8CResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:UnsupportedEncodingException" name="UnsupportedEncodingException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam8RI">
+      <WL5G3N0:input message="WL5G3N1:getEstelam8RI"/>
+      <WL5G3N0:output message="WL5G3N1:getEstelam8RIResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:Exception3F" name="Exception3F"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam7">
+      <WL5G3N0:input message="WL5G3N1:getEstelam7"/>
+      <WL5G3N0:output message="WL5G3N1:getEstelam7Response"/>
+      <WL5G3N0:fault message="WL5G3N1:UnsupportedEncodingException" name="UnsupportedEncodingException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam7C">
+      <WL5G3N0:input message="WL5G3N1:getEstelam7C"/>
+      <WL5G3N0:output message="WL5G3N1:getEstelam7CResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:UnsupportedEncodingException" name="UnsupportedEncodingException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam9C">
+      <WL5G3N0:input message="WL5G3N1:getEstelam9C"/>
+      <WL5G3N0:output message="WL5G3N1:getEstelam9CResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:UnsupportedEncodingException" name="UnsupportedEncodingException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam10">
+      <WL5G3N0:input message="WL5G3N1:getEstelam10"/>
+      <WL5G3N0:output message="WL5G3N1:getEstelam10Response"/>
+      <WL5G3N0:fault message="WL5G3N1:UnsupportedEncodingException" name="UnsupportedEncodingException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelamRI">
+      <WL5G3N0:input message="WL5G3N1:getEstelamRI"/>
+      <WL5G3N0:output message="WL5G3N1:getEstelamRIResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam2SC">
+      <WL5G3N0:input message="WL5G3N1:getEstelam2SC"/>
+      <WL5G3N0:output message="WL5G3N1:getEstelam2SCResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getImage">
+      <WL5G3N0:input message="WL5G3N1:getImage"/>
+      <WL5G3N0:output message="WL5G3N1:getImageResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getImage2">
+      <WL5G3N0:input message="WL5G3N1:getImage2"/>
+      <WL5G3N0:output message="WL5G3N1:getImage2Response"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getImage3">
+      <WL5G3N0:input message="WL5G3N1:getImage3"/>
+      <WL5G3N0:output message="WL5G3N1:getImage3Response"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getImageSmart">
+      <WL5G3N0:input message="WL5G3N1:getImageSmart"/>
+      <WL5G3N0:output message="WL5G3N1:getImageSmartResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getImage4">
+      <WL5G3N0:input message="WL5G3N1:getImage4"/>
+      <WL5G3N0:output message="WL5G3N1:getImage4Response"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam3">
+      <WL5G3N0:input message="WL5G3N1:getEstelam3"/>
+      <WL5G3N0:output message="WL5G3N1:getEstelam3Response"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam4">
+      <WL5G3N0:input message="WL5G3N1:getEstelam4"/>
+      <WL5G3N0:output message="WL5G3N1:getEstelam4Response"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam3SC">
+      <WL5G3N0:input message="WL5G3N1:getEstelam3SC"/>
+      <WL5G3N0:output message="WL5G3N1:getEstelam3SCResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:Exception3F" name="Exception3F"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam3C">
+      <WL5G3N0:input message="WL5G3N1:getEstelam3C"/>
+      <WL5G3N0:output message="WL5G3N1:getEstelam3CResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getImage5">
+      <WL5G3N0:input message="WL5G3N1:getImage5"/>
+      <WL5G3N0:output message="WL5G3N1:getImage5Response"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam5">
+      <WL5G3N0:input message="WL5G3N1:getEstelam5"/>
+      <WL5G3N0:output message="WL5G3N1:getEstelam5Response"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam6C">
+      <WL5G3N0:input message="WL5G3N1:getEstelam6C"/>
+      <WL5G3N0:output message="WL5G3N1:getEstelam6CResponse"/>
+      <WL5G3N0:fault message="WL5G3N1:UnsupportedEncodingException" name="UnsupportedEncodingException"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam">
+      <WL5G3N0:input message="WL5G3N1:getEstelam"/>
+      <WL5G3N0:output message="WL5G3N1:getEstelamResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam2">
+      <WL5G3N0:input message="WL5G3N1:getEstelam2"/>
+      <WL5G3N0:output message="WL5G3N1:getEstelam2Response"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getVersion">
+      <WL5G3N0:input message="WL5G3N1:getVersion"/>
+      <WL5G3N0:output message="WL5G3N1:getVersionResponse"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="EstelamPortBinding" type="WL5G3N1:EstelamPort">
+    <WL5G3N2:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="getEstelam11">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam8C">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="UnsupportedEncodingException">
+        <WL5G3N2:fault name="UnsupportedEncodingException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam8RI">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="Exception3F">
+        <WL5G3N2:fault name="Exception3F" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam7">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="UnsupportedEncodingException">
+        <WL5G3N2:fault name="UnsupportedEncodingException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam7C">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="UnsupportedEncodingException">
+        <WL5G3N2:fault name="UnsupportedEncodingException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam9C">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="UnsupportedEncodingException">
+        <WL5G3N2:fault name="UnsupportedEncodingException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam10">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="UnsupportedEncodingException">
+        <WL5G3N2:fault name="UnsupportedEncodingException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelamRI">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam2SC">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getImage">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getImage2">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getImage3">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getImageSmart">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getImage4">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam3">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam4">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam3SC">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="Exception3F">
+        <WL5G3N2:fault name="Exception3F" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam3C">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getImage5">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam5">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam6C">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="UnsupportedEncodingException">
+        <WL5G3N2:fault name="UnsupportedEncodingException" use="literal"/>
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getEstelam2">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getVersion">
+      <WL5G3N2:operation/>
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="Estelam">
+    <WL5G3N0:documentation>OSB Service</WL5G3N0:documentation>
+    <WL5G3N0:port binding="WL5G3N1:EstelamPortBinding" name="EstelamPort">
+      <WL5G3N2:address location="http://10.0.233.254:80/sabteahval/proxy/SabteAhvalPS"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

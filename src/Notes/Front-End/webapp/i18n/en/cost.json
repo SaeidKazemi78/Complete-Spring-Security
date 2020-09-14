@@ -1,0 +1,33 @@
+
+{
+    "niopdcgatewayApp": {
+        "cost" : {
+            "home": {
+                "title": "Costs",
+                "createLabel": "Create a new Cost",
+                "createOrEditLabel": "Create or edit a Cost"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Cost {{ id }}?"
+            },
+            "detail": {
+                "title": "Cost"
+            },
+            "rateType": "Rate Type",
+            "effect": "Effect",
+            "costAction": "Cost Action",
+            "startLitre": "Start Litre",
+            "endLitre": "End Litre",
+            "costRelated": "Cost Related",
+            "costGroup": "Cost Group",
+            "parent": "Parent"
+        }
+    },
+    "niopdcrateApp": {
+        "cost" : {
+            "created": "A new Cost is created with identifier {{ param }}",
+            "updated": "A Cost is updated with identifier {{ param }}",
+            "deleted": "A Cost is deleted with identifier {{ param }}"
+        }
+    }
+}

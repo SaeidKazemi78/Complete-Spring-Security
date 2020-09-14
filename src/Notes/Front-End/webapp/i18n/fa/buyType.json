@@ -1,0 +1,44 @@
+
+{
+    "niopdcgatewayApp": {
+        "buyType" : {
+            "home": {
+                "title": "نوع خرید",
+                "createLabel": "ایجاد نوع خرید",
+                "view":"نمایش نوع خرید",
+                "createOrEditLabel": "ویرایش نوع خرید",
+                "credit":"مبلغ",
+                "amount":"مقدار",
+                "remained.credit":" مانده مبلغ",
+                "remained.amount":"مانده مقدار",
+                "credit.quota":"سهمیه / اعتبار"
+            },
+            "delete": {
+                "question": "برای حذف نوع خرید {{param}} مطمئن هستید ?"
+            },
+            "detail": {
+                "title": "نوع خرید"
+            },
+            "title": "عنوان",
+            "effectDate": "مدت زمان اعمال(روز)",
+            "typeEffect": "نوع تاثیر",
+            "sellLimit": "توقف فروش",
+            "sellLimitTrue": "باشد",
+            "sellLimitFalse": "نباشد",
+            "buyGroup": "نوع",
+            "buyTypeUsage": "مورد استفاده",
+            "minCredit": "حداقل مبلغ",
+            "minAmount": "حداقل مقدار",
+            "sellContractProduct": "Sell Contract Product"
+
+
+        }
+    },
+    "niopdcbaseApp": {
+        "buyType" : {
+            "created": "نوع خرید با موفقیت ایجاد شد.",
+            "updated": "نوع خرید با موفقیت ویرایش شد.",
+            "deleted": "نوع خرید با موفقیت حذف شد."
+        }
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "niopdcgatewayApp": {
+        "receiptNoDetail": {
+            "home": {
+                "title": "صورت ريز رسيدهاي سوختي"
+            },
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "receiptNo": "شماره رسید",
+            "dateTime": "تاریخ",
+            "personName": "صاحب امتیاز",
+            "airplaneName": "هواپیما",
+            "airplaneModel": "مدل هواپیما",
+            "amount": "مقدار",
+            "oilTank": "واحد",
+            "productCode": "کد فرآورده",
+            "productTitle": "نام فرآورده",
+            "fuelType": "نوع انتقال",
+            "currency": "واحد پولی",
+            "costAmount": "هزینه",
+            "username": "نام کاربر"
+        }
+    }
+}

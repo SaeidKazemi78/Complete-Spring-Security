@@ -1,0 +1,47 @@
+{
+    "niopdcgatewayApp": {
+        "carRfId": {
+            "home": {
+                "title": "تگ ها",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ویرایش",
+                "customerTitle": "وسیله نقلیه"
+            },
+            "delete": {
+                "question": "آیا برای حذف این تگ مطمئن هستید؟"
+            },
+            "unAllocate": {
+                "question": "آیا برای گرفتن این تگ از وسیله نقلیه مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "تگ"
+            },
+            "code": "تگ",
+            "activeTrue": "فعال",
+            "activeFalse": "غیر فعال",
+            "customer": "مشتری",
+            "buyDate": "تاریخ تخصیص",
+            "price": "قیمت",
+            "tagRate": "نرخ تگ",
+            "locationId":"مرز",
+            "locationTitle": "ناحیه مرزی",
+            "reason": "دلیل تغییرات",
+            "allocate":"تخصیص دادن",
+            "plaque": "پلاک اول",
+            "plaqueTwo": "پلاک دوم",
+            "active.question": " آیا برای فعال کردن تگ {{id}} مطمئن هستید؟",
+            "active": "فعال کردن",
+            "description": "توضیحات",
+            "deActiveDate": "تاریخ غیر فعال سازی",
+            "activatedDate": "تاریخ فعال سازی",
+            "status": "وضعیت"
+        }
+    },
+    "niopdcbaseApp": {
+        "carRfId": {
+            "created": "تگ با موفقیت ایجاد شد.",
+            "updated": "تگ با موفقیت ویرایش شد.",
+            "deleted": "تگ با موفقیت حذف شد."
+        }
+    }
+}

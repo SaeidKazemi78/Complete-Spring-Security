@@ -1,0 +1,47 @@
+{
+    "niopdcgatewayApp": {
+        "requestTestResult": {
+            "home": {
+                "title": "تقاضای آزمایش سوخت",
+                "createLabel": "Create a new Request Test Result",
+                "createOrEditLabel": "Create or edit a Request Test Result"
+            },
+            "delete": {
+                "question": "آیا از حذف این در خواست طمینان دارید؟"
+            },
+            "confirm": {
+                "question": "آیا از تایید این در خواست طمینان دارید؟"
+            },
+            "send": {
+                "question": "آیا از ارسال این در خواست طمینان دارید؟"
+            },
+            "detail": {
+                "title": "تقاضای آزمایش سوخت"
+            },
+            "productId": "فرآورده",
+            "date": "تارخ نمونه گیری",
+            "sampleValue": "مقدار نمونه",
+            "oilTankInventory": "موجودی مخزن",
+            "sourceOilTankNumber": "شماره مخزن انبار مبداء",
+            "requestStatus": "وضعیت درخواست",
+            "testResultRequestStatus": "وضعیت پاسخ درخواست",
+            "draftUser": "Draft User",
+            "confirmUser": "Confirm User",
+            "sendUser": "Send User",
+            "electricalConductivity": "هدایت الکتریکی",
+            "samplerName": "نمونه گیرنده",
+            "oilTank": "مخزن",
+            "refuelCenter": "مرکز سوختگیری",
+            "testResultType": "نوع آزمایش"
+        }
+    },
+    "niopdcaoApp": {
+        "requestTestResult": {
+            "created": "درخواست با موفقیت ایجاد شد.",
+            "updated": "درخواست با موفقیت ویرایش شد.",
+            "deleted": "درخواست با موفقیت حذف شد.",
+            "confirm": "درخواست با موفقیت تایید شد.",
+            "send": "درخواست با موفقیت ارسال شد."
+        }
+    }
+}

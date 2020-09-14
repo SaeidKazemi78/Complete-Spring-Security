@@ -1,0 +1,16 @@
+{
+    "niopdcgatewayApp": {
+        "balanceAggregationReport": {
+
+            "home": {
+                "title": "گزارش موازنه تجمیعی"
+            },
+            "productTitle":"عنوان فرآورده",
+            "totalCount":"تعداد کل",
+            "productCode":"کد فرآورده",
+            "customerGroup": "گروه مشتری",
+            "customerType": "نوع مشتری",
+            "region": "تقسیمات کشوری"
+        }
+    }
+}

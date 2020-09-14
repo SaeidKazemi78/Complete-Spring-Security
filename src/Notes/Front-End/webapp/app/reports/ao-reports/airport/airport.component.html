@@ -1,0 +1,68 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <kendo-grid
+        [data]="gridData"
+        [pageSize]="state.take"
+        [skip]="state.skip"
+        [sort]="state.sort"
+        [group]="state.group"
+        [resizable]="true"
+        [sortable]="{ mode: 'multiple' }"
+        [pageable]="{ pageSizes: [ 10,25,50,100,airport?.length] }"
+        [groupable]="{ showFooter: true}"
+        scrollable="scrollable"
+        (dataStateChange)="dataStateChange($event)">
+        <ng-template kendoGridToolbarTemplate>
+
+            <button type="button" kendoGridExcelCommand icon="file-excel" jhiTranslate="report.exportToExcel">Export to
+                Excel
+            </button>
+        </ng-template>
+        <kendo-grid-column-group [title]="('niopdcgatewayApp.metreSheet.dayDate' | translate)+' :  '+(date | dateTimeJalali) +'  '+ ('userManagement.detail.title' | translate) +' : '+ (fullName)" [locked]="false"  [width]="200" >
+
+        <kendo-grid-column field="persianTitle" [title]="'niopdcgatewayApp.airport.persianTitle' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="englishTitle" [title]="'niopdcgatewayApp.airport.englishTitle' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="code" [title]="'niopdcgatewayApp.airport.code' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="globalCode" [title]="'niopdcgatewayApp.airport.globalCode' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="regionName" [title]="'niopdcgatewayApp.airport.regionName' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="countryName" [title]="'niopdcgatewayApp.airport.countryName' | translate"
+                           width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="checkNational" [title]="'niopdcgatewayApp.airport.checkNational' | translate"
+                           width="130">
+            <ng-template kendoGridCellTemplate let-item>
+                <span class="fa" [ngClass]="{'fa-check':item.checkNational,'fa-close':!item.checkNational}"></span>
+            </ng-template>
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        </kendo-grid-column-group>
+        <kendo-grid-messages
+            [pagerOf]="'report.pagerOf' | translate"
+            [pagerItems]="'report.pagerItems' | translate"
+            [groupPanelEmpty]="'report.headerMessage' | translate"
+            [noRecords]="'global.messages.info.emptyRecords' | translate"
+            [pagerItemsPerPage]="'report.pagerItemsPerPage' | translate">
+        </kendo-grid-messages>
+
+        <kendo-grid-excel fileName="airport.xlsx"></kendo-grid-excel>
+    </kendo-grid>
+    <br/>
+</div>

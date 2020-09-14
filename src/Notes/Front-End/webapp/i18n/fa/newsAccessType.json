@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "NewsAccessType" : {
+            "null": "",
+            "PUBLIC": "عمومی",
+            "INTERNAL": "داخلی"
+        }
+    }
+}

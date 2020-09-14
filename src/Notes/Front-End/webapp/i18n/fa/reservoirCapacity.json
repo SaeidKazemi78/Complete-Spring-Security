@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "reservoirCapacity" : {
+            "home": {
+                "title": "Reservoir Capacities",
+                "createLabel": "Create a new Reservoir Capacity",
+                "createOrEditLabel": "Create or edit a Reservoir Capacity"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Reservoir Capacity {{ id }}?"
+            },
+            "detail": {
+                "title": "Reservoir Capacity"
+            },
+            "capacity": "Capacity",
+            "active": "Active",
+            "product": "Product",
+            "person": "Person"
+        }
+    },
+    "niopdcbaseApp": {
+        "reservoirCapacity" : {
+            "created": "A new Reservoir Capacity is created with identifier {{ param }}",
+            "updated": "A Reservoir Capacity is updated with identifier {{ param }}",
+            "deleted": "A Reservoir Capacity is deleted with identifier {{ param }}"
+        }
+    }
+}

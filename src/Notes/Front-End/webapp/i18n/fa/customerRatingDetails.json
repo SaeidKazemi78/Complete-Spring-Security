@@ -1,0 +1,31 @@
+{
+    "niopdcgatewayApp": {
+        "customerRatingDetails": {
+            "home": {
+                "title": "Customer Rating Details",
+                "createLabel": "Create a new Customer Rating Details",
+                "createOrEditLabel": "Create or edit a Customer Rating Details",
+                "view": "view",
+                "customerRatingTitle": "Customer Rating"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Customer Rating Details {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer Rating Details"
+            },
+            "fromDate": "از تاریخ",
+            "toDate": "تا تاریخ",
+            "fromScore": "از امتیاز",
+            "toScore": "تا امتیاز",
+            "location": "ناحیه"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerRatingDetails": {
+            "created": "A new Customer Rating Details is created with identifier {{ param }}",
+            "updated": "A Customer Rating Details is updated with identifier {{ param }}",
+            "deleted": "A Customer Rating Details is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "costElement" : {
+            "home": {
+                "title": "Cost Elements",
+                "createLabel": "Create a new Cost Element",
+                "createOrEditLabel": "Create or edit a Cost Element"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Cost Element {{ id }}?"
+            },
+            "detail": {
+                "title": "Cost Element"
+            },
+            "code": "Code",
+            "customerGroup": "Customer Group",
+            "costGroup": "Cost Group",
+            "cost": "Cost"
+        }
+    },
+    "niopdcrateApp": {
+        "costElement" : {
+            "created": "A new Cost Element is created with identifier {{ param }}",
+            "updated": "A Cost Element is updated with identifier {{ param }}",
+            "deleted": "A Cost Element is deleted with identifier {{ param }}"
+        }
+    }
+}

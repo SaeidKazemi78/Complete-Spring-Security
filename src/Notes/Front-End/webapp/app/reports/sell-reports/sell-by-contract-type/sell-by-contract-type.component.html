@@ -1,0 +1,175 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <form name="editForm" role="form" novalidate (ngSubmit)="loadAll()" #editForm="ngForm">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <h5 class="col-md-3"
+                        jhiTranslate="report.search">Search
+                    </h5>
+                </div>
+            </div>
+            <div class="card-block container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           jhiTranslate="niopdcgatewayApp.consumptionReport.startDate"
+                                           for="field_startDate">startDate</label>
+                                    <div class="d-flex">
+                                        <ng2-datetimepicker  [rtlActive]="true" time="00:00:00"
+                                                            id="field_startDate"
+                                                            class="form-control"
+                                                            name="startDate" [(ngModel)]="req.startDate"
+                                                            required></ng2-datetimepicker>
+                                    </div>
+                                    <div
+                                        [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                                        <small class="form-text text-danger"
+                                               [hidden]="!editForm.controls.startDate?.errors?.required"
+                                               jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                        <small class="form-text text-danger"
+                                               [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                            This field should be a date and time.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="form-control-label"
+                                           jhiTranslate="niopdcgatewayApp.consumptionReport.finishDate"
+                                           for="field_finishDate">finishDate</label>
+                                    <div class="d-flex">
+                                        <ng2-datetimepicker  [rtlActive]="true" time="23:59:59"
+                                                            id="field_finishDate"
+                                                            class="form-control"
+                                                            name="finishDate"
+                                                            [(ngModel)]="req.finishDate"
+                                                            required></ng2-datetimepicker>
+                                    </div>
+                                    <div
+                                        [hidden]="!(editForm.controls.finishDate?.dirty && editForm.controls.finishDate?.invalid)">
+                                        <small class="form-text text-danger"
+                                               [hidden]="!editForm.controls.finishDate?.errors?.required"
+                                               jhiTranslate="entity.validation.required">
+                                            This field is required.
+                                        </small>
+                                        <small class="form-text text-danger"
+                                               [hidden]="!editForm.controls.finishDate?.errors?.ZonedDateTimelocal"
+                                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                            This field should be a date and time.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label jhiTranslate="niopdcgatewayApp.boundarySell.dateType"
+                                           for="field_reportType">Type</label>
+                                    <select class="form-control" type="checkbox" id="field_reportType" name="reportType"
+                                            [(ngModel)]="req.filterDate" required>
+                                        <option [ngValue]="null"></option>
+                                        <option value="registerDate">بر اساس تاریخ صدور حواله</option>
+                                        <option value="depotDate">بر اساس تاریخ خورج از انبار</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label
+                                           for="field_reportType">شماره قرارداد</label>
+                                    <input class="form-control" type="text" id="field_contractNo" name="contractNo"
+                                           [(ngModel)]="req.contractNo"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="field_reportType">کد ملی / شناسه ملی</label>
+                                    <input class="form-control" type="text" id="field_nationalId" name="nationalId"
+                                           [(ngModel)]="req.nationalId"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <button type="submit" class="btn btn-primary "
+                        [disabled]="loading"
+                >
+                    <span class="fa fa-search"></span>&nbsp;<span
+                    jhiTranslate="report.search" >search</span>
+
+                </button>
+            </div>
+        </div>
+    </form>
+    <br/>
+    <kendo-grid
+        [data]="gridData"
+        [pageSize]="state.take"
+        [skip]="state.skip"
+        [sort]="state.sort"
+        [group]="state.group"
+        [resizable]="true"
+        [sortable]="{ mode: 'multiple' }"
+        [groupable]="true"
+        scrollable="scrollable"
+        >
+        <ng-template kendoGridToolbarTemplate>
+            <button type="button" kendoGridExcelCommand>
+                <span class="fa fa-file-excel-o"></span>&nbsp;
+                <span jhiTranslate="report.exportToExcel"></span>
+            </button>
+        </ng-template>
+
+        <kendo-grid-column field="orderNo" [title]="'niopdcgatewayApp.dailySales.orderNo' | translate" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="amount" [title]="'لیتر'"
+                           width="130">
+            <ng-template
+                kendoGridGroupFooterTemplate
+                let-group="group"
+                let-aggregates>{{('report.sum' | translate) + ':' + aggregates['amount']?.sum }}
+            </ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="productRatePrice"
+                           [title]="'نرخ'" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="productTitle"
+                           [title]="'فرآورده'" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="contractType" [title]="'نوع قرارداد'" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+        <kendo-grid-column field="orderType" [title]="'وضعیت حواله'" width="130">
+            <ng-template kendoGridGroupHeaderTemplatе></ng-template>
+        </kendo-grid-column>
+
+
+        <kendo-grid-messages
+            [pagerOf]="'report.pagerOf' | translate"
+            [pagerItems]="'report.pagerItems' | translate"
+            [groupPanelEmpty]="'report.headerMessage' | translate"
+            [noRecords]="'global.messages.info.emptyRecords' | translate"
+            [pagerItemsPerPage]="'report.pagerItemsPerPage' | translate">
+        </kendo-grid-messages>
+
+        <kendo-grid-excel fileName="dailySales.xlsx"></kendo-grid-excel>
+    </kendo-grid>
+
+    <br/>
+</div>

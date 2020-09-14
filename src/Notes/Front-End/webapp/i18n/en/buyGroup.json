@@ -1,0 +1,12 @@
+{
+    "niopdcgatewayApp": {
+        "BuyGroup" : {
+            "null": "",
+            "CASH": "CASH",
+            "QUOTA": "QUOTA",
+            "CREDIT": "CREDIT",
+            "PREBUY": "PREBUY",
+            "FINANCIAL_LICENSE": "FINANCIAL_LICENSE"
+        }
+    }
+}

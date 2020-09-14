@@ -1,0 +1,18 @@
+{
+    "niopdcgatewayApp":{
+        "comparisonProductSellReport":{
+            "home":{
+                "title":"مقایسه فروش فرآورده های نفتی"
+            },
+            "customerName":"مشتری",
+            "productTitle":"فرآورده",
+            "currentMonth":"ماه جاری",
+            "previousMonth":"ماه قبل",
+            "previousYear":"ماه مشابه سال قبل",
+            "previousMonthPercent":"درصد تغییرات ماه قبل",
+            "previousYearPercent":"در صد تغییرات ماه مشابه سال قبل"
+
+        }
+    }
+
+}

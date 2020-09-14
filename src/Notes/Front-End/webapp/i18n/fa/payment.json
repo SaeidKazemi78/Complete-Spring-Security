@@ -1,0 +1,70 @@
+{
+    "niopdcgatewayApp": {
+        "payment": {
+            "home": {
+                "title": "فیش ها",
+                "createLabel": "Create a new Payment",
+                "createOrEditLabel": "Create or edit a Payment"
+            },
+            "electronic": {
+                "title": "پرداخت الکترونیک"
+            },
+            "delete": {
+                "question": "ایا برای حذف فیش مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "فیش"
+            },
+            "currency": "واحد پولی",
+            "bankAccountNumber": "شماره حساب",
+            "niopdcBankAccountTitle": "نوع حساب",
+            "name": "صاحب امتیاز/مشتری",
+            "receiptNo": "شماره فیش",
+            "receiptDateTime": "تاریخ",
+            "amount": "مبلغ",
+            "amountPay": "مبلغ قابل پرداخت",
+            "currentAmount": "مانده",
+            "registerMethod": "نوع",
+            "verified": "تایید شده",
+            "bank": "Bank",
+            "lastPayment": "فیش های موجود",
+            "pos": "Pc-Pos",
+            "again": "سعی مجدد",
+            "ePayment": "اینترنتی",
+            "inquiry": "استعلام",
+            "posDevice": "Pc-Pos",
+            "melliPosDevice": "دستگاه های موجود در شبکه",
+            "testPay": "پرداخت با کیف پول",
+            "cashDeskPay":"تمام مبلغ با پول نقد توسط {{username}} دریافت گردید"
+        },
+        "paymentInquiryRequestDTO": {
+            "title": "استعلام پرداخت",
+            "bank":"بانک",
+            "type":"روش پرداخت",
+            "referenceId":"شناسه پرداخت",
+            "referenceIdPos":"شماره مرجع",
+            "receiptDateTime":"تاریخ پرداخت",
+            "amount":"مبلغ",
+            "customer": "مشتری",
+            "person": "صاحب امتیاز",
+            "location": "ناحیه مرزی",
+            "boundaryCustomer":"فروش مرزی",
+            "rfId": "تگ",
+            "plaque": "شماره پلاک",
+            "niopdcBankAccount":"شماره حساب",
+            "branch":"کد شعبه",
+            "message":"در صورتی که اطلاعات ذیل صحیح می باشد دکمه پرداخت را انتخاب کنید. در غیر این صورت اطلاعات خود را تصحیح کنید.",
+            "acceptMessage":"این اطلاعات مورد تایید می باشد.",
+            "successTitle":"استعلام موفق",
+            "successMsg":"استعلام با موفقیت انجام شد. از لیست فیش های مانده دار می توانید فیش ایجاد شده را انتخاب و پرداخت خود را تکمیل نمایید."
+        }
+    },
+    "niopdcpaymentApp": {
+        "payment": {
+            "created": "فیش با موفقیت ایجاد شد.",
+            "updated": "A Payment is updated with identifier {{ param }}",
+            "deleted": "فیش با موفقیت حذف شد."
+        }
+    }
+
+}

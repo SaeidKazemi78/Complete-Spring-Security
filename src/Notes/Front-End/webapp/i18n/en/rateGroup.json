@@ -1,0 +1,27 @@
+
+{
+    "niopdcgatewayApp": {
+        "rateGroup" : {
+            "home": {
+                "title": "Rate Groups",
+                "createLabel": "Create a new Rate Group",
+                "createOrEditLabel": "Create or edit a Rate Group"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Rate Group {{ id }}?"
+            },
+            "detail": {
+                "title": "Rate Group"
+            },
+            "title": "Title",
+            "type": "Type"
+        }
+    },
+    "niopdcrateApp": {
+        "rateGroup" : {
+            "created": "A new Rate Group is created with identifier {{ param }}",
+            "updated": "A Rate Group is updated with identifier {{ param }}",
+            "deleted": "A Rate Group is deleted with identifier {{ param }}"
+        }
+    }
+}

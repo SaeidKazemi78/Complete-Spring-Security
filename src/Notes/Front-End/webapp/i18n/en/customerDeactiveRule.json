@@ -1,0 +1,32 @@
+
+{
+    "niopdcgatewayApp": {
+        "customerDeactiveRule" : {
+            "home": {
+                "title": "Customer Deactive Rules",
+                "createLabel": "Create a new Customer Deactive Rule",
+                "createOrEditLabel": "Create or edit a Customer Deactive Rule"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Customer Deactive Rule {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer Deactive Rule"
+            },
+            "sellContractCode": "Sell Contract Code",
+            "sellContractCode": "Sell Code",
+            "startDate": "Start Date",
+            "finishDate": "Finish Date",
+            "description": "Description",
+            "location": "Location",
+            "customerType": "Customer Type"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerDeactiveRule" : {
+            "created": "A new Customer Deactive Rule is created with identifier {{ param }}",
+            "updated": "A Customer Deactive Rule is updated with identifier {{ param }}",
+            "deleted": "A Customer Deactive Rule is deleted with identifier {{ param }}"
+        }
+    }
+}

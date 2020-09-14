@@ -1,0 +1,35 @@
+{
+    "niopdcgatewayApp": {
+        "voucherItem": {
+            "home": {
+                "title": "نمایش",
+                "createLabel": "Create a new Voucher Item",
+                "createOrEditLabel": "Create or edit a Voucher Item",
+                "voucherMasterTitle": "اسناد حسابداری"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Voucher Item {{ id }}?"
+            },
+            "detail": {
+                "title": "Voucher Item"
+            },
+            "rowNo": "شماره ردیف",
+            "extra": "متفرقه",
+            "special": "ویژه",
+            "credit": "بستانکار",
+            "debit": "بدهکار",
+            "description": "توضیحات",
+            "accountNo": "شماره حساب",
+            "suffix": "پسوند",
+            "key": "کلید",
+            "voucherMaster": "Voucher Master"
+        }
+    },
+    "niopdcaccountingApp": {
+        "voucherItem": {
+            "created": "A new Voucher Item is created with identifier {{ param }}",
+            "updated": "A Voucher Item is updated with identifier {{ param }}",
+            "deleted": "A Voucher Item is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,0 +1,73 @@
+{
+    "niopdcgatewayApp": {
+        "boundaryDiscountSell": {
+            "home": {
+                "title": "گزارش تعداد معافیت روزانه",
+                "createOrEditLabel": "Create or edit a Order"
+            }
+        },
+        "boundaryDetailsSell": {
+            "home": {
+                "title": "گزارش  ریز فروش مرزی",
+                "createOrEditLabel": "Create or edit a Order",
+                "monthlySell": "گزارش ماهانه فروش مرزی"
+            }
+        },
+        "boundaryShiftSell": {
+            "home": {
+                "title": "گزارش  شیفت فروش مرزی",
+                "createOrEditLabel": "Create or edit a Order"
+            }
+        },
+        "boundaryPublicSell": {
+            "home": {
+                "title": "گزارش فروش مرزی",
+                "totalDiscountType": "نوع معافیت",
+                "createOrEditLabel": "Create or edit a Order"
+            }
+        },
+        "boundarySell": {
+            "home": {
+                "title": "گزارش فروش مرزی",
+                "createOrEditLabel": "Create or edit a Order"
+            },
+            "customerType": "ایرانی / خارجی",
+            "customerId": "مشتری",
+            "personId": "صاحب امتیاز",
+            "locationId": "ناحیه",
+            "locationCustomer": "حوزه فعالیت مشتری",
+            "orderNo": "شماره حواله",
+            "registerDate": "تاریخ",
+            "price": "مبلغ کل(ریال)",
+            "totalDiscountPrice": "معافیت",
+            "totalAmount": "مقدار",
+            "plaque": "پلاک",
+            "vehicleModelTitle": "مدل",
+            "currencyTitle": "واحد پولی",
+            "currencyRateGroupTitle": "گروه واحد پولی",
+            "productTitle": "فرآورده",
+            "targetCountry": "کشور مقصد",
+            "cmr": "CMR",
+            "carnet": "کارنه",
+            "currency": "واحد پولی",
+            "currencyRateGroup": "گروه نرخ واحد پولی",
+            "orderType": "نوع حواله",
+            "description": "توضیحات",
+            "title": "نوع وسیله نقلیه",
+            "count": "تعداد",
+            "receiptNoTitle": "شماره فیش",
+            "amount": "لیتر",
+            "prices": "مبلغ(ریال)",
+            "dateType": "براساس",
+            "shiftDate": "تاریخ شیفت",
+            "orderDate": "تاریخ حواله",
+            "productRatePrice": "نرخ فرآورده(ریال)",
+            "hasPayment":" فقط حواله های دارای پرداخت"
+        },
+        "boundaryHistoryEditCarTank": {
+            "home": {
+                "title": "گزارش سوابق ویرایش باک"
+            }
+        }
+    }
+}

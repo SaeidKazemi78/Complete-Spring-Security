@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "customerScore" : {
+            "home": {
+                "title": "Customer Scores",
+                "createLabel": "Create a new Customer Score",
+                "createOrEditLabel": "Create or edit a Customer Score"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Customer Score {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer Score"
+            },
+            "score": "Score",
+            "startDate": "Start Date",
+            "finishDate": "Finish Date",
+            "customer": "Customer"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerScore" : {
+            "created": "A new Customer Score is created with identifier {{ param }}",
+            "updated": "A Customer Score is updated with identifier {{ param }}",
+            "deleted": "A Customer Score is deleted with identifier {{ param }}"
+        }
+    }
+}

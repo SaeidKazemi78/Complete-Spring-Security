@@ -1,0 +1,32 @@
+
+{
+    "niopdcgatewayApp": {
+        "costElement" : {
+            "home": {
+                "title": "عنصر هزینه",
+                "createLabel": "ایحاد عنصر هزینه",
+                "createOrEditLabel": "ویرایش عنصر هزینه",
+                "view":"نمایش عنصر هزینه",
+                "costGroupTitle":"گروه هزینه",
+                "costTitle":"هزینه"
+            },
+            "delete": {
+                "question": "آیا برای حذف عنصر هزینه مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "عنصر هزینه"
+            },
+            "code": "کد",
+            "customerGroup": "گروه مشتری",
+            "costGroup": "گروه هزینه",
+            "cost": "هزینه"
+        }
+    },
+    "niopdcrateApp": {
+        "costElement" : {
+            "created": "عنصر هزینه با موفقیت ایجاد شد.",
+            "updated": "عنصر هزینه با موفقیت ویرایش شد.",
+            "deleted": "عنصر هزینه با موفقیت حذف شد."
+        }
+    }
+}

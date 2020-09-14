@@ -1,0 +1,31 @@
+{
+    "niopdcgatewayApp": {
+        "dailySalesSummary": {
+            "home": {
+                "title": "گزارش خلاصه فروش روزانه"
+            },
+            "timeBy":"تاریخ با",
+            "timeByOrderCreate":"صدور حواله",
+            "timeByExportFromDepot":"خروج از انبار",
+            "date": "تاریخ",
+            "location": "ناحیه",
+            "product":"فرآورده",
+            "count": "تعداد",
+            "personName": "نام صاحب امتیاز",
+            "customerName": "نام مشتری",
+            "locationTitle": "ناحیه",
+            "amount": "مقدار",
+            "productTitle": "نام فرآورده",
+            "ratePrice": "نرخ فرآورده",
+            "totalPrice": "بهای کل",
+            "basePrice": "مبلغ خالص",
+            "buyGroup": "نوع خرید",
+            "issueType": "نوع صدور",
+            "recipNo":"شماره فیش",
+            "creditNo":"مجوز",
+            "startOrderNo":"از سریال",
+            "endOrderNo":"تا سریال",
+            "costPrice":"هزینه بالاسری"
+        }
+    }
+}

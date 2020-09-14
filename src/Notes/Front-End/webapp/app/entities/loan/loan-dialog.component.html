@@ -1,0 +1,161 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="loan.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="loan.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.loan.customerId"
+                           for="field_customerId">Customer Id</label>
+                   <!-- <jhi-customer-selector class="form-control" required [disabled]="isView || editLimit"
+                                           [(ngModel)]="loan.customerId"
+                                           [customerHaveSellContract]="true"
+                                           [selectObject]="false"
+                                           widthGrid="560px"
+                                           id="field_customerId"
+                                           name="customerId"
+                    ></jhi-customer-selector>-->
+                    <sell-contract-customer-person-selector
+                        [disabled]="isView || editLimit"
+                        [selectObject]="true"
+                        [type]="'order'"
+                        [customerGroup] = "'STATION'"
+                        (selectedItem)="changeCustomerPerson($event)"
+                        [(ngModel)]="customerPerson"
+                        class="form-control"
+                        id="field_customerId"
+                        widthGrid="600px"
+                        ngDefaultControl
+                        [customerId]="loan.customerId"
+                        required
+                        name="customerId">
+                    </sell-contract-customer-person-selector>
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.loan.loanType"
+                           for="field_loanType">Loan Type</label>
+                    <select [disabled]="isView || editLimit || loan.id" class="form-control" id="field_loanType" name="loanType" [(ngModel)]="loan.loanTypeId"
+                            required>
+                        <option *ngIf="!editForm.value.loanType" [ngValue]="null" selected></option>
+                        <option [ngValue]="loanTypeOption.id"
+                                *ngFor="let loanTypeOption of loantypes; trackBy: trackLoanTypeById">
+                            {{loanTypeOption.title}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.loanType?.dirty && editForm.controls.loanType?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.loanType?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.loan.amount" for="field_amount">Amount</label>
+                    <input [disabled]="isView || editLimit" type="text" [numeric]="{min:0}" class="form-control" name="amount" id="field_amount" required
+                           [(ngModel)]="loan.amount"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.loan.installmentCount"
+                           for="field_installmentCount">Installment Count</label>
+                    <input [disabled]="isView || editLimit" type="text" [numeric]="{min:0}" class="form-control" name="installmentCount" required
+                           id="field_installmentCount"
+                           [(ngModel)]="loan.installmentCount"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.loan.firstPaymentDate"
+                           for="field_firstPaymentMonth">First Payment Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView || editLimit"
+                                            [rtlActive]="true"
+                                            id="field_firstPaymentMonth"
+                                            class="form-control"
+                                            [disableTime]="false"
+                                            name="startDate"
+                                            [minDateTime]="minDate"
+                                            [(ngModel)]="loan.firstPaymentDate"
+
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div [hidden]="!(editForm.controls.firstPaymentDate?.dirty && editForm.controls.firstPaymentDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.firstPaymentDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.firstPaymentDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.loan.amountMonth"
+                           for="field_amountMonth">amountMonth</label>
+                    <input disabled type="text" [numeric]="{min:0}" class="form-control" name="amountMonth"
+                           id="field_amountMonth"
+                           [ngModel]="getInstallmentPrice()"/>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.loan.penaltyDay"
+                           for="field_penaltyDay">Penalty Day</label>
+                    <input [disabled]="isView" type="text" [numeric]="{min:0}" class="form-control" name="penaltyDay"
+                           id="field_penaltyDay"
+                           [(ngModel)]="loan.penaltyDay"/>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.loan.description"
+                           for="field_description">Description</label>
+                    <textarea [disabled]="isView" type="text" class="form-control" name="description" maxlength="500"
+                           id="field_description"
+                              [(ngModel)]="loan.description"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

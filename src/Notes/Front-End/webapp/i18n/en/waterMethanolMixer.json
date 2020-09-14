@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "waterMethanolMixer" : {
+            "home": {
+                "title": "Water Methanol Mixers",
+                "createLabel": "Create a new Water Methanol Mixer",
+                "createOrEditLabel": "Create or edit a Water Methanol Mixer"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Water Methanol Mixer {{ id }}?"
+            },
+            "detail": {
+                "title": "Water Methanol Mixer"
+            },
+            "waterAmount": "Water Amount",
+            "methanolAmount": "Methanol Amount",
+            "water": "Water",
+            "methanol": "Methanol",
+            "methanolMixer": "Methanol Mixer"
+        }
+    },
+    "niopdcaoApp": {
+        "waterMethanolMixer" : {
+            "created": "A new Water Methanol Mixer is created with identifier {{ param }}",
+            "updated": "A Water Methanol Mixer is updated with identifier {{ param }}",
+            "deleted": "A Water Methanol Mixer is deleted with identifier {{ param }}"
+        }
+    }
+}

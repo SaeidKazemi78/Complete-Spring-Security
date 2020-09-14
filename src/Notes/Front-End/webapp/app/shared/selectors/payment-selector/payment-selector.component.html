@@ -1,0 +1,79 @@
+<div>
+    <div class="input-group">
+        <input #inp class="textInput form-control" style="border:0; height: unset;"
+               [readonly]="!disabled" [disabled]="disabled"
+               [ngModel]="(multiSelect) ? ((selects && selects.length && selects.length > 0) ? selects.length + ' مورد انتخاب شد' : 'موردی انتخاب نشده است') : (selects ? selects.receiptNo: '')"
+               (focus)="showTable()">
+        <a *ngIf="!disabled" class="input-group-append btn btn-outline-secondary rtl-btn" (click)="showTable()">
+            <span class="fa fa-search"></span>
+        </a>
+    </div>
+    <div [style.visibility]="!overlayVisible ? 'collapse' : 'visible'"
+         [style.height]="!overlayVisible ? '0' : 'none'"
+         [style.overflow]="!overlayVisible ? 'hidden' : 'visible'"
+         [style.width]="widthGrid"
+         [style.right]="rightZero ? 0 : 'none'" style="padding: 0;"
+         class="d-inline-block rounded dataGrid">
+
+        <p-dataTable [value]="payments"
+                     [selectionMode]="multiSelect ? 'multiple' : 'single'"
+                     [(selection)]="selects"
+                     (onRowUnselect)="onSelect($event, false)"
+                     (onRowSelect)="onSelect($event, true)"
+                     [rows]="itemsPerPage" [rowsPerPageOptions]="[5,10,20,totalItems]"
+                     [paginator]="true" [responsive]="true" [stacked]="false"
+                     [totalRecords]="totalItems">
+            <p-header>
+                <p-header>
+                    <button class="btn btn-info" type="button" (click)="search()">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class=" btn btn-danger" type="button" (click)="clear()">
+                        <span class="fa fa-remove"></span>
+                    </button>
+                    <button class=" btn btn-danger" type="button" (click)="empty()">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </p-header>
+            </p-header>
+
+            <p-headerColumnGroup>
+                <p-row>
+                    <p-column [style]="{'width':'38px'}"></p-column>
+                    <p-column field="niopdcBankAccountTitle" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.payment.niopdcBankAccountTitle">niopdcBankAccountTitle</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="receiptNo" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.payment.receiptNo">Receipt No</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="receiptDateTime" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.payment.receiptDateTime">Receipt Date Time</span>
+                        </ng-template>
+                    </p-column>
+                    <p-column field="currentAmount" [sortable]="true">
+                        <ng-template pTemplate="header">
+                            <span jhiTranslate="niopdcgatewayApp.payment.currentAmount">Current Amount</span>
+                        </ng-template>
+                    </p-column>
+                </p-row>
+            </p-headerColumnGroup>
+
+            <p-column [selectionMode]="multiSelect ? 'multiple' : 'single'"></p-column>
+            <p-column field="niopdcBankAccountTitle" [header]="'niopdcgatewayApp.payment.niopdcBankAccountTitle' | translate"></p-column>
+            <p-column field="receiptNo" [header]="'niopdcgatewayApp.payment.receiptNo' | translate"></p-column>
+            <p-column field="receiptDateTime" [header]="'niopdcgatewayApp.payment.receiptDateTime' | translate">
+                <ng-template let-item="rowData" pTemplate="body">
+                    <span>{{item.receiptDateTime | dateJalali}}</span>
+                </ng-template>
+            </p-column>
+            <p-column field="currentAmount" [header]="'niopdcgatewayApp.payment.currentAmount' | translate"></p-column>
+        </p-dataTable>
+    </div>
+</div>
+
+

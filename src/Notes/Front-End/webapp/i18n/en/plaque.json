@@ -1,0 +1,26 @@
+
+{
+    "niopdcgatewayApp": {
+        "plaque" : {
+            "home": {
+                "title": "Plaques",
+                "createLabel": "Create a new Plaque",
+                "createOrEditLabel": "Create or edit a Plaque"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Plaque {{ id }}?"
+            },
+            "detail": {
+                "title": "Plaque"
+            },
+            "title": "Title"
+        }
+    },
+    "niopdcbaseApp": {
+        "plaque" : {
+            "created": "A new Plaque is created with identifier {{ param }}",
+            "updated": "A Plaque is updated with identifier {{ param }}",
+            "deleted": "A Plaque is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "transferType" : {
+            "home": {
+                "title": "Transfer Types",
+                "createLabel": "Create a new Transfer Type",
+                "createOrEditLabel": "Create or edit a Transfer Type"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Transfer Type {{ id }}?"
+            },
+            "detail": {
+                "title": "Transfer Type"
+            },
+            "title": "Title",
+            "transferFrom": "Transfer From",
+            "transferTo": "Transfer To",
+            "activeMetre": "Active Metre",
+            "transferToHimself": "Transfer To Himself"
+        }
+    },
+    "niopdcaoApp": {
+        "transferType" : {
+            "created": "A new Transfer Type is created with identifier {{ param }}",
+            "updated": "A Transfer Type is updated with identifier {{ param }}",
+            "deleted": "A Transfer Type is deleted with identifier {{ param }}"
+        }
+    }
+}

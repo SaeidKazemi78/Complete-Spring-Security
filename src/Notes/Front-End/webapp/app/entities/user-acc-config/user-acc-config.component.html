@@ -1,0 +1,57 @@
+<div class="component">
+    <br/>
+    <jhi-alert-success></jhi-alert-success>
+    <jhi-alert-error></jhi-alert-error>
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <br/>
+    <form name="editForm" role="form" (ngSubmit)="save()" #settingsForm="ngForm"
+          #editForm="ngForm">
+
+        <ng-container class="container-fluid-w">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="form-control-label" for="accUsername" jhiTranslate="niopdcgatewayApp.userAccConfig.accUsername">First
+                            Name</label>
+                        <input type="text" class="form-control" id="accUsername" name="accUsername"
+                               [(ngModel)]="userAccConfig.accUsername" minlength=1 maxlength=50
+                               required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="form-control-label" for="tempDocNumber" jhiTranslate="niopdcgatewayApp.userAccConfig.tempDocNumber">First
+                            Name</label>
+                        <input type="text" class="form-control" id="tempDocNumber" name="tempDocNumber"
+                               [(ngModel)]="userAccConfig.tempDocNumber" minlength=1 maxlength=50
+                               required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.userAccConfig.financialYear"
+                               for="field_financialYear">financialYear</label>
+                        <select class="form-control"
+                                name="financialYear" required
+                                [(ngModel)]="userAccConfig.financialYear"
+                                id="field_financialYear"
+                        >
+                            <option [ngValue]="financialYear" *ngFor="let financialYear of financialYears">
+                                {{financialYear}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <br/>
+                <div class="row col-md-10" >
+                </div>
+                <div class="row col-md-2" >
+                    <button type="submit"
+                            [disabled]="editForm.form.invalid" class="btn btn-primary"
+                            jhiTranslate="settings.form.button">Save
+                    </button>
+                </div>
+            </div>
+        </ng-container>
+    </form>
+</div>

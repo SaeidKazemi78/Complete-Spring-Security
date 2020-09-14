@@ -1,0 +1,85 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myProductRateDifferencePaymentLabel" jhiTranslate="niopdcgatewayApp.productRateDifferencePayment.home.createOrEditLabel">Create or edit a Product Rate Difference Payment</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!productRateDifferencePayment.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="productRateDifferencePayment.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productRateDifferencePayment.paymentId" for="field_paymentId">Payment Id</label>
+            <input type="number" class="form-control" name="paymentId" id="field_paymentId"
+                [(ngModel)]="productRateDifferencePayment.paymentId" required/>
+            <div [hidden]="!(editForm.controls.paymentId?.dirty && editForm.controls.paymentId?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.paymentId?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.paymentId?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productRateDifferencePayment.price" for="field_price">Price</label>
+            <input type="number" class="form-control" name="price" id="field_price"
+                [(ngModel)]="productRateDifferencePayment.price" required/>
+            <div [hidden]="!(editForm.controls.price?.dirty && editForm.controls.price?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.price?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.price?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productRateDifferencePayment.data" for="field_data">Data</label>
+            <div class="d-flex">
+                <input id="field_data" type="datetime-local" class="form-control" name="data" [(ngModel)]="productRateDifferencePayment.data"
+                required/>
+            </div>
+            <div [hidden]="!(editForm.controls.data?.dirty && editForm.controls.data?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.data?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.data?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.productRateDifferencePayment.productRateDifference" for="field_productRateDifference">Product Rate Difference</label>
+            <select class="form-control" id="field_productRateDifference" name="productRateDifference" [(ngModel)]="productRateDifferencePayment.productRateDifferenceId"  required>
+                <option *ngIf="!editForm.value.productRateDifference" [ngValue]="null" selected></option>
+                <option [ngValue]="productRateDifferenceOption.id" *ngFor="let productRateDifferenceOption of productratedifferences; trackBy: trackProductRateDifferenceById">{{productRateDifferenceOption.id}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.productRateDifference?.dirty && editForm.controls.productRateDifference?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.productRateDifference?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

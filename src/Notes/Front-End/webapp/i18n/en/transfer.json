@@ -1,0 +1,38 @@
+
+{
+    "niopdcgatewayApp": {
+        "transfer" : {
+            "home": {
+                "title": "Transfers",
+                "createLabel": "Create a new Transfer",
+                "createOrEditLabel": "Create or edit a Transfer"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Transfer {{ id }}?"
+            },
+            "detail": {
+                "title": "Transfer"
+            },
+            "registerDate": "Register Date",
+            "natureAmount": "Nature Amount",
+            "sixtyAmount": "Sixty Amount",
+            "specialWeight": "Special Weight",
+            "environmentTemperature": "Environment Temperature",
+            "productTemperature": "Product Temperature",
+            "transferByMetre": "Transfer By Metre",
+            "description": "Description",
+            "metreLog": "Metre Log",
+            "transferType": "Transfer Type",
+            "fromDayDepot": "From Day Depot",
+            "toDayDepot": "To Day Depot",
+            "metre": "Metre"
+        }
+    },
+    "niopdcaoApp": {
+        "transfer" : {
+            "created": "A new Transfer is created with identifier {{ param }}",
+            "updated": "A Transfer is updated with identifier {{ param }}",
+            "deleted": "A Transfer is deleted with identifier {{ param }}"
+        }
+    }
+}

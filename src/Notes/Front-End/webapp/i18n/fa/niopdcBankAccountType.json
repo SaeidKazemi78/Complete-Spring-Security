@@ -1,0 +1,27 @@
+
+{
+    "niopdcgatewayApp": {
+        "niopdcBankAccountType" : {
+            "home": {
+                "title": "نوع شماره حساب",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ویرایش"
+            },
+            "delete": {
+                "question": "آیا برای حذف نوعه شماره حساب مطمئن هستید ؟ "
+            },
+            "detail": {
+                "title": "Niopdc Bank Account Type"
+            },
+            "title": "عنوان",
+            "code": "کد"
+        }
+    },
+    "niopdcpaymentApp": {
+        "niopdcBankAccountType" : {
+            "created": "نوع شماره حساب با موفقیت ایجاد شد.",
+            "updated": "نوع شماره حساب با موفقیت ویرایش شد.",
+            "deleted": "نوع شماره حساب با موفقیت حذف شد."
+        }
+    }
+}

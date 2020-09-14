@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "MeasureType" : {
+            "null": "",
+            "NORMAL": "NORMAL",
+            "RATIO": "RATIO"
+        }
+    }
+}

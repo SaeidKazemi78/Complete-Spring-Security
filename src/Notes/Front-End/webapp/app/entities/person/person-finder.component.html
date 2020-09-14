@@ -1,0 +1,18 @@
+<div class="component">
+    <p-inputMask class="ui-rtl" dir="rtl" [(ngModel)]="code" mask="99a999-99" characterPattern="[dت]"></p-inputMask>
+
+    <ngx-plaque></ngx-plaque>
+<br>
+    <jhi-alert-error></jhi-alert-error>
+    <div class="input-group">
+    <input class="form-control" type="text"
+           name="code" id="field_code"
+           [(ngModel)]="code"
+           maxlength="10" search-after-typed (onSearch)="search()"/>
+        <button type="button" (click)="search()" class="input-group-append btn btn-outline-secondary">
+            <span class="fa fa-search"></span>
+        </button>
+    </div>
+    <br/>
+    <pre dir="ltr">{{object|json}}</pre>
+</div>

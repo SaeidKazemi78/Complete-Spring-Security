@@ -1,0 +1,42 @@
+
+{
+    "niopdcgatewayApp": {
+        "sellContractProduct": {
+            "home": {
+                "title": "فرآورده های قرارداد",
+                "createLabel": "ایجاد فرآورده قرارداد",
+                "createOrEditLabel": "ویرایش فرآورده قرارداد",
+                "view": "نمایش فرآورده قرارداد",
+                "cardTitle": "مشخصات"
+            },
+            "delete": {
+                "question": "آیا برای حذف این فرآورده از قرارداد مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "فرآورده قرارداد"
+            },
+            "exportPiId": "پروفرم",
+            "rateGroupId": "گروه نرخی فرآورده",
+            "currencyRateGroupId": "گروه نرخی واحد پولی",
+            "consumption": "انواع مصرف",
+            "product": "فرآورده",
+            "sellContract": "قرارداد",
+            "sellContractCustomer": "مشتری",
+            "depot": "انبارها",
+            "currency": "واحد پولی",
+            "buyType": "نوع خرید",
+            "costGroup": "گروه هزینه",
+            "startDate": "تاریخ شروع دسترسی",
+            "finishDate": "تاریخ پایان دسترسی",
+            "typeOfFuelReceipts":"نحوه فروش",
+            "productRatePrice": "نرخ فرآورده"
+        }
+    },
+    "niopdcbaseApp": {
+        "sellContractProduct": {
+            "created": "فرآورده های قرارداد فروش با موفقیت ایجاد شد.",
+            "updated": "فرآورده های قرارداد فروش با موفقیت ویرایش شد.",
+            "deleted": "فرآورده های قرارداد فروش با موفقیت حذف شد."
+        }
+    }
+}

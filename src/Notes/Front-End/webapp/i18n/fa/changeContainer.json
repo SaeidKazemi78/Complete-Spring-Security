@@ -1,0 +1,34 @@
+{
+    "niopdcgatewayApp": {
+        "changeContainer": {
+            "home": {
+                "title": "تبدیل مظروف به بی ظرف",
+                "createLabel": "ایجاد تعویض ظرف",
+                "createOrEditLabel": "ویرایش تعویض ظرف",
+                "view": "نمایش تعویض ظرف",
+                "dayDepotContainerTitle": "روز مخزن مظروف",
+                "dayDepotTitle": "روز انبار"
+            },
+            "delete": {
+                "question": "آیا برای حذف این تعویض ظرف مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "تعویض ظرف"
+            },
+            "amount": "مقدار",
+            "count": "تعداد",
+            "changeContainerType": "نوع ظرف تعویضی",
+            "source": "ظرف مبدا",
+            "target": "ظرف مقصد",
+            "dayDepot": "مخزن",
+            "unit": "واحد"
+        }
+    },
+    "niopdcaoApp": {
+        "changeContainer": {
+            "created": "تعویض ظرف با موفقیت ایجاد شد.",
+            "updated": "تعویض ظرف با موفقیت ایجاد شد.",
+            "deleted": "تعویض ظرف با موفقیت ایجاد شد."
+        }
+    }
+}

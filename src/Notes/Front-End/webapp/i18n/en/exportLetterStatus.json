@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "ExportLetterStatus" : {
+            "null": "",
+            "PENDING": "PENDING",
+            "ACTIVE": "ACTIVE",
+            "REVOCATION": "REVOCATION"
+        }
+    }
+}

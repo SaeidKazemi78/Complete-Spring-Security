@@ -1,0 +1,29 @@
+{
+    "niopdcgatewayApp": {
+        "customerTypeProductConsumption" : {
+            "home": {
+                "title": "نوع مصرف فرآورده",
+                "productTitle":"فرآورده",
+                "createLabel":"ایجاد نوع مصرف فرآورده",
+                "createOrEditLabel":"ویرایش نوع مصرف فرآورده",
+                "view":"نمایش نوع مصرف فرآورده"
+            },
+            "delete": {
+                "question": "آیا برای حذف این نوع مصرف فرآورده مشتری مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "نوع مصرف فرآورده"
+            },
+            "customerType": "نوع مشتری",
+            "consumption": "نوع مصرف",
+            "product":"فرآورده"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerTypeProductConsumption" : {
+            "created": "مشتری با موفقیت ایجاد شد.",
+            "updated": "مشتری با موفقیت ویرایش شد.",
+            "deleted": "مشتری با موفقیت حذف شد."
+        }
+    }
+}

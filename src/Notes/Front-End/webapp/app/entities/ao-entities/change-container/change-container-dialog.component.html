@@ -1,0 +1,138 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="!changeContainer.id" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.changeContainer.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="changeContainer.id && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.changeContainer.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="changeContainer.id && isView" class="modal-title" id="viewLabel"
+            jhiTranslate="niopdcgatewayApp.changeContainer.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.changeContainer.source"
+                           for="field_source">Source</label>
+                    <select [disabled]="!changeContainer.id || isView" class="form-control" id="field_source"
+                            name="source" [(ngModel)]="changeContainer.sourceId"
+                            (ngModelChange)="onSourceChange($event)"
+                            required>
+                        <option *ngIf="!editForm.value.source" [ngValue]="null"></option>
+                        <option
+                            *ngFor="let dayDepotContainerOption of sources; trackBy: trackDayDepotContainerById"
+                            [ngValue]="dayDepotContainerOption.id">
+                            {{dayDepotContainerOption.title}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.source?.dirty && editForm.controls.source?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.source?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.changeContainer.target"
+                           for="field_target">Target</label>
+                    <select [disabled]="isView" class="form-control" id="field_target"
+                            name="target" [(ngModel)]="changeContainer.targetId"
+                            required>
+                        <option *ngFor="let dayDepotContainerOption of targets; trackBy: trackDayDepotContainerById"
+                                [ngValue]="dayDepotContainerOption.id">
+                            {{dayDepotContainerOption.title}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.target?.dirty && editForm.controls.target?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.target?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.changeContainer.dayDepot"
+                           for="field_dayDepots">Day Depot</label>
+                    <select [disabled]="isView" class="form-control" id="field_dayDepots" name="dayDepots"
+                            [(ngModel)]="changeContainer.dayDepotId" required>
+                        <option *ngIf="!editForm.value.dayDepot" [ngValue]="null" selected></option>
+                        <option *ngFor="let dayDepotOption of dayDepots; trackBy: trackDayDepotById"
+                                [ngValue]="dayDepotOption.id">
+                            {{dayDepotOption.oilTankTitle}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.dayDepot?.dirty && editForm.controls.dayDepot?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.dayDepot?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.changeContainer.count"
+                           for="field_count">Count</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="count" id="field_count"
+                           (ngModelChange)="onChangeCount($event)"
+                           [(ngModel)]="changeContainer.count" required/>
+                    <div [hidden]="!(editForm.controls.count?.dirty && editForm.controls.count?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.count?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.count?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.changeContainer.amount"
+                           for="field_amount">Amount</label>
+                    <input [disabled]="true" type="number" class="form-control" name="amount" id="field_amount"
+                           [(ngModel)]="changeContainer.amount" required/>
+                    <div [hidden]="!(editForm.controls.amount?.dirty && editForm.controls.amount?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.amount?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.amount?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancelShort">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.saveShort">Save</span>
+        </button>
+    </div>
+</form>

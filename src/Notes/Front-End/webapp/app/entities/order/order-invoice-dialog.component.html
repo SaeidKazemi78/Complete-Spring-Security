@@ -1,0 +1,49 @@
+<form name="deleteForm" (ngSubmit)="confirmDelete(order.id, force)">
+    <div class="modal-header">
+        <h4 class="modal-title" jhiTranslate="entity.delete.title">Confirm delete operation</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.momentSheet.startTime"
+                           for="field_startTime">Register Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disableTime]="true" [rtlActive]="true" time="00:00:00"
+                                            id="field_startTime"
+                                            class="form-control"
+                                            name="startTime" [(ngModel)]="startTime"
+                                            required></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.momentSheet.endTime"
+                           for="field_endTime">Register Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disableTime]="true" [rtlActive]="true" time="00:00:00"
+                                            id="field_endTime"
+                                            class="form-control"
+                                            name="endTime" [(ngModel)]="endTime"
+                                            required></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" class="btn btn-danger">
+            <span class="fa fa-remove"></span>&nbsp;<span jhiTranslate="entity.action.delete">Delete</span>
+        </button>
+    </div>
+</form>

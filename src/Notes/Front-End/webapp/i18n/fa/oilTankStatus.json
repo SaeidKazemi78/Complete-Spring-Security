@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "OilTankStatus" : {
+            "null": "",
+            "UNDER_REPAIR": "تحت تعمیر",
+            "STAGNANT": "راکد",
+            "ACTIVE": "فعال"
+        }
+    }
+}

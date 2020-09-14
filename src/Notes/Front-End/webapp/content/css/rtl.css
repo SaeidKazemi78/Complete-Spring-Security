@@ -1,0 +1,14 @@
+.verification .input-wrapper .verification-code-input-area {
+    direction: ltr;
+    padding-left: 1.7em;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    letter-spacing: 1em;
+    font-size: 1.5em;
+    width: 10em;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+

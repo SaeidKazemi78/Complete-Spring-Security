@@ -1,0 +1,12 @@
+{
+    "niopdcgatewayApp": {
+        "TankType" : {
+            "null": "",
+            "CUBE": "مکعبی",
+            "CYLINDER": "استوانه ای",
+            "D_SHAPE":"D شکل",
+            "STEPPING":"پله ای",
+            "L_SHAPE":"L شکل"
+        }
+    }
+}

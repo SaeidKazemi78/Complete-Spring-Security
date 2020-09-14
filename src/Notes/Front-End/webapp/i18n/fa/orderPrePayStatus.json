@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "OrderPrePayStatus" : {
+            "null": "",
+            "DRAFT": "آماده پرداخت",
+            "PAID": "پرداخت شده",
+            "PAID_PUMP": "پرداخت عرضه"
+        }
+    }
+}

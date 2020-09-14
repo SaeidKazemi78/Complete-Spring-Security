@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "TypeEffect" : {
+            "null": "",
+            "CREDIT": "CREDIT",
+            "AMOUNT": "AMOUNT",
+            "BOTH": "BOTH"
+        }
+    }
+}

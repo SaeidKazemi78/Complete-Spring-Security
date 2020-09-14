@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "airplaneModel" : {
+            "home": {
+                "title": "Airplane Models",
+                "createLabel": "Create a new Airplane Model",
+                "createOrEditLabel": "Create or edit a Airplane Model"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Airplane Model {{ id }}?"
+            },
+            "detail": {
+                "title": "Airplane Model"
+            },
+            "title": "Title",
+            "capacity": "Capacity",
+            "product": "Product"
+        }
+    },
+    "niopdcbaseApp": {
+        "airplaneModel" : {
+            "created": "A new Airplane Model is created with identifier {{ param }}",
+            "updated": "A Airplane Model is updated with identifier {{ param }}",
+            "deleted": "A Airplane Model is deleted with identifier {{ param }}"
+        }
+    }
+}

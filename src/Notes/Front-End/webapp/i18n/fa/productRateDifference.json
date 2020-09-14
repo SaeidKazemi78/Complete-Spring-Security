@@ -1,0 +1,48 @@
+{
+    "niopdcgatewayApp": {
+        "productRateDifference": {
+            "home": {
+                "customerTitle": "مشتری",
+                "title": "نرخ فرآورده های آزاد",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ویرایش"
+            },
+            "delete": {
+                "question": "آیا برای حذف این نرخ فرآورده آزاد مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "Product Rate Difference"
+            },
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "orderId": "حواله",
+            "orderNo": "شماره حواله",
+            "orderRegisterDate": "تاریخ ثبت حواله",
+            "exitFromDepotDate": "تاریخ خروج از انبار",
+            "orderProductId": "فرآورده",
+            "productTitle": "فرآورده",
+            "amount": "مقدار",
+            "date": "تاریخ",
+            "product": "فرآورده",
+            "fromRateGroupId": "از گروه نرخی",
+            "toRateGroupId": "به گروه نرخی",
+            "rateGroupTitle": "گروه نرخی",
+            "fromProductRatePrice": "از نرخ فرآورده",
+            "toProductRatePrice": "به نرخ فرآورده",
+            "fromCurrencyId": "از واحد پولی",
+            "toCurrencyId": "به واحد پولی",
+            "fromCurrencyRate": "از نرخ واحد پولی",
+            "toCurrencyRate": "به نرخ واحد پولی",
+            "price": "مبلغ",
+            "status": "وضعیت",
+            "type": "نوع"
+        }
+    },
+    "niopdcbaseApp": {
+        "productRateDifference": {
+            "created": "نرخ فرآورده آزاد با موفقیت ایجاد شد.",
+            "updated": "نرخ فرآورده آزاد با موفقیت ویرایش شد.",
+            "deleted": "نرخ فرآورده آزاد با موفقیت حذف شد."
+        }
+    }
+}

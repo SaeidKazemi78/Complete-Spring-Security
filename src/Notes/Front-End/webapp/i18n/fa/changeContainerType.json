@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "ChangeContainerType" : {
+            "null": "",
+            "WITH_CONTAINER": "مظروف",
+            "WITHOUT_CONTAINER": "بی ظرف"
+        }
+    }
+}

@@ -1,0 +1,33 @@
+
+{
+    "niopdcgatewayApp": {
+        "productRate" : {
+            "home": {
+                "title": "Product Rates",
+                "createLabel": "Create a new Product Rate",
+                "createOrEditLabel": "Create or edit a Product Rate"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Product Rate {{ id }}?"
+            },
+            "detail": {
+                "title": "Product Rate"
+            },
+            "productId": "Product Id",
+            "containerId": "Container Id",
+            "src": "Src",
+            "price": "Price",
+            "startDate": "Start Date",
+            "finishDate": "Finish Date",
+            "currency": "Currency",
+            "rateGroup": "Rate Group"
+        }
+    },
+    "niopdcrateApp": {
+        "productRate" : {
+            "created": "A new Product Rate is created with identifier {{ param }}",
+            "updated": "A Product Rate is updated with identifier {{ param }}",
+            "deleted": "A Product Rate is deleted with identifier {{ param }}"
+        }
+    }
+}

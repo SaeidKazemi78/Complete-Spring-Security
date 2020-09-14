@@ -1,0 +1,31 @@
+
+{
+    "niopdcgatewayApp": {
+        "customerScore" : {
+            "home": {
+                "title": "امتیاز مشتری",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ویرایش",
+                "view":"نمایش",
+                "customerTitle":"مشتری"
+            },
+            "delete": {
+                "question": "آیا برای حذف امتیاز مشتری مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "امتیاز مشتری"
+            },
+            "score": "امتیاز",
+            "startDate": "تاریخ شروع",
+            "finishDate": "تاریخ پایان",
+            "customer": "مشتری"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerScore" : {
+            "created": "امتیاز مشتری با موفقیت ایجاد شد.",
+            "updated": "امتیاز مشتری با موفقیت ویرایش شد.",
+            "deleted": "امتیاز مشتری با موفقیت حذف شد."
+        }
+    }
+}

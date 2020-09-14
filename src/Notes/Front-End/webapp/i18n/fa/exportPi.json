@@ -1,0 +1,31 @@
+
+{
+    "niopdcgatewayApp": {
+        "exportPi" : {
+            "home": {
+                "title": "پروفرم",
+                "exportLetterTitle": "اعلامیه فروش"
+            },
+            "delete": {
+                "question": "آیا برای حذف این پروفرم مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "پروفرما"
+            },
+            "message.maxAmount": "حداکثر مقدار پروفرم ایجاد گردیده است. امکان ایجاد وجود ندارد.",
+            "registerDate": "تاریخ",
+            "piNumber": "شماره",
+            "price": "مبلغ (با نرخ ارزی)",
+            "amount": "مقدار",
+            "type": "نوع پروفرم",
+            "active": "فعال"
+        }
+    },
+    "niopdcbaseApp": {
+        "exportPi" : {
+            "created": "پروفرم با موفقیت ایجاد شد.",
+            "updated": "پروفرم با موفقیت ویرایش شد.",
+            "deleted": "پروفرم با موفقیت حذف شد."
+        }
+    }
+}

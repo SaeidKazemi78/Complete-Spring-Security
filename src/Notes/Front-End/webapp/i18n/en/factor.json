@@ -1,0 +1,32 @@
+
+{
+    "niopdcgatewayApp": {
+        "factor" : {
+            "home": {
+                "title": "Factors",
+                "createLabel": "Create a new Factor",
+                "createOrEditLabel": "Create or edit a Factor"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Factor {{ id }}?"
+            },
+            "detail": {
+                "title": "Factor"
+            },
+            "registerDate": "Register Date",
+            "personId": "Person Id",
+            "factorNo": "Factor No",
+            "startDate": "Start Date",
+            "finishDate": "Finish Date",
+            "price": "Price",
+            "active": "Active"
+        }
+    },
+    "niopdcaccountingApp": {
+        "factor" : {
+            "created": "A new Factor is created with identifier {{ param }}",
+            "updated": "A Factor is updated with identifier {{ param }}",
+            "deleted": "A Factor is deleted with identifier {{ param }}"
+        }
+    }
+}

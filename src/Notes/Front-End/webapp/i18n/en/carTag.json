@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "carTag" : {
+            "home": {
+                "title": "Car Tags",
+                "createLabel": "Create a new Car Tag",
+                "createOrEditLabel": "Create or edit a Car Tag"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Car Tag {{ id }}?"
+            },
+            "detail": {
+                "title": "Car Tag"
+            },
+            "carRfId": "Car Rf Id",
+            "active": "Active",
+            "activeDate": "Active Date",
+            "location": "Location"
+        }
+    },
+    "niopdcbaseApp": {
+        "carTag" : {
+            "created": "A new Car Tag is created with identifier {{ param }}",
+            "updated": "A Car Tag is updated with identifier {{ param }}",
+            "deleted": "A Car Tag is deleted with identifier {{ param }}"
+        }
+    }
+}

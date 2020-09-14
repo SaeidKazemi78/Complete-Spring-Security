@@ -1,0 +1,37 @@
+<div>{{message}}</div>
+<div *ngIf="disabled" style="max-height:200px;overflow:auto; padding:5px">
+    <div *ngIf="oneSelection == true">
+        {{(selectedRegion)?selectedRegion?.label:'موردی انتخاب نشده است.'}}
+    </div>
+    <div *ngIf="oneSelection == false">
+        <ul *ngIf="selectedRegions && selectedRegions.length">
+            <li *ngFor="let select of selectedRegions">
+                {{select?.label}}
+            </li>
+        </ul>
+        <div *ngIf="!selectedRegions || !selectedRegions.length">
+            موردی انتخاب نشده است.
+        </div>
+    </div>
+</div>
+<div *ngIf="!disabled">
+    <a *ngIf="(oneSelection && selectedRegion) || (!oneSelection && selectedRegions && selectedRegions.length)" class="ui-state-default" style="position: absolute; left: 15px;" (click)="clearSelected()">
+        <span class="fa fa-fw fa-close"></span>
+    </a>
+    <p-tree *ngIf="oneSelection == true" selectionMode="single"
+            (onNodeExpand)="nodeExpand($event)"
+            [(selection)]="selectedRegion"
+            (onNodeSelect)="nodeSelect($event)"
+            [style]="{'max-height':'200px','overflow':'auto'}"
+            [value]="regions">
+    </p-tree>
+    <p-tree *ngIf="oneSelection == false" selectionMode="checkbox" [propagateSelectionUp]="false"
+            (onNodeExpand)="nodeExpand($event)"
+            [(selection)]="selectedRegions"
+            (onNodeSelect)="nodeSelect($event)"
+            (onNodeUnselect)="nodeUnSelect($event)"
+            [style]="{'max-height':'200px','overflow':'auto'}"
+            [value]="regions">
+    </p-tree>
+
+</div>

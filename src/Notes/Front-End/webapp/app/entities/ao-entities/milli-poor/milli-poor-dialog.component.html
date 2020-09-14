@@ -1,0 +1,187 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="milliPoor.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.milliPoor.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="milliPoor.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.milliPoor.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.milliPoor.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.milliPoor.wet"
+                           for="field_wet">Wet</label>
+                    <select [disabled]="isView" class="form-control" name="wet" [(ngModel)]="milliPoor.wet"
+                            id="field_wet"
+                            required>
+                        <option value="A0">{{'niopdcgatewayApp.ColorimetricType.A0' | translate}}</option>
+                        <option value="A1">{{'niopdcgatewayApp.ColorimetricType.A1' | translate}}</option>
+                        <option value="A2">{{'niopdcgatewayApp.ColorimetricType.A2' | translate}}</option>
+                        <option value="A3">{{'niopdcgatewayApp.ColorimetricType.A3' | translate}}</option>
+                        <option value="A4">{{'niopdcgatewayApp.ColorimetricType.A4' | translate}}</option>
+                        <option value="A5">{{'niopdcgatewayApp.ColorimetricType.A5' | translate}}</option>
+                        <option value="A6">{{'niopdcgatewayApp.ColorimetricType.A6' | translate}}</option>
+                        <option value="A7">{{'niopdcgatewayApp.ColorimetricType.A7' | translate}}</option>
+                        <option value="A8">{{'niopdcgatewayApp.ColorimetricType.A8' | translate}}</option>
+                        <option value="A9">{{'niopdcgatewayApp.ColorimetricType.A9' | translate}}</option>
+                        <option value="A10">{{'niopdcgatewayApp.ColorimetricType.A10' | translate}}</option>
+                        <option value="B0">{{'niopdcgatewayApp.ColorimetricType.B0' | translate}}</option>
+                        <option value="B1">{{'niopdcgatewayApp.ColorimetricType.B1' | translate}}</option>
+                        <option value="B2">{{'niopdcgatewayApp.ColorimetricType.B2' | translate}}</option>
+                        <option value="B3">{{'niopdcgatewayApp.ColorimetricType.B3' | translate}}</option>
+                        <option value="B4">{{'niopdcgatewayApp.ColorimetricType.B4' | translate}}</option>
+                        <option value="B5">{{'niopdcgatewayApp.ColorimetricType.B5' | translate}}</option>
+                        <option value="B6">{{'niopdcgatewayApp.ColorimetricType.B6' | translate}}</option>
+                        <option value="B7">{{'niopdcgatewayApp.ColorimetricType.B7' | translate}}</option>
+                        <option value="B8">{{'niopdcgatewayApp.ColorimetricType.B8' | translate}}</option>
+                        <option value="B9">{{'niopdcgatewayApp.ColorimetricType.B9' | translate}}</option>
+                        <option value="B10">{{'niopdcgatewayApp.ColorimetricType.B10' | translate}}</option>
+                        <option value="C0">{{'niopdcgatewayApp.ColorimetricType.C0' | translate}}</option>
+                        <option value="C1">{{'niopdcgatewayApp.ColorimetricType.C1' | translate}}</option>
+                        <option value="C2">{{'niopdcgatewayApp.ColorimetricType.C2' | translate}}</option>
+                        <option value="C3">{{'niopdcgatewayApp.ColorimetricType.C3' | translate}}</option>
+                        <option value="C4">{{'niopdcgatewayApp.ColorimetricType.C4' | translate}}</option>
+                        <option value="C5">{{'niopdcgatewayApp.ColorimetricType.C5' | translate}}</option>
+                        <option value="C6">{{'niopdcgatewayApp.ColorimetricType.C6' | translate}}</option>
+                        <option value="C7">{{'niopdcgatewayApp.ColorimetricType.C7' | translate}}</option>
+                        <option value="C8">{{'niopdcgatewayApp.ColorimetricType.C8' | translate}}</option>
+                        <option value="C9">{{'niopdcgatewayApp.ColorimetricType.C9' | translate}}</option>
+                        <option value="C10">{{'niopdcgatewayApp.ColorimetricType.C10' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.wet?.dirty && editForm.controls.wet?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.wet?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.milliPoor.dry"
+                           for="field_dry">Dry</label>
+                    <select [disabled]="isView" class="form-control" name="dry" [(ngModel)]="milliPoor.dry"
+                            id="field_dry"
+                            required>
+                        <option value="A0">{{'niopdcgatewayApp.ColorimetricType.A0' | translate}}</option>
+                        <option value="A1">{{'niopdcgatewayApp.ColorimetricType.A1' | translate}}</option>
+                        <option value="A2">{{'niopdcgatewayApp.ColorimetricType.A2' | translate}}</option>
+                        <option value="A3">{{'niopdcgatewayApp.ColorimetricType.A3' | translate}}</option>
+                        <option value="A4">{{'niopdcgatewayApp.ColorimetricType.A4' | translate}}</option>
+                        <option value="A5">{{'niopdcgatewayApp.ColorimetricType.A5' | translate}}</option>
+                        <option value="A6">{{'niopdcgatewayApp.ColorimetricType.A6' | translate}}</option>
+                        <option value="A7">{{'niopdcgatewayApp.ColorimetricType.A7' | translate}}</option>
+                        <option value="A8">{{'niopdcgatewayApp.ColorimetricType.A8' | translate}}</option>
+                        <option value="A9">{{'niopdcgatewayApp.ColorimetricType.A9' | translate}}</option>
+                        <option value="A10">{{'niopdcgatewayApp.ColorimetricType.A10' | translate}}</option>
+                        <option value="B0">{{'niopdcgatewayApp.ColorimetricType.B0' | translate}}</option>
+                        <option value="B1">{{'niopdcgatewayApp.ColorimetricType.B1' | translate}}</option>
+                        <option value="B2">{{'niopdcgatewayApp.ColorimetricType.B2' | translate}}</option>
+                        <option value="B3">{{'niopdcgatewayApp.ColorimetricType.B3' | translate}}</option>
+                        <option value="B4">{{'niopdcgatewayApp.ColorimetricType.B4' | translate}}</option>
+                        <option value="B5">{{'niopdcgatewayApp.ColorimetricType.B5' | translate}}</option>
+                        <option value="B6">{{'niopdcgatewayApp.ColorimetricType.B6' | translate}}</option>
+                        <option value="B7">{{'niopdcgatewayApp.ColorimetricType.B7' | translate}}</option>
+                        <option value="B8">{{'niopdcgatewayApp.ColorimetricType.B8' | translate}}</option>
+                        <option value="B9">{{'niopdcgatewayApp.ColorimetricType.B9' | translate}}</option>
+                        <option value="B10">{{'niopdcgatewayApp.ColorimetricType.B10' | translate}}</option>
+                        <option value="C0">{{'niopdcgatewayApp.ColorimetricType.C0' | translate}}</option>
+                        <option value="C1">{{'niopdcgatewayApp.ColorimetricType.C1' | translate}}</option>
+                        <option value="C2">{{'niopdcgatewayApp.ColorimetricType.C2' | translate}}</option>
+                        <option value="C3">{{'niopdcgatewayApp.ColorimetricType.C3' | translate}}</option>
+                        <option value="C4">{{'niopdcgatewayApp.ColorimetricType.C4' | translate}}</option>
+                        <option value="C5">{{'niopdcgatewayApp.ColorimetricType.C5' | translate}}</option>
+                        <option value="C6">{{'niopdcgatewayApp.ColorimetricType.C6' | translate}}</option>
+                        <option value="C7">{{'niopdcgatewayApp.ColorimetricType.C7' | translate}}</option>
+                        <option value="C8">{{'niopdcgatewayApp.ColorimetricType.C8' | translate}}</option>
+                        <option value="C9">{{'niopdcgatewayApp.ColorimetricType.C9' | translate}}</option>
+                        <option value="C10">{{'niopdcgatewayApp.ColorimetricType.C10' | translate}}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.dry?.dirty && editForm.controls.dry?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.dry?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.milliPoor.gravimetric"
+                           for="field_gravimetric">Gravimetric</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="gravimetric"
+                           id="field_gravimetric"
+                           [(ngModel)]="milliPoor.gravimetric" required/>
+                    <div [hidden]="!(editForm.controls.gravimetric?.dirty && editForm.controls.gravimetric?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.gravimetric?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.gravimetric?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.milliPoor.date"
+                           for="field_date">Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disableTime]="true" [disabled]="isView" [rtlActive]="true" time="00:00:00"
+                                            id="field_date"
+                                            class="form-control"
+                                            name="date" [(ngModel)]="milliPoor.date"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div [hidden]="!(editForm.controls.date?.dirty && editForm.controls.date?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.date?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.date?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4" style="text-align: center;margin-top: auto">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.milliPoor.isSend"
+                           for="field_isSend">Is
+                        Send</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="isSend" id="field_isSend"
+                           [(ngModel)]="milliPoor.isSend"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

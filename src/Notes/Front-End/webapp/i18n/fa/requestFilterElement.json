@@ -1,0 +1,45 @@
+{
+    "niopdcgatewayApp": {
+        "requestFilterElement": {
+            "home": {
+                "title": "درخواست المنت فیلتر",
+                "createLabel": "Create a new Request Filter Element",
+                "createOrEditLabel": "Create or edit a Request Filter Element"
+            },
+            "delete": {
+                "question": "آیا از حذف این در خواست طمینان دارید؟"
+            },
+            "confirm": {
+                "question": "آیا از تایید این در خواست طمینان دارید؟"
+            },
+            "send": {
+                "question": "آیا از ارسال این در خواست طمینان دارید؟"
+            },
+            "detail": {
+                "title": "درخواست المنت فیلتر"
+            },
+            "filterLocation": "محل نصب فیلتر",
+            "productId": "فرآورده",
+            "maximumPressureDifference": "حداکثر اختلاف فشار PSI",
+            "elementRequestReason": "دلیل درخواست المنت",
+            "amountOfFuelPassed": "مقدار سوخت عبور کرده طی دوره تعویض المنت قبلی تا کنون(بر حسب لیتر)",
+            "requestStatus": "وضعیت درخواست",
+            "changeFilterElementRequestStatus": "وضعیت پاسخ",
+            "draftUser": "Draft User",
+            "confirmUser": "Confirm User",
+            "sendUser": "Send User",
+            "refuelCenter": "مرکز سوخت گیری",
+            "filter": "فیلتر",
+            "oilTank": "واحد"
+        }
+    },
+    "niopdcaoApp": {
+        "requestFilterElement": {
+            "created": "درخواست المنت فیلتر با موفقیت ایجاد شد.",
+            "updated": "درخواست المنت فیلتر با موفقیت ویرایش شد.",
+            "deleted": "درخواست المنت فیلتر با موفقیت حذف شد.",
+            "confirm": "درخواست المنت فیلتر با موفقیت تایید شد.",
+            "send": "درخواست المنت فیلتر با موفقیت ارسال شد."
+        }
+    }
+}

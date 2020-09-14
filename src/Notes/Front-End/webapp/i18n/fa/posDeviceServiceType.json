@@ -1,0 +1,8 @@
+{
+    "niopdcgatewayApp": {
+        "PosDeviceServiceType" : {
+            "SINGLE_PAY": "پرداخت تک حسابی",
+            "MULTI_PAY": "پرداخت چند حسابی"
+        }
+    }
+}

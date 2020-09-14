@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "ProductRateDifferenceType" : {
+            "null": "",
+            "EXIT_FROM_DEPOT": "EXIT_FROM_DEPOT",
+            "SELL": "SELL",
+            "SELL_AND_PRD": "SELL_AND_PRD"
+        }
+    }
+}

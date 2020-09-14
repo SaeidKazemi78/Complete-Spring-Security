@@ -1,0 +1,29 @@
+<form name="deleteForm" (ngSubmit)="confirmArchive(customer.id)">
+    <div class="modal-header">
+        <h4 class="modal-title" *ngIf="!customer.archive" jhiTranslate="entity.archive.title">Confirm delete
+            operation</h4>
+        <h4 class="modal-title" *ngIf="customer.archive" jhiTranslate="niopdcgatewayApp.customer.deArchive">Confirm
+            delete operation</h4>
+
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <p *ngIf="!customer.archive" jhiTranslate="niopdcgatewayApp.customer.question.archive"
+           [translateValues]="{id: customer.plaque ? customer.plaque : customer.plaqueTwo ? customer.plaqueTwo : customer.id}"></p>
+        <p *ngIf="customer.archive" jhiTranslate="niopdcgatewayApp.customer.question.deArchive"
+           [translateValues]="{id: customer.plaque ? customer.plaque : customer.plaqueTwo ? customer.plaqueTwo : customer.id}"></p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" class="btn btn-info">
+            <span class="fa fa-archive"></span>&nbsp;
+            <span *ngIf="!customer.archive" jhiTranslate="entity.action.archive">archive</span>
+            <span  *ngIf="customer.archive" jhiTranslate="entity.action.deArchive">archive</span>
+        </button>
+    </div>
+</form>

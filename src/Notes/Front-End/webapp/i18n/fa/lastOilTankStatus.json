@@ -1,0 +1,12 @@
+{
+    "niopdcgatewayApp": {
+        "lastOilTankStatus": {
+            "home": {
+                "title": "آخرین وضعیت واحد"
+            },
+            "oilTankTitle": "واحد",
+            "oilTankStatus": "آخرین وضعیت",
+            "lastDate": "تاریخ تغییر وضعیت"
+        }
+    }
+}

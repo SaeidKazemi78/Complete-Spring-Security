@@ -1,0 +1,31 @@
+
+{
+    "niopdcgatewayApp": {
+        "accountNumberFormat" : {
+            "home": {
+                "title": "Account Number Formats",
+                "createLabel": "Create a new Account Number Format",
+                "createOrEditLabel": "Create or edit a Account Number Format"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Account Number Format {{ id }}?"
+            },
+            "detail": {
+                "title": "Account Number Format"
+            },
+            "part1": "Part 1",
+            "part2": "Part 2",
+            "part3": "Part 3",
+            "part4": "Part 4",
+            "title": "Title",
+            "format": "Format"
+        }
+    },
+    "niopdcbaseApp": {
+        "accountNumberFormat" : {
+            "created": "A new Account Number Format is created with identifier {{ param }}",
+            "updated": "A Account Number Format is updated with identifier {{ param }}",
+            "deleted": "A Account Number Format is deleted with identifier {{ param }}"
+        }
+    }
+}

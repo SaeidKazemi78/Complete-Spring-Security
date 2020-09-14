@@ -1,0 +1,35 @@
+
+{
+    "niopdcgatewayApp": {
+        "metreLog" : {
+            "home": {
+                "title": "Metre Logs",
+                "createLabel": "Create a new Metre Log",
+                "createOrEditLabel": "Create or edit a Metre Log"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Metre Log {{ id }}?"
+            },
+            "detail": {
+                "title": "Metre Log"
+            },
+            "startMeter": "Start Meter",
+            "endMeter": "End Meter",
+            "amount": "Amount",
+            "registerDate": "Register Date",
+            "fuelType": "Fuel Type",
+            "draft": "Draft",
+            "transfer": "Transfer",
+            "transferPlatformToUnit": "Transfer Platform To Unit",
+            "logBook": "Log Book",
+            "metre": "Metre"
+        }
+    },
+    "niopdcaoApp": {
+        "metreLog" : {
+            "created": "A new Metre Log is created with identifier {{ param }}",
+            "updated": "A Metre Log is updated with identifier {{ param }}",
+            "deleted": "A Metre Log is deleted with identifier {{ param }}"
+        }
+    }
+}

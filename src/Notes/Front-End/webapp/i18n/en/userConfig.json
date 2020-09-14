@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "userConfig" : {
+            "home": {
+                "title": "User Configs",
+                "createLabel": "Create a new User Config",
+                "createOrEditLabel": "Create or edit a User Config"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete User Config {{ id }}?"
+            },
+            "detail": {
+                "title": "User Config"
+            },
+            "username": "Username",
+            "typeOfFuelReceipt": "Type Of Fuel Receipt",
+            "customer": "Customer",
+            "depot": "Depot",
+            "product": "Product"
+        }
+    },
+    "niopdcbaseApp": {
+        "userConfig" : {
+            "created": "A new User Config is created with identifier {{ param }}",
+            "updated": "A User Config is updated with identifier {{ param }}",
+            "deleted": "A User Config is deleted with identifier {{ param }}"
+        }
+    }
+}

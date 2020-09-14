@@ -1,0 +1,42 @@
+
+{
+    "niopdcgatewayApp": {
+        "changeFilterElement" : {
+            "home": {
+                "title": "Change Filter Elements",
+                "createLabel": "Create a new Change Filter Element",
+                "createOrEditLabel": "Create or edit a Change Filter Element"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Change Filter Element {{ id }}?"
+            },
+            "detail": {
+                "title": "Change Filter Element"
+            },
+            "conditionOfCartridges": "Condition Of Cartridges",
+            "conditionOfSeals": "Condition Of Seals",
+            "conditionOfCoating": "Condition Of Coating",
+            "pdGauge": "Pd Gauge",
+            "airEliminator": "Air Eliminator",
+            "reliefValue": "Relief Value",
+            "sampleDrainValue": "Sample Drain Value",
+            "namePlate": "Name Plate",
+            "requestStatus": "Request Status",
+            "draftUser": "Draft User",
+            "confirmUser": "Confirm User",
+            "sendUser": "Send User",
+            "description": "Description",
+            "pdReading": "Pd Reading",
+            "flowTest": "Flow Test",
+            "responseStatus": "Response Status",
+            "requestFilterElement": "Request Filter Element"
+        }
+    },
+    "niopdcaoApp": {
+        "changeFilterElement" : {
+            "created": "A new Change Filter Element is created with identifier {{ param }}",
+            "updated": "A Change Filter Element is updated with identifier {{ param }}",
+            "deleted": "A Change Filter Element is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,0 +1,38 @@
+
+{
+    "niopdcgatewayApp": {
+        "refuelCenter" : {
+            "home": {
+                "title": "RefuelCenters",
+                "createLabel": "Create a new RefuelCenter",
+                "createOrEditLabel": "Create or edit a RefuelCenter"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete RefuelCenter {{ id }}?"
+            },
+            "detail": {
+                "title": "RefuelCenter"
+            },
+            "persianTitle": "Persian Title",
+            "englishTitle": "English Title",
+            "code": "Code",
+            "locationId": "Location Id",
+            "fuelReceiptStartNumber": "Fuel Receipt Start Number",
+            "fuelReceiptEndNumber": "Fuel Receipt End Number",
+            "fuelReceiptCurrentNumber": "Fuel Receipt Current Number",
+            "wayBillStartNumber": "Way Bill Start Number",
+            "wayBillEndNumber": "Way Bill End Number",
+            "wayBillCurrentNumber": "Way Bill Current Number",
+            "regionId": "Region Id",
+            "transferType": "Transfer Type",
+            "targetRefuelCenters": "Target RefuelCenters"
+        }
+    },
+    "niopdcaoApp": {
+        "refuelCenter" : {
+            "created": "A new RefuelCenter is created with identifier {{ param }}",
+            "updated": "A RefuelCenter is updated with identifier {{ param }}",
+            "deleted": "A RefuelCenter is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "customerTypeProductConsumption" : {
+            "home": {
+                "title": "Customer Type Product Consumptions",
+                "createLabel": "Create a new Customer Type Product Consumption",
+                "createOrEditLabel": "Create or edit a Customer Type Product Consumption"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Customer Type Product Consumption {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer Type Product Consumption"
+            },
+            "customerType": "Customer Type",
+            "product": "Product",
+            "consumption": "Consumption"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerTypeProductConsumption" : {
+            "created": "A new Customer Type Product Consumption is created with identifier {{ param }}",
+            "updated": "A Customer Type Product Consumption is updated with identifier {{ param }}",
+            "deleted": "A Customer Type Product Consumption is deleted with identifier {{ param }}"
+        }
+    }
+}

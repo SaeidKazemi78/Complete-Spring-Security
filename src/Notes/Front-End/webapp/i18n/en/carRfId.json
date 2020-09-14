@@ -1,0 +1,31 @@
+
+{
+    "niopdcgatewayApp": {
+        "carRfId" : {
+            "home": {
+                "title": "Car Rf Ids",
+                "createLabel": "Create a new Car Rf Id",
+                "createOrEditLabel": "Create or edit a Car Rf Id"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Car Rf Id {{ id }}?"
+            },
+            "detail": {
+                "title": "Car Rf Id"
+            },
+            "code": "Code",
+            "active": "Active",
+            "price": "Price",
+            "buyDate": "Buy Date",
+            "customer": "Customer",
+            "tagRate": "Tag Rate"
+        }
+    },
+    "niopdcbaseApp": {
+        "carRfId" : {
+            "created": "A new Car Rf Id is created with identifier {{ param }}",
+            "updated": "A Car Rf Id is updated with identifier {{ param }}",
+            "deleted": "A Car Rf Id is deleted with identifier {{ param }}"
+        }
+    }
+}

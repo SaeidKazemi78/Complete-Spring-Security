@@ -1,0 +1,177 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="infringement.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="infringement.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.infringement.infringementType"
+                           for="field_infringementType">Title</label>
+                    <select class="form-control" name="infringementType"
+                            [(ngModel)]="infringement.infringementType" id="field_infringementType" [disabled]="isView" required>
+                        <option></option>
+                        <option
+                            value="EMBEDDED">{{'niopdcgatewayApp.infringementType.EMBEDDED' | translate}}</option>
+                        <option
+                            value="UNAUTHORIZED_BUCK">{{'niopdcgatewayApp.infringementType.UNAUTHORIZED_BUCK' | translate}}</option>
+                        <option
+                            value="CARRYING_STUFF">{{'niopdcgatewayApp.infringementType.CARRYING_STUFF' | translate}}</option>
+                        <option value="OTHER">{{'niopdcgatewayApp.infringementType.OTHER' | translate}}</option>
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.infringementType?.dirty && editForm.controls.infringementType?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.infringementType?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="form-control-label"
+                       jhiTranslate="niopdcgatewayApp.infringement.handlingReference"
+                       for="field_handlingReference">handlingReference</label>
+                <div class="form-group">
+                    <input type="text" class="form-control"  [disabled]="isView"
+                           [(ngModel)]="infringement.handlingReference" name="handlingReference"
+                           id="field_handlingReference" [required]="true">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label jhiTranslate="niopdcgatewayApp.infringement.locationId"
+                       for="field_locationId">Location</label>
+                <p-dropdown
+                    [(ngModel)]="infringement.locationId"  [disabled]="isView"
+                    [options]="customLocation | sortBy: 'label'"
+                    class="form-control" [required]="true"
+                    id="field_locationId"
+                    [defaultLabel]="'global.messages.info.choose' | translate"
+                    [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                    ngDefaultControl
+                    name="location"
+                >
+                </p-dropdown>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.infringement.productTitle"
+                           for="field_product">productTitle</label>
+                    <p-dropdown [options]="customProducts" [(ngModel)]="infringement.productId"
+                                [filter]="true"
+                                class="form-control"
+                                filterBy="label"
+                                id="field_product"
+                                name="product"
+                                ngDefaultControl
+                                required
+                                [disabled]="isView">
+                    </p-dropdown>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-control-label"
+                       jhiTranslate="niopdcgatewayApp.infringement.amount"
+                       for="field_amount">amount</label>
+                <div class="form-group">
+                    <input type="text" class="form-control"
+                           [(ngModel)]="infringement.amount" name="amount"  [disabled]="isView"
+                           id="field_amount" [numeric]="true">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-control-label"
+                       jhiTranslate="niopdcgatewayApp.infringement.ownerFirstName"
+                       for="field_ownerFirstName">ownerFirstName</label>
+                <div class="form-group">
+                    <input type="text" class="form-control" [disabled]="isView"
+                           [(ngModel)]="infringement.ownerFirstName" name="ownerFirstName"
+                           id="field_ownerFirstName" [required]="true">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-control-label"
+                       jhiTranslate="niopdcgatewayApp.infringement.ownerLastName"
+                       for="field_ownerLastName">ownerLastName</label>
+                <div class="form-group">
+                    <input type="text" class="form-control"
+                           [(ngModel)]="infringement.ownerLastName" name="ownerLastName"  [disabled]="isView"
+                           id="field_ownerLastName" [required]="true">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-control-label"
+                       jhiTranslate="niopdcgatewayApp.infringement.ownerNationalCode"
+                       for="field_ownerNationalCode">ownerNationalCode</label>
+                <div class="form-group" >
+                    <input type="text"  [disabled]="isView"  class="form-control"
+                           [(ngModel)]="infringement.ownerNationalCode" name="ownerNationalCode"
+                           id="field_ownerNationalCode" [required]="true"  [numeric]="true" minlength="10" maxlength="10" >
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-control-label"
+                       jhiTranslate="niopdcgatewayApp.infringement.driverFirstName"
+                       for="field_driverFirstName">driverFirstName</label>
+                <div class="form-group">
+                    <input type="text" [disabled]="isView"  class="form-control"
+                           [(ngModel)]="infringement.driverFirstName" name="driverFirstName"
+                           id="field_driverFirstName" [required]="true">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-control-label"
+                       jhiTranslate="niopdcgatewayApp.infringement.driverLastName"
+                       for="field_driverLastName">driverLastName</label>
+                <div class="form-group">
+                    <input type="text"  [disabled]="isView" class="form-control"
+                           [(ngModel)]="infringement.driverLastName" name="driverLastName"
+                           id="field_driverLastName" [required]="true">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label class="form-control-label"
+                       jhiTranslate="niopdcgatewayApp.infringement.driverNationalCode"
+                       for="field_driverNationalCode">driverNationalCode</label>
+                <div class="form-group">
+                    <input type="text" class="form-control"  [disabled]="isView"
+                           [(ngModel)]="infringement.driverNationalCode" name="driverNationalCode"
+                           id="field_driverNationalCode" [required]="true" [numeric]="true" minlength="10" maxlength="10">
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label class="form-control-label"><span
+                    jhiTranslate="niopdcgatewayApp.infringement.description"></span> </label>
+                <textarea placeholder="{{'niopdcgatewayApp.infringement.description' | translate}}"
+                          minlength="3" class="form-control ng-untouched ng-pristine ng-invalid" id="field_keyMap_value"
+                          name="keyMap" type="text" [(ngModel)]="infringement.description"  [disabled]="isView" >
+
+            </textarea>
+            </div >
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving || fileUploading"
+                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

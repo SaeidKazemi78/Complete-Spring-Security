@@ -1,0 +1,85 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="voucherPayment.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="voucherPayment.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherPayment.locationId"
+                           for="field_locationId">Location Id</label>
+                    <input-location-selector
+                        [idSelector]="true"
+                        (ngModelChange)="locationChanged($event)"
+                        [oneSelection]="true"
+                        [selectByPriority]="true"
+                        class="form-control" id="field_locationId" name="field_locationId"
+                        [(ngModel)]="voucherPayment.locationId"
+                        required
+                    >
+                    </input-location-selector>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.voucherPayment.customer"
+                           for="field_customer">customer</label>
+
+                    <p-multiSelect class="form-control" id="field_customer"
+                                   [options]="customers"
+                                   [disabled]="isView"
+                                   name="field_customer"
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                   [(ngModel)]="voucherPayment.customerIds"
+                                   [ngModelOptions]="{standalone: true}"
+                                   required
+                    ></p-multiSelect>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.voucherPayment.voucherType"
+                           for="field_voucherType">Voucher Type</label>
+                    <select class="form-control" id="field_voucherType" name="voucherType" [disabled]="isView"
+                            [(ngModel)]="voucherPayment.voucherTypeId" required>
+                        <option *ngIf="!editForm.value.voucherType" [ngValue]="null" selected></option>
+                        <option [ngValue]="voucherTypeOption.id"
+                                *ngFor="let voucherTypeOption of vouchertypes; trackBy: trackVoucherTypeById">
+                            {{voucherTypeOption.voucherTypeGroupTitle+'/'+voucherTypeOption.title}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.voucherType?.dirty && editForm.controls.voucherType?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.voucherType?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

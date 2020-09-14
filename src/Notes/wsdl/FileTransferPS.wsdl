@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WL5G3N0:definitions targetNamespace="http://web" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/" xmlns:WL5G3N1="http://www.w3.org/2001/XMLSchema" xmlns:WL5G3N2="java:web.info" xmlns:WL5G3N3="http://web" xmlns:WL5G3N4="http://schemas.xmlsoap.org/wsdl/soap/">
+  <WL5G3N0:types>
+    <WL5G3N1:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="java:web.info" xmlns:conv="http://www.openuri.org/2002/04/wsdl/conversation/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap12enc="http://www.w3.org/2003/05/soap-encoding" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:stns="java:web.info" xmlns:tns="http://web" xmlns:wsr="http://www.openuri.org/2002/10/soap/reliability/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <WL5G3N1:complexType name="TransferInfo">
+        <WL5G3N1:sequence>
+          <WL5G3N1:element maxOccurs="1" minOccurs="1" name="data" nillable="true" type="xsd:string">
+     </WL5G3N1:element>
+          <WL5G3N1:element maxOccurs="1" minOccurs="1" name="errMsg" nillable="true" type="xsd:string">
+     </WL5G3N1:element>
+          <WL5G3N1:element maxOccurs="1" minOccurs="1" name="filename" nillable="true" type="xsd:string">
+     </WL5G3N1:element>
+          <WL5G3N1:element maxOccurs="1" minOccurs="1" name="index" type="xsd:int">
+     </WL5G3N1:element>
+        </WL5G3N1:sequence>
+      </WL5G3N1:complexType>
+    </WL5G3N1:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="isActive"/>
+  <WL5G3N0:message name="isActiveResponse">
+    <WL5G3N0:part name="result" type="WL5G3N1:boolean"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="getVersion"/>
+  <WL5G3N0:message name="getVersionResponse">
+    <WL5G3N0:part name="result" type="WL5G3N1:string"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="upload">
+    <WL5G3N0:part name="string" type="WL5G3N1:string"/>
+    <WL5G3N0:part name="string0" type="WL5G3N1:string"/>
+    <WL5G3N0:part name="transferInfo" type="WL5G3N2:TransferInfo"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="uploadResponse">
+    <WL5G3N0:part name="result" type="WL5G3N1:string"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="download">
+    <WL5G3N0:part name="string" type="WL5G3N1:string"/>
+    <WL5G3N0:part name="string0" type="WL5G3N1:string"/>
+  </WL5G3N0:message>
+  <WL5G3N0:message name="downloadResponse">
+    <WL5G3N0:part name="result" type="WL5G3N2:TransferInfo"/>
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="FileTransferPort">
+    <WL5G3N0:operation name="isActive">
+      <WL5G3N0:input message="WL5G3N3:isActive"/>
+      <WL5G3N0:output message="WL5G3N3:isActiveResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getVersion">
+      <WL5G3N0:input message="WL5G3N3:getVersion"/>
+      <WL5G3N0:output message="WL5G3N3:getVersionResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="upload">
+      <WL5G3N0:input message="WL5G3N3:upload"/>
+      <WL5G3N0:output message="WL5G3N3:uploadResponse"/>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="download">
+      <WL5G3N0:input message="WL5G3N3:download"/>
+      <WL5G3N0:output message="WL5G3N3:downloadResponse"/>
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="FileTransferPort" type="WL5G3N3:FileTransferPort">
+    <WL5G3N4:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <WL5G3N0:operation name="isActive">
+      <WL5G3N4:operation style="rpc"/>
+      <WL5G3N0:input>
+        <WL5G3N4:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://web" use="encoded"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N4:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://web" use="encoded"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="getVersion">
+      <WL5G3N4:operation style="rpc"/>
+      <WL5G3N0:input>
+        <WL5G3N4:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://web" use="encoded"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N4:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://web" use="encoded"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="upload">
+      <WL5G3N4:operation style="rpc"/>
+      <WL5G3N0:input>
+        <WL5G3N4:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://web" use="encoded"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N4:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://web" use="encoded"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+    <WL5G3N0:operation name="download">
+      <WL5G3N4:operation style="rpc"/>
+      <WL5G3N0:input>
+        <WL5G3N4:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://web" use="encoded"/>
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N4:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://web" use="encoded"/>
+      </WL5G3N0:output>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="FileTransfer">
+    <WL5G3N0:documentation>OSB Service</WL5G3N0:documentation>
+    <WL5G3N0:port binding="WL5G3N3:FileTransferPort" name="FileTransferPort">
+      <WL5G3N4:address location="http://10.0.233.254:80/sabteahval/proxy/FileTransferPS"/>
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

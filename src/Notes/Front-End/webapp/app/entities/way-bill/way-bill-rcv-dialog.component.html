@@ -1,0 +1,47 @@
+<form name="editForm" (ngSubmit)="confirmDelete(wayBill.dayDepotId)" #editForm="ngForm">
+    <div class="modal-header">
+        <h4 class="modal-title" jhiTranslate="entity.rcv.title">Confirm delete operation</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.momentSheet.startTime"
+                           for="field_startTime">Register Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [rtlActive]="true" time="00:00:00"
+
+                                            id="field_startTime"
+                                            class="form-control"
+                                            name="startTime" [(ngModel)]="startTime"
+                                            required></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.momentSheet.endTime"
+                           for="field_endTime">Register Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [rtlActive]="true" time="23:59:00"
+                                            id="field_endTime"
+                                            class="form-control"
+                                            name="endTime" [(ngModel)]="endTime"
+                                            required></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" class="btn btn-success" [disabled]="editForm.form.invalid">
+            <span class="fa fa-remove"></span>&nbsp;<span jhiTranslate="entity.action.confirm">Delete</span>
+        </button>
+    </div>
+</form>

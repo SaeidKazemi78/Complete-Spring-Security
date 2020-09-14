@@ -1,0 +1,147 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="role.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.role.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="role.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.role.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.role.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.role.name"
+                                   for="field_name">Name</label>
+                            <input type="text" class="form-control" name="name" id="field_name"
+                                   [(ngModel)]="role.name"
+                                   required minlength="3" maxlength="100"/>
+                            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.name?.errors?.required"
+                                       jhiTranslate="entity.validation.required">
+                                    This field is required.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.name?.errors?.minlength"
+                                       jhiTranslate="entity.validation.minlength"
+                                       [translateValues]="{ min: 3 }">
+                                    This field is required to be at least 3 characters.
+                                </small>
+                                <small class="form-text text-danger"
+                                       [hidden]="!editForm.controls.name?.errors?.maxlength"
+                                       jhiTranslate="entity.validation.maxlength"
+                                       [translateValues]="{ max: 42 }">
+                                    This field cannot be longer than 42 characters.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.role.userType"
+                               for="field_userType">userType</label>
+                        <select [disabled]="isView" class="form-control" name="userType"
+                                (ngModelChange)="onChangeUserType($event)"
+                                [(ngModel)]="role.userType" id="field_userType" required>
+                            <option *ngFor="let ut of userTypes"
+                                    [value]="ut">{{'niopdcgatewayApp.userType.' + ut| translate}}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.role.roleLevel"
+                               for="field_roleLevel">roleLevel</label>
+                        <select [disabled]="isView" class="form-control" name="roleLevel"
+                                [(ngModel)]="role.roleLevelId" id="field_roleLevel">
+                            <option [value]="null" label=""></option>
+                            <option *ngFor="let ut of roleLevels" [value]="ut.id" [label]="ut.name"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 vertical-center-group" *jhiHasAnyAuthority="['ROLE_ADMIN']">
+                        <div class="form-group">
+                            <input type="checkbox" class="form-control" name="defaultRole" id="field_defaultRole"
+                                   [(ngModel)]="role.defaultRole"/>
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.role.defaultRole"
+                                   for="field_defaultRole">Activated</label>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 vertical-center-group">
+                        <div class="form-group">
+                            <input type="checkbox" class="form-control" name="activated" id="field_activated"
+                                   [(ngModel)]="role.activated"/>
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.role.activated"
+                                   for="field_activated">Activated</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="form-group">
+                            <label jhiTranslate="niopdcgatewayApp.role.childRoles" for="childRoles">Target
+                                Airports</label>
+                            <p-multiSelect [options]="roles" [(ngModel)]="selectedRoles" id="childRoles"
+                                           [filter]="true"
+                                           [disabled]="isView"
+                                           class="form-control"
+                                           (onChange)="onChangeRoles($event.value)"
+                                           filterBy="label"
+                                           name="productId"
+                                           ngDefaultControl
+                            >
+                            </p-multiSelect>
+                        </div>
+                        <div
+                            [hidden]="!(editForm.controls.targetAirports?.dirty && editForm.controls.targetAirports?.invalid)">
+                            <small class="form-text text-danger"
+                                   [hidden]="!editForm.controls.targetAirports?.errors?.required"
+                                   jhiTranslate="entity.validation.required">
+                                This field is required.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <label jhiTranslate="niopdcgatewayApp.role.authorities" for="field_authorities">Authorities</label>
+                <div class="form-group">
+                    <app-authority-selector class="form-control" id="field_authorities"
+                                            style="height: unset"
+                                            [disabled]="isView"
+                                            (onAuthorities)="authoritiesSelected($event)"
+                                            (onDenyAuthorities)="denyAuthoritiesSelected($event)"
+                                            [authGroup]="parentAuthorities"
+                                            [authorities]="authorities1"
+                                            [denyAuthorities]="denyAuthorities1"
+                                            [enableAuthorities]="canAuth">
+                    </app-authority-selector>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

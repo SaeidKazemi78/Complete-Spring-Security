@@ -1,0 +1,92 @@
+<form name="editForm" role="form" novalidate #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="isRequest" class="modal-title" id="viewRequest" jhiTranslate="entity.action.viewRequest">View</h4>
+        <h4 *ngIf="!isRequest" class="modal-title" id="viewResponse" jhiTranslate="entity.action.viewResponse">View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.actionLog.url"
+                           for="field_url">url</label>
+                    <input dir="ltr" type="text" class="form-control" name="url" id="field_url" disabled
+                           [(ngModel)]="actionLog.url"/>
+                </div>
+            </div>
+            <div class="col-md-3" *ngIf="isRequest">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.actionLog.method"
+                           for="field_method">method</label>
+                    <input type="text" class="form-control" name="method" id="field_method" disabled
+                           [(ngModel)]="actionLog.method"/>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.actionLog.username"
+                           for="field_username">username</label>
+                    <input type="text" class="form-control" name="username" id="field_username" disabled
+                           [(ngModel)]="actionLog.username"/>
+                </div>
+            </div>
+            <div class="col-md-3" *ngIf="!isRequest">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.actionLog.status"
+                           for="field_status">status</label>
+                    <input type="text" class="form-control" name="status" id="field_status" disabled
+                           [(ngModel)]="actionLog.status"/>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.actionLog.remoteAddress"
+                           for="field_remoteAddress">remoteAddress</label>
+                    <input type="text" class="form-control" name="remoteAddress" id="field_remoteAddress" disabled
+                           [(ngModel)]="actionLog.remoteAddress"/>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.actionLog.createdDate"
+                           for="field_createdDate">createdDate</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [rtlActive]="true" id="field_createdDate" disabled
+                                            class="form-control"
+                                            name="createdDate" [(ngModel)]="actionLog.createdDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" *ngIf="!isRequest">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.actionLog.downloadResponseBody"
+                           for="field_downloadResponseBody">downloadResponseBody</label>
+                    <button type="button" class="btn btn-success" (click)="downloadResponseBody(actionLog.id)">
+                        <span class="fa fa-download"></span>&nbsp;<span jhiTranslate="entity.action.download">download</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-12" *ngIf="isRequest">
+                <div class="form-group">
+                    <p-accordion>
+                        <p-accordionTab header="{{'niopdcgatewayApp.actionLog.requestBody' | translate}}">
+                            <ngx-json-viewer style="text-align: left;direction: ltr;" [json]="requestBody"></ngx-json-viewer>
+                        </p-accordionTab>
+                    </p-accordion>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+    </div>
+</form>

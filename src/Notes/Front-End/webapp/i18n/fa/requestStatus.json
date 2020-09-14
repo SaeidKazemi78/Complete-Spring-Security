@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "RequestStatus" : {
+            "null": "بررسی نشده",
+            "DRAFT": "پیشنویس",
+            "CONFIRM": "تایید",
+            "SEND": "ارسال"
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "RateGroupType" : {
+            "null": "",
+            "SUBSIDY": "SUBSIDY",
+            "NON_SUBSIDY": "NON_SUBSIDY"
+        }
+    }
+}

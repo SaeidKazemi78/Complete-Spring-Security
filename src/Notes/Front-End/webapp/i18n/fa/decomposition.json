@@ -1,0 +1,13 @@
+
+{
+    "niopdcgatewayApp": {
+        "decomposition" : {
+            "home": {
+                "title": "تجزیه فروش",
+                "consumptionTitle":"نوع مصرف"
+            }
+
+        }
+    }
+
+}

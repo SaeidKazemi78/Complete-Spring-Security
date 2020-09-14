@@ -1,0 +1,31 @@
+{
+    "niopdcgatewayApp": {
+        "taxRate": {
+            "home": {
+                "homeTitle": "خانه",
+                "title": "فاکتورهای نرخی",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ایجاد یا ویرایش",
+                "search": "جستجو"
+            },
+            "delete": {
+                "question": "آیا برای حذف این فاکتور نرخی مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "فاکتورهای نرخی"
+            },
+            "startDate": "تاریخ شروع",
+            "finishDate": "تاریخ پایان",
+            "taxRate": "نرخ مالیات",
+            "complicationsRate": "نرخ عوارض",
+            "valueAddedTaxRate": "نرخ ماليات بر ارزش افزوده "
+        }
+    },
+    "niopdcrateApp": {
+        "taxRate": {
+            "created": "فاکتور نرخی با موفقیت ایجاد شد.",
+            "updated": "فاکتور نرخی با موفقیت ویرایش شد.",
+            "deleted": "فاکتور نرخی با موفقیت حذف شد."
+        }
+    }
+}

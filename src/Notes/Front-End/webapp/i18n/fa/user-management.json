@@ -1,0 +1,45 @@
+{
+    "userManagement": {
+        "home": {
+            "title": "کاربران",
+            "createLabel": "ایجاد کاربر",
+            "createOrEditLabel": "ویرایش کاربر",
+            "view": "نمایش کاربر"
+        },
+        "created": "یک کاربر جدید  ایجاد شد",
+        "updated": "یک کاربر با شناسه {{ param }} بروز رسانی شد",
+        "deleted": "یک کاربر با شناسه {{ param }} حذف شد",
+        "delete": {
+            "question": "آیا مایل به حذف کاربر {{ login }} هستید؟"
+        },
+        "detail": {
+            "title": "کاربر"
+        },
+        "login": "نام کاربری",
+        "firstName": "نام",
+        "lastName": "نام خانوادگی",
+        "fullName": "نام و نام خانوادگی",
+        "nationalCode": "کد ملی",
+        "personnelCode": "شماره پرسنلی",
+        "cellPhone": "تلفن همراه",
+        "email": "ایمیل",
+        "activated": "فعال شده",
+        "activatedTrue": "فعال",
+        "activatedFalse": "غیر فعال",
+        "deactivated": "غیر فعال شده",
+        "role": "نقش ها",
+        "group": "گروه دسترسی",
+        "profiles": "پروفایل ها",
+        "langKey": "زبان",
+        "createdBy": "ایجاد شده با",
+        "createdDate": "زمان ایجاد",
+        "locations": "دسترسی",
+        "lastModifiedBy": "تغییر کرده با",
+        "lastModifiedDate": "آخرین زمان تغییر",
+        "userType": "سطح کاربر",
+        "adminRole": "دسترسی کامل",
+        "userInfo": "اطلاعات کاربری",
+        "userAccess": "دسترسی کاربر",
+        "grantable": "نقش های قابل اعطا"
+    }
+}

@@ -1,0 +1,78 @@
+
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="customerCapacity.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="customerCapacity.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-12">
+
+
+
+                <!--<div class="form-group">-->
+                    <!--<label class="form-control-label" jhiTranslate="niopdcgatewayApp.customerCapacity.customer" for="field_customer">Customer</label>-->
+                    <!--<select class="form-control" id="field_customer" name="customer" [(ngModel)]="customerCapacity.customerId"  required>-->
+                        <!--<option *ngIf="!editForm.value.customer" [ngValue]="null" selected></option>-->
+                        <!--<option [ngValue]="customerOption.id" *ngFor="let customerOption of customers; trackBy: trackCustomerById">{{customerOption.id}}</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+                <div [hidden]="!(editForm.controls.customer?.dirty && editForm.controls.customer?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.customer?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customerCapacity.productGroup" for="field_productGroup">Product Group</label>
+                    <select [disabled]="isView" class="form-control" id="field_productGroup" name="productGroup" [(ngModel)]="customerCapacity.productGroupId"  required>
+                        <option *ngIf="!editForm.value.productGroup" [ngValue]="null" selected></option>
+                        <option [ngValue]="productGroupOption.id" *ngFor="let productGroupOption of productgroups; trackBy: trackProductGroupById">{{productGroupOption.title}}</option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.productGroup?.dirty && editForm.controls.productGroup?.invalid)">
+                    <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.productGroup?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customerCapacity.capacity" for="field_capacity">Capacity</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="capacity" id="field_capacity"
+                           [(ngModel)]="customerCapacity.capacity" required />
+                    <div [hidden]="!(editForm.controls.capacity?.dirty && editForm.controls.capacity?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.capacity?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.capacity?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

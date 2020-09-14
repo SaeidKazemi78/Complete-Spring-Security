@@ -1,0 +1,34 @@
+{
+    "niopdcgatewayApp": {
+        "productTaxRate": {
+            "home": {
+                "homeTitle": "خانه",
+                "productTitle":"فرآورده",
+                "title": "مالیات فرآورده ها",
+                "createLabel": "ایجاد",
+                "createOrEditLabel": "ایجاد یا ویرایش",
+                "search": "جستجو"
+            },
+            "delete": {
+                "question": "آیا برای حذف این مالیات فرآورده ها مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "مالیات فرآورده ها"
+            },
+            "startDate": "تاریخ شروع",
+            "finishDate": "تاریخ پایان",
+            "taxRate": "مالیات",
+            "complicationsRate": "عوارض",
+            "product": "فرآورده",
+            "rateType": "نوع نرخ",
+            "impliedTax":"مالیات ضمنی"
+        }
+    },
+    "niopdcbaseApp": {
+        "productTaxRate": {
+            "created": "مالیات فرآورده با موفقیت  ایجاد شد.",
+            "updated": "مالیات فرآورده با موفقیت  ویرایش شد.",
+            "deleted": "مالیات فرآورده با موفقیت  حذف شد."
+        }
+    }
+}

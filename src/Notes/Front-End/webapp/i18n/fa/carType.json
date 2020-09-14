@@ -1,0 +1,27 @@
+
+{
+    "niopdcgatewayApp": {
+        "carType" : {
+            "home": {
+                "title": "انواع ماشین",
+                "createLabel": "ایجاد نوع ماشین",
+                "createOrEditLabel": "ویرایش نوع ماشین",
+                "view":"نمایش"
+            },
+            "delete": {
+                "question": "آیا برای حذف نوع ماشین مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "نوع ماشین"
+            },
+            "title": "عنوان"
+        }
+    },
+    "niopdcbaseApp": {
+        "carType" : {
+            "created": "نوع ماشین با موفقیت ایجاد شد.",
+            "updated": "نوع ماشین با موفقیت ویرایش شد.",
+            "deleted": "نوع ماشین با موفقیت حذف شد."
+        }
+    }
+}

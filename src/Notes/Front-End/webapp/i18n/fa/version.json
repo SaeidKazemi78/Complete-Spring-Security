@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "version" : {
+            "home": {
+                "title": "نسخه ها",
+                "createLabel": "ایجاد نسخه",
+                "createOrEditLabel": "ویرایش نسخه"
+            },
+            "delete": {
+                "question": "آیا برای حذف نسخه مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "نسخه"
+            },
+            "title": "عنوان",
+            "versionDate": "تاریخ نسخه",
+            "versionNo": "شماره نسخه",
+            "showVersion": "نمایش به صورت پیشفرض",
+            "appChangeLast": "آخرین تغییرات سامانه",
+            "description": "توضیحات ",
+            "created": "نسخه با موفقیت ایجاد شد.",
+            "updated": "نسخه با موفقیت ویرایش شد.",
+            "deleted": "نسخه با موفقیت حذف شد."
+        }
+    },
+    "version": ""
+}

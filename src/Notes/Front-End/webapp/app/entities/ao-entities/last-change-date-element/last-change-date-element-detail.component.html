@@ -1,0 +1,44 @@
+<div *ngIf="lastChangeDateElement">
+    <h2><span jhiTranslate="niopdcgatewayApp.lastChangeDateElement.detail.title">Last Change Date Element</span>
+        {{lastChangeDateElement.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="niopdcgatewayApp.lastChangeDateElement.currentModel">Current Model</span></dt>
+        <dd>
+            <span>{{lastChangeDateElement.currentModel}}</span>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.lastChangeDateElement.lastChangeDate">Last Change Date</span></dt>
+        <dd>
+            <span>{{lastChangeDateElement.lastChangeDate | date:'medium'}}</span>
+        </dd>
+        <dt><span
+            jhiTranslate="niopdcgatewayApp.lastChangeDateElement.requestFilterElement">Request Filter Element</span>
+        </dt>
+        <dd>
+            <div *ngIf="lastChangeDateElement.requestFilterElementId">
+                <a [routerLink]="['/request-filter-element', lastChangeDateElement.requestFilterElementId]">{{lastChangeDateElement.requestFilterElementId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="niopdcgatewayApp.lastChangeDateElement.element">Element</span></dt>
+        <dd>
+            <div *ngIf="lastChangeDateElement.elementId">
+                <a [routerLink]="['/element', lastChangeDateElement.elementId]">{{lastChangeDateElement.elementId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'last-change-date-element/'+ lastChangeDateElement.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

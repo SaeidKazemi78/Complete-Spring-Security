@@ -1,0 +1,27 @@
+
+{
+    "niopdcgatewayApp": {
+        "productUnit" : {
+            "home": {
+                "title": "Product Units",
+                "createLabel": "Create a new Product Unit",
+                "createOrEditLabel": "Create or edit a Product Unit"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Product Unit {{ id }}?"
+            },
+            "detail": {
+                "title": "Product Unit"
+            },
+            "title": "Title",
+            "code": "Code"
+        }
+    },
+    "niopdcbaseApp": {
+        "productUnit" : {
+            "created": "A new Product Unit is created with identifier {{ param }}",
+            "updated": "A Product Unit is updated with identifier {{ param }}",
+            "deleted": "A Product Unit is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "niopdcgatewayApp": {
+        "totalSell": {
+            "home": {
+                "title": "جمع فروش"
+            },
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "day": "روز",
+            "productCode": "کد فرآورده",
+            "productName": "نام فرآورده",
+            "airportName": "مرکز سوختگیری",
+            "amount": "مقدار",
+            "count": "تعداد",
+            "price": "مبلغ",
+            "fuelType": "نوع عملیات"
+        }
+    }
+}

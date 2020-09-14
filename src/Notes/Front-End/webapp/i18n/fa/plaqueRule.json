@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "plaqueRule" : {
+            "home": {
+                "title": "قوانین پلاک",
+                "createLabel": "Create a new Plaque Rule",
+                "createOrEditLabel": "Create or edit a Plaque Rule",
+                "plaqueTitle":"پلاک"
+            },
+            "delete": {
+                "question": "آیا برای حذف قانون پلاک مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "Plaque Rule"
+            },
+            "digit": "تعداد حرف یا رقم",
+            "priority": "اولویت",
+            "digitType": "نوع",
+            "plaque": "پلاک"
+        }
+    },
+    "niopdcbaseApp": {
+        "plaqueRule" : {
+            "created": "قانون پلاک با موفقیت ایجاد شد.",
+            "updated": "قانون پلاک با موفقیت ویرایش شد.",
+            "deleted": "قانون پلاک با موفقیت حذف شد."
+        }
+    }
+}

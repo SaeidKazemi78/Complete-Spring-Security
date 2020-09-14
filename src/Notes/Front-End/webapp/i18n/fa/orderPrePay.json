@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "orderPrePay" : {
+            "niopdcBankAccountTypeTitle": "نوع حساب",
+            "price": "مبلغ",
+            "remainPrice": "مبلغ قابل پرداخت",
+            "status": "وضعیت",
+            "receiptNumber": "شماره فیش"
+        }
+    }
+}

@@ -1,0 +1,32 @@
+
+{
+    "niopdcgatewayApp": {
+        "sellContractCustomer" : {
+            "home": {
+                "title": "Sell Contract Customers",
+                "createLabel": "Create a new Sell Contract Customer",
+                "createOrEditLabel": "Create or edit a Sell Contract Customer"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Sell Contract Customer {{ id }}?"
+            },
+            "detail": {
+                "title": "Sell Contract Customer"
+            },
+            "hasTransport": "Has Transport",
+            "startDate": "Start Date",
+            "active": "Active",
+            "sellContract": "Sell Contract",
+            "customer": "Customer",
+            "location": "Location",
+            "sellContractProduct": "Sell Contract Product"
+        }
+    },
+    "niopdcbaseApp": {
+        "sellContractCustomer" : {
+            "created": "A new Sell Contract Customer is created with identifier {{ param }}",
+            "updated": "A Sell Contract Customer is updated with identifier {{ param }}",
+            "deleted": "A Sell Contract Customer is deleted with identifier {{ param }}"
+        }
+    }
+}

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="sajad" id="1546078430970-1" runAlways="true">
+        <sql>
+            IF EXISTS (
+            SELECT type_desc, type
+            FROM sys.procedures WITH(NOLOCK)
+            WHERE NAME = 'location_access_procedures'
+            AND type = 'P'
+            )
+            DROP PROCEDURE dbo.location_access_procedures
+        </sql>
+    </changeSet>
+    <changeSet author="sajad" id="1546078430970-2" runAlways="false">
+        <sql>
+            CREATE PROCEDURE dbo.location_access_procedures AS
+            -- location
+            insert into location_access
+            select distinct v.id, v.username
+            from location_view v
+            left join location_access a on (
+            v.id = a.id and
+            v.username = a.username
+            )
+            where a.id is null
+
+            delete a from location_view v
+            right join location_access a on (
+            v.id = a.id and
+            v.username = a.username
+            )
+            where v.id is null
+        </sql>
+    </changeSet>
+    <changeSet author="sajad" id="1546078430970-3" runAlways="true">
+        <sql>
+            CREATE PROCEDURE dbo.location_access_procedures AS
+            -- location
+            insert into location_access
+            select distinct v.id, v.username
+            from location_view v
+            left join location_access a on (
+            v.id = a.id and
+            v.username = a.username
+            )
+            where a.id is null
+
+            delete a from location_view v
+            right join location_access a on (
+            v.id = a.id and
+            v.username = a.username
+            )
+            where v.id is null;
+            select 1;
+        </sql>
+    </changeSet>
+    <changeSet author="sajad" id="1546078430970-200" runAlways="true">
+        <sql>
+            exec location_access_procedures
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

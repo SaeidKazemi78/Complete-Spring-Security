@@ -1,0 +1,11 @@
+{
+    "niopdcgatewayApp": {
+        "ConfigType" : {
+            "null": "",
+            "BOUNDARY_SELL": "فروش مرزی",
+            "NORMAL_SELL": "فروش",
+            "NIOPDC_AO": "عملیات",
+            "INVOICE":"سیاهه فروش"
+        }
+    }
+}

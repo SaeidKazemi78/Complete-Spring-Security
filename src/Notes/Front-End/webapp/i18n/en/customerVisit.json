@@ -1,0 +1,27 @@
+
+{
+    "niopdcgatewayApp": {
+        "customerVisit" : {
+            "home": {
+                "title": "Customer Visits",
+                "createLabel": "Create a new Customer Visit",
+                "createOrEditLabel": "Create or edit a Customer Visit"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Customer Visit {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer Visit"
+            },
+            "description": "Description",
+            "customer": "Customer"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerVisit" : {
+            "created": "A new Customer Visit is created with identifier {{ param }}",
+            "updated": "A Customer Visit is updated with identifier {{ param }}",
+            "deleted": "A Customer Visit is deleted with identifier {{ param }}"
+        }
+    }
+}

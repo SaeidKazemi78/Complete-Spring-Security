@@ -1,0 +1,39 @@
+
+{
+    "niopdcgatewayApp": {
+        "customerCredit" : {
+            "home": {
+                "title": "Customer Credits",
+                "createLabel": "Create a new Customer Credit",
+                "createOrEditLabel": "Create or edit a Customer Credit"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Customer Credit {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer Credit"
+            },
+            "startDate": "Start Date",
+            "finishDate": "Finish Date",
+            "exportationDate": "Exportation Date",
+            "creditNumber": "Credit Number",
+            "currentCredit": "Current Credit",
+            "credit": "Credit",
+            "currentAmount": "Current Amount",
+            "amount": "Amount",
+            "currencyId": "Currency Id",
+            "currencyRateGroupId": "Currency Rate Group Id",
+            "customer": "Customer",
+            "parentBuyType": "Parent Buy Type",
+            "person": "Person",
+            "product": "Product"
+        }
+    },
+    "niopdcbaseApp": {
+        "customerCredit" : {
+            "created": "A new Customer Credit is created with identifier {{ param }}",
+            "updated": "A Customer Credit is updated with identifier {{ param }}",
+            "deleted": "A Customer Credit is deleted with identifier {{ param }}"
+        }
+    }
+}

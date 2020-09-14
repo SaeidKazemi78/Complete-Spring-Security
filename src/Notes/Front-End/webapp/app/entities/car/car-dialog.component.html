@@ -1,0 +1,247 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="car.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="car.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wayBill.personId"
+                           for="field_personId">Person
+                        Id</label>
+                    <app-person-selector widthGrid="600px"
+                                         id="field_personId"
+                                         [selectObject]="false"
+                                         [personGroup]="PersonGroup[PersonGroup.CONTRACTOR]"
+                                         [(ngModel)]="car.personId" required
+                                         [disabled]="isView"
+
+                                         class="form-control" id="field_person" name="person">
+                    </app-person-selector>
+                    <!--    <p-dropdown [options]="customPersons" [(ngModel)]="wayBill.personId"
+                                    [filter]="true"
+                                    [disabled]="wayBill.wayBillType===WayBillType[WayBillType.RECEIVE]"
+                                    class="form-control"
+                                    (onChange)="onChangePerson($event.value)"
+                                    filterBy="label"
+                                    id="field_personId"
+                                    name="person"
+                                    ngDefaultControl
+                        >
+                        </p-dropdown>-->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.car.title"
+                           for="field_title">Title</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="title" id="field_title"
+                           [(ngModel)]="car.title"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.car.plaqueNumber"
+                           for="field_plaqueNumber">Plaque Number</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="plaqueNumber"
+                           id="field_plaqueNumber"
+                           [(ngModel)]="car.plaqueNumber"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.car.serial"
+                           for="field_serial">Serial</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="serial" id="field_serial"
+                           [(ngModel)]="car.serial"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.car.serialNumber"
+                           for="field_serialNumber">Serial Number</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="serialNumber"
+                           id="field_serialNumber"
+                           [(ngModel)]="car.serialNumber"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.car.bakNumber"
+                           for="field_bakNumber">Bak
+                        Number</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="bakNumber" id="field_bakNumber"
+                           [(ngModel)]="car.bakNumber"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.car.ownerNationalId"
+                           for="field_ownerNationalId">Owner National Id</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="ownerNationalId"
+                           id="field_ownerNationalId"
+                           [(ngModel)]="car.ownerNationalId"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.car.cardNo" for="field_cardNo">Card
+                        No</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="cardNo" id="field_cardNo"
+                           [(ngModel)]="car.cardNo"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.car.cardDate" for="field_cardDate">Card
+                        Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                            id="field_cardDate" class="form-control"
+                                            name="cardDate" [(ngModel)]="car.cardDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.car.valveDate"
+                           for="field_valveDate">Valve
+                        Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                            id="field_valveDate" class="form-control"
+                                            name="valveDate" [(ngModel)]="car.valveDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.car.isBlock" for="field_isBlock">Is
+                        Block</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="isBlock" id="field_isBlock"
+                           [(ngModel)]="car.isBlock"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.car.blockReason"
+                           for="field_blockReason">Block Reason</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="blockReason"
+                           id="field_blockReason"
+                           [(ngModel)]="car.blockReason"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.car.startBlockDate"
+                           for="field_startBlockDate">Start Block Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                            id="field_startBlockDate" class="form-control"
+                                            name="startBlockDate" [(ngModel)]="car.startBlockDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.car.finishBlockDate"
+                           for="field_finishBlockDate">Finish Block Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                            id="field_finishBlockDate" class="form-control"
+                                            name="finishBlockDate" [(ngModel)]="car.finishBlockDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.car.description"
+                           for="field_description">Description</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="description"
+                           id="field_description"
+                           [(ngModel)]="car.description"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.car.permitDate"
+                           for="field_permitDate">Permit
+                        Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                            id="field_permitDate" class="form-control"
+                                            name="permitDate" [(ngModel)]="car.permitDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.car.registerDate"
+                           for="field_registerDate">Register Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [disabled]="isView" [rtlActive]="true" time="00:00:00" [disableTime]="true"
+                                            id="field_registerDate" class="form-control"
+                                            name="registerDate" [(ngModel)]="car.registerDate"
+                        ></ng2-datetimepicker>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.car.chassisNumber"
+                           for="field_chassisNumber">Chassis Number</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="chassisNumber"
+                           id="field_chassisNumber"
+                           [(ngModel)]="car.chassisNumber"/>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.car.buildDate"
+                           for="field_buildDate">Build
+                        Date</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="buildDate"
+                           id="field_buildDate"
+                           [(ngModel)]="car.buildDate"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

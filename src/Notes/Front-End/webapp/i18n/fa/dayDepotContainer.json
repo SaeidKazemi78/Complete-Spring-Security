@@ -1,0 +1,35 @@
+
+{
+    "niopdcgatewayApp": {
+        "dayDepotContainer" : {
+            "home": {
+                "title": "روز انبار مظروف",
+                "createLabel":"ایجاد روز انبار مظروف",
+                "createOrEditLabel":"ویرایش روز انبار مظروف",
+                "view":"نمایش روز انبار مظروف",
+                "mainDayDepotTitle":"حساب روز انبار"
+            },
+            "delete": {
+                "question": "آیا برای حذف این روز انبار مظروف مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "روز انبار مظروف"
+            },
+            "deductible": "کسری",
+            "addition": "سرک",
+            "startCount": "تعداد شروع",
+            "endCount": "تعداد پایان",
+            "description": "توضیحات",
+            "oilTankContainer": "مخزن مظروف",
+            "mainDayDepot": "حساب روز انبار",
+            "systemAmount":"موجودی سیستم"
+        }
+    },
+    "niopdcaoApp": {
+        "dayDepotContainer" : {
+            "created": "روز انبار مظروف با موفقیت ایجاد شد.",
+            "updated": "روز انبار مظروف با موفقیت ویرایش شد.",
+            "deleted": "روز انبار مظروف با موفقیت حذف شد."
+        }
+    }
+}

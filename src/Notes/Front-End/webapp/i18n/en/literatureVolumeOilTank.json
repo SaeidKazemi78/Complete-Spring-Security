@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "literatureVolumeOilTank" : {
+            "home": {
+                "title": "Literature Volume Oil Tanks",
+                "createLabel": "Create a new Literature Volume Oil Tank",
+                "createOrEditLabel": "Create or edit a Literature Volume Oil Tank"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Literature Volume Oil Tank {{ id }}?"
+            },
+            "detail": {
+                "title": "Literature Volume Oil Tank"
+            },
+            "millimeter": "Millimeter",
+            "liter": "Liter",
+            "oilTank": "Oil Tank",
+            "serviceOilTank": "Service Oil Tank"
+        }
+    },
+    "niopdcaoApp": {
+        "literatureVolumeOilTank" : {
+            "created": "A new Literature Volume Oil Tank is created with identifier {{ param }}",
+            "updated": "A Literature Volume Oil Tank is updated with identifier {{ param }}",
+            "deleted": "A Literature Volume Oil Tank is deleted with identifier {{ param }}"
+        }
+    }
+}

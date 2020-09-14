@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "MaritalStatus" : {
+            "null": "",
+            "SINGLE": "مجرد",
+            "MARRIED": "متاهل"
+        }
+    }
+}

@@ -1,0 +1,425 @@
+<form name="editForm" #editForm="ngForm">
+    <div class="component">
+        <div class="card">
+            <div class="card-body">
+                <div>
+                    <div class="row" *ngIf="state === BankTransactionState[BankTransactionState.BEGIN]">
+                        <div class="col-md-12" style="text-align: center; margin-bottom: 10px">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.payment.lastPayment"
+                                   for="payment">Payment</label>
+                        </div>
+                        <jhi-payment-selector style="margin: auto;"
+                                              class="form-control" [multiSelect]="true"
+                                              [(ngModel)]="payments"
+                                              (selectedItem)="paymentSelected($event)"
+                                              (exist)="onExistPayment()"
+                                              [selectObject]="true"
+                                              [rightZero]="true"
+                                              [requestIdentifier]="requestIdentifier"
+                                              name="payment" id="payment">
+                        </jhi-payment-selector>
+                        <div class="col-md-12 text-center" *ngIf="existPayment">
+                            <div class="alert-info alert">برای این شخص در سیستم فیش مانده دار موجود می باشد. برای تکمیل
+                                پرداخت می توانید از فیش های موجود استفاده نمایید.
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-md-12" *jhiHasAnyAuthority="['ROLE_ADMIN', 'TEST_PAYMENT']">
+                            <input type="checkbox" id="field_test" class="form-control" [(ngModel)]="testPay"
+                                   (ngModelChange)="checkCanPay()"
+                                   [ngModelOptions]="{standalone: true}"/>
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.payment.testPay"
+                                   for="field_test">testPay</label>
+                        </div>
+                        <div class="col-md-12" *jhiHasAnyAuthority="['ROLE_ADMIN', 'CASH_DESK_PAYMENT']">
+                            <input type="checkbox" class="form-control" [(ngModel)]="cashDeskPay" id="field_cash"
+                                   (ngModelChange)="checkCanPay()"
+                                   [ngModelOptions]="{standalone: true}"/>
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.payment.cashDeskPay"
+                                   [translateValues]="{ username: user.fullName }"
+                                   for="field_cash">cashDeskPay</label>
+                        </div>
+                    </div>
+
+                    <ngb-tabset (tabChange)="changeType($event)" [activeId]="payType"
+                                *ngIf="payType && !onlyPayment && state === BankTransactionState[BankTransactionState.BEGIN]">
+
+                        <ngb-tab id="EPAYMENT" [title]="'niopdcgatewayApp.payment.ePayment' | translate"
+                                 *ngIf="ipgs && ipgs.length">
+                            <ng-template ngbTabContent>
+                                <form #formipg ngNoForm name="input" action="{{ipg?.actionUrl}}" method="POST">
+                                    <div>
+                                        <input *ngFor="let param of ipgParams" type='text' hidden
+                                               id='{{param.name}}'
+                                               name='{{param.name}}'
+                                               value='{{param.value}}'/>
+                                        <div class="row">
+                                            <div class="col-md-12"
+                                                 style="text-align: center; margin-bottom: 10px;margin-top: 10px; ">
+                                                <label class="form-control-label"
+                                                       jhiTranslate="niopdcgatewayApp.payment.amountPay"
+                                                       for="Amount">Amount</label>
+                                            </div>
+                                            <div class="flex" style="margin: auto">
+                                                <input id="Amount" name="payAmount" class="input-pay"
+                                                       type="text"
+                                                       [numeric]
+                                                       [disabled]="disableAmountIpg"
+                                                       [(ngModel)]="payAmount"
+                                                       required autofocus
+                                                />
+                                                <span class="currency">ریال</span>
+                                            </div>
+                                        </div>
+
+                                        <div style="margin: 10px; text-align: center">کد پرداخت : {{requestIdentifier}}
+                                        </div>
+                                        <br/>
+
+                                        <div style="text-align: center;">
+                                            <p-selectButton [options]="ipgs" [(ngModel)]="ipg"
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            optionLabel="name">
+                                                <ng-template let-item>
+                                                    <div class="banks" style="padding: .5em 1em">
+                                                        <img class="img-responsive"
+                                                             style="margin: auto"
+                                                             [src]="'../../../content/images/' + item.value.psp + '.png'"
+                                                             height="150px"
+                                                             width="150px"/>
+                                                    </div>
+                                                </ng-template>
+                                            </p-selectButton>
+                                        </div>
+                                        <br/>
+
+                                        <div style="margin: 10px; text-align: center">
+                                            <span>پرداخت با : </span>
+                                            <span
+                                                *ngIf="ipg">{{('niopdcgatewayApp.Psp.' + ipg?.psp) | translate}}</span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </ng-template>
+                        </ngb-tab>
+                        <ngb-tab id="POS" [title]="'niopdcgatewayApp.payment.pos' | translate"
+                                 *ngIf="userPosDevices && userPosDevices.length">
+                            <ng-template ngbTabContent>
+                                <div class="row">
+                                    <div class="col-md-12"
+                                         style="text-align: center; margin-bottom: 10px;margin-top: 10px; ">
+                                        <label jhiTranslate="niopdcgatewayApp.payment.posDevice"
+                                               for="field_posDevice">device</label>
+                                    </div>
+                                    <div class="col-md-4" style="margin: auto">
+                                        <select class="form-control select-device" id="field_posDevice" name="posDevice"
+                                                (change)="onChangePosDevice()"
+                                                [(ngModel)]="userPosDevice" required>
+                                            <option [ngValue]="posDeviceOption"
+                                                    *ngFor="let posDeviceOption of userPosDevices">
+                                                {{posDeviceOption.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="userPosDevice.type === 'MELLI'">
+                                    <div class="col-md-12"
+                                         style="text-align: center; margin-bottom: 10px; margin-top: 10px; ">
+                                        <label jhiTranslate="niopdcgatewayApp.payment.melliPosDevice"
+                                               for="field_melliPosDevice">device</label>
+                                    </div>
+                                    <div class="col-md-4" style="margin: auto">
+                                        <select class="form-control select-device" id="field_melliPosDevice"
+                                                name="melliPosDevice"
+                                                [(ngModel)]="melliPosDevice" required>
+                                            <option [ngValue]="melliPosDeviceOption"
+                                                    *ngFor="let melliPosDeviceOption of melliPosDevices">
+                                                {{melliPosDeviceOption.MerchantName}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12"
+                                         style="text-align: center; margin-bottom: 10px;margin-top: 10px; ">
+                                        <label class="form-control-label"
+                                               jhiTranslate="niopdcgatewayApp.payment.amountPay"
+                                               for="Amount2">Amount</label>
+                                    </div>
+                                    <div class="flex col-md-4" style="margin: auto">
+                                        <input id="Amount2" name="Amount" class="input-pay"
+                                               type="text"
+                                               [numeric]
+                                               [(ngModel)]="payAmount"
+                                               required autofocus
+                                        />
+                                        <span class="currency">ریال</span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ngb-tab>
+                        <ngb-tab id="INQUIRY" [title]="'niopdcgatewayApp.payment.inquiry' | translate"
+                                 *jhiHasAnyAuthority="['ROLE_ADMIN', 'INQUIRY_PAYMENT']">
+                            <ng-template ngbTabContent>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label"
+                                                   jhiTranslate="niopdcgatewayApp.paymentInquiryRequestDTO.bank"
+                                                   for="field_bank">bank</label>
+                                            <select class="form-control" id="field_bank" name="bank"
+                                                    [disabled]="inquiring"
+                                                    [(ngModel)]="paymentInquiry.bank" required>
+                                                <option [ngValue]="null"></option>
+                                                <option value="MELLAT">{{'niopdcgatewayApp.Bank.MELLAT' | translate}}
+                                                <option value="MELLI">{{'niopdcgatewayApp.Bank.MELLI' | translate}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label"
+                                                   jhiTranslate="niopdcgatewayApp.paymentInquiryRequestDTO.type"
+                                                   for="field_inquiry_type">Type</label>
+                                            <select class="form-control" id="field_inquiry_type" name="inquiry_type"
+                                                    [disabled]="inquiring"
+                                                    [(ngModel)]="paymentInquiry.type" required>
+                                                <option [ngValue]="null"></option>
+                                                <option value="BRANCH">{{'niopdcgatewayApp.ReceiptMethod.BRANCH' |
+                                                    translate}}
+                                                </option>
+                                                <option *ngIf="paymentInquiry.bank === 'MELLAT'" value="EPAYMENT">{{'niopdcgatewayApp.ReceiptMethod.EPAYMENT' | translate}}
+                                                </option>
+                                                <option *ngIf="paymentInquiry.bank === 'MELLAT'" value="POS">{{'niopdcgatewayApp.ReceiptMethod.POS' | translate}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" *ngIf="paymentInquiry.type === 'POS'"
+                                                   jhiTranslate="niopdcgatewayApp.paymentInquiryRequestDTO.referenceIdPos"
+                                                   for="field_referenceId">referenceId</label>
+                                            <label class="form-control-label" *ngIf="paymentInquiry.type !== 'POS'"
+                                                   jhiTranslate="niopdcgatewayApp.paymentInquiryRequestDTO.referenceId"
+                                                   for="field_referenceId">referenceId</label>
+                                            <input type="text" class="form-control" name="referenceId"
+                                                   id="field_referenceId" [disabled]="inquiring"
+                                                   [(ngModel)]="paymentInquiry.referenceId" required/>
+                                            <div
+                                                [hidden]="!(editForm.controls.referenceId?.dirty && editForm.controls.referenceId?.invalid)">
+                                                <small class="form-text text-danger"
+                                                       [hidden]="!editForm.controls.referenceId?.errors?.required"
+                                                       jhiTranslate="entity.validation.required">
+                                                    This field is required.
+                                                </small>
+                                                <small class="form-text text-danger"
+                                                       [hidden]="!editForm.controls.referenceId?.errors?.number"
+                                                       jhiTranslate="entity.validation.number">
+                                                    This field should be a number.
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label"
+                                                   jhiTranslate="niopdcgatewayApp.paymentInquiryRequestDTO.receiptDateTime"
+                                                   for="field_receiptDateTime">Receipt Date Time</label>
+                                            <div class="d-flex">
+                                                <ng2-datetimepicker [rtlActive]="true" time="00:00:00"
+                                                                    id="field_receiptDateTime" class="form-control"
+                                                                    [disableTime]="true" [disabled]="inquiring"
+                                                                    name="receiptDateTime"
+                                                                    [(ngModel)]="paymentInquiry.receiptDateTime"
+                                                                    [maxDateTime]="newDate"
+                                                                    required></ng2-datetimepicker>
+                                            </div>
+                                            <div
+                                                [hidden]="!(editForm.controls.receiptDateTime?.dirty && editForm.controls.receiptDateTime?.invalid)">
+                                                <small class="form-text text-danger"
+                                                       [hidden]="!editForm.controls.receiptDateTime?.errors?.required"
+                                                       jhiTranslate="entity.validation.required">
+                                                    This field is required.
+                                                </small>
+                                                <small class="form-text text-danger"
+                                                       [hidden]="!editForm.controls.receiptDateTime?.errors?.ZonedDateTimelocal"
+                                                       jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                                    This field should be a date and time.
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6" *ngIf="paymentInquiry.type === 'BRANCH' && paymentInquiry.bank === 'MELLI'">
+                                        <div class="form-group">
+                                            <label class="form-control-label"
+                                                   jhiTranslate="niopdcgatewayApp.paymentInquiryRequestDTO.amount"
+                                                   for="field_receiptDateTime">Receipt Date Time</label>
+                                            <div class="d-flex">
+                                                <input type="text" class="form-control" name="amount"
+                                                       id="field_amount" [disabled]="inquiring"
+                                                       [(ngModel)]="paymentInquiry.amount" required/>
+
+                                            </div>
+                                            <div
+                                                [hidden]="!(editForm.controls.receiptDateTime?.dirty && editForm.controls.receiptDateTime?.invalid)">
+                                                <small class="form-text text-danger"
+                                                       [hidden]="!editForm.controls.receiptDateTime?.errors?.required"
+                                                       jhiTranslate="entity.validation.required">
+                                                    This field is required.
+                                                </small>
+                                                <small class="form-text text-danger"
+                                                       [hidden]="!editForm.controls.receiptDateTime?.errors?.ZonedDateTimelocal"
+                                                       jhiTranslate="entity.validation.ZonedDateTimelocal">
+                                                    This field should be a date and time.
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6" *ngIf="paymentInquiry.type === 'BRANCH'">
+                                        <div class="form-group">
+                                            <label class="form-control-label"
+                                                   jhiTranslate="niopdcgatewayApp.paymentInquiryRequestDTO.branch"
+                                                   for="field_branch">branch</label>
+                                            <input type="text" class="form-control" name="branch" id="field_branch"
+                                                   [disabled]="inquiring"
+                                                   [(ngModel)]="paymentInquiry.branch" required [numeric]="{min:0}"/>
+                                            <div
+                                                [hidden]="!(editForm.controls.branch?.dirty && editForm.controls.branch?.invalid)">
+                                                <small class="form-text text-danger"
+                                                       [hidden]="!editForm.controls.branch?.errors?.required"
+                                                       jhiTranslate="entity.validation.required">
+                                                    This field is required.
+                                                </small>
+                                                <small class="form-text text-danger"
+                                                       [hidden]="!editForm.controls.branch?.errors?.number"
+                                                       jhiTranslate="entity.validation.number">
+                                                    This field should be a number.
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6" *ngIf="paymentInquiry.type === 'BRANCH'">
+                                        <div class="form-group">
+                                            <label class="form-control-label"
+                                                   jhiTranslate="niopdcgatewayApp.paymentInquiryRequestDTO.niopdcBankAccount"
+                                                   for="field_niopdcBankAccount">referenceId</label>
+                                            <p-dropdown [options]="customNiopdcBankAccounts"
+                                                        [(ngModel)]="paymentInquiry.niopdcBankAccount"
+                                                        [filter]="true"
+                                                        class="form-control"
+                                                        filterBy="label" [disabled]="inquiring"
+                                                        id="field_niopdcBankAccount"
+                                                        name="productId1"
+                                                        ngDefaultControl
+                                                        required>
+                                            </p-dropdown>
+
+                                            <div
+                                                [hidden]="!(editForm.controls.niopdcBankAccount?.dirty && editForm.controls.niopdcBankAccount?.invalid)">
+                                                <small class="form-text text-danger"
+                                                       [hidden]="!editForm.controls.niopdcBankAccount?.errors?.required"
+                                                       jhiTranslate="entity.validation.required">
+                                                    This field is required.
+                                                </small>
+                                                <small class="form-text text-danger"
+                                                       [hidden]="!editForm.controls.niopdcBankAccount?.errors?.number"
+                                                       jhiTranslate="entity.validation.number">
+                                                    This field should be a number.
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 text-center">
+                                    <button type="button" (click)="pay()" *ngIf="!inquiring"
+                                            class="btn btn-success" jhiTranslate="entity.action.inquiry"></button>
+                                    <button type="button" (click)="reInquiry()" *ngIf="inquiring"
+                                            class="btn btn-danger" jhiTranslate="entity.action.modify"></button>
+                                </div>
+                                <div class="col-md-12" *ngIf="inquiring">
+                                    <p jhiTranslate="niopdcgatewayApp.paymentInquiryRequestDTO.message"></p>
+                                    <p [innerHTML]="infoInquiry.info"></p>
+                                    <div *ngIf="infoInquiry.price!==payAmount && acceptInquiry"
+                                         class="alert alert-warning" role="alert">
+                                        <p jhiTranslate="error.conflict_resept_no"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" *ngIf="inquiring">
+                                    <input type="checkbox" class="form-control" [(ngModel)]="acceptInquiry"
+                                           id="field_acceptInquiry"
+                                           (change)="checkCanPay()"
+                                           required
+                                           [ngModelOptions]="{standalone: true}"/>
+                                    <label class="form-control-label border-bottom"
+                                           [ngClass]="{'border-danger': !acceptInquiry, 'border-success': acceptInquiry}"
+                                           jhiTranslate="niopdcgatewayApp.paymentInquiryRequestDTO.acceptMessage"
+                                           for="field_acceptInquiry">acceptInquiry</label>
+                                </div>
+
+                            </ng-template>
+                        </ngb-tab>
+
+                    </ngb-tabset>
+                </div>
+                <div class="card" *ngIf="message">
+                    <div class="messages ui-g ui-fluid ">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img *ngIf="message?.icon === 'error'" src="../../../content/images/error.png"/>
+                                    <img *ngIf="message?.icon === 'warning'" src="../../../content/images/info.png"/>
+                                    <img *ngIf="message?.icon === 'good'" src="../../../content/images/good.png"/>
+                                </div>
+                                <div class="col-md-8" style="margin: auto">
+                                    <div class="row ttl">{{message?.title}}
+                                    </div>
+                                    <div class="row" style="text-align:right">
+                                        <div> {{message?.body}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="message.reload">
+                                <div class="col-md-12" style="text-align: center">
+                                    <button type="button" class="btn btn-info" (click)="loadBankTransaction()">بار گذاری
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="message.redirectUrl && showButton">
+                                <div class="col-md-12" style="text-align: center">
+                                    <button type="button" class="btn btn-info" [routerLink]="[message.redirectUrl]">
+                                        بازگشت
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="showButton" class="card-footer" style="text-align: center">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="button" *ngIf="onlyPayment" (click)="pay()"
+                                class="btn btn-success">
+                            پرداخت
+                        </button>
+                        <button type="button" *ngIf="!onlyPayment" (click)="pay()"
+                                class="btn btn-success">
+                            پرداخت و اتصال به درگاه بانک
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

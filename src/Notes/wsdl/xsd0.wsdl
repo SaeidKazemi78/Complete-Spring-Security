@@ -1,0 +1,21 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+<xs:import schemaLocation="xsd2.wsdl" namespace="http://schemas.datacontract.org/2004/07/PDN.OTS.Data.ViewModels"/>
+<xs:import schemaLocation="xsd3.wsdl" namespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic"/>
+<xs:element name="Insert">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="userName" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="password" nillable="true" type="xs:string"/>
+<xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/PDN.OTS.Data.ViewModels" minOccurs="0" name="listModel" nillable="true" type="q1:ArrayOfVM_Factor_Batch_Service"/>
+<xs:element minOccurs="0" name="startRowNumber" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="InsertResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System.Collections.Generic" minOccurs="0" name="InsertResult" type="q2:KeyValuePairOfbooleanstring"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:schema>

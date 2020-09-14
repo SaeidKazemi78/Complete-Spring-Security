@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "DeliveryTerm" : {
+            "null": "",
+            "EX_WORKS": "EX_WORKS",
+            "FOB": "FOB"
+        }
+    }
+}

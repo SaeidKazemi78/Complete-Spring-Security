@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "TransferFuelType" : {
+            "null": "",
+            "TANKER": "TANKER",
+            "PIPE": "PIPE"
+        }
+    }
+}

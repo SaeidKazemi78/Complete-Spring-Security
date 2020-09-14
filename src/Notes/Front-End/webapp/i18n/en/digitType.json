@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "DigitType" : {
+            "null": "",
+            "NUMBER": "NUMBER",
+            "PERSIAN_WORD": "PERSIAN_WORD",
+            "ENGLISH_WORD": "ENGLISH_WORD"
+        }
+    }
+}

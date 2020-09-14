@@ -1,0 +1,84 @@
+<div class="component">
+    <div class="card">
+        <div class="card-header">
+            اطلاعات تیکت
+        </div>
+        <div class="card-body">
+            <div class="row" *ngIf="dayDepots">
+                <div class="col-xs-12 col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               jhiTranslate="niopdcgatewayApp.changeContainer.dayDepot"
+                               for="field_dayDepot">Day Depot</label>
+                        <select class="form-control" id="field_dayDepot"
+                                name="dayDepot"
+                                (ngModelChange)="changeDayDepot($event)"
+                                [(ngModel)]="logBook.dayDepotId" required>
+                            <option [ngValue]="null"
+                                    selected></option>
+                            <option
+                                *ngFor="let dayDepotOption of dayDepots; trackBy: trackDayDepotById"
+                                [ngValue]="dayDepotOption.id">
+                                {{dayDepotOption.oilTankTitle}} - {{dayDepotOption.parentOilTankTitle}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-3">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               jhiTranslate="niopdcgatewayApp.transfer.metre"
+                               for="field_metre">Metre</label>
+                        <select class="form-control" id="field_metre" name="metre"
+                                (change)="getStartMetre()"
+                                [(ngModel)]="logBook.metreLog.metreId" required>
+                            <option [ngValue]="null"></option>
+                            <option [ngValue]="metreOption.id"
+                                    *ngFor="let metreOption of metres; trackBy: trackMetreById">
+                                {{metreOption.title}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-2">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               jhiTranslate="niopdcgatewayApp.metreLog.startMeter"
+                               for="field_startMeter">Start Meter</label>
+                        <input [disabled]="true" type="number" class="form-control"
+                               name="amount"
+                               id="field_amount"
+                               [ngModel]="order.amount" required/>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-2">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               jhiTranslate="niopdcgatewayApp.metreLog.startMeter"
+                               for="field_startMeter">Start Meter</label>
+                        <input [disabled]="true" type="number" class="form-control"
+                               name="startMeter"
+                               id="field_startMeter"
+                               [ngModel]="logBook.metreLog.startMeter" required/>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-2">
+                    <div class="form-group">
+                        <label class="form-control-label"
+                               jhiTranslate="niopdcgatewayApp.metreLog.endMeter"
+                               for="field_endMeter">Start Meter</label>
+                        <input [disabled]="true" type="number" class="form-control" name="endMeter"
+                               id="field_endMeter"
+                               [ngModel]="logBook.metreLog.endMeter" required/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-success" (click)="save()" [disabled]="!logBook.metreLog.metreId || !logBook.dayDepotId">
+                <span class="fa fa-save"></span>
+                ذخیره
+            </button>
+        </div>
+    </div>
+</div>

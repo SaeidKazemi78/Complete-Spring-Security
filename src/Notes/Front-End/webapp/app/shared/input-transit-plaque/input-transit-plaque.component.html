@@ -1,0 +1,23 @@
+<!--<div>
+    <input [(ngModel)]="transitPlaque" [disabled]="disabled" [required]="required" maxlength="28"
+           (keyup)="onChangeTransit($event)">
+</div>-->
+
+
+<div class=" row jhi-tr-plaque">
+    <input type="text"  class="tr-control tr-plaque-r" placeholder=""
+           [(ngModel)]="plaque1"
+    />
+
+
+    <select class="  tr-combo ">
+        <option value="" *ngIf="!required"></option>
+        <option  *ngFor=" let option  of customPlaques" value="option.value">{{option.label}}</option>
+    </select>
+
+
+    <input type="text"  class="tr-control  tr-plaque-l" placeholder=""
+           [(ngModel)]="plaque2"
+    />
+
+</div>

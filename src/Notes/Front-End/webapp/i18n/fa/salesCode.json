@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "salesCode" : {
+            "home": {
+                "title": "Sales Codes",
+                "createLabel": "Create a new Sales Code",
+                "createOrEditLabel": "Create or edit a Sales Code"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Sales Code {{ id }}?"
+            },
+            "detail": {
+                "title": "Sales Code"
+            },
+            "code": "Code",
+            "receivedDate": "Received Date",
+            "person": "Person"
+        }
+    },
+    "niopdcbaseApp": {
+        "salesCode" : {
+            "created": "A new Sales Code is created with identifier {{ param }}",
+            "updated": "A Sales Code is updated with identifier {{ param }}",
+            "deleted": "A Sales Code is deleted with identifier {{ param }}"
+        }
+    }
+}

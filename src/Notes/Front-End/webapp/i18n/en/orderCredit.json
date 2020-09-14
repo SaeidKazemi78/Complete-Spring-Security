@@ -1,0 +1,35 @@
+
+{
+    "niopdcgatewayApp": {
+        "orderCredit" : {
+            "home": {
+                "title": "Order Credits",
+                "createLabel": "Create a new Order Credit",
+                "createOrEditLabel": "Create or edit a Order Credit"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Order Credit {{ id }}?"
+            },
+            "detail": {
+                "title": "Order Credit"
+            },
+            "customerCreditId": "Customer Credit Id",
+            "decreasedCredit": "Decreased Credit",
+            "decreasedAmount": "Decreased Amount",
+            "decreasedCost": "Decreased Cost",
+            "creditNumber": "Credit Number",
+            "buyTypeUsage": "Buy Type Usage",
+            "settled": "Settled",
+            "buyGroup": "Buy Group",
+            "order": "Order",
+            "orderProduct": "Order Product"
+        }
+    },
+    "niopdcorderApp": {
+        "orderCredit" : {
+            "created": "A new Order Credit is created with identifier {{ param }}",
+            "updated": "A Order Credit is updated with identifier {{ param }}",
+            "deleted": "A Order Credit is deleted with identifier {{ param }}"
+        }
+    }
+}

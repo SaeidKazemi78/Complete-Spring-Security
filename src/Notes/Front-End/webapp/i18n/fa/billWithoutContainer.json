@@ -1,0 +1,20 @@
+{
+    "niopdcgatewayApp": {
+        "billWithoutContainer": {
+            "home": {
+                "title": "صورت تحویلی بدون ظرف"
+            },
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ",
+            "personName": "‫نام شرکت‬",
+            "airportName": "مرکز سوختگیری",
+            "sumDomesticFlightAmount": "فروش داخلی به لیتر",
+            "countDomesticFlightAirplane": "فروش داخلی فروند هواپیما",
+            "sumInternationalFlightAmount": "فروش خارجی به لیتر",
+            "sellType": "محل خرید",
+            "currency": "واحد پولی",
+            "buyGroup": "نحوه ی خرید",
+            "countInternationalFlightAirplane": "فروش خارجی فروند هواپیما"
+        }
+    }
+}

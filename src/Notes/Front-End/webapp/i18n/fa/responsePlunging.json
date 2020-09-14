@@ -1,0 +1,36 @@
+
+{
+    "niopdcgatewayApp": {
+        "responsePlunging": {
+            "home": {
+                "title": "پاسخ آزمایش غوطه وری",
+                "createLabel": "ایجاد پاسخ آزمایش غوطه وری",
+                "createOrEditLabel": "ویرایش پاسخ آزمایش غوطه وری",
+                "view": "نمایش پاسخ آزمایش غوطه وری",
+                "requestPlungingTitle": "درخواست آزمایش غوطه وری"
+            },
+            "delete": {
+                "question": "آیا برای حذف این پاسخ آزمایش غوطه وری مطمئن هستید؟"
+            },
+            "detail": {
+                "title": "پاسخ آزمایش غوطه وری"
+            },
+            "confirm": "تایید",
+            "confirmTrue": "تایید",
+            "confirmFalse": "عدم تایید",
+            "description": "توضیحات",
+            "responseDate": "تاریخ پاسخ",
+            "isSend": "ارسال",
+            "isSendTrue": "فعال",
+            "isSendFalse": "غیر فعال",
+            "requestPlunging": "درخواست آزمایش غوطه وری"
+        }
+    },
+    "niopdcaoApp": {
+        "responsePlunging": {
+            "created": "پاسخ آزمایش غوطه وری با موفقیت ایجاد شد.",
+            "updated": "پاسخ آزمایش غوطه وری با موفقیت ایجاد شد.",
+            "deleted": "پاسخ آزمایش غوطه وری با موفقیت ایجاد شد."
+        }
+    }
+}

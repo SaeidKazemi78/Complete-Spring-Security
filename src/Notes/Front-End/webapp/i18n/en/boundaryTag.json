@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "boundaryTag" : {
+            "home": {
+                "title": "Boundary Tags",
+                "createLabel": "Create a new Boundary Tag",
+                "createOrEditLabel": "Create or edit a Boundary Tag"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Boundary Tag {{ id }}?"
+            },
+            "detail": {
+                "title": "Boundary Tag"
+            },
+            "amount": "Amount",
+            "buyPrice": "Buy Price",
+            "buyDate": "Buy Date",
+            "location": "Location"
+        }
+    },
+    "niopdcbaseApp": {
+        "boundaryTag" : {
+            "created": "A new Boundary Tag is created with identifier {{ param }}",
+            "updated": "A Boundary Tag is updated with identifier {{ param }}",
+            "deleted": "A Boundary Tag is deleted with identifier {{ param }}"
+        }
+    }
+}

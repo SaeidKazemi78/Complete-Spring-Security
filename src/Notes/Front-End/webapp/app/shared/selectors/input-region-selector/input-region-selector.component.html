@@ -1,0 +1,23 @@
+<input class="form-control" type="text" name="inputText" id="inputText" [readonly]="true" [ngModel]="inputText"
+       (click)="clickInput()"/>
+<div [hidden]="!openModal" *ngIf="!disabled">
+    <a *ngIf="(oneSelection && selectedRegion) || (!oneSelection && selectedRegions && selectedRegions.length)"
+       class="ui-state-default" style="position: absolute; left: 15px;" (click)="clearSelected()">
+        <span class="fa fa-fw fa-close"></span>
+    </a>
+    <p-tree *ngIf="oneSelection == true" selectionMode="single"
+            (onNodeExpand)="nodeExpand($event)"
+            [(selection)]="selectedRegion"
+            (onNodeSelect)="nodeSelect($event)"
+            styleClass="tree-selector"
+            [value]="regions">
+    </p-tree>
+    <p-tree *ngIf="oneSelection == false" selectionMode="checkbox" [propagateSelectionUp]="false"
+            (onNodeExpand)="nodeExpand($event)"
+            [(selection)]="selectedRegions"
+            (onNodeSelect)="nodeSelect($event)"
+            (onNodeUnselect)="nodeUnSelect($event)"
+            styleClass="tree-selector"
+            [value]="regions">
+    </p-tree>
+</div>

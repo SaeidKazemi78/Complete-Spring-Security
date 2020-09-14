@@ -1,0 +1,119 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <br/>
+    <form name="editForm" role="form" novalidate (ngSubmit)="report()" #editForm="ngForm">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.order.startDate"
+                           for="field_startDate">startDate</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [rtlActive]="true" time="00:00:00"
+                                            id="field_startDate"
+                                            class="form-control"
+                                            name="startDate" [(ngModel)]="req.startDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.order.finishDate"
+                           for="field_finishDate">finish Date</label>
+                    <div class="d-flex">
+                        <ng2-datetimepicker [rtlActive]="true" time="00:00:00"
+                                            id="field_finishDate"
+                                            class="form-control"
+                                            name="finishDate" [(ngModel)]="req.finishDate"
+                                            required></ng2-datetimepicker>
+                    </div>
+                    <div
+                        [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.startDate?.errors?.ZonedDateTimelocal"
+                               jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label jhiTranslate="niopdcgatewayApp.order.locationId"
+                       for="field_locations">Location</label>
+                <p-dropdown [options]="customLocation" [(ngModel)]="req.locationId"
+                            [filter]="true"
+                            class="form-control"
+                            filterBy="label"
+                            id="field_locations"
+                            name="location"
+                            ngDefaultControl
+                ></p-dropdown>
+            </div>
+
+
+            <div class="col-md-3">
+                <label jhiTranslate="niopdcgatewayApp.product.home.title"
+                       for="field_products">Products</label>
+                <p-dropdown [options]="customProduct" [(ngModel)]="req.productId"
+                            [filter]="true"
+                            class="form-control"
+                            filterBy="label"
+                            id="field_products"
+                            name="location"
+                            ngDefaultControl
+                ></p-dropdown>
+            </div>
+
+        </div>
+
+
+       <!-- <div class="col-md-3">
+            <div class="form-group">
+                <label jhiTranslate="niopdcgatewayApp.rateGroup.home.title"
+                       for="field_type">Type</label>
+                <select class="form-control" id="field_type" name="type"
+                        [(ngModel)]="req.rateGroupId">
+                    <option [ngValue]="null"></option>
+                    <option [ngValue]="rateGroupTypeOption.id"
+                            *ngFor="let rateGroupTypeOption of customRateGroups| sortBy:'title'">
+                        {{rateGroupTypeOption.title}}
+                    </option>
+                </select>
+            </div>
+        </div>-->
+
+   <div class="card-footer text-center">
+    <button type="submit" class="btn btn-primary "
+            [disabled]="editForm.form.invalid ">
+        <span class="fa fa-search"></span>&nbsp;<span
+        jhiTranslate="report.search">Save</span>
+    </button>
+  </div>
+</form>
+<br/>
+<div id="viewer" dir="ltr">
+
+</div>
+</div>

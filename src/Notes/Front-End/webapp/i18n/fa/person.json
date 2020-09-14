@@ -1,0 +1,93 @@
+{
+    "niopdcgatewayApp": {
+        "person": {
+            "createUserTitle": "ایجاد حساب کاربری",
+            "editUserTitle": "ویرایش حساب کاربری",
+            "home": {
+                "title": "اشخاص",
+                "transportTitle": "اشخاص ناوگان",
+                "createLabel": "ایجاد اشخاص",
+                "createOrEditLabel": "ویرایش اشخاص",
+                "view": "نمایش اشخاص",
+                "register": "اطلاعات حساب کاربری",
+                "generalInformation": "اطلاعات عمومی",
+                "oldSellInformation": "اطلاعات فروش قدیم"
+            },
+            "delete": {
+                "question": "آیا برای حذف شخص {{ id }} مطمئن هستید؟"
+            },
+            "active": {
+                "question": "آیا برای فعال کردن شخص {{param}} مطمئن هستید ؟"
+            },
+            "de-active": {
+                "question": "آیا برای غیر فعال کردن شخص {{param}} مطمئن هستید ؟"
+            },
+            "reject": {
+                "question": "آیا برای رد کردن شخص {{param}} مطمئن هستید ؟"
+            },
+            "message": {
+                "wrongConfirmPassword": "رمز عبور و تکرار باید یکسان باشند.",
+                "existUser": "نام کاربری از قبل ثبت شده است.",
+                "existEmail": "این ایمیل قبلا ثبت شده است.",
+                "existPerson": "این صاحب امتیاز قبلا ثبت شده است."
+            },
+            "detail": {
+                "title": "اشخاص"
+            },
+            "name": "نام",
+            "fullName": "نام",
+            "firstName": "نام",
+            "lastName": "نام خانوادگی",
+            "code": "کد",
+            "nationalCode": "کد ملی",
+            "codeLegal": "شناسه ملی",
+            "codeOther": "کد فراگیر",
+            "fatherName": "نام پدر",
+            "idCode": "شماره شناسنامه",
+            "telephone": "تلفن",
+            "cellphone": "تلفن همراه",
+            "fax": "فکس",
+            "email": "ایمیل",
+            "postalCode": "کد پستی",
+            "creditAccount": "حساب اعتباری",
+            "registerNo": "شماره ثبت",
+            "registerContractorNo": "شماره پیمان",
+            "address": "آدرس",
+            "exportHistory": "سابقه قبلی صادارت",
+            "birthday": "تاریخ تولد",
+            "economicCode": "کد اقتصادی",
+            "personality": "نوع مالکیت",
+            "birthRegion": "محل تولد",
+            "region": "موقعیت مکانی",
+            "regionLegal": "محل ثبت",
+            "country": "کشور",
+            "nationality": "ملیت",
+            "location": "حوزه فعالیت",
+            "sellContractPerson": "Sell Contract Person",
+            "username": "نام کاربری",
+            "password": "رمز عبور",
+            "confirmPassword": "تکرار رمز عبور",
+            "salesCode": "کد 9 رقمی فروش",
+            "verifyStatus": "وضعیت",
+            "old": "قبلا در سیستم فروش  اینترنتی ثبت نام شده ام",
+            "costAccount": "حساب هزینه",
+            "createUser": "ایجاد حساب کاربری",
+            "editUser": "ویرایش حساب کاربری",
+            "registerDate": "تاریخ ثبت",
+            "transportCode": "کد ناوگان",
+            "personGroup": "گروه شخص"
+        }
+    },
+    "niopdcbaseApp": {
+        "person": {
+            "created": "شخص با موفقیت ایجاد شد.",
+            "updated": "شخص با موفقیت ویرایش شد.",
+            "deleted": "شخص با موفقیت حذف شد.",
+            "active": "شخص با موفقیت فعال شد.",
+            "deActive": "شخص با موفقیت غیر فعال شد.",
+            "rejected": "شخص با موفقیت رد شد.",
+            "failedActive": "اطلاعات در حال بررسی می باشد.",
+            "uploaded": "فایل لیست پیمانکاران با موفقیت بارگزاری شد."
+        }
+    }
+}

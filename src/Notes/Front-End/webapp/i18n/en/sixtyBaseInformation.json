@@ -1,0 +1,32 @@
+
+{
+    "niopdcgatewayApp": {
+        "sixtyBaseInformation" : {
+            "home": {
+                "title": "Sixty Base Informations",
+                "createLabel": "Create a new Sixty Base Information",
+                "createOrEditLabel": "Create or edit a Sixty Base Information"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Sixty Base Information {{ id }}?"
+            },
+            "detail": {
+                "title": "Sixty Base Information"
+            },
+            "environmentTemperature": "Environment Temperature",
+            "productTemperature": "Product Temperature",
+            "specialWeight": "Special Weight",
+            "productId": "Product Id",
+            "registerDate": "Register Date",
+            "type": "Type",
+            "refuelCenter": "Refuel Center"
+        }
+    },
+    "niopdcaoApp": {
+        "sixtyBaseInformation" : {
+            "created": "A new Sixty Base Information is created with identifier {{ param }}",
+            "updated": "A Sixty Base Information is updated with identifier {{ param }}",
+            "deleted": "A Sixty Base Information is deleted with identifier {{ param }}"
+        }
+    }
+}

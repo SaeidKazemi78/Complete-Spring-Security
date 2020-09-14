@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "productSrc" : {
+            "home": {
+                "title": "Product Srcs",
+                "createLabel": "Create a new Product Src",
+                "createOrEditLabel": "Create or edit a Product Src"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Product Src {{ id }}?"
+            },
+            "detail": {
+                "title": "Product Src"
+            },
+            "src": "Src",
+            "active": "Active",
+            "product": "Product"
+        }
+    },
+    "niopdcbaseApp": {
+        "productSrc" : {
+            "created": "A new Product Src is created with identifier {{ param }}",
+            "updated": "A Product Src is updated with identifier {{ param }}",
+            "deleted": "A Product Src is deleted with identifier {{ param }}"
+        }
+    }
+}

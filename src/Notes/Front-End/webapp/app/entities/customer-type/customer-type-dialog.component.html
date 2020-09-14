@@ -1,0 +1,250 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="customerType.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.customerType.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="customerType.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.customerType.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.customerType.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customerType.title"
+                           for="field_title">Title</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="title"
+                           id="field_title"
+                           [(ngModel)]="customerType.title"
+                           required minlength="3" maxlength="42"/>
+                    <div
+                        [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 42 }">
+                            This field cannot be longer than 42 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customerType.code"
+                           for="field_code">Code</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="code"
+                           id="field_code"
+                           [(ngModel)]="customerType.code"
+                           [numeric]="{max:9999,min:-9999}"
+                           required minlength="1" maxlength="4"/>
+                    <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 1 }">
+                            This field is required to be at least 4 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 4 }">
+                            This field cannot be longer than 4 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.customerType.customerGroup"
+                           for="field_customerGroup">Customer Group</label>
+                    <select [disabled]="isView" class="form-control" name="customerGroup"
+                            (ngModelChange)="onChangeCustomerGroup($event)"
+                            [(ngModel)]="customerType.customerGroup" id="field_customerGroup" required>
+                        <option value="STATION" jhiTranslate="niopdcgatewayApp.CustomerGroup.STATION">
+                            SUPPLIER
+                        </option>
+                        <option value="SELLER" jhiTranslate="niopdcgatewayApp.CustomerGroup.SELLER">
+                            CONSUMER
+                        </option>
+                        <option value="MAJOR_CONSUMER" jhiTranslate="niopdcgatewayApp.CustomerGroup.MAJOR_CONSUMER">
+                            SUPPLIER
+                        </option>
+                        <option value="AIRPLANE" jhiTranslate="niopdcgatewayApp.CustomerGroup.AIRPLANE">
+                            AIRLINE
+                        </option>
+                        <option value="LIQUID_GAS">{{'niopdcgatewayApp.CustomerGroup.LIQUID_GAS' | translate}}</option>
+                        <option value="BOUNDARY">{{'niopdcgatewayApp.CustomerGroup.BOUNDARY' | translate}}</option>
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.customerGroup?.dirty && editForm.controls.customerGroup?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.customerGroup?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <div class="form-group">
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="active" id="field_active"
+                           [(ngModel)]="customerType.active"/>
+
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.customerType.active"
+                           for="field_active">Customer Group</label>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customerType.locationType"
+                           for="field_locationType">Location Type</label>
+                    <select [disabled]="isView" class="form-control" name="locationType" required (change)="onChangeLocationType()"
+                            [(ngModel)]="customerType.locationType" id="field_locationType">
+                        <option value="FIXED" jhiTranslate="niopdcgatewayApp.LocationType.FIXED">FIXED</option>
+                        <option value="MOVABLE" jhiTranslate="niopdcgatewayApp.LocationType.MOVABLE">MOVABLE</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4"
+                 *ngIf="customerType.locationType===LocationType[LocationType.FIXED]">
+
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.customerType.customerTypeIgnore"
+                           for="field_customerTypeIgnore">Target
+                        Airports</label>
+                    <p-multiSelect [disabled]="isView" class="form-control" id="field_customerTypeIgnore"
+                                   [options]="customerTypes"
+                                   (onChange)="onChangeIgnoreCustomerType($event)"
+                                   name="customerTypeIgnore"
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                   [(ngModel)]="selectedCustomerTypes"
+                                   [ngModelOptions]="{standalone: true}"
+                    ></p-multiSelect>
+                </div>
+                <div
+                    [hidden]="!(editForm.controls.targetAirports?.dirty && editForm.controls.targetAirports?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.targetAirports?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4"
+                 *ngIf="customerType.customerGroup===CustomerGroup[CustomerGroup.SELLER] || customerType.customerGroup === CustomerGroup[CustomerGroup.MAJOR_CONSUMER]">
+                <div class="form-group">
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="manualQuota" id="field_manualQuota"
+                           [(ngModel)]="customerType.manualQuota"/>
+                    <label jhiTranslate="niopdcgatewayApp.customerType.manualQuota"
+                           for="field_manualQuota">manual Quota</label>
+                </div>
+            </div>
+
+            <div class="col-md-4" *ngIf="customerType.customerGroup===CustomerGroup[CustomerGroup.BOUNDARY]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.vehicleModel.vehicleModelType"
+                           for="field_vehicleModelType">Oil Tank Type</label>
+                    <select [disabled]="isView" class="form-control" name="vehicleModelType"
+                            [(ngModel)]="customerType.vehicleModelType" id="field_vehicleModelType" required>
+                        <option value="TRUCK">{{'niopdcgatewayApp.VehicleModelType.TRUCK' | translate}}</option>
+                        <option value="BUS">{{'niopdcgatewayApp.VehicleModelType.BUS' | translate}}</option>
+                        <option value="CAR">{{'niopdcgatewayApp.VehicleModelType.CAR' | translate}}</option>
+                    </select>
+                    <div
+                        [hidden]="!(editForm.controls.vehicleModelType?.dirty && editForm.controls.vehicleModelType?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.vehicleModelType?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4"
+                 *ngIf="customerType.customerGroup===CustomerGroup[CustomerGroup.BOUNDARY]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customerType.iranian"
+                           for="field_iranian">iranian</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="iranian" id="field_iranian"
+                           [(ngModel)]="customerType.iranian"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6"
+                 *ngIf="customerType.customerGroup !== CustomerGroup[CustomerGroup.BOUNDARY] &&
+                 customerType.customerGroup !== CustomerGroup[CustomerGroup.AIRPLANE] &&
+                  customerType.locationType === LocationType[LocationType.MOVABLE]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customerType.customerCodeTitle"
+                           for="field_customerCodeTitle">Title</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="customerCodeTitle"
+                           id="field_customerCodeTitle"
+                           [(ngModel)]="customerType.customerCodeTitle"
+                           required minlength="3" maxlength="42"/>
+                    <div
+                        [hidden]="!(editForm.controls.customerCodeTitle?.dirty && editForm.controls.customerCodeTitle?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.customerCodeTitle?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.customerCodeTitle?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 42 }">
+                            This field cannot be longer than 42 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6"
+                 *ngIf="customerType.customerGroup===CustomerGroup[CustomerGroup.STATION] || customerType.customerGroup === CustomerGroup[CustomerGroup.MAJOR_CONSUMER]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.customerType.hasGsId"
+                           for="field_hasGsId">Has Gs Id</label>
+                    <input [disabled]="isView" type="checkbox" class="form-control" name="hasGsId" id="field_hasGsId"
+                           [(ngModel)]="customerType.hasGsId"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" *ngIf="!isView" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

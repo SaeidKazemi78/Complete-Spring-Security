@@ -1,0 +1,30 @@
+{
+    "niopdcgatewayApp": {
+        "containerRate": {
+            "home": {
+                "titleContainer": "نرخ ظرف فرآورده",
+                "title": "نرخ ظرف فرآورده",
+                "titleProduct": "نرخ فرآورده",
+                "containerTitle": "ظرف فرآورده",
+                "createLabel": "ایجاد نرخ ظرف فرآورده",
+                "createOrEditLabel": "ویرایش نرخ ظرف فرآورده",
+                "view": "نمایش نرخ ظرف فرآورده"
+            },
+            "detail": {
+                "title": "نرخ ظرف فرآورده"
+            },
+            "src": "رمز ظرف فرآورده",
+            "price": "بهاي ظرف فرآورده",
+            "confirm": "تایید",
+            "confirmTrue": "تایید شده",
+            "confirmFalse": "تایید نشده",
+            "startDate": "تاریخ شروع"
+        }
+    },
+    "niopdcrateApp": {
+        "containerRate": {
+            "created": "نرخ ظرف فرآورده با موفقیت ایجاد شد.",
+            "updated": "نرخ ظرف فرآورده با موفقیت ویرایش شد."
+        }
+    }
+}

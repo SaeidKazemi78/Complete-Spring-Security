@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "Authority" : {
+            "null": "",
+            "AUTH1": "مدیریت بازرگانی",
+            "AUTH2": "مدیریت مالی",
+            "BOTH": "هردو"
+        }
+    }
+}

@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "milliPoor" : {
+            "home": {
+                "title": "Milli Poors",
+                "createLabel": "Create a new Milli Poor",
+                "createOrEditLabel": "Create or edit a Milli Poor"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Milli Poor {{ id }}?"
+            },
+            "detail": {
+                "title": "Milli Poor"
+            },
+            "wet": "Wet",
+            "dry": "Dry",
+            "gravimetric": "Gravimetric",
+            "date": "Date",
+            "isSend": "Is Send"
+        }
+    },
+    "niopdcaoApp": {
+        "milliPoor" : {
+            "created": "A new Milli Poor is created with identifier {{ param }}",
+            "updated": "A Milli Poor is updated with identifier {{ param }}",
+            "deleted": "A Milli Poor is deleted with identifier {{ param }}"
+        }
+    }
+}

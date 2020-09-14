@@ -1,0 +1,57 @@
+{
+    "niopdcgatewayApp": {
+        "sellContract": {
+            "home": {
+                "createCreditLabel": "اعتبار",
+                "createQuotaLabel": "سهمیه",
+                "title": "قرارداد فروش",
+                "createLabel": "ایجاد",
+                "editLabel": "ویرایش",
+                "createOrEditLabel": "ایجاد یا ویرایش",
+                "transferQuota": "انتقال سهمیه",
+                "baseInfo": "مشخصات عمومی"
+            },
+            "delete": {
+                "question": "آیا برای حذف موارد تایید نشده این قرارداد فروش مطمئن هستید؟"
+            },
+            "confirm": {
+                "question": "در صورت تایید قرارداد برای انجام هرگونه ویرایش نیاز به الحاقیه می باشد.؟"
+            },
+            "detail": {
+                "title": "قرارداد فروش"
+            },
+            "createdDate": "تاریخ ثبت قرارداد",
+            "startDate": "تاريخ شروع قرارداد",
+            "finishDate": "تاريخ پايان قرارداد",
+            "exportationDate": "تاريخ صدور قرارداد",
+            "contractNo": "شماره قرارداد",
+            "description": "توضيحات",
+            "contractType": "نوع قرارداد",
+            "active": "تایید شده",
+            "activeFalse": "پیش نویس",
+            "activeTrue": "تایید شده",
+            "customer": "مشتریان طرف قرارداد",
+            "person": "اشخاص طرف قرارداد",
+            "sellContractOwner": "صاحب امتیاز قرارداد",
+            "sellContractProduct": "فرآورده های قرارداد",
+            "customers": "مشتریان",
+            "calculateTax": "محاسبه ارزش افزوده",
+            "people": "صاحب امتیازان",
+            "amount": "مقدار سهمیه",
+            "fromSellContractProduct": "از فرآورده قرارداد",
+            "toSellContractProduct": "به فرآورده قرارداد",
+            "addendumNumber": "شماره الحاقیه",
+            "addendum": "سابقه قرارداد",
+            "exchangeDate": "تاریخ معامله بورس",
+            "exchangeNumber": "شماره معامله بورس"
+        }
+    },
+    "niopdcbaseApp": {
+        "sellContract": {
+            "created": "قرارداد فروش با موفقیت ایجاد شد.",
+            "updated": "قرارداد فروش با موفقیت ویرایش شد.",
+            "deleted": "موارد تایید نشده قرارداد فروش با موفقیت حذف شد.",
+            "confirmed": "قرارداد فروش با شماره {{param}} موفقیت تایید شد."
+        }
+    }
+}

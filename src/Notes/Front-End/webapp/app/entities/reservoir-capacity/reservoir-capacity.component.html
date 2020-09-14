@@ -1,0 +1,81 @@
+<div>
+    <h2>
+        <span jhiTranslate="niopdcgatewayApp.reservoirCapacity.home.title">Reservoir Capacities</span>
+        <button class="btn btn-primary float-right jh-create-entity create-reservoir-capacity" [routerLink]="['/', { outlets: { popup: ['reservoir-capacity-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="niopdcgatewayApp.reservoirCapacity.home.createLabel">
+            Create new Reservoir Capacity
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-success></jhi-alert-success>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="reservoirCapacities">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="capacity"><span jhiTranslate="niopdcgatewayApp.reservoirCapacity.capacity">Capacity</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="active"><span jhiTranslate="niopdcgatewayApp.reservoirCapacity.active">Active</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="productTitle"><span jhiTranslate="niopdcgatewayApp.reservoirCapacity.product">Product</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="personName"><span jhiTranslate="niopdcgatewayApp.reservoirCapacity.person">Person</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let reservoirCapacity of reservoirCapacities ;trackBy: trackId">
+                <td><a [routerLink]="['../reservoir-capacity', reservoirCapacity.id ]">{{reservoirCapacity.id}}</a></td>
+                <td>{{reservoirCapacity.capacity}}</td>
+                <td>{{reservoirCapacity.active}}</td>
+                <td>
+                    <div *ngIf="reservoirCapacity.productId">
+                        <a [routerLink]="['../product', reservoirCapacity.productId  ]" >{{reservoirCapacity.productTitle}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="reservoirCapacity.personId">
+                        <a [routerLink]="['../person', reservoirCapacity.personId  ]" >{{reservoirCapacity.personName}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../reservoir-capacity', reservoirCapacity.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'reservoir-capacity/'+ reservoirCapacity.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'reservoir-capacity/'+ reservoirCapacity.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pager is not implemented yet, so this is normal pagination instead -->
+    <div *ngIf="reservoirCapacities && reservoirCapacities.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

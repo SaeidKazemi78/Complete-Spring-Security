@@ -1,0 +1,12 @@
+{
+    "niopdcgatewayApp": {
+        "aoMountReport": {
+            "home": {
+                "title": "گزارش ماهانه اداره سوختگیری"
+            },
+            "startDate": "از تاریخ",
+            "finishDate": "تا تاریخ"
+        }
+    }
+}
+

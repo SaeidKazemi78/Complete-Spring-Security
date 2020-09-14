@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import schemaLocation="http://172.17.75.2:8082/Service1.svc?xsd=xsd2"
+               namespace="http://schemas.datacontract.org/2004/07/AnbarService"/>
+    <xs:element name="GetData">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="value" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetDataResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetDataResult" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetDriverWithNationalCode">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="nationalCode" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetDriverWithNationalCodeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetDriverWithNationalCodeResult" nillable="true"
+                            type="q1:DataComplexType._tblDriver"
+                            xmlns:q1="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetStatusCarNiroogah">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="req" nillable="true" type="q2:DataComplexType._StatusCarRequest"
+                            xmlns:q2="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetStatusCarNiroogahResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetStatusCarNiroogahResult" nillable="true"
+                            type="q3:DataComplexType._StatusCarResult"
+                            xmlns:q3="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetFromMonitoringSended">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="myowid" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetFromMonitoringSendedResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetFromMonitoringSendedResult" nillable="true"
+                            type="q4:ArrayOfDataComplexType._WaybillObj"
+                            xmlns:q4="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AcceptSended">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="lst" nillable="true" type="q5:ArrayOfDataComplexType._waybillId"
+                            xmlns:q5="http://schemas.datacontract.org/2004/07/AnbarService"/>
+                <xs:element minOccurs="0" name="type" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AcceptSendedResponse">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetFromMonitoringRecieve">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="myowid" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetFromMonitoringRecieveResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetFromMonitoringRecieveResult" nillable="true"
+                            type="q6:ArrayOfDataComplexType._WaybillObj"
+                            xmlns:q6="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetFromMonitoringSendedWithWaybill">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="myowid" type="xs:int"/>
+                <xs:element minOccurs="0" name="WaybillId" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetFromMonitoringSendedWithWaybillResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetFromMonitoringSendedWithWaybillResult" nillable="true"
+                            type="q7:DataComplexType._WaybillObj"
+                            xmlns:q7="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetWaybillFromMonitoring">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="WaybillId" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetWaybillFromMonitoringResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetWaybillFromMonitoringResult" nillable="true"
+                            type="q8:DataComplexType._WaybillObj"
+                            xmlns:q8="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InsertDumping">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="Waybill" nillable="true" type="q9:DataComplexType._DumpedaybillObj"
+                            xmlns:q9="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InsertDumpingResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="InsertDumpingResult" nillable="true"
+                            type="q10:DataComplexType._waybillId"
+                            xmlns:q10="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="IsDumped">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="BarNo" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="IsDumpedResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="IsDumpedResult" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendMojoodiFaravardeh">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="req" nillable="true"
+                            type="q11:ArrayOfDataComplexType._SendMojoodiFaravardehRequest"
+                            xmlns:q11="http://schemas.datacontract.org/2004/07/AnbarService"/>
+                <xs:element minOccurs="0" name="isMovazeneh" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendMojoodiFaravardehResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="SendMojoodiFaravardehResult" nillable="true"
+                            type="q12:ArrayOfDataComplexType._SendMojoodiFaravardehResult"
+                            xmlns:q12="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetCarExtraInfoWithPelakNo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="req" nillable="true" type="q13:DataComplexType._ExtraInfoReq"
+                            xmlns:q13="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetCarExtraInfoWithPelakNoResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetCarExtraInfoWithPelakNoResult" nillable="true"
+                            type="q14:DataComplexType._tblCarExtraInfo"
+                            xmlns:q14="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendMojoodiFaravardehTada">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="req" nillable="true" type="q15:ArrayOfDataComplexType._TadaRequest"
+                            xmlns:q15="http://schemas.datacontract.org/2004/07/AnbarService"/>
+                <xs:element minOccurs="0" name="date" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="owID" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="senderOWID" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendMojoodiFaravardehTadaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="SendMojoodiFaravardehTadaResult" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetBarnamehCount">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="Zone" type="xs:int"/>
+                <xs:element minOccurs="0" name="Date" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetBarnamehCountResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetBarnamehCountResult" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendUntrustTada">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="req" nillable="true" type="q16:ArrayOfDataComplexType._TadaRequest"
+                            xmlns:q16="http://schemas.datacontract.org/2004/07/AnbarService"/>
+                <xs:element minOccurs="0" name="date" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="owID" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="senderOWID" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendUntrustTadaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="SendUntrustTadaResult" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendMojoodiFaravardehTadaMonthly">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="req" nillable="true"
+                            type="q17:ArrayOfDataComplexType._SendMojoodiFaravardehRequest"
+                            xmlns:q17="http://schemas.datacontract.org/2004/07/AnbarService"/>
+                <xs:element minOccurs="0" name="owID" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendMojoodiFaravardehTadaMonthlyResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="SendMojoodiFaravardehTadaMonthlyResult" nillable="true"
+                            type="q18:DataComplexType._SendMojoodiFaravardehResult"
+                            xmlns:q18="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetWaybillRangeAnbar">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="MyOwid" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetWaybillRangeAnbarResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetWaybillRangeAnbarResult" nillable="true"
+                            type="q19:DataComplexType._WaybillRange"
+                            xmlns:q19="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetWaybillRangeSell">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="TaCode" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetWaybillRangeSellResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetWaybillRangeSellResult" nillable="true"
+                            type="q20:DataComplexType._WaybillRange"
+                            xmlns:q20="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetLastWaybillId">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="ZoneId" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetLastWaybillIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetLastWaybillIdResult" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InsertSealDataToTada">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="Seal" nillable="true" type="q21:DataComplexType._TadaWaybillSeal"
+                            xmlns:q21="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InsertSealDataToTadaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="InsertSealDataToTadaResult" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetRange">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="SLastNumber" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="SCount" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetRangeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetRangeResult" nillable="true" type="q22:DataComplexType._WaybillRange"
+                            xmlns:q22="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetKholaseAnbar">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="list" nillable="true"
+                            type="q23:ArrayOfDataComplexType._TadaKholaseAnbar"
+                            xmlns:q23="http://schemas.datacontract.org/2004/07/AnbarService"/>
+                <xs:element minOccurs="0" name="MyOwid" type="xs:int"/>
+                <xs:element minOccurs="0" name="FromDate" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="ToDate" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetKholaseAnbarResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetKholaseAnbarResult" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetDataFromNavgan">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetDataFromNavganResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetDataFromNavganResult" nillable="true"
+                            type="q24:DataComplexType._GetDataNavganResult"
+                            xmlns:q24="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetActivitiTypeCode">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="count" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetActivitiTypeCodeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetActivitiTypeCodeResult" nillable="true"
+                            type="q25:ArrayOfDataComplexType._NaftkeshActivityType"
+                            xmlns:q25="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetCountOfCar">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetCountOfCarResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetCountOfCarResult" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CheckNavganIsOk">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CheckNavganIsOkResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="CheckNavganIsOkResult" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetProductDestination">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="b" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetProductDestinationResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetProductDestinationResult" nillable="true"
+                            type="q26:ArrayOfDataComplexType._GetProductDest"
+                            xmlns:q26="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetProductDestinationCount">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="Owid" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetProductDestinationCountResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetProductDestinationCountResult" nillable="true"
+                            type="q27:ArrayOfDataComplexType._GetProductDest"
+                            xmlns:q27="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InsertNavganStatusProdDest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="CarId" type="xs:int"/>
+                <xs:element minOccurs="0" name="src" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InsertNavganStatusProdDestResponse">
+        <xs:complexType>
+            <xs:sequence/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetDataFromNavganWithType">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="code" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="type" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetDataFromNavganWithTypeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetDataFromNavganWithTypeResult" nillable="true"
+                            type="q28:ArrayOfDataComplexType._PymanResult"
+                            xmlns:q28="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetPymanListFromNavgan">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetPymanListFromNavganResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetPymanListFromNavganResult" nillable="true"
+                            type="q29:ArrayOfDataComplexType._GetDataNavgan_Pyman_Sell"
+                            xmlns:q29="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetOneDataFromNavgan">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="PlakNo" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="seri" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetOneDataFromNavganResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetOneDataFromNavganResult" nillable="true"
+                            type="q30:DataComplexType._GetDataNavganResult"
+                            xmlns:q30="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendMojoodiMakhazenData">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="req" nillable="true"
+                            type="q31:ArrayOfDataComplexType._SendMojoodiMakhazenRequest"
+                            xmlns:q31="http://schemas.datacontract.org/2004/07/AnbarService"/>
+                <xs:element minOccurs="0" name="date" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="owID" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendMojoodiMakhazenDataResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="SendMojoodiMakhazenDataResult" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendSevenPageSellData">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="req" nillable="true"
+                            type="q32:ArrayOfDataComplexType._SevenPageSellContract"
+                            xmlns:q32="http://schemas.datacontract.org/2004/07/AnbarService"/>
+                <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="nahiyeCode" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendSevenPageSellDataResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="SendSevenPageSellDataResult" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="sendHavalehToAnbar">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="list" nillable="true" type="q33:ArrayOfDataComplexType.HavalehObject"
+                            xmlns:q33="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="sendHavalehToAnbarResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="sendHavalehToAnbarResult" nillable="true"
+                            type="q34:ArrayOfDataComplexType.SendHavalehResult"
+                            xmlns:q34="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="sendTankCapacity">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="list" nillable="true"
+                            type="q35:ArrayOfDataComplexType.tblTankCapacityRequest"
+                            xmlns:q35="http://schemas.datacontract.org/2004/07/AnbarService"/>
+                <xs:element minOccurs="0" name="owid" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="sendTankCapacityResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="sendTankCapacityResult" nillable="true"
+                            type="q36:ArrayOfDataComplexType.tblTankCapacityResult"
+                            xmlns:q36="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetHamlPomps">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="owid" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetHamlPompsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetHamlPompsResult" nillable="true"
+                            type="q37:ArrayOfDataComplexType.PompsHaml"
+                            xmlns:q37="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendBarnameh_OS">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="list" nillable="true" type="q38:ArrayOfDataComplexType.Barnameh_OS"
+                            xmlns:q38="http://schemas.datacontract.org/2004/07/AnbarService"/>
+                <xs:element minOccurs="0" name="OwID" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendBarnameh_OSResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="SendBarnameh_OSResult" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendDaryafti_OS">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="list" nillable="true" type="q39:ArrayOfDataComplexType.Daryaft_OS"
+                            xmlns:q39="http://schemas.datacontract.org/2004/07/AnbarService"/>
+                <xs:element minOccurs="0" name="OwID" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendDaryafti_OSResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="SendDaryafti_OSResult" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendMojoodi_OS">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="list" nillable="true" type="q40:ArrayOfDataComplexType.Mojoodi_OS"
+                            xmlns:q40="http://schemas.datacontract.org/2004/07/AnbarService"/>
+                <xs:element minOccurs="0" name="OwID" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendMojoodi_OSResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="SendMojoodi_OSResult" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendSevenPage_OS">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="list" nillable="true" type="q41:ArrayOfDataComplexType.SevenPage_OS"
+                            xmlns:q41="http://schemas.datacontract.org/2004/07/AnbarService"/>
+                <xs:element minOccurs="0" name="OwID" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendSevenPage_OSResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="SendSevenPage_OSResult" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendTicket_OS">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="list" nillable="true" type="q42:ArrayOfDataComplexType.Ticket_OS"
+                            xmlns:q42="http://schemas.datacontract.org/2004/07/AnbarService"/>
+                <xs:element minOccurs="0" name="OwID" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="toDate" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SendTicket_OSResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="SendTicket_OSResult" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetInquiryFromNavgan">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="PlakNo" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="seri" nillable="true" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetInquiryFromNavganResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetInquiryFromNavganResult" nillable="true"
+                            type="q43:ArrayOfDataComplexType._GetInquiryNavganResult"
+                            xmlns:q43="http://schemas.datacontract.org/2004/07/AnbarService"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

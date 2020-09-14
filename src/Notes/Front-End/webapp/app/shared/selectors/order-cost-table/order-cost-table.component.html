@@ -1,0 +1,62 @@
+<div>
+    <div>
+        <label [style.color]="productColor" (focus)="showTable()">
+            {{sumCost | separator}}
+            <a class="text-primary" (click)="showTable()">
+                <span class="fa fa-search"></span>
+            </a>
+        </label>
+    </div>
+    <div [style.visibility]="!overlayVisible ? 'collapse' : 'visible'"
+         [style.height]="!overlayVisible ? '0' : 'none'"
+         [style.overflow]="!overlayVisible ? 'hidden' : 'visible'"
+         [style.width]="widthGrid" style="padding: 0; position: relative; float: left"
+         class="d-inline-block rounded dataGrid">
+        <p-table [value]="costResponses" [responsive]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th jhiTranslate="niopdcgatewayApp.costGroup.costGroup"></th>
+                    <th jhiTranslate="niopdcgatewayApp.order.priceAmount"></th>
+                    <th jhiTranslate="niopdcgatewayApp.cost.costAction"></th>
+                    <th jhiTranslate="niopdcgatewayApp.costGroup.productRateEffect"></th>
+                </tr>
+            </ng-template>
+            <ng-template  let-item pTemplate="body">
+                <tr>
+                    <td><span>{{item.costGroupTitle + (item.costRelated ? ' (' + ('niopdcgatewayApp.CostRelated.' + item.costRelated | translate) + ')' : '')}}</span></td>
+                    <td><span>{{item.price | separator}}</span></td>
+                    <td><span>{{'niopdcgatewayApp.CostAction.' + item.costAction | translate}}</span></td>
+                    <td><span class="fa" [ngClass]="{'fa-check':item.productRateEffect,'fa-close':!item.productRateEffect}"></span></td>
+                </tr>
+
+            </ng-template>
+            <!--<p-column field="costGroupTitle" [sortable]="true"-->
+                     <!--[header]="amir" >-->
+                <!--{{'' | translate}}-->
+                <!--<ng-template let-item="rowData" pTemplate="body">-->
+                    <!--{{item.costGroupTitle + (item.costRelated ? ' (' + ('niopdcgatewayApp.CostRelated.' + item.costRelated | translate) + ')' : '')}}-->
+                <!--</ng-template>-->
+            <!--</p-column>-->
+            <!--<p-column field="price" [sortable]="true"-->
+                      <!--[headerText]="'' | translate">-->
+                <!--<ng-template let-item="rowData" pTemplate="body">-->
+                    <!--<span></span>-->
+                <!--</ng-template>-->
+            <!--</p-column>-->
+            <!--<p-column field="costAction" [sortable]="true"-->
+                      <!--[headerText]="'' | translate">-->
+                <!--<ng-template let-item="rowData" pTemplate="body">-->
+                    <!--<span></span>-->
+                <!--</ng-template>-->
+            <!--</p-column>-->
+            <!--<p-column field="productRateEffect" [sortable]="true"-->
+                      <!--[headerText]="'' | translate">-->
+                <!--<ng-template let-item="rowData" pTemplate="body">-->
+
+                <!--</ng-template>-->
+            <!--</p-column>-->
+        </p-table>
+    </div>
+</div>
+
+

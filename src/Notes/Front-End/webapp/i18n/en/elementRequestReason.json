@@ -1,0 +1,14 @@
+{
+    "niopdcgatewayApp": {
+        "ElementRequestReason" : {
+            "null": "",
+            "MAX_DIFF": "MAX_DIFF",
+            "MAX_TIME_ELAPSED": "MAX_TIME_ELAPSED",
+            "UNACCEPTABLE_DROP": "UNACCEPTABLE_DROP",
+            "UNACCEPTABLE_RESULT": "UNACCEPTABLE_RESULT",
+            "ABNORMAL_RESULT": "ABNORMAL_RESULT",
+            "TEARING_ELEMENT": "TEARING_ELEMENT",
+            "SUDDEN_DROP": "SUDDEN_DROP"
+        }
+    }
+}

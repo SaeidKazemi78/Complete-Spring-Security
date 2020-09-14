@@ -1,0 +1,34 @@
+
+{
+    "niopdcgatewayApp": {
+        "containerRate" : {
+            "home": {
+                "title": "Container Rates",
+                "createLabel": "Create a new Container Rate",
+                "createOrEditLabel": "Create or edit a Container Rate"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Container Rate {{ id }}?"
+            },
+            "detail": {
+                "title": "Container Rate"
+            },
+            "containerId": "Container Id",
+            "src": "Src",
+            "title": "Title",
+            "price": "Price",
+            "hasTax": "Has Tax",
+            "startDate": "Start Date",
+            "finishDate": "Finish Date",
+            "currency": "Currency",
+            "currencyRateGroup": "Currency Rate Group"
+        }
+    },
+    "niopdcrateApp": {
+        "containerRate" : {
+            "created": "A new Container Rate is created with identifier {{ param }}",
+            "updated": "A Container Rate is updated with identifier {{ param }}",
+            "deleted": "A Container Rate is deleted with identifier {{ param }}"
+        }
+    }
+}

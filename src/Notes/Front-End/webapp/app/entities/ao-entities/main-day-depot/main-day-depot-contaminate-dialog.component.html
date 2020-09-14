@@ -1,0 +1,22 @@
+<form name="closeForm" (ngSubmit)="confirmContaminate(mainDayDepot.id)">
+    <div class="modal-header">
+        <h4 class="modal-title" jhiTranslate="entity.contaminate.title">Confirm close operation</h4>
+        <button type="button" class="contaminate" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <p jhiTranslate="niopdcgatewayApp.mainDayDepot.contaminate.question"
+           [translateValues]="{id: mainDayDepot.id}">Are
+            you sure you want to contaminate this Main Day Depot?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" class="btn btn-danger">
+            <span class="fa fa-remove"></span>&nbsp;<span jhiTranslate="entity.action.contaminate">Contaminate</span>
+        </button>
+    </div>
+</form>

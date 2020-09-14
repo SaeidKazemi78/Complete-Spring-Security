@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "TypeOfDangerousCertificateCard" : {
+            "null": "",
+            "TEMPORARY": "TEMPORARY",
+            "ALWAYS": "ALWAYS"
+        }
+    }
+}

@@ -1,0 +1,27 @@
+
+{
+    "niopdcgatewayApp": {
+        "baseQuery" : {
+            "home": {
+                "title": "Base Queries",
+                "createLabel": "Create a new Base Query",
+                "createOrEditLabel": "Create or edit a Base Query"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Base Query {{ id }}?"
+            },
+            "detail": {
+                "title": "Base Query"
+            },
+            "title": "Title",
+            "tempQuery": "Temp Query"
+        }
+    },
+    "niopdcaccountingApp": {
+        "baseQuery" : {
+            "created": "A new Base Query is created with identifier {{ param }}",
+            "updated": "A Base Query is updated with identifier {{ param }}",
+            "deleted": "A Base Query is deleted with identifier {{ param }}"
+        }
+    }
+}

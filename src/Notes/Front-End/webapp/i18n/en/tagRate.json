@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "tagRate" : {
+            "home": {
+                "title": "Tag Rates",
+                "createLabel": "Create a new Tag Rate",
+                "createOrEditLabel": "Create or edit a Tag Rate"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Tag Rate {{ id }}?"
+            },
+            "detail": {
+                "title": "Tag Rate"
+            },
+            "sellPrice": "Sell Price",
+            "startDate": "Start Date",
+            "finishDate": "Finish Date",
+            "location": "Location"
+        }
+    },
+    "niopdcbaseApp": {
+        "tagRate" : {
+            "created": "A new Tag Rate is created with identifier {{ param }}",
+            "updated": "A Tag Rate is updated with identifier {{ param }}",
+            "deleted": "A Tag Rate is deleted with identifier {{ param }}"
+        }
+    }
+}

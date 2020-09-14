@@ -1,0 +1,109 @@
+<div class="component">
+    <p-breadcrumb [model]="breadcrumbItems"></p-breadcrumb>
+    <jhi-alert-success></jhi-alert-success>
+    <jhi-alert-error></jhi-alert-error>
+
+
+    <br/>
+    <p-dataTable #dt [value]="wallets" [lazy]="true" [rows]="itemsPerPage" [rowsPerPageOptions]="[5,10,20,totalItems]"
+                 [paginator]="true" [responsive]="true" [stacked]="false"
+                 [totalRecords]="totalItems" (onLazyLoad)="loadLazy($event)">
+        <p-header>
+            <div class="ui-helper-clearfix">
+                <form class="form"  name="editForm" role="form" novalidate (ngSubmit)="startBankTransaction()" #editForm="ngForm">
+                    <div class="row">
+
+                        <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.wallet.amount"
+                                   for="field_amount">Amount</label>
+                            <input type="number" class="form-control" name="amount"
+                                   id="field_amount"
+                                   [(ngModel)]="wallet.amount" required="required"/>
+                        </div>
+                        </div>
+
+                        <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="form-control-label"
+                                   jhiTranslate="niopdcgatewayApp.niopdcBankAccountType.home.title"
+                                   for="field_bankAccount">Bank Account</label>
+                            <select class="form-control" id="field_bankAccount" name="bankAccount"
+                                    [(ngModel)]="wallet.bankAccountTypeId" required>
+                                <option [ngValue]="null"></option>
+                                <option [ngValue]="niopdcBankAccountOption.id"
+                                        *ngFor="let niopdcBankAccountOption of niopdcbankaccountTypes; trackBy: trackNiopdcBankAccountTypeById">
+                                    {{niopdcBankAccountOption.title}}
+                                </option>
+                            </select>
+                        </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       jhiTranslate="niopdcgatewayApp.wallet.customer"
+                                       for="field_customerId">Product</label>
+                                <select class="form-control" id="field_customerId"
+                                        name="customerId"
+                                        [(ngModel)]="wallet.customerId"
+                                required>
+                                    <option [ngValue]="customerOption.value"
+                                            *ngFor="let customerOption of customerOptions">
+                                        {{customerOption.label}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <button type="submit" [disabled]="editForm.form.invalid || transactionStarted" class="btn btn-primary " style="margin-top: 20px">
+                                <span class="fa fa-plus"></span>
+                                <span jhiTranslate="niopdcgatewayApp.wallet.add"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </p-header>
+
+        <p-headerColumnGroup>
+            <p-row>
+
+                <p-column field="customerName" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.wallet.customer">customer</span>
+                    </ng-template>
+                </p-column>
+
+                <p-column field="amount" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.wallet.amount">Amount</span>
+                    </ng-template>
+                </p-column>
+                <p-column field="bankAccountTypeTitle" [sortable]="true">
+                    <ng-template pTemplate="header">
+                        <span jhiTranslate="niopdcgatewayApp.wallet.bankAccountType">bankAccountType</span>
+                    </ng-template>
+                </p-column>
+            </p-row>
+        </p-headerColumnGroup>
+
+        <p-column field="customerName" [header]="'niopdcgatewayApp.wallet.amount' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span>{{(item.customerName == null ? '-----' : item.customerName) }}</span>
+            </ng-template>
+        </p-column>
+        <p-column field="amount" [header]="'niopdcgatewayApp.wallet.amount' | translate">
+            <ng-template let-item="rowData" pTemplate="body">
+                <span>{{item.amount | separator}}</span>
+            </ng-template>
+
+
+        </p-column>
+        <p-column field="bankAccountTypeTitle" [header]="'niopdcgatewayApp.wallet.amount' | translate"></p-column>
+
+    </p-dataTable>
+
+</div>

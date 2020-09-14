@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "TestResultType" : {
+            "null": "",
+            "PLUNGING": "آزمایش غوطه وری",
+            "BASE": "آزمایش سوخت",
+            "MICROB": "MICROB"
+        }
+    }
+}

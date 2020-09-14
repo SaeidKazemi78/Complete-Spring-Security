@@ -1,0 +1,29 @@
+
+{
+    "niopdcgatewayApp": {
+        "vehicleCapacity" : {
+            "home": {
+                "title": "ایجادباک",
+                "createLabel": "ایجادباک",
+                "createOrEditLabel": "ویرایش ایجاد باک",
+                "vehicleModelTitle":"مدل وسیله نقلیه"
+            },
+            "delete": {
+                "question": "آیا برای حذف این اندازه گیری باک مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "اندازه گیری باگ"
+            },
+            "capacity": "ظرفیت",
+            "vehicleModel": "مدل وسیله نقلیه",
+            "product": "فرآورده"
+        }
+    },
+    "niopdcbaseApp": {
+        "vehicleCapacity" : {
+            "created": "اندازه گیری باک با موفقیت ایجاد شد.",
+            "updated": "اندازه گیری باک با موفقیت ویرایش شد.",
+            "deleted": "اندازه گیری باک با موفقیت حذف شد."
+        }
+    }
+}

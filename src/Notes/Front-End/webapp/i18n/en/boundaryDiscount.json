@@ -1,0 +1,31 @@
+
+{
+    "niopdcgatewayApp": {
+        "boundaryDiscount" : {
+            "home": {
+                "title": "Boundary Discounts",
+                "createLabel": "Create a new Boundary Discount",
+                "createOrEditLabel": "Create or edit a Boundary Discount"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Boundary Discount {{ id }}?"
+            },
+            "detail": {
+                "title": "Boundary Discount"
+            },
+            "liter": "Liter",
+            "kilometer": "Kilometer",
+            "product": "Product",
+            "location": "Location",
+            "country": "Country",
+            "vehicleModel": "Vehicle Model"
+        }
+    },
+    "niopdcbaseApp": {
+        "boundaryDiscount" : {
+            "created": "A new Boundary Discount is created with identifier {{ param }}",
+            "updated": "A Boundary Discount is updated with identifier {{ param }}",
+            "deleted": "A Boundary Discount is deleted with identifier {{ param }}"
+        }
+    }
+}

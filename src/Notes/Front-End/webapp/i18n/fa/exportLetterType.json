@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "ExportLetterType" : {
+            "null": "",
+            "EXCHANGE": "اعلامیه بورس",
+            "NORMAL": "تفاهم نامه"
+        }
+    }
+}

@@ -1,0 +1,221 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="depot.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.depot.home.createLabel">
+            Create</h4>
+        <h4 *ngIf="depot.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="niopdcgatewayApp.depot.home.createOrEditLabel">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="niopdcgatewayApp.depot.home.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.depot.title"
+                           for="field_title">Title</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="title" id="field_title"
+                           [(ngModel)]="depot.title"
+                           required minlength="3" maxlength="42"/>
+                    <div
+                        [hidden]="!(editForm.controls.title?.dirty && editForm.controls.title?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 3 }">
+                            This field is required to be at least 3 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.title?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 42 }">
+                            This field cannot be longer than 42 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.depot.code"
+                           for="field_code">Code</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="code" id="field_code"
+                           [(ngModel)]="depot.code"
+                           [numeric] [pattern]="regexCode"
+                           required minlength="4" maxlength="4"/>
+                    <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 4 }">
+                            This field is required to be at least 4 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.code?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 4 }">
+                            This field cannot be longer than 4 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.depot.accCode"
+                           for="field_accCode">Acc Code</label>
+                    <input [disabled]="isView" type="text" class="form-control" name="accCode" id="field_accCode"
+                           [(ngModel)]="depot.accCode"
+                           minlength="4" maxlength="4"/>
+                    <div
+                        [hidden]="!(editForm.controls.accCode?.dirty && editForm.controls.accCode?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.accCode?.errors?.minlength"
+                               jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 4 }">
+                            This field is required to be at least 4 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.accCode?.errors?.maxlength"
+                               jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 4 }">
+                            This field cannot be longer than 4 characters.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.depot.product"
+                           for="field_product">Product</label>
+                    <p-multiSelect [disabled]="isView" class="form-control" id="field_product"
+                                   [options]="products"
+                                   (onChange)="onChangeProducts($event)"
+                                   name="product"
+                                   [defaultLabel]="'global.messages.info.choose' | translate"
+                                   [selectedItemsLabel]="('global.messages.info.selectedItems' | translate)"
+                                   [(ngModel)]="productSelected"
+                                   [ngModelOptions]="{standalone: true}"
+                    ></p-multiSelect>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4" *ngIf="depot.depotType===DepotType[DepotType.DEPOT]">
+                <div class="form-group">
+                    <label jhiTranslate="niopdcgatewayApp.depot.location"
+                           for="field_locations">location</label>
+
+                    <input-location-selector [disabled]="isView" class="form-control" required
+                                             [oneSelection]="false"
+                                             [idSelector]="false"
+                                             (ngModelChange)="locationChanged($event)"
+                                             [(ngModel)]="depot.locations"
+                                             id="field_locations" name="locations"
+                                             [selectOfLevel]="[1,2]"
+                                             [selectByPriority]="true"
+                    >
+
+                    </input-location-selector>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4" *ngIf="depot.depotType===DepotType[DepotType.DEPOT]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.depot.locationId"
+                           for="field_location">Location</label>
+                    <select [disabled]="isView" class="form-control" id="field_location" name="location"
+                            [(ngModel)]="depot.locationId"
+                            required>
+                        <option *ngIf="!editForm.value.location" [ngValue]="null" selected></option>
+                        <option *ngFor="let locationOption of locations; trackBy: trackLocationById"
+                                [ngValue]="locationOption.id">
+                            {{locationOption.name}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.location?.dirty && editForm.controls.location?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.location?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-6">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.depot.depotType"
+                           for="field_depotType">Depot Type</label>
+                    <select [disabled]="isView" class="form-control" name="depotType" [(ngModel)]="depot.depotType"
+                            (ngModelChange)="onChangeDepotType($event)"
+                            id="field_depotType"
+                            required>
+                        <option value="DEPOT">{{'niopdcgatewayApp.DepotType.DEPOT' | translate}}</option>
+                        <option value="REFUELING_UNIT">{{'niopdcgatewayApp.DepotType.REFUELING_UNIT' | translate}}
+                        </option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.depotType?.dirty && editForm.controls.depotType?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.depotType?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6" *ngIf="depot.depotType===DepotType[DepotType.REFUELING_UNIT]">
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.depot.refuelCenterId"
+                           for="field_refuelCenter">refuel Center</label>
+                    <select [disabled]="isView" class="form-control" id="field_refuelCenter" name="refuelCenter"
+                            [(ngModel)]="depot.refuelCenterId"
+                            required>
+                        <option [ngValue]="null" selected></option>
+                        <option *ngFor="let refuelCenter of refuelCenters;"
+                                [ngValue]="refuelCenter.id">
+                            {{refuelCenter.persianTitle}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.depot.counterPath"
+                       for="field_counterPath">Current Order Number</label>
+                <input [disabled]="isView" type="text" class="form-control"
+                       name="counterPath"
+                       id="field_counterPath"
+                       [(ngModel)]="depot.counterPath"
+                />
+            </div>
+            <div class="col-md-6">
+                <label class="form-control-label" jhiTranslate="niopdcgatewayApp.depot.webServiceUrl"
+                       for="field_webServiceUrl">webServiceUrl</label>
+                <input [disabled]="isView" type="text" class="form-control"
+                       name="webServiceUrl"
+                       id="field_webServiceUrl"
+                       [(ngModel)]="depot.webServiceUrl"
+                />
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

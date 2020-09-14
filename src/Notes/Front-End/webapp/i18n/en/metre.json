@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "metre" : {
+            "home": {
+                "title": "Metres",
+                "createLabel": "Create a new Metre",
+                "createOrEditLabel": "Create or edit a Metre"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Metre {{ id }}?"
+            },
+            "detail": {
+                "title": "Metre"
+            },
+            "title": "Title",
+            "maxMetre": "Max Metre",
+            "amount": "Amount",
+            "active": "Active",
+            "oilTank": "Oil Tank"
+        }
+    },
+    "niopdcaoApp": {
+        "metre" : {
+            "created": "A new Metre is created with identifier {{ param }}",
+            "updated": "A Metre is updated with identifier {{ param }}",
+            "deleted": "A Metre is deleted with identifier {{ param }}"
+        }
+    }
+}

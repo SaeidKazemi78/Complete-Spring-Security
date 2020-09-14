@@ -1,0 +1,39 @@
+<div>
+    <div class="input-group">
+        <input #inp class="textInput form-control" style="border:0; height: unset;"
+               [readonly]="!disabled" [disabled]="disabled"
+               [ngModel]="(multiSelect) ? ((selects && selects.length && selects.length > 0) ? selects.length + ' مورد انتخاب شد' : 'موردی انتخاب نشده است') : selects ?(selects.name): ''"
+               (focus)="showTable()">
+        <a *ngIf="!disabled" class="input-group-append btn btn-outline-secondary rtl-btn" (click)="showTable()">
+            <span class="fa fa-search"></span>
+        </a>
+    </div>
+    <div [style.visibility]="!overlayVisible ? 'collapse' : 'visible'"
+         [style.height]="!overlayVisible ? '0' : 'none'"
+         [style.overflow]="!overlayVisible ? 'hidden' : 'visible'"
+         [style.width]="widthGrid" style="padding: 0;"
+         class="d-inline-block rounded dataGrid">
+        <p-dataTable [value]="locations"
+                     [selectionMode]="multiSelect ? 'multiple' : 'single'"
+                     [(selection)]="selects"
+                     (onRowUnselect)="onSelect($event, false)"
+                     (onRowSelect)="onSelect($event, true)"
+                     [rows]="5"
+                     [rowsPerPageOptions]="[5,10,20]"
+                     [paginator]="true"
+                     [responsive]="true"
+                     [stacked]="false"
+
+        >
+            <p-column [style]="{'width':'38px'}" [selectionMode]="multiSelect ? 'multiple' : 'single'"></p-column>
+            <p-column field="name" [filter]="true" filterMatchMode="contains" [sortable]="true"
+                      [header]="'niopdcgatewayApp.location.level3name' | translate">
+                <ng-template let-cole="rowData" pTemplate="body">
+                    <span>{{cole.name}}</span>
+                </ng-template>
+            </p-column>
+        </p-dataTable>
+    </div>
+</div>
+
+

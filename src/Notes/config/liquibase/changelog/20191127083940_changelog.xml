@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="jafari (generated)" id="1574844057213-1">
+        <addColumn tableName="vehicle_model">
+            <column name="capacity" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="jafari (generated)" id="1574844057213-2">
+        <addColumn tableName="vehicle_model_aud">
+            <column name="capacity" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="jafari (generated)" id="1574844057213-3">
+        <addColumn tableName="vehicle_model">
+            <column name="product_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="jafari (generated)" id="1574844057213-4">
+        <addColumn tableName="vehicle_model_aud">
+            <column name="product_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="jafari (generated)" id="1574844057213-5">
+        <dropColumn tableName="vehicle_model">
+            <column name="product_id" type="bigint"/>
+        </dropColumn>
+    </changeSet>
+    <changeSet author="jafari (generated)" id="1574844057213-6">
+        <dropColumn tableName="vehicle_model_aud">
+            <column name="product_id" type="bigint"/>
+        </dropColumn>
+    </changeSet>
+</databaseChangeLog>

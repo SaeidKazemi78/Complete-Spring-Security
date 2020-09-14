@@ -1,0 +1,111 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="menu.id==null" class="modal-title" id="createLabel"
+                                  jhiTranslate="entity.action.create">
+            Create
+        </h4>
+        <h4 *ngIf="menu.id!=null && !isView" class="modal-title" id="editLabel"
+                                             jhiTranslate="entity.action.edit">
+            Edit
+        </h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View
+        </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            (click)="clear()">&times;
+        </button>
+
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.menu.title" for="field_name">
+                            Name
+                        </label>
+                        <input [disabled]="isView" type="text" class="form-control" name="nameds" id="field_name"
+                            [(ngModel)]="menu.title" required/>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.menu.routerLink"
+                               for="field_routerLink">
+                            Name
+                        </label>
+                        <input [disabled]="isView" type="text" class="form-control" name="namasdsae"
+                                                   id="field_routerLink"
+                            [(ngModel)]="menu.routerLink" />
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.menu.queryParams"
+                               for="field_routerLink">
+                            Name
+                        </label>
+                        <input style="direction: ltr" [disabled]="isView" type="text" class="form-control"
+                               name="queryParams"
+                               id="field_rsadsaouterLink"
+                            [(ngModel)]="menu.queryParams" />
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.menu.icon"
+                               for="field_routerLink">
+                            Name
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i [ngClass]="iconCss.value"></i>
+                            </span>
+                            <input type="text" name="iconCss" class="form-control"
+                                [iconPicker]="menu.icon"
+                                [ipPosition]="'bottom'"
+                                [ipIconPack]="['fa']"
+                                [ipWidth]="'250px'"
+                                [ipPlaceHolder]="'Choose an icon'"
+                                [ipFallbackIcon]="fallbackIcon"
+                                (iconPickerSelect)="onIconPickerSelect($event)"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="niopdcgatewayApp.menu.priority" for="field_priority">
+                            Name
+                        </label>
+                        <input [disabled]="isView" type="number" class="form-control" name="priority" id="field_priority"
+                            [(ngModel)]="menu.priority" required/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label jhiTranslate="niopdcgatewayApp.role.authorities" for="field_authorities">Authorities</label>
+                <div class="form-group">
+                    <app-authority-selector class="form-control" id="field_authorities"
+                                            style="height: unset"
+                        [disabled]="isView"
+                        (onAuthorities)="authoritiesSelected($event)"
+                        [authGroup]="parentAuthorities"
+                        [authorities]="authorities"
+                    >
+                    </app-authority-selector>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving"
+                                class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

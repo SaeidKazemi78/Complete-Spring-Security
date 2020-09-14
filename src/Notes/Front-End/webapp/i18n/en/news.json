@@ -1,0 +1,34 @@
+
+{
+    "niopdcgatewayApp": {
+        "news" : {
+            "home": {
+                "title": "News",
+                "createLabel": "Create a new News",
+                "createOrEditLabel": "Create or edit a News"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete News {{ id }}?"
+            },
+            "detail": {
+                "title": "News"
+            },
+            "title": "Title",
+            "summary": "Summary",
+            "startDate": "Start Date",
+            "finishDate": "Finish Date",
+            "picture": "Picture",
+            "content": "Content",
+            "newsType": "News Type",
+            "newsAccessType": "News Access Type",
+            "location": "Location"
+        }
+    },
+    "niopdcbaseApp": {
+        "news" : {
+            "created": "A new News is created with identifier {{ param }}",
+            "updated": "A News is updated with identifier {{ param }}",
+            "deleted": "A News is deleted with identifier {{ param }}"
+        }
+    }
+}

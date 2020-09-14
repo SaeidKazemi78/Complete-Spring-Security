@@ -1,0 +1,111 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 *ngIf="requestElement.id==null" class="modal-title" id="createLabel"
+            jhiTranslate="entity.action.create">
+            Create</h4>
+        <h4 *ngIf="requestElement.id!=null && !isView" class="modal-title" id="editLabel"
+            jhiTranslate="entity.action.edit">
+            Edit</h4>
+        <h4 *ngIf="isView" class="modal-title" id="viewLabel" jhiTranslate="entity.action.view">
+            View</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.requestElement.count"
+                           for="field_count">Count</label>
+                    <input [disabled]="isView" type="number" class="form-control" name="count" id="field_count"
+                           [(ngModel)]="requestElement.count" required/>
+                    <div [hidden]="!(editForm.controls.count?.dirty && editForm.controls.count?.invalid)">
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.count?.errors?.required"
+                               jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.count?.errors?.number"
+                               jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label"
+                           jhiTranslate="niopdcgatewayApp.requestElement.requestFilterElement"
+                           for="field_requestFilterElement">Request Filter Element</label>
+                    <select class="form-control" id="field_requestFilterElement" name="requestFilterElement"
+                            [(ngModel)]="requestElement.requestFilterElementId" required>
+                        <option *ngIf="!editForm.value.requestFilterElement" [ngValue]="null" selected></option>
+                        <option [ngValue]="requestFilterElementOption.id"
+                                *ngFor="let requestFilterElementOption of requestfilterelements; trackBy: trackRequestFilterElementById">
+                            {{requestFilterElementOption.id}}
+                        </option>
+                    </select>
+                </div>
+                <div
+                    [hidden]="!(editForm.controls.requestFilterElement?.dirty && editForm.controls.requestFilterElement?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.requestFilterElement?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="niopdcgatewayApp.requestElement.element"
+                           for="field_element">Element</label>
+                    <select class="form-control" id="field_element" name="element"
+                            [(ngModel)]="requestElement.elementId" required>
+                        <option *ngIf="!editForm.value.element" [ngValue]="null" selected></option>
+                        <option [ngValue]="elementOption.id"
+                                *ngFor="let elementOption of elements; trackBy: trackElementById">{{elementOption.id}}
+                        </option>
+                    </select>
+                </div>
+                <div [hidden]="!(editForm.controls.element?.dirty && editForm.controls.element?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.element?.errors?.required"
+                           jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="niopdcgatewayApp.requestElement.lastChangeDateElement"
+                   for="field_lastChangeDateElement">Last Change Date Element</label>
+            <select class="form-control" id="field_lastChangeDateElement" name="lastChangeDateElement"
+                    [(ngModel)]="requestElement.lastChangeDateElementId" required>
+                <option *ngIf="!editForm.value.lastChangeDateElement" [ngValue]="null" selected></option>
+                <option [ngValue]="lastChangeDateElementOption.id"
+                        *ngFor="let lastChangeDateElementOption of lastchangedateelements; trackBy: trackLastChangeDateElementById">
+                    {{lastChangeDateElementOption.id}}
+                </option>
+            </select>
+        </div>
+        <div
+            [hidden]="!(editForm.controls.lastChangeDateElement?.dirty && editForm.controls.lastChangeDateElement?.invalid)">
+            <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.lastChangeDateElement?.errors?.required"
+                   jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button *ngIf="!isView" type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

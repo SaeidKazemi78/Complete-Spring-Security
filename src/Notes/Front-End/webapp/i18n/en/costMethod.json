@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "CostMethod" : {
+            "null": "",
+            "NORMAL_SALES": "NORMAL_SALES",
+            "DEFUEL": "DEFUEL"
+        }
+    }
+}

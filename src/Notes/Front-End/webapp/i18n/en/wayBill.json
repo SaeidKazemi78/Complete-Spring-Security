@@ -1,0 +1,41 @@
+
+{
+    "niopdcgatewayApp": {
+        "wayBill" : {
+            "home": {
+                "title": "Way Bills",
+                "createLabel": "Create a new Way Bill",
+                "createOrEditLabel": "Create or edit a Way Bill"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Way Bill {{ id }}?"
+            },
+            "detail": {
+                "title": "Way Bill"
+            },
+            "registerDate": "Register Date",
+            "wayBillNumber": "Way Bill Number",
+            "natureAmount": "Nature Amount",
+            "sixtyAmount": "Sixty Amount",
+            "specialWeight": "Special Weight",
+            "environmentTemperature": "Environment Temperature",
+            "productTemperature": "Product Temperature",
+            "sourceDepotId": "Source Depot Id",
+            "targetDepotId": "Target Depot Id",
+            "driverId": "Driver Id",
+            "carId": "Car Id",
+            "personId": "Person Id",
+            "routeId": "Route Id",
+            "transferFuelType": "Transfer Fuel Type",
+            "description": "Description",
+            "dayDepot": "Day Depot"
+        }
+    },
+    "niopdcaoApp": {
+        "wayBill" : {
+            "created": "A new Way Bill is created with identifier {{ param }}",
+            "updated": "A Way Bill is updated with identifier {{ param }}",
+            "deleted": "A Way Bill is deleted with identifier {{ param }}"
+        }
+    }
+}

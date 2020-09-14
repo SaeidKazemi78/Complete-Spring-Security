@@ -1,0 +1,10 @@
+{
+    "niopdcgatewayApp": {
+        "ValidityType" : {
+            "null": "",
+            "CREDIT": "اعتباری",
+            "PRE_ORDER": "پیش خرید",
+            "FINANCIAL_LICENSE": "مجوز مالی"
+        }
+    }
+}

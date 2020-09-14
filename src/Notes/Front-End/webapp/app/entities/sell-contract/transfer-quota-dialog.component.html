@@ -1,0 +1,60 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="createLabel"
+            jhiTranslate="niopdcgatewayApp.sellContract.home.transferQuota">
+            Create</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;
+        </button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-5">
+                <label jhiTranslate="niopdcgatewayApp.sellContract.sellContractProduct"
+                       for="field_sellContractProduct">Location</label>
+                <p-dropdown required [options]="customFromSellContractsProducts"
+                            [(ngModel)]="transferQuota.fromSellContractProductId"
+                            [filter]="true"
+                            class="form-control"
+                            (ngModelChange)="onChangeFromSellContractProduct($event)"
+                            filterBy="label"
+                            id="field_sellContractProduct"
+                            name="sellContractProduct"
+                            ngDefaultControl
+                ></p-dropdown>
+            </div>
+            <div class="col-md-5">
+                <label jhiTranslate="niopdcgatewayApp.sellContract.sellContractProduct"
+                       for="field_toSellContractProduct">Location</label>
+                <p-dropdown required [options]="customToSellContractsProducts"
+                            [(ngModel)]="transferQuota.toSellContractProductId"
+                            [filter]="true" class="form-control"
+                            filterBy="label"
+                            id="field_toSellContractProduct"
+                            name="toSellContractProduct"
+                            ngDefaultControl
+                ></p-dropdown>
+            </div>
+            <div class="col-md-2">
+                <label jhiTranslate="niopdcgatewayApp.sellContract.amount"
+                       for="field_amount">Location</label>
+                <input required [(ngModel)]="transferQuota.amount"
+                       class="form-control"
+                       id="field_amount"
+                       name="amount"
+                />
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

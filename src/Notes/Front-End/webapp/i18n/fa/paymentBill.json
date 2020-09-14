@@ -1,0 +1,32 @@
+
+{
+    "niopdcgatewayApp": {
+        "paymentBill" : {
+            "home": {
+                "title": "Payment Bills",
+                "createLabel": "Create a new Payment Bill",
+                "createOrEditLabel": "Create or edit a Payment Bill"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Payment Bill {{ id }}?"
+            },
+            "detail": {
+                "title": "Payment Bill"
+            },
+            "spentDate": "Spent Date",
+            "amount": "Amount",
+            "customerId": "Customer Id",
+            "personId": "Person Id",
+            "type": "Type",
+            "billId": "Bill Id",
+            "payment": "Payment"
+        }
+    },
+    "niopdcpaymentApp": {
+        "paymentBill" : {
+            "created": "A new Payment Bill is created with identifier {{ param }}",
+            "updated": "A Payment Bill is updated with identifier {{ param }}",
+            "deleted": "A Payment Bill is deleted with identifier {{ param }}"
+        }
+    }
+}

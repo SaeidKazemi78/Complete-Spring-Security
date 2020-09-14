@@ -1,0 +1,50 @@
+
+{
+    "niopdcgatewayApp": {
+        "driveSecurity" : {
+            "home": {
+                "title": "Drive Securities",
+                "createLabel": "Create a new Drive Security",
+                "createOrEditLabel": "Create or edit a Drive Security"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Drive Security {{ id }}?"
+            },
+            "detail": {
+                "title": "Drive Security"
+            },
+            "birthDate": "Birth Date",
+            "height": "Height",
+            "weight": "Weight",
+            "eyeColor": "Eye Color",
+            "hairColor": "Hair Color",
+            "nationalId": "National Id",
+            "fatherName": "Father Name",
+            "religion": "Religion",
+            "education": "Education",
+            "maritalStatus": "Marital Status",
+            "militaryStatus": "Military Status",
+            "exemptMilitaryReason": "Exempt Military Reason",
+            "haveCriminal": "Have Criminal",
+            "criminalReason": "Criminal Reason",
+            "address": "Address",
+            "postalCode": "Postal Code",
+            "mobileNumber": "Mobile Number",
+            "phoneNumber": "Phone Number",
+            "fileName": "File Name",
+            "description": "Description",
+            "inCompleteDocument": "In Complete Document",
+            "serial": "Serial",
+            "isGuest": "Is Guest",
+            "driver": "Driver",
+            "nationality": "Nationality"
+        }
+    },
+    "niopdcbaseApp": {
+        "driveSecurity" : {
+            "created": "A new Drive Security is created with identifier {{ param }}",
+            "updated": "A Drive Security is updated with identifier {{ param }}",
+            "deleted": "A Drive Security is deleted with identifier {{ param }}"
+        }
+    }
+}

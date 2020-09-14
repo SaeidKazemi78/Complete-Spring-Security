@@ -1,0 +1,28 @@
+
+{
+    "niopdcgatewayApp": {
+        "requestPlunging" : {
+            "home": {
+                "title": "Request Plungings",
+                "createLabel": "Create a new Request Plunging",
+                "createOrEditLabel": "Create or edit a Request Plunging"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Request Plunging {{ id }}?"
+            },
+            "detail": {
+                "title": "Request Plunging"
+            },
+            "requestDate": "Request Date",
+            "description": "Description",
+            "isSend": "Is Send"
+        }
+    },
+    "niopdcaoApp": {
+        "requestPlunging" : {
+            "created": "A new Request Plunging is created with identifier {{ param }}",
+            "updated": "A Request Plunging is updated with identifier {{ param }}",
+            "deleted": "A Request Plunging is deleted with identifier {{ param }}"
+        }
+    }
+}

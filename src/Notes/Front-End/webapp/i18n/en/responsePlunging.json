@@ -1,0 +1,30 @@
+
+{
+    "niopdcgatewayApp": {
+        "responsePlunging" : {
+            "home": {
+                "title": "Response Plungings",
+                "createLabel": "Create a new Response Plunging",
+                "createOrEditLabel": "Create or edit a Response Plunging"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Response Plunging {{ id }}?"
+            },
+            "detail": {
+                "title": "Response Plunging"
+            },
+            "confirm": "Confirm",
+            "description": "Description",
+            "responseDate": "Response Date",
+            "isSend": "Is Send",
+            "requestPlunging": "Request Plunging"
+        }
+    },
+    "niopdcaoApp": {
+        "responsePlunging" : {
+            "created": "A new Response Plunging is created with identifier {{ param }}",
+            "updated": "A Response Plunging is updated with identifier {{ param }}",
+            "deleted": "A Response Plunging is deleted with identifier {{ param }}"
+        }
+    }
+}

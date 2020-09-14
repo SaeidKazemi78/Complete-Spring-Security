@@ -1,0 +1,31 @@
+
+{
+    "niopdcgatewayApp": {
+        "bankAccount" : {
+            "home": {
+                "title": "حساب های بانکی",
+                "personTitle": "صاحب امتیاز"
+
+            },
+            "delete": {
+                "question": "آیا برای حذف این حساب بانکی مطمئن هستید ؟"
+            },
+            "detail": {
+                "title": "حساب بانکی"
+            },
+            "personId": "صاحب امتیاز",
+            "accountNumber": "شماره حساب",
+            "shabaNumber": "شماره شبا",
+            "cardNumber": "شماره کارت",
+            "bank": "بانک",
+            "shabaNumberPattern":"شماره شبا معتبر نمی باشد. با IR شروع می شود."
+        }
+    },
+    "niopdcaccountingApp": {
+        "bankAccount" : {
+            "created": "حساب بانکی با موفقیت ایجاد شد.",
+            "updated": "حساب بانکی با موفقیت ویرایش شد.",
+            "deleted": "حساب بانکی با موفقیت حذف شد."
+        }
+    }
+}

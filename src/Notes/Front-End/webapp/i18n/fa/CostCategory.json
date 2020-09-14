@@ -1,0 +1,9 @@
+{
+    "niopdcgatewayApp": {
+        "CostCategory": {
+            "EVAPORATION": "تبخیر",
+            "COST": "هزینه",
+            "WAGE": "کارمزد"
+        }
+    }
+}
